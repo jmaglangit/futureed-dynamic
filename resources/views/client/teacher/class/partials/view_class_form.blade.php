@@ -1,7 +1,7 @@
 <div ng-if="class.active_view || class.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>View Class Details</span>
+			<span>{!! trans('messages.view_class_details') !!}</span>
 		</div>		
 	</div>
 
@@ -26,7 +26,7 @@
 			)
 		) !!}
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Class <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">{!! trans('messages.class') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					<div ng-class="{ 'input-group' : class.active_view }">
 						{!! Form::text('class_name', ''
@@ -34,7 +34,7 @@
 								'ng-disabled'=>'class.active_view'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'class.record.name'
-								, 'placeholder' => 'Class Name'
+								, 'placeholder' => trans('messages.class_name')
 							)
 						) !!}
 
@@ -45,27 +45,27 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Subject</label>
+				<label class="col-xs-3 control-label">{!! trans('messages.subject') !!}</label>
 				<div class="col-xs-5">
 					{!! Form::text('subject', ''
 						, array(
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'class.record.subject.name'
-							, 'placeholder' => 'Subject'
+							, 'placeholder' => trans('messages.subject')
 						)
 					) !!}
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Grade</label>
+				<label class="col-xs-3 control-label">{!! trans('messages.grade') !!}</label>
 				<div class="col-xs-5">
 					{!! Form::text('search_name', ''
 						, array(
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'class.record.grade.name'
-							, 'placeholder' => 'Grade'
+							, 'placeholder' => trans('messages.grade')
 						)
 					) !!}
 				</div>
@@ -73,7 +73,7 @@
 		{!! Form::close() !!}
 
 		<div class="btn-container col-xs-5 col-xs-offset-3 margin-10-top" ng-if="class.active_view">
-			{!! Form::button('View List'
+			{!! Form::button(trans('messages.view_list')
 				, array(
 					'class' => 'btn btn-gold btn-large'
 					, 'ng-click' => "class.setActive('list')"
@@ -82,14 +82,14 @@
 		</div>
 
 		<div class="btn-container col-xs-5 col-xs-offset-3 margin-10-top" ng-if="class.active_edit">
-			{!! Form::button('Save'
+			{!! Form::button(trans('messages.save')
 				, array(
 					'class' => 'btn btn-blue btn-medium'
 					, 'ng-click' => 'class.update()'
 				)
 			) !!}
 
-			{!! Form::button('Cancel'
+			{!! Form::button(trans('messages.cancel')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 					, 'ng-click' => "class.setActive('view')"
@@ -100,7 +100,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -117,7 +117,7 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'class.search.name'
-								, 'placeholder' => 'Name'
+								, 'placeholder' => trans('messages.name')
 							)
 						) !!}
 					</div>
@@ -126,12 +126,12 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'class.search.email'
-								, 'placeholder' => 'Email'
+								, 'placeholder' => trans('messages.email')
 							)
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('Search'
+						{!! Form::button(trans('messages.search')
 							, array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'class.searchFnc($event)'
@@ -139,7 +139,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('Clear'
+						{!! Form::button(trans('messages.clear')
 							, array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'class.clear()'
@@ -153,12 +153,12 @@
 
 	<div class="col-xs-12 table-container">
 		<button class="btn btn-blue btn-small" type="button" ng-click="class.setActive('add_student')">
-			<i class="fa fa-plus-square"></i> Add Student
+			<i class="fa fa-plus-square"></i> {!! trans('messages.add_student') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Student List
+				{!! trans('messages.student_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -182,9 +182,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>Student's Name</th>
-			            <th class="width-medium">Email</th>
-			            <th ng-if="class.students.length">Action</th>
+			            <th>{!! trans('messages.student_name') !!}</th>
+			            <th class="width-medium">{!! trans('messages.email') !!}</th>
+			            <th ng-if="class.students.length">{!! trans('messages.action') !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>
@@ -201,7 +201,7 @@
 			        </tr>
 			        <tr class="odd" ng-if="!class.students.length">
 			        	<td valign="top" colspan="3">
-			        		No records found.
+			        		{!! trans('messages.no_records_found') !!}
 			        	</td>
 			        </tr>
 		        </tbody>
@@ -231,7 +231,7 @@
   	<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	        <div class="modal-header">
-	            Delete Student
+	            {!! trans('messages.delete_student') !!}
 	        </div>
 	        <div class="modal-body center-date">
 			    <div class="alert alert-error" ng-if="class.delete_student.errors">
@@ -243,14 +243,14 @@
 	        </div>
 	        <div class="modal-footer">
 	        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-	                {!! Form::button('Delete'
+	                {!! Form::button(trans('messages.delete')
 	                    , array(
 	                        'class' => 'btn btn-blue btn-medium'
 	                        , 'ng-click' => 'class.deleteStudent(class.delete_student_id)'
 	                    )
 	                ) !!}
 
-	                {!! Form::button('Cancel'
+	                {!! Form::button(trans('messages.cancel')
 	                    , array(
 	                        'class' => 'btn btn-gold btn-medium'
 	                        , 'data-dismiss' => 'modal'

@@ -15,25 +15,25 @@
 		{!! Form::open(array('class' => 'form-horizontal')) !!}
 			<fieldset>
 				<legend class="legend-name-mid">
-					Module Details
+					{!! trans('messages.admin_module_details') !!}
 				</legend>
 				<div class="form-group">
-					<label class="control-label col-xs-2">Module</label>
+					<label class="control-label col-xs-2">{!! trans('messages.module') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('module',''
 							, array(
-								'placeHolder' => 'Module'
+								'placeHolder' => trans('messages.module')
 								, 'ng-model' => 'qa.module.name'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 							)
 						) !!}
 					</div>
-					<label class="control-label col-xs-2">Subject</label>
+					<label class="control-label col-xs-2">{!! trans('messages.subject') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('subject',''
 							, array(
-								'placeHolder' => 'Subject'
+								'placeHolder' => trans('messages.subject')
 								, 'ng-model' => 'qa.module.subject.name'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
@@ -42,22 +42,22 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-2">Code<span class="required">*</span></label>
+					<label class="control-label col-xs-2">{!! trans('messages.code') !!}<span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('code',''
 							, array(
-								'placeHolder' => 'Code'
+								'placeHolder' => trans('messages.code')
 								, 'ng-model' => 'qa.record.code'
 								, 'class' => 'form-control'
 								, 'ng-disabled' => 'true'
 							)
 						) !!}
 					</div>
-					<label class="control-label col-xs-2">Area</label>
+					<label class="control-label col-xs-2">{!! trans('messages.area') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('area',''
 							, array(
-								'placeHolder' => 'Area'
+								'placeHolder' => trans('messages.area')
 								, 'ng-model' => 'qa.module.area'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
@@ -69,14 +69,14 @@
 
 			<fieldset>
 				<legend class="legend-name-mid">
-					Question Details
+					{!! trans('messages.admin_question_details') !!}
 				</legend>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Question <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.question') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::textarea('questions_text',''
 							, array(
-								'placeHolder' => 'Question'
+								'placeHolder' => trans('messages.question')
 								, 'ng-model' => 'qa.record.questions_text'
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-disabled' => 'qa.active_view'
@@ -87,9 +87,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Question Image </label>
+					<label class="control-label col-xs-3">{!! trans('messages.admin_question_image') !!} </label>
 					<div class="col-xs-5" ng-if="qa.active_edit">
-						<div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.record)"> Choose Image... </div>
+						<div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.record)">{!! trans('messages.choose_image') !!}</div>
 					</div>
 
 					<div class="margin-top-8" ng-if="qa.record.uploaded">
@@ -98,7 +98,7 @@
 
 					<div ng-if="qa.active_view && qa.record.questions_image != 'None' && qa.record.original_image_name != '0'">
 						<div class="col-xs-5 margin-top-8">
-							<a href="" ng-click="qa.viewImage(qa.record)">View Image Test</a>
+							<a href="" ng-click="qa.viewImage(qa.record)">{!! trans('messages.admin_view_image') !!}</a>
 							<a class="pull-right" href="" ng-click="qa.confirmImageDelete(qa.record)"><i class="fa fa-trash"></i></a>
 						</div>
 					</div>
@@ -112,7 +112,7 @@
 					<div class="col-xs-3"></div>
 					<div ng-if="qa.active_edit && qa.record.questions_image != futureed.NONE">
 						<div class="col-xs-5 margin-top-8">
-							<a href="" ng-click="qa.viewImage(qa.record)">View Image</a>
+							<a href="" ng-click="qa.viewImage(qa.record)">{!! trans('messages.admin_view_image') !!}</a>
 							<a class="pull-right" href="" ng-click="qa.removeImage(qa.record)"><i class="fa fa-trash"></i></a>
 						</div>
 					</div>
@@ -121,23 +121,23 @@
 				<div class="form-group" ng-if="qa.record.uploaded">
 					<div class="col-xs-3"></div>
 					<div class="col-xs-5">
-						<span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
-						<a href="" class="control-label col-xs-6" ng-click="qa.viewImage(qa.record)">View Image</a>
+						<span class="col-xs-6 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span>
+						<a href="" class="control-label col-xs-6" ng-click="qa.viewImage(qa.record)">{!! trans('messages.admin_view_image') !!}</a>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-xs-3">Question Type <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.admin_question_type') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::select('question_type'
 							, array(
-								'' => '-- Select Question Type --'
-								, 'MC' => 'Multiple Choice'
-								, 'FIB' => 'Fill in the Blanks'
-								, 'O' => 'Orders'
-								, 'N' => 'Provide'
-								, 'GR' => 'Graph'
-								, 'QUAD' => 'Quadrant'
+								'' => trans('messages.admin_select_question_type')
+								, 'MC' => trans('messages.admin_mc')
+								, 'FIB' => trans('messages.admin_fib')
+								, 'O' => trans('messages.admin_order')
+								, 'N' => trans('messages.admin_provide')
+								, 'GR' => trans('messages.admin_graph')
+								, 'QUAD' => trans('messages.admin_quadrant')
 							)
 							, ''
 							, array(
@@ -151,13 +151,13 @@
 				</div>
 
 				<div class="form-group" ng-if="qa.record.question_type == futureed.GRAPH">
-					<label class="control-label col-xs-3">Orientation <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.admin_orientation') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::select('orientation'
 							, array(
-								'' => '-- Select Orientation --'
-								, 'vertical' => 'Vertical'
-								, 'horizontal' => 'Horizontal'
+								'' => trans('messages.admin_select_orientation')
+								, 'vertical' => trans('messages.admin_vertical')
+								, 'horizontal' => trans('messages.admin_horizontal')
 							)
 							, ''
 							, array(
@@ -175,12 +175,12 @@
 					 && qa.record.question_type != futureed.MULTIPLECHOICE
 					 && qa.record.question_type != futureed.GRAPH
 					 && qa.record.question_type != futureed.QUADRANT">
-					<label class="control-label col-xs-3">Answer <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.answer') !!} <span class="required">*</span></label>
 
 					<div class="col-xs-5">
 						{!! Form::textarea('answer',''
 							, array(
-								'placeHolder' => 'Answer'
+								'placeHolder' => trans('messages.answer')
 								, 'ng-model' => 'qa.record.answer'
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-disabled' => 'qa.active_view'
@@ -192,11 +192,11 @@
 				</div>
 
 				<div class="form-group" ng-if="qa.record.question_type == futureed.ORDERING  && qa.record.question_type">
-					<label class="control-label col-xs-3">Order <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.admin_order') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::textarea('question_order_text',''
 							, array(
-								'placeHolder' => 'Order'
+								'placeHolder' => trans('messages.admin_order')
 								, 'ng-model' => 'qa.record.question_order_text'
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-disabled' => 'qa.active_view'
@@ -208,11 +208,11 @@
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-xs-3">Points Earned <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.admin_points_earned') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('points_earned',''
 							, array(
-								'placeHolder' => 'Points Earned'
+								'placeHolder' => trans('messages.admin_points_earned')
 								, 'ng-model' => 'qa.record.points_earned'
 								, 'class' => 'form-control'
 								, 'ng-disabled' => 'qa.active_view'
@@ -222,11 +222,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Difficulty <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.difficulty') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('difficulty',''
 							, array(
-								'placeHolder' => 'Difficulty'
+								'placeHolder' => trans('messages.difficulty')
 								, 'ng-model' => 'qa.record.difficulty'
 								, 'class' => 'form-control'
 								, 'ng-disabled' => 'qa.active_view'
@@ -236,7 +236,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 					<div class="col-xs-5" ng-if="qa.active_edit">
 						<div class="col-xs-6 checkbox">                                 
 							<label>
@@ -248,7 +248,7 @@
 										, 'ng-model' => 'qa.record.status'
 									) 
 								) !!}
-							<span class="lbl padding-8">Enabled</span>
+							<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 							</label>
 						</div>
 						<div class="col-xs-6 checkbox">
@@ -261,7 +261,7 @@
 										, 'ng-model' => 'qa.record.status'
 									)
 								) !!}
-							<span class="lbl padding-8">Disabled</span>
+							<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 							</label>
 						</div>
 					</div>
@@ -280,11 +280,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Sequence No</label>
+					<label class="control-label col-xs-3">{!! trans('messages.sequence_no') !!}</label>
 					<div class="col-xs-5">
 						{!! Form::text('seq_no',''
 							, array(
-								'placeHolder' => 'Sequance No'
+								'placeHolder' => trans('messages.sequence_no')
 								, 'ng-model' => 'qa.record.seq_no'
 								, 'class' => 'form-control'
 								, 'ng-disabled' => 'qa.active_view'
@@ -298,28 +298,28 @@
 			<fieldset>
 				<div class="form-group">
 				   <div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('Edit'
+						{!! Form::button(trans('messages.edit')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "qa.setActive(futureed.ACTIVE_EDIT, qa.record.id)"
 								, 'ng-if' => 'qa.active_view'
 							)
 						) !!}
-						{!! Form::button('Update'
+						{!! Form::button(trans('messages.update')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'qa.update()'
 								, 'ng-if' => 'qa.active_edit'
 							)
 						) !!}
-						{!! Form::button('Cancel'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "qa.setActive(futureed.ACTIVE_VIEW, qa.record.id)"
 								, 'ng-if' => 'qa.active_edit'
 							)
 						) !!}
-						{!! Form::button('Cancel'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'qa.setActive()'
@@ -348,7 +348,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('Close'
+						{!! Form::button(trans('messages.close')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'
@@ -364,17 +364,17 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					Delete Image
+					{!! trans('messages.admin_delete_image') !!}
 				</div>
 				<div class="modal-body">
-					Are you sure you want to delete this image?
+					{!! trans('messages.admin_delete_image_msg') !!}
 					<div class="modal-image">
 						<img ng-src="{! qa.view_image.image_path !}"/>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
-						{!! Form::button('Yes'
+						{!! Form::button(trans('messages.yes')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'qa.deleteImage(object)'
@@ -382,7 +382,7 @@
 							)
 						) !!}
 
-						{!! Form::button('No'
+						{!! Form::button(trans('messages.no')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'
@@ -396,7 +396,7 @@
 
 	<br>
 	<div class="footnotes">
-		<div><label class="required">*</label> required information</div>
-		<div ng-if="qa.record.question_type == futureed.ORDERING  && qa.record.question_type"><label class="required">**</label> answer should be comma separated to indicate the order. </div>
+		<div><label class="required">*</label> {!! trans('messages.admin_question_required_info') !!}</div>
+		<div ng-if="qa.record.question_type == futureed.ORDERING  && qa.record.question_type"><label class="required">**</label> {!! trans('messages.admin_question_instruction_msg') !!} </div>
 	</div>
 </div>

@@ -4,13 +4,13 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hi there {{ $name }},</div>
+<div>{!! trans('messages.hi_there') !!} {{ $name }},</div>
 <br/>
 <div>
-    <div>You have been added in {{$class_name}} by Teacher {{$teacher_name}}.
+    <div>{!! trans('messages.email_existing_student_registration_msg') !!} {{$class_name}} {!! trans('messages.email_existing_student_registration_msg2') !!} {{$teacher_name}}.
 </div>
-	<div>Regards,</div><br/>
-    <div>Admin</div>
+	<div>{!! trans('messages.regards') !!},</div><br/>
+    <div>{!! trans('messages.admin') !!}</div>
 
 </div>
 </body>

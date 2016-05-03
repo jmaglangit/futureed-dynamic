@@ -216,7 +216,7 @@ class LogController extends Controller {
 		if(!is_null($error_code)){
 
 			$return = $this->setErrorCode($error_code)
-				->setMessage(config('futureed-error.error_messages.' . $error_code))
+				->setMessage(trans('errors.' . $error_code))
 				->errorMessageCommon();
 
 

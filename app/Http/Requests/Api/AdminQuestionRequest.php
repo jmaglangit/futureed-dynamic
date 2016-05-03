@@ -62,14 +62,14 @@ class AdminQuestionRequest extends ApiRequest {
 	public function messages()
 	{
 		return [
-			'module_id.required' => 'Module is required.',
-			'module_id.integer' => 'Module is invalid.',
-			'difficulty.integer' => 'Difficulty is invalid.',
-			'points_earned.integer' => 'Points earned is invalid.',
-			'code.integer' => 'Code is invalid.',
-			'seq_no.integer' => 'Sequence number is invalid.',
-			'answer.required_if' => 'The answer field is required.',
-			'question_order_text.required_if' => 'Question order text is required.'
+			'module_id.required' => trans('errors.1003',['attribute' => trans('errors.2161')]),
+			'module_id.integer' => trans('errors.1004',['attribute' => trans('errors.2161')]),
+			'difficulty.integer' => trans('errors.1004',['attribute' => trans('errors.2168')]),
+			'points_earned.integer' => trans('errors.1004',['attribute' => trans('errors.2169')]),
+			'code.integer' => trans('errors.1004',['attribute' => trans('errors.2163')]),
+			'seq_no.integer' => trans('errors.1004',['attribute' => trans('errors.2170')]),
+			'answer.required_if' => trans('validation.required',['attribute' => trans('errors.2171')]),
+			'question_order_text.required_if' => trans('errors.2172',['attribute' => trans('errors.2173')]),
 
 		];
 	}

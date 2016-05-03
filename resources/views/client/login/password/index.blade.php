@@ -10,7 +10,7 @@
 
 		<div class="client-container form-style" ng-if="password.active_default">
 			<div class="form-content" ng-if="!password.sent">
-				<div class="title">Retrieve Password</div>
+				<div class="title">{!! trans('messages.client_retrieve_password') !!}</div>
 				<div class="alert alert-danger" ng-if="password.errors">
 					<p ng-repeat="error in password.errors" > 
 						{! error !}
@@ -26,14 +26,14 @@
 									, array(
 											'class' => 'form-control'
 										, 'ng-model' => 'password.record.username'
-										, 'placeholder' => 'Email or Username'
+										, 'placeholder' => trans('messages.email_or_username')
 										, 'autocomplete' => 'off'
 									)
 						)!!}
 					</div>
 
 					<div class="btn-container">
-						{!! Form::button('Send'
+						{!! Form::button(trans('messages.forgot_send')
 								, array(
 											'id' => 'proceed_btn'
 										, 'class' => 'btn btn-blue btn-medium'
@@ -42,7 +42,7 @@
 								)
 						) !!}
 
-						{!! Html::link(route('client.login'), 'Cancel'
+						{!! Html::link(route('client.login'), trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 								)
@@ -65,8 +65,8 @@
 
 				{!! Form::close() !!}
 
-				<div class="title" ng-if="!password.resent">Reset Code Sent</div>
-				<div class="title" ng-if="password.resent">Reset Code Resent</div>
+				<div class="title" ng-if="!password.resent">{!! trans('messages.client_reset_code_sent') !!}</div>
+				<div class="title" ng-if="password.resent">{!! trans('messages.client_reset_code_resent') !!}</div>
 
 				<div class="alert alert-danger" ng-if="password.errors">
 					<p ng-repeat="error in password.errors" > 
@@ -80,7 +80,7 @@
 					</div>
 
 					<p class="text">
-						An email to reset your password has been sent to your email account.
+						{!! trans('messages.forgot_email_sent') !!}
 					</p>
 				</div>
 
@@ -90,32 +90,31 @@
 					</div>
 						
 					<p class="text">
-						A new reset code has been sent to your email account.
+						{!! trans('messages.forgot_new_code') !!}
 					</p>
 				</div>
 
 				<div class="form-group">
-					<small>Please check your inbox or your spam folder for the email. 
-					<br />The email contains a reset code that you need to input below.</small>
+					<small>{!! trans('messages.client_reset_code_msg') !!}</small>
 				</div>
 
 				{!! Form::open(array('ng-submit' => 'password.clientValidateCode($event)')) !!} 
 					<div class="form-group">
-						{!! Form::label(null, 'Enter Reset Code:') !!}
+						{!! Form::label(null, trans('messages.client_enter_reset_code')) !!}
 
 						{!! Form::text('reset_code', '',
 							array(
 								'class' => 'form-control'
 								, 'ng-model' => 'password.record.reset_code'
 								, 'ng-disabled' => 'password.password_set'
-								, 'placeholder' => 'Reset Code'
+								, 'placeholder' => trans('messages.client_reset_code')
 								, 'autocomplete' => 'off'
 							)
 						) !!}
 					</div>
 
 					<div class="btn-container">
-						{!! Form::button('Proceed'
+						{!! Form::button(trans('messages.client_proceed')
 							, array(
 								'id' => 'proceed_btn'
 								, 'class' => 'btn btn-blue btn-medium'
@@ -124,7 +123,7 @@
 							)
 						) !!}
 
-						{!! Form::button('Resend Code'
+						{!! Form::button(trans('messages.client_resend_code')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => '!password.password_set'
@@ -134,7 +133,7 @@
 					</div>
 
 					<br />
-					<a href="{!! route('client.login') !!}"><i class="fa fa-home"></i> Home</a>
+					<a href="{!! route('client.login') !!}"><i class="fa fa-home"></i> {!! trans('messages.forgot_home') !!}</a>
 					{!! Form::close() !!}
 				</div>
 			</div>

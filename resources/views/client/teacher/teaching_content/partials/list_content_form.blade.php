@@ -1,23 +1,23 @@
 <div class="col-xs-12 teacher-module-container" ng-if="content.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span><i class="fa fa-lightbulb-o"></i> Teaching Content </span>
+			<span><i class="fa fa-lightbulb-o"></i> {!! trans('messages.client_teaching_content') !!} </span>
 
 			<div class="col-xs-2 pull-right">
 				<span>
-					<a href="{!! route('client.teacher.module.index') !!}" class="btn btn-gold teacher-module-back">Back</a>
+					<a href="{!! route('client.teacher.module.index') !!}" class="btn btn-gold teacher-module-back">{!! trans('messages.back') !!}</a>
 				</span>
 			</div>
 		</div>
 	</div>
 
 	<div class="teacher-module-btn">
-		<button class="btn btn-maroon" ng-click="content.viewQuestions('{!! route('client.teacher.question.index') !!}')">View Questions</button> 
+		<button class="btn btn-maroon" ng-click="content.viewQuestions('{!! route('client.teacher.question.index') !!}')">{!! trans('messages.view_questions') !!}</button> 
 	</div>
 
 	<div class="no-content-container col-xs-12" ng-if="!content.content">
 		<div class="alert alert-info">
-			<center><span><i class="fa fa-info-circle"></i> No Content Available</span></center>
+			<center><span><i class="fa fa-info-circle"></i> {!! trans('messages.no_content_available') !!}</span></center>
 		</div>
 	</div>
 

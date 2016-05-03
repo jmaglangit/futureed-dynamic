@@ -5,18 +5,18 @@
             <div class="row questions-header col-xs-12">
                 <div class="row col-xs-3">
                     <button type="button" class="btn btn-gold next-btn left-0"
-                            ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')">Exit Module</button>
+                            ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')"> {{ trans('messages.exit_module') }} </button>
                 </div>
 
                 <div class="row col-xs-6">
-                    <center><h3> Question #{! mod.question_number + 1 !} </h3></center>
+                    <center><h3> {{ trans('messages.question') }} #{! mod.question_number + 1 !} </h3></center>
                 </div>
 
                 <div class="row col-xs-3">
                     <button
                             {{--ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed"--}}
                             type="button" class="btn btn-orange next-btn right-0"
-                            ng-click="mod.validateAnswer()"> Submit </button>
+                            ng-click="mod.validateAnswer()"> {{ trans('messages.submit')}} </button>
                 </div>
 
             </div>
@@ -52,7 +52,7 @@
                         <div class="questions-tips"
                              ng-class="{'question-tip-pos-top-10' : mod.trialQuestion[mod.question_number]['question_image'] != 'none', 'question-tip-pos-top-130' : mod.trialQuestion[mod.question_number]['question_image'] == 'none'}"
                              ng-if="mod.trialQuestion[mod.question_number]['type'] == futureed.ORDERING">
-                            <p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
+                            <p> <img ng-src="{! user.avatar !}" /> <span>{{ trans('messages.drag_items_reorder') }} </span></p>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
 
                                 </table>
                                 <div class="col-xs-3 pull-right reset-graph">
-                                    <button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+                                    <button class="btn btn-gold" ng-click="mod.resetGraph()">{{ trans('messages.reset_caps') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                                 <div ng-init="mod.getQuadrant()">
                                     <div id="placeholder" style="width:300px;height:300px;margin:0 auto;"></div>
                                     <div class="col-xs-3 pull-right reset-graph">
-                                        <button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+                                        <button class="btn btn-gold" ng-click="mod.resetGraph()">{{ trans('messages.reset_caps') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +180,7 @@
     <div ng-if="mod.show_correct" class="margin-top-50">
         <div class="questions-container col-xs-12">
             <div class="questions-header">
-                <h3> Question #{! mod.question_number + 1 !} </h3>
+                <h3> {{ trans('messages.question') }} #{! mod.question_number + 1 !} </h3>
             </div>
 
             <div class="result-image">
@@ -191,17 +191,17 @@
             <div class="result-message"
                  ng-class="{ 'result-correct' : mod.answer_valid, 'result-incorrect' : !mod.answer_valid }">
                 <p ng-if="mod.answer_valid">
-                    Correct!
+                    {{ trans('messages.correct') }}
                 </p>
 
                 <p ng-if="!mod.answer_valid">
-                    Wrong
+                    {{ trans('messages.wrong') }}
                 </p>
             </div>
 
             <div class="proceed-btn-container btn-container">
                 <button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
-                    Proceed to next Question
+                    {{ trans('messages.proceed_to_next_questions') }}
                 </button>
             </div>
         </div>
@@ -210,7 +210,7 @@
     <div ng-if="mod.trial_expired" class="margin-top-50">
         <div class="questions-container col-xs-12">
             <div class="questions-header">
-                <h3> Question #{! mod.question_number + 1 !} </h3>
+                <h3> {{ trans('messages.question') }} #{! mod.question_number + 1 !} </h3>
             </div>
 
             <div class="result-failed message-container">
@@ -222,14 +222,14 @@
 
                     <div class="col-xs-6">
                         <p class="module-message">
-                            You have reached the end of the trial questions.
-                            <p class="font-size-16" ng-if="user.age > 13"><span class="fa fa-lightbulb-o"></span>Please subscribe if you want to continue using Future Lesson!</p>
-                            <p class="font-size-16" ng-if="user.age <= 13">You can ask your Parent or be invited by your Teacher to join a class!</p>
+                            {{ trans('messages.end_of_trial_question') }}
+                            <p class="font-size-16" ng-if="user.age > 13"><span class="fa fa-lightbulb-o"></span>{{ trans('messages.end_of_trial_question_age_greater_13') }}</p>
+                            <p class="font-size-16" ng-if="user.age <= 13">{{ trans('messages.end_of_trial_question_age_below_13') }}</p>
                         </p>
 
                         <div class="trial-proceed-btn-container btn-container">
                             <button type="button" class="btn trial-btn-maroon btn-large" ng-click="mod.exitModule('{!! route('student.payment.index') !!}')">
-                                Subscribe Now!
+                                {{ trans('messages.subscribe_now') }}
                             </button>
                         </div>
                     </div>

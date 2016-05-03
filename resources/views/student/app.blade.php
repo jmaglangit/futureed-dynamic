@@ -47,9 +47,10 @@
 
         <footer class="footer" ng-cloak>
             <div class="container text-center">
-                <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
+                <p class="text-muted">{{ date('Y') }} &copy; {!! trans('messages.all_right_reserved') !!} FutureEd Pte Ltd</p>
             </div>
         </footer>
+
     @show
 
     <!-- START SCRIPTS -->

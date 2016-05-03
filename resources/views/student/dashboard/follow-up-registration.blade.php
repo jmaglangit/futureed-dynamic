@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container login" ng-init="resetChecked()" ng-cloak>
-    <div class="form-style form-wide">
-
+	<div class="form-style form-wide">
         {!! Form::open(array('id' => 'process_form', 'method' => 'GET', 'route' => 'student.dashboard.index')) !!}
             {!! Form::hidden('user_data', '') !!}
         {!! Form::close() !!}

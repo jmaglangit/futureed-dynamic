@@ -42,16 +42,16 @@ class StudentModuleRequest extends ApiRequest
 	public function messages()
 	{
 		return [
-			'class_id.required' => 'Class is required.',
-			'class_id.integer' => 'Class must be a number.',
-			'student_id.required' => 'Student is required.',
-			'student_id.integer' => 'Student must be a number.',
-			'module_id.required' => 'Module is required.',
-			'module_id.integer' => 'Module must be a number.',
-			'subject_id.required' => 'Subject is required.',
-			'subject_id.integer' => 'Subject must be a number.',
-			'last_viewed_content_id.integer' => 'Content is invalid.',
-			'last_answered_question_id.integer' => 'Question is invalid.',
+			'class_id.required' => trans('errors.1003',['attribute' => trans('errors.2182')]),
+			'class_id.integer' => trans('errors.1013',['attribute' => trans('errors.2182')]),
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+			'student_id.integer' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+			'module_id.required' => trans('errors.1003',['attribute' => trans('errors.2161')]),
+			'module_id.integer' => trans('errors.1013',['attribute' => trans('errors.2161')]),
+			'subject_id.required' => trans('errors.1003',['attribute' => trans('errors.2155')]),
+			'subject_id.integer' => trans('errors.1013',['attribute' => trans('errors.2155')]),
+			'last_viewed_content_id.integer' => trans('errors.1004',['attribute' => trans('errors.2211')]),
+			'last_answered_question_id.integer' => trans('errors.1004',['attribute' => trans('errors.2162')]),
 		];
 	}
 }

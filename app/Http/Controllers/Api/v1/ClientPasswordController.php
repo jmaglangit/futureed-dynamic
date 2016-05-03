@@ -108,7 +108,7 @@ class ClientPasswordController extends ApiController{
 					return $this->respondWithError([[
 						'error_code' => 2114,
 						'field' => 'password',
-						'message' => config('futureed-error.error_messages.2114')
+						'message' => trans('errors.2114')
 					]
 					]);
                 }

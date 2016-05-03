@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Mail;
 use League\Flysystem\Exception;
 class MailServices {
 
-	/**
-	 * @param Mailer $mailer
-	 * @param UserServices $user
-	 * @param ClientServices $client
-	 */
+    /**
+     * @param Mailer $mailer
+     * @param UserServices $user
+     * @param ClientServices $client
+     * @param RegistrationTokenServices $registrationTokenServices
+     */
     public function __construct(
 		Mailer $mailer,
 		UserServices $user,

@@ -8,7 +8,7 @@
             {!! Form::hidden('user_data', '') !!}
             {!! Form::close() !!}
 
-            <h3>Learning Style Quiz</h3>
+            <h3>{!! trans('messages.learning_style_quiz') !!}</h3>
 
             <div class="learning-style-form" ng-controller="LearningStyleController as learning_style" ng-cloak>
                 <div class="wrapr">
@@ -18,7 +18,7 @@
                                 <div id="section_header">
                                     <span ng-bind="sections[session.section].name"
                                           ng-hide="session.current_state == 'completed'"></span>
-                                    <center ng-show="session.current_state == 'completed'">Test Completed</center>
+                                    <center ng-show="session.current_state == 'completed'">{!! trans('messages.test_completed') !!}</center>
                                     <div class="" ng-cloak ng-hide="order_candidate_test.test.time_limit_actual"
                                          ng-bind="'This test has no time limit'"></div>
                                 </div>
@@ -26,7 +26,7 @@
                             <div class="panel-body test">
 
                                 <h6 class="text-danger ng-hide" ng-show="session.current_state == 'introduction'">
-                                    Instructions</h6>
+                                    {!! trans('messages.instructions') !!}</h6>
 
                                 <!-- INTRODUCTION -->
                                 <div id="instructions" class="instructions ng-hide"
@@ -54,7 +54,7 @@
 
                                     <div class="col-xs-2 text-center">
                                         <p id="time_left" ng-show="order_candidate_test.test.time_limit_actual">
-                                            <b>Time Remaining</b><br>
+                                            <b>{!! trans('messages.time_remaining') !!}</b><br>
 									<span class="lead" id="stopwatch">
 										<span id="minutes" ng-bind="session.remaining.minutes">00</span>:<span
                                                 id="seconds" ng-bind="session.remaining.seconds">00</span>
@@ -182,7 +182,7 @@
                                                                    placeholder="Enter stressor and press enter to add">
 														<span class="input-group-btn">
 															<button type="submit" class="btn btn-primary btn-block">
-                                                                Add
+                                                                {!! trans('messages.add') !!}
                                                             </button>
 														</span>
                                                         </div>
@@ -239,7 +239,7 @@
                                         <button type="button" id="btn_previous" class="btn btn-brand ng-hide btn-gold"
                                                 ng-click="previous()" ng-show="session.reversible"><i
                                                     class="fa fa-chevron-left"></i> <span
-                                                    ng-bind="session.previous">Previous</span></button>
+                                                    ng-bind="session.previous">{!! trans('messages.previous') !!}</span></button>
                                     </div>
 
                                     <div class="modern-paginator col-xs-6 text-center"
@@ -255,7 +255,7 @@
                                         </ul>
                                         <small class="text-center out-of ng-hide"
                                                ng-show="session.current_state != 'completed' && session.current_state != 'introduction'">
-                                            out of {! getNumberOfQuestions() !}
+                                            {!! trans('messages.out_of') !!} {! getNumberOfQuestions() !}
                                         </small>
                                     </div>
 
@@ -279,16 +279,12 @@
                                     <div class="col-sm-12">
                                         <p class="ng-hide"
                                            ng-show="session.current_state != 'introduction' && session.current_state != 'completed' && session.current_state != 'sample questions'">
-                                            *Please answer all the questions on this page before proceeding to the next
-                                            page</p>
+                                            *{!! trans('messages.ls_text_msg_1') !!}</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <p class="ng-hide" ng-show="session.current_state == 'sample questions'">*Please
-                                            read
-                                            the examples carefully to understand the instructions before clicking
-                                            NEXT</p>
+                                        <p class="ng-hide" ng-show="session.current_state == 'sample questions'">*{!! trans('messages.ls_text_msg_2') !!}</p>
                                     </div>
                                 </div>
                             </div>

@@ -47,20 +47,20 @@ class StudentQuestionContentTipRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'class_id.required' => 'Class is required.',
-			'class_id.integer' => 'Class is invalid.',
-			'student_id.required' => 'Student is required.',
-			'student_id.integer' => 'Student is invalid.',
-			'module_id.required' => 'Module is required.',
-			'module_id.integer' => 'Module is invalid.',
-			'subject_id.required' => 'Subject is required.',
-			'subject_id.integer' => 'Subject is invalid.',
-			'subject_area_id.required' => 'Area is required.',
-			'subject_area_id.integer' => 'Area is invalid.',
-			'link_id.required' => 'Link is required.',
-			'link_id.integer' => 'Link is invalid.',
-			'content.required' => 'The description field is required.',
-			'content.string' => 'The description field is invalid.',
+			'class_id.required' => trans('errors.1003',['attribute' => trans('errors.2182')]),
+			'class_id.integer' => trans('errors.1004',['attribute' => trans('errors.2182')]),
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+			'student_id.integer' => trans('errors.1004',['attribute' => trans('errors.2192')]),
+			'module_id.required' => trans('errors.1003',['attribute' => trans('errors.2161')]),
+			'module_id.integer' => trans('errors.1004',['attribute' => trans('errors.2161')]),
+			'subject_id.required' => trans('errors.1003',['attribute' => trans('errors.2155')]),
+			'subject_id.integer' => trans('errors.1004',['attribute' => trans('errors.2155')]),
+			'subject_area_id.required' => trans('errors.1003',['attribute' => trans('errors.2156')]),
+			'subject_area_id.integer' => trans('errors.1004',['attribute' => trans('errors.2156')]),
+			'link_id.required' => trans('errors.1003',['attribute' => trans('errors.2197')]),
+			'link_id.integer' => trans('errors.1004',['attribute' => trans('errors.2197')]),
+			'content.required' => trans('validation.required',['attribute' => trans('errors.2172')]),
+			'content.string' => trans('errors.1004',['attribute' => trans('errors.2172')]),
 
 
 		];

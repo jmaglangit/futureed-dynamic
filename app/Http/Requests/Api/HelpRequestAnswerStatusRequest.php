@@ -37,8 +37,8 @@ class HelpRequestAnswerStatusRequest extends ApiRequest {
 
 	public function messages(){
 		return[
-			'rating.required_if' => 'The rating is required.',
-			'rating.integer' => 'The rating must be a number.'
+			'rating.required_if' => trans('errors.1003',['attribute' => trans('errors.2194')]),
+			'rating.integer' => trans('errors.1013',['attribute' => trans('errors.2194')]),
 		];
 	}
 

@@ -37,8 +37,8 @@ class StudentBadgeRequest extends ApiRequest {
 	public function messages(){
 
 		return [
-			'badge_id.required' => 'Badge name is required.',
-			'badge_id.integer' => 'Badge name is invalid.',
+			'badge_id.required' => trans('errors.1003',['attribute' => trans('errors.2210')]),
+			'badge_id.integer' => trans('errors.1004',['attribute' => trans('errors.2210')]),
 		];
 	}
 

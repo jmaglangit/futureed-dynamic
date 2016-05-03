@@ -17,19 +17,19 @@
 			<div class="price-content">
 				<div class="content-title">
 					<div class="title-main-content">
-						<span><i class="fa fa-gear"></i> Tips & Help Requests</span>
+						<span><i class="fa fa-gear"></i> {!! trans('messages.tips_and_help_request') !!}</span>
 					</div>
 				</div>
 				
 				<ul class="nav nav-pills nav-admin">
 					<li class="active">
-						<a href=""><span><i class="fa fa-lightbulb-o"></i>Tips</span></a>
+						<a href=""><span><i class="fa fa-lightbulb-o"></i>{!! trans('messages.tips') !!}</span></a>
 					</li>
 					<li>
-						<a href="{!! route('admin.manage.help.index') !!}"><span><i class="fa fa-question-circle"></i>Help Requests</span></a>
+						<a href="{!! route('admin.manage.help.index') !!}"><span><i class="fa fa-question-circle"></i>{!! trans_choice('messages.help_request', 1) !!}</span></a>
 					</li>
 					<li>
-						<a href="{!! route('admin.manage.answer.index') !!}"><span><i class="fa fa-exclamation-circle"></i>Help Request Answers</span></a>
+						<a href="{!! route('admin.manage.answer.index') !!}"><span><i class="fa fa-exclamation-circle"></i>{!! trans('messages.help_request_answers') !!}</span></a>
 					</li>
 				</ul>
 

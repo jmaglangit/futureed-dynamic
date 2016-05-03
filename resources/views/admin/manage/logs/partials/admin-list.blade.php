@@ -13,7 +13,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'Username'
+							'placeholder' => trans('messages.username')
 							, 'ng-model' => 'logs.search.username'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -37,15 +37,15 @@
 				<div class="col-xs-5">
 					{!! Form::text('email', ''
 						,array(
-							'placeholder' => 'Email'
+							'placeholder' => trans('messages.email')
 							, 'ng-model' => 'logs.search.email'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
 				</div>
 				
-				<div class="col-xs-2">
-					{!! Form::button('Search'
+				<div class="col-xs-2 admin-search-admin-log">
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'logs.searchFnc($event)'
@@ -57,7 +57,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('name', ''
 						,array(
-							'placeholder' => 'Name'
+							'placeholder' => trans('messages.name')
 							, 'ng-model' => 'logs.search.name'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -67,7 +67,7 @@
 				<div class="col-xs-5">
 					{!! Form::select('admin_type'
 						, array(
-							'' =>' -- Select Admin Type --'
+							'' =>trans('messages.admin_select_admin_type')
 							, 'Admin'=>'Admin'
 							, 'Super Admin'=>'Super Admin'
 						)
@@ -79,8 +79,8 @@
 					) !!}
 				</div>
 				
-				<div class="col-xs-2">
-					{!! Form::button('Clear'
+				<div class="col-xs-2 admin-search-admin-log">
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'logs.clearFnc($event)'
@@ -92,7 +92,7 @@
 				<div class="col-xs-5">
 					{!! Form::select('result_response'
 						, array(
-							'' =>' -- Select Response Code --'
+							'' =>trans('messages.admin_response_code')
 							, '200'=>'200'
 							, '201'=>'201'
 							, '404'=>'404'
@@ -114,7 +114,7 @@
 	<div class="table-container">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Logs
+				{!! trans('messages.logs') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -138,11 +138,11 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>Username</th>
-			            <th>Email</th>
-			            <th>Name</th>
-			            <th>Admin Type</th>
-			            <th>Action</th>
+			            <th>{!! trans('messages.username') !!}</th>
+			            <th>{!! trans('messages.email') !!}</th>
+			            <th>{!! trans('messages.name') !!}</th>
+			            <th>{!! trans('messages.admin_type') !!}</th>
+			            <th>{!! trans('messages.action') !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>
@@ -161,12 +161,12 @@
 			        </tr>
 			        <tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
 			        	<td valign="top" colspan="10">
-			        		No records found
+			        		{!! trans('messages.no_records_found') !!}
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="logs.table.loading">
 			        	<td valign="top" colspan="10">
-			        		Loading...
+			        		{!! trans('messages.loading') !!}
 			        	</td>
 			        </tr>
 		        </tbody>
@@ -192,55 +192,55 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					Log Details
+					{!! trans('messages.admin_log_details') !!}
 				</div>
 				<div class="modal-body">
 					<table class="col-xs-12 table table-striped table-bordered">
 						<thead>
 							<tr>
-								<th>Info</th>
-								<th>Value</th>
+								<th>{!! trans('messages.admin_info') !!}</th>
+								<th>{!! trans('messages.admin_value') !!}</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>Username</td>
+								<td>{!! trans('messages.username') !!}</td>
 								<td>{! logs.record.username !}</td>
 							</tr>
 
 							<tr>
-								<td>Name</td>
+								<td>{!! trans('messages.name') !!}</td>
 								<td>{! logs.record.name !}</td>
 							</tr>
 
 							<tr>
-								<td>Email Address</td>
+								<td>{!! trans('messages.email_address') !!}</td>
 								<td>{! logs.record.email !}</td>
 							</tr>
 
 							<tr>
-								<td>Admin Type</td>
+								<td>{!! trans('messages.admin_type') !!}</td>
 								<td>{! logs.record.admin_type !}</td>
 							</tr>
 
 							<tr>
-								<td>Page Accessed</td>
+								<td>{!! trans('messages.admin_page_accessed') !!}</td>
 								<td>{! logs.record.page_accessed !}</td>
 							</tr>
 
 							<tr>
-								<td>API Accessed</td>
+								<td>{!! trans('messages.admin_api_accessed') !!}</td>
 								<td>{! logs.record.api_accessed !}</td>
 							</tr>
 
 							<tr>
-								<td>Response Status</td>
+								<td>{!! trans('messages.admin_response_status') !!}</td>
 								<td>{! logs.record.result_response !}</td>
 							</tr>
 
 							<tr class="odd" ng-if="!logs.record">
 								<td valign="top" colspan="10">
-									No records found
+									{!! trans('messages.no_records_found') !!}
 								</td>
 							</tr>
 						</tbody>
@@ -248,7 +248,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('Close'
+						{!! Form::button(trans('messages.close')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

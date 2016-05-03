@@ -361,3 +361,49 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 .imprt-err-msgs {
 	padding-left: 10px;
 }
+
+div div.invoice-btn {
+	padding-left: 0px;
+}
+
+div.add-subject div.checkbox,
+div.add-subject div.checkbox label,
+div.add-grade div.checkbox,
+div.add-grade div.checkbox label,
+div.form-group div.search-admin,
+div.admin-view-admin div.checkbox,
+div.form-group div.admin-search-client,
+div.admin-view-client-details div.checkbox,
+div.admin-view-client-details div.checkbox label,
+div.form-group div.admin-search-student,
+div.admin-view-student-form div.checkbox,
+div.admin-view-student-form div.checkbox label,
+div.admin-view-subject-details div.checkbox,
+div.admin-view-subject-details div.checkbox label,
+div.admin-view-subject-area-details div.checkbox,
+div.admin-view-subject-area-details div.checkbox label,
+div.admin-view-grade-details div.checkbox,
+div.admin-view-grade-details div.checkbox label,
+div.form-group div.admin-search-grade,
+div.form-group div.admin-search-module,
+div.form-group div.admin-search-module-content,
+div.admin-view-module-details div.checkbox,
+div.admin-view-module-details div.checkbox label,
+div.form-group div.admin-search-security,
+div.form-group div.admin-search-admin-log,
+div.form-group div.admin-search-admin-user,
+div.form-group div.admin-tips-list,
+div.form-group div.admin-help-list,
+div.form-group div.admin-help-answer-list
+{
+	padding-left: 0px;
+}
+
+div.admin-view-module-content {
+	width: 28%;
+	padding-left: 0px;
+}
+
+div.admin-search-module-content {
+	width: 19%;
+}

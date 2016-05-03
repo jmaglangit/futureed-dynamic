@@ -4,17 +4,15 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hi {{ $name  }},</div><br/>
+<div>{!! trans('messages.hi_there') !!} {{ $name  }},</div><br/>
 
 <div>
-    <div>Your email has been changed from {{$email}} to {{$new_email}} You can now use this email in your <a href="{{ $link }}">login </a>.</div>
+    <div>{!! trans('messages.email_change_email_msg') !!} {{$email}} {!! trans('messages.to') !!} {{$new_email}} {!! trans('messages.email_change_email_msg2') !!} <a href="{{ $link }}">{!! trans('messages.login') !!}</a>.</div>
 
-        <div>If you did not ask for this change, please contact the administrator right away.</div><br/>
+        <div>{!! trans('messages.email_change_password_msg2') !!}</div><br/>
 
-    <div>Regards,</div><br/>
-    <div>Admin</div>
-
-
+    <div>{!! trans('messages.regards') !!},</div><br/>
+    <div>{!! trans('messages.admin') !!}</div>
 
 </div>
 </body>

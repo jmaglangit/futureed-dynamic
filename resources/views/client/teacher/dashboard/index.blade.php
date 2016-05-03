@@ -4,13 +4,13 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					To get started on using Future Lesson, you need to add a student.
+					{{ trans('messages.teacher_dashboard_message_1') }}
 				</h5>
 			</div>
 			<div class="col-xs-4">
 				<a class="dashboard-content-btn" href="{!! route('client.teacher.class.index') !!}">
 					<button  type="button">
-						Add student now!
+						{{ trans('messages.teacher_dashboard_add_student') }}
 					</button>
 				</a>
 			</div>
@@ -19,13 +19,13 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					To see all your students, click student.
+					{{ trans('messages.teacher_dashboard_message_2') }}
 				</h5>
 			</div>
 			<div class="col-xs-4">
 				<a class="dashboard-content-btn" href="{!! route('client.teacher.student.index') !!}">
 					<button  type="button">
-						Student List
+						{{ trans('messages.teacher_dashboard_student_list') }}
 					</button>
 				</a>
 			</div>
@@ -34,13 +34,13 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					To review the lessons and practice questions, click the module.
+					{{ trans('messages.teacher_dashboard_message_3') }}
 				</h5>
 			</div>
 			<div class="col-xs-4">
 				<a class="dashboard-content-btn" href="{!! route('client.teacher.module.index') !!}">
 					<button  type="button">
-						Module
+						{{ trans('messages.teacher_dashboard_module') }}
 					</button>
 				</a>
 			</div>
@@ -55,7 +55,7 @@
 		<div class="row client-export-button-container">
 			<div class="col-xs-12">
 				<div class="btn-group export-buttons pull-right">
-					<button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i> Export </button>
+					<button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i> {!! trans('messages.export') !!} </button>
 					<ul class="dropdown-menu">
 						<li><a href="{!dashboard.teacher_report_export!}/pdf">PDF</a></li>
 						<li><a href="{!dashboard.teacher_report_export!}/xls">Excel</a></li>
@@ -67,28 +67,28 @@
 		<div ng-if="dashboard.export" class="report-options">
 			<ul class="pull-right">
 				<li>
-					<button class="btn btn-blue"><i class="fa fa-save"></i> Save </button>
+					<button class="btn btn-blue"><i class="fa fa-save"></i> {!! trans('messages.save') !!} </button>
 				</li>
 				<li>
-					<button class="btn btn-blue"><i class="fa fa-file-pdf-o"></i> Export </button>
+					<button class="btn btn-blue"><i class="fa fa-file-pdf-o"></i> {!! trans('messages.export') !!} </button>
 				</li>
 				<li>
-					<button class="btn btn-blue"><i class="fa fa-print"></i> Print </button>
+					<button class="btn btn-blue"><i class="fa fa-print"></i> {!! trans('messages.print') !!} </button>
 				</li>
 				<li>
-					<button class="btn btn-blue"><i class="fa fa-envelope-o"></i> Email </button>
+					<button class="btn btn-blue"><i class="fa fa-envelope-o"></i> {!! trans('messages.email') !!} </button>
 				</li>
 			</ul>
 		</div>
 
 		<div class="report-container">
 			<ul class="nav nav-tabs report-nav" role="tablist">
-				<li class="col-xs-6 active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-list-ul"></i> View class list</a></li>
+				<li class="col-xs-6 active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-list-ul"></i> {!! trans('messages.client_view_class_list') !!}</a></li>
 				<li class="col-xs-6 class-list">
 					<select ng-model="dashboard.classroom_id"
 							ng-change="dashboard.getDashboardReport()"
 							class="form-control">
-						<option value="">-- Select Class --</option>
+						<option value="">{!! trans('messages.select_class') !!}</option>
 						<option ng-selected="dashboard.classroom_id == class.id"
 								ng-repeat="class in dashboard.class_list"
 								ng-value="class.id">
@@ -100,14 +100,14 @@
 
 			<!-- teacher details -->
 			<div>
-				<h3><i class="fa fa-th-list"></i> Teacher Details</h3>
+				<h3><i class="fa fa-th-list"></i> {!! trans('messages.client_teacher_details') !!}</h3>
 				<table class="table table-bordered">
 					<tr class="magenta-row">
-						<th class="col-xs-3">Class Name</th>
+						<th class="col-xs-3">{!! trans('messages.class_name') !!}</th>
 						<td>{! dashboard.additional_information.class_name !}</td>
 					</tr>
 					<tr class="magenta-row">
-						<th class="col-xs-3">Class Level</th>
+						<th class="col-xs-3">{!! trans('messages.class_level') !!}</th>
 						<td>{! dashboard.additional_information.grade_name !}</td>
 					</tr>
 				</table>
@@ -115,7 +115,7 @@
 
 			<!-- student status -->
 			<div>
-				<h3><i class="fa fa-file-text"></i> Student Status</h3>
+				<h3><i class="fa fa-file-text"></i> {!! trans('messages.student_status') !!}</h3>
 				<table class="table table-bordered">
 					<thead>
 						<tr class="magenta">
@@ -134,7 +134,7 @@
 
 			<!-- students to watch-->
 			<div>
-				<h3><i class="fa fa-user"></i> Students to watch</h3>
+				<h3><i class="fa fa-user"></i> {!! trans('messages.student_to_watch') !!}</h3>
 				<table class="table table-bordered">
 					<tr class="magenta-row">
 						<th class="col-xs-3">{! dashboard.column_header.student_watch.struggling !}</th>

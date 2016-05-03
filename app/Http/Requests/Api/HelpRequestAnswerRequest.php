@@ -44,12 +44,12 @@ class HelpRequestAnswerRequest extends ApiRequest {
 	public function messages(){
 
 		return [
-            'student_id.required' =>'Student is required.',
-            'help_request_id.required' =>'Help request is required.',
-            'student_id.integer' =>'Student must be a number.',
-            'help_request_id.integer' =>'Help request must be a number.',
-            'content.required' => 'The answer field is required.',
-            'content.string' => 'The answer field is invalid.'
+            'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+            'help_request_id.required' => trans('errors.1003',['attribute' => trans('errors.2193')]),
+            'student_id.integer' =>trans('errors.1003',['attribute' => trans('errors.2192')]),
+            'help_request_id.integer' => trans('errors.1013',['attribute' => trans('errors.2193')]),
+            'content.required' => trans('validation.required',['attribute' => trans('errors.2171')]),
+            'content.string' => trans('errors.1004',['attribute' => trans('errors.2171')]),
 		];
 	}
 

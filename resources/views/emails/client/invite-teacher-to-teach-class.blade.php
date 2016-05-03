@@ -4,17 +4,17 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hi there {{ $name }},</div><br/>
+<div>{!! trans('messages.hi_there') !!} {{ $name }},</div><br/>
 
 <div>
-    <div>   {{ $school_name }} has assigned you to {{ $class_name }} to teach. You may now start adding your students to your class.
+    <div>{{ $school_name }} {!! trans('messages.email_invite_teacher_to_teach_msg') !!} {{ $class_name }} {!! trans('messages.email_invite_teacher_to_teach_msg2') !!}
     </div>
     <br/>
-    <div>   Click <a href="{{ $login_link }}">here</a> to login.
+    <div>{!! trans('messages.click') !!} <a href="{{ $login_link }}">{!! trans('messages.here') !!}</a> {!! trans('messages.email_to_login') !!}
     </div>
     <br/>
-    <div>Thanks,</div><br/>
-    <div>Admin</div>
+    <div>{!! trans('messages.regards') !!},</div><br/>
+    <div>{!! trans('messages.admin') !!}</div>
 
 </div>
 </body>

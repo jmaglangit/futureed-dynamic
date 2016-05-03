@@ -1,19 +1,19 @@
 <div>
 	<div class="content-title">
 		<div class="title-main-content">
-			<span><i class="fa fa-gear"></i> Tips & Help Requests</span>
+			<span><i class="fa fa-gear"></i> {!! trans('messages.tips_and_help_request') !!}</span>
 		</div>
 	</div>
 	<div class="form-content col-xs-12">
 		<ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active" ng-init="class.setTabActive()">
-		    	<a ng-click="class.setTabActive('tip')" href="#tips" aria-controls="tips" role="tab" data-toggle="tab"><span><i class="fa fa-lightbulb-o"></i>Tips</span></a>
+		    	<a ng-click="class.setTabActive('tip')" href="#tips" aria-controls="tips" role="tab" data-toggle="tab"><span><i class="fa fa-lightbulb-o"></i>{!! trans('messages.tips') !!}</span></a>
 		    </li>
 		    <li role="presentation">
-		    	<a ng-click="class.setTabActive('help')" href="#help" aria-controls="help" role="tab" data-toggle="tab"><span><i class="fa fa-question-circle"></i>Help Requests</span></a>
+		    	<a ng-click="class.setTabActive('help')" href="#help" aria-controls="help" role="tab" data-toggle="tab"><span><i class="fa fa-question-circle"></i>{!! trans('messages.help_request') !!}</span></a>
 		    </li>
 		    <li role="presentation">
-		    	<a href="#help-ans" ng-click="class.setTabActive('help-ans')" aria-controls="help-ans" role="tab" data-toggle="tab"><span><i class="fa fa-exclamation-circle"></i>Help Request Answers</span></a>
+		    	<a href="#help-ans" ng-click="class.setTabActive('help-ans')" aria-controls="help-ans" role="tab" data-toggle="tab"><span><i class="fa fa-exclamation-circle"></i>{!! trans('messages.help_request_answers') !!}</span></a>
 		    </li>
 		</ul>
 	</div>

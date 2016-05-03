@@ -9,7 +9,7 @@
 	<div class="form-narrow form-style">
 		<div class="content-title">
 			<div class="pull-left title-main-content">
-				<span>Failed Payment</span>
+				<span>{!! trans('messages.failed_payment') !!}</span>
 			</div>
 		</div>
 
@@ -19,11 +19,11 @@
 			</div>
 
 			<div class="module-container">
-				<p class="alert alert-error">You have failed to complete the payment process.</p>
+				<p class="alert alert-error">{!! trans('messages.failed_payment_msg') !!}</p>
 			</div>
 		
 			<div class="btn-container">
-				{!! Html::link(route('student.payment.index'), 'View Payment List'
+				{!! Html::link(route('student.payment.index'), trans('messages.view_payment_list')
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 					)

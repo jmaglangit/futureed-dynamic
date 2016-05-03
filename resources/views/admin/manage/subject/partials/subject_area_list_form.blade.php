@@ -1,7 +1,7 @@
 <div ng-if="subject.active_view && area.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Subject Area Management</span>
+			<span>{!! trans('messages.admin_subject_area_mngt') !!}</span>
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -33,7 +33,7 @@
 				<div class="col-xs-6">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'Area'
+							'placeholder' => trans('messages.area')
 							, 'ng-model' => 'area.search.name'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -41,7 +41,7 @@
 				</div>
 				
 				<div class="col-xs-3">
-					{!! Form::button('Search'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'area.searchFnc($event)'
@@ -49,7 +49,7 @@
 					)!!}
 				</div>
 				<div class="col-xs-3">
-					{!! Form::button('Clear'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'area.clear()'
@@ -62,16 +62,16 @@
 	 
 	<div class="col-xs-12 table-container">
 		<button class="btn btn-blue btn-semi-medium" ng-click="area.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Subject Area
+			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_subject_area') !!}
 		</button>
 
 		<button class="btn btn-gold btn-semi-medium pull-right" ng-click="subject.setActive()">
-			Back to Subject
+			{!! trans('messages.admin_back_to_subject') !!}
 		</button>
 
 		<div class="list-container" ng-init="area.setActive()" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Subject Area List
+				{!! trans('messages.admin_subject_area_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -95,9 +95,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>Area Code</th>
-			            <th>Area</th>
-			            <th ng-if="area.records.length">Action</th>
+			            <th>{!! trans('messages.admin_area_code') !!}</th>
+			            <th>{!! trans('messages.area') !!}</th>
+			            <th ng-if="area.records.length">{!! trans('messages.action') !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>
@@ -125,12 +125,12 @@
 			        </tr>
 			        <tr class="odd" ng-if="!area.records.length && !area.table.loading">
 			        	<td valign="top" colspan="4">
-			        		No records found
+			        		{!! trans('messages.no_records_found') !!}
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="area.table.loading">
 			        	<td valign="top" colspan="4">
-			        		Loading...
+			        		{!! trans('messages.loading') !!}
 			        	</td>
 			        </tr>
 		        </tbody>

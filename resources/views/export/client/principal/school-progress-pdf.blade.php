@@ -36,15 +36,15 @@
         <tr></tr>
     </table>
     <div>&nbsp;</div>
-    <div class="export-header"><h3>Overall School Progress</h3></div>
+    <div class="export-header"><h3>{!! trans('messages.overall_school_progress') !!}</h3></div>
     <div>
         {{--Skills watch--}}
         <div>
             <h3 class="export-sub-header">{{ $column_header['skills_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
-                    <th class="col-xs-4">Subject</th>
-                    <th class="col-xs-3">Progress</th>
+                    <th class="col-xs-4">{!! trans('messages.subject') !!}</th>
+                    <th class="col-xs-3">{!! trans('messages.progress') !!}</th>
                 </tr>
                 @if(!is_null($rows['skills_watch']['highest_skill']))
                     <tr>
@@ -60,7 +60,7 @@
                 @endif
                 @if(is_null($rows['skills_watch']['highest_skill']) && is_null($rows['skills_watch']['lowest_skill']))
                     <tr>
-                        <td colspan="2"><p>No result...</p></td>
+                        <td colspan="2"><p>{!! trans('messages.no_results') !!}</p></td>
                     </tr>
                 @endif
             </table>
@@ -71,12 +71,12 @@
             <h3 class="export-sub-header">{{ $column_header['class_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
-                    <th class="col-xs-4">Teacher</th>
-                    <th class="col-xs-3">Progress</th>
+                    <th class="col-xs-4">{!! trans('messages.teacher') !!}</th>
+                    <th class="col-xs-3">{!! trans('messages.progress') !!}</th>
                 </tr>
                 @if(!is_null($rows['class_watch']['highest_class']))
                     <tr>
-                        <td>Teacher {{ $rows['class_watch']['highest_class']['first_name']
+                        <td>{!! trans('messages.teacher') !!} {{ $rows['class_watch']['highest_class']['first_name']
                     .' '.$rows['class_watch']['highest_class']['last_name'] }}
                         </td>
                         <td>{{ $rows['class_watch']['highest_class']['percent_progress'] }} %</td>
@@ -84,7 +84,7 @@
                 @endif
                 @if(!is_null($rows['class_watch']['lowest_class']))
                     <tr>
-                        <td>Teacher {{ $rows['class_watch']['lowest_class']['first_name']
+                        <td>{!! trans('messages.teacher') !!} {{ $rows['class_watch']['lowest_class']['first_name']
                      .' '. $rows['class_watch']['lowest_class']['last_name']}}
                         </td>
                         <td>{{ $rows['class_watch']['lowest_class']['percent_progress'] }}%</td>
@@ -92,7 +92,7 @@
                 @endif
                 @if(is_null($rows['class_watch']['highest_class']) && is_null($rows['class_watch']['lowest_class']))
                     <tr>
-                        <td colspan="2"><p>No result...</p></td>
+                        <td colspan="2"><p>{!! trans('messages.no_results') !!}</p></td>
                     </tr>
                 @endif
 
@@ -103,8 +103,8 @@
             <h3 class="export-sub-header">{{ $column_header['student_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
-                    <th class="col-xs-4">Student</th>
-                    <th class="col-xs-3">Status</th>
+                    <th class="col-xs-4">{!! trans('messages.student') !!}</th>
+                    <th class="col-xs-3">{!! trans('messages.status') !!}</th>
                 </tr>
                 @if(count($rows['student_watch']) > 0)
                     @foreach($rows['student_watch'] as $student)
@@ -115,7 +115,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="2"><p>No result...</p></td>
+                        <td colspan="2"><p>{!! trans('messages.no_result') !!}</p></td>
                     </tr>
                 @endif
 
@@ -123,20 +123,20 @@
         </div>
         {{--Highest Lowest Scorers--}}
         <div>
-            <h3 class="export-sub-header">Scores</h3>
+            <h3 class="export-sub-header">{!! trans('messages.scores') !!}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="report-empty-column"></th>
-                    <th>Student</th>
-                    <th>Teacher</th>
+                    <th>{!! trans('messages.student') !!}</th>
+                    <th>{!! trans('messages.teacher') !!}</th>
                 </tr>
                 <tr class="magenta-row">
-                    <th>Highest Score</th>
+                    <th>{!! trans('messages.highest_score') !!}</th>
                     <td>{{ $rows['highest_score']['student_first_name'].' '.$rows['highest_score']['student_last_name'] }}</td>
                     <td>{{ $rows['highest_score']['teacher_first_name'].' '.$rows['highest_score']['teacher_last_name'] }}</td>
                 </tr>
                 <tr class="magenta-row">
-                    <th>Lowest Score</th>
+                    <th>{!! trans('messages.lowest_score') !!}</th>
                     <td>{{ $rows['lowest_score']['student_first_name'].' '.$rows['highest_score']['student_last_name'] }}</td>
                     <td>{{ $rows['lowest_score']['teacher_first_name'].' '.$rows['highest_score']['teacher_last_name'] }}</td>
                 </tr>

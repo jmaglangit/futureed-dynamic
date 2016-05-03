@@ -1,7 +1,7 @@
 <div ng-if="login.active_login">
 	<div class="col-xs-5">
 		<div class="login-container form-style form-narrow">
-			<div class="title">Login to your account</div>
+			<div class="title">{!! trans('messages.login_to_your_account') !!}</div>
 			
 			<div class="alert alert-danger" style="text-align:left;" ng-if="login.errors">
 				<p ng-repeat="error in login.errors"> 
@@ -22,7 +22,7 @@
 				</div>
 				{!! Form::text('login', ''
 					, array(
-						'placeholder' => 'Email or Username'
+						'placeholder' => trans('messages.email_or_username')
 						, 'ng-model' => 'login.username'
 						, 'autocomplete' => 'off'
 					)
@@ -35,13 +35,13 @@
 				</div>
 				{!! Form::password('password'
 					, array(
-						'placeholder' => 'Password'
+						'placeholder' => trans('messages.password')
 						, 'ng-model' => 'login.password'
 					)
 				) !!}
 			</div>
 
-			<div class="title">ROLE</div>
+			<div class="title">{!! trans('messages.role') !!}</div>
 		
 			<div class="input">
 				<div class="icon">
@@ -49,10 +49,10 @@
 				</div>
 				{!! Form::select('role'
 					, array(
-						'' => '-- Select Role --'
-						, 'Parent' => 'Parent'
-						, 'Teacher' => 'Teacher'
-						, 'Principal' => 'Principal'
+						'' => trans('messages.select_role')
+						, 'Parent' => trans('messages.parent')
+						, 'Teacher' => trans('messages.teacher')
+						, 'Principal' => trans('messages.principal')
 					)
 					, ''
 					, array(
@@ -69,7 +69,7 @@
 			) !!}
 		
 			<div class="form-group">
-				{!! Form::button('Login'
+				{!! Form::button(trans('messages.login')
 					, array(
 						'class' => 'btn btn-blue'
 						, 'ng-click' => 'login.clientLogin()'
@@ -78,46 +78,46 @@
 			</div>
 
 			<div class="form-group login-divider">
-				<em>or</em>
+				<em>{!! trans('messages.or') !!}</em>
 			</div>
 
 			<div class="row form-group">
 				<div class="col-xs-6"> 
 					<button type="button" class="btn btn-fb"
 						ng-click="login.loginViaFacebook()">
-							<i class="fa fa-facebook"></i> Sign in via Facebook
+							<i class="fa fa-facebook"></i> {!! trans('messages.sign_via_fb') !!}
 					</button>
 				</div>
 
 				<div class="col-xs-6"> 
 					<button id="btn-google" type="button" class="btn btn-google" ng-init="login.googleInit()"> 
 						<span><img src="/images/icons/google-logo.png" /></span>
-						<span>Sign in with Google</span> 
+						<span>{!! trans('messages.sign_via_google') !!}</span> 
 					</button>
 				</div>
 			</div>
 
 			<div class="text-group">
-				<small>Not a Parent / Teacher / School?</small>
-				<small>Click 
+				<small>{!! trans('messages.client_not_a_client') !!}</small>
+				<small>{!! trans('messages.click') !!} 
 
 				{!! Html::link(
 					route('student.login')
-					, 'here') 
+					, trans('messages.here'))
 				!!}
 
-				for Student Site
+				{!! trans('messages.for_student_site') !!}
 				</small>     
 			</div>  
 
 			<div class="text-group">
 				<small>
-					{!! Html::link(route('client.login.forgot_password'), 'Forgot your password?') !!}
+					{!! Html::link(route('client.login.forgot_password'), trans('messages.forgot_your_password')) !!}
 				</small>  
 			</div>
 
 			<p>
-				{!! Html::link(route('client.registration'), 'Sign Up'
+				{!! Html::link(route('client.registration'), trans('messages.sign_up')
 					, array(
 						'class' => 'btn btn-gold fb'
 					)
@@ -129,7 +129,7 @@
 	</div>
 
 	<div class="col-xs-7 bulletin" ng-init="getAnnouncement()">
-		<h2 class="title">Bulletin Board</h2>
+		<h2 class="title">{!! trans('messages.client_bulletin_board') !!}</h2>
 		<hr />
 		<h4 class="announce-title">
 			<i class="fa fa-clock-o"></i>
@@ -137,5 +137,27 @@
 		</h4>
 		<br />
 		<p>{! announce.announcement !}</p>
+	</div>
+
+	<div class="col-xs-12" style="padding-top: 10px;padding-bottom: 10px; background-color: #A92147;">
+		<center class="col-xs-offset-4 col-xs-4" >
+			{!! Html::link(url('/lang/en'), 'English - US, '
+                  , array(
+                      'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',
+                  )
+              ) !!}
+
+			{!! Html::link(url('/lang/id'), 'Bahasa Indonesia, '
+                    , array(
+                        'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',
+                    )
+                ) !!}
+
+			{!! Html::link(url('/lang/th'), 'Thai '
+                    , array(
+                        'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',
+                    )
+                ) !!}
+		</center>
 	</div>
 </div>

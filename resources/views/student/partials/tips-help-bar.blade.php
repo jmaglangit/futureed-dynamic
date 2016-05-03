@@ -41,7 +41,7 @@
 			</div>
 			<div class="sidebar-div" ng-if="!class.tips.total">
 				<div class="div-side-content">
-					<p>No Tips for now...</p>
+					<p>{!! trans('messages.no_tips_for_now') !!}</p>
 				</div>
 			</div>
 		</div>
@@ -52,7 +52,7 @@
 			    </p>
 			</div>
 			<div class="alert alert-success" ng-if="class.tips.success">
-				<p>Success! You have added a new tip. Your content is currently being reviewed.</p>
+				<p>{!! trans('messages.success_add_new_tip') !!}</p>
 			</div>
 		</div>
 		<div class="clearfix"></div>	
@@ -61,34 +61,34 @@
 				<div class="sidebar-div">
 					<div class="tip-form">
 						<div class="form-group">
-							<label class="control-label label-side">Title</label>
+							<label class="control-label label-side">{!! trans('messages.title') !!}</label>
 							{!! Form::text('title', ''
 				                , array(
 				                    'class' => 'form-control sidebar-input'
-				                    , 'placeholder' => 'Title' 
+				                    , 'placeholder' => trans('messages.title')
 				                    , 'ng-model' => 'class.tips.title'
 				                    , 'autocomplete' => 'off')
 				            ) !!}
 						</div>
 						<div class="form-group">
-							<label class="control-label label-side">Description</label>
+							<label class="control-label label-side">{!! trans('messages.description') !!}</label>
 							{!! Form::textarea('description', ''
 				                , array(
 				                    'class' => 'form-control sidebar-input disabled-textarea'
-				                    , 'placeholder' => 'Description' 
+				                    , 'placeholder' => trans('messages.description')
 				                    , 'ng-model' => 'class.tips.content'
 				                    , 'autocomplete' => 'off')
 				            ) !!}	
 						</div>
 						<div class="side-btn-container submit-btn-tips">
-							{!! Form::button('Submit'
+							{!! Form::button(trans('messages.submit')
 				                , array(
 				                  'id' => 'submit'
 				                  , 'class' => 'btn btn-blue side-btn'
 				                  , 'ng-click' => 'class.submitTips()'
 				                )
 				            ) !!}
-				            {!! Form::button('Back'
+				            {!! Form::button(trans('messages.back')
 				                , array(
 				                  'id' => 'back'
 				                  , 'class' => 'btn btn-maroon'
@@ -102,7 +102,7 @@
 			<div class="clearfix"></div>
 			<div class="side-btn-container row" ng-if="class.tips.success">
 				<div class="col-xs-6 btn-left">
-					{!! Form::button('Add More'
+					{!! Form::button(trans('messages.add_more')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-blue'
@@ -111,7 +111,7 @@
 		            ) !!}
 				</div>
 				<div class="col-xs-6 btn-right">
-					{!! Form::button('Back'
+					{!! Form::button(trans('messages.back')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-maroon'
@@ -122,7 +122,7 @@
 			</div>
 			<div class="side-btn-container row" ng-if="!class.add_tips && !class.tips.success">
 				<div class="col-xs-6 btn-left">
-		            {!! Form::button('View List'
+		            {!! Form::button(trans('messages.view_list')
 		                , array(
 		                   'class' => 'btn btn-blue'
 		                   , 'ng-if' => 'class.tips.total'
@@ -131,7 +131,7 @@
 		            ) !!}
 				</div>
 				<div class="col-xs-6 btn-right">
-					{!! Form::button('Add Tips'
+					{!! Form::button(trans('messages.add_tips')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-maroon'
@@ -149,7 +149,7 @@
 	<div id="help_request_form" class="side-container">
 		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success">
 			<div class="col-xs-12 submit-btn-help">
-				{!! Form::button('My Help Requests'
+				{!! Form::button(trans('messages.my_help_requests')
 	                , array(
 	                   'class' => 'btn btn-blue'
 	                   , 'ng-click' => "class.redirectHelp('', 'Own')"
@@ -177,7 +177,7 @@
 			</div>
 			<div class="sidebar-div" ng-if="!class.help.total">
 				<div class="div-side-content">
-					<p>No Help Requests for now...</p>
+					<p>{!! trans('messages.no_help_requests_for_now') !!}</p>
 				</div>
 			</div>
 		</div>
@@ -189,7 +189,7 @@
 			    </p>
 			</div>
 			<div class="alert alert-success" ng-if="class.help.success">
-				<p>Success! You have added a new help request. Your content is currently being reviewed.</p>
+				<p>{!! trans('messages.success_add_help_request') !!}</p>
 			</div>
 		</div>
 
@@ -198,34 +198,34 @@
 				<div class="sidebar-div">
 					<div class="help-form">
 						<div class="form-group">
-							<label class="control-label label-side">Title</label>
+							<label class="control-label label-side">{!! trans('messages.title') !!}</label>
 							{!! Form::text('title', ''
 				                , array(
 				                    'class' => 'form-control sidebar-input'
-				                    , 'placeholder' => 'Title' 
+				                    , 'placeholder' => trans('messages.title')
 				                    , 'ng-model' => 'class.help.title'
 				                    , 'autocomplete' => 'off')
 				            ) !!}
 						</div>
 						<div class="form-group">
-							<label class="control-label label-side">Description</label>
+							<label class="control-label label-side">{!! trans('messages.description') !!}</label>
 								{!! Form::textarea('content', ''
 					                , array(
 					                    'class' => 'form-control sidebar-input disabled-textarea'
-					                    , 'placeholder' => 'Description' 
+					                    , 'placeholder' => trans('messages.description')
 					                    , 'ng-model' => 'class.help.content'
 					                    , 'autocomplete' => 'off')
 					            ) !!}
 						</div>
 						<div class="side-btn-container submit-btn-help">
-							{!! Form::button('Submit'
+							{!! Form::button(trans('messages.submit')
 				                , array(
 				                  'id' => 'validate_code_btn'
 				                  , 'class' => 'btn btn-blue side-btn'
 				                  , 'ng-click' => 'class.submitHelp()'
 				                )
 				            ) !!}
-				            {!! Form::button('Back'
+				            {!! Form::button(trans('messages.back')
 				                , array(
 				                  'id' => 'back'
 				                  , 'class' => 'btn btn-maroon'
@@ -239,7 +239,7 @@
 
 			<div class="side-btn-container row container-bottom" ng-if="!class.add_help && !class.help.success">
 				<div class="col-xs-6 btn-left">
-		            {!! Form::button('View List'
+		            {!! Form::button(trans('messages.view_list')
 		                , array(
 		                   'class' => 'btn btn-blue'
 		                   , 'ng-if' => 'class.help.total'
@@ -248,7 +248,7 @@
 		            ) !!}
 				</div>
 				<div class="col-xs-6 btn-right">
-					{!! Form::button('Add Help'
+					{!! Form::button(trans('messages.add_help')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-maroon'
@@ -259,7 +259,7 @@
 			</div>
 			<div class="side-btn-container row" ng-if="class.help.success">
 				<div class="col-xs-6 btn-left">
-					{!! Form::button('Add More'
+					{!! Form::button(trans('messages.add_more')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-blue'
@@ -268,7 +268,7 @@
 		            ) !!}
 				</div>
 				<div class="col-xs-6 btn-right">
-					{!! Form::button('Back'
+					{!! Form::button(trans('messages.back')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-maroon'
@@ -281,6 +281,6 @@
 	</div>
 	
 	<div class="side-btn-in" ng-class="{ 'side-btn-out' : class.bool_change_class }">
-		<p ng-click="class.click()">Tips / Help</p> 
+		<p ng-click="class.click()">{!! trans('messages.tips_help') !!}</p> 
 	</div>
 </div>

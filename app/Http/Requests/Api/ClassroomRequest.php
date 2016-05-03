@@ -65,19 +65,19 @@ class ClassroomRequest extends ApiRequest {
     public function messages()
     {
         return [
-			'grade_id.required' => 'Grade is required.',
-			'grade_id.integer' => 'Grade must be a number.',
-			'client_id.required' => 'Teacher is required.',
-			'client_id.integer' => 'Client must be a number.',
-			'seats_total.integer' => 'Number of seats is invalid.',
-			'seats_taken.integer' => 'Seats taken is invalid.',
-			'name.required' => 'Class name is required.',
-			'seats_total.required' => 'Number of seats is required.',
-			'name.regex' => 'Class name format is invalid.',
-			'name.min' => 'Class name should be a minimum of 2 characters.',
-			'name.max' => 'Class name may not be greater than 128 characters.',
-			'subject_id.required' => 'Subject is required.',
-			'subject_id.integer' => 'Subject must be a number.',
+			'grade_id.required' => trans('errors.1003',['attribute' => trans('errors.2153')]),
+			'grade_id.integer' => trans('validation.numeric',['attribute' => trans('error.2153')]),
+			'client_id.required' => trans('errors.1003',['attribute' => trans('errors.')]),
+			'client_id.integer' => trans('validation.numeric',['attribute' => trans('errors.2176')]),
+			'seats_total.integer' => trans('errors.1004',['attribute' => trans('errors.2177')]),
+			'seats_taken.integer' => trans('errors.1004', ['attribute' => trans('errors.2178')]),
+			'name.required' => trans('errors.1003',['attribute' => trans('errors.2179')]),
+			'seats_total.required' =>  trans('errors.1003',['attribute' => trans('errors.2177')]),
+			'name.regex' => trans('validation.regex',['attribute' => trans('errors.2179')]),
+			'name.min' => trans('errors.2180'),
+			'name.max' => trans('errors.2181'),
+			'subject_id.required' => trans('errors.1003',['attribute' => trans('errors.2155')]),
+			'subject_id.integer' => trans('validation.numeric',['attribute' => trans('errors.2155')]),
         ];
     }
 

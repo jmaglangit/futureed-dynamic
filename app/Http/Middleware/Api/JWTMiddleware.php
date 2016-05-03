@@ -102,7 +102,7 @@ class JWTMiddleware {
      */
     public function validateToken($token){
 
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
         $validator = Validator::make(
             [
@@ -182,7 +182,7 @@ class JWTMiddleware {
      * @return JWTMiddleware
      */
     public function respondErrorMessage($error_code){
-        $error_msg  = config('futureed-error.error_messages');
+        $error_msg  = trans('errors');
 
         if(!is_null($error_code)){
 

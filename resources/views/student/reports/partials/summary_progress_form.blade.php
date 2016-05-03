@@ -14,7 +14,7 @@
 						ng-change="reports.summaryProgress()"
 						ng-disabled="!reports.subjects.length"
 						class="form-control">
-					<option value="">-- Select Subject --</option>
+					<option value="">{!! trans('messages.select_subject') !!}</option>
 					<option ng-selected="reports.search.subject_id == subject.id"
 							ng-repeat="subject in reports.subjects" ng-value="subject.id">{! subject.name !}
 					</option>
@@ -39,17 +39,17 @@
 		</div>
 
 		<div class="row">
-			<p class="progress-key">Keys</p>
+			<p class="progress-key">{!! trans('messages.keys') !!}</p>
 
 			<div class="progress-legends col-xs-4">
-				<div class="success-legend"> Completed</div>
+				<div class="success-legend">{!! trans('messages.completed') !!}</div>
 			</div>
 			<div class="progress-legends col-xs-4">
-				<div class="ongoing-legend"> Ongoing</div>
+				<div class="ongoing-legend">{!! trans('messages.ongoing') !!}</div>
 			</div>
 
 			<div class="progress-legends col-xs-4">
-				<div class="not-started-legend"> Not yet started</div>
+				<div class="not-started-legend">{!! trans('messages.not_yet_started') !!}</div>
 			</div>
 		</div>
 	</div>

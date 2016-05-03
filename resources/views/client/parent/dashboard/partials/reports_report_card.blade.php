@@ -27,9 +27,9 @@
 		<table id="tip-list" class="table table-striped table-bordered">
 			<thead>
 			<tr class="magenta">
-				<th>Subject</th>
-				<th>Module Status</th>
-				<th>Points Earned</th>
+				<th>{!! trans('messages.subject') !!}</th>
+				<th>{!! trans('messages.module_status') !!}</th>
+				<th>{!! trans('messages.admin_points_earned') !!}</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -40,12 +40,12 @@
 			</tr>
 			<tr class="odd" ng-if="!reports.records.length && !reports.table.loading">
 				<td valign="top" colspan="7">
-					No records found
+					{!! trans('messages.no_records_found') !!}
 				</td>
 			</tr>
 			<tr class="odd" ng-if="reports.table.loading">
 				<td valign="top" colspan="7">
-					Loading...
+					{!! trans('messages.loading') !!}
 				</td>
 			</tr>
 			</tbody>

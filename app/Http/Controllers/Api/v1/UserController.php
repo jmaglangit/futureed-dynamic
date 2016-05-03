@@ -160,7 +160,6 @@ class UserController extends ApiController{
     public function resendResetEmailCode(){
 
         $input = Input::only('email','user_type','callback_uri'); 
-        $error = config('futureed-error.error_messages');
         $subject = config('futureed.subject_forgot_resend');
 
         $this->addMessageBag($this->email($input,'email'));
@@ -261,7 +260,6 @@ class UserController extends ApiController{
     public function resendRegisterEmailCode(){
 
         $input = Input::only('email','user_type','callback_uri');
-        $error = config('futureed-error.error_messages');
         $subject = config('futureed.subject_reg_resend');
 
         $this->addMessageBag($this->email($input,'email'));

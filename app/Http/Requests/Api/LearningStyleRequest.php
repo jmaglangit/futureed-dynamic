@@ -39,12 +39,12 @@ class LearningStyleRequest extends ApiRequest {
 	public function messages() {
 		
 		$custom_messages = [
-			'test_id.required' => 'Test is required.',
-			'student_id.required' => 'Student is required.',
-			'student_id.exists' => 'Student does not exist.',
-			'student_id.integer' => 'Student is invalid.',
-			'section_id.required' => 'Section is required.',
-			'user_answers.required' => 'Answers are required.'
+			'test_id.required' => trans('errors.1003',['attribute' => trans('errors.2204')]),
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+			'student_id.exists' => trans('errors.1014',['attribute' => trans('errors.2192')]),
+			'student_id.integer' => trans('errors.1004',['attribute' => trans('errors.2192')]),
+			'section_id.required' => trans('errors.1003',['attribute' => trans('errors.2205')]),
+			'user_answers.required' => trans('errors.1003',['attribute' => trans('errors.2171')]),
 		];
 
 		return $custom_messages;

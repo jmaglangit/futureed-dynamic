@@ -35,7 +35,7 @@ class InvoiceDetailRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'id.required' => 'Invoice is required.'
+			'id.required' => trans('errors.1003',['attribute' => trans('errors.2198')]),
 		];
 	}
 }

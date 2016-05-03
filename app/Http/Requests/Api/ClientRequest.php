@@ -110,23 +110,23 @@ class ClientRequest extends ApiRequest {
 	public function messages()
 	{
 		return [
-			'zip.max' => config('futureed-error.error_messages.2045'),
-			'zip.regex' => config('futureed-error.error_messages.2044'),
+			'zip.max' => trans('errors.1009',['attribute' => trans('errors.2187')]),
+			'zip.regex' =>  trans('errors.1008',['attribute' => trans('errors.2187')]),
 
-			'school_code.exist' => config('futureed-error.error_messages.2602'),
-			'school_code.required' => config('futureed-error.error_messages.2602'),
-			'school_code.numeric' => config('futureed-error.error_messages.2602'),
-			'school_contact_number.max' => config('futureed-error.error_messages.2046'),
-			'school_contact_number.regex' => config('futureed-error.error_messages.2115'),
-			'school_country_id.required' => config('futureed-error.error_messages.2603'),
-			'school_country_id.numeric' => config('futureed-error.error_messages.2604'),
+			'school_code.exist' => trans('errors.1004',['attribute' => trans('errors.2157')]),
+			'school_code.required' => trans('errors.1004',['attribute' => trans('errors.2157')]),
+			'school_code.numeric' => trans('errors.1004',['attribute' => trans('errors.2157')]),
+			'school_contact_number.max' => trans('errors.1011',['attribute' => trans('errors.2188')]),
+			'school_contact_number.regex' => trans('errors.1010',['attribute' => trans('errors.2188')]),
+			'school_country_id.required' => trans('validation.required',['attribute' => trans('errors.2154')]),
+			'school_country_id.numeric' => trans('validation.numeric',['attribute' => trans('errors.2154')]),
 
-			'country_id.required' => config('futureed-error.error_messages.2603'),
-			'country_id.numeric' => config('futureed-error.error_messages.2604'),
+			'country_id.required' => trans('validation.required',['attribute' => trans('errors.2154')]),
+			'country_id.numeric' => trans('validation.numeric',['attribute' => trans('errors.2154')]),
 
-			'contact_number.max' => config('futureed-error.error_messages.2046'),
+			'contact_number.max' => trans('errors.1011',['attribute' => trans('errors.2188')]),
 
-			'password_image_id.required' => config('futureed-error.error_messages.2138')
+			'password_image_id.required' => trans('errors.1003',['attribute' => 'errors.2189']),
 		];
 	}
 

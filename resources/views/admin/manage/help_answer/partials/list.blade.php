@@ -13,7 +13,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'Module'
+							'placeholder' => trans_choice('messages.module', 1)
 							, 'ng-model' => 'answer.search.module'
 							, 'class' => 'form-control'
 						)
@@ -37,7 +37,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'Subject'
+							'placeholder' => trans('messages.subject')
 							, 'ng-model' => 'answer.search.subject'
 							, 'class' => 'form-control'
 							, 'autocomplete' => 'off'
@@ -45,8 +45,8 @@
 					)!!}
 				</div>
 				
-				<div class="col-xs-2">
-					{!! Form::button('Search'
+				<div class="col-xs-2 admin-help-answer-list">
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'answer.searchFnc($event)'
@@ -58,7 +58,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_subject_area', ''
 						,array(
-							'placeholder' => 'Area'
+							'placeholder' => trans('messages.area')
 							, 'ng-model' => 'answer.search.subject_area'
 							, 'class' => 'form-control'
 						)
@@ -68,9 +68,9 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_request_answer_status'
 						, array(
-							'' => '-- Select Status --'
-							, 'Pending' => 'Pending'
-							, 'Accepted' => 'Accepted'
+							'' => trans('messages.admin_select_status')
+							, 'Pending' => trans('messages.pending')
+							, 'Accepted' => trans('messages.accepted')
 						)
 						, ''
 						, array(
@@ -80,8 +80,8 @@
 					) !!}
 				</div>
 				
-				<div class="col-xs-2">
-					{!! Form::button('Clear'
+				<div class="col-xs-2 admin-help-answer-list">
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'answer.clearFnc($event)'
@@ -93,7 +93,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('help_request', ''
 						,array(
-							'placeholder' => 'Help Request'
+							'placeholder' => trans('messages.help_request')
 							, 'ng-model' => 'answer.search.help_request'
 							, 'class' => 'form-control'
 						)
@@ -106,7 +106,7 @@
 	<div class="table-container" ng-init="answer.list()">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Help Answer List
+				{!! trans('messages.admin_help_answer_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -130,13 +130,13 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>Module</th>
-			            <th>Subject</th>
-			            <th>Area</th>
-			            <th>Help Request</th>
-			            <th>Answer</th>
-			            <th>Status</th>
-			            <th ng-if="answer.records.length">Actions</th>
+			            <th>{!! trans('messages.module') !!}</th>
+			            <th>{!! trans('messages.subject') !!}</th>
+			            <th>{!! trans('messages.area') !!}</th>
+			            <th>{!! trans('messages.help_request') !!}</th>
+			            <th>{!! trans('messages.answer') !!}</th>
+			            <th>{!! trans('messages.status') !!}</th>
+			            <th ng-if="answer.records.length">{!! trans('messages.action') !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>
@@ -163,12 +163,12 @@
 			        </tr>
 			        <tr class="odd" ng-if="!answer.records.length && !answer.table.loading">
 			        	<td valign="top" colspan="7">
-			        		No records found
+			        		{!! trans('messages.no_records_found') !!}
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="answer.table.loading">
 			        	<td valign="top" colspan="7">
-			        		Loading...
+			        		{!! trans('messages.loading') !!}
 			        	</td>
 			        </tr>
 		        </tbody>

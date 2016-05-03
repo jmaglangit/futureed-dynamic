@@ -7,7 +7,7 @@
 				<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 				
 				<div ng-if="!confirm.confirmed">
-					<div class="title">Thank you for registering to Future Lesson!</div>
+					<div class="title">{!! trans('messages.client_thank_you_for_register') !!}</div>
 			
 					<div class="alert alert-danger" ng-if="confirm.errors">
 						<p ng-repeat="error in confirm.errors" > 
@@ -22,7 +22,7 @@
 							</div>
 
 							<p class="text">
-									Please enter the confirmation code to confirm your email account.
+									{!! trans('messages.client_confirmation_sent') !!}
 							</p>
 						</div>
 
@@ -32,20 +32,20 @@
 							</div>
 							
 							<p class="text">
-									A new confirmation code has been sent to your email account.
+									{!! trans('messages.client_new_confirmation_code') !!}
 							</p>
 						</div>
 							
 							<br />
-							<small>Please check your inbox or your spam folder for the email. The email contains a confirmation code that you need to input below.</small>
+							<small>{!! trans('messages.client_check_inbox') !!}</small>
 							{!! Form::open(array('ng-submit' => 'confirm.confirmClientRegistration($event)')) !!}
 									<div class="form-group" ng-if="!confirm.account_confirmed">
-											{!! Form::label('', 'Enter Confirmation Code:')!!}
+											{!! Form::label('', trans('messages.enter_confirmation_code'):')!!}
 											
 											{!! Form::text('confirmation_code', ''
 															, array(
 																	'class' => 'form-control'
-																	, 'placeholder' => 'Confirmation Code'
+																	, 'placeholder' => trans('messages.confirm_code')
 																	, 'ng-model' => 'confirm.record.email_code'
 																	, 'autocomplete' => 'off'
 															)
@@ -54,7 +54,7 @@
 											{!! Form::hidden('email', $email) !!}
 									</div>
 									<div class="btn-container">
-											{!! Form::button('Confirm'
+											{!! Form::button(trans('messages.confirm')
 													, array(
 																'id' => 'proceed_btn'
 															, 'class' => 'btn btn-blue btn-medium'
@@ -63,7 +63,7 @@
 													)
 											) !!}
 
-											{!! Form::button('Resend'
+											{!! Form::button(trans('messages.resend'
 													, array(
 																'class' => 'btn btn-gold btn-medium'
 															, 'ng-click' => 'confirm.resendClientConfirmation()'
@@ -72,13 +72,13 @@
 											)!!}
 									</div>
 									<br />
-									<a href="{!! route('client.login') !!}"><i class="fa fa-home"></i> Home</a>
+									<a href="{!! route('client.login') !!}"><i class="fa fa-home"></i> {!! trans('messages.forgot_home') !!}</a>
 							{!! Form::close() !!}
 					</div>
 				</div>
 
 				<div ng-if="confirm.confirmed && !confirm.success">
-						<div class="title">Set New Password</div>
+						<div class="title">{!! trans('messages.set_new_password') !!}</div>
 
 							<div class="alert alert-danger" ng-if="confirm.errors">
 								<p ng-repeat="error in confirm.errors" > 
@@ -98,7 +98,7 @@
 								{!! Form::password('new_password'
 											, array(
 													'ng-model' => 'confirm.record.new_password'
-												, 'placeholder' => 'New Password'
+												, 'placeholder' => trans('messages.new_password')
 											)
 								) !!}
 							</div>
@@ -109,13 +109,13 @@
 								{!! Form::password('confirm_password'
 											, array(
 													'ng-model' => 'confirm.record.confirm_password'
-												, 'placeholder' => 'Confirm New Password'
+												, 'placeholder' => trans('messages.confirm_new_password')
 											)
 								) !!}
 							</div>
 
 							<div class="btn-container">
-								{!! Form::button('Set Password'
+								{!! Form::button(trans('messages.set_password')
 										, array(
 											'class' => 'btn btn-blue btn-large'
 											, 'ng-click' => 'confirm.setNewClientPassword()'
@@ -126,19 +126,19 @@
 				</div>
 
 				<div ng-if="confirm.confirmed && confirm.success">
-						<div class="title">Success!</div>
+						<div class="title">{!! trans('messages.success') !!}</div>
 
 						<div class="roundcon">
 							<i class="fa fa-check fa-5x img-rounded text-center"></i>
 						</div>
 
-						<p>Your password has been set.</p>
-						<p> You may now use your new password to login.</p>
+						<p>{!! trans('messages.password_set') !!}</p>
+						<p>{!! trans('messages.password_new_use') !!}</p>
 
 						<br />
 
 						<div class="btn-container">
-							<a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">Click here to Login</a>
+							<a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">{!! trans('messages.click_to_login') !!}</a>
 						</div>
 				</div>
 		</div>

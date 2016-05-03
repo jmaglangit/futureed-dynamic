@@ -30,20 +30,20 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'qa.search.questions_text'
-								, 'placeholder' => 'Question Text'
+								, 'placeholder' => trans('messages.admin_question_text')
 							)
 						) !!}
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-4 admin-view-module-content">
 						{!! Form::select('question_type'
 							, array(
-								'' => '-- Select Question Type --'
-								, 'MC' => 'Multiple Choice'
-								, 'FIB' => 'Fill in the Blanks'
-								, 'O' => 'Orders'
-								, 'N' => 'Provide'
-								, 'GR' => 'Graph'
-								, 'QUAD' => 'Quadrant'
+								'' => trans('messages.admin_select_question_type')
+								, 'MC' => trans('messages.admin_mc')
+								, 'FIB' => trans('messages.admin_fib')
+								, 'O' => trans('messages.admin_order')
+								, 'N' => trans('messages.admin_provide')
+								, 'GR' => trans('messages.admin_graph')
+								, 'QUAD' => trans('messages.admin_quadrant')
 							)
 							, ''
 							, array(
@@ -52,16 +52,16 @@
 							)
 						) !!}
 					</div>
-					<div class="col-xs-2">
-						{!! Form::button('Search'
+					<div class="col-xs-2 admin-search-module-content">
+						{!! Form::button(trans('messages.search')
 							,array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'qa.searchFnc($event)'
 							)
 						)!!}
 					</div>
-					<div class="col-xs-2">
-						{!! Form::button('Clear'
+					<div class="col-xs-2 admin-search-module-content">
+						{!! Form::button(trans('messages.clear')
 							,array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'qa.clearFnc($event)'
@@ -75,12 +75,12 @@
 
 	<div class="col-xs-12 table-container">
 		<button class="btn btn-blue btn-semi-medium" ng-click="qa.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Q & A
+			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_q_a') !!}
 		</button>
 
 		<div class="list-container">
 			<div class="col-xs-6 title-mid">
-				Question List
+				{!! trans('messages.admin_question_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -104,19 +104,19 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Code</th>
-						<th>Question Text</th>
-						<th>Question Image</th>
-						<th>Question Type</th>
-						<th>Difficulty</th>
-						<th ng-if="qa.records.length">Action</th>
+						<th>{!! trans('messages.code') !!}</th>
+						<th>{!! trans('messages.admin_question_text') !!}</th>
+						<th>{!! trans('messages.admin_question_image') !!}</th>
+						<th>{!! trans('messages.admin_question_type') !!}</th>
+						<th>{!! trans('messages.difficulty') !!}</th>
+						<th ng-if="qa.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="record in qa.records">
 						<td>{! record.code !}</td>
 						<td class="wide-column">{! record.questions_text !}</td>
-						<td><a href="javascript:;" ng-if="record.questions_image != futureed.NONE" ng-click="qa.viewImage(record)">View Image</a></td>
+						<td><a href="javascript:;" ng-if="record.questions_image != futureed.NONE" ng-click="qa.viewImage(record)">{!! trans('messages.admin_view_image') !!}</a></td>
 						<td>{! record.question_type !}</td>
 						<td>{! record.difficulty !}</td>
 						<td ng-if="qa.records.length">
@@ -135,7 +135,7 @@
 					</tr>
 					<tr class="odd" ng-if="!qa.records.length">
 						<td valign="top" colspan="7">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 				</tbody>
@@ -161,14 +161,14 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					Delete Question
+					{!! trans('messages.admin_delete_question') !!}
 				</div>
 				<div class="modal-body">
-					Are you sure you want to delete this question?
+					{!! trans('messages.admin_delete_question_msg') !!}
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
-						{!! Form::button('Yes'
+						{!! Form::button(trans('messages.yes')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'qa.deleteQuestion()'
@@ -176,7 +176,7 @@
 							)
 						) !!}
 
-						{!! Form::button('No'
+						{!! Form::button(trans('messages.no')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'
@@ -201,7 +201,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
-						{!! Form::button('Close'
+						{!! Form::button(trans('messages.close')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

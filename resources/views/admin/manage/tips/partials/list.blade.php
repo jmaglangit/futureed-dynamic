@@ -13,7 +13,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'Module'
+							'placeholder' => trans_choice('messages.module', 1)
 							, 'ng-model' => 'tips.search.module'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -37,15 +37,15 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'Subject'
+							'placeholder' => trans('messages.subject')
 							, 'ng-model' => 'tips.search.subject'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
 				</div>
 				
-				<div class="col-xs-2">
-					{!! Form::button('Search'
+				<div class="col-xs-2 admin-tips-list">
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'tips.searchFnc($event)'
@@ -57,7 +57,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_area', ''
 						,array(
-							'placeholder' => 'Area'
+							'placeholder' => trans('messages.area')
 							, 'ng-model' => 'tips.search.area'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -67,9 +67,9 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_status'
 						, array(
-							'' => '-- Select Status --'
-							, 'Pending' => 'Pending'
-							, 'Accepted' => 'Accepted'
+							'' => trans('messages.admin_select_status')
+							, 'Pending' => trans('messages.pending')
+							, 'Accepted' => trans('messages.accepted')
 						)
 						, ''
 						, array(
@@ -79,8 +79,8 @@
 					) !!}
 				</div>
 				
-				<div class="col-xs-2">
-					{!! Form::button('Clear'
+				<div class="col-xs-2 admin-tips-list">
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'tips.clearFnc($event)'
@@ -90,14 +90,14 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-3"></div>
-				<label class="col-xs-2 control-label">Displayed At</label>
+				<label class="col-xs-2 control-label">{!! trans('messages.displayed_at') !!}</label>
 				<div class="col-xs-5">
 					{!! Form::select('search_link_type'
 						, array(
-							'' => '-- Select Type --'
-							, 'General' => 'General'
-							, 'Content' => 'Content'
-							, 'Question' => 'Question'
+							'' => trans('messages.admin_select_type')
+							, 'General' => trans('messages.general')
+							, 'Content' => trans('messages.content')
+							, 'Question' => trans('messages.question')
 						)
 						, ''
 						, array(
@@ -113,7 +113,7 @@
 	<div class="table-container" ng-init="tips.listTips()">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Tip List
+				{!! trans('messages.admin_tip_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -137,13 +137,13 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>Displayed At</th>
-			            <th>Module</th>
-			            <th>Subject</th>
-			            <th>Area</th>
-			            <th>Title</th>
-			            <th>Status</th>
-			            <th ng-if="tips.records.length">Actions</th>
+			            <th>{!! trans('messages.displayed_at') !!}</th>
+			            <th>{!! trans('messages.module') !!}</th>
+			            <th>{!! trans('messages.subject') !!}</th>
+			            <th>{!! trans('messages.area') !!}</th>
+			            <th>{!! trans('messages.title') !!}</th>
+			            <th>{!! trans('messages.status') !!}</th>
+			            <th ng-if="tips.records.length">{!! trans('messages.action') !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>
@@ -170,12 +170,12 @@
 			        </tr>
 			        <tr class="odd" ng-if="!tips.records.length && !tips.table.loading">
 			        	<td valign="top" colspan="7">
-			        		No records found
+			        		{!! trans('messages.no_records_found') !!}
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="tips.table.loading">
 			        	<td valign="top" colspan="7">
-			        		Loading...
+			        		{!! trans('messages.loading') !!}
 			        	</td>
 			        </tr>
 		        </tbody>

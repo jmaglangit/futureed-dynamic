@@ -99,7 +99,7 @@ class ClientImportController extends ApiController {
 
 				$this->addMessageBag($this->setErrorCode(2200)
 					->setField('email')
-					->setMessage(config('futureed-error.error_messages.2200'))
+					->setMessage(trans('errors.2200'))
 					->errorMessage());
 
 			}
@@ -109,7 +109,7 @@ class ClientImportController extends ApiController {
 
 				$this->addMessageBag($this->setErrorCode(2201)
 					->setField('username')
-					->setMessage(config('futureed-error.error_messages.2201'))
+					->setMessage(trans('errors.2201'))
 					->errorMessage());
 
 			}
@@ -120,7 +120,7 @@ class ClientImportController extends ApiController {
 			if(!$check_school_code){
 				$this->addMessageBag($this->setErrorCode(2105)
 					->setField('school_name')
-					->setMessage(config('futureed-error.error_messages.2105'))
+					->setMessage(trans('errors.2105'))
 					->errorMessage());
 			}
 

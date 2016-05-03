@@ -13,12 +13,12 @@
 
 	<div class="table-container" ng-init="age.ageModuleList()">
 		<button class="btn btn-blue btn-semi-medium" ng-click="age.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Age Group
+			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_age_group') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Age Group List
+				{!! trans('messages.admin_age_group_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -42,9 +42,9 @@
 			<table id="tip-list" class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Age</th>
-						<th>Total Earned Points</th>
-						<th ng-if="age.records.length">Action</th>
+						<th>{!! trans('messages.age') !!}</th>
+						<th>{!! trans('messages.admin_total_points_earned') !!}</th>
+						<th ng-if="age.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,12 +64,12 @@
 					</tr>
 					<tr class="odd" ng-if="!age.records.length && !age.table.loading">
 						<td valign="top" colspan="7">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="age.table.loading">
 						<td valign="top" colspan="7">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>
@@ -95,14 +95,14 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					Delete Age Group
+					{!! trans('messages.admin_delete_age_group') !!}
 				</div>
 				<div class="modal-body">
-					Are you sure you want to delete this age group?
+					{!! trans('messages.admin_delete_age_group_msg') !!}
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
-						{!! Form::button('Yes'
+						{!! Form::button(trans('messages.yes')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'age.deleteAgeGroup()'
@@ -110,7 +110,7 @@
 							)
 						) !!}
 
-						{!! Form::button('No'
+						{!! Form::button(trans('messages.no')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

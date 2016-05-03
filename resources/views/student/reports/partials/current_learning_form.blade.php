@@ -23,7 +23,7 @@
 										ng-change="reports.currentLearning()"
 										ng-disabled="!reports.subjects.length"
 										class="form-control">
-									<option value="">-- Select Subject --</option>
+									<option value="">{!! trans('messages.select_subject') !!}</option>
 									<option ng-selected="reports.search.subject_id == subject.id"
 											ng-repeat="subject in reports.subjects" ng-value="subject.id">{! subject.name !}
 									</option>
@@ -50,7 +50,7 @@
 							<div>{! '' !}</div>
 						</div>
 						<div ng-if="data.progress">
-							{! data.progress !}% Completed
+							{! data.progress !}% {{ trans('messages.completed') }}
 						</div>
 					</td>
 					<td>&nbsp;</td>

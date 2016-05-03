@@ -6,8 +6,8 @@
 
 		<div class="form-style login-container form-select-password" ng-if="!password.password_isset">
 			<div  id="title" class="title">
-				<p ng-if="!password.password_selected">Select a picture for your new picture password</p>
-				<p ng-if="password.password_selected">Select a picture to confirm your new picture password</p>
+				<p ng-if="!password.password_selected">{!! trans('messages.select_pic_new_pic_password') !!}</p>
+				<p ng-if="password.password_selected">{!! trans('messages.select_pic_confirm_pic_password') !!}</p>
 			</div>
 
 			<div class="alert alert-danger" ng-if="password.errors">
@@ -24,7 +24,7 @@
 					</li>
 				</ul>
 
-				{!! Form::button('Proceed'
+				{!! Form::button(trans('messages.client_proceed')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'password.selectNewPassword()'
@@ -34,14 +34,14 @@
 
 				<div ng-if="password.password_selected">
 					<div class="btn-container">
-						{!! Form::button('Previous'
+						{!! Form::button(trans('messages.previous')
 							, array(
 								'class' => 'btn btn-maroon btn-medium'
 								, 'ng-click' => 'password.undoNewPassword()'
 							) 
 						) !!}
 
-						{!! Form::button('Save'
+						{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'password.resetPassword()'
@@ -53,18 +53,18 @@
 		</div>
 
 		<div class="form-style login-container form-select-password" ng-if="password.password_isset">
-			<div class="title">Success!</div>
+			<div class="title">{!! trans('messages.success') !!}</div>
 
 			<div class="roundcon">
 				<i class="fa fa-check fa-5x img-rounded text-center"></i>
 			</div>
 
-			Your picture password has been reset. <br /> 
-			You may now use your new picture password to login. <br />
+			{!! trans('messages.your_pic_password_reset') !!} <br /> 
+			{!! trans('messages.you_may_now_use_new_pic_password_to_login') !!} <br />
 
 			<br />
 
-			{!! Html::link(route('student.login') , 'Click here to Login'
+			{!! Html::link(route('student.login') , trans('messages.click_to_login')
 				, array(
 					'class' => 'btn btn-maroon'
 				)

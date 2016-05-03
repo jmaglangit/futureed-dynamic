@@ -65,7 +65,7 @@ class AdminRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'custom_password' => config('futureed-error.error_messages.2112')
+			'custom_password' => trans('errors.2112'),
 		];
 	}
 }

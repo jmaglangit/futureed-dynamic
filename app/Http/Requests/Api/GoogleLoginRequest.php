@@ -82,15 +82,15 @@ class GoogleLoginRequest extends ApiRequest {
 	public function messages(){
 
 		return [
-			'country_id.required' => config('futureed-error.error_messages.2603'),
-			'country_id.numeric' => config('futureed-error.error_messages.2604'),
-			'country_id.exists' => config('futureed-error.error_messages.2203'),
-			'zip.regex' => config('futureed-error.error_messages.2044'),
-			'zip.max' => config('futureed-error.error_messages.2045'),
-			'school_country_id.required' => config('futureed-error.error_messages.2603'),
-			'school_country_id.numeric' => config('futureed-error.error_messages.2604'),
-			'contact_number.regex' => config('futureed-error.error_messages.2115'),
-			'birth_date.before' => config('futureed-error.error_messages.2028')
+			'country_id.required' => trans('validation.required',['attribute' => trans('errors.2154')]),
+			'country_id.numeric' => trans('validation.numeric',['attribute' => trans('errors.2154')]),
+			'country_id.exists' => trans('errors.1004',['attribute' => trans('errors.2186')]),
+			'zip.regex' =>  trans('errors.1008',['attribute' => trans('errors.2187')]),
+			'zip.max' => trans('errors.1009',['attribute' => trans('errors.2187')]),
+			'school_country_id.required' => trans('validation.required',['attribute' => trans('errors.2154')]),
+			'school_country_id.numeric' => trans('validation.numeric',['attribute' => trans('errors.2154')]),
+			'contact_number.regex' => trans('errors.1010',['attribute' => trans('errors.2188')]),
+			'birth_date.before' => trans('errors.2028'),
 		];
 	}
 

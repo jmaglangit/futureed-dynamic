@@ -16,16 +16,16 @@
 					</p>
 				</div>
 
-				<div class="adlogin-title">Reset Password</div>
+				<div class="adlogin-title">{!! trans('messages.reset_password') !!}</div>
 
 				{!! Form::open(array('id' => 'login_form')) !!}
 					<div class="input">
 						<div class="icon">
 							<i class="fa fa-unlock-alt"></i>
-						</div>
+						</div>						
 						{!! Form::password('new_password'
 								, array(
-										'placeholder' => 'Enter Password'
+										'placeholder' => trans('messages.enter_password')
 										, 'ng-model' => 'forgot.new_password'
 										, 'autocomplete' => 'off'
 								)
@@ -38,13 +38,13 @@
 						</div>
 						{!! Form::password('confirm_password'
 								, array(
-										'placeholder' => 'Confirm Password'
+										'placeholder' => trans('messages.confirm_password')
 										, 'ng-model' => 'forgot.confirm_password'
 								)
 						) !!}
 					</div>
 
-					{!! Form::button('Reset'
+					{!! Form::button( trans('messages.reset')
 						, array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'forgot.resetPassword()'
@@ -59,22 +59,22 @@
 				</div>
 
 				<br />
-				<div class="adlogin-title">Reset Password Success</div>
+				<div class="adlogin-title">{!! trans('messages.reset_password_success') !!}</div>
 
 				<div class="roundcon">
 					<i class="fa fa-check fa-5x img-rounded text-center"></i>
 				</div>
 
 				<div class="forgot-message">
-					<strong>Success!</strong>
-					<p>Your password has been set.</p>
-					<p> You may now use your new password to login.</p>
+					<strong>{!! trans('messages.success') !!}</strong>
+					<p>{!! trans('messages.password_set') !!}</p>
+					<p>{!! trans('messages.password_new_use') !!}</p>
 				</div>
 
 				<br />
 
 				<div class="btn-container">
-					<a class="btn btn-blue btn-large" href="{!! route('admin.login') !!}">Click here to Login</a>
+					<a class="btn btn-blue btn-large" href="{!! route('admin.login') !!}">{!! trans('messages.click_to_login') !!}</a>
 				</div>
 			</div>
 		</div>

@@ -76,7 +76,9 @@ class SubscriptionRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function messages() {
-		$config_file = config('futureed-error.error_messages');
+
+		$config_file = trans('errors');
+
 		return [
 			'numeric' => $config_file[Error::SUBSCRIPTION_MUST_BE_A_NUMBER],
 			'name.required' => $config_file[Error::SUBSCRIPTION_NAME_REQUIRED],

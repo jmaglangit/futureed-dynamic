@@ -1,6 +1,6 @@
 <div class="client-container form-style" ng-if="password.active_linked">
-	<div class="title" ng-if="!password.resent">Enter Reset Code</div>
-	<div class="title" ng-if="password.resent">Reset Code Resent</div>
+	<div class="title" ng-if="!password.resent">{!! trans('messages.client_enter_reset_code') !!}</div>
+	<div class="title" ng-if="password.resent">{!! trans('messages.client_reset_code_resent') !!}</div>
 		
 	<div class="alert alert-danger" ng-if="password.errors">
 		<p ng-repeat="error in password.errors" > 
@@ -15,7 +15,7 @@
 			</div>
 
 			<p class="text" >
-				Please enter the reset code to create your new password.
+				{!! trans('messages.forgot_reset') !!}
 			</p>
 		</div>
 
@@ -25,9 +25,9 @@
 			</div>
 
 			<p>
-				A new reset code has been sent to your email account.
+				{!! trans('messages.forgot_new_code') !!}
 			</p>
-			<small>Please check your inbox or your spam folder for the email. The email contains a confirmation code that you need to input below.</small>
+			<small>{!! trans('messages.forgot_check_inbox') !!}</small>
 		</div>
 
 		{!! Form::open(array('id' => 'redirect_form', 'method' => 'POST', 'route' => 'client.login.reset_password')) !!}
@@ -40,7 +40,7 @@
 				{!! Form::text('reset_code', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'Reset Code'
+						, 'placeholder' => trans('messages.client_reset_code')
 						, 'autocomplete' => 'off'
 						, 'ng-disabled' => 'password.password_set'
 						, 'ng-model' => 'password.record.reset_code'
@@ -48,7 +48,7 @@
 				) !!}
 			</div>
 			<div class="btn-container">
-				{!! Form::button('Proceed'
+				{!! Form::button(trans('messages.client_proceed')
 					, array(
 						  'class' => 'btn btn-blue btn-medium'
 						, 'ng-if' => '!password.password_set'
@@ -56,7 +56,7 @@
 					)
 				) !!}
 
-				{!! Form::button('Resend Code'
+				{!! Form::button(trans('messages.client_resend_code')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-if' => '!password.password_set'
@@ -66,7 +66,7 @@
 			</div>
 			
 			<br />
-			<a href="{!! route('student.login') !!}"><i class="fa fa-home"></i> Home</a>
+			<a href="{!! route('student.login') !!}"><i class="fa fa-home"></i> {!! trans('messages.forgot_home') !!}</a>
 		{!! Form::close() !!}
 	</div>
 </div>

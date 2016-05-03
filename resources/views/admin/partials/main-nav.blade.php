@@ -14,7 +14,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a>Welcome, {! user.first_name !}</a>
+						<a>{{ trans('messages.welcome') }}, {! user.first_name !}</a>
 					</li>
 					<li>
 						<a href="javascript:void(0)" ng-click="logout(user.id, futureed.ADMIN, '{!! route('admin.logout') !!}')">Logout</a>

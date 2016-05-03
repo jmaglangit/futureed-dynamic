@@ -13,7 +13,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -27,22 +27,22 @@
 				<div class="col-xs-4">
 					{!! Form::text('search_teaching_module', ''
 						,array(
-							'placeholder' => 'Teaching Module Name'
+							'placeholder' => trans('messages.admin_teaching_module_name')
 							, 'ng-model' => 'content.search.teaching_module'
 							, 'class' => 'form-control'
 						)
 					)!!}
 				</div>
 
-				<div class="col-xs-4" ng-init="content.getLearningStyle()">
+				<div class="col-xs-4 admin-view-module-content" ng-init="content.getLearningStyle()">
 					<select  name="learning_style" class="form-control" ng-model="content.search.learning_style">
-						<option value="">-- Select Learning Style --</option>
+						<option value="">{!! trans('messages.select_learning_style') !!}</option>
 						<option ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>
 					</select>
 				</div>
 				
-				<div class="col-xs-2">
-					{!! Form::button('Search'
+				<div class="col-xs-2 admin-search-module-content">
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'content.searchFnc($event)'
@@ -50,8 +50,8 @@
 					)!!}
 				</div>
 
-				<div class="col-xs-2">
-					{!! Form::button('Clear'
+				<div class="col-xs-2 admin-search-module-content">
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'content.clearFnc($event)'
@@ -64,12 +64,12 @@
 	 
 	<div class="col-xs-12 table-container" ng-init="content.list()">
 		<button class="btn btn-blue btn-semi-medium" ng-click="content.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Content
+			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_content') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Module Content List
+				{!! trans('messages.admin_content_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -93,11 +93,11 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Code</th>
-						<th>Teaching Module Name</th>
-						<th>Learning Style</th>
-						<th>Media Type</th>
-						<th ng-if="content.records.length">Actions</th>
+						<th>{!! trans('messages.code') !!}</th>
+						<th>{!! trans('messages.admin_teaching_module_name') !!}</th>
+						<th>{!! trans('messages.learning_style') !!}</th>
+						<th>{!! trans('messages.admin_media_type') !!}</th>
+						<th ng-if="content.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -122,12 +122,12 @@
 					</tr>
 					<tr class="odd" ng-if="!content.records.length && !content.table.loading">
 						<td valign="top" colspan="7">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="content.table.loading">
 						<td valign="top" colspan="7">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>

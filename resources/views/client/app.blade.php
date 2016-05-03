@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		
-		<title>FutureEd Online Education Platform</title>
+		<title>{!! trans('messages.futureed_online_platform') !!}</title>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie.css?20140508" />
@@ -17,13 +17,13 @@
 		<!--[if IE 6]><link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie6fixes.css" /><![endif]-->
 
 		<!-- Bootstrap core CSS -->
-		{!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'); !!}
+		{!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css') !!}
 		<!-- Fonts -->
-		{!! Html::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'); !!}
-		{!! Html::style('//fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic'); !!}
+		{!! Html::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') !!}
+		{!! Html::style('//fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic') !!}
 		<!-- Custom styles for this template -->
 		{!! Html::style('/css/datetimepicker.css') !!}
-		{!! Html::style('/css/futureed.css'); !!}
+		{!! Html::style('/css/futureed.css') !!}
 
 		{!! Html::style('/css/futureed-client.css') !!}
 		{!! Html::style('/css/angucomplete.css') !!}
@@ -51,9 +51,10 @@
 
 			<footer class="footer" ng-cloak>
 				<div class="container text-center">
-					<p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
+					<p class="text-muted">{{ date('Y') }} &copy; {!! trans('messages.all_right_reserved') !!} FutureEd Pte Ltd</p>
 				</div>
 			</footer>
+
 		@show
 
 		<!-- START SCRIPTS -->

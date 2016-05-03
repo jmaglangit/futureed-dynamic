@@ -22,7 +22,7 @@ trait AccessTokenTrait {
     //validate token
     public function validateToken($token){
 
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
         $validator = Validator::make(
             [

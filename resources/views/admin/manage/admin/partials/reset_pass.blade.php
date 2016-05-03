@@ -1,7 +1,7 @@
 <div ng-if="admin.active_edit_pass">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Reset Password</span>
+			<span>{!! trans('messages.reset_password') !!}</span>
 		</div>
 	</div>
 
@@ -25,11 +25,11 @@
 	!!}
 	<div class="form-content col-xs-12" ng-if="!admin.reset_success">
 		<div class="form-group">
-			<label class="col-xs-3 control-label">Password <span class="required">*</span></label>
+			<label class="col-xs-3 control-label">{!! trans('messages.password') !!} <span class="required">*</span></label>
 			<div class="col-xs-5">
 				{!! Form::password('new_password',
 						[
-							'placeholder' => 'Password'
+							'placeholder' => trans('messages.password')
 							, 'ng-model' => 'admin.change.new_password'
 							, 'ng-class' => "{ 'required-field' : admin.fields['new_password'] }"
 							, 'class' => 'form-control'
@@ -38,11 +38,11 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-xs-3 control-label">Confirm Password <span class="required">*</span></label>
+			<label class="col-xs-3 control-label">{!! trans('messages.confirm_password') !!} <span class="required">*</span></label>
 			<div class="col-xs-5">
 				{!! Form::password('confirm_password',
 						[
-							'placeholder' => 'Password'
+							'placeholder' => trans('messages.password')
 							, 'ng-model' => 'admin.change.confirm_password'
 							, 'ng-class' => "{ 'required-field' : admin.fields['confirm_password'] || admin.fields['new_password'] }"
 							, 'class' => 'form-control'
@@ -51,14 +51,14 @@
 			</div>
 		</div>
 		<div class="btn-container col-xs-7 col-xs-offset-2">
-			{!! Form::button('Reset'
+			{!! Form::button(trans('messages.reset')
 				, array(
 					'class' => 'btn btn-blue btn-medium'
 					, 'ng-click' => "admin.resetPassword()"
 				)
 			) !!}
 
-			{!! Form::button('Cancel'
+			{!! Form::button(trans('messages.cancel')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 					, 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"
@@ -74,12 +74,12 @@
 				</div>
 			</div>
 			<p class="text">
-				<strong>Success!</strong>
-				<br/>An email has been sent to {! admin.record.email !} with the password that you have set.
+				<strong>{!! trans('messages.success') !!}</strong>
+				<br/>{!! trans('messages.admin_email_sent') !!} {! admin.record.email !} {!! trans('messages.admin_with_password') !!}
 			</p>
 
 			<div class="btn-container">
-				{!! Form::button('View Profile',
+				{!! Form::button(trans('messages.view_profile'),
 					array(
 						'class' => 'btn btn-blue'
 						, 'ng-click' => 'admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)'
