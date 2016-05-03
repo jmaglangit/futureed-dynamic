@@ -2192,4 +2192,8 @@ Jika anda memindahkan hak administrasi organisasi anda kepada orang lain dalam o
 
 	"ls_text_msg_2" => "Bacalah contoh dengan hati-hati untuk memahami petunjuk sebelum mengklik BERIKUTNYA",
 
+	"did_not_receive_email_confirmation" => "Tidak menerima konfirmasi email?",
+
+	"resend_confirmation" => "Kirim kembali konfirmasi"
+
 ];

@@ -111,7 +111,7 @@
 									)
 							) !!}
 
-							{!! Form::button(trans('messages.client_resend_code'
+							{!! Form::button(trans('messages.client_resend_code')
 									, array(
 											'class' => 'btn btn-gold btn-medium'
 											, 'ng-if' => '!password.password_set'

@@ -100,7 +100,7 @@
 
 				{!! Form::open(array('ng-submit' => 'password.clientValidateCode($event)')) !!} 
 					<div class="form-group">
-						{!! Form::label(null, trans('messages.client_enter_reset_code'):') !!}
+						{!! Form::label(null, trans('messages.client_enter_reset_code')) !!}
 
 						{!! Form::text('reset_code', '',
 							array(
