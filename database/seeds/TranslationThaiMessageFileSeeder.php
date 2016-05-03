@@ -41,7 +41,7 @@ class TranslationThaiMessageFileSeeder extends Seeder
         {
             if(isset($lang_id_array[$value]))
             {
-                $content = $content."\t".'"'.$key.'" => "'.trim(addslashes(mb_substr($lang_id_array[$value], 0, strlen($lang_id_array[$value]), 'UTF-8'))).'",'."\n\r";
+                $content = $content."\t".'"'.$key.'" => "'.addslashes($lang_id_array[$value]).'",'."\n\r";
             }
         }
 
