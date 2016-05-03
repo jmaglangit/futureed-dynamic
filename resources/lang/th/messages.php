@@ -2175,4 +2175,10 @@ return [
 	"not_included" => "ไม่รวม",
 
 	"admin_management" => "งานธุรการ",
+
+	"did_not_receive_email_confirmation" => "ไม่ได้รับอีเมล์ยืนยัน?",
+
+	"resend_confirmation" => "ยืนยันการส่งซ้ำ",
+
+	"user_credentials" => "สิทธิของผู้ใช้"
 ];

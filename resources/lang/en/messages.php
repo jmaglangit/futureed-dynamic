@@ -1310,6 +1310,9 @@ return [
 	
 	//resources/views/student/learning-style/index.blade.php
 	'ls_text_msg_1' => 'Please answer all the questions on this page before proceeding to the next page',
-	'ls_text_msg_2' => 'Please read the examples carefully to understand the instructions before clicking NEXT'
+	'ls_text_msg_2' => 'Please read the examples carefully to understand the instructions before clicking NEXT',
+
+	'did_not_receive_email_confirmation' => 'Did not receive email confirmation?',
+	'resend_confirmation' => 'resend confirmation'
 	
 ];
