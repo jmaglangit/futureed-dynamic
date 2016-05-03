@@ -16,15 +16,15 @@
         </li>
         <ul class="sub-menu collapse" ng-class="{ 'in' : admin || client || student }" id="students" ng-if="user.admin_role == futureed.SUPER_ADMIN">
             <li>
-				<a href="{!! route('admin.manage.admin.index') !!}" ng-init="admin.setActive()"><span><i class="fa fa-user"></i></span>{{ ucfirst(trans('messages.admin_manage_admin')) }}</a>
+				<a href="{!! route('admin.manage.admin.index') !!}" ng-init="admin.setActive()"><span><i class="fa fa-user"></i></span>{{ trans('messages.admin_manage_admin') }}</a>
             </li>
 
             <li>
-                <a href="{!! route('admin.manage.client.index') !!}" ng-init="client.setManageClientActive()"><span><i class="fa fa-user"></i></span>{{ ucfirst(trans('messages.admin_manage_client')) }}</a>
+                <a href="{!! route('admin.manage.client.index') !!}" ng-init="client.setManageClientActive()"><span><i class="fa fa-user"></i></span>{{ trans('messages.admin_manage_client') }}</a>
             </li>
 
             <li>
-                <a href="{!! route('admin.manage.student.index') !!}"><span><i class="fa fa-user"></i></span>{{ ucfirst(trans('messages.admin_manage_student')) }}</a>
+                <a href="{!! route('admin.manage.student.index') !!}"><span><i class="fa fa-user"></i></span>{{ trans('messages.admin_manage_student') }}</a>
             </li>
         </ul>
 
@@ -64,7 +64,7 @@
                 <a href="{!! route('admin.manage.announce.index') !!}"><span><i class="fa fa-bullhorn"></i>{{ trans('messages.announcement') }}</span></a>
             </li>
             <li ng-class="{ 'active' : tips }">
-                <a href="{!! route('admin.manage.tips.index') !!}"><span><i class="fa fa-lightbulb-o"></i> {{ trans('messages.tips_and_help_request') }}</span></a>
+                    <a href="{!! route('admin.manage.tips.index') !!}"><span><i class="fa fa-lightbulb-o"></i> {{ trans('messages.tips_and_help_request') }}</span></a>
             </li>
             <li ng-class="{ 'active' : logs }">
                 <a href="{!! route('admin.manage.logs.index') !!}"><span><i class="fa fa-file-o"></i> {{ trans('messages.logs') }} </span></a>

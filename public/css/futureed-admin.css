@@ -391,7 +391,10 @@ div.admin-view-module-details div.checkbox,
 div.admin-view-module-details div.checkbox label,
 div.form-group div.admin-search-security,
 div.form-group div.admin-search-admin-log,
-div.form-group div.admin-search-admin-user
+div.form-group div.admin-search-admin-user,
+div.form-group div.admin-tips-list,
+div.form-group div.admin-help-list,
+div.form-group div.admin-help-answer-list
 {
 	padding-left: 0px;
 }

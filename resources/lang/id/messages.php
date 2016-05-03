@@ -346,11 +346,11 @@ return [
 
 	"go_to_my_profile" => "Ke Profil saya",
 
-	"help_request" => "permintaan bantuan | permintaan bantuan",
+	"help_request" => "Permintaan Bantuan | Permintaan Bantuan",
 
-	"help_request_details" => "Rincian permintaan bantuan",
+	"help_request_details" => "Rincian Permintaan Bantuan",
 
-	"help_request_answers" => "Jawaban permintaan bantuan",
+	"help_request_answers" => "Jawaban Permintaan Bantuan",
 
 	"help_request_answer_details" => "Rincian jawaban permintaan bantuan",
 
@@ -848,7 +848,7 @@ return [
 
 	"time_remaining" => "Waktu yang tersisa",
 
-	"tips" => "petunjuk",
+	"tips" => "Petunjuk",
 
 	"tip_list" => "Daftar petunjuk",
 
@@ -1508,11 +1508,11 @@ return [
 
 	"admin_invoice" => "Faktur",
 
-	"admin_manage_admin" => "kelola Admin",
+	"admin_manage_admin" => "Kelola Admin",
 
-	"admin_manage_client" => "kelola Klien",
+	"admin_manage_client" => "Kelola Klien",
 
-	"admin_manage_student" => "kelola Murid",
+	"admin_manage_student" => "Kelola Murid",
 
 	"admin_master_settings" => "Pengaturan Utama",
 

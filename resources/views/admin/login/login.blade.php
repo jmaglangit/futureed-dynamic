@@ -51,7 +51,7 @@
 							)
 					) !!}
 
-					{!! Form::button('Login'
+					{!! Form::button(trans('messages.login')
 							, array(
 									'class' => 'btn btn-blue'
 									, 'ng-click' => 'login.validateAdmin()'
@@ -61,8 +61,29 @@
 					{!! Form::close() !!}
 					<br />
 					<div class="form-group">
-						<a href="{!! route('admin.login.forgot_password') !!}" style="color:#055A7F;">Forgot your password?</a>
+						<a href="{!! route('admin.login.forgot_password') !!}" style="color:#055A7F;">{!! trans('messages.login_forgot') !!}</a>
 					</div>
+			</div>
+			<div class="col-xs-12" style="padding-top: 10px;padding-bottom: 10px; background-color: #A92147;">
+				<center>
+					{!! Html::link(url('/lang/en'), 'English - US, '
+                          , array(
+                              'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',
+                          )
+                      ) !!}
+
+					{!! Html::link(url('/lang/id'), 'Bahasa Indonesia, '
+                            , array(
+                                'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',
+                            )
+                        ) !!}
+
+					{!! Html::link(url('/lang/th'), 'Thai '
+                            , array(
+                                'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',
+                            )
+                        ) !!}
+				</center>
 			</div>
 		</div>
 	</div>
