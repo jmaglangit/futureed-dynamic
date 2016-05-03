@@ -253,6 +253,11 @@
 						, 'uses' => 'FutureLesson\Student\PaymentController@add_form'
 					]);
 
+				Routes::get('/subscribe', [
+					'as' => 'student.payment.partials.subscribe'
+					, 'uses' => 'FutureLesson\Student\PaymentController@subscription'
+				]);
+
 				Routes::get('/view', [ 
 						'as' => 'student.payment.partials.view'
 						, 'uses' => 'FutureLesson\Student\PaymentController@view_form'
