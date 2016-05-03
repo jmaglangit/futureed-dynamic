@@ -82,12 +82,12 @@
 						</div>
 
 						<p class="text">
-							<br /> {!! trans('messages.a_new_email_reset_pic_password ') !!}
+							<br /> {!! trans('messages.a_new_email_reset_pic_password') !!}
 						</p>
 					</div>
 
 					<div class="form-group">
-						<small>{!! trans('messages.client_check_inbox ') !!}</small>
+						<small>{!! trans('messages.client_check_inbox') !!}</small>
 					</div>
 
 					{!! Form::open(array('ng-submit' => 'password.validateCode($event)')) !!}
@@ -95,7 +95,7 @@
 							{!! Form::text('reset_code', ''
 								, array(
 									'class' => 'form-control'
-									, 'placeholder' => trans('messages.client_reset_code ')
+									, 'placeholder' => trans('messages.client_reset_code')
 									, 'autocomplete' => 'off'
 									, 'ng-disabled' => 'password.password_set'
 									, 'ng-model' => 'password.record.reset_code'
@@ -103,7 +103,7 @@
 							) !!}
 						</div>
 						<div class="btn-container">
-							{!! Form::button(trans('messages.client_proceed ')
+							{!! Form::button(trans('messages.client_proceed')
 									, array(
 											  'class' => 'btn btn-maroon btn-medium'
 											, 'ng-if' => '!password.password_set'
