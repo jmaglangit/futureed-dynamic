@@ -11,7 +11,6 @@ class QuestionAnswerTableSeeder extends Seeder
 		\DB::table('question_answers')->truncate();
 
 		$this->dataLoader(['question_answers.csv', 'question_answers_two.csv']);
-		$this->command->info('Done');
 	}
 
 	/**
