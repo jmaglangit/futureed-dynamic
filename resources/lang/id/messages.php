@@ -628,7 +628,7 @@ return [
 
 	"review_teaching_content_msg" => "Anda perlu meninjau isi pengajaran.",
 
-	"reports" => "laporan",
+	"reports" => "Laporan",
 
 	"report_card" => "Kartu laporan",
 
