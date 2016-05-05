@@ -138,7 +138,7 @@
                             {!! trans('messages.tc_msg38') !!}
                         </div>
                     </fieldset>
-
+                    
                     <fieldset>
                         <div>
                             {!! trans('messages.tc_msg39') !!}
