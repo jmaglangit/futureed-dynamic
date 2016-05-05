@@ -13,32 +13,44 @@ class TranslationBahasaIndonesiaMessageFileSeeder extends Seeder
 
         $text_var_array = [];
         $lang_id_array = [];
+        $final_array = [];
 
         $content = '<?php'."\n\r";
         $content = $content.'return ['."\n\r";
-        $this->command->info('Getting Language Pack');
+        $this->command->info('Retrieving Language Pack');
+
         foreach($lang_id_reader as $index => $value)
         {
-            if($index != 0 && $index != 1)
+            if($index != 0 && $index != 1 && $value[0] != '')
             {
-                $lang_id_array[$value[0]] = $value[1];
+                $lang_id_array[] = addslashes($value[0]);
+                $lang_id_array[] = addslashes($value[1]);
             }
         }
-        $this->command->info('Unpacking');
         foreach($text_var_reader as $index => $value)
         {
-            if($index != 0 && $index != 1)
+            if($index != 0 && $index != 1 && $value[0] != '')
             {
-                $text_var_array[trim($value[0], " ")] = $value[1];
+                $text_var_array[] = addslashes($value[0]);
+                $text_var_array[] = addslashes($value[1]);
             }
         }
-        $this->command->info('Generating File');
-        foreach($text_var_array as $key => $value)
+        foreach($text_var_array as $index => $value)
         {
-            if(isset($lang_id_array[$value]))
+            if($value != '')
             {
-                $content = $content."\t".'"'.$key.'" => "'.addslashes($lang_id_array[$value]).'",'."\n\r";
+                $numIndex = array_search($value, $lang_id_array);
+                if(!empty($numIndex))
+                {
+                    $final_array[$text_var_array[$index-1]] = $lang_id_array[$numIndex+1];
+                }
             }
+        }
+
+        $this->command->info('Generating File');
+        foreach($final_array as $key => $value)
+        {
+            $content = $content."\t".'"'.$key.'" => "'.$value.'",'."\n\r";
         }
 
         $content = $content.'];';

@@ -9,7 +9,7 @@
 			)
 		) !!}
 		<div class="form-group">
-			<label class="control-label col-xs-2">{!! trans('messages.module') !!}</label>
+			<label class="control-label col-xs-2">{!! trans_choice('messages.module', 1) !!}</label>
 			<div class="col-xs-4">
 				{!! Form::text('module', ''
 					, array(

@@ -139,8 +139,8 @@
 		<p>{! announce.announcement !}</p>
 	</div>
 
-	<div class="col-xs-12" style="padding-top: 10px;padding-bottom: 10px; background-color: #A92147;">
-		<center class="col-xs-offset-4 col-xs-4" >
+	<div class="col-xs-12 border-radius-3" style="padding-top: 10px;padding-bottom: 10px; background-color: #A92147;">
+		<center class="col-xs-offset-4 col-xs-4">
 			{!! Html::link(url('/lang/en'), 'English - US, '
                   , array(
                       'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',

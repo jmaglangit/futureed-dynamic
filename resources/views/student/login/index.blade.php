@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-xs-12" style="padding-top: 10px;padding-bottom: 10px; color: whitesmoke; position: relative; bottom: 26px;">
-        <center class="col-xs-offset-4 col-xs-4" style="background-color: #A92147;padding:5px;">
+        <center class="col-xs-offset-4 col-xs-4 border-radius-3" style="background-color: #A92147;padding:5px;">
             {!! Html::link(url('/lang/en'), 'English - US, '
                   , array(
                       'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',

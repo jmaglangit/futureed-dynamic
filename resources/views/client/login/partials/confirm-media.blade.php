@@ -87,13 +87,13 @@
 									)
 								) !!}
 							</div>
-							<label class="col-xs-2 control-label">{!! trans('messages.lase_name') !!}<span class="required">*</span></label>
+							<label class="col-xs-2 control-label">{!! trans('messages.last_name') !!}<span class="required">*</span></label>
 							<div class="col-xs-4">
 								{!! Form::text('last_name', ''
 									, array(
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
-										, 'placeholder' => trans('messages.lase_name')
+										, 'placeholder' => trans('messages.last_name')
 										, 'ng-model' => 'login.record.last_name'
 									)
 								) !!}
