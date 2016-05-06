@@ -1974,6 +1974,8 @@ Jika anda memindahkan hak administrasi organisasi anda kepada orang lain dalam o
 
 	"did_not_receive_email_confirmation" => "Tidak menerima konfirmasi email?",
 
-	"resend_confirmation" => "Kirim kembali konfirmasi"
+	"resend_confirmation" => "Kirim kembali konfirmasi",
+
+	"youre_almost_done" => "Kamu hampir selesai"
 
 ];

@@ -1313,6 +1313,6 @@ return [
 	'ls_text_msg_2' => 'Please read the examples carefully to understand the instructions before clicking NEXT',
 
 	'did_not_receive_email_confirmation' => 'Did not receive email confirmation?',
-	'resend_confirmation' => 'resend confirmation'
-	
+	'resend_confirmation' => 'resend confirmation',
+	'youre_almost_done' => 'You\'re almost done'
 ];
