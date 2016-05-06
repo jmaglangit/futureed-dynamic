@@ -18,11 +18,11 @@
 					{!! trans('messages.admin_module_details') !!}
 				</legend>
 				<div class="form-group">
-					<label class="control-label col-xs-2">{!! trans('messages.module') !!}</label>
+					<label class="control-label col-xs-2">{!! trans_choice('messages.module', 1) !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('module',''
 							, array(
-								'placeHolder' => trans('messages.module')
+								'placeHolder' => trans_choice('messages.module', 1)
 								, 'ng-model' => 'qa.module.name'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'

@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">{!! trans('messages.grade') !!}</label>
+				<label class="col-xs-3 control-label">{!! trans_choice('messages.grade', 1) !!}</label>
 				<div class="col-xs-5">
 					{!! Form::text('search_name', ''
 						, array(
