@@ -65,7 +65,7 @@
 					</div>
 			</div>
 			<div class="col-xs-12" style="padding-top: 10px;padding-bottom: 10px; background-color: #A92147;">
-				<center>
+				<center class="border-radius-3">
 					{!! Html::link(url('/lang/en'), 'English - US, '
                           , array(
                               'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px',

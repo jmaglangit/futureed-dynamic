@@ -10,7 +10,7 @@
 		    	<a ng-click="class.setTabActive('tip')" href="#tips" aria-controls="tips" role="tab" data-toggle="tab"><span><i class="fa fa-lightbulb-o"></i>{!! trans('messages.tips') !!}</span></a>
 		    </li>
 		    <li role="presentation">
-		    	<a ng-click="class.setTabActive('help')" href="#help" aria-controls="help" role="tab" data-toggle="tab"><span><i class="fa fa-question-circle"></i>{!! trans('messages.help_request') !!}</span></a>
+		    	<a ng-click="class.setTabActive('help')" href="#help" aria-controls="help" role="tab" data-toggle="tab"><span><i class="fa fa-question-circle"></i>{!! trans_choice('messages.help_request', 1) !!}</span></a>
 		    </li>
 		    <li role="presentation">
 		    	<a href="#help-ans" ng-click="class.setTabActive('help-ans')" aria-controls="help-ans" role="tab" data-toggle="tab"><span><i class="fa fa-exclamation-circle"></i>{!! trans('messages.help_request_answers') !!}</span></a>

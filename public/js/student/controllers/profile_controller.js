@@ -477,7 +477,7 @@ function ProfileController($scope, $timeout,apiService, ProfileService) {
 				}
 				else if(response.data) {
 					self.getAvatarAccessories();
-					$scope.getCashPoints();
+					$scope.getUserPoints();
 					$('#buy_avatar_accessory_modal').modal('toggle');
 				}
 			}
