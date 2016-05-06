@@ -293,7 +293,7 @@ return [
 	'principal_dashboard_message_1' => 'To get started using Future Lesson, you need to invite a teacher first to manage your classes.',
 	'principal_dashboard_message_2' => 'If you already invited a Teacher, you need to go to the payment to buy seats for your classes.',
 	'principal_dashboard_add_teacher' => 'Add Teacher',
-	'principal_dashboard_buy_seats' => 'Buy SeatsManage Admin',
+	'principal_dashboard_buy_seats' => 'Buy Seats',
 	'price' => 'Price',
 	'print' => 'Print',
 	'profile' => 'Profile',
@@ -925,101 +925,101 @@ return [
 	
 	'tc_msg14' => 'You are solely responsible for backing up all data and records submitted to Futureed Pte Ltd and assume full responsibility for providing backup storage facility for records for any candidate records that are captured on Futureed, and you agree not to rely on Futureed Pte Ltd for storage of the results of candidate assessments.',
 	
-	'tc_msg_15' => 'No Unlawful Use',
-	
+	'tc_msg15' => 'No Unlawful Use',
+
 	'tc_msg16' => 'As a responsible user, you agree that you will not use the Futureed Pte Ltd site, or any product, or service provided by or made available on or from the Futureed Pte Ltd site for any unlawful purpose.',
-	
-	'tc_msg_17' => 'Specifically, you agree to not use the Service to:',
-	
-	'tc_msg_18' => 'Use any device, software, or routine to interfere or attempt to interfere with the proper working of the Futureed Pte Ltd site or any activity being conducted on the Futureed Pte Ltd site.',
-	
-	'tc_msg_19' => 'Upload, post, email, transmit or otherwise make available any Content that is unlawful, harmful, threatening, abusive, harassing, tortious, defamatory, vulgar, obscene, pornographic, libelous, invasive of another\'s privacy, subversive, hateful, or racially, ethnically or otherwise objectionable or contrary to public interest, public order or national harmony in all relevant jurisdictions;',
-	
-	'tc_msg_20' => 'Harm minors in any way;',
-	
-	'tc_msg_21' => 'Impersonate any person or entity, including, but not limited to, a KCGA official, or host, or falsely state or otherwise misrepresent your affiliation with a person or entity;',
-	
-	'tc_msg_22' => 'Forge headers or otherwise manipulate identifiers in order to disguise the origin of any Content transmitted through Futureed;',
-	
-	'tc_msg_23' => 'Upload, post, email, transmit or otherwise make available any Content that you do not have a right to make available under any law or under contractual or fiduciary relationships (such as inside information, proprietary and confidential information learned or disclosed as part of employment relationships or under nondisclosure agreements);',
-	
-	'tc_msg_24' => 'Upload, post, email, transmit or otherwise make available any Content that infringes any patent, trademark, trade secret, copyright or other proprietary rights of any party;',
-	
-	'tc_msg_25' => 'Upload, post, email, transmit or otherwise make available any unsolicited or unauthorized advertising, promotional materials, "junk mail," "spam," "chain letters," "pyramid schemes," or any other form of solicitation, except in those areas (such as shopping) that are designated for such purpose;',
-	
-	'tc_msg_26' => 'Upload, post, email, transmit or otherwise make available any material that contains software viruses or any other computer code, files or programs designed to interrupt, destroy or limit the functionality of any part of Futureed;',
-	
-	'tc_msg_27' => 'Disrupt the normal flow of dialogue, cause a screen to "scroll" faster than other users of the Service are able to type, or otherwise act in a manner that negatively affects other users\' ability to engage in real time exchanges;',
-	
-	'tc_msg_28' => 'Interfere with or disrupt the service of Futureed Pte Ltd or another person\'s use of the Futureed Pte Ltd or servers or networks connected to the Futureed, or disobey any requirements, procedures, policies or regulations of networks connected to Futureed;',
-	
-	'tc_msg_29' => 'Intentionally or unintentionally violate any applicable law, statute, ordinance, regulation, rule or code, including, but not limited to, any regulations, rules, notices, instructions or directives of any regulatory body or authority, governmental agency or national or other securities exchange ;',
-	
-	'tc_msg_30' => 'Provide material support or resources (or to conceal or disguise the nature, location, source, or ownership of material support or resources) to any organization(s) designated by Singapore, your country or the United States government as a foreign terrorist organization;',
-	
-	'tc_msg_31' => '"stalk" or otherwise harass another;',
-	
-	'tc_msg_32' => 'Commit any fraudulent or unlawful act, whether in relation to any third party provider of products and services on the Service or otherwise and/or',
-	
-	'tc_msg_33' => 'Collect or store personal data about other users in connection with the prohibited conduct and activities set forth in this agreement;',
-	
-	'tc_msg_34' => 'Create, display, transmit, or obtain materials that poses a threat to or adversely affects the national security of Singapore',
-	
-	'tc_msg_35' => 'Create, display, transmit, or obtain materials that poses a threat to or adversely affects racial harmony in Singapore;',
-	
-	'tc_msg_36' => 'Create, display, transmit, or obtain materials that violates intellectual property laws;',
-	
-	'tc_msg_37' => 'Use of machines, computers, scripts, "bots" or any automated system on Futureed Pte Ltd is strictly prohibited and may result in criminal liability. Futureed Pte Ltd may terminate and permanently disqualify any User who, in its sole discretion, determines as being in violation of these Terms of Service. All decisions by Futureed Pte Ltd are final;',
-	
-	'tc_msg_38' => 'Futureed Pte Ltd may include hyperlinks to Websites operated by parties other than Futureed Pte Ltd including advertisers and other content providers. Those sites may collect data or solicit personal information from you. Futureed Pte Ltd does not control such Websites, and is not responsible for their content, privacy policies, or for the collection, use or disclosure of any information those sites may collect.',
-	
-	'tc_msg_39' => 'Futureed Pte Ltd and KCGA makes no guarantee of the accuracy, correctness, or completeness of any information on these web pages, surveys, databases, or results, and are not responsible for a) any errors or omissions arising from the use of such information; 2) any failures, delays, or interruptions in the delivery of any content or services contained on our servers; or 3) losses or damages arising from the use of the content or services provided by us.',
-	
-	'tc_msg_40' => 'Intellectual Property Rights',
-	
-	'tc_msg_41' => 'Unless otherwise indicated, KCGA or its licensors own and retain all proprietary rights in the website and all material and information posted thereon, including without limitation photographs, text, graphics, logos, icons, content, sound recording, tutorials, audio/visual clips and design (collectively, "Content").<br/>All of the materials contained on the Website are copyrighted, except where explicitly noted otherwise.<br/>The Futureed Pte Ltd site may be used only by you and your employees, or individuals under your control and/or supervision.<br/>These Terms and Conditions of Use do not grant to or create in the Customer, any user, or any other person any proprietary interest or intellectual property rights in or to the Futureed Pte Ltd site or any assessment tools, or information or other content comprising or available on the Futureed Pte Ltd site.<br/>You may not use, copy, reproduce, republish, upload, post, transmit, distribute, or modify the trademarks or the Content, without the express permission of Futureed Pte Ltd in each instance, unless such Content is posted by you.<br/>The use of Futureed Pte Ltd or KCGA copyrighted materials on any other website is strictly prohibited.<br/>Futureed Pte Ltd and KCGA will aggressively enforce its intellectual property rights to the fullest extent of the law, including the seeking of criminal prosecution.',
-							
-	'tc_msg_42' => 'Confidential Information',
-							
-	'tc_msg_43' => 'Confidential Information includes these terms, statements of work, license agreements, business and marketing plans and strategies, non-public business and technology information, trade secrets, Content included in assessments by you, any written materials marked as confidential and any other information, including visual and oral information, which reasonably should be understood to be confidential.<br/>Futureed Pte Ltd will use commercially reasonable technology, industry best practices to ensure the integrity and security of all Confidential Information with respect to theft, piracy, and unauthorized access.',
-	
-	'tc_msg_44' => 'Indemnity Obligation',
-	
-	'tc_msg_45' => 'To the extent allowed by law, you agree to indemnify and hold harmless KCGA against any and all claims and expenses, including reasonable attorneys’ fees, arising from the use of KCGA products, services and this web site.<br/>This indemnification expressly includes your responsibility for any and all liability arising from the violation or infringement of copyrights, trademarks or other proprietary rights and from the use of any libelous or unlawful material contained submitted.',
-							
-	'tc_msg_46' => 'Right To Terminate',
-	
-	'tc_msg_47' => 'KCGA reserves the right to suspend or terminate your use of the web site and the services at any time, without notice, if you are found in violation of our terms in this agreement.',
-	
-	'tc_msg_48' => 'DISCLAIMER',
-	
-	'tc_msg_49' => 'FUTUREED PTE LTD IS PROVIDED "AS IS" AND "WITH ALL FAULTS," AND WITHOUT WARRANTY OF ANY KIND, AND USE OF FUTUREED PTE LTD IS AT CUSTOMER\'S, AND EACH USER’S OWN RISK.<br/>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA DISCLAIMS ALL EXPRESS, AND IMPLIED WARRANTIES, AND CONDITIONS, WHETHER BY STATUTE, COMMON LAW, CUSTOM, COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OF TRADE, OR OTHERWISE, RELATING TO FUTUREED PTE LTD INCLUDING (BUT NOT LIMITED TO) ALL WARRANTIES AND CONDITIONS OF MERCHANTABILITY, MERCHANTABLE QUALITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, LACK OF VIRUSES, AND NON-INFRINGEMENT.<br/>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, FUTUREED PTE LTD MAKES NO REPRESENTATION, WARRANTY, OR GUARANTY RELATING TO THE SUITABILITY, RELIABILITY, AVAILABILITY, TIMELINESS, QUALITY, ACCURACY, OR COMPLETENESS OF FUTUREED PTE LTD , ANY DATA, INFORMATION, RECORD, OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF FUTUREED PTE LTD , OR THE ACCURACY OF THE INFORMATIONAL CONTENT, FOR ANY PURPOSE. WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA MAKES NO REPRESENTATION, WARRANTY, OR GUARANTY THAT FUTUREED PTE LTD WILL MEET THE CUSTOMER’S, OR ANY USER’S REQUIREMENTS OR EXPECTATIONS, THAT FUTUREED PTE LTD WILL BE ERROR-FREE, THAT ANY DEFECTS OR ERRORS WILL BE CORRECTED, OR THAT THE DATA, INFORMATION, RECORDS OR OTHER RESULTS OBTAINED FROM THE USE OF FUTUREED PTE LTD WILL BE ACCURATE OR RELIABLE FOR ANY OTHER PURPOSE.',
-	
-	'tc_msg_50' => 'TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA SHALL NOT BE LIABLE TO THE CUSTOMER, ANY USER, OR ANY OTHER PERSON FOR ANY SPECIAL, INCIDENTAL, INDIRECT, COLLATERAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, WHETHER IN ANY ACTION OR CONTRACT, EQUITY, STRICT LIABILITY, TORT (INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE) OR OTHER THEORY OF LIABILITY (INCLUDING, BUT NOT LIMITED TO, BREACH OF WARRANTY) ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATING TO THE USE OR PERFORMANCE OF OR INABILITY TO USE FUTUREED PTE LTD OR ANY ERROR, OMISSION OR INACCURACY CONTAINED IN, ANY DATA, INFORMATION, RECORD OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF FUTUREED PTE LTD OR FROM ANY LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, EVEN IF KCGA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR SUCH POSSIBILITY WAS REASONABLY FORESEEABLE INCLUDING (BUT NOT LIMITED TO) DAMAGES FOR LOSS OF USE, FOR DELAY, LOSS OF BUSINESS, LOSS OF REVENUE, PROFITS OR SAVINGS, BUSINESS INTERRUPTION LOSS, LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, LOSS OF PRIVACY, AND LOSS OF GOODWILL, AND LIABILITY TO THIRD PARTIES, ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATED TO THE USE OR PERFORMANCE OF OR INABILITY TO USE FUTUREED PTE LTD OR ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATING TO THE USE OR INABILITY TO USE ANY DATA OR OTHER INFORMATION, RECORD, OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF OR INABILITY TO USE FUTUREED PTE LTD , ANY LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, OR ARISING FROM ANY FAILURE TO MEET ANY DUTY, INCLUDING (BUT NOT LIMITED TO) ANY DUTY OF GOOD FAITH OR TO EXERCISE COMMERCIALLY REASONABLE CARE, OR ARISING OUT OF ANY COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OR TRADE, OR OTHERWISE, EVEN IF KCGA OR FUTUREED PTE LTD WAS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR IF SUCH POSSIBILITY WAS REASONABLY FORESEEABLE.',
-	
-	'tc_msg_51' => 'TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA\'S TOTAL LIABILITY AND OBLIGATION ARISING OUT OF OR IN ANY MANNER CONNECTED WITH OR RELATING TO THE CUSTOMER’S OR ANY USER’S USE OR INABILITY TO USE FUTUREED PTE LTD , OR THE RESULTS OBTAINED FROM THE USE OF FUTUREED PTE LTD IS LIMITED TO DIRECT DAMAGES WHICH SHALL NOT IN ANY EVENT EXCEED ONE HUNDRED SINGAPORE DOLLARS (S$100.00) IN THE AGGREGATE. TO THE MAXIMUM EXTEND PERMITTED BY APPLICABLE LAW, THIS LIMITATION APPLIES REGARDLESS AS TO WHETHER THE LIABILITY IS BASED ON BREACH OF CONTRACT, TORT (INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE), STRICT LIABILITY, BREACH OF WARRANTY, OR ANY OTHER LEGAL THEORY.',
-	
-	'tc_msg_52' => 'TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, YOU WILL NOT BRING, REQUEST, JOIN, OR PARTICIPATE IN A CLASS ACTION OR CLASS ARBITRATION PROCEEDING AS TO ANY CLAIM, DEMAND, SUIT OR CAUSE OF ACTION YOU MAY HAVE AGAINST KCGA, FUTUREED PTE LTD ARISING OUT OF, RELATING TO OR IN ANY WAY CONNECTED WITH THE FUTUREED PTE LTD SITE, YOUR USE OF THE FUTUREED PTE LTD SITE, OR ANY TEST OR OTHER PRODUCT OR SERVICE OBTAINED THROUGH THE FUTUREED PTE LTD SITE, AND YOU WAIVE AND RELINQUISH ANY RIGHT YOU MAY NOW OR IN THE FUTURE HAVE TO BRING, REQUEST, JOIN OR PARTICIPATE IN ANY LAWSUIT OR ARBITRATION OR OTHER PROCEEDING ON A CLASS ACTION OR CONSOLIDATED BASIS OR TO PARTICIPATE AS A REPRESENTATIVE OR MEMBER OF ANY CLASS OF CLAIMANTS PERTAINING TO ANY CLAIM, DEMAND, SUIT OR CAUSE OF ACTION ARISING OUT OF, RELATING TO OR IN ANY WAY CONNECTED WITH YOUR USE OF THE FUTUREED PTE LTD SITE, OR ANY TEST, OR OTHER PRODUCT OR SERVICE OBTAINED THROUGH THE FUTUREED PTE LTD SITE. THIS PROVISION DOES NOT CONSTITUTE A WAIVER OF ANY OF YOUR RIGHTS AND REMEDIES TO PURSUE A CLAIM INDIVIDUALLY, AND NOT ON A CLASS ACTION, CLASS ARBITRATION OR CONSOLIDATED BASIS OR AS A REPRESENTATIVE OR MEMBER OF ANY CLASS OF CLAIMANTS.',
-	
-	'tc_msg_53' => 'Severability',
-	
-	'tc_msg_54' => 'In the event that any one or more of these provisions should be held invalid, illegal or unenforceable, such provisions will be modified, if possible, to the minimum extent necessary to make them valid and enforceable, or if they cannot be so modified, then severed, and the remaining provisions contained herein will not in any way be affected or impaired',
-	
-	'tc_msg_55' => 'Jurisdiction and Governing Law',
-	
-	'tc_msg_56' => 'The validity, construction, enforcement and interpretation of these Terms and Conditions of Use is to be governed the laws of Singapore.',
-	
-	'tc_msg_57' => 'Waiver',
-	
-	'tc_msg_58' => 'KCGA’s failure to enforce strict performance of any provision of these Terms does not constitute a waiver of the right to subsequently enforce such provision.',
-	
-	'tc_msg_59' => 'Your Consent',
-	
-	'tc_msg_60' => 'By using our site, you consent to our terms and conditions as written in this agreement.',
-	
-	'tc_msg_61' => 'Contacting Us',
-	
-	'tc_msg_62' => 'If there are any questions regarding this policy you may contact us using the information below.',
+
+	'tc_msg17' => 'Specifically, you agree to not use the Service to:',
+
+	'tc_msg18' => 'Use any device, software, or routine to interfere or attempt to interfere with the proper working of the Futureed Pte Ltd site or any activity being conducted on the Futureed Pte Ltd site.',
+
+	'tc_msg19' => 'Upload, post, email, transmit or otherwise make available any Content that is unlawful, harmful, threatening, abusive, harassing, tortious, defamatory, vulgar, obscene, pornographic, libelous, invasive of another\'s privacy, subversive, hateful, or racially, ethnically or otherwise objectionable or contrary to public interest, public order or national harmony in all relevant jurisdictions;',
+
+	'tc_msg20' => 'Harm minors in any way;',
+
+	'tc_msg21' => 'Impersonate any person or entity, including, but not limited to, a KCGA official, or host, or falsely state or otherwise misrepresent your affiliation with a person or entity;',
+
+	'tc_msg22' => 'Forge headers or otherwise manipulate identifiers in order to disguise the origin of any Content transmitted through Futureed;',
+
+	'tc_msg23' => 'Upload, post, email, transmit or otherwise make available any Content that you do not have a right to make available under any law or under contractual or fiduciary relationships (such as inside information, proprietary and confidential information learned or disclosed as part of employment relationships or under nondisclosure agreements);',
+
+	'tc_msg24' => 'Upload, post, email, transmit or otherwise make available any Content that infringes any patent, trademark, trade secret, copyright or other proprietary rights of any party;',
+
+	'tc_msg25' => 'Upload, post, email, transmit or otherwise make available any unsolicited or unauthorized advertising, promotional materials, "junk mail," "spam," "chain letters," "pyramid schemes," or any other form of solicitation, except in those areas (such as shopping) that are designated for such purpose;',
+
+	'tc_msg26' => 'Upload, post, email, transmit or otherwise make available any material that contains software viruses or any other computer code, files or programs designed to interrupt, destroy or limit the functionality of any part of Futureed;',
+
+	'tc_msg27' => 'Disrupt the normal flow of dialogue, cause a screen to "scroll" faster than other users of the Service are able to type, or otherwise act in a manner that negatively affects other users\' ability to engage in real time exchanges;',
+
+	'tc_msg28' => 'Interfere with or disrupt the service of Futureed Pte Ltd or another person\'s use of the Futureed Pte Ltd or servers or networks connected to the Futureed, or disobey any requirements, procedures, policies or regulations of networks connected to Futureed;',
+
+	'tc_msg29' => 'Intentionally or unintentionally violate any applicable law, statute, ordinance, regulation, rule or code, including, but not limited to, any regulations, rules, notices, instructions or directives of any regulatory body or authority, governmental agency or national or other securities exchange ;',
+
+	'tc_msg30' => 'Provide material support or resources (or to conceal or disguise the nature, location, source, or ownership of material support or resources) to any organization(s) designated by Singapore, your country or the United States government as a foreign terrorist organization;',
+
+	'tc_msg31' => '"stalk" or otherwise harass another;',
+
+	'tc_msg32' => 'Commit any fraudulent or unlawful act, whether in relation to any third party provider of products and services on the Service or otherwise and/or',
+
+	'tc_msg33' => 'Collect or store personal data about other users in connection with the prohibited conduct and activities set forth in this agreement;',
+
+	'tc_msg34' => 'Create, display, transmit, or obtain materials that poses a threat to or adversely affects the national security of Singapore',
+
+	'tc_msg35' => 'Create, display, transmit, or obtain materials that poses a threat to or adversely affects racial harmony in Singapore;',
+
+	'tc_msg36' => 'Create, display, transmit, or obtain materials that violates intellectual property laws;',
+
+	'tc_msg37' => 'Use of machines, computers, scripts, "bots" or any automated system on Futureed Pte Ltd is strictly prohibited and may result in criminal liability. Futureed Pte Ltd may terminate and permanently disqualify any User who, in its sole discretion, determines as being in violation of these Terms of Service. All decisions by Futureed Pte Ltd are final;',
+
+	'tc_msg38' => 'Futureed Pte Ltd may include hyperlinks to Websites operated by parties other than Futureed Pte Ltd including advertisers and other content providers. Those sites may collect data or solicit personal information from you. Futureed Pte Ltd does not control such Websites, and is not responsible for their content, privacy policies, or for the collection, use or disclosure of any information those sites may collect.',
+
+	'tc_msg39' => 'Futureed Pte Ltd and KCGA makes no guarantee of the accuracy, correctness, or completeness of any information on these web pages, surveys, databases, or results, and are not responsible for a) any errors or omissions arising from the use of such information; 2) any failures, delays, or interruptions in the delivery of any content or services contained on our servers; or 3) losses or damages arising from the use of the content or services provided by us.',
+
+	'tc_msg40' => 'Intellectual Property Rights',
+
+	'tc_msg41' => 'Unless otherwise indicated, KCGA or its licensors own and retain all proprietary rights in the website and all material and information posted thereon, including without limitation photographs, text, graphics, logos, icons, content, sound recording, tutorials, audio/visual clips and design (collectively, "Content").<br/>All of the materials contained on the Website are copyrighted, except where explicitly noted otherwise.<br/>The Futureed Pte Ltd site may be used only by you and your employees, or individuals under your control and/or supervision.<br/>These Terms and Conditions of Use do not grant to or create in the Customer, any user, or any other person any proprietary interest or intellectual property rights in or to the Futureed Pte Ltd site or any assessment tools, or information or other content comprising or available on the Futureed Pte Ltd site.<br/>You may not use, copy, reproduce, republish, upload, post, transmit, distribute, or modify the trademarks or the Content, without the express permission of Futureed Pte Ltd in each instance, unless such Content is posted by you.<br/>The use of Futureed Pte Ltd or KCGA copyrighted materials on any other website is strictly prohibited.<br/>Futureed Pte Ltd and KCGA will aggressively enforce its intellectual property rights to the fullest extent of the law, including the seeking of criminal prosecution.',
+
+	'tc_msg42' => 'Confidential Information',
+
+	'tc_msg43' => 'Confidential Information includes these terms, statements of work, license agreements, business and marketing plans and strategies, non-public business and technology information, trade secrets, Content included in assessments by you, any written materials marked as confidential and any other information, including visual and oral information, which reasonably should be understood to be confidential.<br/>Futureed Pte Ltd will use commercially reasonable technology, industry best practices to ensure the integrity and security of all Confidential Information with respect to theft, piracy, and unauthorized access.',
+
+	'tc_msg44' => 'Indemnity Obligation',
+
+	'tc_msg45' => 'To the extent allowed by law, you agree to indemnify and hold harmless KCGA against any and all claims and expenses, including reasonable attorneys’ fees, arising from the use of KCGA products, services and this web site.<br/>This indemnification expressly includes your responsibility for any and all liability arising from the violation or infringement of copyrights, trademarks or other proprietary rights and from the use of any libelous or unlawful material contained submitted.',
+
+	'tc_msg46' => 'Right To Terminate',
+
+	'tc_msg47' => 'KCGA reserves the right to suspend or terminate your use of the web site and the services at any time, without notice, if you are found in violation of our terms in this agreement.',
+
+	'tc_msg48' => 'DISCLAIMER',
+
+	'tc_msg49' => 'FUTUREED PTE LTD IS PROVIDED "AS IS" AND "WITH ALL FAULTS," AND WITHOUT WARRANTY OF ANY KIND, AND USE OF FUTUREED PTE LTD IS AT CUSTOMER\'S, AND EACH USER’S OWN RISK.<br/>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA DISCLAIMS ALL EXPRESS, AND IMPLIED WARRANTIES, AND CONDITIONS, WHETHER BY STATUTE, COMMON LAW, CUSTOM, COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OF TRADE, OR OTHERWISE, RELATING TO FUTUREED PTE LTD INCLUDING (BUT NOT LIMITED TO) ALL WARRANTIES AND CONDITIONS OF MERCHANTABILITY, MERCHANTABLE QUALITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, LACK OF VIRUSES, AND NON-INFRINGEMENT.<br/>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, FUTUREED PTE LTD MAKES NO REPRESENTATION, WARRANTY, OR GUARANTY RELATING TO THE SUITABILITY, RELIABILITY, AVAILABILITY, TIMELINESS, QUALITY, ACCURACY, OR COMPLETENESS OF FUTUREED PTE LTD , ANY DATA, INFORMATION, RECORD, OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF FUTUREED PTE LTD , OR THE ACCURACY OF THE INFORMATIONAL CONTENT, FOR ANY PURPOSE. WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA MAKES NO REPRESENTATION, WARRANTY, OR GUARANTY THAT FUTUREED PTE LTD WILL MEET THE CUSTOMER’S, OR ANY USER’S REQUIREMENTS OR EXPECTATIONS, THAT FUTUREED PTE LTD WILL BE ERROR-FREE, THAT ANY DEFECTS OR ERRORS WILL BE CORRECTED, OR THAT THE DATA, INFORMATION, RECORDS OR OTHER RESULTS OBTAINED FROM THE USE OF FUTUREED PTE LTD WILL BE ACCURATE OR RELIABLE FOR ANY OTHER PURPOSE.',
+
+	'tc_msg50' => 'TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA SHALL NOT BE LIABLE TO THE CUSTOMER, ANY USER, OR ANY OTHER PERSON FOR ANY SPECIAL, INCIDENTAL, INDIRECT, COLLATERAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, WHETHER IN ANY ACTION OR CONTRACT, EQUITY, STRICT LIABILITY, TORT (INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE) OR OTHER THEORY OF LIABILITY (INCLUDING, BUT NOT LIMITED TO, BREACH OF WARRANTY) ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATING TO THE USE OR PERFORMANCE OF OR INABILITY TO USE FUTUREED PTE LTD OR ANY ERROR, OMISSION OR INACCURACY CONTAINED IN, ANY DATA, INFORMATION, RECORD OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF FUTUREED PTE LTD OR FROM ANY LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, EVEN IF KCGA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR SUCH POSSIBILITY WAS REASONABLY FORESEEABLE INCLUDING (BUT NOT LIMITED TO) DAMAGES FOR LOSS OF USE, FOR DELAY, LOSS OF BUSINESS, LOSS OF REVENUE, PROFITS OR SAVINGS, BUSINESS INTERRUPTION LOSS, LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, LOSS OF PRIVACY, AND LOSS OF GOODWILL, AND LIABILITY TO THIRD PARTIES, ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATED TO THE USE OR PERFORMANCE OF OR INABILITY TO USE FUTUREED PTE LTD OR ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATING TO THE USE OR INABILITY TO USE ANY DATA OR OTHER INFORMATION, RECORD, OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF OR INABILITY TO USE FUTUREED PTE LTD , ANY LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, OR ARISING FROM ANY FAILURE TO MEET ANY DUTY, INCLUDING (BUT NOT LIMITED TO) ANY DUTY OF GOOD FAITH OR TO EXERCISE COMMERCIALLY REASONABLE CARE, OR ARISING OUT OF ANY COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OR TRADE, OR OTHERWISE, EVEN IF KCGA OR FUTUREED PTE LTD WAS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR IF SUCH POSSIBILITY WAS REASONABLY FORESEEABLE.',
+
+	'tc_msg51' => 'TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA\'S TOTAL LIABILITY AND OBLIGATION ARISING OUT OF OR IN ANY MANNER CONNECTED WITH OR RELATING TO THE CUSTOMER’S OR ANY USER’S USE OR INABILITY TO USE FUTUREED PTE LTD , OR THE RESULTS OBTAINED FROM THE USE OF FUTUREED PTE LTD IS LIMITED TO DIRECT DAMAGES WHICH SHALL NOT IN ANY EVENT EXCEED ONE HUNDRED SINGAPORE DOLLARS (S$100.00) IN THE AGGREGATE. TO THE MAXIMUM EXTEND PERMITTED BY APPLICABLE LAW, THIS LIMITATION APPLIES REGARDLESS AS TO WHETHER THE LIABILITY IS BASED ON BREACH OF CONTRACT, TORT (INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE), STRICT LIABILITY, BREACH OF WARRANTY, OR ANY OTHER LEGAL THEORY.',
+
+	'tc_msg52' => 'TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, YOU WILL NOT BRING, REQUEST, JOIN, OR PARTICIPATE IN A CLASS ACTION OR CLASS ARBITRATION PROCEEDING AS TO ANY CLAIM, DEMAND, SUIT OR CAUSE OF ACTION YOU MAY HAVE AGAINST KCGA, FUTUREED PTE LTD ARISING OUT OF, RELATING TO OR IN ANY WAY CONNECTED WITH THE FUTUREED PTE LTD SITE, YOUR USE OF THE FUTUREED PTE LTD SITE, OR ANY TEST OR OTHER PRODUCT OR SERVICE OBTAINED THROUGH THE FUTUREED PTE LTD SITE, AND YOU WAIVE AND RELINQUISH ANY RIGHT YOU MAY NOW OR IN THE FUTURE HAVE TO BRING, REQUEST, JOIN OR PARTICIPATE IN ANY LAWSUIT OR ARBITRATION OR OTHER PROCEEDING ON A CLASS ACTION OR CONSOLIDATED BASIS OR TO PARTICIPATE AS A REPRESENTATIVE OR MEMBER OF ANY CLASS OF CLAIMANTS PERTAINING TO ANY CLAIM, DEMAND, SUIT OR CAUSE OF ACTION ARISING OUT OF, RELATING TO OR IN ANY WAY CONNECTED WITH YOUR USE OF THE FUTUREED PTE LTD SITE, OR ANY TEST, OR OTHER PRODUCT OR SERVICE OBTAINED THROUGH THE FUTUREED PTE LTD SITE. THIS PROVISION DOES NOT CONSTITUTE A WAIVER OF ANY OF YOUR RIGHTS AND REMEDIES TO PURSUE A CLAIM INDIVIDUALLY, AND NOT ON A CLASS ACTION, CLASS ARBITRATION OR CONSOLIDATED BASIS OR AS A REPRESENTATIVE OR MEMBER OF ANY CLASS OF CLAIMANTS.',
+
+	'tc_msg53' => 'Severability',
+
+	'tc_msg54' => 'In the event that any one or more of these provisions should be held invalid, illegal or unenforceable, such provisions will be modified, if possible, to the minimum extent necessary to make them valid and enforceable, or if they cannot be so modified, then severed, and the remaining provisions contained herein will not in any way be affected or impaired',
+
+	'tc_msg55' => 'Jurisdiction and Governing Law',
+
+	'tc_msg56' => 'The validity, construction, enforcement and interpretation of these Terms and Conditions of Use is to be governed the laws of Singapore.',
+
+	'tc_msg57' => 'Waiver',
+
+	'tc_msg58' => 'KCGA’s failure to enforce strict performance of any provision of these Terms does not constitute a waiver of the right to subsequently enforce such provision.',
+
+	'tc_msg59' => 'Your Consent',
+
+	'tc_msg60' => 'By using our site, you consent to our terms and conditions as written in this agreement.',
+
+	'tc_msg61' => 'Contacting Us',
+
+	'tc_msg62' => 'If there are any questions regarding this policy you may contact us using the information below.',
 	
 	//resources/views/client/parent/dashboard/index.blade.php
 	'client_parent_dashboard_msg_1' => 'To get started on using Future Lesson, you need to add a student, click',
@@ -1031,7 +1031,7 @@ return [
 	'client_parent_dashboard_msg_7' => 'the lessons and practice questions.',	
 	
 	//resources/views/client/parent/dashboard/partials/reports_progress_bar.blade.php
-	'client_progress_curriculum' => 'Progress in Future Lesson Curriculum',	
+	'client_progress_curriculum' => 'Progress in Future Lesson Curriculum',
 	'client_progress_curriculum' => 'Progress in Future Lesson Curriculum',
 	'client_badges_earned' => 'Badges Earned',
 	'client_no_medals_earned' => 'Number of Medals Earned',
