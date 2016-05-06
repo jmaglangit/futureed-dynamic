@@ -44,7 +44,8 @@
 
 						{!! Html::link(route('client.login'), trans('messages.cancel')
 								, array(
-									'class' => 'btn btn-gold btn-medium'
+									'class' => 'btn btn-gold btn-medium',
+									'style' => 'margin-right:0;'
 								)
 						) !!}
 					</div>
@@ -128,6 +129,7 @@
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => '!password.password_set'
 								, 'ng-click' => 'password.clientResendCode()'
+								, 'style' => 'margin-right:0;'
 							)
 						) !!}
 					</div>
