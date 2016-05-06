@@ -42,7 +42,8 @@
 
 						{!! Html::link(route('student.login'), trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gold btn-medium',
+								'style' => 'margin-right: 0;'
 							)
 						) !!}
 					</div>
@@ -116,6 +117,7 @@
 											'class' => 'btn btn-gold btn-medium'
 											, 'ng-if' => '!password.password_set'
 											, 'ng-click' => 'password.resendResetCode()'
+											, 'style' => 'margin-right: 0;'
 									)
 							) !!}
 						</div>
