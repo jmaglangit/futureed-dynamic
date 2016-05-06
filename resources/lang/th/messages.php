@@ -1974,6 +1974,8 @@ return [
 
 	"resend_confirmation" => "ยืนยันการส่งซ้ำ",
 
-	"user_credentials" => "สิทธิของผู้ใช้"
+	"user_credentials" => "สิทธิของผู้ใช้",
+
+	"youre_almost_done" => "เกือบเสร็จแล้ว"
 
 ];
