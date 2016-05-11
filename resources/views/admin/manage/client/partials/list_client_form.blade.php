@@ -140,7 +140,7 @@
 						<th>{!! trans('messages.email') !!}</th>
 						<th>{!! trans('messages.role') !!}</th>
 						<th>{!! trans('messages.account_status') !!}</th>
-						<th ng-if="client.records.length">{!! trans('messages.action') !!}</th>
+						<th ng-if="client.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 					</tr>
 				</thead>
 				 <tbody>

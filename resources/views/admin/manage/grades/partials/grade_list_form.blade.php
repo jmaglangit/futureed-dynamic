@@ -102,9 +102,9 @@
 			<thead>
 		        <tr>
 		            <th>{!! trans('messages.grade_code') !!}</th>
-		            <th>{!! trans('messages.grade') !!}</th>
+		            <th>{!! trans_choice('messages.grade', 1) !!}</th>
 		            <th>{!! trans('messages.country') !!}</th>
-		            <th ng-if="grade.records.length">{!! trans('messages.action') !!}</th>
+		            <th ng-if="grade.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 		        </tr>
 	        </thead>
 	        <tbody>
