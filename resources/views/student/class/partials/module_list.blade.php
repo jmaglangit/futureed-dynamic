@@ -11,7 +11,7 @@
 				<div class="col-xs-2">
 					{!! Form::text('search_name', ''
 						,array(
-							'placeholder' => trans('messages.module')
+							'placeholder' => trans_choice('messages.module', 1)
 							, 'ng-model' => 'class.search.module_name'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
