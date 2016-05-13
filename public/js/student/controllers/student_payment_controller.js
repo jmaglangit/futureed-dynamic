@@ -611,5 +611,24 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 	}
 
+	self.modifyUserAddress = function(data){
+
+		//if edit == true
+		if(data == Constants.TRUE){
+
+			self.billing_info = Constants.TRUE;
+			labelToForm();
+
+		}else {
+
+			console.log(user_name);
+			//save
+			self.billing_info = Constants.FALSE;
+			formToLabel();
+		}
+
+
+	}
+
 
 }
