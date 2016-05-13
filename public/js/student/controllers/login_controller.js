@@ -48,7 +48,6 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 				break;
 
 			case 'resend'			:
-				console.log(active);
 				self.active_resend = Constants.TRUE;
 				break;
 
