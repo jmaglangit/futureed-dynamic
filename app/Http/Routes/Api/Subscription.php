@@ -20,4 +20,19 @@ Routes::group([
 	Routes::post('/renew-subscription/{id}', [
 		'uses' => 'Api\v1\RenewSubscriptionController@renewSubscription',
 		'as' => 'subscription.renew']);
+
+
+});
+
+
+//Subscription Package
+//TODO transfer under permission
+Routes::group([
+    'prefix' => '/subscription-package'
+],function(){
+
+    Routes::get('/',[
+        'uses' => 'Api\v1\SubscriptionPackageController@index',
+        'as' => 'api.v1.subscription-package.index'
+    ]);
 });
