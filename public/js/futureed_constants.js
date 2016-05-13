@@ -62,6 +62,15 @@ var Constants = {
 	, TRIAL_QUESTIONS	:10
 
 	/**
+	 * Subscription filters
+	 */
+	, SUBSCRIPTION_COUNTRY	:	"country"
+	, SUBSCRIPTION_SUBJECT	: 	"subject"
+	, SUBSCRIPTION_PLAN		:	"plan"
+	, SUBSCRIPTION_DAYS		:	"days"
+	, SUBSCRIPTION_OTHERS	: 	"others"
+
+	/**
 	* Media Types
 	*/
 	, VIDEO			: 1
