@@ -18,7 +18,7 @@
 							</div>
 						</div>
 
-						<div class="col-xs-3" ng-if="!login.record.invited">
+						<div class="col-xs-3 auto-login-form" ng-if="!login.record.invited">
 							<div class="form-group col-xs-12">
 								<button type="button" class="btn btn-fb"
 									ng-click="login.loginViaFacebook()">
@@ -35,6 +35,10 @@
 									<span><img src="/images/icons/google-logo.png" /></span>
 									<span>{!! trans('messages.client_sign_up_google') !!}</span> 
 								</button>
+							</div>
+
+							<div class="form-group col-xs-12">
+								<span>{!! trans('messages.did_not_receive_email_confirmation') !!} <a class="cursor-pointer" ng-click="login.setActive('resend')">{!! trans('messages.resend_confirmation') !!}</a></span>
 							</div>
 						</div>
 					</div>
