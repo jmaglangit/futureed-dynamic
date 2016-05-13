@@ -15,20 +15,35 @@ $(document).ready(function () {
         }
     });
 
-    $(".next-step").click(function (e) {
-
-        var $active = $('.wizard .nav-tabs li.active');
-        $active.next().removeClass('disabled');
-        nextTab($active);
-
+    //Wizard Subject
+    $(".wizard-box").click(function (e) {
+        navigateTab();
     });
+
+    //Wizard Panel
+    $(".wizard-panel").click(function (e) {
+        navigateTab();
+    });
+
+    $(".next-step").click(function (e) {
+        navigateTab();
+    });
+
     $(".prev-step").click(function (e) {
-
-        var $active = $('.wizard .nav-tabs li.active');
-        prevTab($active);
-
+        navigatePrevTab();
     });
 });
+
+function navigateTab(){
+    var $active = $('.wizard .nav-tabs li.active');
+    $active.next().removeClass('disabled');
+    nextTab($active);
+}
+
+function navigatePrevTab(){
+    var $active = $('.wizard .nav-tabs li.active');
+    prevTab($active);
+}
 
 function nextTab(elem) {
     $(elem).next().find('a[data-toggle="tab"]').click();
