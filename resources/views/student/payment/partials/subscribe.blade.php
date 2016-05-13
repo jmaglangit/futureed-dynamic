@@ -1,6 +1,7 @@
 <div ng-if="payment.active_add">
     {{--Headers progress breadcrumb arrow Start > SUBJECT > SUBSCRIPTION > DAYS > DETAILS > PAY --}}
     {!! Html::script('/js/common/subscription_service.js')!!}
+    {!! Html::script('/js/common/form_service.js')!!}
     <div class="wizard-content-title">
         <div class="title-main-content">
             <span>{!! trans('messages.add_payment') !!}</span>
@@ -147,33 +148,36 @@
                                         <div class="form-group">
                                             <label class="col-xs-2 control-label h4">Name:</label>
 
-                                            <div class="col-lg-4 h4">{! payment.billing_information.name !}</div>
+                                            <label class="col-lg-4 h4 form-label" name="user_name">{! payment.billing_information.name !}</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-2 control-label h4">City:</label>
+                                            <label class="col-xs-2 control-label h4 ">City:</label>
 
-                                            <div class="col-lg-4 h4">{! payment.billing_information.city !}</div>
+                                            <label class="col-lg-4 h4 form-label" name="user_city" >{! payment.billing_information.city !}</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-2 control-label h4">State:</label>
 
-                                            <div class="col-lg-4 h4">{! payment.billing_information.state !}</div>
+                                            <label class="col-lg-4 h4 form-label" name="user_state">{! payment.billing_information.state !}</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-2 control-label h4">Country:</label>
 
-                                            <div class="col-lg-4 h4">{! payment.billing_information.country.full_name !}</div>
+                                            <label class="col-lg-4 h4 form-label" name="user_country">{! payment.billing_information.country.full_name !}</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <ul class="list-inline pull-right">
                                 <li>
-                                    <button type="button" class="btn btn-gold btn-info-full next-step"
-                                            ng-click="">Edit</button>
+                                    <button type="button" class="btn btn-gold btn-info-full" ng-if="!payment.billing_info"
+                                            ng-click="payment.modifyUserAddress(futureed.TRUE)">Edit</button>
                                 </li>
                                 <li>
-
+                                    <button type="button" class="btn btn-gold btn-info-full" ng-if="payment.billing_info"
+                                            ng-click="payment.modifyUserAddress(futureed.FALSE)">Save</button>
+                                </li>
+                                <li>
                                     <button type="button" class="btn btn-primary btn-info-full next-step"
                                             ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_OTHERS,futureed.FALSE)">Continue</button>
                                 </li>
