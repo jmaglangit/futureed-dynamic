@@ -21,6 +21,9 @@
 
 	<div template-directive template-url="{!! route('student.login.confirm_media') !!}"></div>
 
+	<div template-directive template-url="{!! route('student.login.resend_confirmation') !!}"></div>
+
+
 	@include('student.login.terms-and-condition')
 	
 	@include('student.login.privacy-policy')
