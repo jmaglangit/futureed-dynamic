@@ -1,4 +1,4 @@
-<div class="client-container form-style" ng-if="login.resend">
+<div class="login-container form-style" ng-if="login.active_resend">
     <div class="title">Enter Your Email Address</div>
 
     <div class="alert alert-danger" ng-if="login.errors">
@@ -23,12 +23,12 @@
         {!! Form::button('Resend'
         , array(
         'class' => 'btn btn-gold btn-medium'
-        , 'ng-click' => 'login.resendClientConfirmation()'
-        , 'ng-if' => 'login.resend'
+        , 'ng-click' => 'login.studentResendConfirmation()'
+        , 'ng-if' => 'login.active_resend'
         )
         )!!}
     </div>
     <br/>
-    <a href="{!! route('client.login') !!}"><i class="fa fa-home"></i> Home</a>
+    <a href="{!! route('student.login') !!}"><i class="fa fa-home"></i> Home</a>
     {!! Form::close() !!}
 </div>
