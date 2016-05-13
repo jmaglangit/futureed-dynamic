@@ -398,17 +398,17 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 391,9,11391,FIB,How long is this fish?,fishmeasurements,fishmeasurements.jpg,3 inches,,,15,3,1,Enabled,,,,,,,
 392,9,11392,FIB,How many fish swimming in a row would form a one foot line?,fishmeasurements,fishmeasurements.jpg,4,,,16,3,1,Enabled,,,,,,,
 393,9,11393,FIB,How many paper clips fit within a 10 inch space?,paper clip,paper-clip.jpg,5,,,17,3,1,Enabled,,,,,,,
-394,8,11394,GR,"Help build a science experiment by graphing 4 microscopes, 5 beakers and 6 test tube sets in the area provided","science lab graphing, graphing skills",science-lab-graphing.jpg,"{""answer"":[{""field"":""microscopes"",""image"":""/uploads/question/394/microscopes.png"",""count"":4,""count_objects"":4},{""field"":""bickers"",""image"":""/uploads/question/394/bickers.png"",""count"":5,""count_objects"":5},{""field"":""test tube sets"",""image"":""/uploads/question/394/testtube.png"",""count"":6,""count_objects"":6}]}",,"{""orientation"":""vertical"",""image"":[{""field"":""microscopes"",""path"":""/uploads/question/394/microscopes.png"",""seq_no"":""1""},{""field"":""bickers"",""path"":""/uploads/question/394/bickers.png"",""seq_no"":""2""},{""field"":""test tube sets"",""path"":""/uploads/question/394/testtube.png"",""seq_no"":""3""}]}",11,3,1,Enabled,,,,,,,science lab graphing answer.jpg
-395,8,11395,GR,"The astronaut needs 2 rockets ,5 telescopes and 3 mars rovers for their mission, please graph this in the area provided","space graphing, graphing skills",space-graphing.jpg,"{""answer"":[{""field"":""rockets"",""image"":""/uploads/question/395/rockets.png"",""count"":2,""count_objects"":2},{""field"":""telescopes"",""image"":""/uploads/question/395/telescopes.png"",""count"":5,""count_objects"":5},{""field"":""mars rovers"",""image"":""/uploads/question/395/marsrovers.png"",""count"":3,""count_objects"":3}]}",,"{""orientation"":""vertical"",""image"":[{""field"":""rockets"",""path"":""/uploads/question/395/rockets.png"",""seq_no"":""1""},{""field"":""telescopes"",""path"":""/uploads/question/395/telescopes.png"",""seq_no"":""2""},{""field"":""mars rovers"",""path"":""/uploads/question/395/marsrovers.png"",""seq_no"":""3""}]}",6,2,1,Enabled,,,,,,,space graphing answer.jpg
-396,8,11396,GR,Create a beautiful summer day with sunshine (5) and a few white clouds (6),weather graphing,weather-graphing.JPG,"{""answer"":[{""field"":""sunshine"",""image"":""/uploads/question/396/sunshine.png"",""count"":5,""count_objects"":5},{""field"":""white clouds"",""image"":""/uploads/question/396/whiteclouds.png"",""count"":6,""count_objects"":6}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""sunshine"",""path"":""/uploads/question/396/sunshine.png"",""seq_no"":""1""},{""field"":""white clouds"",""path"":""/uploads/question/396/whiteclouds.png"",""seq_no"":""2""}]}",7,2,1,Enabled,,,,,,,weather graphing answer 1.jpg
-397,8,11397,GR,Create a rainy day with thunder (3) and rain clouds (4),weather graphing,weather-graphing.JPG,"{""answer"":[{""field"":""thunder"",""image"":""/uploads/question/397/thunder.png"",""count"":3,""count_objects"":3},{""field"":""rainclouds"",""image"":""/uploads/question/397/rainclouds.png"",""count"":4,""count_objects"":4}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""thunder"",""path"":""/uploads/question/397/thunder.png"",""seq_no"":""1""},{""field"":""rain clouds"",""path"":""/uploads/question/397/rainclouds.png"",""seq_no"":""2""}]}",8,2,1,Enabled,,,,,,,weather graphing answer 2.jpg
-398,8,11398,GR,Create a snowy day with snow clouds (5)  and a little sunshine (2),weather graphing,weather-graphing.JPG,"{""answer"":[{""field"":""snow clouds"",""image"":""/uploads/question/398/snowclouds.png"",""count"":5,""count_objects"":5},{""field"":""little sunshine"",""image"":""/uploads/question/398/littlesunshine.png"",""count"":2,""count_objects"":2}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""snow clouds"",""path"":""/uploads/question/398/snowclouds.png"",""seq_no"":""1""},{""field"":""little sunshine"",""path"":""/uploads/question/398/littlesunshine.png"",""seq_no"":""2""}]}",9,2,1,Enabled,,,,,,,weather graphing answer 3.jpg
-399,8,11399,GR,"Build your vegatable garden with 5 broccoli, 6 carrots and 7 cabbage",garden graphing,garden-graphing.JPG,"{""answer"":[{""field"":""broccoli"",""image"":""/uploads/question/399/broccoli.png"",""count"":5,""count_objects"":5},{""field"":""carrots"",""image"":""/uploads/question/399/carrots.png"",""count"":6,""count_objects"":6},{""field"":""cabbage"",""image"":""/uploads/question/399/cabbage.png"",""count"":7,""count_objects"":7}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""broccoli"",""path"":""/uploads/question/399/broccoli.png"",""seq_no"":""1""},{""field"":""carrots"",""path"":""/uploads/question/399/carrots.png"",""seq_no"":""2""},{""field"":""cabbage"",""path"":""/uploads/question/399/cabbage.png"",""seq_no"":""3""}]}",10,2,1,Enabled,,,,,,,garden graphing 1.jpg
-400,8,11400,GR,"Build your fruit garden with 3 apples, 3 broccoli, 5 bananas and 4 carrots",garden graphing,garden-graphing.JPG,"{""answer"":[{""field"":""apples"",""image"":""/uploads/question/400/apples.png"",""count"":3,""count_objects"":3},{""field"":""broccoli"",""image"":""/uploads/question/400/broccoli.png"",""count"":3,""count_objects"":3},{""field"":""bananas"",""image"":""/uploads/question/400/bananas.png"",""count"":5,""count_objects"":5},{""field"":""carrots"",""image"":""/uploads/question/400/carrots.png"",""count"":4,""count_objects"":4}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""apples"",""path"":""/uploads/question/400/apples.png"",""seq_no"":""1""},{""field"":""broccoli"",""path"":""/uploads/question/400/broccoli.png"",""seq_no"":""2""},{""field"":""bananas"",""path"":""/uploads/question/400/bananas.png"",""seq_no"":""3""},{""field"":""carrots"",""path"":""/uploads/question/400/carrots.png"",""seq_no"":""4""}]}",11,2,1,Enabled,,,,,,,garden graphing 2.jpg
-401,8,11401,GR,"Build a mixed garden with 5 carrots, 4 apples and 4 pears",garden graphing,garden-graphing.JPG,"{""answer"":[{""field"":""carrots"",""image"":""/uploads/question/401/carrots.png"",""count"":5,""count_objects"":5},{""field"":""apples"",""image"":""/uploads/question/401/apples.png"",""count"":4,""count_objects"":4},{""field"":""pears"",""image"":""/uploads/question/401/pears.png"",""count"":4,""count_objects"":4}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""carrots"",""path"":""/uploads/question/401/carrots.png"",""seq_no"":""1""},{""field"":""apples"",""path"":""/uploads/question/401/apples.png"",""seq_no"":""2""},{""field"":""pears"",""path"":""/uploads/question/401/pears.png"",""seq_no"":""3""}]}",12,2,1,Enabled,,,,,,,garden graphing 3.jpg
-402,8,11402,GR,"It's a hot sunny day you would love 5 ice-creams and 6 waffles, graph these",bakery graphing,bakery-graphing.JPG,"{""answer"":[{""field"":""ice cream"",""image"":""/uploads/question/402/icecream.png"",""count"":5,""count_objects"":5},{""field"":""waffles"",""image"":""/uploads/question/402/waffles.png"",""count"":6,""count_objects"":6}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""ice cream"",""path"":""/uploads/question/402/icecream.png"",""seq_no"":""1""},{""field"":""waffles"",""path"":""/uploads/question/402/waffles.png"",""seq_no"":""2""}]}",13,2,1,Enabled,,,,,,,bakery graphing 1.jpg
-403,8,11403,GR,"After dinner dessert, your favourites are 4 cakes, 3 pasteries, graph these",bakery graphing,bakery-graphing.JPG,"{""answer"":[{""field"":""cakes"",""image"":""/uploads/question/403/cakes.png"",""count"":4,""count_objects"":4},{""field"":""pasteries"",""image"":""/uploads/question/403/pasteries.png"",""count"":3,""count_objects"":3}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""cakes"",""path"":""/uploads/question/403/cakes.png"",""seq_no"":""1""},{""field"":""pasteries"",""path"":""/uploads/question/403/pasteries.png"",""seq_no"":""2""}]}",14,2,1,Enabled,,,,,,,bakery graphing 2.jpg
-404,8,11404,GR,"Your mom packed your favourite treats graph these, 6 cookies and 7 cakes",bakery graphing,bakery-graphing.JPG,"{""answer"":[{""field"":""cookies"",""image"":""/uploads/question/404/cookies.png"",""count"":6,""count_objects"":6},{""field"":""cakes"",""image"":""/uploads/question/404/cakes.png"",""count"":7,""count_objects"":7}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""cookies"",""path"":""/uploads/question/404/cookies.png"",""seq_no"":""1""},{""field"":""cakes"",""path"":""/uploads/question/404/cakes.png"",""seq_no"":""2""}]}",6,1,1,Enabled,,,,,,,bakery graphing 3.jpg
+394,8,11394,GR,"Help build a science experiment by graphing 4 microscopes, 5 beakers and 6 test tube sets in the area provided","science lab graphing, graphing skills",,"{""answer"":[{""field"":""microscopes"",""image"":""/uploads/question/394/microscopes.png"",""count"":4,""count_objects"":4},{""field"":""bickers"",""image"":""/uploads/question/394/bickers.png"",""count"":5,""count_objects"":5},{""field"":""test tube sets"",""image"":""/uploads/question/394/testtube.png"",""count"":6,""count_objects"":6}]}",,"{""orientation"":""vertical"",""image"":[{""field"":""microscopes"",""path"":""/uploads/question/394/microscopes.png"",""seq_no"":""1""},{""field"":""bickers"",""path"":""/uploads/question/394/bickers.png"",""seq_no"":""2""},{""field"":""test tube sets"",""path"":""/uploads/question/394/testtube.png"",""seq_no"":""3""}]}",11,3,1,Enabled,,,,,,,science lab graphing answer.jpg
+395,8,11395,GR,"The astronaut needs 2 rockets ,5 telescopes and 3 mars rovers for their mission, please graph this in the area provided","space graphing, graphing skills",,"{""answer"":[{""field"":""rockets"",""image"":""/uploads/question/395/rockets.png"",""count"":2,""count_objects"":2},{""field"":""telescopes"",""image"":""/uploads/question/395/telescopes.png"",""count"":5,""count_objects"":5},{""field"":""mars rovers"",""image"":""/uploads/question/395/marsrovers.png"",""count"":3,""count_objects"":3}]}",,"{""orientation"":""vertical"",""image"":[{""field"":""rockets"",""path"":""/uploads/question/395/rockets.png"",""seq_no"":""1""},{""field"":""telescopes"",""path"":""/uploads/question/395/telescopes.png"",""seq_no"":""2""},{""field"":""mars rovers"",""path"":""/uploads/question/395/marsrovers.png"",""seq_no"":""3""}]}",6,2,1,Enabled,,,,,,,space graphing answer.jpg
+396,8,11396,GR,Create a beautiful summer day with sunshine (5) and a few white clouds (6),weather graphing,,"{""answer"":[{""field"":""sunshine"",""image"":""/uploads/question/396/sunshine.png"",""count"":5,""count_objects"":5},{""field"":""white clouds"",""image"":""/uploads/question/396/whiteclouds.png"",""count"":6,""count_objects"":6}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""sunshine"",""path"":""/uploads/question/396/sunshine.png"",""seq_no"":""1""},{""field"":""white clouds"",""path"":""/uploads/question/396/whiteclouds.png"",""seq_no"":""2""}]}",7,2,1,Enabled,,,,,,,weather graphing answer 1.jpg
+397,8,11397,GR,Create a rainy day with thunder (3) and rain clouds (4),weather graphing,,"{""answer"":[{""field"":""thunder"",""image"":""/uploads/question/397/thunder.png"",""count"":3,""count_objects"":3},{""field"":""rainclouds"",""image"":""/uploads/question/397/rainclouds.png"",""count"":4,""count_objects"":4}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""thunder"",""path"":""/uploads/question/397/thunder.png"",""seq_no"":""1""},{""field"":""rain clouds"",""path"":""/uploads/question/397/rainclouds.png"",""seq_no"":""2""}]}",8,2,1,Enabled,,,,,,,weather graphing answer 2.jpg
+398,8,11398,GR,Create a snowy day with snow clouds (5)  and a little sunshine (2),weather graphing,,"{""answer"":[{""field"":""snow clouds"",""image"":""/uploads/question/398/snowclouds.png"",""count"":5,""count_objects"":5},{""field"":""little sunshine"",""image"":""/uploads/question/398/littlesunshine.png"",""count"":2,""count_objects"":2}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""snow clouds"",""path"":""/uploads/question/398/snowclouds.png"",""seq_no"":""1""},{""field"":""little sunshine"",""path"":""/uploads/question/398/littlesunshine.png"",""seq_no"":""2""}]}",9,2,1,Enabled,,,,,,,weather graphing answer 3.jpg
+399,8,11399,GR,"Build your vegatable garden with 5 broccoli, 6 carrots and 7 cabbage",garden graphing,,"{""answer"":[{""field"":""broccoli"",""image"":""/uploads/question/399/broccoli.png"",""count"":5,""count_objects"":5},{""field"":""carrots"",""image"":""/uploads/question/399/carrots.png"",""count"":6,""count_objects"":6},{""field"":""cabbage"",""image"":""/uploads/question/399/cabbage.png"",""count"":7,""count_objects"":7}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""broccoli"",""path"":""/uploads/question/399/broccoli.png"",""seq_no"":""1""},{""field"":""carrots"",""path"":""/uploads/question/399/carrots.png"",""seq_no"":""2""},{""field"":""cabbage"",""path"":""/uploads/question/399/cabbage.png"",""seq_no"":""3""}]}",10,2,1,Enabled,,,,,,,garden graphing 1.jpg
+400,8,11400,GR,"Build your fruit garden with 3 apples, 3 broccoli, 5 bananas and 4 carrots",garden graphing,,"{""answer"":[{""field"":""apples"",""image"":""/uploads/question/400/apples.png"",""count"":3,""count_objects"":3},{""field"":""broccoli"",""image"":""/uploads/question/400/broccoli.png"",""count"":3,""count_objects"":3},{""field"":""bananas"",""image"":""/uploads/question/400/bananas.png"",""count"":5,""count_objects"":5},{""field"":""carrots"",""image"":""/uploads/question/400/carrots.png"",""count"":4,""count_objects"":4}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""apples"",""path"":""/uploads/question/400/apples.png"",""seq_no"":""1""},{""field"":""broccoli"",""path"":""/uploads/question/400/broccoli.png"",""seq_no"":""2""},{""field"":""bananas"",""path"":""/uploads/question/400/bananas.png"",""seq_no"":""3""},{""field"":""carrots"",""path"":""/uploads/question/400/carrots.png"",""seq_no"":""4""}]}",11,2,1,Enabled,,,,,,,garden graphing 2.jpg
+401,8,11401,GR,"Build a mixed garden with 5 carrots, 4 apples and 4 pears",garden graphing,,"{""answer"":[{""field"":""carrots"",""image"":""/uploads/question/401/carrots.png"",""count"":5,""count_objects"":5},{""field"":""apples"",""image"":""/uploads/question/401/apples.png"",""count"":4,""count_objects"":4},{""field"":""pears"",""image"":""/uploads/question/401/pears.png"",""count"":4,""count_objects"":4}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""carrots"",""path"":""/uploads/question/401/carrots.png"",""seq_no"":""1""},{""field"":""apples"",""path"":""/uploads/question/401/apples.png"",""seq_no"":""2""},{""field"":""pears"",""path"":""/uploads/question/401/pears.png"",""seq_no"":""3""}]}",12,2,1,Enabled,,,,,,,garden graphing 3.jpg
+402,8,11402,GR,"It's a hot sunny day you would love 5 ice-creams and 6 waffles, graph these",bakery graphing,,"{""answer"":[{""field"":""ice cream"",""image"":""/uploads/question/402/icecream.png"",""count"":5,""count_objects"":5},{""field"":""waffles"",""image"":""/uploads/question/402/waffles.png"",""count"":6,""count_objects"":6}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""ice cream"",""path"":""/uploads/question/402/icecream.png"",""seq_no"":""1""},{""field"":""waffles"",""path"":""/uploads/question/402/waffles.png"",""seq_no"":""2""}]}",13,2,1,Enabled,,,,,,,bakery graphing 1.jpg
+403,8,11403,GR,"After dinner dessert, your favourites are 4 cakes, 3 pasteries, graph these",bakery graphing,,"{""answer"":[{""field"":""cakes"",""image"":""/uploads/question/403/cakes.png"",""count"":4,""count_objects"":4},{""field"":""pasteries"",""image"":""/uploads/question/403/pasteries.png"",""count"":3,""count_objects"":3}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""cakes"",""path"":""/uploads/question/403/cakes.png"",""seq_no"":""1""},{""field"":""pasteries"",""path"":""/uploads/question/403/pasteries.png"",""seq_no"":""2""}]}",14,2,1,Enabled,,,,,,,bakery graphing 2.jpg
+404,8,11404,GR,"Your mom packed your favourite treats graph these, 6 cookies and 7 cakes",bakery graphing,,"{""answer"":[{""field"":""cookies"",""image"":""/uploads/question/404/cookies.png"",""count"":6,""count_objects"":6},{""field"":""cakes"",""image"":""/uploads/question/404/cakes.png"",""count"":7,""count_objects"":7}]}",,"{""orientation"":""horizontal"",""image"":[{""field"":""cookies"",""path"":""/uploads/question/404/cookies.png"",""seq_no"":""1""},{""field"":""cakes"",""path"":""/uploads/question/404/cakes.png"",""seq_no"":""2""}]}",6,1,1,Enabled,,,,,,,bakery graphing 3.jpg
 405,27,11405,MC,How do we get 10?,mixed operations 1,mixed-operations-1.jpg,,,,1,1,1,Enabled,,,,,,,
 406,27,11406,MC,Which of the following results in 8?,mixed operations 2,mixed-operations-2.jpg,,,,2,1,1,Enabled,,,,,,,
 407,10,11407,MC,How do we get 2?,mixed operations 3,mixed-operations-3.jpg,,,,15,3,1,Enabled,,,,,,,
@@ -664,42 +664,75 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 657,26,11657,N,90<br>-50<br>___<br>??,,,40,,,4,1,1,Enabled,,,,,,,
 658,26,11658,N,65<br>-12<br>___<br>??,,,35,,,1,2,1,Enabled,,,,,,,
 659,26,11659,N,38<br>-24<br>___<br>??,,,14,,,2,2,1,Enabled,,,,,,,
-660,26,11660,"N",99<br>-40<br>___<br>??,,,59,,,3,2,1,Enabled,,,,,,,
-661,26,11661,"N",72<br>-22<br>___<br>??,,,50,,,4,2,1,Enabled,,,,,,,
-662,26,11662,"N",86<br>-25<br>___<br>??,,,61,,,5,2,1,Enabled,,,,,,,
-663,26,11663,"N",64<br>-55<br>___<br>??,,,9,,,1,3,1,Enabled,,,,,,,
-664,26,11664,"N",92<br>-78<br>___<br>??,,,14,,,2,3,1,Enabled,,,,,,,
-665,26,11665,"N",23<br>-18<br>___<br>??,,,5,,,3,3,1,Enabled,,,,,,,
-666,26,11666,"N",60<br>-34<br>___<br>??,,,26,,,4,3,1,Enabled,,,,,,,
-667,26,11667,"N",97<br>-49<br>___<br>??,,,48,,,5,3,1,Enabled,,,,,,,
-668,26,11668,"N","Dustin received $65 for his allowance, he spent $17 on a gift for this mom on Mother's Day. How much money does Dustin have now?",,,40,,,6,3,1,Enabled,,,,,,,
-669,26,11669,"N",Preethi was given 80 inches of gift wrap. She used 25 inches of the gift wrap to wrap her friend's present. She then used 36 inches of wrapping paper to wrap her father's gift. How much gift wrap does Preethi have now?,,,20,,,7,3,1,Enabled,,,,,,,
-670,26,11670,"N","J.T was selling fruits at the beach. He had 86 pineapples with him, then he managed to sell 38 of those pineapples by the end of the day. Then he gave away 15 pineapples to his friends. How many pineapples does he have now?",,,33,,,8,3,1,Enabled,,,,,,,
-671,26,11671,"N","Marianne bought 64 crayons for school. At the end of the year, she only has 47 crayons. How many crayons did Marianne lose over the course of the year?",,,15,,,9,3,1,Enabled,,,,,,,
+660,26,11660,"N
+",99<br>-40<br>___<br>??,,,59,,,3,2,1,Enabled,,,,,,,
+661,26,11661,"N
+",72<br>-22<br>___<br>??,,,50,,,4,2,1,Enabled,,,,,,,
+662,26,11662,"N
+",86<br>-25<br>___<br>??,,,61,,,5,2,1,Enabled,,,,,,,
+663,26,11663,"N
+",64<br>-55<br>___<br>??,,,9,,,1,3,1,Enabled,,,,,,,
+664,26,11664,"N
+",92<br>-78<br>___<br>??,,,14,,,2,3,1,Enabled,,,,,,,
+665,26,11665,"N
+",23<br>-18<br>___<br>??,,,5,,,3,3,1,Enabled,,,,,,,
+666,26,11666,"N
+",60<br>-34<br>___<br>??,,,26,,,4,3,1,Enabled,,,,,,,
+667,26,11667,"N
+",97<br>-49<br>___<br>??,,,48,,,5,3,1,Enabled,,,,,,,
+668,26,11668,"N
+","Dustin received $65 for his allowance, he spent $17 on a gift for this mom on Mother's Day. How much money does Dustin have now?",,,40,,,6,3,1,Enabled,,,,,,,
+669,26,11669,"N
+",Preethi was given 80 inches of gift wrap. She used 25 inches of the gift wrap to wrap her friend's present. She then used 36 inches of wrapping paper to wrap her father's gift. How much gift wrap does Preethi have now?,,,20,,,7,3,1,Enabled,,,,,,,
+670,26,11670,"N
+","J.T was selling fruits at the beach. He had 86 pineapples with him, then he managed to sell 38 of those pineapples by the end of the day. Then he gave away 15 pineapples to his friends. How many pineapples does he have now?",,,33,,,8,3,1,Enabled,,,,,,,
+671,26,11671,"N
+","Marianne bought 64 crayons for school. At the end of the year, she only has 47 crayons. How many crayons did Marianne lose over the course of the year?",,,15,,,9,3,1,Enabled,,,,,,,
 672,26,11672,FIB,"Fill in the sequence:<br>83, ____, 57, 44, 31, ____",,,"70,18",,,10,3,1,Enabled,,,,,,,
 673,26,11673,FIB,"Fill in the sequence:<br>112, 88 ,____, ____, 16, ",,,"64,40",,,11,3,1,Enabled,,,,,,,
 674,26,11674,FIB,"Fill in the sequence:<br>____. 89, 64, ____, 14",,,"114,39",,,12,3,1,Enabled,,,,,,,
-675,27,11675,"N",100<br>+200<br>___<br>???,,,300,,,3,1,1,Enabled,,,,,,,
-676,27,11676,"N",400<br>+500<br>___<br>???,,,900,,,4,1,1,Enabled,,,,,,,
-677,27,11677,"N",200<br>+400<br>___<br>???,,,600,,,5,1,1,Enabled,,,,,,,
-678,27,11678,"N",600<br>+300<br>___<br>???,,,900,,,6,1,1,Enabled,,,,,,,
-679,27,11679,"N",500<br>+200<br>___<br>???,,,700,,,7,1,1,Enabled,,,,,,,
-680,27,11680,"N",140<br>+  34<br>___<br>???,,,174,,,1,2,1,Enabled,,,,,,,
-681,27,11681,"N",  432<br>+566<br>___<br>???,,,998,,,2,2,1,Enabled,,,,,,,
-682,27,11682,"N",  942<br>+  21<br>___<br>???,,,963,,,3,2,1,Enabled,,,,,,,
-683,27,11683,"N",  441<br>+  36<br>___<br>???,,,477,,,4,2,1,Enabled,,,,,,,
-684,27,11684,"N",  742<br>+  53<br> ___<br>???,,,795,,,5,2,1,Enabled,,,,,,,
-685,27,11685,"N",  495<br>+  59<br> ___<br>???,,,554,,,1,3,1,Enabled,,,,,,,
-686,27,11686,"N",  234<br>+  88<br> ___<br>???,,,322,,,2,3,1,Enabled,,,,,,,
-687,27,11687,"N",  323<br>+  48<br> ___<br>???,,,371,,,3,3,1,Enabled,,,,,,,
-688,27,11688,"N",  867<br>+  43<br> ___<br>???,,,910,,,4,3,1,Enabled,,,,,,,
-689,27,11689,"N",  655<br>+  98<br> ___<br>???,,,753,,,5,3,1,Enabled,,,,,,,
-690,27,11690,"N","Kim bought 648 flowers for her wedding, but she order 23 more for honeymoon. She realized she needed to order 42 more. How many flowers did she order in total? ",,,700,,,6,3,1,Enabled,,,,,,,
-691,27,11691,"N",Justin had 342 notes for all the students in his graduating class. He forgot that there were a total of new 68 students that transferred that year. How many notes does he need altogether?,,,410,,,7,3,1,Enabled,,,,,,,
-692,27,11692,"N",  122<br>+  ??<br> ___<br>234,,,112,,,8,3,1,Enabled,,,,,,,
-693,27,11693,"N",  215<br>+  ??<br> ___<br>830,,,615,,,8,1,1,Enabled,,,,,,,
-694,27,11694,"N",  308<br>+  ??<br> ___<br>395,,,87,,,9,1,1,Enabled,,,,,,,
-695,27,11695,"N",  ???<br>+  76<br> ___<br>842,,,766,,,10,1,1,Enabled,,,,,,,
+675,27,11675,"N
+",100<br>+200<br>___<br>???,,,300,,,3,1,1,Enabled,,,,,,,
+676,27,11676,"N
+",400<br>+500<br>___<br>???,,,900,,,4,1,1,Enabled,,,,,,,
+677,27,11677,"N
+",200<br>+400<br>___<br>???,,,600,,,5,1,1,Enabled,,,,,,,
+678,27,11678,"N
+",600<br>+300<br>___<br>???,,,900,,,6,1,1,Enabled,,,,,,,
+679,27,11679,"N
+",500<br>+200<br>___<br>???,,,700,,,7,1,1,Enabled,,,,,,,
+680,27,11680,"N
+",140<br>+  34<br>___<br>???,,,174,,,1,2,1,Enabled,,,,,,,
+681,27,11681,"N
+",  432<br>+566<br>___<br>???,,,998,,,2,2,1,Enabled,,,,,,,
+682,27,11682,"N
+",  942<br>+  21<br>___<br>???,,,963,,,3,2,1,Enabled,,,,,,,
+683,27,11683,"N
+",  441<br>+  36<br>___<br>???,,,477,,,4,2,1,Enabled,,,,,,,
+684,27,11684,"N
+",  742<br>+  53<br> ___<br>???,,,795,,,5,2,1,Enabled,,,,,,,
+685,27,11685,"N
+",  495<br>+  59<br> ___<br>???,,,554,,,1,3,1,Enabled,,,,,,,
+686,27,11686,"N
+",  234<br>+  88<br> ___<br>???,,,322,,,2,3,1,Enabled,,,,,,,
+687,27,11687,"N
+",  323<br>+  48<br> ___<br>???,,,371,,,3,3,1,Enabled,,,,,,,
+688,27,11688,"N
+",  867<br>+  43<br> ___<br>???,,,910,,,4,3,1,Enabled,,,,,,,
+689,27,11689,"N
+",  655<br>+  98<br> ___<br>???,,,753,,,5,3,1,Enabled,,,,,,,
+690,27,11690,"N
+","Kim bought 648 flowers for her wedding, but she order 23 more for honeymoon. She realized she needed to order 42 more. How many flowers did she order in total? ",,,700,,,6,3,1,Enabled,,,,,,,
+691,27,11691,"N
+",Justin had 342 notes for all the students in his graduating class. He forgot that there were a total of new 68 students that transferred that year. How many notes does he need altogether?,,,410,,,7,3,1,Enabled,,,,,,,
+692,27,11692,"N
+",  122<br>+  ??<br> ___<br>234,,,112,,,8,3,1,Enabled,,,,,,,
+693,27,11693,"N
+",  215<br>+  ??<br> ___<br>830,,,615,,,8,1,1,Enabled,,,,,,,
+694,27,11694,"N
+",  308<br>+  ??<br> ___<br>395,,,87,,,9,1,1,Enabled,,,,,,,
+695,27,11695,"N
+",  ???<br>+  76<br> ___<br>842,,,766,,,10,1,1,Enabled,,,,,,,
 696,37,11721,FIB,Use the words more or less. The length of the first blackboard is ____ than one foot?,measurement 1,measurement-1.JPG,more,,,1,1,1,Enabled,,,,,,,
 697,37,11722,FIB,Use the words more or less. The length of the first blackbaord is ____ than six feet?,measurement 1,measurement-1.JPG,less,,,2,1,1,Enabled,,,,,,,
 698,37,11723,FIB,Which blackboard is longer?,measurement 1,measurement-1.JPG,B,,,3,1,1,Enabled,,,,,,,
@@ -769,8 +802,10 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 762,34,11787,FIB,What is the total of 4 cent + 4 cents?,,,8 cents,,,5,1,1,Enabled,,,,,,,
 763,34,11788,FIB,What is the total of 1 cent + 11 cents?,,,12 cents,,,2,2,1,Enabled,,,,,,,
 764,34,11789,FIB,What is the total of 11 cents + 9 cents?,,,20 cents,,,1,3,1,Enabled,,,,,,,
-765,34,11790,FIB,"Susie bought a new pen for two dollars, and Henry about paper for four dollars, how much did they spend in total?<br/>Note: Please express your answer in words",,,Six dollars,,,2,3,1,Enabled,,,,,,,
-766,34,11791,FIB,"Susie bought a new pen for two dollars, and Henry about paper for four dollars, how much Henry spend more than Susie?<br/>Note: Please express your answer in words",,,Two dollars,,,3,3,1,Enabled,,,,,,,
+765,34,11790,FIB,"Susie bought a new pen for two dollars, and Henry about paper for four dollars, how much did they spend in total?
+<br/>Note: Please express your answer in words",,,Six dollars,,,2,3,1,Enabled,,,,,,,
+766,34,11791,FIB,"Susie bought a new pen for two dollars, and Henry about paper for four dollars, how much Henry spend more than Susie?
+<br/>Note: Please express your answer in words",,,Two dollars,,,3,3,1,Enabled,,,,,,,
 767,34,11792,FIB,"Karen has $10 and likes pink shoes, which can she afford to buy?",Shoe prices,shoe-prices.JPG,H,,,4,3,1,Enabled,,,,,,,
 768,34,11793,FIB,"Brian has $20 and bought the shoe that has white, red and blue on it (E), how much money does he have left?",Shoe prices,shoe-prices.JPG,9,,,5,3,1,Enabled,,,,,,,
 769,34,11794,MC,With $8 in his pocket which shoe can Michael afford?,Shoe prices,shoe-prices.JPG,"G,I",,,6,3,1,Enabled,,,,,,,
@@ -800,9 +835,11 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 793,34,11818,FIB,Add 3 dollars to 33 dollars,money 16,money-16.jpg,36,,,9,2,1,Enabled,,,,,,,
 794,34,11819,FIB,How much is the bank note worth?,money 17,money-17.jpg,10 dollars,,,10,2,1,Enabled,,,,,,,
 795,39,11820,MC,What is the probabililty of choosing Wed out of the seven days in the week?,Probability 1,probability-1.jpg,,,,2,3,1,Enabled,,,,,,,
-796,39,11821,MC,"What is the probability of chosing a day that starts with the letter S?",Probability 2,probability-2.jpg,,,,3,3,1,Enabled,,,,,,,
+796,39,11821,MC,"
+What is the probability of chosing a day that starts with the letter S?",Probability 2,probability-2.jpg,,,,3,3,1,Enabled,,,,,,,
 797,39,11822,MC,What is the probability of selecting a weekend?,Probability 2,probability-2.jpg,,,,4,3,1,Enabled,,,,,,,
-798,39,11823,MC,"What is the probability of chosing a day that starts with the letter T?",Probability 2,probability-2.jpg,,,,5,3,1,Enabled,,,,,,,
+798,39,11823,MC,"
+What is the probability of chosing a day that starts with the letter T?",Probability 2,probability-2.jpg,,,,5,3,1,Enabled,,,,,,,
 799,39,11824,MC,What if the probability of selecting January from the calendar?,Probability 3,probability-3.jpg,,,,6,3,1,Enabled,,,,,,,
 800,39,11825,MC,"What if the probability of selecting a month starting with ""J"" from the calendar?",Probability 4,probability-4.jpg,,,,7,3,1,Enabled,,,,,,,
 801,39,11826,MC,"What if the probability of selecting a month starting with ""J"" or ""M"" from the calendar?",Probability 5,probability-5.jpg,,,,8,3,1,Enabled,,,,,,,
@@ -866,8 +903,10 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 859,30,11884,FIB,"Write out this equation using the following operators , +, - , =",Operation 22,operation-22.jpg,45+77-12=110,,,19,3,1,Enabled,,,,,,,
 860,33,11885,FIB,Jason bought 290 apples on Tuesday. On Friday he bought 145 more apples than on Tuesday. How many apples did he buy on Friday? ,,,435,,,1,2,1,Enabled,,,,,,,
 861,33,11886,FIB,There are 287 mango trees in a big garden. 135 of them give fruits. How many mango trees do not give fruits? ,,,152,,,2,2,1,Enabled,,,,,,,
-862,33,11887,FIB,"Jenna needs 400 dollars. She has already 201 dollars. How many dollars does she still need? ",,,199,,,3,2,1,Enabled,,,,,,,
-863,33,11888,FIB,"A computer costs 700 dollars. If you pay with 999 dollars, how much change will you get back?",,,299,,,4,2,1,Enabled,,,,,,,
+862,33,11887,FIB,"Jenna needs 400 dollars. She has already 201 dollars.
+How many dollars does she still need? ",,,199,,,3,2,1,Enabled,,,,,,,
+863,33,11888,FIB,"A computer costs 700 dollars. If you pay with 999 dollars, how
+much change will you get back?",,,299,,,4,2,1,Enabled,,,,,,,
 864,33,11889,FIB,"I bought an iPhone for 382 dollars. If I paid for it with 500 dollars, how much change did I get? ",,,118,,,5,2,1,Enabled,,,,,,,
 865,33,11890,FIB,"I'm a number between 10 and 20, and can be divided by 5.  What am I?",,,15,,,1,3,1,Enabled,,,,,,,
 866,33,11891,FIB,"I'm a number between 100 and 200, and am half of 300.  What am I?",,,150,,,2,3,1,Enabled,,,,,,,
@@ -895,13 +934,20 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 888,36,11913,FIB,Can you read the coordinates? Where is the red flower?,Graph skills 1,graph-skills-1.jpg,"6,3",,,2,2,1,Enabled,,,,,,,
 889,36,11914,FIB,Can you read the coordinates? Where is the yellow flower?,Graph skills 1,graph-skills-1.jpg,"4,10",,,3,2,1,Enabled,,,,,,,
 890,36,11915,FIB,Can you read the coordinates? Where is the pink flower?,Graph skills 1,graph-skills-1.jpg,"2,9",,,4,2,1,Enabled,,,,,,,
-891,36,11916,QUAD,"Can you plot this point on the worksheet? (4,1)",ploting points,ploting-points.JPG,"{""answer"": [{""x"":4,""y"":1}]}",,,1,3,1,Enabled,,,,,,,
-892,36,11917,QUAD,"Can you plot this point on the worksheet? (2,5)",ploting points,ploting-points.JPG,"{""answer"": [{""x"":2,""y"":5}]}",,,2,3,1,Enabled,,,,,,,
-893,36,11918,QUAD,"Can you plot this point on the worksheet? (-3,-2)",ploting points,ploting-points.JPG,"{""answer"": [{""x"":-3,""y"":-2}]}",,,3,3,1,Enabled,,,,,,,
-894,36,11919,QUAD,"Can you plot this point on the worksheet? (-4,-4)",ploting points,ploting-points.JPG,"{""answer"": [{""x"":-4,""y"":-4}]}",,,4,3,1,Enabled,,,,,,,
-895,36,11920,QUAD,Can you plot this point on the worksheet? (-5.-6),ploting points,ploting-points.JPG,"{""answer"": [{""x"":-5,""y"":-6}]}",,,5,3,1,Enabled,,,,,,,
-896,36,11921,QUAD,"Can you plot this point on the worksheet? (5,5)",ploting points,ploting-points.JPG,"{""answer"": [{""x"":5,""y"":5}]}",,,6,3,1,Enabled,,,,,,,
-897,36,11922,QUAD,"Can you plot this point on the worksheet? (0,0)",ploting points,ploting-points.JPG,"{""answer"": [{""x"":0,""y"":0}]}",,,7,3,1,Enabled,,,,,,,
+891,36,11916,QUAD,"Can you plot this point on the worksheet? (4,1)",ploting points,,"{""answer"": [{""x"":4,""y"":1}]}
+",,,1,3,1,Enabled,,,,,,,
+892,36,11917,QUAD,"Can you plot this point on the worksheet? (2,5)",ploting points,,"{""answer"": [{""x"":2,""y"":5}]}
+",,,2,3,1,Enabled,,,,,,,
+893,36,11918,QUAD,"Can you plot this point on the worksheet? (-3,-2)",ploting points,,"{""answer"": [{""x"":-3,""y"":-2}]}
+",,,3,3,1,Enabled,,,,,,,
+894,36,11919,QUAD,"Can you plot this point on the worksheet? (-4,-4)",ploting points,,"{""answer"": [{""x"":-4,""y"":-4}]}
+",,,4,3,1,Enabled,,,,,,,
+895,36,11920,QUAD,Can you plot this point on the worksheet? (-5.-6),ploting points,,"{""answer"": [{""x"":-5,""y"":-6}]}
+",,,5,3,1,Enabled,,,,,,,
+896,36,11921,QUAD,"Can you plot this point on the worksheet? (5,5)",ploting points,,"{""answer"": [{""x"":5,""y"":5}]}
+",,,6,3,1,Enabled,,,,,,,
+897,36,11922,QUAD,"Can you plot this point on the worksheet? (0,0)",ploting points,,"{""answer"": [{""x"":0,""y"":0}]}
+",,,7,3,1,Enabled,,,,,,,
 898,36,11923,FIB,"What shape do you get when you plot, (0,4),(4,0), (0,-4) and (-4,0)?",ploting points,ploting-points.JPG,Square,,,8,3,1,Enabled,,,,,,,
 899,36,11924,FIB,"What shape do you get when you plot, (0,0),(4,0), (0,4) and (4,4)?",ploting points,ploting-points.JPG,Square,,,9,3,1,Enabled,,,,,,,
 900,36,11925,FIB,"What shape do you get when you plot, (-3,0),(-3,2), (3,0) and (3,2)?",ploting points,ploting-points.JPG,Rectangle,,,10,3,1,Enabled,,,,,,,
@@ -1334,16 +1380,16 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 1327,3,11874,N,How much do you get if you take one away from the other? 2214 - 1260?,,,954,,,41,3,1,Enabled,,,,,,,
 1328,3,11875,N,How much do you get if you take one away from the other? 2280 - 1300?,,,980,,,42,3,1,Enabled,,,,,,,
 1329,4,11876,MC,What am I?,wedge,,,,,11,2,1,Disabled,,,,,,,
-1330,4,11877,MC,What am I?,cyclinder,,,,,12,2,1,Disabled,,,,,,,
-1331,4,11878,MC,What am I?,cube,,,,,13,2,1,Disabled,,,,,,,
+1330,4,11877,MC,What am I?,cyclinder,cylinder.png,,,,12,2,1,Disabled,,,,,,,
+1331,4,11878,MC,What am I?,cube,cube.png,,,,13,2,1,Disabled,,,,,,,
 1332,4,11879,MC,What am I?,prism,,,,,14,2,1,Disabled,,,,,,,
-1333,4,11880,MC,What am I?,cone,,,,,15,2,1,Disabled,,,,,,,
-1334,4,11881,MC,What am I?,cuboid,,,,,16,2,1,Disabled,,,,,,,
-1335,4,11882,MC,What am I?,sphere,,,,,17,2,1,Disabled,,,,,,,
-1336,4,11883,MC,What am I?,cube,,,,,18,2,1,Disabled,,,,,,,
-1337,4,11884,MC,What am I?,pyramid,,,,,19,2,1,Disabled,,,,,,,
-1338,4,11885,MC,What am I?,triangular prism,,,,,20,2,1,Disabled,,,,,,,
-1339,4,11886,MC,What am I?,octagon prism,,,,,21,2,1,Disabled,,,,,,,
+1333,4,11880,MC,What am I?,cone,cone.png,,,,15,2,1,Disabled,,,,,,,
+1334,4,11881,MC,What am I?,cuboid,cubiod.png,,,,16,2,1,Disabled,,,,,,,
+1335,4,11882,MC,What am I?,sphere,sphere,,,,17,2,1,Disabled,,,,,,,
+1336,4,11883,MC,What am I?,cube,cube.png,,,,18,2,1,Disabled,,,,,,,
+1337,4,11884,MC,What am I?,pyramid,pyramid.png,,,,19,2,1,Disabled,,,,,,,
+1338,4,11885,MC,What am I?,triangular prism,triangular-prism.png,,,,20,2,1,Disabled,,,,,,,
+1339,4,11886,MC,What am I?,octagon prism,octagonal-prism.png,,,,21,2,1,Disabled,,,,,,,
 1340,4,11887,MC,What am I?,Icosahedron,,,,,22,2,1,Disabled,,,,,,,
 1341,4,11888,MC,What am I?,tetrahedron,,,,,23,2,1,Disabled,,,,,,,
 1342,4,11889,MC,What am I?,dodecahedron,,,,,24,2,1,Disabled,,,,,,,
@@ -2795,115 +2841,251 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 2788,137,12155,N,"Calculate the perimeter of this drawing with the following dimensions.  54 = 56, 47 = 49, 47 = 49, 46 = 48, 46 = 48, 46 = 48, 46 = 48, 46 = 48, 46 = 48, 46 = 48",Perimeter diagram 5,perimeter-diagram-5.jpg,490,,,11,3,,,,,,,,,
 2789,137,12156,N,"Calculate the perimeter of this drawing with the following dimensions.  56 = 58, 49 = 51, 49 = 51, 48 = 50, 48 = 50, 48 = 50, 48 = 50, 48 = 50, 48 = 50, 48 = 50",Perimeter diagram 5,perimeter-diagram-5.jpg,510,,,12,3,,,,,,,,,
 2790,137,12157,N,"Calculate the perimeter of this drawing with the following dimensions.  58 = 60, 51 = 53, 51 = 53, 50 = 52, 50 = 52, 50 = 52, 50 = 52, 50 = 52, 50 = 52, 50 = 52",Perimeter diagram 5,perimeter-diagram-5.jpg,530,,,13,3,,,,,,,,,
-2791,65,1,FIB,"This number is<br/>___ is 100 more than 12000",,,12100,,,1,1,1,Enabled,,,,,,,
-2792,65,2,FIB,"This number is<br/>___ is 1000 less than 90800",,,89800,,,2,1,1,Enabled,,,,,,,
-2793,65,3,FIB,"This number is<br/>55000 is ___ more than 47000",,,8000,,,3,1,1,Enabled,,,,,,,
-2794,65,4,FIB,"This number is<br/>___ is 10000 less than 10755",,,755,,,4,1,1,Enabled,,,,,,,
-2795,65,5,FIB,"Complete the series<br/>12348, 12338, 12328, ___, ___",,,"12318,12308",,,5,1,1,Enabled,,,,,,,
-2796,65,6,FIB,"Complete the series<br/>27165, 28165, 29165, ___, ___",,,"30165,31165",,,6,1,1,Enabled,,,,,,,
-2797,65,7,FIB,"Complete the series<br/>39812, 39912, ___, ___, 40213",,,"40012,40112",,,7,1,1,Enabled,,,,,,,
-2798,65,8,FIB,"Complete the series<br/>___, 14050, 24050, 34050, ___",,,"4050,44050",,,8,1,1,Enabled,,,,,,,
-2799,65,9,FIB,"Complete the series and write down the rule<br/>86317, 76317, 66317, ___, ___<br/>rule: ___ ___ to get the next number",,,"56317,46317",,,9,1,1,Enabled,,,,,,,
-2800,65,10,FIB,"Complete the series and write down the rule<br/>29168, 29068, ___, ___, 28768<br/>rule: ___ ___ to get the next number",,,"28968,28868",,,10,1,1,Enabled,,,,,,,
-2801,65,11,FIB,"Complete the series and write down the rule<br/>53892, 53992, ___, ___, 54292<br/>rule: ___ ___ to get the next number",,,"54092,54192",,,11,1,1,Enabled,,,,,,,
-2802,65,12,FIB,"28 is ___ when rounded off to the nearest ten.",,,30,,,12,1,1,Enabled,,,,,,,
-2803,65,13,FIB,"44 is ___ when rounded off to the nearest ten.",,,40,,,13,1,1,Enabled,,,,,,,
-2804,65,14,FIB,"139 is ___ when rounded off to the nearest ten.",,,140,,,14,1,1,Enabled,,,,,,,
-2805,65,15,FIB,"Using the following numbers (2, 0, 7, 3, 1)<br/>Arrange the numbers to form the greatest 5-digit number ___",,,73210,,,15,1,1,Enabled,,,,,,,
-2806,65,16,FIB,"Using the following numbers (2, 0, 7, 3, 1)<br/>Arrange the numbers to form the smallest 5-digit number ___ (do not start with 0)",,,10237,,,16,1,1,Enabled,,,,,,,
-2807,65,17,FIB,"Using the following numbers (6, 3, 8, 2, 0)<br/>Arrange the numbers to form the smallest 5-digit even number ___",,,20368,,,17,1,1,Enabled,,,,,,,
-2808,65,18,FIB,"Using the following numbers (6, 3, 8, 2, 0)<br/>Arrange the numbers to form the greatest 5-digit odd number ___",,,86203,,,18,1,1,Enabled,,,,,,,
-2809,65,19,FIB," 1 more than 21459 is ___",,,21460,,,19,1,1,Enabled,,,,,,,
-2810,65,20,FIB," 10 more than 21459 is ___",,,21469,,,20,1,1,Enabled,,,,,,,
-2811,65,21,FIB," 100 more than 21459 is ___",,,21559,,,21,1,1,Enabled,,,,,,,
-2812,65,22,FIB," 1000 more than 21459 is ___",,,22459,,,22,1,1,Enabled,,,,,,,
-2813,65,23,FIB," 10000 more than 21459 is ___",,,31459,,,23,1,1,Enabled,,,,,,,
-2814,65,24,FIB,"Complete the series<br/>___, 20904, 20905, 20906, ___",,,"21903,21907",,,24,1,1,Enabled,,,,,,,
-2815,65,25,FIB,"Complete the series<br/>23903, ___, ___, 23906, ___",,,"23904,23905,23907",,,25,1,1,Enabled,,,,,,,
-2816,65,26,FIB,"Complete the series<br/>___, 20904, 21904, 22904, ___",,,"19904,23904",,,26,1,1,Enabled,,,,,,,
-2817,65,27,FIB,"Complete the series<br/>20906, 21906, ___, 23906, ___, ___, 26907",,,"22906,24906,25906",,,27,1,1,Enabled,,,,,,,
-2818,65,28,FIB,"Complete the series<br/>___, ___, ___, 5087, 5187, ___, ___",,,"4787,4887,4987,5287,5387",,,28,1,1,Enabled,,,,,,,
-2819,65,29,FIB,"Complete the series<br/>___, ___, 41936, 42936, ___, ___",,,"39936,40936,43936,44936",,,29,1,1,Enabled,,,,,,,
-2820,65,30,FIB,"How many of each equals the following number?<br/> 57849<br/>Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"5,7,8,4,9",,,30,1,1,Enabled,,,,,,,
-2821,65,31,FIB,"How many of each equals the following number?<br/> 57984<br/>Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"5,7,9,8,4",,,31,1,1,Enabled,,,,,,,
-2822,65,32,FIB,"How many of each equals the following number?<br/> 57995<br/>Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"5,7,9,9,5",,,32,1,1,Enabled,,,,,,,
-2823,65,33,FIB,"How many of each equals the following number?<br/> 60875<br/>Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"6,0,8,7,5",,,33,1,1,Enabled,,,,,,,
-2824,65,34,FIB,"How many of each equals the following number?<br/> 60796<br/>Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"6,0,7,9,6",,,34,1,1,Enabled,,,,,,,
-2825,65,35,FIB,"How many of each equals the following number?<br/> 60870<br/>Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"6,0,8,7,0",,,35,1,1,Enabled,,,,,,,
-2826,65,36,FIB,"___ is the smallest number out of the following series  (57849, 57984, 57995).",,,57849,,,36,1,1,Enabled,,,,,,,
-2827,65,37,FIB,"___ is the greatest number out of the following series  (57849, 57984, 57995).",,,57995,,,37,1,1,Enabled,,,,,,,
-2828,65,38,FIB,"Arrange the numbers from smallest to largest<br/>60875, 60796, 60871",,,"60796,60871,60875",,,38,1,1,Enabled,,,,,,,
-2829,65,39,FIB,"Arrange the numbers from smallest to largest<br/>28571, 27581, 28751, 27852",,,"27581,27852,28571,28751",,,39,1,1,Enabled,,,,,,,
-2830,65,40,FIB,"Arrange the numbers from smallest to largest<br/>75840, 68540, 75480, 68451",,,"68451,68540,75480,75840",,,40,1,1,Enabled,,,,,,,
-2831,65,41,FIB,"Arrange the cities according to their distances from Jakarta beginning with the furthest away<br/>Distance from Jakarta to:<br/>London  10871 km<br/>New York 15533 km<br/>Buenos Aires 15904 km<br/>Honolulu 10823 km<br/>Paris 10758 km",,,"Buenos Aires,New York,London,Honolulu,Paris",,,41,1,1,Enabled,,,,,,,
-2832,65,42,FIB,"Write the number<br/>Twenty-seven thousand and nine hundred",,,27900,,,42,1,1,Enabled,,,,,,,
-2833,65,43,FIB,"Write the number<br/>Forty-five thousand, two hundred and five",,,45205,,,43,1,1,Enabled,,,,,,,
-2834,65,44,FIB,"Write the number<br/>Seventy thousand and one hundred",,,70100,,,44,1,1,Enabled,,,,,,,
-2835,65,45,FIB,"Write the number<br/>Nine thousand, eight hundred and ninety-seven",,,9897,,,45,1,1,Enabled,,,,,,,
-2836,65,46,FIB,"Write the number<br/>Forty-two thousand, five hundred and twenty",,,42520,,,46,1,1,Enabled,,,,,,,
-2837,65,47,FIB,"How would this number be represented in words?<br/>39864",,,"Thirty-nine thousand,eight hundred,sixty four",,,47,1,1,Enabled,,,,,,,
-2838,65,48,FIB,"How would this number be represented in words?<br/>41267",,,"Fourty-one thousand,two hundred,sixty seven",,,48,1,1,Enabled,,,,,,,
-2839,65,49,FIB,"How would this number be represented in words?<br/>50618",,,"Fifty thousand,six hundred,eighteen",,,49,1,1,Enabled,,,,,,,
-2840,65,50,FIB,"How would this number be represented in words?<br/>83559",,,"Eighty-three thousand,five hundred,fifty nine",,,50,1,1,Enabled,,,,,,,
-2841,65,51,FIB,"How would this number be represented in words?<br/>70023",,,"Seventy thousand,twenty three",,,51,1,1,Enabled,,,,,,,
-2842,65,52,FIB,"How would this number be represented in words?<br/>98610",,,"Ninety-eight thousand,six hundred,ten",,,52,1,1,Enabled,,,,,,,
-2843,65,53,FIB,"Guess the number<br/>I have a 5-digit number. <br/>The digit 7 is in the thousands place and tens place.<br/>The digit 2 stands for two and the digit 3 stands for thirty thousand.<br/>The digit 4 stands for four hundred.",,,37472,,,53,1,1,Enabled,,,,,,,
-2844,65,54,FIB,"Guess the number<br/>I have a 5-digit number.<br/>The digit 5 is in the ones place, tens place and thousands place.<br/>The digit 7 stands for 700 and the digit 9 stands for 90000.",,,95755,,,54,1,1,Enabled,,,,,,,
-2845,70,59,FIB,"Solve<br/>List the first three common multiples of 2 and 4",,,"8,12,16",,,1,1,1,Enabled,,,,,,,
-2846,70,64,MC,"Solve<br/>Which of the following is not a common factor of 30 and 45?",q65,,,,,2,1,1,Enabled,,,,,,,
-2847,81,67,FIB,"Find the number<br/>What is the greatest 5-digit number that can be formed using the digits 1, 3, 5, 6 and 7?",,,76531,,,1,1,1,Enabled,,,,,,,
-2848,81,71,MC,"Find the number<br/>Which number has the digit 3 in the ten thousands place?",q72,,,,,2,1,1,Enabled,,,,,,,
-2849,65,72,MC,"Find the number<br/>13937 when rounded off to the nearest 100 is ___",q73,,,,,55,1,1,Enabled,,,,,,,
-2850,83,121,FIB,"Fill in the blank<br/>17357 = 10000 + ___ + 300 + 50 + 7",,,7000,,,16,1,1,Enabled,,,,,,,
-2851,83,122,FIB,"Fill in the blank<br/>20465 = 20000 + ___ + 60 + 5",,,400,,,17,1,1,Enabled,,,,,,,
-2852,80,123,FIB,"Fill in the blank<br/>42060 = ___ + 2000 + 60",,,40000,,,119,1,1,Enabled,,,,,,,
-2853,80,124,FIB,"Fill in the blank<br/>50000 + 2000 + 600 + 60 + 3 = ___",,,52663,,,120,1,1,Enabled,,,,,,,
-2854,65,125,FIB,"Fill in the blank<br/>80000 + 3000 + 50 + 7 = ___",,,83057,,,56,1,1,Enabled,,,,,,,
-2855,68,126,FIB,"Fill in the blank<br/>70000 + 4000 + 300 = ___",,,74300,,,1,1,1,Enabled,,,,,,,
-2856,67,127,FIB,"Fill in the blank<br/>20000 + 900 + 50 = ___",,,20950,,,1,1,1,Enabled,,,,,,,
-2857,65,128,FIB,"Fill in the blank<br/>8 + 500 + 2000 + 70000 = ___",,,72508,,,57,1,1,Enabled,,,,,,,
-2858,69,129,FIB,"Form a  5-digit numbers with the digit 3 in the ten thousands place and the digit 4 in the hundreds place<br/>0, 1, 2, 3, 4",,,30412,,,1,1,1,Enabled,,,,,,,
-2859,80,130,FIB,"Complete<br/>41039<br/>Ten Thousands: ___ Thousands:____ Hundreds:___ Tens:___ Ones:___",,,"4,1,0,3,9",,,121,1,1,Enabled,,,,,,,
-2860,81,131,FIB,"Complete<br/>52394<br/>Ten Thousands: ___ Thousands:____ Hundreds:___ Tens:___ Ones:___",,,"5,2,3,9,4",,,3,1,1,Enabled,,,,,,,
-2861,65,132,MC,"Which is larger<br/>13293 , 13495",,,,,,58,1,1,Enabled,,,,,,,
-2862,65,133,MC,"Which is larger<br/>13138 , 13135",,,,,,59,1,1,Enabled,,,,,,,
-2863,66,134,MC,"Which is larger<br/>73352 , 73343",,,,,,1,1,1,Enabled,,,,,,,
-2864,81,135,MC,"Which is larger<br/>83204 , 80917",,,,,,4,1,1,Enabled,,,,,,,
-2865,69,136,FIB,"What is the number<br/>Fourty-five thousand, seven hundred and thirty-two",,,45732,,,2,1,1,Enabled,,,,,,,
-2866,66,137,FIB,"What is the number<br/>Thirteen thousand and fourty-five",,,13045,,,2,1,1,Enabled,,,,,,,
-2867,66,138,FIB,"What is the number<br/>Sixty thousand and four hundred",,,60400,,,3,1,1,Enabled,,,,,,,
-2868,67,139,FIB,"What is the number<br/>Seventy thousand and thirteen",,,70013,,,2,1,1,Enabled,,,,,,,
-2869,67,140,FIB,"Write the number in words<br/>63090",,,Sixty-three thousand and ninety,,,3,1,1,Enabled,,,,,,,
-2870,67,141,FIB,"Write the number in words<br/>90002",,,Ninety thousand and two,,,4,1,1,Enabled,,,,,,,
-2871,67,142,FIB,"Write the number in words<br/>24609",,,"Twenty-four thousand, six hundred and nine",,,5,1,1,Enabled,,,,,,,
-2872,67,143,FIB,"Write the number in words<br/>83456",,,"Eighty-three thousand, four hundred and fifty six",,,6,1,1,Enabled,,,,,,,
-2873,65,144,FIB,"Complete<br/>14293 is a 5-digit number<br/>There are 1 ___, 4 thousands, 2 ___, 9 tens and 3",,,"ten thousand,hundred",,,60,1,1,Enabled,,,,,,,
-2874,65,145,FIB,"Complete<br/>29350 is a 5-digit number<br/>The digit 2 stands for ___and the digit 9 stands for ___",,,"twenty thousand,nine thousand",,,61,1,1,Enabled,,,,,,,
-2875,65,146,FIB,"Complete<br/>39523 is a 5-digit number<br/>The digit ___ is in the hundreds place and the digit ___ is in the ones place",,,"5,3",,,62,1,1,Enabled,,,,,,,
-2876,65,147,FIB,"Fill in the blanks<br/>34295<br/>3: ___ 4: 4000 2: ___ 9: 90 5: ___",,,"30000,200,5",,,63,1,1,Enabled,,,,,,,
-2877,65,447,FIB,"Express in figures<br/>3 ten thousands 7 hundreds 9 tens 1 ones",,,30791,,,64,1,1,Enabled,,,,,,,
-2878,65,448,FIB,"Express in figures<br/>Twelve thousand, two hundred and one",,,12201,,,65,1,1,Enabled,,,,,,,
-2879,66,449,FIB,"Express in figures<br/>Twenty-six thousand, three hundred and nineteen",,,26319,,,4,1,1,Enabled,,,,,,,
-2880,66,450,FIB,"Express in figures<br/>Seventy thousand and three",,,70003,,,5,1,1,Enabled,,,,,,,
-2881,66,451,FIB,"Express in words<br/>20260",,,"Twenty thousand,two hundred,sixty",,,6,1,1,Enabled,,,,,,,
-2882,65,452,FIB,"Express in words<br/>74232",,,"Seventy-four thousand,two hundred,thirty two",,,66,1,1,Enabled,,,,,,,
-2883,65,453,FIB,"The value of the digit 8 is<br/>34689",,,"Thirty four thousand,six hundred,eighty nine",,,67,1,1,Enabled,,,,,,,
-2884,65,454,FIB,"The value of the digit 8 is<br/>84157",,,"Eighty-four thousand,one hundred,fifty seven",,,68,1,1,Enabled,,,,,,,
-2885,65,455,FIB,"The value of the digit 8 is<br/>68009",,,"Sixty-eight thousand,nine",,,69,1,1,Enabled,,,,,,,
-2886,65,456,FIB,"The value of the digit 8 is<br/>20870",,,"Twenty thousand,eight hundred,seventy",,,70,1,1,Enabled,,,,,,,
-2887,65,457,FIB,"I have a 5-digit number.<br/>The digit 3 is in the hundreds place and ones place<br/>The digit 1 is in the thousands place<br/>The digit 2 stands for 20 and the digit 5 stands for 50000<br/>What is the 5-digit number?",,,51323,,,71,1,1,Enabled,,,,,,,
-2888,65,458,FIB,"Form the the greatest 5-digit number from<br/>3, 2, 0, 7, 5",,,75320,,,72,1,1,Enabled,,,,,,,
-2889,65,459,FIB,"Fill in the blanks<br/>97612 = ___ + 7000 + 600 + 10 + 2",,,90000,,,73,1,1,Enabled,,,,,,,
-2890,65,460,FIB,"Fill in the blanks<br/>70325 = 70000 + ___ + 20 + 5",,,300,,,74,1,1,Enabled,,,,,,,
-2891,65,461,FIB,"Fill in the blanks<br/>2 + 60 + 500 + 30000 = ___",,,30562,,,75,1,1,Enabled,,,,,,,
-2892,65,462,FIB,"Fill in the blanks<br/>1 + 90 + 30000 + 7000 = ___",,,37091,,,76,1,1,Enabled,,,,,,,
-2893,65,463,FIB,"Arrange in ascending order<br/>60785, 60875, 60870, 60758",,,"60758,60785,60870,60875",,,77,1,1,Enabled,,,,,,,
-2894,65,464,FIB,"Complete the pattern<br/>__, 40804, 50804, 60804, ___",,,"30804,70804",,,78,1,1,Enabled,,,,,,,
-2895,65,465,FIB,"Complete the pattern<br/>__, 14004, 15004, 16004, ___",,,"13004,17004",,,79,1,1,Enabled,,,,,,,
-2896,65,466,FIB,"Complete the pattern<br/>20704, 20804, 20904, 21004, ___",,,22004,,,80,1,1,Enabled,,,,,,,
+2791,65,1,FIB,"This number is<br/>
+___ is 100 more than 12000",,,12100,,,1,1,1,Enabled,,,,,,,
+2792,65,2,FIB,"This number is<br/>
+___ is 1000 less than 90800",,,89800,,,2,1,1,Enabled,,,,,,,
+2793,65,3,FIB,"This number is<br/>
+55000 is ___ more than 47000",,,8000,,,3,1,1,Enabled,,,,,,,
+2794,65,4,FIB,"This number is<br/>
+___ is 10000 less than 10755",,,755,,,4,1,1,Enabled,,,,,,,
+2795,65,5,FIB,"Complete the series<br/>
+12348, 12338, 12328, ___, ___",,,"12318,12308",,,5,1,1,Enabled,,,,,,,
+2796,65,6,FIB,"Complete the series<br/>
+27165, 28165, 29165, ___, ___",,,"30165,31165",,,6,1,1,Enabled,,,,,,,
+2797,65,7,FIB,"Complete the series<br/>
+39812, 39912, ___, ___, 40213",,,"40012,40112",,,7,1,1,Enabled,,,,,,,
+2798,65,8,FIB,"Complete the series<br/>
+___, 14050, 24050, 34050, ___",,,"4050,44050",,,8,1,1,Enabled,,,,,,,
+2799,65,9,FIB,"Complete the series and write down the rule<br/>
+86317, 76317, 66317, ___, ___<br/>
+rule: ___ ___ to get the next number",,,"56317,46317",,,9,1,1,Enabled,,,,,,,
+2800,65,10,FIB,"Complete the series and write down the rule<br/>
+29168, 29068, ___, ___, 28768<br/>
+rule: ___ ___ to get the next number",,,"28968,28868",,,10,1,1,Enabled,,,,,,,
+2801,65,11,FIB,"Complete the series and write down the rule<br/>
+53892, 53992, ___, ___, 54292<br/>
+rule: ___ ___ to get the next number",,,"54092,54192",,,11,1,1,Enabled,,,,,,,
+2802,65,12,FIB,"
+28 is ___ when rounded off to the nearest ten.",,,30,,,12,1,1,Enabled,,,,,,,
+2803,65,13,FIB,"
+44 is ___ when rounded off to the nearest ten.",,,40,,,13,1,1,Enabled,,,,,,,
+2804,65,14,FIB,"
+139 is ___ when rounded off to the nearest ten.",,,140,,,14,1,1,Enabled,,,,,,,
+2805,65,15,FIB,"Using the following numbers (2, 0, 7, 3, 1)<br/>
+Arrange the numbers to form the greatest 5-digit number ___",,,73210,,,15,1,1,Enabled,,,,,,,
+2806,65,16,FIB,"Using the following numbers (2, 0, 7, 3, 1)<br/>
+Arrange the numbers to form the smallest 5-digit number ___ (do not start with 0)",,,10237,,,16,1,1,Enabled,,,,,,,
+2807,65,17,FIB,"Using the following numbers (6, 3, 8, 2, 0)<br/>
+Arrange the numbers to form the smallest 5-digit even number ___",,,20368,,,17,1,1,Enabled,,,,,,,
+2808,65,18,FIB,"Using the following numbers (6, 3, 8, 2, 0)<br/>
+Arrange the numbers to form the greatest 5-digit odd number ___",,,86203,,,18,1,1,Enabled,,,,,,,
+2809,65,19,FIB," 
+1 more than 21459 is ___",,,21460,,,19,1,1,Enabled,,,,,,,
+2810,65,20,FIB," 
+10 more than 21459 is ___",,,21469,,,20,1,1,Enabled,,,,,,,
+2811,65,21,FIB," 
+100 more than 21459 is ___",,,21559,,,21,1,1,Enabled,,,,,,,
+2812,65,22,FIB," 
+1000 more than 21459 is ___",,,22459,,,22,1,1,Enabled,,,,,,,
+2813,65,23,FIB," 
+10000 more than 21459 is ___",,,31459,,,23,1,1,Enabled,,,,,,,
+2814,65,24,FIB,"Complete the series<br/>
+___, 20904, 20905, 20906, ___",,,"21903,21907",,,24,1,1,Enabled,,,,,,,
+2815,65,25,FIB,"Complete the series<br/>
+23903, ___, ___, 23906, ___",,,"23904,23905,23907",,,25,1,1,Enabled,,,,,,,
+2816,65,26,FIB,"Complete the series<br/>
+___, 20904, 21904, 22904, ___",,,"19904,23904",,,26,1,1,Enabled,,,,,,,
+2817,65,27,FIB,"Complete the series<br/>
+20906, 21906, ___, 23906, ___, ___, 26907",,,"22906,24906,25906",,,27,1,1,Enabled,,,,,,,
+2818,65,28,FIB,"Complete the series<br/>
+___, ___, ___, 5087, 5187, ___, ___",,,"4787,4887,4987,5287,5387",,,28,1,1,Enabled,,,,,,,
+2819,65,29,FIB,"Complete the series<br/>
+___, ___, 41936, 42936, ___, ___",,,"39936,40936,43936,44936",,,29,1,1,Enabled,,,,,,,
+2820,65,30,FIB,"How many of each equals the following number?<br/>
+ 57849<br/>
+Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"5,7,8,4,9",,,30,1,1,Enabled,,,,,,,
+2821,65,31,FIB,"How many of each equals the following number?<br/>
+ 57984<br/>
+Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"5,7,9,8,4",,,31,1,1,Enabled,,,,,,,
+2822,65,32,FIB,"How many of each equals the following number?<br/>
+ 57995<br/>
+Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"5,7,9,9,5",,,32,1,1,Enabled,,,,,,,
+2823,65,33,FIB,"How many of each equals the following number?<br/>
+ 60875<br/>
+Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"6,0,8,7,5",,,33,1,1,Enabled,,,,,,,
+2824,65,34,FIB,"How many of each equals the following number?<br/>
+ 60796<br/>
+Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"6,0,7,9,6",,,34,1,1,Enabled,,,,,,,
+2825,65,35,FIB,"How many of each equals the following number?<br/>
+ 60870<br/>
+Ten Thousands: ___ Thousands:___ Hundreds:___ Tens:___ Ones:___",,,"6,0,8,7,0",,,35,1,1,Enabled,,,,,,,
+2826,65,36,FIB,"
+___ is the smallest number out of the following series  (57849, 57984, 57995).",,,57849,,,36,1,1,Enabled,,,,,,,
+2827,65,37,FIB,"
+___ is the greatest number out of the following series  (57849, 57984, 57995).",,,57995,,,37,1,1,Enabled,,,,,,,
+2828,65,38,FIB,"Arrange the numbers from smallest to largest<br/>
+60875, 60796, 60871",,,"60796,60871,60875",,,38,1,1,Enabled,,,,,,,
+2829,65,39,FIB,"Arrange the numbers from smallest to largest<br/>
+28571, 27581, 28751, 27852",,,"27581,27852,28571,28751",,,39,1,1,Enabled,,,,,,,
+2830,65,40,FIB,"Arrange the numbers from smallest to largest<br/>
+75840, 68540, 75480, 68451",,,"68451,68540,75480,75840",,,40,1,1,Enabled,,,,,,,
+2831,65,41,FIB,"Arrange the cities according to their distances from Jakarta beginning with the furthest away<br/>
+Distance from Jakarta to:<br/>
+London  10871 km<br/>
+New York 15533 km<br/>
+Buenos Aires 15904 km<br/>
+Honolulu 10823 km<br/>
+Paris 10758 km",,,"Buenos Aires,New York,London,Honolulu,Paris",,,41,1,1,Enabled,,,,,,,
+2832,65,42,FIB,"Write the number<br/>
+Twenty-seven thousand and nine hundred",,,27900,,,42,1,1,Enabled,,,,,,,
+2833,65,43,FIB,"Write the number<br/>
+Forty-five thousand, two hundred and five",,,45205,,,43,1,1,Enabled,,,,,,,
+2834,65,44,FIB,"Write the number<br/>
+Seventy thousand and one hundred",,,70100,,,44,1,1,Enabled,,,,,,,
+2835,65,45,FIB,"Write the number<br/>
+Nine thousand, eight hundred and ninety-seven",,,9897,,,45,1,1,Enabled,,,,,,,
+2836,65,46,FIB,"Write the number<br/>
+Forty-two thousand, five hundred and twenty",,,42520,,,46,1,1,Enabled,,,,,,,
+2837,65,47,FIB,"How would this number be represented in words?<br/>
+39864",,,"Thirty-nine thousand,eight hundred,sixty four",,,47,1,1,Enabled,,,,,,,
+2838,65,48,FIB,"How would this number be represented in words?<br/>
+41267",,,"Fourty-one thousand,two hundred,sixty seven",,,48,1,1,Enabled,,,,,,,
+2839,65,49,FIB,"How would this number be represented in words?<br/>
+50618",,,"Fifty thousand,six hundred,eighteen",,,49,1,1,Enabled,,,,,,,
+2840,65,50,FIB,"How would this number be represented in words?<br/>
+83559",,,"Eighty-three thousand,five hundred,fifty nine",,,50,1,1,Enabled,,,,,,,
+2841,65,51,FIB,"How would this number be represented in words?<br/>
+70023",,,"Seventy thousand,twenty three",,,51,1,1,Enabled,,,,,,,
+2842,65,52,FIB,"How would this number be represented in words?<br/>
+98610",,,"Ninety-eight thousand,six hundred,ten",,,52,1,1,Enabled,,,,,,,
+2843,65,53,FIB,"Guess the number<br/>
+I have a 5-digit number. <br/>
+The digit 7 is in the thousands place and tens place.<br/>
+The digit 2 stands for two and the digit 3 stands for thirty thousand.<br/>
+The digit 4 stands for four hundred.",,,37472,,,53,1,1,Enabled,,,,,,,
+2844,65,54,FIB,"Guess the number<br/>
+I have a 5-digit number.<br/>
+The digit 5 is in the ones place, tens place and thousands place.<br/>
+The digit 7 stands for 700 and the digit 9 stands for 90000.",,,95755,,,54,1,1,Enabled,,,,,,,
+2845,70,59,FIB,"Solve<br/>
+List the first three common multiples of 2 and 4",,,"8,12,16",,,1,1,1,Enabled,,,,,,,
+2846,70,64,MC,"Solve<br/>
+Which of the following is not a common factor of 30 and 45?",q65,,,,,2,1,1,Enabled,,,,,,,
+2847,81,67,FIB,"Find the number<br/>
+What is the greatest 5-digit number that can be formed using the digits 1, 3, 5, 6 and 7?",,,76531,,,1,1,1,Enabled,,,,,,,
+2848,81,71,MC,"Find the number<br/>
+Which number has the digit 3 in the ten thousands place?",q72,,,,,2,1,1,Enabled,,,,,,,
+2849,65,72,MC,"Find the number<br/>
+13937 when rounded off to the nearest 100 is ___",q73,,,,,55,1,1,Enabled,,,,,,,
+2850,83,121,FIB,"Fill in the blank<br/>
+17357 = 10000 + ___ + 300 + 50 + 7",,,7000,,,16,1,1,Enabled,,,,,,,
+2851,83,122,FIB,"Fill in the blank<br/>
+20465 = 20000 + ___ + 60 + 5",,,400,,,17,1,1,Enabled,,,,,,,
+2852,80,123,FIB,"Fill in the blank<br/>
+42060 = ___ + 2000 + 60",,,40000,,,119,1,1,Enabled,,,,,,,
+2853,80,124,FIB,"Fill in the blank<br/>
+50000 + 2000 + 600 + 60 + 3 = ___",,,52663,,,120,1,1,Enabled,,,,,,,
+2854,65,125,FIB,"Fill in the blank<br/>
+80000 + 3000 + 50 + 7 = ___",,,83057,,,56,1,1,Enabled,,,,,,,
+2855,68,126,FIB,"Fill in the blank<br/>
+70000 + 4000 + 300 = ___",,,74300,,,1,1,1,Enabled,,,,,,,
+2856,67,127,FIB,"Fill in the blank<br/>
+20000 + 900 + 50 = ___",,,20950,,,1,1,1,Enabled,,,,,,,
+2857,65,128,FIB,"Fill in the blank<br/>
+8 + 500 + 2000 + 70000 = ___",,,72508,,,57,1,1,Enabled,,,,,,,
+2858,69,129,FIB,"Form a  5-digit numbers with the digit 3 in the ten thousands place and the digit 4 in the hundreds place<br/>
+0, 1, 2, 3, 4",,,30412,,,1,1,1,Enabled,,,,,,,
+2859,80,130,FIB,"Complete<br/>
+41039<br/>
+Ten Thousands: ___ Thousands:____ Hundreds:___ Tens:___ Ones:___",,,"4,1,0,3,9",,,121,1,1,Enabled,,,,,,,
+2860,81,131,FIB,"Complete<br/>
+52394<br/>
+Ten Thousands: ___ Thousands:____ Hundreds:___ Tens:___ Ones:___",,,"5,2,3,9,4",,,3,1,1,Enabled,,,,,,,
+2861,65,132,MC,"Which is larger<br/>
+13293 , 13495",,,,,,58,1,1,Enabled,,,,,,,
+2862,65,133,MC,"Which is larger<br/>
+13138 , 13135",,,,,,59,1,1,Enabled,,,,,,,
+2863,66,134,MC,"Which is larger<br/>
+73352 , 73343",,,,,,1,1,1,Enabled,,,,,,,
+2864,81,135,MC,"Which is larger<br/>
+83204 , 80917",,,,,,4,1,1,Enabled,,,,,,,
+2865,69,136,FIB,"What is the number<br/>
+Fourty-five thousand, seven hundred and thirty-two",,,45732,,,2,1,1,Enabled,,,,,,,
+2866,66,137,FIB,"What is the number<br/>
+Thirteen thousand and fourty-five",,,13045,,,2,1,1,Enabled,,,,,,,
+2867,66,138,FIB,"What is the number<br/>
+Sixty thousand and four hundred",,,60400,,,3,1,1,Enabled,,,,,,,
+2868,67,139,FIB,"What is the number<br/>
+Seventy thousand and thirteen",,,70013,,,2,1,1,Enabled,,,,,,,
+2869,67,140,FIB,"Write the number in words<br/>
+63090",,,Sixty-three thousand and ninety,,,3,1,1,Enabled,,,,,,,
+2870,67,141,FIB,"Write the number in words<br/>
+90002",,,Ninety thousand and two,,,4,1,1,Enabled,,,,,,,
+2871,67,142,FIB,"Write the number in words<br/>
+24609",,,"Twenty-four thousand, six hundred and nine",,,5,1,1,Enabled,,,,,,,
+2872,67,143,FIB,"Write the number in words<br/>
+83456",,,"Eighty-three thousand, four hundred and fifty six",,,6,1,1,Enabled,,,,,,,
+2873,65,144,FIB,"Complete<br/>
+14293 is a 5-digit number<br/>
+There are 1 ___, 4 thousands, 2 ___, 9 tens and 3",,,"ten thousand,hundred",,,60,1,1,Enabled,,,,,,,
+2874,65,145,FIB,"Complete<br/>
+29350 is a 5-digit number<br/>
+The digit 2 stands for ___and the digit 9 stands for ___",,,"twenty thousand,nine thousand",,,61,1,1,Enabled,,,,,,,
+2875,65,146,FIB,"Complete<br/>
+39523 is a 5-digit number<br/>
+The digit ___ is in the hundreds place and the digit ___ is in the ones place",,,"5,3",,,62,1,1,Enabled,,,,,,,
+2876,65,147,FIB,"Fill in the blanks<br/>
+34295<br/>
+3: ___ 4: 4000 2: ___ 9: 90 5: ___",,,"30000,200,5",,,63,1,1,Enabled,,,,,,,
+2877,65,447,FIB,"Express in figures<br/>
+3 ten thousands 7 hundreds 9 tens 1 ones",,,30791,,,64,1,1,Enabled,,,,,,,
+2878,65,448,FIB,"Express in figures<br/>
+Twelve thousand, two hundred and one",,,12201,,,65,1,1,Enabled,,,,,,,
+2879,66,449,FIB,"Express in figures<br/>
+Twenty-six thousand, three hundred and nineteen",,,26319,,,4,1,1,Enabled,,,,,,,
+2880,66,450,FIB,"Express in figures<br/>
+Seventy thousand and three",,,70003,,,5,1,1,Enabled,,,,,,,
+2881,66,451,FIB,"Express in words<br/>
+20260",,,"Twenty thousand,two hundred,sixty",,,6,1,1,Enabled,,,,,,,
+2882,65,452,FIB,"Express in words<br/>
+74232",,,"Seventy-four thousand,two hundred,thirty two",,,66,1,1,Enabled,,,,,,,
+2883,65,453,FIB,"The value of the digit 8 is<br/>
+34689",,,"Thirty four thousand,six hundred,eighty nine",,,67,1,1,Enabled,,,,,,,
+2884,65,454,FIB,"The value of the digit 8 is<br/>
+84157",,,"Eighty-four thousand,one hundred,fifty seven",,,68,1,1,Enabled,,,,,,,
+2885,65,455,FIB,"The value of the digit 8 is<br/>
+68009",,,"Sixty-eight thousand,nine",,,69,1,1,Enabled,,,,,,,
+2886,65,456,FIB,"The value of the digit 8 is<br/>
+20870",,,"Twenty thousand,eight hundred,seventy",,,70,1,1,Enabled,,,,,,,
+2887,65,457,FIB,"I have a 5-digit number.<br/>
+The digit 3 is in the hundreds place and ones place<br/>
+The digit 1 is in the thousands place<br/>
+The digit 2 stands for 20 and the digit 5 stands for 50000<br/>
+What is the 5-digit number?",,,51323,,,71,1,1,Enabled,,,,,,,
+2888,65,458,FIB,"Form the the greatest 5-digit number from<br/>
+3, 2, 0, 7, 5",,,75320,,,72,1,1,Enabled,,,,,,,
+2889,65,459,FIB,"Fill in the blanks<br/>
+97612 = ___ + 7000 + 600 + 10 + 2",,,90000,,,73,1,1,Enabled,,,,,,,
+2890,65,460,FIB,"Fill in the blanks<br/>
+70325 = 70000 + ___ + 20 + 5",,,300,,,74,1,1,Enabled,,,,,,,
+2891,65,461,FIB,"Fill in the blanks<br/>
+2 + 60 + 500 + 30000 = ___",,,30562,,,75,1,1,Enabled,,,,,,,
+2892,65,462,FIB,"Fill in the blanks<br/>
+1 + 90 + 30000 + 7000 = ___",,,37091,,,76,1,1,Enabled,,,,,,,
+2893,65,463,FIB,"Arrange in ascending order<br/>
+60785, 60875, 60870, 60758",,,"60758,60785,60870,60875",,,77,1,1,Enabled,,,,,,,
+2894,65,464,FIB,"Complete the pattern<br/>
+__, 40804, 50804, 60804, ___",,,"30804,70804",,,78,1,1,Enabled,,,,,,,
+2895,65,465,FIB,"Complete the pattern<br/>
+__, 14004, 15004, 16004, ___",,,"13004,17004",,,79,1,1,Enabled,,,,,,,
+2896,65,466,FIB,"Complete the pattern<br/>
+20704, 20804, 20904, 21004, ___",,,22004,,,80,1,1,Enabled,,,,,,,
 2897,65,471,FIB,The length of a ship was reported to be 50 m when rounded off to the neares 10 m. What could the actual length of the ship be? ( Use a numberline to help you answer the question),,,45-54,,,81,1,1,Enabled,,,,,,,
-2898,65,1030,MC,"Choose the correct answer<br/>Which of the following numbers has the digit 3 in the hundredth place?",q1031,,,,,82,1,1,Enabled,,,,,,,
-2899,65,1031,MC,"Choose the correct answer<br/>Which of the following numbers has the smallest value?",q1032,,,,,83,1,1,Enabled,,,,,,,
+2898,65,1030,MC,"Choose the correct answer<br/>
+Which of the following numbers has the digit 3 in the hundredth place?",q1031,,,,,82,1,1,Enabled,,,,,,,
+2899,65,1031,MC,"Choose the correct answer<br/>
+Which of the following numbers has the smallest value?",q1032,,,,,83,1,1,Enabled,,,,,,,
 2900,70,55,FIB,"Solve the problem<br/>
 Sarah bought 6 rings and a necklace. Each ring costs $145 and the necklace costs $295. What is the total cost of the whole set?",,,1165,,,3,1,1,Enabled,,,,,,,
 2901,70,56,FIB,"Solve the problem<br/>
@@ -4496,139 +4678,139 @@ When 1157 is divided by 5, which of these is the remainder?",,,,,,88,1,1,Enabled
 4463,14,13470,FIB,How would you represent one seventeenth in numbers? (example 1/4 or 1/5),,,1/17,,,17,2,1,Enabled,,,,,,,
 4464,14,13471,FIB,How would you represent one eighteenth in numbers? (example 1/4 or 1/5),,,1/18,,,18,2,1,Enabled,,,,,,,
 4465,14,13472,FIB,How would you represent one nineteenth in numbers? (example 1/4 or 1/5),,,1/19,,,19,2,1,Enabled,,,,,,,
-4466,14,13473,MC,What does the picture represent?,Fraction G1-1,,,,,5,1,1,Enabled,,,,,,,
-4467,14,13474,MC,What does the picture represent?,Fraction G1-2,,,,,6,1,1,Enabled,,,,,,,
-4468,14,13475,MC,What does the picture represent?,Fraction G1-3,,,,,7,1,1,Enabled,,,,,,,
-4469,14,13476,MC,What does the picture represent?,Fraction G1-4,,,,,8,1,1,Enabled,,,,,,,
-4470,14,13477,MC,What does the picture represent?,Fraction G1-5,,,,,9,1,1,Enabled,,,,,,,
-4471,14,13478,MC,What does the picture represent?,Fraction G1-6,,,,,10,1,1,Enabled,,,,,,,
-4472,14,13479,MC,What does the picture represent?,Fraction G1-7,,,,,11,1,1,Enabled,,,,,,,
-4473,14,13480,MC,What does the picture represent?,Fraction G1-8,,,,,12,1,1,Enabled,,,,,,,
-4474,14,13481,MC,What does the picture represent?,Fraction G1-9,,,,,13,1,1,Enabled,,,,,,,
-4475,14,13482,MC,What does the picture represent?,Fraction G1-10,,,,,14,1,1,Enabled,,,,,,,
-4476,14,13483,MC,What does the picture represent?,Fraction G1-11,,,,,15,1,1,Enabled,,,,,,,
-4477,14,13484,MC,What does the picture represent?,Fraction G1-12,,,,,16,1,1,Enabled,,,,,,,
-4478,14,13485,MC,What does the picture represent?,Fraction G1-13,,,,,17,1,1,Enabled,,,,,,,
-4479,14,13486,MC,What does the picture represent?,Fraction G1-14,,,,,18,1,1,Enabled,,,,,,,
-4480,14,13487,MC,What does the picture represent?,Fraction G1-15,,,,,19,1,1,Enabled,,,,,,,
-4481,14,13488,MC,What does the picture represent?,Fraction G1-16,,,,,20,1,1,Enabled,,,,,,,
-4482,14,13489,MC,What does the picture represent?,Fraction G1-17,,,,,21,1,1,Enabled,,,,,,,
-4483,14,13490,O,Arrange these numbers from smallest to largest,Fraction G1-18,,,,,17,3,1,Enabled,,,,,,,
-4484,14,13491,O,Arrange these numbers from smallest to largest,Fraction G1-19,,,,,18,3,1,Enabled,,,,,,,
-4485,14,13492,O,Arrange these numbers from smallest to largest,Fraction G1-20,,,,,19,3,1,Enabled,,,,,,,
-4486,14,13493,O,Arrange these numbers from smallest to largest,Fraction G1-21,,,,,20,3,1,Enabled,,,,,,,
-4487,14,13494,O,Arrange these numbers from smallest to largest,Fraction G1-22,,,,,21,3,1,Enabled,,,,,,,
-4488,14,13495,O,Arrange these numbers from smallest to largest,Fraction G1-23,,,,,22,3,1,Enabled,,,,,,,
-4489,14,13496,O,Arrange these numbers from smallest to largest,Fraction G1-24,,,,,23,3,1,Enabled,,,,,,,
-4490,14,13497,O,Arrange these numbers from smallest to largest,Fraction G1-25,,,,,24,3,1,Enabled,,,,,,,
-4491,14,13498,O,Arrange these numbers from smallest to largest,Fraction G1-26,,,,,25,3,1,Enabled,,,,,,,
-4492,14,13499,O,Arrange these numbers from smallest to largest,Fraction G1-27,,,,,26,3,1,Enabled,,,,,,,
-4493,14,13500,O,Arrange these numbers from smallest to largest,Fraction G1-28,,,,,27,3,1,Enabled,,,,,,,
-4494,14,13501,O,Arrange these numbers from smallest to largest,Fraction G1-29,,,,,28,3,1,Enabled,,,,,,,
-4495,14,13502,O,Arrange these numbers from smallest to largest,Fraction G1-30,,,,,29,3,1,Enabled,,,,,,,
-4496,9,13503,FIB,How many cm does the arrow point to?,measurement 18,,3,,,8,1,1,Enabled,,,,,,,
-4497,9,13504,FIB,How many cm does the arrow point to?,measurement 19,,5,,,9,1,1,Enabled,,,,,,,
-4498,9,13505,FIB,How many cm does the arrow point to?,measurement 20,,4,,,10,1,1,Enabled,,,,,,,
-4499,9,13506,FIB,How many cm does the arrow point to?,measurement 21,,7,,,11,1,1,Enabled,,,,,,,
-4500,9,13507,FIB,How many cm does the arrow point to?,measurement 22,,8,,,12,1,1,Enabled,,,,,,,
-4501,9,13508,FIB,How many cm does the arrow point to?,measurement 23,,7.5,,,13,1,1,Enabled,,,,,,,
-4502,9,13509,FIB,How many cm does the arrow point to?,measurement 24,,9.5,,,14,1,1,Enabled,,,,,,,
-4503,9,13510,FIB,How many cm does the arrow point to?,measurement 25,,5,,,15,1,1,Enabled,,,,,,,
-4504,9,13511,FIB,How many cm does the arrow point to?,measurement 26,,1,,,16,1,1,Enabled,,,,,,,
-4505,9,13512,O,Order the images from largest to smallest,measurement 27,, AB  ,,,12,2,1,Enabled,,,,,,,
-4506,9,13513,O,Order the images from largest to smallest,measurement 28,, AB ,,,13,2,1,Enabled,,,,,,,
-4507,9,13514,O,Order the images from largest to smallest,measurement 29,, BA  ,,,14,2,1,Enabled,,,,,,,
-4508,9,13515,O,Order the images from largest to smallest,measurement 30,, AB ,,,15,2,1,Enabled,,,,,,,
-4509,9,13516,O,Order the images from largest to smallest,measurement 31,, AB ,,,16,2,1,Enabled,,,,,,,
-4510,9,13517,O,Order the images from largest to smallest,measurement 32,, BA ,,,17,2,1,Enabled,,,,,,,
-4511,9,13518,O,Order the images from largest to smallest,measurement 33,, BA ,,,18,3,1,Enabled,,,,,,,
-4512,18,13519,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 11,,,,,1,3,1,Enabled,,,,,,,
-4513,18,13520,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 12,,,,,2,3,1,Enabled,,,,,,,
-4514,18,13521,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 13,,,,,3,3,1,Enabled,,,,,,,
-4515,18,13522,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 14,,,,,4,3,1,Enabled,,,,,,,
-4516,18,13523,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 15,,,,,5,3,1,Enabled,,,,,,,
-4517,18,13524,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 16,,,,,6,3,1,Enabled,,,,,,,
-4518,18,13525,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 17,,,,,7,3,1,Enabled,,,,,,,
-4519,18,13526,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 18,,,,,8,3,1,Enabled,,,,,,,
-4520,18,13527,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 19,,,,,9,3,1,Enabled,,,,,,,
-4521,18,13528,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 20,,,,,10,3,1,Enabled,,,,,,,
-4522,18,13529,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 21,,,,,11,3,1,Enabled,,,,,,,
-4523,18,13530,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 22,,,,,12,3,1,Enabled,,,,,,,
-4524,18,13531,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 23,,,,,13,3,1,Enabled,,,,,,,
-4525,18,13532,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 24,,,,,14,3,1,Enabled,,,,,,,
-4526,18,13533,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 25,,,,,15,3,1,Enabled,,,,,,,
-4527,18,13534,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 26,,,,,16,3,1,Enabled,,,,,,,
-4528,18,13535,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 27,,,,,17,3,1,Enabled,,,,,,,
-4529,18,13536,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 28,,,,,18,3,1,Enabled,,,,,,,
-4530,18,13537,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 29,,,,,19,3,1,Enabled,,,,,,,
-4531,18,13538,MC,How would you classify these objects? ,Classify1,,,,,1,1,1,Enabled,,,,,,,
-4532,18,13539,MC,How would you classify these objects? ,Classify1,,,,,2,1,1,Enabled,,,,,,,
-4533,18,13540,MC,How would you classify these objects? ,2 balls side by side,,,,,3,1,1,Enabled,,,,,,,
-4534,18,13541,MC,How would you classify these objects? ,3 Foods side by side,,,,,4,1,1,Enabled,,,,,,,
-4535,18,13542,MC,How would you classify these objects? ,3 Fruits Stacked,,,,,5,1,1,Enabled,,,,,,,
-4536,18,13543,MC,How would you classify these objects? ,Classify2,,,,,6,1,1,Enabled,,,,,,,
-4537,18,13544,MC,How would you classify these objects? ,3x3 food grid,,,,,7,1,1,Enabled,,,,,,,
-4538,18,13545,MC,How would you classify these objects? ,2x3 sports grid,,,,,8,1,1,Enabled,,,,,,,
-4539,18,13546,MC,How would you classify these objects? ,order 9,,,,,9,1,1,Enabled,,,,,,,
-4540,18,13547,MC,How would you classify these objects? ,order 15,,,,,10,1,1,Enabled,,,,,,,
-4541,18,13548,MC,How would you classify these objects? ,transportation,,,,,11,1,1,Enabled,,,,,,,
-4542,18,13549,MC,How would you classify these objects? ,clothing,,,,,12,1,1,Enabled,,,,,,,
-4543,18,13550,MC,How would you classify these objects? ,electronics,,,,,13,1,1,Enabled,,,,,,,
-4544,18,13551,MC,How would you classify these objects? ,appliances,,,,,14,1,1,Enabled,,,,,,,
-4545,18,13552,MC,How would you classify these objects? ,Classify3,,,,,15,1,1,Enabled,,,,,,,
-4546,18,13553,MC,How would you classify these objects? ,Classify4,,,,,16,1,1,Enabled,,,,,,,
-4547,18,13554,MC,How would you classify these objects? ,Classify5,,,,,17,1,1,Enabled,,,,,,,
-4548,18,13555,MC,How would you classify these objects? ,Classify6,,,,,18,1,1,Enabled,,,,,,,
-4549,18,13556,MC,How would you classify these objects? ,cents31,,,,,19,1,1,Enabled,,,,,,,
-4550,18,13557,MC,How would you classify these objects? ,Classify7,,,,,20,1,1,Enabled,,,,,,,
-4551,18,13558,MC,How would you classify these objects? ,Classify8,,,,,21,1,1,Enabled,,,,,,,
-4552,18,13559,MC,How would you classify these objects? ,Classify9,,,,,22,1,1,Enabled,,,,,,,
-4553,18,13560,MC,How would you classify these objects? ,Classify10,,,,,23,1,1,Enabled,,,,,,,
-4554,18,13561,MC,How would you classify these objects? ,Classify11,,,,,24,1,1,Enabled,,,,,,,
-4555,18,13562,MC,How would you classify these objects? ,Classify12,,,,,25,1,1,Enabled,,,,,,,
-4556,18,13563,MC,How would you classify these objects? ,Classify13,,,,,26,1,1,Enabled,,,,,,,
-4557,18,13564,MC,How would you classify these objects? ,Classify14,,,,,27,1,1,Enabled,,,,,,,
-4558,18,13565,MC,How would you classify these objects? ,Classify15,,,,,28,1,1,Enabled,,,,,,,
-4559,18,13566,MC,How would you classify these objects? ,Classify16,,,,,29,1,1,Enabled,,,,,,,
-4560,13,13567,FIB,How much does the dress cost?,clothing prices,,150,,,14,1,1,Enabled,,,,,,,
-4561,13,13568,FIB,How much is the hat?,clothing prices,,24,,,15,1,1,Enabled,,,,,,,
-4562,13,13569,FIB,how much is the coat?,clothing prices,,120,,,16,1,1,Enabled,,,,,,,
-4563,13,13570,FIB,How much is the ski jacket?,clothing prices,,98,,,17,1,1,Enabled,,,,,,,
-4564,13,13571,FIB,What does the handbag cost?,clothing prices,,98,,,18,1,1,Enabled,,,,,,,
-4565,13,13572,FIB,What does the bikini cost?,clothing prices,,40,,,19,1,1,Enabled,,,,,,,
-4566,13,13573,FIB,How much is the swimming suit?,clothing prices,,66,,,20,1,1,Enabled,,,,,,,
-4567,13,13574,FIB,How much is the red sweater?,clothing prices,,50,,,21,1,1,Enabled,,,,,,,
-4568,13,13575,FIB,How much is the stereo?,electronics prices,,600,,,22,1,1,Enabled,,,,,,,
-4569,13,13576,FIB,How much is the laptop?,electronics prices,,1500,,,23,1,1,Enabled,,,,,,,
-4570,13,13577,FIB,How much is the monitor?,electronics prices,,200,,,24,1,1,Enabled,,,,,,,
-4571,13,13578,FIB,How much is the phone?,electronics prices,,550,,,25,1,1,Enabled,,,,,,,
-4572,13,13579,FIB,How much is the tablet?,electronics prices,,320,,,26,1,1,Enabled,,,,,,,
-4573,13,13580,FIB,How much is the oven?,appliances pricing,,325,,,27,1,1,Enabled,,,,,,,
-4574,13,13581,FIB,How much is the stove?,appliances pricing,,1400,,,28,1,1,Enabled,,,,,,,
-4575,13,13582,FIB,How much is the blender?,appliances pricing,,25,,,29,1,1,Enabled,,,,,,,
-4576,13,13583,FIB,How much is the pan?,appliances pricing,,10,,,30,1,1,Enabled,,,,,,,
-4577,13,13584,FIB,How much is the toaster?,appliances pricing,,55,,,31,1,1,Enabled,,,,,,,
-4578,13,13585,FIB,How much is the wok?,appliances pricing,,34,,,32,1,1,Enabled,,,,,,,
-4579,13,13586,FIB,How much is the electric kettle?,appliances pricing,,49,,,33,1,1,Enabled,,,,,,,
-4580,13,13587,FIB,"Jane has $200, and she needs a dresst, can she afford one?  (Y/N)",clothing prices,,Y,,,8,2,1,Enabled,,,,,,,
-4581,13,13588,FIB,"After Jane spends $150 on a dress, can she still afford a handbag if she has $200 in total? (Y/N)",clothing prices,,N,,,9,2,1,Enabled,,,,,,,
-4582,13,13589,FIB,"Karen is going on vacation and needs something for the beach, with $50 which can she afford, the bikini or bathing suit?",clothing prices,,Bathing suit,,,10,2,1,Enabled,,,,,,,
-4583,13,13590,FIB,"Henry spent $120 out of his $200 allowance on a new jacket, how much does he have left?",clothing prices,,80,,,11,2,1,Enabled,,,,,,,
-4584,13,13591,FIB,"Mark is going skiing, and needs a new jacket, how much should he ask his dad for?",clothing prices,,98,,,12,2,1,Enabled,,,,,,,
-4585,13,13592,FIB,"Henry needs a hat to go with his jacket which cost him $120, does he have enough money from his $200 allowance?  (Y/N)",clothing prices,,Y,,,13,2,1,Enabled,,,,,,,
-4586,13,13593,FIB,"With $30, what can James buy?",clothing prices,,Hat,,,14,2,1,Enabled,,,,,,,
-4587,13,13594,FIB,How much does Michelle need to buy a handbag and bikini?,clothing prices,,164,,,15,2,1,Enabled,,,,,,,
-4588,13,13595,FIB,How much does Mary need to purchase a sweater and dress?,clothing prices,,200,,,16,2,1,Enabled,,,,,,,
-4589,13,13596,FIB,With $30 can Brian buy a sweater? (Y/N),clothing prices,,NO,,,17,2,1,Enabled,,,,,,,
-4590,13,13597,FIB,Which is cheaper for Nancy to purchase a bikini or bathing suit?,clothing prices,,Bathing suit,,,18,2,1,Enabled,,,,,,,
-4591,13,13598,FIB,How much with Eric have to pay  for a stereo system and phone?,electronics prices,,1150,,,19,2,1,Enabled,,,,,,,
-4592,13,13599,FIB,How much would a new laptop and monitor cost Jenny?,electronics prices,,1700,,,20,2,1,Enabled,,,,,,,
-4593,13,13600,FIB,"With $200, what can Stella afford?",electronics prices,,monitor,,,21,2,1,Enabled,,,,,,,
-4594,13,13601,FIB,"With $500, what can Steve purchase? Name two items",electronics prices,,"monitor, tablet",,,22,2,1,Enabled,,,,,,,
-4595,13,13602,FIB,"If his father gave Rusell $1000, can he afford a Stereo system and new laptop? (Y/N)",electronics prices,,N,,,23,2,1,Enabled,,,,,,,
-4596,13,13603,FIB,"With her $200 allowance, can Serina afford a new tablet?",electronics prices,,N,,,24,2,1,Enabled,,,,,,,
-4597,13,13604,FIB,How much more would Stephanie need from her dad to buy a phone if her allowance is $200?,electronics prices,,350,,,25,2,1,Enabled,,,,,,,
-4598,13,13605,FIB,Which is cheaper?  The tablet or laptop?,electronics prices,,tablet,,,26,2,1,Enabled,,,,,,,
+4466,14,13473,MC,What does the picture represent?,Fraction G1-1,fraction-g1-1.png,,,,5,1,1,Enabled,,,,,,,
+4467,14,13474,MC,What does the picture represent?,Fraction G1-2,fraction-g1-2.png,,,,6,1,1,Enabled,,,,,,,
+4468,14,13475,MC,What does the picture represent?,Fraction G1-3,fraction-g1-3.png,,,,7,1,1,Enabled,,,,,,,
+4469,14,13476,MC,What does the picture represent?,Fraction G1-4,fraction-g1-4.png,,,,8,1,1,Enabled,,,,,,,
+4470,14,13477,MC,What does the picture represent?,Fraction G1-5,fraction-g1-5.png,,,,9,1,1,Enabled,,,,,,,
+4471,14,13478,MC,What does the picture represent?,Fraction G1-6,fraction-g1-6.png,,,,10,1,1,Enabled,,,,,,,
+4472,14,13479,MC,What does the picture represent?,Fraction G1-7,fraction-g1-7.png,,,,11,1,1,Enabled,,,,,,,
+4473,14,13480,MC,What does the picture represent?,Fraction G1-8,fraction-g1-8.png,,,,12,1,1,Enabled,,,,,,,
+4474,14,13481,MC,What does the picture represent?,Fraction G1-9,fraction-g1-9.png,,,,13,1,1,Enabled,,,,,,,
+4475,14,13482,MC,What does the picture represent?,Fraction G1-10,fraction-g1-10.png,,,,14,1,1,Enabled,,,,,,,
+4476,14,13483,MC,What does the picture represent?,Fraction G1-11,fraction-g1-11.png,,,,15,1,1,Enabled,,,,,,,
+4477,14,13484,MC,What does the picture represent?,Fraction G1-12,fraction-g1-12.png,,,,16,1,1,Enabled,,,,,,,
+4478,14,13485,MC,What does the picture represent?,Fraction G1-13,fraction-g1-13.png,,,,17,1,1,Enabled,,,,,,,
+4479,14,13486,MC,What does the picture represent?,Fraction G1-14,fraction-g1-14.png,,,,18,1,1,Enabled,,,,,,,
+4480,14,13487,MC,What does the picture represent?,Fraction G1-15,fraction-g1-15.png,,,,19,1,1,Enabled,,,,,,,
+4481,14,13488,MC,What does the picture represent?,Fraction G1-16,fraction-g1-16.png,,,,20,1,1,Enabled,,,,,,,
+4482,14,13489,MC,What does the picture represent?,Fraction G1-17,fraction-g1-17.png,,,,21,1,1,Enabled,,,,,,,
+4483,14,13490,O,Arrange these numbers from smallest to largest,Fraction G1-18,fraction-g1-18.png,,,,17,3,1,Enabled,,,,,,,
+4484,14,13491,O,Arrange these numbers from smallest to largest,Fraction G1-19,fraction-g1-19.png,,,,18,3,1,Enabled,,,,,,,
+4485,14,13492,O,Arrange these numbers from smallest to largest,Fraction G1-20,fraction-g1-20.png,,,,19,3,1,Enabled,,,,,,,
+4486,14,13493,O,Arrange these numbers from smallest to largest,Fraction G1-21,fraction-g1-21.png,,,,20,3,1,Enabled,,,,,,,
+4487,14,13494,O,Arrange these numbers from smallest to largest,Fraction G1-22,fraction-g1-22.png,,,,21,3,1,Enabled,,,,,,,
+4488,14,13495,O,Arrange these numbers from smallest to largest,Fraction G1-23,fraction-g1-23.png,,,,22,3,1,Enabled,,,,,,,
+4489,14,13496,O,Arrange these numbers from smallest to largest,Fraction G1-24,fraction-g1-24.png,,,,23,3,1,Enabled,,,,,,,
+4490,14,13497,O,Arrange these numbers from smallest to largest,Fraction G1-25,fraction-g1-25.png,,,,24,3,1,Enabled,,,,,,,
+4491,14,13498,O,Arrange these numbers from smallest to largest,Fraction G1-26,fraction-g1-26.png,,,,25,3,1,Enabled,,,,,,,
+4492,14,13499,O,Arrange these numbers from smallest to largest,Fraction G1-27,fraction-g1-27.png,,,,26,3,1,Enabled,,,,,,,
+4493,14,13500,O,Arrange these numbers from smallest to largest,Fraction G1-28,fraction-g1-28.png,,,,27,3,1,Enabled,,,,,,,
+4494,14,13501,O,Arrange these numbers from smallest to largest,Fraction G1-29,fraction-g1-29.png,,,,28,3,1,Enabled,,,,,,,
+4495,14,13502,O,Arrange these numbers from smallest to largest,Fraction G1-30,fraction-g1-30.png,,,,29,3,1,Enabled,,,,,,,
+4496,9,13503,FIB,How many cm does the arrow point to?,measurement 18,measurement-18.png,3,,,8,1,1,Enabled,,,,,,,
+4497,9,13504,FIB,How many cm does the arrow point to?,measurement 19,measurement-19.png,5,,,9,1,1,Enabled,,,,,,,
+4498,9,13505,FIB,How many cm does the arrow point to?,measurement 20,measurement-20.png,4,,,10,1,1,Enabled,,,,,,,
+4499,9,13506,FIB,How many cm does the arrow point to?,measurement 21,measurement-21.png,7,,,11,1,1,Enabled,,,,,,,
+4500,9,13507,FIB,How many cm does the arrow point to?,measurement 22,measurement-22.png,8,,,12,1,1,Enabled,,,,,,,
+4501,9,13508,FIB,How many cm does the arrow point to?,measurement 23,measurement-23.png,7.5,,,13,1,1,Enabled,,,,,,,
+4502,9,13509,FIB,How many cm does the arrow point to?,measurement 24,measurement-24.png,9.5,,,14,1,1,Enabled,,,,,,,
+4503,9,13510,FIB,How many cm does the arrow point to?,measurement 25,measurement-25.png,5,,,15,1,1,Enabled,,,,,,,
+4504,9,13511,FIB,How many cm does the arrow point to?,measurement 26,measurement-26.png,1,,,16,1,1,Enabled,,,,,,,
+4505,9,13512,O,Order the images from largest to smallest,measurement 27,measurement-27.png, AB  ,,,12,2,1,Enabled,,,,,,,
+4506,9,13513,O,Order the images from largest to smallest,measurement 28,measurement-28.png, AB ,,,13,2,1,Enabled,,,,,,,
+4507,9,13514,O,Order the images from largest to smallest,measurement 29,measurement-29.png, BA  ,,,14,2,1,Enabled,,,,,,,
+4508,9,13515,O,Order the images from largest to smallest,measurement 30,measurement-30.png, AB ,,,15,2,1,Enabled,,,,,,,
+4509,9,13516,O,Order the images from largest to smallest,measurement 31,measurement-31.png, AB ,,,16,2,1,Enabled,,,,,,,
+4510,9,13517,O,Order the images from largest to smallest,measurement 32,measurement-32.png, BA ,,,17,2,1,Enabled,,,,,,,
+4511,9,13518,O,Order the images from largest to smallest,measurement 33,measurement-33.png, BA ,,,18,3,1,Enabled,,,,,,,
+4512,18,13519,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 11,venn-11.png,,,,1,3,1,Enabled,,,,,,,
+4513,18,13520,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 12,venn-12.png,,,,2,3,1,Enabled,,,,,,,
+4514,18,13521,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 13,venn-13.png,,,,3,3,1,Enabled,,,,,,,
+4515,18,13522,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 14,venn-14.png,,,,4,3,1,Enabled,,,,,,,
+4516,18,13523,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 15,venn-15.png,,,,5,3,1,Enabled,,,,,,,
+4517,18,13524,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 16,venn-16.png,,,,6,3,1,Enabled,,,,,,,
+4518,18,13525,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 17,venn-17.png,,,,7,3,1,Enabled,,,,,,,
+4519,18,13526,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 18,venn-18.png,,,,8,3,1,Enabled,,,,,,,
+4520,18,13527,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 19,venn-19.png,,,,9,3,1,Enabled,,,,,,,
+4521,18,13528,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 20,venn-20.png,,,,10,3,1,Enabled,,,,,,,
+4522,18,13529,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 21,venn-21.png,,,,11,3,1,Enabled,,,,,,,
+4523,18,13530,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 22,venn-22.png,,,,12,3,1,Enabled,,,,,,,
+4524,18,13531,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 23,venn-23.png,,,,13,3,1,Enabled,,,,,,,
+4525,18,13532,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 24,venn-24.png,,,,14,3,1,Enabled,,,,,,,
+4526,18,13533,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 25,venn-25.png,,,,15,3,1,Enabled,,,,,,,
+4527,18,13534,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 26,venn-26.png,,,,16,3,1,Enabled,,,,,,,
+4528,18,13535,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 27,venn-27.png,,,,17,3,1,Enabled,,,,,,,
+4529,18,13536,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 28,venn-28.png,,,,18,3,1,Enabled,,,,,,,
+4530,18,13537,MC,"Where would you classify this object? Position A, B, C or None of the above",Venn 29,venn-29.png,,,,19,3,1,Enabled,,,,,,,
+4531,18,13538,MC,How would you classify these objects? ,Classify1,classify1.png,,,,1,1,1,Enabled,,,,,,,
+4532,18,13539,MC,How would you classify these objects? ,Classify1,classify1.png,,,,2,1,1,Enabled,,,,,,,
+4533,18,13540,MC,How would you classify these objects? ,2 balls side by side,2-balls-side-by-side.png,,,,3,1,1,Enabled,,,,,,,
+4534,18,13541,MC,How would you classify these objects? ,3 Foods side by side,3-foods-side-by-side.png,,,,4,1,1,Enabled,,,,,,,
+4535,18,13542,MC,How would you classify these objects? ,3 Fruits Stacked,3-fruits-stacked.png,,,,5,1,1,Enabled,,,,,,,
+4536,18,13543,MC,How would you classify these objects? ,Classify2,classify2.png,,,,6,1,1,Enabled,,,,,,,
+4537,18,13544,MC,How would you classify these objects? ,3x3 food grid,3x3-food-grid.png,,,,7,1,1,Enabled,,,,,,,
+4538,18,13545,MC,How would you classify these objects? ,2x3 sports grid,2x3-sports-grid.png,,,,8,1,1,Enabled,,,,,,,
+4539,18,13546,MC,How would you classify these objects? ,order 9,order-9.JPG,,,,9,1,1,Enabled,,,,,,,
+4540,18,13547,MC,How would you classify these objects? ,order 15,order-15.JPG,,,,10,1,1,Enabled,,,,,,,
+4541,18,13548,MC,How would you classify these objects? ,transportation,transportation.png,,,,11,1,1,Enabled,,,,,,,
+4542,18,13549,MC,How would you classify these objects? ,clothing,clothing.png,,,,12,1,1,Enabled,,,,,,,
+4543,18,13550,MC,How would you classify these objects? ,electronics,electronics.png,,,,13,1,1,Enabled,,,,,,,
+4544,18,13551,MC,How would you classify these objects? ,appliances,appliances.png,,,,14,1,1,Enabled,,,,,,,
+4545,18,13552,MC,How would you classify these objects? ,Classify3,classify3.jpg,,,,15,1,1,Enabled,,,,,,,
+4546,18,13553,MC,How would you classify these objects? ,Classify4,classify4.jpg,,,,16,1,1,Enabled,,,,,,,
+4547,18,13554,MC,How would you classify these objects? ,Classify5,classify5.png,,,,17,1,1,Enabled,,,,,,,
+4548,18,13555,MC,How would you classify these objects? ,Classify6,classify6.png,,,,18,1,1,Enabled,,,,,,,
+4549,18,13556,MC,How would you classify these objects? ,cents31,cents31.png,,,,19,1,1,Enabled,,,,,,,
+4550,18,13557,MC,How would you classify these objects? ,Classify7,classify7.png,,,,20,1,1,Enabled,,,,,,,
+4551,18,13558,MC,How would you classify these objects? ,Classify8,classify8.png,,,,21,1,1,Enabled,,,,,,,
+4552,18,13559,MC,How would you classify these objects? ,Classify9,classify9.png,,,,22,1,1,Enabled,,,,,,,
+4553,18,13560,MC,How would you classify these objects? ,Classify10,classify10.png,,,,23,1,1,Enabled,,,,,,,
+4554,18,13561,MC,How would you classify these objects? ,Classify11,classify11.png,,,,24,1,1,Enabled,,,,,,,
+4555,18,13562,MC,How would you classify these objects? ,Classify12,classify12.png,,,,25,1,1,Enabled,,,,,,,
+4556,18,13563,MC,How would you classify these objects? ,Classify13,classify13.png,,,,26,1,1,Enabled,,,,,,,
+4557,18,13564,MC,How would you classify these objects? ,Classify14,classify14.png,,,,27,1,1,Enabled,,,,,,,
+4558,18,13565,MC,How would you classify these objects? ,Classify15,classify15.png,,,,28,1,1,Enabled,,,,,,,
+4559,18,13566,MC,How would you classify these objects? ,Classify16,classify16.png,,,,29,1,1,Enabled,,,,,,,
+4560,13,13567,FIB,How much does the dress cost?,clothing prices,clothing-prices.png,150,,,14,1,1,Enabled,,,,,,,
+4561,13,13568,FIB,How much is the hat?,clothing prices,clothing-prices.png,24,,,15,1,1,Enabled,,,,,,,
+4562,13,13569,FIB,how much is the coat?,clothing prices,clothing-prices.png,120,,,16,1,1,Enabled,,,,,,,
+4563,13,13570,FIB,How much is the ski jacket?,clothing prices,clothing-prices.png,98,,,17,1,1,Enabled,,,,,,,
+4564,13,13571,FIB,What does the handbag cost?,clothing prices,clothing-prices.png,98,,,18,1,1,Enabled,,,,,,,
+4565,13,13572,FIB,What does the bikini cost?,clothing prices,clothing-prices.png,40,,,19,1,1,Enabled,,,,,,,
+4566,13,13573,FIB,How much is the swimming suit?,clothing prices,clothing-prices.png,66,,,20,1,1,Enabled,,,,,,,
+4567,13,13574,FIB,How much is the red sweater?,clothing prices,clothing-prices.png,50,,,21,1,1,Enabled,,,,,,,
+4568,13,13575,FIB,How much is the stereo?,electronics prices,electronics.png,600,,,22,1,1,Enabled,,,,,,,
+4569,13,13576,FIB,How much is the laptop?,electronics prices,electronics.png,1500,,,23,1,1,Enabled,,,,,,,
+4570,13,13577,FIB,How much is the monitor?,electronics prices,electronics.png,200,,,24,1,1,Enabled,,,,,,,
+4571,13,13578,FIB,How much is the phone?,electronics prices,electronics.png,550,,,25,1,1,Enabled,,,,,,,
+4572,13,13579,FIB,How much is the tablet?,electronics prices,electronics.png,320,,,26,1,1,Enabled,,,,,,,
+4573,13,13580,FIB,How much is the oven?,appliances pricing,appliance-pricing.png,325,,,27,1,1,Enabled,,,,,,,
+4574,13,13581,FIB,How much is the stove?,appliances pricing,appliance-pricing.png,1400,,,28,1,1,Enabled,,,,,,,
+4575,13,13582,FIB,How much is the blender?,appliances pricing,appliance-pricing.png,25,,,29,1,1,Enabled,,,,,,,
+4576,13,13583,FIB,How much is the pan?,appliances pricing,appliance-pricing.png,10,,,30,1,1,Enabled,,,,,,,
+4577,13,13584,FIB,How much is the toaster?,appliances pricing,appliance-pricing.png,55,,,31,1,1,Enabled,,,,,,,
+4578,13,13585,FIB,How much is the wok?,appliances pricing,appliance-pricing.png,34,,,32,1,1,Enabled,,,,,,,
+4579,13,13586,FIB,How much is the electric kettle?,appliances pricing,appliance-pricing.png,49,,,33,1,1,Enabled,,,,,,,
+4580,13,13587,FIB,"Jane has $200, and she needs a dress, can she afford one?  (Y/N)",clothing prices,clothing-prices.png,Y,,,8,2,1,Enabled,,,,,,,
+4581,13,13588,FIB,"After Jane spends $150 on a dress, can she still afford a handbag if she has $200 in total? (Y/N)",clothing prices,clothing-prices.png,N,,,9,2,1,Enabled,,,,,,,
+4582,13,13589,FIB,"Karen is going on vacation and needs something for the beach, with $50 which can she afford, the bikini or bathing suit?",clothing prices,clothing-prices.png,Bathing suit,,,10,2,1,Enabled,,,,,,,
+4583,13,13590,FIB,"Henry spent $120 out of his $200 allowance on a new jacket, how much does he have left?",clothing prices,clothing-prices.png,80,,,11,2,1,Enabled,,,,,,,
+4584,13,13591,FIB,"Mark is going skiing, and needs a new jacket, how much should he ask his dad for?",clothing prices,clothing-prices.png,98,,,12,2,1,Enabled,,,,,,,
+4585,13,13592,FIB,"Henry needs a hat to go with his jacket which cost him $120, does he have enough money from his $200 allowance?  (Y/N)",clothing prices,clothing-prices.png,Y,,,13,2,1,Enabled,,,,,,,
+4586,13,13593,FIB,"With $30, what can James buy?",clothing prices,clothing-prices.png,Hat,,,14,2,1,Enabled,,,,,,,
+4587,13,13594,FIB,How much does Michelle need to buy a handbag and bikini?,clothing prices,clothing-prices.png,164,,,15,2,1,Enabled,,,,,,,
+4588,13,13595,FIB,How much does Mary need to purchase a sweater and dress?,clothing prices,clothing-prices.png,200,,,16,2,1,Enabled,,,,,,,
+4589,13,13596,FIB,With $30 can Brian buy a sweater? (Y/N),clothing prices,clothing-prices.png,NO,,,17,2,1,Enabled,,,,,,,
+4590,13,13597,FIB,Which is cheaper for Nancy to purchase a bikini or bathing suit?,clothing prices,clothing-prices.png,Bathing suit,,,18,2,1,Enabled,,,,,,,
+4591,13,13598,FIB,How much with Eric have to pay  for a stereo system and phone?,electronics prices,electronics-pricing.png,1150,,,19,2,1,Enabled,,,,,,,
+4592,13,13599,FIB,How much would a new laptop and monitor cost Jenny?,electronics prices,electronics-pricing.png,1700,,,20,2,1,Enabled,,,,,,,
+4593,13,13600,FIB,"With $200, what can Stella afford?",electronics prices,electronics-pricing.png,monitor,,,21,2,1,Enabled,,,,,,,
+4594,13,13601,FIB,"With $500, what can Steve purchase? Name two items",electronics prices,electronics-pricing.png,"monitor, tablet",,,22,2,1,Enabled,,,,,,,
+4595,13,13602,FIB,"If his father gave Rusell $1000, can he afford a Stereo system and new laptop? (Y/N)",electronics prices,electronics-pricing.png,N,,,23,2,1,Enabled,,,,,,,
+4596,13,13603,FIB,"With her $200 allowance, can Serina afford a new tablet?",electronics prices,electronics-pricing.png,N,,,24,2,1,Enabled,,,,,,,
+4597,13,13604,FIB,How much more would Stephanie need from her dad to buy a phone if her allowance is $200?,electronics prices,electronics-pricing.png,350,,,25,2,1,Enabled,,,,,,,
+4598,13,13605,FIB,Which is cheaper?  The tablet or laptop?,electronics prices,electronics-pricing.png,tablet,,,26,2,1,Enabled,,,,,,,
 4599,6,13606,FIB,Round 8 up to the nearest 10,,,10,,,1,1,1,Enabled,,,,,,,
 4600,6,13607,FIB,Round 7 up to the nearest 10,,,10,,,2,1,1,Enabled,,,,,,,
 4601,6,13608,FIB,Round 68 up to the nearest 10,,,70,,,3,1,1,Enabled,,,,,,,
@@ -4706,45 +4888,45 @@ When 1157 is divided by 5, which of these is the remainder?",,,,,,88,1,1,Enabled
 4673,11,13680,FIB,Which is larger? 456 or 161,,,456,,,22,3,1,Enabled,,,,,,,
 4674,11,13681,FIB,Which is larger? 890 or 191,,,890,,,23,3,1,Enabled,,,,,,,
 4675,11,13682,FIB,Which is larger? 920 or 221,,,920,,,24,3,1,Enabled,,,,,,,
-4676,8,13683,FIB,What is the missing number on the x-axis?,graph 18,,4,,,7,1,1,Enabled,,,,,,,
-4677,8,13684,FIB,What is the missing number on the x-axis?,graph 19,,2,,,8,1,1,Enabled,,,,,,,
-4678,8,13685,FIB,What is the missing number on the x-axis?,graph 20,,20,,,9,1,1,Enabled,,,,,,,
-4679,8,13686,FIB,What is the missing number on the x-axis?,graph 21,,20,,,10,1,1,Enabled,,,,,,,
-4680,8,13687,FIB,What is the missing number on the x-axis?,graph 22,,8,,,11,1,1,Enabled,,,,,,,
-4681,8,13688,FIB,What is the missing number on the x-axis?,graph 23,,18,,,12,1,1,Enabled,,,,,,,
-4682,8,13689,FIB,What is the missing number on the x-axis?,graph 24,,9,,,13,1,1,Enabled,,,,,,,
-4683,8,13690,FIB,What is the missing number on the x-axis?,graph 25,,120,,,14,1,1,Enabled,,,,,,,
-4684,8,13691,FIB,What is the missing number on the x-axis?,graph 26,,30,,,15,1,1,Enabled,,,,,,,
-4685,8,13692,FIB,What is the missing number on the y-axis?,graph 18,,2,,,16,1,1,Enabled,,,,,,,
-4686,8,13693,FIB,What is the missing number on the y-axis?,graph 19,,4,,,17,1,1,Enabled,,,,,,,
-4687,8,13694,FIB,What is the missing number on the y-axis?,graph 20,,30,,,18,1,1,Enabled,,,,,,,
-4688,8,13695,FIB,What is the missing number on the y-axis?,graph 21,,8,,,19,1,1,Enabled,,,,,,,
-4689,8,13696,FIB,What is the missing number on the y-axis?,graph 22,,12,,,20,1,1,Enabled,,,,,,,
-4690,8,13697,FIB,What is the missing number on the y-axis?,graph 23,,12,,,21,1,1,Enabled,,,,,,,
-4691,8,13698,FIB,What is the missing number on the y-axis?,graph 24,,25,,,22,1,1,Enabled,,,,,,,
-4692,8,13699,FIB,What is the missing number on the y-axis?,graph 25,,200,,,23,1,1,Enabled,,,,,,,
-4693,8,13700,FIB,What is the missing number on the y-axis?,graph 26,,50,,,24,1,1,Enabled,,,,,,,
-4694,15,13701,FIB,What is the value of the underlined digit?,value1,,20,,,6,1,1,Enabled,,,,,,,
-4695,15,13702,FIB,What is the value of the underlined digit?,value2,,70,,,7,1,1,Enabled,,,,,,,
-4696,15,13703,FIB,What is the value of the underlined digit?,value3,,10,,,8,1,1,Enabled,,,,,,,
-4697,15,13704,FIB,What is the value of the underlined digit?,value4,,9,,,9,1,1,Enabled,,,,,,,
-4698,15,13705,FIB,What is the value of the underlined digit?,value5,,80,,,10,1,1,Enabled,,,,,,,
-4699,15,13706,FIB,What is the value of the underlined digit?,value6,,60,,,11,1,1,Enabled,,,,,,,
-4700,15,13707,FIB,What is the value of the underlined digit?,value7,,20,,,12,1,1,Enabled,,,,,,,
-4701,15,13708,FIB,What is the value of the underlined digit?,value8,,10,,,13,1,1,Enabled,,,,,,,
-4702,15,13709,FIB,What is the value of the underlined digit?,value9,,30,,,14,1,1,Enabled,,,,,,,
-4703,15,13710,FIB,What is the value of the underlined digit?,value10,,5,,,15,1,1,Enabled,,,,,,,
-4704,15,13711,FIB,What is the value of the underlined digit?,value11,,100,,,6,2,1,Enabled,,,,,,,
-4705,15,13712,FIB,What is the value of the underlined digit?,value12,,300,,,7,2,1,Enabled,,,,,,,
-4706,15,13713,FIB,What is the value of the underlined digit?,value13,,2000,,,8,2,1,Enabled,,,,,,,
-4707,15,13714,FIB,What is the value of the underlined digit?,value14,,90,,,9,2,1,Enabled,,,,,,,
-4708,15,13715,FIB,What is the value of the underlined digit?,value15,,7000,,,10,2,1,Enabled,,,,,,,
-4709,15,13716,FIB,What is the value of the underlined digit?,value16,,10,,,11,2,1,Enabled,,,,,,,
-4710,15,13717,FIB,What is the value of the underlined digit?,value17,,1,,,12,2,1,Enabled,,,,,,,
-4711,15,13718,FIB,What is the value of the underlined digit?,value18,,300,,,13,2,1,Enabled,,,,,,,
-4712,15,13719,FIB,What is the value of the underlined digit?,value19,,60,,,14,2,1,Enabled,,,,,,,
-4713,15,13720,FIB,What is the value of the underlined digit?,value20,,9000,,,15,2,1,Enabled,,,,,,,
-4714,15,13721,FIB,What is the value of the underlined digit?,value21,,100,,,16,2,1,Enabled,,,,,,,
+4676,8,13683,FIB,What is the missing number on the x-axis?,graph 18,graph-18.jpg,4,,,7,1,1,Enabled,,,,,,,
+4677,8,13684,FIB,What is the missing number on the x-axis?,graph 19,graph-19.jpg,2,,,8,1,1,Enabled,,,,,,,
+4678,8,13685,FIB,What is the missing number on the x-axis?,graph 20,graph-20.jpg,20,,,9,1,1,Enabled,,,,,,,
+4679,8,13686,FIB,What is the missing number on the x-axis?,graph 21,graph-21.jpg,20,,,10,1,1,Enabled,,,,,,,
+4680,8,13687,FIB,What is the missing number on the x-axis?,graph 22,graph-22.jpg,8,,,11,1,1,Enabled,,,,,,,
+4681,8,13688,FIB,What is the missing number on the x-axis?,graph 23,graph-23.jpg,18,,,12,1,1,Enabled,,,,,,,
+4682,8,13689,FIB,What is the missing number on the x-axis?,graph 24,graph-24.jpg,9,,,13,1,1,Enabled,,,,,,,
+4683,8,13690,FIB,What is the missing number on the x-axis?,graph 25,graph-25.jpg,120,,,14,1,1,Enabled,,,,,,,
+4684,8,13691,FIB,What is the missing number on the x-axis?,graph 26,graph-26.jpg,30,,,15,1,1,Enabled,,,,,,,
+4685,8,13692,FIB,What is the missing number on the y-axis?,graph 18,graph-18.jpg,2,,,16,1,1,Enabled,,,,,,,
+4686,8,13693,FIB,What is the missing number on the y-axis?,graph 19,graph-19.jpg,4,,,17,1,1,Enabled,,,,,,,
+4687,8,13694,FIB,What is the missing number on the y-axis?,graph 20,graph-20.jpg,30,,,18,1,1,Enabled,,,,,,,
+4688,8,13695,FIB,What is the missing number on the y-axis?,graph 21,graph-21.jpg,8,,,19,1,1,Enabled,,,,,,,
+4689,8,13696,FIB,What is the missing number on the y-axis?,graph 22,graph-22.jpg,12,,,20,1,1,Enabled,,,,,,,
+4690,8,13697,FIB,What is the missing number on the y-axis?,graph 23,graph-23.jpg,12,,,21,1,1,Enabled,,,,,,,
+4691,8,13698,FIB,What is the missing number on the y-axis?,graph 24,graph-24.jpg,25,,,22,1,1,Enabled,,,,,,,
+4692,8,13699,FIB,What is the missing number on the y-axis?,graph 25,graph-25.jpg,200,,,23,1,1,Enabled,,,,,,,
+4693,8,13700,FIB,What is the missing number on the y-axis?,graph 26,graph-26.jpg,50,,,24,1,1,Enabled,,,,,,,
+4694,15,13701,FIB,What is the value of the underlined digit?,value1,value1.jpg,20,,,6,1,1,Enabled,,,,,,,
+4695,15,13702,FIB,What is the value of the underlined digit?,value2,value2.jpg,70,,,7,1,1,Enabled,,,,,,,
+4696,15,13703,FIB,What is the value of the underlined digit?,value3,value3.jpg,10,,,8,1,1,Enabled,,,,,,,
+4697,15,13704,FIB,What is the value of the underlined digit?,value4,value4.jpg,9,,,9,1,1,Enabled,,,,,,,
+4698,15,13705,FIB,What is the value of the underlined digit?,value5,value5.jpg,80,,,10,1,1,Enabled,,,,,,,
+4699,15,13706,FIB,What is the value of the underlined digit?,value6,value6.jpg,60,,,11,1,1,Enabled,,,,,,,
+4700,15,13707,FIB,What is the value of the underlined digit?,value7,value7.jpg,20,,,12,1,1,Enabled,,,,,,,
+4701,15,13708,FIB,What is the value of the underlined digit?,value8,value8.jpg,10,,,13,1,1,Enabled,,,,,,,
+4702,15,13709,FIB,What is the value of the underlined digit?,value9,value9.jpg,30,,,14,1,1,Enabled,,,,,,,
+4703,15,13710,FIB,What is the value of the underlined digit?,value10,value10.jpg,5,,,15,1,1,Enabled,,,,,,,
+4704,15,13711,FIB,What is the value of the underlined digit?,value11,value11.jpg,100,,,6,2,1,Enabled,,,,,,,
+4705,15,13712,FIB,What is the value of the underlined digit?,value12,value12.jpg,300,,,7,2,1,Enabled,,,,,,,
+4706,15,13713,FIB,What is the value of the underlined digit?,value13,value13.jpg,2000,,,8,2,1,Enabled,,,,,,,
+4707,15,13714,FIB,What is the value of the underlined digit?,value14,value14.jpg,90,,,9,2,1,Enabled,,,,,,,
+4708,15,13715,FIB,What is the value of the underlined digit?,value15,value15.jpg,7000,,,10,2,1,Enabled,,,,,,,
+4709,15,13716,FIB,What is the value of the underlined digit?,value16,value16.jpg,10,,,11,2,1,Enabled,,,,,,,
+4710,15,13717,FIB,What is the value of the underlined digit?,value17,value17.jpg,1,,,12,2,1,Enabled,,,,,,,
+4711,15,13718,FIB,What is the value of the underlined digit?,value18,value18.jpg,300,,,13,2,1,Enabled,,,,,,,
+4712,15,13719,FIB,What is the value of the underlined digit?,value19,value19.jpg,60,,,14,2,1,Enabled,,,,,,,
+4713,15,13720,FIB,What is the value of the underlined digit?,value20,value20.jpg,9000,,,15,2,1,Enabled,,,,,,,
+4714,15,13721,FIB,What is the value of the underlined digit?,value21,value21.jpg,100,,,16,2,1,Enabled,,,,,,,
 4715,42,1547,FIB,"Fill in the series<br/>1215, 2215, 3215, 4215, ____, ____",,,"5215,6216",,,1,1,1,Enabled,,,,,,,
 4716,42,1548,FIB,"Fill in the series<br/>9502, 8502, 7502, ____, ____, 4502, 3502",,,"6502,5502",,,2,1,1,Enabled,,,,,,,
 4717,42,1549,FIB,"Fill in the series<br/>3028, 4028, 5028, 6028, ____, ____, 9028",,,"7028,8028",,,3,1,1,Enabled,,,,,,,
@@ -6125,33 +6307,33 @@ When 1157 is divided by 5, which of these is the remainder?",,,,,,88,1,1,Enabled
 6077,42,1000120,FIB,"Fill in the blanks and complete the sequence:<br/> 68,_______, 53, 47, ______, 38",,,"60,42",,,52,2,1,Enabled,,,,,,,
 6078,42,1000121,FIB,"Fill in the blanks and complete the sequence:<br/> 123, 111, _____, ______, 81, 73",,,"100,90",,,53,2,1,Enabled,,,,,,,
 6079,42,1000122,FIB,"Fill in the blanks and complete the sequence:<br/> 123, 111, 100, 90, ______, ________",,,"81,73",,,54,2,1,Enabled,,,,,,,
-6080,42,1000123,FIB,Complete the sequence and calculate how many tigers there are ?,animals1,animals1,100,,,115,3,1,Enabled,,,,,,,
-6081,42,1000124,FIB,Complete the sequence and calculate how many apes there are ?,animals2,animals2,88,,,116,3,1,Enabled,,,,,,,
-6082,42,1000125,FIB,Complete the sequence and calculate how many zebras there are ?,animals3,animals3,280,,,117,3,1,Enabled,,,,,,,
-6083,42,1000126,FIB,Complete the sequence and calculate how many more zebras there are than tigers?,animals4,animals4,40,,,118,3,1,Enabled,,,,,,,
-6084,42,1000127,FIB,Complete the sequence and calculate how many more apes there are than tigers?,animals5,animals5,20,,,119,3,1,Enabled,,,,,,,
-6085,42,1000128,FIB,Complete the sequence and calculate how many more zebras there are than apes?,animals6,animals6,22,,,120,3,1,Enabled,,,,,,,
-6086,42,1000129,FIB,Complete the sequence and calculate how many apples there are in the picture ?,fruits1,fruits1,108,,,121,3,1,Enabled,,,,,,,
-6087,42,1000130,FIB,Complete the sequence and calculate how many apples and how many graphes are in the sequence ?,fruits2,fruits2,"16,21",,,122,3,1,Enabled,,,,,,,
-6088,42,1000131,FIB,Complete the sequence and calculate how many oears there are in the picture ?,fruits3,fruits3,200,,,123,3,1,Enabled,,,,,,,
-6089,42,1000132,FIB,Complete the sequence,fruits3,fruits3,"85,115",,,124,3,1,Enabled,,,,,,,
-6090,42,1000133,FIB,Complete the sequence,fruits1,fruits1,"36,72",,,125,3,1,Enabled,,,,,,,
-6091,42,1000134,FIB,Complete the sequence,fruits2,fruits2,"16,12",,,48,1,1,Enabled,,,,,,,
-6092,42,1000135,MC,"Describe the following sequence: 123, 118, 112, 105, 97",Increasingdecreasing,Increasingdecreasing,,,,126,3,1,Enabled,,,,,,,
-6093,42,1000136,MC,"Describe the following sequence: 101, 92, 83, 74, 65",Increasingdecreasing,Increasingdecreasing,,,,127,3,1,Enabled,,,,,,,
-6094,42,1000137,MC,"Describe the following sequence: 66, 74, 82, 90, 98",Increasingdecreasing,Increasingdecreasing,,,,128,3,1,Enabled,,,,,,,
-6095,42,1000138,MC,"Describe the following sequence: 45, 55, 67, 81, 97",Increasingdecreasing,Increasingdecreasing,,,,129,3,1,Enabled,,,,,,,
-6096,42,1000139,MC,"Describe the following sequence: 60, 80, 102, 126, 152",Increasingdecreasing,Increasingdecreasing,,,,130,3,1,Enabled,,,,,,,
-6097,42,1000140,MC,"Describe the following sequence: 97, 92, 85, 76, 65",Increasingdecreasing,Increasingdecreasing,,,,131,3,1,Enabled,,,,,,,
-6098,42,1000141,MC,"Describe the following sequence: 459, 472, 485, 498, 511",Increasingdecreasing,Increasingdecreasing,,,,132,3,1,Enabled,,,,,,,
-6099,42,1000142,MC,"Describe the following sequence: 57, 70, 83, 96, 109",Increasingdecreasing,Increasingdecreasing,,,,133,3,1,Enabled,,,,,,,
-6100,42,1000143,MC,"Describe the following sequence: 378, 390, 404, 420, 438",Increasingdecreasing,Increasingdecreasing,,,,134,3,1,Enabled,,,,,,,
-6101,42,1000144,MC,"Describe the following sequence: 113, 107, 99, 89,77",Increasingdecreasing,Increasingdecreasing,,,,135,3,1,Enabled,,,,,,,
-6102,42,1000145,MC,"Describe the following sequence: 251, 262, 275, 290, 307",Increasingdecreasing,Increasingdecreasing,,,,136,3,1,Enabled,,,,,,,
-6103,42,1000146,MC,"Describe the following sequence: 209, 232, 255, 278, 301",Increasingdecreasing,Increasingdecreasing,,,,137,3,1,Enabled,,,,,,,
-6104,42,1000147,MC,"Describe the following sequence: 202, 194, 184, 172, 158",Increasingdecreasing,Increasingdecreasing,,,,138,3,1,Enabled,,,,,,,
-6105,42,1000148,MC,"Describe the following sequence: 181, 162, 143, 124, 105",Increasingdecreasing,Increasingdecreasing,,,,139,3,1,Enabled,,,,,,,
-6106,42,1000149,MC,"Describe the following sequence: 451, 439, 425, 409, 391",Increasingdecreasing,Increasingdecreasing,,,,140,3,1,Enabled,,,,,,,
+6080,42,1000123,FIB,Complete the sequence and calculate how many tigers there are ?,animals1,animals1.png,100,,,115,3,1,Enabled,,,,,,,
+6081,42,1000124,FIB,Complete the sequence and calculate how many apes there are ?,animals2,animals2.png,88,,,116,3,1,Enabled,,,,,,,
+6082,42,1000125,FIB,Complete the sequence and calculate how many zebras there are ?,animals3,animals3.png,280,,,117,3,1,Enabled,,,,,,,
+6083,42,1000126,FIB,Complete the sequence and calculate how many more zebras there are than tigers?,animals4,animals4.png,40,,,118,3,1,Enabled,,,,,,,
+6084,42,1000127,FIB,Complete the sequence and calculate how many more apes there are than tigers?,animals5,animals5.png,20,,,119,3,1,Enabled,,,,,,,
+6085,42,1000128,FIB,Complete the sequence and calculate how many more zebras there are than apes?,animals6,animals6.png,22,,,120,3,1,Enabled,,,,,,,
+6086,42,1000129,FIB,Complete the sequence and calculate how many apples there are in the picture ?,fruits1,fruits1.png,108,,,121,3,1,Enabled,,,,,,,
+6087,42,1000130,FIB,Complete the sequence and calculate how many apples and how many graphes are in the sequence ?,fruits2,fruits2.png,"16,21",,,122,3,1,Enabled,,,,,,,
+6088,42,1000131,FIB,Complete the sequence and calculate how many oears there are in the picture ?,fruits3,fruits3.png,200,,,123,3,1,Enabled,,,,,,,
+6089,42,1000132,FIB,Complete the sequence,fruits3,fruits3.png,"85,115",,,124,3,1,Enabled,,,,,,,
+6090,42,1000133,FIB,Complete the sequence,fruits1,fruits1.png,"36,72",,,125,3,1,Enabled,,,,,,,
+6091,42,1000134,FIB,Complete the sequence,fruits2,fruits2.png,"16,12",,,48,1,1,Enabled,,,,,,,
+6092,42,1000135,MC,"Describe the following sequence: 123, 118, 112, 105, 97",Increasingdecreasing,increasingdecreasing.png,,,,126,3,1,Enabled,,,,,,,
+6093,42,1000136,MC,"Describe the following sequence: 101, 92, 83, 74, 65",Increasingdecreasing,increasingdecreasing.png,,,,127,3,1,Enabled,,,,,,,
+6094,42,1000137,MC,"Describe the following sequence: 66, 74, 82, 90, 98",Increasingdecreasing,increasingdecreasing.png,,,,128,3,1,Enabled,,,,,,,
+6095,42,1000138,MC,"Describe the following sequence: 45, 55, 67, 81, 97",Increasingdecreasing,increasingdecreasing.png,,,,129,3,1,Enabled,,,,,,,
+6096,42,1000139,MC,"Describe the following sequence: 60, 80, 102, 126, 152",Increasingdecreasing,increasingdecreasing.png,,,,130,3,1,Enabled,,,,,,,
+6097,42,1000140,MC,"Describe the following sequence: 97, 92, 85, 76, 65",Increasingdecreasing,increasingdecreasing.png,,,,131,3,1,Enabled,,,,,,,
+6098,42,1000141,MC,"Describe the following sequence: 459, 472, 485, 498, 511",Increasingdecreasing,increasingdecreasing.png,,,,132,3,1,Enabled,,,,,,,
+6099,42,1000142,MC,"Describe the following sequence: 57, 70, 83, 96, 109",Increasingdecreasing,increasingdecreasing.png,,,,133,3,1,Enabled,,,,,,,
+6100,42,1000143,MC,"Describe the following sequence: 378, 390, 404, 420, 438",Increasingdecreasing,increasingdecreasing.png,,,,134,3,1,Enabled,,,,,,,
+6101,42,1000144,MC,"Describe the following sequence: 113, 107, 99, 89,77",Increasingdecreasing,increasingdecreasing.png,,,,135,3,1,Enabled,,,,,,,
+6102,42,1000145,MC,"Describe the following sequence: 251, 262, 275, 290, 307",Increasingdecreasing,increasingdecreasing.png,,,,136,3,1,Enabled,,,,,,,
+6103,42,1000146,MC,"Describe the following sequence: 209, 232, 255, 278, 301",Increasingdecreasing,increasingdecreasing.png,,,,137,3,1,Enabled,,,,,,,
+6104,42,1000147,MC,"Describe the following sequence: 202, 194, 184, 172, 158",Increasingdecreasing,increasingdecreasing.png,,,,138,3,1,Enabled,,,,,,,
+6105,42,1000148,MC,"Describe the following sequence: 181, 162, 143, 124, 105",Increasingdecreasing,increasingdecreasing.png,,,,139,3,1,Enabled,,,,,,,
+6106,42,1000149,MC,"Describe the following sequence: 451, 439, 425, 409, 391",Increasingdecreasing,increasingdecreasing.png,,,,140,3,1,Enabled,,,,,,,
 6107,20,1000150,FIB,Is 200 (more/less) than 201?,,,less,,,6,1,1,Enabled,,,,,,,
 6108,20,1000151,FIB,Is 197 (more/less) than 201?,,,less,,,7,1,1,Enabled,,,,,,,
 6109,20,1000152,FIB,Is 196 (more/less) than 222?,,,less,,,8,1,1,Enabled,,,,,,,
