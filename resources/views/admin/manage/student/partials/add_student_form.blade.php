@@ -187,7 +187,7 @@
 			<fieldset>
 				<legend class="legend-name-mid">{!! trans('messages.school_info') !!}</legend>
 				<div class="form-group" ng-init="student.getGrades()">
-					<label class="control-label col-xs-3">trans('messages.grade') <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans_choice('messages.grade', 1) !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<select name="grade_code" ng-disabled="!student.record.country_id" class="form-control" ng-class="{ 'required-field' : student.fields['grade_code']}" ng-model="student.record.grade_code">
 							<option value="">{!! trans('messages.select_level') !!}</option>

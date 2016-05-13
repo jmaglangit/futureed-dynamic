@@ -24,7 +24,7 @@
 
 				<div class="form-group">
 					<div ng-if="tips.record.link_type != futureed.GENERAL">
-						<label class="col-xs-2 control-label">{!! trans('messages.module') !!} <span class="required">*</span></label>
+						<label class="col-xs-2 control-label">{!! trans_choice('messages.module', 1) !!} <span class="required">*</span></label>
 						<div class="col-xs-4">
 							{!! Form::text('username', '',
 								[

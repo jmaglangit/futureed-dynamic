@@ -2158,3 +2158,7 @@ a.payment-page-text {
 {
 	height: 233px;
 }
+
+.auto-login-form {
+	text-align: center;
+}

@@ -93,7 +93,7 @@
 					<tr>
 						<th>{!! trans('messages.admin_subject_code') !!}</th>
 						<th>{!! trans('messages.admin_subject_name') !!}</th>
-						<th ng-if="subject.records.length">{!! trans('messages.action') !!}</th>
+						<th ng-if="subject.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 					</tr>
 				</thead>
 				<tbody>

@@ -217,7 +217,7 @@
 					<th>{!! trans('messages.admin_subscription_name') !!}</th>
 					<th>{!! trans('messages.description') !!}</th>
 					<th>{!! trans('messages.price') !!}</th>
-					<th ng-if="price.records.length">{!! trans('messages.action') !!}</th>
+					<th ng-if="price.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 				</tr>
 				</thead>
 				<tbody>

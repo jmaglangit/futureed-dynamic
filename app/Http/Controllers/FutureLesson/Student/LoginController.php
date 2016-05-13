@@ -196,4 +196,8 @@ class LoginController extends Controller {
 	public function privacy_policy(){
 		return view('student.login.privacy-policy');
 	}
+
+	public function resend_confirmation(){
+		return view('student.login.register.registration-resend-confirmation');
+	}
 }

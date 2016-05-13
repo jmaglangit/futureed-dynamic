@@ -130,13 +130,13 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>{!! trans('messages.module') !!}</th>
+			            <th>{!! trans_choice('messages.module', 1) !!}</th>
 			            <th>{!! trans('messages.subject') !!}</th>
 			            <th>{!! trans('messages.area') !!}</th>
-			            <th>{!! trans('messages.help_request') !!}</th>
+			            <th>{!! trans_choice('messages.help_request', 1) !!}</th>
 			            <th>{!! trans('messages.answer') !!}</th>
 			            <th>{!! trans('messages.status') !!}</th>
-			            <th ng-if="answer.records.length">{!! trans('messages.action') !!}</th>
+			            <th ng-if="answer.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>

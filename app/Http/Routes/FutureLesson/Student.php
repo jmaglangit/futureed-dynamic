@@ -94,6 +94,11 @@
 				'as' => 'student.login.privacy-policy'
 				, 'uses' => 'FutureLesson\Student\LoginController@privacy_policy'
 			]);
+
+			Routes::get('/resend_confirmation', [
+				'as' => 'student.login.resend_confirmation'
+				, 'uses' => 'FutureLesson\Student\LoginController@resend_confirmation'
+			]);
 		});
 
 		Routes::group([
