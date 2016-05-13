@@ -24,6 +24,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 		self.active_confirm = Constants.FALSE;
 		self.active_enter_password = Constants.FALSE;
 		self.active_registration = Constants.FALSE;
+		self.active_resend = Constants.FALSE;
 
 		switch(active) {
 			case 'confirm_media'	:
@@ -44,6 +45,11 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 
 			case 'registration_success'	:
 				self.active_registration_success = Constants.TRUE;
+				break;
+
+			case 'resend'			:
+				console.log(active);
+				self.active_resend = Constants.TRUE;
 				break;
 
 			case 'login'			:
