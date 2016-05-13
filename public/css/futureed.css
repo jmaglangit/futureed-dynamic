@@ -1455,7 +1455,7 @@ fieldset legend {
 
 .wizard-content-title{
 	border-bottom: 1px solid #DCDCDC;
-	margin: 15px 0px -40px 25px;
+	margin: 15px 0px -13px 25px;
 	height: 30px;
 }
 .wizard-row {
@@ -1525,13 +1525,13 @@ span.round-tab:hover {
 }
 
 .wizard .nav-tabs > li {
-	width: 20%;
+	width: 16%;
 }
 
 .wizard li:after {
 	content: " ";
 	position: absolute;
-	left: 46%;
+	left: 44%;
 	opacity: 0;
 	margin: 0 auto;
 	bottom: 0px;
@@ -1543,7 +1543,7 @@ span.round-tab:hover {
 .wizard li.active:after {
 	content: " ";
 	position: absolute;
-	left: 46%;
+	left: 44%;
 	opacity: 1;
 	margin: 0 auto;
 	bottom: 0px;
@@ -1588,9 +1588,64 @@ span.round-tab:hover {
 	margin-bottom: 20px;
 }
 
-.wizard .tab-content .tab-pane .row {
-	margin-bottom: 20px;
+/*Subject*/
+.wizard-box {
+	width : 150px;
+	height: 150px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	border-radius: 10px;
+	padding-top: 25px;
 }
+
+.wizard-box:after {
+	transition: 2s ease-in-out;
+}
+
+.wizard-box:before {
+	transition: 2s ease-in-out;
+}
+
+.wizard-subject {
+	width : 150px;
+	height: 150px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	border-radius: 10px;
+	padding-top: 25px;
+}
+
+.wizard-subject:after {
+	transition: 2s ease-in-out;
+}
+
+.wizard-subject:before {
+	transition: 2s ease-in-out;
+}
+
+/*Plan*/
+.wizard-panel {
+	width: 175px;
+	height: 200px;
+	float: left;
+	margin: 10px;
+	transition: 0.1s ease-in-out;
+}
+
+
+.wizard-panel .panel-heading {
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+
+.wizard-panel .panel-heading .panel-title {
+	padding-top: 17px;
+}
+.wizard-panel .panel-body {
+	text-align: center;
+}
+
 
 @media( max-width : 585px ) {
 
