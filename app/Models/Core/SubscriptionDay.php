@@ -1,14 +1,27 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 5/5/16
- * Time: 5:43 PM
- */
-
-namespace FutureEd\Models\Core;
+<?php namespace FutureEd\Models\Core;
 
 
-class SubscriptionDay {
+use FutureEd\Models\Traits\TransactionTrait;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class SubscriptionDay extends Model {
+
+	use SoftDeletes;
+
+	use TransactionTrait;
+
+	protected $table = 'subscription_days';
+
+	protected $dates = ['deleted_at'];
+
+	protected $fillable = ['days','status'];
+
+	protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
 
 }
