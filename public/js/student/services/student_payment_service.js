@@ -122,5 +122,12 @@ function StudentPaymentService($http) {
 		});
 	}
 
+	service.getCountryList = function(){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	serviceUrl + 'countries'
+		});
+	}
+
 	return service;
 }
