@@ -611,6 +611,22 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 	}
 
+	self.getCountryList = function(){
+
+		StudentPaymentService.getCountryList().success(function(response){
+
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}else {
+				self.country_list = response.data;
+			}
+
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	self.modifyUserAddress = function(data){
 
 		//if edit == true
@@ -621,8 +637,9 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 		}else {
 
-			console.log(user_name);
-			//save
+			//save new billing info
+
+
 			self.billing_info = Constants.FALSE;
 			formToLabel();
 		}
