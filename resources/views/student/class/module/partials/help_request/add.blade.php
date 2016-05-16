@@ -13,7 +13,7 @@
 			<div class="clearfix"></div>
 			{!! Form::open(['class' => 'form-horizontal margin-top-15']) !!}
 			<div class="form-group">
-				<label class="control-label col-xs-2">trans('messages.title')</label>
+				<label class="control-label col-xs-2">{{ trans('messages.title') }}</label>
 				<div class="col-xs-10">
 					{!! Form::text('title', ''
 						, array(
