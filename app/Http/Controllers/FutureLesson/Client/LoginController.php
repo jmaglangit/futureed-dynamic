@@ -154,9 +154,9 @@ class LoginController extends Controller {
 	}
 
 	public function user_confirm() {
-		$input = Input::only('email');
+		$input = Input::only('email', 'code');
 
-		return view('client.login.set-password', array('email' => $input['email']));
+		return view('client.login.set-password', array('email' => $input['email'], 'code' => $input['code']));
 	}
 
 	public function resendConfirmation(){
