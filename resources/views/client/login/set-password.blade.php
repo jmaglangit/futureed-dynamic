@@ -63,7 +63,7 @@
 													)
 											) !!}
 
-											{!! Form::button(trans('messages.resend'
+											{!! Form::button(trans('messages.resend')
 													, array(
 																'class' => 'btn btn-gold btn-medium'
 															, 'ng-click' => 'confirm.resendClientConfirmation()'
