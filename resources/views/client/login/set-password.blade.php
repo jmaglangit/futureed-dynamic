@@ -40,7 +40,7 @@
 							<small>{!! trans('messages.client_check_inbox') !!}</small>
 							{!! Form::open(array('ng-submit' => 'confirm.confirmClientRegistration($event)')) !!}
 									<div class="form-group" ng-if="!confirm.account_confirmed">
-											{!! Form::label('', trans('messages.enter_confirmation_code'):')!!}
+											{!! Form::label('', trans('messages.enter_confirmation_code') )!!}
 											
 											{!! Form::text('confirmation_code', ''
 															, array(
@@ -63,7 +63,7 @@
 													)
 											) !!}
 
-											{!! Form::button(trans('messages.resend'
+											{!! Form::button(trans('messages.resend')
 													, array(
 																'class' => 'btn btn-gold btn-medium'
 															, 'ng-click' => 'confirm.resendClientConfirmation()'
