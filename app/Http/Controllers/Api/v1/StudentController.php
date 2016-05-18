@@ -151,6 +151,22 @@ class StudentController extends ApiController {
 	}
 
 	/**
+	 * Update billing address of the student.
+	 * @param StudentRequest $request
+	 */
+	public function updateBillingAddress(StudentRequest $request, $id){
+
+		$student_billing_information = $request->only('city','state','country_id');
+
+		//updated student address
+
+		$student = $this->student->updateStudentDetails($id,$student_billing_information);
+
+		return $this->respondWithData($student);
+
+	}
+
+	/**
 	 * Check if student needs to take learning style program
 	 * @param $id
 	 * @return mixed
