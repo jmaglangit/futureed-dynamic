@@ -1588,6 +1588,12 @@ span.round-tab:hover {
 	margin-bottom: 20px;
 }
 
+.wizard .tab-content .tab-pane .row .invoice-form [class*="col-"] {
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
 /*Subject*/
 .wizard-box {
 	width : 150px;
@@ -1645,6 +1651,7 @@ span.round-tab:hover {
 .wizard-panel .panel-body {
 	text-align: center;
 }
+
 
 
 @media( max-width : 585px ) {
