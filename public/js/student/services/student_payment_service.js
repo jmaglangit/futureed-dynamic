@@ -129,5 +129,23 @@ function StudentPaymentService($http) {
 		});
 	}
 
+	service.updateStudentAddress = function(data){
+		//api/v1/student/billing-address/{id}
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			,url	: serviceUrl + 'student/billing-address/' + data.id
+		});
+	}
+
+	service.getClientDiscount = function(data){
+
+		//return $http({
+		//	method	: Constants.METHOD_GET
+		//	, url	: serviceUrl + 'client-discount?'
+		//	+ 'client_id=' + ((data.client_id) ? data.cl)
+		//});
+	}
+
 	return service;
 }
