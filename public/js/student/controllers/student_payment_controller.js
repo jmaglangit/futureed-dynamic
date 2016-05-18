@@ -45,6 +45,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.active_view = Constants.FALSE;
 		self.subscription_option = {};
 		self.subscription_packages = {};
+		self.subscription_continue = Constants.TRUE;
 
 		switch(active) {
 			case Constants.ACTIVE_ADD 	:
@@ -483,12 +484,19 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 	self.subscriptionOptionGenerator = function(category, data){
 
+		//add computation
+		//TODO get user discount available
+		//
+
 		switch(category){
 			case Constants.SUBSCRIPTION_COUNTRY :
 				self.subscriptionGenerateCountry(data);
+
+
 				break;
 			case Constants.SUBSCRIPTION_SUBJECT	:
 				self.subscriptionGenerateSubject(data);
+
 				break;
 			case Constants.SUBSCRIPTION_PLAN	:
 				self.subscriptionGeneratePlan(data);
@@ -497,7 +505,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				self.subscriptionGenerateDays(data);
 				break;
 			case Constants.SUBSCRIPTION_OTHERS	:
-				self.subscriptionGenerateOtherInfo(data);
+				self.subscriptionGenerateOtherInfo();
 				break;
 			default :
 				break;
@@ -594,6 +602,11 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 		self.subscription_packages.others = self.billing_information;
 
+		if(!self.billing_information.city && !self.billing_information.state && !self.billing_information.country){
+
+			self.subscription_continue = Constants.FALSE;
+		}
+
 	}
 
 	self.getCountry = function(id){
@@ -618,7 +631,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			}else {
-				self.country_list = response.data;
+				self.countries = response.data;
 			}
 
 		}).error(function(response) {
@@ -633,18 +646,54 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		if(data == Constants.TRUE){
 
 			self.billing_info = Constants.TRUE;
-			labelToForm();
 
 		}else {
 
 			//save new billing info
+			if(self.billing_information.city && self.billing_information.state && self.billing_information.country.id){
 
-
-			self.billing_info = Constants.FALSE;
-			formToLabel();
+				//update user address information.
+				self.updateUserBillingInformation();
+				self.subscription_continue = Constants.TRUE;
+				self.billing_info = Constants.FALSE;
+			};
 		}
 
 
+	}
+
+	self.updateUserBillingInformation = function(){
+
+		var addr_data = {};
+
+		addr_data.id = $scope.user.id;
+		addr_data.country_id = self.billing_information.country.id;
+		addr_data.city = self.billing_information.city;
+		addr_data.state = self.billing_information.state;
+
+		StudentPaymentService.updateStudentAddress(addr_data).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}else {
+
+				self.getCountry(self.billing_information.country.id);
+				$scope.user.city = self.billing_information.city;
+				$scope.user.state = self.billing_information.state;
+				$scope.user.country_id = self.billing_information.country.id;
+				$scope.user.country = self.billing_information.country;
+
+				apiService.updateUserSession($scope.user).success(function(response) {
+					if(response.errors){
+						self.errors = $scope.errorHandler(response.errors);
+					}
+				}).error(function() {
+					$scope.internalError();
+				});
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 
 
