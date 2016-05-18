@@ -140,30 +140,81 @@
 
                             {{--Other information--}}
                             {{--TODO add js script on change from text to input--}}
-                            <div class="row">
-                                <div class="col-xs-12">
+                            <div class="row" ng-init="payment.subscriptionOption(futureed.SUBSCRIPTION_OTHERS)">
+                                <div class="col-xs-12 invoice-form">
                                     <h4>Billing Information</h4>
 
                                     <div class="form-search">
-                                        <div class="form-group">
-                                            <label class="col-xs-2 control-label h4">Name:</label>
+                                        <div ng-if="!payment.billing_info">
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label h4">Name:</label>
 
-                                            <label class="col-lg-4 h4 form-label" name="user_name">{! payment.billing_information.name !}</label>
+                                                <label class="col-lg-4 h4 form-label" name="user_name">{!
+                                                    payment.billing_information.name !}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label h4 ">City:</label>
+
+                                                <label class="col-lg-4 h4 form-label" name="user_city">{!
+                                                    payment.billing_information.city !}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label h4">State:</label>
+
+                                                <label class="col-lg-4 h4 form-label" name="user_state">{!
+                                                    payment.billing_information.state !}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label h4">Country:</label>
+
+                                                <label class="col-lg-4 h4 form-label" name="user_country">{!
+                                                    payment.billing_information.country.name !}</label>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-xs-2 control-label h4 ">City:</label>
+                                        <div ng-if="payment.billing_info">
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label h4">Name:</label>
 
-                                            <label class="col-lg-4 h4 form-label" name="user_city" >{! payment.billing_information.city !}</label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-xs-2 control-label h4">State:</label>
-
-                                            <label class="col-lg-4 h4 form-label" name="user_state">{! payment.billing_information.state !}</label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-xs-2 control-label h4">Country:</label>
-
-                                            <label class="col-lg-4 h4 form-label" name="user_country">{! payment.billing_information.country.full_name !}</label>
+                                                <label class="col-lg-4 h4 form-label" name="user_name">{!
+                                                    payment.billing_information.name !}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label h4 ">City:</label>
+                                                <div class="col-lg-4">
+                                                    {!! Form::text('city', ''
+                                                        , array(
+                                                            'class' => 'form-control'
+                                                            , 'placeholder' => trans('messages.city')
+                                                            , 'ng-model' => 'payment.billing_information.city')
+                                                    ) !!}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label h4">State:</label>
+                                                <div class="col-lg-4">
+                                                    {!! Form::text('state', ''
+                                                        , array(
+                                                            'class' => 'form-control'
+                                                            , 'placeholder' => trans('messages.state')
+                                                            , 'ng-model' => 'payment.billing_information.state')
+                                                    ) !!}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-xs-2 control-label h4">Country:</label>
+                                                <div class="col-lg-4">
+                                                    <select class="form-control" name="user_country"
+                                                            ng-init="getCountries()"
+                                                            ng-model="payment.billing_information.country.id">
+                                                        <option ng-selected="payment.billing_information.country.id == futureed.FALSE"
+                                                                value="">{!! trans('messages.select_country') !!}</option>
+                                                        <option ng-selected="payment.billing_information.country.id == country.id"
+                                                                ng-repeat="country in countries"
+                                                                ng-value="country.id">{! country.name !}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +229,8 @@
                                             ng-click="payment.modifyUserAddress(futureed.FALSE)">Save</button>
                                 </li>
                                 <li>
-                                    <button type="button" class="btn btn-primary btn-info-full next-step"
+                                    <button ng-model="button" ng-disabled="!payment.subscription_continue"
+                                            type="button" class="btn btn-primary btn-info-full next-step"
                                             ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_OTHERS,futureed.FALSE)">Continue</button>
                                 </li>
                             </ul>
@@ -187,23 +239,53 @@
                             <h3>Billing Invoice</h3>
 
                             <div class="row">
-                                <div class="col-xs-12">
-                                    {{--user information--}}
-
-                                    {{--invoice details--}}
-
-                                    <div class="col-xs-6 search-container">
-                                        {{--country--}}
-                                        <div><label>Country : {! payment.subscription_packages.country.name !}</label></div>
-                                        {{--subject--}}
-                                        <div><label>Subject : {! payment.subscription_packages.subject.name !}</label></div>
-                                        {{--Subscription / plan--}}
-                                        <div><label>Plan : {! payment.subscription_packages.subscription.name !}</label></div>
-                                        {{--Days--}}
-                                        <div><label>Days : {! payment.subscription_packages.subscription_day.days !}</label></div>
-                                        {{--price--}}
-                                        <div><label>Price : {! payment.subscription_packages.price !}</label></div>
+                                <div class="col-xs-12 invoice-form">
+                                    {{--subscription summary--}}
+                                    <div class="form-search">
+                                        <h3>Subscription Summary</h3>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">SUBJECT : </label>
+                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.subject.name !}</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">SUBSCRIPTION PLAN : </label>
+                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.subscription.name !}</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">No. of Days : </label>
+                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.subscription_day.days !}</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">Country : </label>
+                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.country.name !}</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">with Learning Style : </label>
+                                            <label ng-if="!payment.subscription_packages.subscription.has_lsp" class="col-lg-4 h4 form-label">{! futureed.NO !}</label>
+                                            <label ng-if="payment.subscription_packages.subscription.has_lsp" class="col-lg-4 h4 form-label">{! futureed.YES !}</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">Price : </label>
+                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.price !}</label>
+                                        </div>
                                     </div>
+                                    <div class="wizard-content-title"></div>
+                                    <div class="form-search">
+                                        <h3>Total Price Computation</h3>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">SUBTOTAL : </label>
+                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.price !} USD</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">DISCOUNT : </label>
+                                            <label class="col-lg-4 h4 form-label"> 00000.00</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h4">TOTAL : </label>
+                                            <label class="col-lg-4 h4 form-label"> 00000.00</label>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <ul class="list-inline pull-right">
