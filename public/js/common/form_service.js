@@ -24,8 +24,6 @@ function formToLabel(){
         //<option value="volvo">Volvo</option> TODO: generate for each country.
 
 
-            return '<select class="' + this.classList.value
-                + '" name='+ this.getAttribute('name') + '>'+ this.value +'</select>';
         }else {
             return '<label class="' + this.classList.value
                 + '" name='+ this.getAttribute('name') + '>'+ this.value +'</label>';
