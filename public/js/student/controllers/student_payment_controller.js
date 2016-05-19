@@ -45,6 +45,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.active_view = Constants.FALSE;
 		self.subscription_option = {};
 		self.subscription_packages = {};
+		self.subscription_invoice = {};
 		self.subscription_continue = Constants.TRUE;
 
 		switch(active) {
@@ -487,11 +488,13 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		//add computation
 		//TODO get user discount available
 		//
+		//console.log(self.subscription_packages);
+		self.getStudentDiscount();
+		self.getInvoice();
 
 		switch(category){
 			case Constants.SUBSCRIPTION_COUNTRY :
 				self.subscriptionGenerateCountry(data);
-
 
 				break;
 			case Constants.SUBSCRIPTION_SUBJECT	:
@@ -694,6 +697,47 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.getStudentDiscount = function(){
+
+		StudentPaymentService.getClientDiscount($scope.user.user.id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}else if(response.data.total == Constants.TRUE) {
+				self.subscription_packages.discount_percentage = response.data.records[0].percentage;
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getInvoice = function(){
+
+		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
+			//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
+
+		if (self.subscription_packages.length == 1) {
+			var subscription = self.subscription_packages[0];
+			var date = new Date();
+
+			self.subscription_invoice.subject_id = subscription.subject_id;
+			self.subscription_invoice.order_date = date;
+			self.subscription_invoice.date_start = date; // determined by days_id
+			self.subscription_invoice.date_end = date + subscription.subscription_day.days; // determined by days_id
+			self.subscription_invoice.student_id = $scope.user.id;
+			self.subscription_invoice.subscription_id = subscription.subscription_id;
+			self.subscription_invoice.seats_total = Constants.TRUE;
+			self.subscription_invoice.seats_taken = Constants.TRUE;
+			self.subscription_invoice.payment_status = Constants.PENDING;
+			self.subscription_invoice.country_id = subscription.country_id;
+
+			self.subscription_invoice.sub_total = subscription.price;
+
+
+			console.log(self.subscription_invoice);
+		}
 	}
 
 
