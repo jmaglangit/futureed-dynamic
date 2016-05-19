@@ -3,10 +3,12 @@ namespace FutureEd\Models\Repository\ClientDiscount;
 
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\ClientDiscount;
+use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 
 class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 {
+	use LoggerTrait;
 
 	/**
 	 * Display a listing of client discounts.
@@ -26,7 +28,7 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 
 			$count = 0;
 
-			$clientDiscounts = $clientDiscounts->with('client');
+			$clientDiscounts = $clientDiscounts->with('user');
 
 			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
@@ -41,8 +43,8 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 					if (isset($criteria['client_role'])) {
 						$clientDiscounts = $clientDiscounts->role($criteria['client_role']);
 					}
-					if (isset($criteria['client_id'])) {
-						$clientDiscounts = $clientDiscounts->clientid($criteria['client_id']);
+					if (isset($criteria['user_id'])) {
+						$clientDiscounts = $clientDiscounts->userId($criteria['user_id']);
 					}
 
 				}
@@ -83,7 +85,7 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 		DB::beginTransaction();
 
 		try{
-			$response = ClientDiscount::with('client')->find($id);
+			$response = ClientDiscount::with('user')->find($id);
 
 		}catch (\Exception $e){
 
@@ -102,9 +104,11 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 	/**
 	 * Update specific subscription.
 	 *
-	 * @param  array $subscription
-	 *
+	 * @param $id
+	 * @param $clientDiscount
 	 * @return object
+	 * @internal param array $subscription
+	 *
 	 */
 
 	public function updateClientDiscount($id, $clientDiscount)
@@ -132,9 +136,10 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 	/**
 	 * Add specific subscription.
 	 *
-	 * @param  array $subscription
-	 *
+	 * @param $clientDiscount
 	 * @return object
+	 * @internal param array $subscription
+	 *
 	 */
 
 	public function addClientDiscount($clientDiscount)
@@ -161,9 +166,10 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 	/**
 	 * Delete specific subscription.
 	 *
-	 * @param  id $subscription
+	 * @param $id
+	 * @return bool
+	 * @internal param id $subscription
 	 *
-	 * @return boolean
 	 */
 	public function deleteClientDiscount($id)
 	{
@@ -187,12 +193,12 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 		return $response;
 	}
 
-	public function checkClient($client_id)
+	public function checkClient($user_id)
 	{
 		DB::beginTransaction();
 
 		try{
-			$response = ClientDiscount::clientid($client_id)->pluck('id');
+			$response = ClientDiscount::clientid($user_id)->pluck('id');
 
 		}catch (\Exception $e){
 
