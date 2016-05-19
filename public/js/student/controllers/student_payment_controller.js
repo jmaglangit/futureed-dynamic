@@ -489,7 +489,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		//TODO get user discount available
 		//
 		//console.log(self.subscription_packages);
-		self.getStudentDiscount();
+		//self.getStudentDiscount();
 		self.getInvoice();
 
 		switch(category){
@@ -719,13 +719,15 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
 
 		if (self.subscription_packages.length == 1) {
-			var subscription = self.subscription_packages[0];
-			var date = new Date();
 
+			self.getStudentDiscount();
+			var subscription = self.subscription_packages[0];
+
+			//console.log(self.subscription_packages.discount);
 			self.subscription_invoice.subject_id = subscription.subject_id;
-			self.subscription_invoice.order_date = date;
-			self.subscription_invoice.date_start = date; // determined by days_id
-			self.subscription_invoice.date_end = date + subscription.subscription_day.days; // determined by days_id
+			self.subscription_invoice.order_date = moment().format('YYYY-MM-DD');
+			self.subscription_invoice.date_start = moment().format('YYYY-MM-DD');
+			self.subscription_invoice.date_end = moment().add(subscription.subscription_day.days,'days').format('YYYY-MM-DD');
 			self.subscription_invoice.student_id = $scope.user.id;
 			self.subscription_invoice.subscription_id = subscription.subscription_id;
 			self.subscription_invoice.seats_total = Constants.TRUE;
@@ -734,9 +736,14 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.subscription_invoice.country_id = subscription.country_id;
 
 			self.subscription_invoice.sub_total = subscription.price;
+			self.subscription_invoice.discount = subscription.discount;
+			self.subscription_invoice.total = [];
+
 
 
 			console.log(self.subscription_invoice);
+			console.log(subscription);
+
 		}
 	}
 
