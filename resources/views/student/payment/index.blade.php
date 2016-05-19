@@ -27,4 +27,5 @@
 
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/moment.min.js')!!}
 @stop
