@@ -146,7 +146,7 @@ class StudentPaymentController extends ApiController {
 
 
 		$order = $request->only('subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
-			'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status');
+			'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id');
 
 		//get order details
 		$order_record = $this->order->getOrder($id);
@@ -187,6 +187,7 @@ class StudentPaymentController extends ApiController {
 		$invoice['total_amount'] = $order['total_amount'];
 		$invoice['subscription_id'] = $order['subscription_id'];
 		$invoice['payment_status'] = $order['payment_status'];
+		$invoice['discount_id'] = $order['discount_id'];
 
 		//insert data to invoices table
 		$this->invoice->updateInvoice($invoice_record[0]['id'],$invoice);
