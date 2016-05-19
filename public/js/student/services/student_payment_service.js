@@ -138,13 +138,13 @@ function StudentPaymentService($http) {
 		});
 	}
 
-	service.getClientDiscount = function(data){
+	service.getClientDiscount = function(user_id){
 
-		//return $http({
-		//	method	: Constants.METHOD_GET
-		//	, url	: serviceUrl + 'client-discount?'
-		//	+ 'client_id=' + ((data.client_id) ? data.cl)
-		//});
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: serviceUrl + 'client-discount?'
+			+ 'user_id=' + ((user_id) ? user_id : '')
+		});
 	}
 
 	return service;
