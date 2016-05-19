@@ -242,47 +242,52 @@
                                 <div class="col-xs-12 invoice-form">
                                     {{--subscription summary--}}
                                     <div class="form-search">
-                                        <h3>Subscription Summary</h3>
+                                        <div class="h4">Subscription Summary</div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">SUBJECT : </label>
-                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.subject.name !}</label>
+                                            <label class="col-xs-4 control-label h5">SUBJECT : </label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.subject.name !}</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">SUBSCRIPTION PLAN : </label>
-                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.subscription.name !}</label>
+                                            <label class="col-xs-4 control-label h5">SUBSCRIPTION PLAN : </label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.subscription.name !}</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">No. of Days : </label>
-                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.subscription_day.days !}</label>
+                                            <label class="col-xs-4 control-label h5">No. of Days : </label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.subscription_day.days !}</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">Country : </label>
-                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.country.name !}</label>
+                                            <label class="col-xs-4 control-label h5">Date period : </label>
+                                            <label class="col-lg-4 h5 form-label">date_start - date_end</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">with Learning Style : </label>
-                                            <label ng-if="!payment.subscription_packages.subscription.has_lsp" class="col-lg-4 h4 form-label">{! futureed.NO !}</label>
-                                            <label ng-if="payment.subscription_packages.subscription.has_lsp" class="col-lg-4 h4 form-label">{! futureed.YES !}</label>
+                                            <label class="col-xs-4 control-label h5">Country : </label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.country.name !}</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">Price : </label>
-                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.price !}</label>
+                                            <label class="col-xs-4 control-label h5">with Learning Style : </label>
+                                            <label ng-if="!payment.subscription_packages.subscription.has_lsp" class="col-lg-4 h5 form-label">{! futureed.NO !}</label>
+                                            <label ng-if="payment.subscription_packages.subscription.has_lsp" class="col-lg-4 h5 form-label">{! futureed.YES !}</label>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label h5">Price : </label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.price !} USD</label>
+                                        </div>
+
                                     </div>
                                     <div class="wizard-content-title"></div>
                                     <div class="form-search">
-                                        <h3>Total Price Computation</h3>
+                                        <div class="h4">Total Price Computation</div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">SUBTOTAL : </label>
-                                            <label class="col-lg-4 h4 form-label">{! payment.subscription_packages.price !} USD</label>
+                                            <label class="col-xs-4 control-label h5">SUBTOTAL : </label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.price !} USD</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">DISCOUNT : </label>
-                                            <label class="col-lg-4 h4 form-label"> 00000.00</label>
+                                            <label class="col-xs-4 control-label h5">DISCOUNT : </label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.discount_percentage !} %</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h4">TOTAL : </label>
-                                            <label class="col-lg-4 h4 form-label"> 00000.00</label>
+                                            <label class="col-xs-4 control-label h5">TOTAL : </label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.total !} USD</label>
                                         </div>
                                     </div>
 
