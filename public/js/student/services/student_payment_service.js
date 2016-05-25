@@ -96,22 +96,23 @@ function StudentPaymentService($http) {
 		});
 	}
 
-	// subject_id
-	//days_id
-	//subscription_id
-	//country_id
-	//price
-	//status
-	service.subscriptionPackage = function(data) {
-
+	service.subscriptionPackages = function(data) {
 		return $http({
 			method	:	Constants.METHOD_GET
 			, url	:	serviceUrl + 'subscription-package?'
-				+ '&subject_id=' + ((data.subject_id) ? data.subject_id : '')
+				+ 'subject_id=' + ((data.subject_id) ? data.subject_id : '')
 				+ '&days_id=' + ((data.days_id) ? data.days_id : '')
 				+ '&subscription_id=' + ((data.subscription_id) ? data.subscription_id : '')
 				+ '&country_id=' + ((data.country_id) ? data.country_id : '')
 				+ '&status=' + Constants.ENABLED
+		});
+	}
+
+	//service.subs  api/v1/subscription-package/{id}
+	service.subscriptionPackage = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	serviceUrl + 'subscription-package/' + id
 		});
 	}
 
