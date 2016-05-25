@@ -3,20 +3,25 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			{{--Header--}}
 			<div class="row questions-header col-xs-12">
-				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
-						Exit Module
-					</button>
+				<div class="col-xs-6">
+					<div class="row col-xs-3">
+						<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+							Exit Module
+						</button>
+					</div>
+					<div class="row col-xs-3">
+						<center><h3> Question #{! mod.question_counter !} </h3></center>
+					</div>
 				</div>
-
-				<div class="row col-xs-6">
-					<center><h3> Question #{! mod.question_counter !} </h3></center>
-				</div>
-
-				<div class="row col-xs-3">
-					<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed"
-							type="button" class="btn btn-orange next-btn right-0"
-							ng-click="mod.checkAnswer()"> Submit </button>
+				<div class="col-xs-6">
+					<div class="row col-xs-6 left-percent-20 bottom-5">
+						<h3 class="border-radius-10">Progress {! mod.current_points !} / {! mod.points_to_finish !}</h3>
+					</div>
+					<div class="row col-xs-6">
+						<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed"
+								type="button" class="btn btn-orange next-btn right-0"
+								ng-click="mod.checkAnswer()"> Submit </button>
+					</div>
 				</div>
 
 			</div>

@@ -54,6 +54,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
+					var student_update = response.data;
+
+					self.points_to_finish = student_update.module.points_to_finish;
+					self.current_points = student_update.correct_counter;
+
 					if(successCallback) {
 						successCallback(response);
 					}
