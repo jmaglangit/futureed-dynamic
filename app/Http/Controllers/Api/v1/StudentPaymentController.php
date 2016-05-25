@@ -51,13 +51,15 @@ class StudentPaymentController extends ApiController {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param StudentPaymentRequest $request
 	 * @return Response
 	 */
 	public function studentPayment(StudentPaymentRequest $request)
 	{
 
 		$order = $request->only('subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
-								'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status');
+								'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status',
+								'subscription_package_id','discount_id','discount','sub_total');
 
 		//get student details
 		$student = $this->student->viewStudent($order['student_id']);
@@ -88,7 +90,7 @@ class StudentPaymentController extends ApiController {
 		//form data for order_details
 		$order_detail['order_id'] = $inserted_order['id'];
 		$order_detail['student_id'] = $order['student_id'];
-		$order_detail['price'] = $order['total_amount'];
+		$order_detail['price'] = $order['sub_total'];
 
 		//insert data to order_details table
 		$this->order_detail->addOrderDetail($order_detail);
@@ -104,6 +106,9 @@ class StudentPaymentController extends ApiController {
 		$invoice['total_amount'] = $order['total_amount'];
 		$invoice['subscription_id'] = $order['subscription_id'];
 		$invoice['payment_status'] = $order['payment_status'];
+		$invoice['subscription_package_id'] =  $order['subscription_package_id'];
+		$invoice['discount_id'] = $order['discount_id'];
+		$invoice['discount'] = $order['discount'];
 
 		//insert data to invoices table
 		$inserted_invoice = $this->invoice->addInvoice($invoice);
