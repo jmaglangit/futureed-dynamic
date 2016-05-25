@@ -13,7 +13,10 @@ class AnswerExplanationRepository implements  AnswerExplanationRepositoryInterfa
 	 */
 	public function getAnswerExplanation($module_id, $question_id,$seq_no){
 
-		return AnswerExplanation::moduleId($module_id)->questionId($question_id)->seqNo($seq_no)->get();
+		return AnswerExplanation::moduleId($module_id)
+			->questionId($question_id)
+			->seqNo($seq_no)
+			->first();
 	}
 
 }
