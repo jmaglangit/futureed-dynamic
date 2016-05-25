@@ -140,7 +140,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 		DB::beginTransaction();
 
 		try{
-			$response = Invoice::with('subscription','order','invoiceDetail')->find($id);
+			$response = Invoice::with('subscription','subscriptionPackage','order','invoiceDetail')->find($id);
 
 		}catch (\Exception $e){
 
