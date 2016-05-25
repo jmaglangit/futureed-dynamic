@@ -1389,6 +1389,10 @@ fieldset legend {
 	right: 0px !important;
 }
 
+.bottom-5 {
+	bottom: 5px;
+}
+
 .bg-image-item, .detcon{
 	padding: 20px 0;
 	float: left;
@@ -1450,4 +1454,18 @@ fieldset legend {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+}
+
+.border-radius-10
+{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 2px solid #a1a1a1;
+	height: 40px;
+	padding: 4px 40px;
+}
+
+.left-percent-20{
+	left : 20%;
 }
