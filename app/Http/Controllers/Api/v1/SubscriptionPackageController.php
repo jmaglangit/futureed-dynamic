@@ -63,7 +63,16 @@ class SubscriptionPackageController extends ApiController {
 			$offset = Input::get('offset');
 		}
 
-		return $this->respondWithData($this->subscription_package->getSubscriptionPackage($criteria,$limit,$offset));
+		return $this->respondWithData($this->subscription_package->getSubscriptionPackages($criteria,$limit,$offset));
+	}
+
+	/**
+	 * Get subscription package.
+	 * @param $id
+	 */
+	public function show($id){
+
+		return $this->respondWithData($this->subscription_package->getSubscriptionPackage($id));
 	}
 
 }
