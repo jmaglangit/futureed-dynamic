@@ -32,6 +32,8 @@ $(document).ready(function () {
     $(".prev-step").click(function (e) {
         navigatePrevTab();
     });
+
+
 });
 
 function navigateTab(){
@@ -50,4 +52,13 @@ function nextTab(elem) {
 }
 function prevTab(elem) {
     $(elem).prev().find('a[data-toggle="tab"]').click();
+}
+
+function lastTab() {
+    var $active = $('.wizard .nav-tabs li.active');
+    var $last = $('.wizard .nav-tabs li:last');
+    $active.removeClass('active');
+    $active.addClass('disabled');
+    $last.removeClass('disabled');
+    $last.find('a[data-toggle="tab"]').click();
 }
