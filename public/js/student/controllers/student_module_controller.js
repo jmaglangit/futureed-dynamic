@@ -1022,4 +1022,16 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.getTeachingContents(self.record.id);
 	}
 
+	self.getAnswerExplanation = function(){
+
+		console.log(self);
+		var data = {
+			'module_id' : 1,
+			'question_id' : 1,
+			'seq_no' : 1
+		};
+
+
+	}
+
 }
