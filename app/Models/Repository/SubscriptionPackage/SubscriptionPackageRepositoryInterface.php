@@ -3,7 +3,9 @@
 
 interface SubscriptionPackageRepositoryInterface {
 
-	public function getSubscriptionPackage($criteria = [], $limit, $offset);
+	public function getSubscriptionPackages($criteria = [], $limit, $offset);
+
+	public function getSubscriptionPackage($id);
 
 	public function getSubscriptionCountries();
 
