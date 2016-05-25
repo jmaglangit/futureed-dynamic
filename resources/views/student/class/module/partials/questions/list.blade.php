@@ -188,6 +188,9 @@
 					Proceed to next Question
 				</button>
 			</div>
+			<div ng-if="mod.result.points_earned <= 0" ng-init="mod.getAnswerExplanation()">
+				Tool tip here.
+			</div>
 		</div>
 	</div>
 
