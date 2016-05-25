@@ -15,7 +15,7 @@ class SubscriptionPackageRepository implements SubscriptionPackageRepositoryInte
 	 * @param $offset
 	 * @return array|bool
 	 */
-	public function getSubscriptionPackage($criteria = [], $limit, $offset){
+	public function getSubscriptionPackages($criteria = [], $limit, $offset){
 
 		DB::beginTransaction();
 
@@ -70,6 +70,16 @@ class SubscriptionPackageRepository implements SubscriptionPackageRepositoryInte
 
 		return $response;
 
+	}
+
+	/**
+	 * Get a package record.
+	 * @param $id
+	 * @return \Illuminate\Support\Collection|null|static
+	 */
+	public function getSubscriptionPackage($id){
+
+		return SubscriptionPackages::find($id);
 	}
 
 	/**
