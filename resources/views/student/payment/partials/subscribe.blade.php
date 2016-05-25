@@ -1,10 +1,16 @@
-<div ng-if="payment.active_add">
+<div ng-if="payment.active_add || payment.active_view">
     {{--Headers progress breadcrumb arrow Start > SUBJECT > SUBSCRIPTION > DAYS > DETAILS > PAY --}}
     {!! Html::script('/js/common/subscription_service.js')!!}
     {!! Html::script('/js/common/form_service.js')!!}
     <div class="wizard-content-title">
         <div class="title-main-content">
             <span>{!! trans('messages.add_payment') !!}</span>
+            {{--errors here --}}
+            <div class="alert alert-error" ng-if="payment.errors">
+                <p ng-repeat="error in payment.errors track by $index" >
+                    {! error !}
+                </p>
+            </div>
 
             <div class="col-xs-2 pull-right top-10">
                 <a href="{!! route('student.class.index') !!}" class="btn btn-maroon">{!! trans('messages.back') !!}</a>
@@ -12,7 +18,7 @@
         </div>
 
     </div>
-    <div class="wizard-row" ng-init="payment.subscriptionPackage(futureed.SUBSCRIPTION_COUNTRY); payment.subscriptionOption()">
+    <div class="wizard-row">
         <section>
             <div class="wizard">
                 <div class="wizard-inner">
@@ -140,7 +146,7 @@
 
                             {{--Other information--}}
                             {{--TODO add js script on change from text to input--}}
-                            <div class="row" ng-init="payment.subscriptionOption(futureed.SUBSCRIPTION_OTHERS)">
+                            <div class="row" ng-if="payment.active_add" ng-init="payment.subscriptionOption(futureed.SUBSCRIPTION_OTHERS)">
                                 <div class="col-xs-12 invoice-form">
                                     <h4>Billing Information</h4>
 
@@ -257,7 +263,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">Date period : </label>
-                                            <label class="col-lg-4 h5 form-label">date_start - date_end</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.date_start_string !} - {! payment.subscription_invoice.date_end_string !}</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">Country : </label>
@@ -283,22 +289,30 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">DISCOUNT : </label>
-                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.discount_percentage !} %</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.discount!} %</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">TOTAL : </label>
-                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.total !} USD</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.total_amount !} USD</label>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <ul class="list-inline pull-right">
-                                <li>
-                                    <button type="button" class="btn btn-primary">Save</button>
+                                <li ng-if="payment.active_add">
+                                    <button ng-click="payment.paySubscription()" type="button" class="btn btn-gold">
+                                        Pay Subscription
+                                    </button>
                                 </li>
-                                <li>
-                                    <button type="button" class="btn btn-gold">Pay Subscription</button>
+                                <li ng-if="payment.invoice.expired && payment.active_renew">
+                                    <button ng-click="payment.renewSubscription()" type="button" class="btn btn-primary">
+                                        Renew Subscription
+                                    </button>
+                                </li>
+                                <li ng-if="payment.active_view">
+                                    <button ng-click="payment.setActive()" type="button" class="btn btn-gold">
+                                        View List
+                                    </button>
                                 </li>
                             </ul>
                         </div>
