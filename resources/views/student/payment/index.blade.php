@@ -16,7 +16,7 @@
 			{{--<div template-directive template-url="{!! route('student.payment.partials.add') !!}"></div>--}}
 			<div template-directive template-url="{!! route('student.payment.partials.subscribe') !!}"></div>
 			
-			<div template-directive template-url="{!! route('student.payment.partials.view') !!}"></div>
+			{{--<div template-directive template-url="{!! route('student.payment.partials.view') !!}"></div>--}}
 		</div>
 	</div>
 @stop
