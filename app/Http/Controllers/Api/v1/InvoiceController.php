@@ -123,11 +123,14 @@ class InvoiceController extends ApiController {
 
         $now = Carbon::now();
 
-        if($now > $invoice['date_end']){
+        if ($now > $invoice['date_end']) {
 
-             $invoice['expired'] = true;
+            $invoice['expired'] = true;
+        } else {
 
+            $invoice['expired'] = false;
         }
+
         return $this->respondWithData($invoice);
     }
 
