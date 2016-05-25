@@ -73,12 +73,15 @@ class RenewSubscriptionController extends ApiController {
 		$data['seats_total'] = $invoice['seats_total'];
 		$data['discount_type'] = $invoice['discount_type'];
 		$data['discount_id'] = $invoice['discount_id'];
+		$data['discount'] = $invoice['discount'];
 		$data['subscription_id'] = $invoice['subscription_id'];
 		$data['payment_status'] = config('futureed.pending');
 		$data['seats_taken'] = $invoice['order']['seats_taken'];
 		$data['total_amount'] = 0;
 		$data['renew'] = 1;
 		$data['order_no'] = $invoice['order_no'];
+
+		//date start and ende
 
 		//add invoice
 		$added_invoice = $this->invoice->addInvoice($data);
