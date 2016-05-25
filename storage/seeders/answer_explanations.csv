@@ -1,0 +1,6 @@
+id,module_id,question_id,answer_id,learning_style_id,seq_no,answer_explanation,created_by,updated_by,created_at,updated_at,deleted_at
+,1,1,,,1,"To answer, look at the image",,,,,
+,1,2,,,1,"To answer, look at the image above the text",,,,,
+,1,2,,,2,Look at the number of images,,,,,
+,1,3,,,1,"To answer, look at the image above",,,,,
+,1,4,,,1,Select the  correct picture to satisfy the question,,,,,
