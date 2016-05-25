@@ -43,10 +43,13 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.active_list = Constants.FALSE;
 		self.active_add = Constants.FALSE;
 		self.active_view = Constants.FALSE;
+		self.active_renew = Constants.FALSE;
 		self.subscription_option = {};
 		self.subscription_packages = {};
 		self.subscription_invoice = {};
+		self.subscription_views = {};
 		self.subscription_continue = Constants.TRUE;
+		self.subscription_discount = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_ADD 	:
@@ -54,9 +57,13 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 				self.invoice = {};
 				self.invoice.student_id = $scope.user.id;
+				self.subscriptionOption();
+				self.subscriptionPackage(Constants.SUBSCRIPTION_COUNTRY);
 				break;
 
-			case Constants.ACTIVE_VIEW  : 
+			case Constants.ACTIVE_VIEW  :
+
+				console.log('active view');
 				self.active_view = Constants.TRUE;
 				self.paymentDetail(id);
 				break;
@@ -224,20 +231,31 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	};
 
 	self.saveSubscription = function() {
-		self.paySubscription(Constants.TRUE);
+		$scope.ui_block();
+		StudentPaymentService.paySubscription(self.subscription_invoice).success(function(response) {
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+
+				angular.forEach(response.errors, function(value, key) {
+					self.fields[value.field] = Constants.TRUE;
+				});
+
+
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	};
 
-	self.paySubscription = function(save) {
-		self.checkStudentBillingAddress();
-		if(self.student_billing_address_not_found == Constants.FALSE) {
-			self.fields = [];
-			self.errors = Constants.FALSE;
+	self.paySubscription = function() {
+		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
+		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
+		//subscription_package_id
 
-			self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
-			self.invoice.payment_status = Constants.PENDING;
-
-			$scope.ui_block();
-			StudentPaymentService.paySubscription(self.invoice).success(function(response) {
+		$scope.ui_block();
+			StudentPaymentService.paySubscription(self.subscription_invoice).success(function(response) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 
@@ -247,19 +265,14 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 					$scope.ui_unblock();
 				} else if(response.data) {
-					if(save) {
-						self.setActive();
-						$scope.ui_unblock();
-					} else {
 						var invoice = response.data;
 						self.getPaymentUri(invoice);
-					}
+
 				}
 			}).error(function(response) {
 				self.errors = $scope.internalError();
 				$scope.ui_unblock();
 			});
-		}
 	};
 
 	self.getPaymentUri = function(invoice) {
@@ -291,6 +304,10 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	};
 
 	self.paymentDetail = function(id) {
+
+		//TODO : 1. get to subscribe view and disable the rest of the options.
+		//TODO : if renewable enable button.
+		//TODO : disable other tabs.
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
@@ -300,19 +317,11 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			} else if(response.data) {
 				var data = response.data;
 
-				self.invoice = {
-					  id 				: 	data.id
-					, payment_status	: 	data.payment_status
-					, subscription_id 	: 	data.subscription_id
-					, order_id 			:  	data.order.id
-					, subject_id 		:  	(data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject_id : Constants.EMPTY_STR
-					, subject_name 		: 	(data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR
-					, date_start 		: 	data.date_start
-					, date_end 			: 	data.date_end
-					, expired 			: 	data.expired
-				};
+				self.invoice = data;
 
-				computeDays(data.subscription, self.invoice);
+				console.log('subscription details');
+				self.subscriptionView(response.data);
+
 			}
 
 			$scope.ui_unblock();
@@ -390,7 +399,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		} else {
 			self.errors = $scope.internalError();
 		}
-	}
+	};
 
 	//new subscription
 
@@ -448,6 +457,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 				break;
 			case Constants.SUBSCRIPTION_OTHERS	:
+				console.log("call sub option - " + category + ' and ' + id);
 				self.subscription_option.others = {};
 				self.subscriptionPackage();
 
@@ -456,20 +466,22 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				self.subscription_option = {};
 				break;
 		}
-	}
+	};
 
 	self.subscriptionPackage = function(category){
 
 		self.errors = Constants.FALSE;
 
-		StudentPaymentService.subscriptionPackage(self.subscription_option).success(function(response){
+		StudentPaymentService.subscriptionPackages(self.subscription_option).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 
 				self.subscription_packages = response.data.records;
+				console.log("new record 1 - " + category);
 				self.subscriptionOptionGenerator(category,self.subscription_packages);
 
 				if(self.subscription_packages.length == Constants.TRUE){
 					self.subscription_packages = self.subscription_packages[0];
+					console.log("new record 2");
 				}
 
 			}else{
@@ -481,15 +493,11 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			$scope.ui_unblock();
 		});
 
-	}
+	};
 
 	self.subscriptionOptionGenerator = function(category, data){
 
-		//add computation
-		//TODO get user discount available
-		//
-		//console.log(self.subscription_packages);
-		//self.getStudentDiscount();
+		self.getStudentDiscount();
 		self.getInvoice();
 
 		switch(category){
@@ -514,7 +522,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				break;
 		}
 
-	}
+	};
 
 	self.subscriptionGenerateCountry = function(data){
 
@@ -533,7 +541,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				hasCountry = 0;
 			}
 		});
-	}
+	};
 
 	self.subscriptionGenerateSubject = function(data){
 
@@ -552,7 +560,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				hasSubject = 0;
 			}
 		});
-	}
+	};
 
 	self.subscriptionGeneratePlan = function(data){
 
@@ -571,7 +579,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				hasPlan = 0;
 			}
 		});
-	}
+	};
 
 	self.subscriptionGenerateDays = function(data){
 
@@ -590,7 +598,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				hasDays = 0;
 			}
 		});
-	}
+	};
 
 	self.subscriptionGenerateOtherInfo = function(data){
 		//get user information -- student for billing
@@ -610,7 +618,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.subscription_continue = Constants.FALSE;
 		}
 
-	}
+	};
 
 	self.getCountry = function(id){
 
@@ -625,7 +633,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			$scope.ui_unblock();
 		});
 
-	}
+	};
 
 	self.getCountryList = function(){
 
@@ -641,7 +649,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
+	};
 
 	self.modifyUserAddress = function(data){
 
@@ -663,7 +671,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		}
 
 
-	}
+	};
 
 	self.updateUserBillingInformation = function(){
 
@@ -697,7 +705,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
+	};
 
 	self.getStudentDiscount = function(){
 
@@ -705,29 +713,31 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			}else if(response.data.total == Constants.TRUE) {
-				self.subscription_packages.discount_percentage = response.data.records[0].percentage;
+				self.subscription_discount = response.data.records[0];
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
+	};
 
 	self.getInvoice = function(){
 
 		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
 			//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
 
-		if (self.subscription_packages.length == 1) {
+		if (self.subscription_packages.length == 1 && self.active_add) {
 
-			self.getStudentDiscount();
 			var subscription = self.subscription_packages[0];
 
-			//console.log(self.subscription_packages.discount);
 			self.subscription_invoice.subject_id = subscription.subject_id;
-			self.subscription_invoice.order_date = moment().format('YYYY-MM-DD');
-			self.subscription_invoice.date_start = moment().format('YYYY-MM-DD');
-			self.subscription_invoice.date_end = moment().add(subscription.subscription_day.days,'days').format('YYYY-MM-DD');
+
+			self.subscription_invoice.order_date = moment().format('YYYYMMDD');
+			self.subscription_invoice.date_start = moment().format('YYYYMMDD');
+			self.subscription_invoice.date_end = moment().add(subscription.subscription_day.days,'days').format('YYYYMMDD');
+			self.subscription_invoice.date_start_string = moment().format('MMMM DD YYYY');
+			self.subscription_invoice.date_end_string = moment().add(subscription.subscription_day.days,'days').format('MMMM DD YYYY');
+
 			self.subscription_invoice.student_id = $scope.user.id;
 			self.subscription_invoice.subscription_id = subscription.subscription_id;
 			self.subscription_invoice.seats_total = Constants.TRUE;
@@ -736,15 +746,77 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.subscription_invoice.country_id = subscription.country_id;
 
 			self.subscription_invoice.sub_total = subscription.price;
-			self.subscription_invoice.discount = subscription.discount;
-			self.subscription_invoice.total = [];
-
-
-
-			console.log(self.subscription_invoice);
-			console.log(subscription);
+			self.subscription_invoice.discount = self.subscription_discount.percentage;
+			self.subscription_invoice.discount_id = self.subscription_discount.id;
+			self.subscription_invoice.total_amount = subscription.price - ((subscription.price * self.subscription_discount.percentage) / 100);
+			self.subscription_invoice.subscription_package_id = subscription.id;
 
 		}
+	};
+
+	self.subscriptionView = function(data){
+
+		//console.log(data);
+
+		lastTab();
+
+		self.subscription_packages = data.subscription_package;
+		self.subscription_packages.subscription = data.subscription;
+
+		self.subscription_invoice = {
+			subject_id	:	data.invoice_detail[0].classroom.subject.id,
+			order_date	:	data.order.order_date,
+			date_start	:	data.date_start,
+			date_end	:	data.date_end,
+			date_start_string	:	moment(data.date_start,'YYYY-MM-DD').format('MMMM DD YYYY'),
+			date_end_string	:	moment(data.date_end,'YYYY-MM-DD').format('MMMM DD YYYY'),
+
+			student_id	:	$scope.user.id,
+			subscription_id	:	data.subscription_id,
+			seats_total	:	data.seats_total,
+			payment_status	:	data.payment_status,
+			country_id	:	self.subscription_packages.country_id,
+
+			sub_total	:	data.subscription_package,
+			discount	:	data.discount,
+			discount_id	:	data.discount_id,
+			total_amount	:	data.total_amount,
+			subscription_package_id	:	data.subscription_package_id
+
+		};
+
+		self.subscription_option = data.subscription_package;
+
+		self.checkSubscription();
+
+		console.log(self.subscription_packages);
+	};
+
+	self.renewSubscription = function(){
+
+		var invoice = self.invoice;
+
+		//TODO check subscription package is still exists else output error to get new subscription.
+		//TODO update date views.
+
+
+	};
+
+	self.checkSubscription = function(){
+
+		StudentPaymentService.subscriptionPackage(self.subscription_invoice.subscription_package_id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data) {
+				//self.subscription_packages = response.data;
+				self.active_renew = Constants.TRUE;
+			} else {
+				self.active_renew = Constants.FALSE;
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 
 
