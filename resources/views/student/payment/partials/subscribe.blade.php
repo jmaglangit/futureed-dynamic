@@ -6,11 +6,7 @@
         <div class="title-main-content">
             <span>{!! trans('messages.add_payment') !!}</span>
             {{--errors here --}}
-            <div class="alert alert-error" ng-if="payment.errors">
-                <p ng-repeat="error in payment.errors track by $index" >
-                    {! error !}
-                </p>
-            </div>
+
 
             <div class="col-xs-2 pull-right top-10">
                 <a href="{!! route('student.class.index') !!}" class="btn btn-maroon">{!! trans('messages.back') !!}</a>
@@ -70,6 +66,11 @@
                             </a>
                         </li>
                     </ul>
+                </div>
+                <div class="alert alert-error col-xs-6" ng-if="payment.errors">
+                    <p ng-repeat="error in payment.errors track by $index" >
+                        {! error !}
+                    </p>
                 </div>
                 {!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
                     <div class="tab-content">
@@ -299,12 +300,12 @@
                                 </div>
                             </div>
                             <ul class="list-inline pull-right">
-                                <li ng-if="payment.active_add">
+                                <li ng-if="payment.active_add || payment.active_pay">
                                     <button ng-click="payment.paySubscription()" type="button" class="btn btn-gold">
                                         Pay Subscription
                                     </button>
                                 </li>
-                                <li ng-if="payment.invoice.expired && payment.active_renew">
+                                <li ng-if="payment.invoice.expired && payment.active_renew && !payment.active_pay">
                                     <button ng-click="payment.renewSubscription()" type="button" class="btn btn-primary">
                                         Renew Subscription
                                     </button>
