@@ -58,7 +58,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 					self.points_to_finish = student_update.module.points_to_finish;
 					self.current_points = student_update.correct_counter;
-					self.current_student_module = student_update;
 
 					if(successCallback) {
 						successCallback(response);
@@ -438,6 +437,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		answer.student_id = $scope.user.id;
 		answer.date_start = new Date();
 		answer.date_end = new Date();
+
+		self.current_student_module = {
+			module_id : self.record.id,
+			question_id : self.current_question.id,
+			seq_no	:	self.current_question.seq_no
+		};
 
 		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
 			answer.answer_text = self.current_question.answer_text.join(",");
@@ -1032,8 +1037,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 		var data = {
 			'module_id' : self.current_student_module.module_id,
-			'question_id' : self.current_student_module.question.id,
-			'seq_no' : self.current_student_module.question.seq_no
+			'question_id' : self.current_student_module.question_id,
+			'seq_no' : self.current_student_module.seq_no
 		};
 
 		StudentModuleService.getAnswerExplanation(data).success(function(response){
