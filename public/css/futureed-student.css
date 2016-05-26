@@ -943,7 +943,7 @@ hr {
 	right: 0;
 	left: 0;
 	text-align: center;
-	padding-bottom: 10px;
+	padding-bottom: 0px;
 }
 
 .questions-image {
@@ -1194,7 +1194,7 @@ hr {
 }
 
 .result-image {
-	margin: 80px auto 0px auto;
+	margin: 87px auto 0px -70%;
 	text-align: center;
 	background: #e8e8e8;
 	border-radius: 50%;
@@ -1206,14 +1206,28 @@ hr {
 	margin-top: 100px;
 }
 
+.result-tip {
+	text-align: center;
+	padding-top: 0px;
+	padding-bottom: 20px;
+}
+
+.result-tip img {
+	margin-right: 15px;
+}
+
 .result-message {
-	margin: 36px auto;
-	background-color: rgba(213, 213, 213, .3);
+	margin: 100px 40% 40px 40%;
 	padding: 20px;
 	border-radius: 5px;
 	font-size: 22px;
-	width: 50%;
+	width: 25%;
 	text-align: center;
+}
+
+.result-message h2 {
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .quote-message {
