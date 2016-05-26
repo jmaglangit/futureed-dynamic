@@ -15,6 +15,11 @@
 
     </div>
     <div class="wizard-row">
+        <div class="alert alert-error" ng-if="payment.errors">
+            <p ng-repeat="error in payment.errors track by $index" >
+                {! error !}
+            </p>
+        </div>
         <section>
             <div class="wizard">
                 <div class="wizard-inner">
@@ -66,11 +71,6 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-                <div class="alert alert-error col-xs-6" ng-if="payment.errors">
-                    <p ng-repeat="error in payment.errors track by $index" >
-                        {! error !}
-                    </p>
                 </div>
                 {!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
                     <div class="tab-content">
