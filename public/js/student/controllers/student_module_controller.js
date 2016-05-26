@@ -58,6 +58,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 					self.points_to_finish = student_update.module.points_to_finish;
 					self.current_points = student_update.correct_counter;
+					self.current_student_module = student_update;
 
 					if(successCallback) {
 						successCallback(response);
@@ -1025,6 +1026,28 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.list = function(){
 
 		self.getTeachingContents(self.record.id);
+	}
+
+	self.getAnswerExplanation = function(){
+
+		var data = {
+			'module_id' : self.current_student_module.module_id,
+			'question_id' : self.current_student_module.question.id,
+			'seq_no' : self.current_student_module.question.seq_no
+		};
+
+		StudentModuleService.getAnswerExplanation(data).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			} else {
+				self.answer_explanation = response.data;
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+
 	}
 
 }

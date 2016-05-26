@@ -127,5 +127,15 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.getAnswerExplanation = function(data){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	serviceUrl + 'answer-explanation?'
+				+	'module_id=' +	data.module_id
+				+	'&question_id='	+	data.question_id
+				+	'&seq_no='	+	data.seq_no
+		});
+	}
+
 	return service;
 }

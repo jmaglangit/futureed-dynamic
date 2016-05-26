@@ -172,27 +172,34 @@
 				<h3> Question #{! mod.question_counter !} </h3>
 			</div>
 
-			<div class="result-image">
-				<i class="fa fa-5x img-rounded text-center"
-					ng-class="{ 'fa-times' : !mod.result.points_earned, 'fa-check' : mod.result.points_earned }"></i>
+			<div class="col-xs-12 col-md-12">
+
+				<span class="result-message col-xs-3"
+					 ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
+					<h2 ng-if="mod.result.points_earned > 0">
+						Correct!
+					</h2>
+
+					<h2 ng-if="mod.result.points_earned <= 0" >
+						Wrong.
+					</h2>
+				</span>
+				<span class="result-image col-xs-3">
+					<i class="fa fa-5x img-rounded text-center"
+					   ng-class="{ 'fa-times' : !mod.result.points_earned, 'fa-check' : mod.result.points_earned }"></i>
+				</span>
 			</div>
-
-			<div class="result-message"
-				ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">	
-				<p ng-if="mod.result.points_earned > 0">
-					Correct!
-				</p>
-
-				<p ng-if="mod.result.points_earned <= 0">
-					Wrong.
-				</p>
+			<div class="result-tip col-xs-12" ng-if="mod.result.points_earned <= 0"
+				 ng-init="mod.getAnswerExplanation()">
+				<span ng-if="mod.answer_explanation.answer_explanation"><img src="/images/icon-tipbulb.png">   </span>
+				<span class="h4" ng-if="mod.answer_explanation.answer_explanation">{! mod.answer_explanation.answer_explanation !}</span>
 			</div>
-
 			<div class="proceed-btn-container btn-container">
 				<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
 					Proceed to next Question
 				</button>
 			</div>
+
 		</div>
 	</div>
 
