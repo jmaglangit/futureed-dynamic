@@ -12,11 +12,11 @@ class AnswerExplanationTableSeeder extends Seeder
 
         $reader = Reader::createFromPath(storage_path('seeders') . '/answer_explanations.csv');
 
-        DB::table('answer_explanations')->truncate();
+        $seeds = [];
 
         foreach($reader as $data){
 
-            DB::table('answer_explanations')->insert([
+            array_push($seeds,[
                 'module_id' => $data[1],
                 'question_id' => $data[2],
                 'answer_id' => $data[3],
@@ -29,8 +29,10 @@ class AnswerExplanationTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-
         }
+
+        DB::table('answer_explanations')->truncate();
+        DB::table('answer_explanations')->insert($seeds);
 
     }
 }
