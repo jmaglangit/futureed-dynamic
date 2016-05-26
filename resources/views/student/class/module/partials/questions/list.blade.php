@@ -4,17 +4,17 @@
 			{{--Header--}}
 			<div class="row questions-header col-xs-12">
 				<div class="col-xs-6">
-					<div class="row col-xs-3">
+					<div class="row col-xs-6">
 						<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 							Exit Module
 						</button>
 					</div>
-					<div class="row col-xs-3">
-						<center><h3> Question #{! mod.question_counter !} </h3></center>
+					<div class="row col-xs-6">
+						<div><h3> Question #{! mod.question_counter !} </h3></div>
 					</div>
 				</div>
 				<div class="col-xs-6">
-					<div class="row col-xs-6 left-percent-20 bottom-5">
+					<div class="row col-xs-6 bottom-6">
 						<h3 class="border-radius-10">Progress {! mod.current_points !} / {! mod.points_to_finish !}</h3>
 					</div>
 					<div class="row col-xs-6">
