@@ -44,6 +44,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.active_add = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 		self.active_renew = Constants.FALSE;
+		self.active_pay = Constants.FALSE;
 		self.subscription_option = {};
 		self.subscription_packages = {};
 		self.subscription_invoice = {};
@@ -799,6 +800,19 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		//TODO check subscription package is still exists else output error to get new subscription.
 		//TODO update date views.
 
+		self.checkSubscription();
+
+		//extend date
+		console.log(self.subscription_packages);
+
+		self.subscription_invoice.order_date = moment().format('YYYYMMDD');
+		self.subscription_invoice.date_start = moment().format('YYYYMMDD');
+		self.subscription_invoice.date_end = moment().add(self.subscription_packages.subscription_day.days,'days').format('YYYYMMDD');
+		self.subscription_invoice.date_start_string = moment().format('MMMM DD YYYY');
+		self.subscription_invoice.date_end_string = moment().add(self.subscription_packages.subscription_day.days,'days').format('MMMM DD YYYY');
+
+		//enable button
+		self.active_pay = Constants.TRUE;
 
 	};
 
@@ -808,7 +822,6 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
-				//self.subscription_packages = response.data;
 				self.active_renew = Constants.TRUE;
 			} else {
 				self.active_renew = Constants.FALSE;
