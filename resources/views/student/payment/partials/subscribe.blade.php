@@ -249,7 +249,13 @@
                                 <div class="col-xs-12 invoice-form">
                                     {{--subscription summary--}}
                                     <div class="form-search">
-                                        <div class="h4">Subscription Summary</div>
+                                        <div>
+                                            <div class="h4 col-xs-9">Subscription Summary</div>
+                                            <div class="col-md-3 h4 alert"
+                                                 ng-class="{'alert-info' : payment.subscription_invoice.payment_status == futureed.PAID
+                                                 , 'alert-danger' : payment.subscription_invoice.payment_status == futureed.PENDING}">
+                                                <center>{! payment.subscription_invoice.payment_status !}</center></div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">SUBJECT : </label>
                                             <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.subject.name !}</label>
@@ -300,13 +306,18 @@
                                 </div>
                             </div>
                             <ul class="list-inline pull-right">
-                                <li ng-if="payment.active_add || payment.active_pay">
+                                <li ng-if="payment.active_add || payment.active_pay || payment.subscription_invoice.payment_status == futureed.PENDING">
                                     <button ng-click="payment.paySubscription()" type="button" class="btn btn-gold">
                                         Pay Subscription
                                     </button>
                                 </li>
+                                <li ng-if="!payment.active_view">
+                                    <button ng-click="payment.saveSubscription()" type="button" class="btn btn-primary">
+                                        Save
+                                    </button>
+                                </li>
                                 <li ng-if="payment.invoice.expired && payment.active_renew && !payment.active_pay">
-                                    <button ng-click="payment.renewSubscription()" type="button" class="btn btn-primary">
+                                    <button ng-click="payment.renewSubscription(); payment.renewPayment()" type="button" class="btn btn-primary">
                                         Renew Subscription
                                     </button>
                                 </li>
