@@ -4,6 +4,7 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\StudentPaymentRequest;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Services\ClassroomServices;
 use FutureEd\Services\InvoiceServices;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
@@ -25,6 +26,7 @@ class StudentPaymentController extends ApiController {
 	protected $classroom;
 	protected $class_student;
 	protected $invoice_detail;
+	protected $classrom_service;
 
 	public function __construct(
 							StudentRepositoryInterface $student,
@@ -34,7 +36,8 @@ class StudentPaymentController extends ApiController {
 							InvoiceRepositoryInterface $invoice,
 							ClassroomRepositoryInterface $classroom,
 							ClassStudentRepositoryInterface $class_student,
-							InvoiceDetailRepositoryInterface $invoice_detail
+							InvoiceDetailRepositoryInterface $invoice_detail,
+							ClassroomServices $classroomServices
 								){
 
 		$this->student = $student;
@@ -45,7 +48,7 @@ class StudentPaymentController extends ApiController {
 		$this->classroom = $classroom;
 		$this->class_student = $class_student;
 		$this->invoice_detail = $invoice_detail;
-
+		$this->classrom_service = $classroomServices;
 	}
 
 	/**
