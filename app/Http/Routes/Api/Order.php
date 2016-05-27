@@ -15,4 +15,14 @@ Routes::group([
 		'as' => 'api.v1.order.store'
 	]);
 
+	Routes::get('/order/{id}',[
+		'uses' => 'Api\v1\OrderController@show',
+		'as' => 'api.v1.order.show'
+	]);
+
+	Routes::put('/order/{id}',[
+		'uses' => 'Api\v1\OrderController@update',
+		'as' => 'api.v1.order.update'
+	]);
+
 });
