@@ -1,12 +1,7 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use Carbon\Carbon;
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
-use FutureEd\Models\Core\OrderDetail;
-use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepository;
-use Illuminate\Http\Request;
-use FutureEd\Http\Requests\Api\RenewSubscriptionRequest;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
@@ -66,20 +61,45 @@ class RenewSubscriptionController extends ApiController {
 		//get invoice details
 		$invoice = $this->invoice->getInvoice($id);
 
+		//TODO: check new fields.
+//		"id" => 1
+//		"order_no" => "0003-000001-2016"
+//		"invoice_date" => "2016-05-24 00:00:00"
+//		"client_id" => 0
+//		"client_name" => "0"
+//		"student_id" => 3
+//		"student_name" => "Jason Maglangit"
+//		"date_start" => "2016-05-20 00:00:00"
+//		"date_end" => "2016-05-23 00:00:00"
+//		"seats_total" => 1
+//		"discount_type" => "Volume"
+//		"discount_id" => 1
+//		"discount" => "25.00"
+//		"total_amount" => "3.75"
+//		"subscription_id" => 1
+//		"subscription_package_id" => 1
+//		"renew" => 0
+//		"payment_status" => "Paid"
+//		"status" => "Disabled"
+
+		$data['order_no'] = $invoice['order_no'];
+		$data['invoice_date'] = Carbon::now()->toDateString();
 		$data['client_id'] = $invoice['client_id'];
 		$data['client_name'] = $invoice['client_name'];
 		$data['student_id'] = $invoice['student_id'];
 		$data['student_name'] = $invoice['student_name'];
+		$data['date_start'] = Carbon::now()->toDateString();
+		$data['date_end'] = Carbon::now()->addDays($invoice->subscriptionPackage->subscription_day->days)->toDateString();
 		$data['seats_total'] = $invoice['seats_total'];
 		$data['discount_type'] = $invoice['discount_type'];
 		$data['discount_id'] = $invoice['discount_id'];
 		$data['discount'] = $invoice['discount'];
+		$data['total_amount'] = 0;
 		$data['subscription_id'] = $invoice['subscription_id'];
+		$data['subscription_package_id'] = $invoice['subscription_package_id'];
+		$data['renew'] = 1;
 		$data['payment_status'] = config('futureed.pending');
 		$data['seats_taken'] = $invoice['order']['seats_taken'];
-		$data['total_amount'] = 0;
-		$data['renew'] = 1;
-		$data['order_no'] = $invoice['order_no'];
 
 		//date start and ende
 
