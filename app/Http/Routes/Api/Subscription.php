@@ -21,6 +21,10 @@ Routes::group([
 		'uses' => 'Api\v1\PaymentSubscriptionController@renewSubscription',
 		'as' => 'subscription.renew']);
 
+    Routes::post('/save-subscription', [
+        'uses' => 'Api\v1\PaymentSubscriptionController@saveSubscription',
+        'as' => 'subscription.save']);
+
 
 });
 
