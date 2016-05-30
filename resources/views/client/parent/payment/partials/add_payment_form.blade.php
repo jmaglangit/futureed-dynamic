@@ -157,7 +157,7 @@
 								<td>{!! trans('messages.name') !!}</td>
 								<td>{!! trans('messages.email') !!}</td>
 								<td>{!! trans('messages.price') !!}</td>
-								<td>{!! trans('messages.action') !!}</td>
+								<td>{!! trans_choice('messages.action', 1) !!}</td>
 							</tr>
 						</thead>
 						<tbody>

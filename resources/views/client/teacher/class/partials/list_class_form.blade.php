@@ -103,7 +103,7 @@
 		            <th>{!! trans('messages.class_name') !!}</th>
 		            <th>{!! trans('messages.no_of_seats_taken') !!}</th>
 		            <th>{!! trans('messages.no_of_seats_enrolled') !!}</th>
-		            <th ng-if="class.records.length">{!! trans('messages.action') !!}</th>
+		            <th ng-if="class.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 		        </tr>
 	        </thead>
 	        <tbody>
