@@ -148,18 +148,26 @@ function StudentPaymentService($http) {
 		});
 	}
 
-	service.getOrder = function($order_id){
+	service.getOrder = function(order_id){
 		return $http({
 			method	: Constants.METHOD_GET
-			, url	: serviceUrl + 'order/' + $order_id
+			, url	: serviceUrl + 'order/' + order_id
 		});
 	}
 
-	service.updateOrder = function($order_id,data){
+	service.updateOrder = function(order_id,data){
 		return $http({
 			method	: Constants.METHOD_PUT
 			, data	: data
-			, url	: serviceUrl + 'order/' + $order_id
+			, url	: serviceUrl + 'order/' + order_id
+		});
+	}
+
+	service.saveSubscription = function(data){
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: serviceUrl + 'save-subscription'
 		});
 	}
 
