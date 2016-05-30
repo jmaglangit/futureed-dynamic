@@ -106,7 +106,7 @@
 		        <tr>
 		            <th>{!! trans_choice('messages.module', 1) !!}</th>
 		            <th>{!! trans_choice('messages.grade', 1) !!}</th>
-		            <th ng-if="module.records.length" class="table-width-200">{!! trans('messages.action') !!}</th>
+		            <th ng-if="module.records.length" class="table-width-200">{!! trans_choice('messages.action', 2) !!}</th>
 		        </tr>
 	        </thead>
 	        <tbody>

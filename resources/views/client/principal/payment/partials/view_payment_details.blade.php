@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="form-group" ng-init="getGradeLevel(user.country_id)">
-                            <label class="col-xs-3 control-label">{!! trans('messages.grade') !!} <span class="required">*</span></label>
+                            <label class="col-xs-3 control-label">{!! trans_choice('messages.grade', 1) !!} <span class="required">*</span></label>
 
                             <div class="col-xs-5">
                                 <select name="grade_id" ng-disabled="!grades.length || payment.invoice.renew"
@@ -336,12 +336,12 @@
                         <thead>
                         <tr>
                             <th>{!! trans('messages.no_of_seats') !!}</th>
-                            <th>{!! trans('messages.grade') !!}</th>
+                            <th>{!! trans_choice('messages.grade', 1) !!}</th>
                             <th>{!! trans('messages.teacher') !!}</th>
                             <th>{!! trans('messages.class') !!}</th>
                             <th>{!! trans('messages.price') !!}</th>
                             <th ng-if="payment.invoice.payment_status == futureed.PENDING && !payment.invoice.renew">
-                                {!! trans('messages.action') !!}
+                                {!! trans_choice('messages.action', 1) !!}
                             </th>
                         </tr>
                         </thead>
