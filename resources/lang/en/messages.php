@@ -75,7 +75,6 @@ return [
 	'click_to_login' => 'Click here to Login',
 	'click_confirm_email' => 'Click on Confirm Email Address',
 	'client' => 'Client',
-	'client_update_info' => 'Please update your billing address(address information).',
 	'client_site' => 'client site',
 	'close' => 'Close',
 	'close_this_req' => 'Close This Request',
