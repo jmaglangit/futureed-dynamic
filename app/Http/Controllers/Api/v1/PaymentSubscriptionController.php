@@ -11,6 +11,7 @@ use FutureEd\Services\InvoiceServices;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
+use FutureEd\Http\Requests\Api\PaymentSubscriptionRequest;
 
 class PaymentSubscriptionController extends ApiController {
 
@@ -110,6 +111,42 @@ class PaymentSubscriptionController extends ApiController {
 		return $this->respondWithData($this->invoice->getInvoice($added_invoice['id']));
 	}
 
+	/**
+	 * @param PaymentSubscriptionRequest $request
+	 */
+	public function saveSubscription(PaymentSubscriptionRequest $request){
+
+		$invoice = $request->all();
+
+		//get the last inputted order
+		$prev_order = $this->order->getNextOrderNo();
+
+		if(!$prev_order){
+
+			$next_order_id = 1;
+		}else{
+
+			$next_order_id = ++$prev_order['id'];
+		}
+
+		$invoice['order_no'] = $this->invoice_service->createOrderNo($invoice['student_id'],$next_order_id);
+
+		//insert data into order
+		$inserted_order = $this->order->addOrder($invoice);
+
+		//form data for order_details
+		$order_detail['order_id'] = $inserted_order['id'];
+		$order_detail['student_id'] = $invoice['student_id'];
+		$order_detail['price'] = $invoice['sub_total'];
+
+		//insert data to order_details table
+		$this->order_detail->addOrderDetail($order_detail);
+
+
+		$invoice = $this->invoice->addInvoice($invoice);
+
+		return $this->respondWithData($invoice);
+	}
 
 
 }
