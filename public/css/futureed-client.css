@@ -913,3 +913,41 @@ content legend {
 	border-bottom-color: #04435e;
 	left: 65px;
 }
+
+/*subscription on parent*/
+.wizard .parent > li {
+	width: 14%;
+}
+
+.wizard .parent li:after {
+	left: 41%;
+}
+
+.wizard-panel-student {
+	width: 175px;
+	height: 200px;
+	float: left;
+	margin: 10px;
+	transition: 0.1s ease-in-out;
+}
+
+
+.wizard-panel-student .panel-heading {
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+
+.wizard-panel-student .panel-heading .panel-title {
+	padding-top: 17px;
+}
+.wizard-panel-student .panel-body {
+	text-align: center;
+}
+
+.box-name {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+}
