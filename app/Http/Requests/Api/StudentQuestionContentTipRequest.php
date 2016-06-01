@@ -61,8 +61,9 @@ class StudentQuestionContentTipRequest extends ApiRequest {
 			'link_id.integer' => trans('errors.1004',['attribute' => trans('errors.2197')]),
 			'content.required' => trans('validation.required',['attribute' => trans('errors.2172')]),
 			'content.string' => trans('errors.1004',['attribute' => trans('errors.2172')]),
-
-
+			'title.required' => trans('validation.required', ['attribute' => trans('errors.2223')]),
+			'title.max' => trans('validation.max.string', ['attribute' => trans('errors.2223')]),
+			'title.min' => trans('validation.min.string', ['attribute' => trans('errors.2223')])
 		];
 	}
 
