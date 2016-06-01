@@ -5,12 +5,6 @@
     <div class="wizard-content-title">
         <div class="title-main-content">
             <span>{!! trans('messages.add_payment') !!}</span>
-            {{--errors here --}}
-
-
-            <div class="col-xs-2 pull-right top-10">
-                <a href="{!! route('student.class.index') !!}" class="btn btn-maroon">{!! trans('messages.back') !!}</a>
-            </div>
         </div>
 
     </div>
@@ -24,7 +18,7 @@
             <div class="wizard">
                 <div class="wizard-inner">
                     <div class="connecting-line"></div>
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav nav-tabs parent" role="tablist">
 
                         <li role="presentation" class="active">
                             <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Country">
@@ -57,7 +51,14 @@
                             </a>
                         </li>
                         <li role="presentation" class="disabled">
-                            <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab" title="Other Information">
+                            <a href="#step5" data-toggle="tab" aria-controls="step4" role="tab" title="Students">
+                            <span class="round-tab">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </span>
+                            </a>
+                        </li>
+                        <li role="presentation" class="disabled">
+                            <a href="#step6" data-toggle="tab" aria-controls="step5" role="tab" title="Other Information">
                             <span class="round-tab">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
                             </span>
@@ -143,6 +144,25 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step5">
+                            <h3>Students</h3>
+                            {{--TODO List Students under parents--}}
+                            <div class="row" ng-init="payment.subscriptionOption(futureed.SUBSCRIPTION_STUDENTS)">
+                                <div class="col-xs-12" data-toggle="buttons">
+                                    <div ng-repeat="student in payment.student_list" class="btn btn-sq-lg btn-primary wizard-box-lone"
+                                            ng-click="payment.enlistStudent(student)">
+                                        <span class="box-image fa fa-5x fa-user"></span><br>
+                                        <div class="box-name">{! student.first_name !} {! student.last_name!}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-inline pull-right">
+                                <li>
+                                    <button type="button" class="btn btn-primary btn-info-full"
+                                            ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_STUDENT)">Add Student</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="step6">
                             <h3>Additional Information</h3>
 
                             {{--Other information--}}
