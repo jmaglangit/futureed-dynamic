@@ -47,10 +47,28 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 
+		//subscription
+		self.active_renew = Constants.FALSE;
+		self.active_pay = Constants.FALSE;
+		self.active_save = Constants.FALSE;
+		self.subscription_option = {};
+		self.subscription_packages = {};
+		self.subscription_invoice = {};
+		self.subscription_views = {};
+		self.subscription_continue = Constants.TRUE;
+		self.subscription_discount = Constants.FALSE;
+
+		self.getClientDetails();
+
 		switch(active){
 			case Constants.ACTIVE_ADD 	:
 
 				self.active_add = Constants.TRUE;
+
+				self.invoice = {};
+				self.invoice.student_id = $scope.user.id;
+				self.subscriptionOption();
+				self.subscriptionPackage(Constants.SUBSCRIPTION_COUNTRY);
 				break;
 
 			case Constants.ACTIVE_VIEW 	:
@@ -678,4 +696,368 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.errors = $scope.internalError();
 		});
 	}
+
+	self.getClientDetails = function(){
+
+		ManageParentPaymentService.getClient($scope.user.id).success(function (response) {
+			if (angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data;
+
+					self.client_details = data;
+				}
+			}
+
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+		});
+	};
+
+	//new subscription
+
+	self.subscriptionOption = function(category,id){
+
+		switch(category){
+
+			case Constants.SUBSCRIPTION_COUNTRY :
+
+				self.subscription_option.country_id = id;
+
+				//empty values
+				self.subscription_option.subject_id = Constants.FALSE;
+				self.subscription_option.subscription_id = Constants.FALSE;
+				self.subscription_option.days_id = Constants.FALSE;
+
+				//next tab
+				self.subscriptionPackage(Constants.SUBSCRIPTION_SUBJECT);
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_SUBJECT	:
+
+				self.subscription_option.subject_id = id;
+
+				//empty values
+				self.subscription_option.subscription_id = Constants.FALSE;
+				self.subscription_option.days_id = Constants.FALSE;
+
+				//next tab
+				self.subscriptionPackage(Constants.SUBSCRIPTION_PLAN);
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_PLAN	:
+
+				self.subscription_option.subscription_id = id;
+
+				//empty values
+				self.subscription_option.days_id = Constants.FALSE;
+
+				//next tab
+				self.subscriptionPackage(Constants.SUBSCRIPTION_DAYS);
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_DAYS	:
+
+				self.subscription_option.days_id = id;
+
+				//next tab
+				self.subscriptionPackage(Constants.SUBSCRIPTION_OTHERS);
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_STUDENTS:
+
+				self.subscriptionPackage(Constants.SUBSCRIPTION_STUDENTS);
+				break;
+
+			case Constants.SUBSCRIPTION_OTHERS	:
+				self.subscription_option.others = {};
+				self.subscriptionPackage();
+
+				break;
+			default:
+				self.subscription_option = {};
+				break;
+		}
+	};
+
+	self.subscriptionPackage = function(category){
+
+		self.errors = Constants.FALSE;
+
+		ManageParentPaymentService.subscriptionPackages(self.subscription_option).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+
+				self.subscription_packages = response.data.records;
+				self.subscriptionOptionGenerator(category,self.subscription_packages);
+
+				if(self.subscription_packages.length == Constants.TRUE){
+					self.subscription_packages = self.subscription_packages[0];
+				}
+
+			}else{
+				self.errors = $scope.errorHandler(response.errors);
+			}
+
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+	};
+
+	self.subscriptionOptionGenerator = function(category, data){
+
+		self.getClientSubscriptionDiscount();
+		self.getInvoice();
+
+		switch(category){
+			case Constants.SUBSCRIPTION_COUNTRY :
+				self.subscriptionGenerateCountry(data);
+				break;
+			case Constants.SUBSCRIPTION_SUBJECT	:
+				self.subscriptionGenerateSubject(data);
+				break;
+			case Constants.SUBSCRIPTION_PLAN	:
+				self.subscriptionGeneratePlan(data);
+				break;
+			case Constants.SUBSCRIPTION_DAYS	:
+				self.subscriptionGenerateDays(data);
+				break;
+			case Constants.SUBSCRIPTION_STUDENTS:
+				self.subscriptionGenerateStudentList();
+				break;
+			case Constants.SUBSCRIPTION_OTHERS	:
+				self.subscriptionGenerateOtherInfo();
+				break;
+			default :
+				break;
+		}
+
+	};
+
+	self.subscriptionGenerateCountry = function(data){
+
+		self.subscription_country = [];
+		var hasCountry = 0;
+		angular.forEach(data, function(value,key){
+			angular.forEach(self.subscription_country,function(v,k){
+				if(v.id == value.country_id){
+					hasCountry = 1;
+				}
+			});
+
+			if(hasCountry == 0){
+				self.subscription_country.push(value.country);
+			}else {
+				hasCountry = 0;
+			}
+		});
+	};
+
+	self.subscriptionGenerateSubject = function(data){
+
+		self.subscription_subject = [];
+		var hasSubject = 0;
+		angular.forEach(data, function(value,key){
+			angular.forEach(self.subscription_subject,function(v,k){
+				if(v.id == value.subject_id){
+					hasSubject = 1;
+				}
+			});
+
+			if(hasSubject == 0){
+				self.subscription_subject.push(value.subject);
+			}else {
+				hasSubject = 0;
+			}
+		});
+	};
+
+	self.subscriptionGeneratePlan = function(data){
+
+		self.subscription_plan = [];
+		var hasPlan = 0;
+		angular.forEach(data, function(value,key){
+			angular.forEach(self.subscription_plan,function(v,k){
+				if(v.id == value.subscription_id){
+					hasPlan = 1;
+				}
+			});
+
+			if(hasPlan == 0){
+				self.subscription_plan.push(value.subscription);
+			}else {
+				hasPlan = 0;
+			}
+		});
+	};
+
+	self.subscriptionGenerateDays = function(data){
+
+		self.subscription_days = [];
+		var hasDays = 0;
+		angular.forEach(data, function(value,key){
+			angular.forEach(self.subscription_days,function(v,k){
+				if(v.id == value.days_id){
+					hasDays = 1;
+				}
+			});
+
+			if(hasDays == 0){
+				self.subscription_days.push(value.subscription_day);
+			}else {
+				hasDays = 0;
+			}
+		});
+	};
+
+	self.subscriptionGenerateOtherInfo = function(data){
+		//get user information -- student for billing
+
+		self.billing_information = [];
+
+		self.billing_information.name = $scope.user.first_name + ' ' + $scope.user.last_name;
+		self.billing_information.city = $scope.user.city;
+		self.billing_information.state = $scope.user.state;
+
+		self.getCountry($scope.user.country_id);
+
+		self.subscription_packages.others = self.billing_information;
+
+		if(!self.billing_information.city && !self.billing_information.state && !self.billing_information.country){
+
+			self.subscription_continue = Constants.FALSE;
+		}
+
+	};
+
+	self.subscriptionGenerateStudentList = function(){
+
+		//Add list of students to invoice subscription
+		self.getStudentList();
+
+	};
+
+	self.getCountry = function(id){
+
+		ManageParentPaymentService.getCountry(id).success(function(response){
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			} else{
+				self.billing_information.country =  response.data[0];
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+	};
+
+	self.getCountryList = function(){
+
+		ManageParentPaymentService.getCountryList().success(function(response){
+
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}else {
+				self.countries = response.data;
+			}
+
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	};
+
+	self.getClientSubscriptionDiscount = function(){
+
+		ManageParentPaymentService.getClientSubscriptionDiscount(self.client_details.user_id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}else if(response.data.total == Constants.TRUE) {
+				self.subscription_discount = response.data.records[0];
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	};
+
+	self.getInvoice = function(){
+
+		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
+		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
+
+		if (self.subscription_packages.length == 1 && self.active_add) {
+
+			var subscription = self.subscription_packages[0];
+
+			self.subscription_invoice.subject_id = subscription.subject_id;
+
+			self.subscription_invoice.order_date = moment().format('YYYYMMDD');
+			self.subscription_invoice.date_start = moment().format('YYYYMMDD');
+			self.subscription_invoice.date_end = moment().add(subscription.subscription_day.days,'days').format('YYYYMMDD');
+			self.subscription_invoice.date_start_string = moment().format('MMMM DD YYYY');
+			self.subscription_invoice.date_end_string = moment().add(subscription.subscription_day.days,'days').format('MMMM DD YYYY');
+
+			self.subscription_invoice.student_id = $scope.user.id;
+			self.subscription_invoice.subscription_id = subscription.subscription_id;
+			self.subscription_invoice.seats_total = Constants.TRUE;
+			self.subscription_invoice.seats_taken = Constants.TRUE;
+			self.subscription_invoice.payment_status = Constants.PENDING;
+			self.subscription_invoice.country_id = subscription.country_id;
+
+			self.subscription_invoice.sub_total = subscription.price;
+			self.subscription_invoice.discount = self.subscription_discount.percentage;
+			self.subscription_invoice.discount_id = self.subscription_discount.id;
+			self.subscription_invoice.total_amount = subscription.price - ((subscription.price * self.subscription_discount.percentage) / 100);
+			self.subscription_invoice.subscription_package_id = subscription.id;
+		}
+	};
+
+	//get student list of the parent.
+	self.getStudentList = function(){
+
+		var data = {};
+
+		console.log('getting students');
+		ManageParentPaymentService.listStudents(self.client_details.id, data).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}else {
+				self.student_list = response.data.records;
+				self.enlist_student = {};
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+	};
+
+	self.enlistStudent = function(student){
+
+		var values = self.enlist_student;
+
+		console.log(values);
+
+		if(!values){
+			values.push();
+		}
+		angular.forEach(values, function(value, keys){
+			if(!value){
+				console.log('empty');
+			}
+		});
+
+		console.log(values);
+
+	};
+
+
 }
