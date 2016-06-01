@@ -76,6 +76,11 @@
 					'uses' => $manage_parent_payment_controller . '@add_payment_form'
 				]);
 
+				Routes::get('subscribe', [
+					'as' => 'client.parent.payment.partials.subscribe',
+					'uses' => $manage_parent_payment_controller . '@subscription'
+				]);
+
 				Routes::get('view_payment_form', [
 					'as' => 'client.parent.payment.partials.view_payment_form',
 					'uses' => $manage_parent_payment_controller . '@view_payment_form'
