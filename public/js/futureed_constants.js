@@ -69,6 +69,7 @@ var Constants = {
 	, SUBSCRIPTION_PLAN		:	"plan"
 	, SUBSCRIPTION_DAYS		:	"days"
 	, SUBSCRIPTION_OTHERS	: 	"others"
+	, SUBSCRIPTION_STUDENTS	:	"students"
 
 	/**
 	* Media Types
