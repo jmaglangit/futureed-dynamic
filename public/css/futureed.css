@@ -1612,6 +1612,23 @@ span.round-tab:hover {
 	transition: 2s ease-in-out;
 }
 
+.wizard-box-lone {
+	width : 150px;
+	height: 150px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	border-radius: 10px;
+	padding-top: 25px;
+}
+
+.wizard-box-lone:after {
+	transition: 2s ease-in-out;
+}
+
+.wizard-box-lone:before {
+	transition: 2s ease-in-out;
+}
+
 .wizard-subject {
 	width : 150px;
 	height: 150px;
