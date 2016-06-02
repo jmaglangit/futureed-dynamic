@@ -51,14 +51,14 @@
                             </a>
                         </li>
                         <li role="presentation" class="disabled">
-                            <a href="#step5" data-toggle="tab" aria-controls="step4" role="tab" title="Students">
+                            <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab" title="Students">
                             <span class="round-tab">
                                 <i class="fa fa-users" aria-hidden="true"></i>
                             </span>
                             </a>
                         </li>
                         <li role="presentation" class="disabled">
-                            <a href="#step6" data-toggle="tab" aria-controls="step5" role="tab" title="Other Information">
+                            <a href="#step6" data-toggle="tab" aria-controls="step6" role="tab" title="Other Information">
                             <span class="round-tab">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
                             </span>
@@ -146,7 +146,7 @@
                         <div class="tab-pane" role="tabpanel" id="step5">
                             <h3>Students</h3>
                             {{--TODO List Students under parents--}}
-                            <div class="row" ng-init="payment.subscriptionOption(futureed.SUBSCRIPTION_STUDENTS)">
+                            <div class="row">
                                 <div class="col-xs-12" data-toggle="buttons">
                                     <div ng-repeat="student in payment.student_list" class="btn btn-sq-lg btn-primary wizard-box-lone"
                                             ng-click="payment.enlistStudent(student)">
@@ -158,7 +158,7 @@
                             <ul class="list-inline pull-right">
                                 <li>
                                     <button type="button" class="btn btn-primary btn-info-full"
-                                            ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_STUDENT)">Add Student</button>
+                                            ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_STUDENTS)">Add Student</button>
                                 </li>
                             </ul>
                         </div>
@@ -309,14 +309,36 @@
                                     </div>
                                     <div class="wizard-content-title"></div>
                                     <div class="form-search">
+                                        <div class="h4">Students</div>
+                                        <div class="form-group">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="h5">Name</td>
+                                                        <td class="h5">Email</td>
+                                                        <td class="h5">Price</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="student in payment.subscription_invoice.students">
+                                                        <td class="h5">{! student.first_name + ' ' + student.last_name !}</td>
+                                                        <td class="h5">{! student.user.email !}</td>
+                                                        <td class="h5">{! student.price !} USD</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="wizard-content-title"></div>
+                                    <div class="form-search">
                                         <div class="h4">Total Price Computation</div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">SUBTOTAL : </label>
-                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.price !} USD</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.sub_total !} USD</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">DISCOUNT : </label>
-                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.discount!} %</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.discount ?  payment.subscription_invoice.discount : 0.00 !}%</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">TOTAL : </label>
