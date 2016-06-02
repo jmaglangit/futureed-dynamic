@@ -145,28 +145,11 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					var data = response.data;
-					
-					self.invoice = {
-						  id				: 	data.id
-						, client_id			: 	data.client_id
-						, client_name 		: 	data.client_name
-						, subscription_id 	: 	data.subscription_id
-						, date_start 		: 	data.date_start
-						, date_end 			: 	data.date_end
-						, order_no 			: 	data.order_no
-						, subject_id 		: 	data.invoice_detail[0].classroom.subject_id
-						, payment_status 	: 	data.payment_status
-						, discount 			: 	data.discount
-						, discount_id 		: 	data.discount_id
-						, discount_type 	: 	data.discount_type
-						, seats_total 		: 	data.seats_total
-						, total_amount 		: 	data.total_amount
-						, expired	 		: 	data.expired
-						, renew				:	data.renew
-					}
 
-					self.getStudents(self.invoice.order_no);
-					
+					self.invoice = data;
+
+					//self.getStudents(self.invoice.order_no);
+					self.subscriptionView(data);
 					if(angular.equals(self.invoice.payment_status, Constants.PAID)) {
 						getClient(self.invoice.client_id)
 					}
@@ -576,6 +559,69 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		});
 	}
 
+	//TODO add payment invoice, order, and classroom then
+	// TODO add students.
+	self.paySubscription = function(isSave) {
+		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
+		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
+		//subscription_package_id
+
+		if(self.active_view && self.invoice.renew || self.active_view){
+			ManageParentPaymentService.getOrder(self.invoice.order.id).success(function(response){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					var invoice = response.data;
+					var order_data = {
+						order_id : self.invoice.order.id,
+						date_start : self.subscription_invoice.date_start,
+						date_end : self.subscription_invoice.date_end
+					};
+
+					self.updateOrderDates(order_data);
+
+					if(!isSave){
+						self.getPaymentUri(invoice.invoice);
+					}
+				}
+
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			$scope.ui_block();
+			ManageParentPaymentService.paySubscription(self.subscription_invoice).success(function(response) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+
+					$scope.ui_unblock();
+				} else if(response.data) {
+					var invoice = response.data;
+
+					if(!isSave){
+						self.getPaymentUri(invoice);
+					}
+
+				}
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+	};
+
+	self.saveSubscription = function(){
+
+		self.paySubscription(Constants.TRUE);
+		self.setActive();
+
+	};
+
 	self.renewSubscription = function() {
 		if(self.invoice.expired) {
 			var data = {
@@ -608,18 +654,19 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		}
 	});
 
-	self.getPaymentUri = function() {
+	self.getPaymentUri = function(data) {
+
 		var payment = {};
-			payment.invoice_id = self.invoice.id;
+			payment.invoice_id = data.id;
 			payment.quantity = Constants.TRUE;
-			payment.price = self.invoice.total_amount;
-			payment.client_id = self.invoice.client_id;
-			payment.order_no = self.invoice.order_no;
-			payment.renew = self.invoice.renew;
+			payment.price = data.total_amount;
+			payment.client_id = data.client_id;
+			payment.order_no = data.order_no;
+			payment.renew = data.renew;
 
 		var base_url = $("#base_url_form input[name='base_url']").val();
-			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/success"
-			payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/fail"
+			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/success";
+			payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/fail";
 
 		ManageParentPaymentService.getPaymentUri(payment).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -766,12 +813,17 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_OTHERS);
+
+				//generate parent students
+				self.getStudentList();
 				navigateTab();
 				break;
 
 			case Constants.SUBSCRIPTION_STUDENTS:
 
+				self.subscription_option.students = {};
 				self.subscriptionPackage(Constants.SUBSCRIPTION_STUDENTS);
+				navigateTab();
 				break;
 
 			case Constants.SUBSCRIPTION_OTHERS	:
@@ -921,10 +973,12 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 		self.billing_information = [];
 
-		self.billing_information.name = $scope.user.first_name + ' ' + $scope.user.last_name;
-		self.billing_information.city = $scope.user.city;
-		self.billing_information.state = $scope.user.state;
 
+		self.billing_information.name = self.client_details.first_name + ' ' + self.client_details.last_name;
+		self.billing_information.city = self.client_details.city;
+		self.billing_information.state = self.client_details.state;
+
+		//get country
 		self.getCountry($scope.user.country_id);
 
 		self.subscription_packages.others = self.billing_information;
@@ -933,14 +987,124 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 			self.subscription_continue = Constants.FALSE;
 		}
-
 	};
 
 	self.subscriptionGenerateStudentList = function(){
 
 		//Add list of students to invoice subscription
-		self.getStudentList();
+		self.subscription_invoice.students = self.enlist_student;
+	};
 
+	self.modifyUserAddress = function(data){
+
+		//if edit == true
+		if(data == Constants.TRUE){
+
+			self.billing_info = Constants.TRUE;
+
+		}else {
+
+			//save new billing info
+			if(self.billing_information.city && self.billing_information.state && self.billing_information.country.id){
+
+				//update user address information.
+				self.updateUserBillingInformation();
+				self.subscription_continue = Constants.TRUE;
+				self.billing_info = Constants.FALSE;
+			};
+		}
+	};
+
+	self.updateUserBillingInformation = function(){
+
+		var addr_data = {};
+
+		addr_data.id = $scope.user.id;
+		addr_data.country_id = self.billing_information.country.id;
+		addr_data.city = self.billing_information.city;
+		addr_data.state = self.billing_information.state;
+
+		ManageParentPaymentService.updateBillingAddress(addr_data).success(function(response){
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	};
+
+	self.subscriptionView = function(data){
+
+		lastTab();
+
+		self.subscription_packages = data.subscription_package;
+		self.subscription_packages.subscription = data.subscription;
+
+
+
+		self.subscription_invoice = {
+			subject_id	:	self.subscription_packages.subject_id,
+			order_date	:	moment(data.order.order_date).format('YYYYMMDD'),
+			date_start	:	moment(data.date_start).format('YYYYMMDD'),
+			date_end	:	moment(data.date_end).format('YYYYMMDD'),
+			date_start_string	:	moment(data.date_start,'YYYY-MM-DD').format('MMMM DD YYYY'),
+			date_end_string	:	moment(data.date_end,'YYYY-MM-DD').format('MMMM DD YYYY'),
+
+			students	:	[],
+			subscription_id	:	data.subscription_id,
+			seats_total	:	data.seats_total,
+			payment_status	:	data.payment_status,
+			country_id	:	self.subscription_packages.country_id,
+
+			sub_total	:	0,
+			discount	:	data.discount,
+			discount_id	:	data.discount_id,
+			total_amount	:	data.total_amount,
+			subscription_package_id	:	data.subscription_package_id
+
+		};
+
+		self.generateStudentSubscriptionView(data);
+
+		self.subscription_option = data.subscription_package;
+
+		if(data.status == Constants.ENABLED){
+			self.checkSubscription();
+		}
+	};
+
+	self.generateStudentSubscriptionView = function(data){
+
+		var students = data.invoice_detail[0].classroom.class_student;
+		var subscription_package = data.subscription_package;
+		var sub_total = Constants.FALSE;
+
+		angular.forEach(students, function(value){
+			value.student.price = subscription_package.price;
+			sub_total += parseFloat(value.student.price);
+			self.subscription_invoice.students.push(value.student);
+
+		});
+
+		self.subscription_invoice.sub_total = sub_total;
+
+	}
+
+	self.checkSubscription = function(){
+
+		ManageParentPaymentService.subscriptionPackage(self.subscription_invoice.subscription_package_id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data) {
+				self.active_renew = Constants.TRUE;
+			} else {
+				self.active_renew = Constants.FALSE;
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	};
 
 	self.getCountry = function(id){
@@ -1005,33 +1169,52 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.subscription_invoice.date_start_string = moment().format('MMMM DD YYYY');
 			self.subscription_invoice.date_end_string = moment().add(subscription.subscription_day.days,'days').format('MMMM DD YYYY');
 
-			self.subscription_invoice.student_id = $scope.user.id;
+			self.subscription_invoice.client_id = $scope.user.id;
 			self.subscription_invoice.subscription_id = subscription.subscription_id;
-			self.subscription_invoice.seats_total = Constants.TRUE;
-			self.subscription_invoice.seats_taken = Constants.TRUE;
+			self.subscription_invoice.seats_total = (self.subscription_invoice.students) ? self.subscription_invoice.students.length : Constants.FALSE ;
+			self.subscription_invoice.seats_taken = (self.subscription_invoice.students) ? self.subscription_invoice.students.length : Constants.FALSE ;
 			self.subscription_invoice.payment_status = Constants.PENDING;
 			self.subscription_invoice.country_id = subscription.country_id;
 
-			self.subscription_invoice.sub_total = subscription.price;
-			self.subscription_invoice.discount = self.subscription_discount.percentage;
-			self.subscription_invoice.discount_id = self.subscription_discount.id;
-			self.subscription_invoice.total_amount = subscription.price - ((subscription.price * self.subscription_discount.percentage) / 100);
+			self.subscription_invoice.package_price = subscription.price;
+			self.subscription_invoice.sub_total = 0;
+			self.subscription_invoice.discount = (self.subscription_discount.percentage) ? self.subscription_discount.percentage : 0;
+			self.subscription_invoice.discount_id = (self.subscription_discount.id) ? self.subscription_discount.id : 0;
+
+			self.generateStudentPrice();
+
+			(self.subscription_discount.percentage) ?
+				self.subscription_invoice.total_amount = subscription.price - ((subscription.price * self.subscription_discount.percentage) / 100)
+				: self.subscription_invoice.total_amount = self.subscription_invoice.sub_total;
+
 			self.subscription_invoice.subscription_package_id = subscription.id;
+
+			//order_no,parent_id,subject_id,order_date,subscription_id,date_start,date_end,total_amount,
+			//discount_type,discount_id,discount,total_amount,subscription_id,
+			self.subscription_invoice.parent_id = $scope.user.id;
 		}
 	};
+
+	self.generateStudentPrice = function(){
+
+		angular.forEach(self.subscription_invoice.students,function(value){
+			value.price = parseFloat(self.subscription_invoice.package_price);
+			self.subscription_invoice.sub_total = self.subscription_invoice.sub_total + value.price;
+		});
+
+	}
 
 	//get student list of the parent.
 	self.getStudentList = function(){
 
 		var data = {};
 
-		console.log('getting students');
 		ManageParentPaymentService.listStudents(self.client_details.id, data).success(function(response){
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			}else {
 				self.student_list = response.data.records;
-				self.enlist_student = {};
+				self.enlist_student = [];
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
@@ -1042,22 +1225,30 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 	self.enlistStudent = function(student){
 
-		var values = self.enlist_student;
+		var index = self.enlist_student.indexOf(student);
 
-		console.log(values);
-
-		if(!values){
-			values.push();
+		if (index > -1) {
+			self.enlist_student.splice(index, 1);
+		} else {
+			self.enlist_student.push(student);
+			self.enlist_student[self.enlist_student.indexOf(student)] = student;
 		}
-		angular.forEach(values, function(value, keys){
-			if(!value){
-				console.log('empty');
-			}
-		});
-
-		console.log(values);
-
 	};
+
+	self.updateOrderDates = function(data){
+		var dates = {
+			date_start	: 	data.date_start,
+			date_end	:	data.date_end
+		};
+		ManageParentPaymentService.updateOrder(data.order_id,dates).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
 
 
 }
