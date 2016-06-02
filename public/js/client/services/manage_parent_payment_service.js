@@ -115,7 +115,7 @@ function ManageParentPaymentService($http){
 		return $http({
 			method : Constants.METHOD_PUT
 			, data : data
-			, url  : serviceUrl + 'parent-student/pay-subscription/' + data.id
+			, url  : serviceUrl + 'parent-student/pay-subscription'
 		});
 	}
 
@@ -199,6 +199,38 @@ function ManageParentPaymentService($http){
 				+ '&name=' + ((data.name) ?  data.name : '')
 				+ '&email=' + ((data.email) ? data.email : '')
 				+ '&offset=' + ((data.offset) ? data.offset : '')
+		});
+	}
+
+	//api/v1/client/update-billing-address/{id}
+	service.updateBillingAddress = function(data){
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: serviceUrl + 'client/update-billing-address/' + data.id
+		});
+	}
+
+	//service.subs  api/v1/subscription-package/{id}
+	service.subscriptionPackage = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	serviceUrl + 'subscription-package/' + id
+		});
+	}
+
+	service.updateOrder = function(order_id,data){
+		return $http({
+			method	: Constants.METHOD_PUT
+			, data	: data
+			, url	: serviceUrl + 'order/' + order_id
+		});
+	}
+
+	service.getOrder = function(order_id){
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: serviceUrl + 'order/' + order_id
 		});
 	}
 
