@@ -25,6 +25,10 @@ Routes::group([
         'uses' => 'Api\v1\PaymentSubscriptionController@saveSubscription',
         'as' => 'subscription.save']);
 
+    Routes::post('/pay-subscription', [
+        'uses' => 'Api\v1\PaymentSubscriptionController@paySubscription',
+        'as' => 'subscription.pay']);
+
 
 });
 
