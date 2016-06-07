@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use FutureEd\Http\Requests;
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
@@ -24,6 +25,7 @@ class PaymentSubscriptionController extends ApiController {
 	protected $classroom;
 	protected $class_student;
 	protected $student;
+	protected $client;
 
 
 	public function __construct(
@@ -36,7 +38,8 @@ class PaymentSubscriptionController extends ApiController {
 		OrderDetailRepositoryInterface $order_detail,
 		ClassroomRepositoryInterface $classroom,
 		ClassStudentRepositoryInterface $class_student,
-		StudentRepositoryInterface $studentRepositoryInterface
+		StudentRepositoryInterface $studentRepositoryInterface,
+		ClientRepositoryInterface $clientRepositoryInterface
 
 	){
 		$this->student = $studentRepositoryInterface;
@@ -48,6 +51,7 @@ class PaymentSubscriptionController extends ApiController {
 		$this->order_detail = $order_detail;
 		$this->classroom = $classroom;
 		$this->class_student = $class_student;
+		$this->client = $clientRepositoryInterface;
 	}
 
 	/**
@@ -193,6 +197,101 @@ class PaymentSubscriptionController extends ApiController {
 		$this->invoice_detail->addInvoiceDetail($invoice_detail);
 
 		return $this->respondWithData($invoice);
+	}
+
+	/**
+	 * Add payment by principal.
+	 *
+	 * @param PaymentSubscriptionRequest $request
+	 * @return mixed
+	 * @internal param $id
+	 */
+	public function paySubscription(PaymentSubscriptionRequest $request)
+	{
+		/**
+		 * TODO
+		 * 1. create order
+		 * 2. create order details
+		 * 3. create invoice
+		 * 4. create invoice details
+		 * 5. classroom
+		 */
+
+		$order = $request->all();
+
+		//create order
+		$prev_order = $this->order->getNextOrderNo();
+
+		if(!$prev_order){
+
+			$next_order_id = 1;
+		}else{
+
+			$next_order_id = ++$prev_order['id'];
+		}
+
+		$order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
+
+		$new_order = $this->order->addOrder($order);
+
+		//create order details
+//		foreach($order['students'] as $student){
+//
+//			//insert data to order_details table
+//			$this->order_detail->addOrderDetail([
+//				'order_id' => $new_order['id'],
+//				'student_id' => $student['id'],
+//				'price' => $student['price']
+//			]);
+//
+//		}
+
+		$client = $this->client->getClientDetails($order['client_id']);
+
+		//create invoice
+		$invoice['order_no'] = $order['order_no'];
+		$invoice['invoice_date'] = $order['order_date'];
+		$invoice['client_id'] = $order['client_id'];
+		$invoice['client_name'] =$client->user->name;
+		$invoice['date_start'] = $order['date_start'];
+		$invoice['date_end'] = $order['date_end'];
+		$invoice['seats_total'] = $order['seats_total'];
+		$invoice['total_amount'] = $order['total_amount'];
+		$invoice['subscription_id'] = $order['subscription_id'];
+		$invoice['payment_status'] = $order['payment_status'];
+		$invoice['subscription_package_id'] =  $order['subscription_package_id'];
+		$invoice['discount_id'] = isset($order['discount_id']) ? $order['discount_id'] : 0;
+		$invoice['discount'] = isset($order['discount']) ? $order['discount'] : 0;
+
+		//insert data to invoices table
+		$inserted_invoice = $this->invoice->addInvoice($invoice);
+
+		//insert new classroom
+		foreach($order['classrooms'] as $classroom){
+
+			$classroom['order_no'] = $order['order_no'];
+			$classroom['name'] = $classroom['class_name'];
+			$classroom['grade_id'] = $classroom['grade']['id'];
+			$classroom['client_id'] = $classroom['teacher']['id'];
+			$classroom['subject_id'] = $order['subject_id'];
+			$classroom['seats_taken'] = 0;
+			$classroom['seats_total'] = $classroom['seats'];
+
+			//insert data to classrooms table
+			$inserted_classroom = $this->classroom->addClassroom($classroom);
+
+			//insert invoice details
+			//form data for invoice detail
+			$invoice_detail['invoice_id'] = $inserted_invoice['id'];
+			$invoice_detail['class_id'] = $inserted_classroom['id'];
+			$invoice_detail['grade_id'] = $classroom['grade']['id'];
+			$invoice_detail['price'] = $classroom['price'];
+
+			//insert data to invoice_detail
+			$this->invoice_detail->addInvoiceDetail($invoice_detail);
+		}
+
+		return $this->respondWithData($inserted_invoice);
 	}
 
 
