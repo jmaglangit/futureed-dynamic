@@ -99,7 +99,7 @@
 			            <th>{!! trans('messages.total_no_seats') !!}</th>
 			            <th>{!! trans('messages.total_price') !!}</th>
 			            <th>{!! trans('messages.status') !!}</th>
-			            <th ng-if="invoice.records.length">{!! trans('messages.action') !!}</th>
+			            <th ng-if="invoice.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>

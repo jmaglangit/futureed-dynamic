@@ -142,7 +142,7 @@
 			            <th>{!! trans('messages.email') !!}</th>
 			            <th>{!! trans('messages.name') !!}</th>
 			            <th>{!! trans('messages.admin_type') !!}</th>
-			            <th>{!! trans('messages.action') !!}</th>
+			            <th>{!! trans_choice('messages.action', 1) !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>

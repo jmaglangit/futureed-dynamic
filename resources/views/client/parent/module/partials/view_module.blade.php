@@ -9,7 +9,7 @@
 			)
 		) !!}
 		<div class="form-group">
-			<label class="control-label col-xs-2">{!! trans('messages.module') !!}</label>
+			<label class="control-label col-xs-2">{!! trans_choice('messages.module', 1) !!}</label>
 			<div class="col-xs-4">
 				{!! Form::text('module', ''
 					, array(
@@ -44,14 +44,14 @@
 					)
 				) !!}
 			</div>
-			<label class="control-label col-xs-2">{!! trans('messages.grade') !!}</label>
+			<label class="control-label col-xs-2">{!! trans_choice('messages.grade', 1) !!}</label>
 			<div class="col-xs-4">
 				{!! Form::text('grade', ''
 					, array(
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'module.record.grade.name'
-						, 'placeholder' => trans('messages.grade')
+						, 'placeholder' => trans_choice('messages.grade', 1)
 					)
 				) !!}
 			</div>

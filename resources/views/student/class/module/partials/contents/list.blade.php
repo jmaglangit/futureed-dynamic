@@ -87,6 +87,7 @@
 	</div>
 
 	<div ng-if="!mod.contents.teaching_content">
+
 		<div class="content-container col-xs-12 col-md-12">
 			<div class="content-text-header">
 				<div class="row col-xs-3">

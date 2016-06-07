@@ -306,7 +306,7 @@ class StudentReportExportController extends ReportController {
 	 * @param $report_dir
 	 * @return mixed
 	 */
-	public function studentCurrentLearningExcel($data, $name, $report_dir){
+	public function studentCurrentLearningExcel($data, $name, $report_dir = null){
 		ob_end_clean();
 		ob_start();
 		if(empty($report_dir)){

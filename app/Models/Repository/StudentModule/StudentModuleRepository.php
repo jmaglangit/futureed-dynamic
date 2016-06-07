@@ -121,7 +121,7 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 
 		try {
 
-			$response = StudentModule::with('question')->find($id);
+			$response = StudentModule::with('question','module')->find($id);
 
 		} catch (\Exception $e) {
 

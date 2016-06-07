@@ -104,9 +104,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 			<thead>
 		        <tr>
-		            <th>{!! trans('messages.module') !!}</th>
-		            <th>{!! trans('messages.grade') !!}</th>
-		            <th ng-if="module.records.length" class="table-width-200">{!! trans('messages.action') !!}</th>
+		            <th>{!! trans_choice('messages.module', 1) !!}</th>
+		            <th>{!! trans_choice('messages.grade', 1) !!}</th>
+		            <th ng-if="module.records.length" class="table-width-200">{!! trans_choice('messages.action', 2) !!}</th>
 		        </tr>
 	        </thead>
 	        <tbody>

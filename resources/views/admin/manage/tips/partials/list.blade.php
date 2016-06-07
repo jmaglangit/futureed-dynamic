@@ -138,12 +138,12 @@
 				<thead>
 			        <tr>
 			            <th>{!! trans('messages.displayed_at') !!}</th>
-			            <th>{!! trans('messages.module') !!}</th>
+			            <th>{!! trans_choice('messages.module', 1) !!}</th>
 			            <th>{!! trans('messages.subject') !!}</th>
 			            <th>{!! trans('messages.area') !!}</th>
 			            <th>{!! trans('messages.title') !!}</th>
 			            <th>{!! trans('messages.status') !!}</th>
-			            <th ng-if="tips.records.length">{!! trans('messages.action') !!}</th>
+			            <th ng-if="tips.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>

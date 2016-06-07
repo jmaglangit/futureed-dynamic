@@ -154,7 +154,7 @@
 					<tr>
 						<th>{!! trans('messages.admin_min_seats') !!}</th>
 						<th>{!! trans('messages.admin_percentage') !!}</th>
-						<th ng-if="bulk.records.length">{!! trans('messages.action') !!}</th>
+						<th ng-if="bulk.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 					</tr>
 				</thead>
 				<tbody>

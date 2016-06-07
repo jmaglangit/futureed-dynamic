@@ -44,7 +44,8 @@
 
 						{!! Html::link(route('client.login'), trans('messages.cancel')
 								, array(
-									'class' => 'btn btn-gold btn-medium'
+									'class' => 'btn btn-gold btn-medium',
+									'style' => 'margin-right:0;'
 								)
 						) !!}
 					</div>
@@ -100,7 +101,7 @@
 
 				{!! Form::open(array('ng-submit' => 'password.clientValidateCode($event)')) !!} 
 					<div class="form-group">
-						{!! Form::label(null, trans('messages.client_enter_reset_code'):') !!}
+						{!! Form::label(null, trans('messages.client_enter_reset_code')) !!}
 
 						{!! Form::text('reset_code', '',
 							array(
@@ -128,6 +129,7 @@
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => '!password.password_set'
 								, 'ng-click' => 'password.clientResendCode()'
+								, 'style' => 'margin-right:0;'
 							)
 						) !!}
 					</div>

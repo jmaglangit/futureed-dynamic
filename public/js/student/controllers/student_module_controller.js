@@ -54,6 +54,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
+					var student_update = response.data;
+
+					self.points_to_finish = student_update.module.points_to_finish;
+					self.current_points = student_update.correct_counter;
+
 					if(successCallback) {
 						successCallback(response);
 					}
@@ -432,6 +437,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		answer.student_id = $scope.user.id;
 		answer.date_start = new Date();
 		answer.date_end = new Date();
+
+		self.current_student_module = {
+			module_id : self.record.id,
+			question_id : self.current_question.id,
+			seq_no	:	self.current_question.seq_no
+		};
 
 		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
 			answer.answer_text = self.current_question.answer_text.join(",");
@@ -1020,6 +1031,28 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.list = function(){
 
 		self.getTeachingContents(self.record.id);
+	}
+
+	self.getAnswerExplanation = function(){
+
+		var data = {
+			'module_id' : self.current_student_module.module_id,
+			'question_id' : self.current_student_module.question_id,
+			'seq_no' : self.current_student_module.seq_no
+		};
+
+		StudentModuleService.getAnswerExplanation(data).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			} else {
+				self.answer_explanation = response.data;
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+
 	}
 
 }

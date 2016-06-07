@@ -218,7 +218,7 @@
 					<tr>
 						<th>{!! trans('messages.class_handled') !!}</th>
 						<th>{!! trans('messages.number_of_students') !!}</th>
-						<th>{!! trans('messages.grade') !!}</th>
+						<th>{!! trans_choice('messages.grade', 1) !!}</th>
 					</tr>
 				</thead>
 				<tbody>

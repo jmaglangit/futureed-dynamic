@@ -45,7 +45,8 @@
 
 					{!! Html::link(route('admin.login'), trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gold btn-medium',
+								'style' => 'margin-right:0;'
 							)
 					) !!}
 				</div>
@@ -126,10 +127,11 @@
 							)
 						) !!}
 
-						{!! Form::button('trans(messages.client_resend_code)'
+						{!! Form::button(trans('messages.client_resend_code')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => 'forgot.resendCode()'
+								'class' => 'btn btn-gold btn-medium',
+								'ng-click' => 'forgot.resendCode()',
+								'style' => 'margin-right:0;'
 							)
 						) !!}
 					</div>

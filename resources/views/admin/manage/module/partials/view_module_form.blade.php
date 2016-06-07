@@ -144,11 +144,11 @@
 					            </div>
 
 								<div class="form-group">
-									<label class="control-label col-xs-2">{!! trans('messages.module') !!} <span class="required">*</span></label>
+									<label class="control-label col-xs-2">{!! trans_choice('messages.module', 1) !!} <span class="required">*</span></label>
 									<div class="col-xs-4">
 										{!! Form::text('module',''
 											, array(
-												'placeHolder' => trans('messages.module')
+												'placeHolder' => trans_choice('messages.module', 1)
 												, 'ng-model' => 'module.record.name'
 												, 'class' => 'form-control'
 												, 'ng-disabled' => 'module.active_view'

@@ -63,13 +63,13 @@
 								<span>{!! trans('messages.client_sign_up_google') !!}</span> 
 							</button>
 						</div>
+
+						<div class="form-group col-xs-12">
+							<span>{!! trans('messages.did_not_receive_email_confirmation') !!} <a class="cursor-pointer" ng-click="login.setActive('resend')">{!! trans('messages.resend_confirmation') !!}</a></span>
+						</div>
 					</div>
 				</div>
-				
-				 <div class="form-group col-xs-12">
-					<span>{!! trans('messages.did_not_receive_email_confirmation') !!} <a class="cursor-pointer" ng-click="login.setActive('resend')">{!! trans('messages.resend_confirmation') !!}</a></span>
-				</div>
-			
+
 				<div class="col-xs-12" ng-if="login.record.client_role">
 					<div class="alert alert-error" ng-if="login.errors">
 						<p ng-repeat="error in login.errors track by $index"> 

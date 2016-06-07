@@ -18,7 +18,7 @@
 							</div>
 						</div>
 
-						<div class="col-xs-3" ng-if="!login.record.invited">
+						<div class="col-xs-3 auto-login-form" ng-if="!login.record.invited">
 							<div class="form-group col-xs-12">
 								<button type="button" class="btn btn-fb"
 									ng-click="login.loginViaFacebook()">
@@ -35,6 +35,10 @@
 									<span><img src="/images/icons/google-logo.png" /></span>
 									<span>{!! trans('messages.client_sign_up_google') !!}</span> 
 								</button>
+							</div>
+
+							<div class="form-group col-xs-12">
+								<span>{!! trans('messages.did_not_receive_email_confirmation') !!} <a class="cursor-pointer" ng-click="login.setActive('resend')">{!! trans('messages.resend_confirmation') !!}</a></span>
 							</div>
 						</div>
 					</div>
@@ -87,7 +91,7 @@
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['gender'] }"
 										, 'ng-model' => 'login.record.gender')
-								); !!}
+								) !!}
 							</div>
 						</div>
 						<div class="form-group">
@@ -115,7 +119,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-xs-2 control-label">{!! trans('messages.city') !!}<span class="required">*</span></label>
+							<label class="col-xs-2 control-label">{!! trans('messages.city') !!}</label>
 							<div class="col-xs-4">
 								{!! Form::text('city', ''
 									, array(
@@ -137,7 +141,7 @@
 							</div>
 						</div>
 						<div class="form-group" ng-init="getCountries()">
-							<label class="col-xs-2 control-label">{!! trans('messages.country') !!}<span class="required">*</span></label>
+							<label class="col-xs-2 control-label">{!! trans('messages.country') !!}</label>
 							<div class="col-xs-4">
 								<select name="country_id" id="country" 
 									class="form-control" 
@@ -203,7 +207,7 @@
 					<fieldset>
 						<legend>{!! trans('messages.school_info') !!}</legend>
 						<div class="form-group" ng-if="login.record.invited">
-							<label class="col-xs-2 control-label">{!! trans('messages.school_name') !!}<span class="required">*</span></label>
+							<label class="col-xs-2 control-label">{!! trans('messages.school_name') !!}</label>
 							<div class="col-xs-4">
 								{!! Form::text('state', 'N/A'
 									, array(
@@ -214,7 +218,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-xs-2 control-label">{!! trans('messages.school_level') !!}<span class="required">*</span></label>
+							<label class="col-xs-2 control-label">{!! trans('messages.school_level') !!}</label>
 							<div class="col-xs-4">
 								<select name="grade_code" 
 									ng-disabled="!grades.length" 

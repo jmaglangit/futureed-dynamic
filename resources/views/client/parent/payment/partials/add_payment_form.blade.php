@@ -15,7 +15,7 @@
 			
 			<div class="alert alert-error" ng-if="payment.billing_address_not_found">
 				<p>
-					{!! trans('messages.client_update_info') !!} <a href="{!! route('client.profile.index') !!}">{!! trans('messages.student_update_now') !!}</a>.
+					{!! trans('errors.2800') !!} <a href="{!! route('client.profile.index') !!}">{!! trans('messages.student_update_now') !!}</a>.
 				</p>
 			</div>
 
@@ -157,7 +157,7 @@
 								<td>{!! trans('messages.name') !!}</td>
 								<td>{!! trans('messages.email') !!}</td>
 								<td>{!! trans('messages.price') !!}</td>
-								<td>{!! trans('messages.action') !!}</td>
+								<td>{!! trans_choice('messages.action', 1) !!}</td>
 							</tr>
 						</thead>
 						<tbody>

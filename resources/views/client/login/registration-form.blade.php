@@ -102,7 +102,7 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-xs-2 control-label">{!! trans('messages.street_address') !!}<span class="required" ng-if="login.required">*</span></label>
+			<label class="col-xs-2 control-label">{!! trans('messages.street_address') !!}</label>
 			<div class="col-xs-6">
 				{!! Form::text('street_address', ''
 				, array(
@@ -116,7 +116,7 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-xs-2 control-label">{!! trans('messages.city') !!}<span class="required" ng-if="login.required">*</span></label>
+			<label class="col-xs-2 control-label">{!! trans('messages.city') !!}</label>
 			<div class="col-xs-4">
 				{!! Form::text('city', ''
 					, array(
@@ -153,7 +153,7 @@
 				) !!}
 			</div>
 
-			<label class="col-xs-2 control-label">{!! trans('messages.country') !!}<span class="required" ng-if="login.required">*</span></label>
+			<label class="col-xs-2 control-label">{!! trans('messages.country') !!}</label>
 			<div class="col-xs-4" ng-init="getCountries()">
 				<select  name="country_id" 
 					class="form-control" 
@@ -285,7 +285,7 @@
 					<label>
 						{!! Form::checkbox('terms', 1, null, array('ng-model' => 'login.record.terms')) !!}
 
-						I agree on the 
+						{{ trans('messages.i_agree') }}
 
 						{!! Html::link('#', trans('messages.terms_and_conditions')
 							, array(
@@ -294,7 +294,7 @@
 							)
 						) !!}
 
-						and 
+						{{ trans('messages.and') }}
 
 						{!! Html::link('#', trans('messages.data_privacy_policy')
 							, array(

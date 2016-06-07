@@ -895,10 +895,6 @@ content legend {
 	margin-bottom: 5px;
 }
 
-.dashboard-content .row div h5 {
-	padding-top: 10px;
-}
-
 .tooltip.parent-module-tooltip .tooltip-inner {
 	background-color: #04435e;
 	margin: 20px 0px;

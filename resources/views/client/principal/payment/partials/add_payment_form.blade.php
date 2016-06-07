@@ -57,7 +57,7 @@
 			        	</div>
 
 			        	<div class="form-group" ng-init="getGradeLevel(user.country_id)">
-			        		<label class="col-xs-3 control-label">{!! trans('messages.grade') !!} <span class="required">*</span></label>
+			        		<label class="col-xs-3 control-label">{!! trans_choice('messages.grade', 1) !!} <span class="required">*</span></label>
 			        		<div class="col-xs-5">
 			        			<select name="grade_id" ng-disabled="!grades.length" ng-class="{ 'required-field' : payment.fields['grade_id'] }" class="form-control" ng-model="payment.classroom.grade_id">
 		                            <option ng-selected="payment.classroom.grade_id == futureed.false" value="">{!! trans('messages.select_level') !!}</option>
@@ -181,11 +181,11 @@
 							<thead>
 						        <tr>
 						            <th>{!! trans('messages.no_of_seats') !!}</th>
-						            <th>{!! trans('messages.grade') !!}</th>
+						            <th>{!! trans_choice('messages.grade', 1) !!}</th>
 						            <th>{!! trans('messages.teacher') !!}</th>
 						            <th>{!! trans('messages.class') !!}</th>
 						            <th>{!! trans('messages.price') !!}</th>
-						            <th>{!! trans('messages.action') !!}</th>
+						            <th>{!! trans_choice('messages.action', 2) !!}</th>
 						        </tr>
 						    </thead>
 

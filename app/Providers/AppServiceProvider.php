@@ -322,5 +322,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface',
 			'FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\AnswerExplanation\AnswerExplanationRepositoryInterface',
+			'FutureEd\Models\Repository\AnswerExplanation\AnswerExplanationRepository'
+		);
 	}
 }

@@ -3,7 +3,7 @@
 @section('content')
 	<div class="container login" ng-cloak>
 			<div class="client-container form-style" ng-controller="LoginController as confirm"
-				ng-init="confirm.setRegistrationStatus('{!! $email !!}')"> 
+				ng-init="confirm.setRegistrationStatus('{!! $email !!}', '{{ $code }}')">
 				<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 				
 				<div ng-if="!confirm.confirmed">
@@ -40,7 +40,7 @@
 							<small>{!! trans('messages.client_check_inbox') !!}</small>
 							{!! Form::open(array('ng-submit' => 'confirm.confirmClientRegistration($event)')) !!}
 									<div class="form-group" ng-if="!confirm.account_confirmed">
-											{!! Form::label('', trans('messages.enter_confirmation_code'):')!!}
+											{!! Form::label('', trans('messages.enter_confirmation_code'))!!}
 											
 											{!! Form::text('confirmation_code', ''
 															, array(
@@ -63,7 +63,7 @@
 													)
 											) !!}
 
-											{!! Form::button(trans('messages.resend'
+											{!! Form::button(trans('messages.resend')
 													, array(
 																'class' => 'btn btn-gold btn-medium'
 															, 'ng-click' => 'confirm.resendClientConfirmation()'

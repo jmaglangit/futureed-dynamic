@@ -24,6 +24,7 @@ Routes::group([
 	include('Routes/Api/Admin.php');
 	include('Routes/Api/AgeGroup.php');
 	include('Routes/Api/Announcement.php');
+	include('Routes/Api/AnswerExplanation.php');
 	include('Routes/Api/Assess.php');
 	include('Routes/Api/AvatarAccessory.php');
 	include('Routes/Api/AvatarPose.php');

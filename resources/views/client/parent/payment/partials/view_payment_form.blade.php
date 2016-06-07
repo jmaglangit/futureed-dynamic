@@ -279,7 +279,7 @@
                             <th>{!! trans('messages.email') !!}</th>
                             <th>{!! trans('messages.price') !!}</th>
                             <th ng-if="payment.invoice.payment_status == futureed.PENDING && !payment.invoice.renew">
-                                {!! trans('messages.action') !!}
+                                {!! trans_choice('messages.action', 2) !!}
                             </th>
                         </tr>
                         </thead>
