@@ -5,12 +5,6 @@
     <div class="wizard-content-title">
         <div class="title-main-content">
             <span>{!! trans('messages.add_payment') !!}</span>
-            {{--errors here --}}
-
-
-            <div class="col-xs-2 pull-right top-10">
-                <a href="{!! route('student.class.index') !!}" class="btn btn-maroon">{!! trans('messages.back') !!}</a>
-            </div>
         </div>
 
     </div>
@@ -24,7 +18,7 @@
             <div class="wizard">
                 <div class="wizard-inner">
                     <div class="connecting-line"></div>
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav nav-tabs parent" role="tablist">
 
                         <li role="presentation" class="active">
                             <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Country">
@@ -57,7 +51,14 @@
                             </a>
                         </li>
                         <li role="presentation" class="disabled">
-                            <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab" title="Other Information">
+                            <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab" title="Classroom">
+                            <span class="round-tab">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </span>
+                            </a>
+                        </li>
+                        <li role="presentation" class="disabled">
+                            <a href="#step6" data-toggle="tab" aria-controls="step6" role="tab" title="Other Information">
                             <span class="round-tab">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
                             </span>
@@ -143,6 +144,99 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step5">
+                            <h3>Classroom</h3>
+                            {{--TODO List Students under parents--}}
+                            <div class="row">
+                                <div class="form-group" ng-init="payment.getGradeLevel(user.country_id); payment.getSchoolCode()">
+                                    <table ng-table="tableClassroom" class="table table-condensed table-classroom">
+                                        <thead>
+                                        <tr>
+                                            <td class="h5">No. of Seats</td>
+                                            <td class="h5">Grade</td>
+                                            <td class="h5">Teacher</td>
+                                            <td class="h5">Class</td>
+                                            <td class="h5">Price</td>
+                                            <td class="h5">Actions</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="(key,classroom) in payment.subscription_classroom" ng-if="classroom">
+                                            <td class="h5">{! classroom.seats !}</td>
+                                            <td class="h5">{! classroom.grade.name !}</td>
+                                            <td class="h5">{! classroom.teacher.name !}</td>
+                                            <td class="h5">{! classroom.class_name !}</td>
+                                            <td class="h5">{! classroom.price !}</td>
+                                            <td class="h5"><a class="btn btn-primary " ng-click="payment.removeClassroom(key,payment.subscription_classroom)">DELETE</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="h5">
+                                                {!! Form::text('seats', ''
+                                                        , [
+                                                            'class' => 'form-control'
+                                                            , 'placeholder' => 'no. of seats'
+                                                            , 'ng-model' => 'payment.new_classroom.seats']
+                                                    ) !!}
+                                            </td>
+                                            <td class="h5">
+                                                <select name="grade_id" ng-disabled="!grades.length" ng-class="{ 'required-field' : payment.fields['grade_id'] }" class="form-control" ng-model="payment.new_classroom.grade_id">
+                                                    <option ng-selected="payment.classroom.grade_id == futureed.false" value="">{!! trans('messages.select_level') !!}</option>
+                                                    <option ng-selected="payment.classroom.grade_id == grade.id" ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
+                                                </select>
+                                            </td>
+                                            <td class="h5">
+                                                {!! Form::text('teacher',''
+                                                    , array(
+                                                        'placeHolder' => trans('messages.teacher')
+                                                        , 'ng-model' => 'payment.classroom.client_name'
+                                                        , 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+                                                        , 'ng-class' => "{ 'required-field' : payment.fields['client_id'] }"
+                                                        , 'ng-change' => "payment.suggestTeacher()"
+                                                        , 'class' => 'form-control'
+                                                    )
+                                                ) !!}
+
+                                                <div class="angucomplete-holder" ng-if="payment.teachers.length">
+                                                    <ul class="col-xs-5 angucomplete-dropdown">
+                                                        <li class="angucomplete-row" ng-repeat="teacher in payment.teachers" ng-click="payment.selectTeacher(teacher)">
+                                                            {! teacher.first_name !} {! teacher.last_name !}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </td>
+                                            <td class="h5">
+                                                {!! Form::text('class_name', ''
+                                                       , array(
+                                                           'class' => 'form-control'
+                                                           , 'placeholder' => 'name'
+                                                           , 'ng-model' => 'payment.new_classroom.class_name')
+                                                   ) !!}
+                                            </td>
+                                            <td class="h5">{! (((payment.new_classroom.seats) ?  payment.new_classroom.seats : 0)
+                                                * payment.subscription_invoice.package_price) !}
+                                            </td>
+                                            <td class="h5">
+                                                <div ng-model="button" class="btn btn-primary"
+                                                     ng-disabled="(!payment.new_classroom.seats || !payment.new_classroom.grade_id
+                                                        || !payment.subscription_teacher || !payment.new_classroom.class_name)"
+                                                     ng-click="payment.getClassroomGrade(payment.new_classroom.grade_id)"
+                                                        >Add Classroom</div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <ul class="list-inline pull-right">
+                                <li>
+                                    <button type="button" class="btn btn-primary btn-info-full"
+                                            ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_CLASSROOM)"
+                                            ng-disabled="(payment.subscription_classroom.length == 0)"
+                                            >Next</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="step6">
                             <h3>Additional Information</h3>
 
                             {{--Other information--}}
@@ -289,14 +383,40 @@
                                     </div>
                                     <div class="wizard-content-title"></div>
                                     <div class="form-search">
+                                        <div class="h4">Classroom</div>
+                                        <div class="form-group">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="h5">No. of Seats</td>
+                                                        <td class="h5">Grade</td>
+                                                        <td class="h5">Teacher</td>
+                                                        <td class="h5">Class</td>
+                                                        <td class="h5">Price</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="classroom in payment.subscription_invoice.classrooms">
+                                                        <td class="h5">{! classroom.seats !}</td>
+                                                        <td class="h5">{! classroom.grade.name !}</td>
+                                                        <td class="h5">{! classroom.teacher.name !}</td>
+                                                        <td class="h5">{! classroom.class_name !}</td>
+                                                        <td class="h5">{! classroom.price !}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="wizard-content-title"></div>
+                                    <div class="form-search">
                                         <div class="h4">Total Price Computation</div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">SUBTOTAL : </label>
-                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.price !} USD</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.sub_total !} USD</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">DISCOUNT : </label>
-                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.discount!} %</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.discount ?  payment.subscription_invoice.discount : 0.00 !}%</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">TOTAL : </label>
@@ -322,7 +442,7 @@
                                     </button>
                                 </li>
                                 <li ng-if="payment.active_view">
-                                    <button ng-click="payment.setActive()" type="button" class="btn btn-gold">
+                                    <button ng-click="payment.setActive(Constants.ACTIVE_LIST)" type="button" class="btn btn-gold">
                                         View List
                                     </button>
                                 </li>
