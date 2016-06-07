@@ -42,6 +42,20 @@ class PaymentSubscriptionRequest extends ApiRequest {
 							'subscription_package_id' => 'required|numeric|exists:subscription_packages,id,deleted_at,NULL',
 						];
 						break;
+					case 'subscription.pay':
+						return [
+							'subject_id' => 'required|numeric',
+							'order_date' => 'required|date_format:Ymd',
+							'subscription_id' => 'required|numeric|exists:subscription,id,deleted_at,NULL',
+							'date_start' => 'required|date_format:Ymd',
+							'date_end' => 'required|date_format:Ymd',
+							'seats_taken' => 'numeric',
+							'total_amount' => 'required|numeric|between:1,999999.99',
+							'payment_status' => 'required|in:Pending,Paid,Cancelled',
+							'discount_id' => 'numeric|exists:client_discounts,id,deleted_at,NULL',
+							'subscription_package_id' => 'required|numeric|exists:subscription_packages,id,deleted_at,NULL',
+						];
+						break;
 					default:
 						return [
 							'order_date' => 'required|date_format:Ymd',
