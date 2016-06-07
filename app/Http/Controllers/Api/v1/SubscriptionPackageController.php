@@ -27,14 +27,6 @@ class SubscriptionPackageController extends ApiController {
 		$limit = 0;
 		$offset = 0;
 
-		//TODO get inputs -->
-		// subject_id
-		//days_id
-		//subscription_id
-		//country_id
-		//price
-		//status
-
 		if(Input::get('subject_id')){
 			$criteria['subject_id'] = Input::get('subject_id');
 		}

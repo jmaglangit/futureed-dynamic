@@ -65,7 +65,6 @@ function ManagePrincipalPaymentController(
 		self.searchDefaults();
 		self.getClientDetails();
 
-		console.log(active);
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
 				self.active_view = Constants.TRUE;
@@ -344,7 +343,6 @@ function ManagePrincipalPaymentController(
 		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
 		//subscription_package_id
 
-		console.log(self.subscription_invoice);
 		if(self.active_view && self.invoice.renew || self.active_view){
 			managePrincipalPaymentService.getOrder(self.invoice.order.id).success(function(response){
 				if(response.errors){
@@ -1368,7 +1366,6 @@ function ManagePrincipalPaymentController(
 		self.subscription_packages = data.subscription_package;
 		self.subscription_packages.subscription = data.subscription;
 
-		//TODO generate classroom format
 		self.generateClassroom(data.invoice_detail);
 
 		self.subscription_invoice = {

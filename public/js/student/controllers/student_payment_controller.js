@@ -328,9 +328,9 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 	self.paymentDetail = function(id) {
 
-		//TODO : 1. get to subscribe view and disable the rest of the options.
-		//TODO : if renewable enable button.
-		//TODO : disable other tabs.
+		//1. get to subscribe view and disable the rest of the options.
+		//if renewable enable button.
+		//disable other tabs.
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
@@ -812,8 +812,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 		var invoice = self.invoice;
 
-		//TODO check subscription package is still exists else output error to get new subscription.
-		//TODO update date views.
+		//check subscription package is still exists else output error to get new subscription.
+		//update date views.
 
 		self.checkSubscription();
 

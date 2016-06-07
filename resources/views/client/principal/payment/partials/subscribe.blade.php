@@ -77,9 +77,6 @@
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             <h3>Country</h3>
-
-                            {{--Display subject options --}}
-                            {{--TODO get subject list--}}
                             <div class="row">
                                 <div class="col-xs-12">
                                     <p>
@@ -95,9 +92,6 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
                             <h3>Subject</h3>
-
-                            {{--Display subject options --}}
-                            {{--TODO get subject list--}}
                             <div class="row">
                                 <div class="col-xs-12">
                                     <p>
@@ -113,8 +107,6 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step3">
                             <h3>Plans</h3>
-
-                            {{--Display list of plan--}}
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div ng-repeat="plan in payment.subscription_plan" class="wizard-panel panel panel-primary panel-horizontal"
@@ -129,8 +121,6 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step4">
                             <h3>Days</h3>
-
-                            {{--List plans available days.--}}
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div ng-repeat="days in payment.subscription_days" class="wizard-panel panel panel-primary panel-horizontal"
@@ -145,7 +135,6 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step5">
                             <h3>Classroom</h3>
-                            {{--TODO List Students under parents--}}
                             <div class="row">
                                 <div class="form-group" ng-init="payment.getGradeLevel(user.country_id); payment.getSchoolCode()">
                                     <table ng-table="tableClassroom" class="table table-condensed table-classroom">
@@ -238,9 +227,6 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step6">
                             <h3>Additional Information</h3>
-
-                            {{--Other information--}}
-                            {{--TODO add js script on change from text to input--}}
                             <div class="row" ng-if="payment.active_add" ng-init="payment.subscriptionOption(futureed.SUBSCRIPTION_OTHERS)">
                                 <div class="col-xs-12 invoice-form">
                                     <h4>Billing Information</h4>
@@ -341,7 +327,6 @@
 
                             <div class="row">
                                 <div class="col-xs-12 invoice-form">
-                                    {{--subscription summary--}}
                                     <div class="form-search">
                                         <div>
                                             <div class="h4 col-xs-9">Subscription Summary</div>

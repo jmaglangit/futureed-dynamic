@@ -193,7 +193,6 @@ class ParentStudentController extends ApiController {
     public function paySubscription(ParentStudentRequest $request)
     {
         /**
-         * TODO
          * 1. create order
          * 2. create order details
          * 3. create invoice
@@ -324,7 +323,6 @@ class ParentStudentController extends ApiController {
      */
     public function addStudent(ParentStudentRequest $request){
 
-        //TODO add student.
         $student_id = $request->only('student_id');
 
         $student_user_id = $this->student->getUserId($student_id);
@@ -467,7 +465,6 @@ class ParentStudentController extends ApiController {
         return $this->respondWithData($this->user->getUserDetail($student_user_id,config('futureed.student')));
     }
 
-	//TODO: 711
 	public function getStudentList($id){
 
 		$criteria['parent_id'] = $id;

@@ -1,32 +1,26 @@
-
-
-function labelToForm(){
+function labelToForm() {
 
     //change child
-    $(".form-label").replaceWith(function(){
+    $(".form-label").replaceWith(function () {
 
-        //TODO: check for countries into drop down.
 
-            return  '<input class="' + this.classList.value + '" type="text" value="'
-                + this.textContent +'" name="'+ this.getAttribute('name') +'">';
+        return '<input class="' + this.classList.value + '" type="text" value="'
+            + this.textContent + '" name="' + this.getAttribute('name') + '">';
     });
 }
 
-function formToLabel(){
+function formToLabel() {
 
     //change child expects form
-    $(".form-label").replaceWith(function(){
+    $(".form-label").replaceWith(function () {
 
         //check if label is country.
-        if(this.getAttribute('name') == 'user_country'){
-
-            // TODO: get countries from api -- self.country_list
-        //<option value="volvo">Volvo</option> TODO: generate for each country.
+        if (this.getAttribute('name') == 'user_country') {
 
 
-        }else {
+        } else {
             return '<label class="' + this.classList.value
-                + '" name='+ this.getAttribute('name') + '>'+ this.value +'</label>';
+                + '" name=' + this.getAttribute('name') + '>' + this.value + '</label>';
         }
 
     });

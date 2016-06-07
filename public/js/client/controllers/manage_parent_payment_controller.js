@@ -559,8 +559,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		});
 	}
 
-	//TODO add payment invoice, order, and classroom then
-	// TODO add students.
+	//add payment invoice, order, and classroom then add students.
 	self.paySubscription = function(isSave) {
 		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
 		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
