@@ -204,7 +204,7 @@ class ParentStudentController extends ApiController {
         $order = $request->all();
 
         //create order
-        $prev_order = $this->order->getNextOrderNo();
+        $prev_order = $this->order->getLastOrderNo();
 
         if(!$prev_order){
 
@@ -233,31 +233,35 @@ class ParentStudentController extends ApiController {
         $client = $this->client->getClientDetails($order['client_id']);
 
         //create invoice
-        $invoice['order_no'] = $order['order_no'];
-        $invoice['invoice_date'] = $order['order_date'];
-        $invoice['client_id'] = $order['client_id'];
-        $invoice['client_name'] =$client->user->name;
-        $invoice['date_start'] = $order['date_start'];
-        $invoice['date_end'] = $order['date_end'];
-        $invoice['seats_total'] = $order['seats_total'];
-        $invoice['total_amount'] = $order['total_amount'];
-        $invoice['subscription_id'] = $order['subscription_id'];
-        $invoice['payment_status'] = $order['payment_status'];
-        $invoice['subscription_package_id'] =  $order['subscription_package_id'];
-        $invoice['discount_id'] = isset($order['discount_id']) ? $order['discount_id'] : 0;
-        $invoice['discount'] = isset($order['discount']) ? $order['discount'] : 0;
+        $invoice = [
+            'order_no' => $order['order_no'],
+            'invoice_date' => $order['order_date'],
+            'client_id' => $order['client_id'],
+            'client_name' => $client->user->name,
+            'date_start' => $order['date_start'],
+            'date_end' => $order['date_end'],
+            'seats_total' => $order['seats_total'],
+            'total_amount' => $order['total_amount'],
+            'subscription_id' => $order['subscription_id'],
+            'payment_status' => $order['payment_status'],
+            'subscription_package_id' => $order['subscription_package_id'],
+            'discount_id' => isset($order['discount_id']) ? $order['discount_id'] : 0,
+            'discount' => isset($order['discount']) ? $order['discount'] : 0
+        ];
 
         //insert data to invoices table
         $inserted_invoice = $this->invoice->addInvoice($invoice);
 
         //insert new classroom
-        $classroom['order_no'] = $order['order_no'];
-        $classroom['name'] = config('futureed.STU').Carbon::now()->timestamp;
-        $classroom['grade_id'] = config('futureed.true');
-        $classroom['client_id'] = $order['client_id'];
-        $classroom['subject_id'] = $order['subject_id'];
-        $classroom['seats_taken'] = $order['seats_taken'];
-        $classroom['seats_total'] = $order['seats_total'];
+        $classroom = [
+            'order_no' => $order['order_no'],
+            'name' => config('futureed.STU').Carbon::now()->timestamp,
+            'grade_id' => config('futureed.true'),
+            'client_id' => $order['client_id'],
+            'subject_id' => $order['subject_id'],
+            'seats_taken' => $order['seats_taken'],
+            'seats_total' => $order['seats_total']
+        ];
 
         //insert data to classrooms table
         $inserted_classroom = $this->classroom->addClassroom($classroom);
@@ -275,10 +279,12 @@ class ParentStudentController extends ApiController {
 
         //insert invoice details
         //form data for invoice detail
-        $invoice_detail['invoice_id'] = $inserted_invoice['id'];
-        $invoice_detail['class_id'] = $inserted_classroom['id'];
-        $invoice_detail['grade_id'] = config('futureed.true');
-        $invoice_detail['price'] = $order['total_amount'];
+        $invoice_detail = [
+            'invoice_id' => $inserted_invoice['id'],
+            'class_id' => $inserted_classroom['id'],
+            'grade_id' => config('futureed.true'),
+            'price' => $order['total_amount']
+        ];
 
         //insert data to invoice_detail
         $this->invoice_detail->addInvoiceDetail($invoice_detail);
@@ -289,8 +295,9 @@ class ParentStudentController extends ApiController {
     /**
      * get list by parent user id
      *
-     * @param $parent_id
+     * @param $order_no
      * @return mixed
+     * @internal param $parent_id
      */
     public function getStudents($order_no){
         $order = $this->order->getOrderByOrderNo($order_no);

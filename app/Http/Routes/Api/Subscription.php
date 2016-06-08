@@ -28,8 +28,6 @@ Routes::group([
     Routes::post('/pay-subscription', [
         'uses' => 'Api\v1\PaymentSubscriptionController@paySubscription',
         'as' => 'subscription.pay']);
-
-
 });
 
 
@@ -47,5 +45,4 @@ Routes::group([
         'uses' => 'Api\v1\SubscriptionPackageController@show',
         'as' => 'api.v1.subscription-package.show'
     ]);
-
 });

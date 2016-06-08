@@ -70,24 +70,27 @@ class PaymentSubscriptionController extends ApiController {
 		//get invoice details
 		$invoice = $this->invoice->getInvoice($id);
 
-		$data['order_no'] = $invoice['order_no'];
-		$data['invoice_date'] = Carbon::now()->toDateString();
-		$data['client_id'] = $invoice['client_id'];
-		$data['client_name'] = $invoice['client_name'];
-		$data['student_id'] = $invoice['student_id'];
-		$data['student_name'] = $invoice['student_name'];
-		$data['date_start'] = Carbon::now()->toDateString();
-		$data['date_end'] = Carbon::now()->addDays($invoice->subscriptionPackage->subscription_day->days)->toDateString();
-		$data['seats_total'] = $invoice['seats_total'];
-		$data['discount_type'] = $invoice['discount_type'];
-		$data['discount_id'] = $invoice['discount_id'];
-		$data['discount'] = $invoice['discount'];
-		$data['total_amount'] = $invoice['total_amount'];
-		$data['subscription_id'] = $invoice['subscription_id'];
-		$data['subscription_package_id'] = $invoice['subscription_package_id'];
-		$data['renew'] = 1;
-		$data['payment_status'] = config('futureed.pending');
-		$data['seats_taken'] = $invoice['order']['seats_taken'];
+		$data = [
+			'order_no' => $invoice['order_no'],
+			'invoice_date' => Carbon::now()->toDateString(),
+			'client_id' => $invoice['client_id'],
+			'client_name' => $invoice['client_name'],
+			'student_id' => $invoice['student_id'],
+			'student_name' =>  $invoice['student_name'],
+			'date_start' => Carbon::now()->toDateString(),
+			'date_end' => Carbon::now()
+				->addDays($invoice->subscriptionPackage->subscription_day->days)->toDateString(),
+			'seats_total' => $invoice['seats_total'],
+			'discount_type' => $invoice['discount_type'],
+			'discount_id' => $invoice['discount_id'],
+			'discount' => $invoice['discount'],
+			'total_amount' => $invoice['total_amount'],
+			'subscription_id' => $invoice['subscription_id'],
+			'subscription_package_id' => $invoice['subscription_package_id'],
+			'renew' => config('futureed.true'),
+			'payment_status' => config('futureed.pending'),
+			'seats_taken' => $invoice['order']['seats_taken']
+		];
 
 		//add invoice
 		$added_invoice = $this->invoice->addInvoice($data);
@@ -100,10 +103,13 @@ class PaymentSubscriptionController extends ApiController {
 			foreach($invoice_detail as $k => $v){
 
 				//Change invoice details
-				$value['invoice_id'] = $added_invoice['id'];
-				$value['class_id'] = $v->class_id;
-				$value['grade_id'] = $v->grade_id;
-				$value['price'] = $data['total_amount'];
+				$value = [
+					'invoice_id' => $added_invoice['id'],
+					'class_id' => $v->class_id,
+					'grade_id' => $v->grade_id,
+					'price' => $data['total_amount']
+				];
+
 				$this->invoice_detail->addInvoiceDetail($value);
 			}
 
@@ -126,7 +132,7 @@ class PaymentSubscriptionController extends ApiController {
 		$student = $this->student->viewStudent($order['student_id']);
 
 		//get the last inputted order
-		$prev_order = $this->order->getNextOrderNo();
+		$prev_order = $this->order->getLastOrderNo();
 
 		if(!$prev_order){
 
@@ -142,56 +148,67 @@ class PaymentSubscriptionController extends ApiController {
 		$inserted_order = $this->order->addOrder($order);
 
 		//form data for order_details
-		$order_detail['order_id'] = $inserted_order['id'];
-		$order_detail['student_id'] = $order['student_id'];
-		$order_detail['price'] = $order['sub_total'];
+		$order_detail = [
+			'order_id' => $inserted_order['id'],
+			'student_id' => $order['student_id'],
+			'price' => $order['sub_total']
+		];
 
 		//insert data to order_details table
 		$this->order_detail->addOrderDetail($order_detail);
+
 		//form data for invoice
-		$invoice['order_no'] = $order['order_no'];
-		$invoice['invoice_date'] = $order['order_date'];
-		$invoice['student_id'] = $order['student_id'];
-		$invoice['student_name'] = $student['user']['name'];
-		$invoice['date_start'] = $order['date_start'];
-		$invoice['date_end'] = $order['date_end'];
-		$invoice['seats_total'] = $order['seats_total'];
-		$invoice['total_amount'] = $order['total_amount'];
-		$invoice['subscription_id'] = $order['subscription_id'];
-		$invoice['payment_status'] = $order['payment_status'];
-		$invoice['subscription_package_id'] =  $order['subscription_package_id'];
-		$invoice['discount_id'] = $order['discount_id'];
-		$invoice['discount'] = $order['discount'];
+		$invoice = [
+			'order_no' => $order['order_no'],
+			'invoice_date' => $order['order_date'],
+			'student_id' => $order['student_id'],
+			'student_name' => $student['user']['name'],
+			'date_start' => $order['date_start'],
+			'date_end' => $order['date_end'],
+			'seats_total' => $order['seats_total'],
+			'total_amount' => $order['total_amount'],
+			'subscription_id' => $order['subscription_id'],
+			'payment_status' => $order['payment_status'],
+			'subscription_package_id' => $order['subscription_package_id'],
+			'discount_id' => $order['discount_id'],
+			'discount' => $order['discount']
+		];
 
 		//insert data to invoices table
 		$inserted_invoice = $this->invoice->addInvoice($invoice);
 
 		//form data for classroom
-		$classroom['order_no'] = $order['order_no'];
-		$classroom['name'] = config('futureed.STU').Carbon::now()->timestamp;
-		$classroom['grade_id'] = $student['grade']['id'];
-		$classroom['student_id'] = $order['student_id'];
-		$classroom['subject_id'] = $order['subject_id'];
-		$classroom['seats_taken'] = $order['seats_taken'];
-		$classroom['seats_total'] = $order['seats_total'];
+		$classroom = [
+			'order_no' => $order['order_no'],
+			'name' => config('futureed.STU').Carbon::now()->timestamp,
+			'grade_id' => $student['grade']['id'],
+			'student_id' => $order['student_id'],
+			'subject_id' => $order['subject_id'],
+			'seats_taken' => $order['seats_taken'],
+			'seats_total' => $order['seats_total']
+		];
 
 		//insert data to classrooms table
 		$inserted_classroom = $this->classroom->addClassroom($classroom);
 
 		//form data for class_students
-		$class_student['student_id'] = $order['student_id'];
-		$class_student['class_id'] = $inserted_classroom['id'];
-		$class_student['date_started'] = $order['order_date'];
-		$class_student['subscription_status'] = config('futureed.active');
+		$class_student = [
+			'student_id' => $order['student_id'],
+			'class_id' => $inserted_classroom['id'],
+			'date_started' => $order['order_date'],
+			'subscription_status' => config('futureed.active')
+		];
 
 		//insert data to class_students table
-		$inserted_class_student = $this->class_student->addClassStudent($class_student);
+		$this->class_student->addClassStudent($class_student);
 
 		//form data for invoice detail
-		$invoice_detail['invoice_id'] = $inserted_invoice['id'];
-		$invoice_detail['class_id'] = $inserted_classroom['id'];
-		$invoice_detail['grade_id'] = $student['grade']['id'];
-		$invoice_detail['price'] = $order['total_amount'];
+		$invoice_detail = [
+			'invoice_id' => $inserted_invoice['id'],
+			'class_id' => $inserted_classroom['id'],
+			'grade_id' => $student['grade']['id'],
+			'price' => $order['total_amount']
+		];
 
 		//insert data to invoice_detail
 		$this->invoice_detail->addInvoiceDetail($invoice_detail);
@@ -220,7 +237,7 @@ class PaymentSubscriptionController extends ApiController {
 		$order = $request->all();
 
 		//create order
-		$prev_order = $this->order->getNextOrderNo();
+		$prev_order = $this->order->getLastOrderNo();
 
 		if(!$prev_order){
 
@@ -234,58 +251,53 @@ class PaymentSubscriptionController extends ApiController {
 
 		$new_order = $this->order->addOrder($order);
 
-		//create order details
-//		foreach($order['students'] as $student){
-//
-//			//insert data to order_details table
-//			$this->order_detail->addOrderDetail([
-//				'order_id' => $new_order['id'],
-//				'student_id' => $student['id'],
-//				'price' => $student['price']
-//			]);
-//
-//		}
-
 		$client = $this->client->getClientDetails($order['client_id']);
 
 		//create invoice
-		$invoice['order_no'] = $order['order_no'];
-		$invoice['invoice_date'] = $order['order_date'];
-		$invoice['client_id'] = $order['client_id'];
-		$invoice['client_name'] =$client->user->name;
-		$invoice['date_start'] = $order['date_start'];
-		$invoice['date_end'] = $order['date_end'];
-		$invoice['seats_total'] = $order['seats_total'];
-		$invoice['total_amount'] = $order['total_amount'];
-		$invoice['subscription_id'] = $order['subscription_id'];
-		$invoice['payment_status'] = $order['payment_status'];
-		$invoice['subscription_package_id'] =  $order['subscription_package_id'];
-		$invoice['discount_id'] = isset($order['discount_id']) ? $order['discount_id'] : 0;
-		$invoice['discount'] = isset($order['discount']) ? $order['discount'] : 0;
+		$invoice = [
+			'order_no' => $order['order_no'],
+			'invoice_date' => $order['order_date'],
+			'client_id' => $order['client_id'],
+			'client_name' => $client->user->name,
+			'date_start' => $order['date_start'],
+			'date_end' => $order['date_end'],
+			'seats_total' => $order['seats_total'],
+			'total_amount' => $order['total_amount'],
+			'subscription_id' => $order['subscription_id'],
+			'payment_status' => $order['payment_status'],
+			'subscription_package_id' =>  $order['subscription_package_id'],
+			'discount_id' => isset($order['discount_id']) ? $order['discount_id'] : 0,
+			'discount' => isset($order['discount']) ? $order['discount'] : 0
+		];
 
 		//insert data to invoices table
 		$inserted_invoice = $this->invoice->addInvoice($invoice);
 
 		//insert new classroom
-		foreach($order['classrooms'] as $classroom){
+		foreach($order['classrooms'] as $class){
 
-			$classroom['order_no'] = $order['order_no'];
-			$classroom['name'] = $classroom['class_name'];
-			$classroom['grade_id'] = $classroom['grade']['id'];
-			$classroom['client_id'] = $classroom['teacher']['id'];
-			$classroom['subject_id'] = $order['subject_id'];
-			$classroom['seats_taken'] = 0;
-			$classroom['seats_total'] = $classroom['seats'];
+			$classroom = [
+				'order_no' => $order['order_no'],
+				'name' => $class['class_name'],
+				'grade_id' => $class['grade']['id'],
+				'client_id' => $class['teacher']['id'],
+				'subject_id' => $order['subject_id'],
+				'seats_taken' => config('futureed.false'),
+				'seats_total' => $class['seats']
+			];
 
 			//insert data to classrooms table
 			$inserted_classroom = $this->classroom->addClassroom($classroom);
 
 			//insert invoice details
 			//form data for invoice detail
-			$invoice_detail['invoice_id'] = $inserted_invoice['id'];
-			$invoice_detail['class_id'] = $inserted_classroom['id'];
-			$invoice_detail['grade_id'] = $classroom['grade']['id'];
-			$invoice_detail['price'] = $classroom['price'];
+			$invoice_detail = [
+				'invoice_id' => $inserted_invoice['id'],
+				'class_id' => $inserted_classroom['id'],
+				'grade_id' => $class['grade']['id'],
+				'price' => $class['price']
+			];
+
 
 			//insert data to invoice_detail
 			$this->invoice_detail->addInvoiceDetail($invoice_detail);

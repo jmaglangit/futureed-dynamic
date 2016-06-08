@@ -67,9 +67,6 @@ class PaymentSubscriptionRequest extends ApiRequest {
 						];
 						break;
 				}
-
-
-
 		}
 	}
 
@@ -81,11 +78,6 @@ class PaymentSubscriptionRequest extends ApiRequest {
 			'student_id.numeric' => trans('errors.1004',['attribute' => trans('errors.2192')]),
 			'subscription_id.required' => trans('errors.1003',['attribute' => trans('errors.2199')]),
 			'subscription_id.numeric' => trans('errors.1004',['attribute' => trans('errors.2199')]),
-
-
 		];
 	}
-
-
-
 }
