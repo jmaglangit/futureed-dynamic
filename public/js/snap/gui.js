@@ -99,7 +99,7 @@ IDE_Morph.uber = Morph.prototype;
 IDE_Morph.prototype.setDefaultDesign = function () {
     MorphicPreferences.isFlat = true;
 
-    SpriteMorph.prototype.paletteColor = new Color(250, 116, 167);
+    SpriteMorph.prototype.paletteColor = new Color(155, 215, 213);
     SpriteMorph.prototype.paletteTextColor = new Color(70, 70, 70);
 
     StageMorph.prototype.paletteTextColor = new Color(1,1,1);
@@ -110,7 +110,7 @@ IDE_Morph.prototype.setDefaultDesign = function () {
     IDE_Morph.prototype.backgroundColor = new Color(255,255,255);
     IDE_Morph.prototype.frameColor = new Color(0,0,0,0);
 
-    IDE_Morph.prototype.groupColor = new Color(244,216,89);//SpriteMorph.prototype.paletteColor.lighter(8);//this is the background color for the script page
+    IDE_Morph.prototype.groupColor = new Color(255,245,195);//SpriteMorph.prototype.paletteColor.lighter(8);//this is the background color for the script page
     IDE_Morph.prototype.sliderColor = new Color(0,0,0);
     IDE_Morph.prototype.buttonLabelColor = new Color(0,0,0);
     IDE_Morph.prototype.tabColors = [
