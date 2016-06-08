@@ -298,7 +298,7 @@
 						</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">{!! trans('messages.grade') !!} <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans_choice('messages.grade', 1) !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<select ng-disabled="student.active_view || !student.record.country_id" name="grade_code" ng-class="{ 'required-field' : student.fields['grade_code'] }" class="form-control" ng-model="student.record.grade_code">
 							<option value="">{!! trans('messages.select_level') !!}</option>
@@ -376,7 +376,7 @@
 					<tr>
 						<th>{!! trans_choice('messages.module', 1) !!}</th>
 						<th>{!! trans('messages.admin_age_group') !!}</th>
-						<th ng-if="student.modules.length">{!! trans('messages.action') !!}</th>
+						<th ng-if="student.modules.length">{!! trans_choice('messages.action', 1) !!}</th>
 					</tr>
 				</thead>
 

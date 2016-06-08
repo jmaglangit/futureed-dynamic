@@ -15,6 +15,7 @@ class SubjectTableSeeder extends Seeder
 			[1,'Math','Singapore Math','Enabled'],
 			[2,'English Grammar','US Common Core, Singapore English Grammar','Enabled'],
 			[3,'English Vocabulary','US Common Core, Singapore English Vocabulary','Enabled'],
+			[4,'Programming','Basic Visual Coding','Enabled']
 		];
 
 		\DB::table('subjects')->truncate();

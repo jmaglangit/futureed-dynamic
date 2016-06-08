@@ -109,7 +109,7 @@
 						<th>{!! trans('messages.admin_question_image') !!}</th>
 						<th>{!! trans('messages.admin_question_type') !!}</th>
 						<th>{!! trans('messages.difficulty') !!}</th>
-						<th ng-if="qa.records.length">{!! trans('messages.action') !!}</th>
+						<th ng-if="qa.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 					</tr>
 				</thead>
 				<tbody>

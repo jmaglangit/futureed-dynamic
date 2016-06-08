@@ -100,7 +100,7 @@
 				            <th>{!! trans('messages.tips') !!}</th>
 				            <th>{!! trans('messages.posted_since') !!}</th>
 				            <th>{!! trans('messages.posted_by') !!}</th>
-				            <th ng-if="tips.records.length">{!! trans('messages.action') !!}</th>
+				            <th ng-if="tips.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 				        </tr>
 			        </thead>
 			        <tbody>

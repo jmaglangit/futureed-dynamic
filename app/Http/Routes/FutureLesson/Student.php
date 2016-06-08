@@ -202,6 +202,13 @@
 							, 'uses' => 'FutureLesson\Student\TipsController@view_tip'
 						]);
 
+					Routes::get('/code',
+						[
+							'as'    => 'student.class.module.code.activity',
+							'uses'  => 'FutureLesson\Student\ClassModuleController@coding_module'
+						]
+					);
+
 					Routes::get('/contents', [
 						'as' => 'student.class.module.partials.contents'
 						, 'uses' => 'FutureLesson\Student\ClassModuleController@contents'
