@@ -20,22 +20,35 @@ class StudentControllerRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		return [
-			//  Required
-			'first_name'=> 'required|min:2|regex:'. config('regex.name') .'|max:64',
-			'last_name' => 'required|min:2|regex:'. config('regex.name') .'|max:64',
-			'gender'    => 'required|alpha|in:'.config('futureed.gender.male').','.config('futureed.gender.female'),
-			'birth_date'=> 'required|date_format:Ymd|before:-14 year',
-			'email'     => 'required|email',
-			'username'  => 'required|min:8|max:32|alpha_num',
+		switch($this->route()->getName()){
 
-			//  Not required
-			'grade_code'=> 'numeric',
-			'country_id'=> 'numeric',
-			'city'      => 'max:128|regex:'.config('regex.state_city'),
-			'state'     => 'max:128|regex:'.config('regex.state_city'),
+			case 'student.update.billing-address':
+				return [
+					'country_id'=> 'required|numeric',
+					'city'      => 'required|max:128|regex:'.config('regex.state_city'),
+					'state'     => 'required|max:128|regex:'.config('regex.state_city'),
+				];
+				break;
+			default:
+				return [
+					//  Required
+					'first_name'=> 'required|min:2|regex:'. config('regex.name') .'|max:64',
+					'last_name' => 'required|min:2|regex:'. config('regex.name') .'|max:64',
+					'gender'    => 'required|alpha|in:'.config('futureed.gender.male').','.config('futureed.gender.female'),
+					'birth_date'=> 'required|date_format:Ymd|before:-14 year',
+					'email'     => 'required|email',
+					'username'  => 'required|min:8|max:32|alpha_num',
 
-		];
+					//  Not required
+					'grade_code'=> 'numeric',
+					'country_id'=> 'numeric',
+					'city'      => 'max:128|regex:'.config('regex.state_city'),
+					'state'     => 'max:128|regex:'.config('regex.state_city'),
+
+				];
+			break;
+		}
+
 	}
 
 	public function messages()

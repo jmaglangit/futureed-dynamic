@@ -103,6 +103,15 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('BackgroundImageTableSeeder');
 		$this->command->info('BackgroundImageTableSeeder seeded!');
+
+		$this->call('SubscriptionsTableSeeder');
+		$this->command->info('SubscriptionsTableSeeder seeded!');
+
+		$this->call('SubscriptionPackagesTableSeeder');
+		$this->command->info('SubscriptionPackagesTableSeeder seeded!');
+
+		$this->call('SubscriptionDaysTableSeeder');
+		$this->command->info('SubscriptionDaysTableSeeder seeded!');
 		
 		#$this->call('UsersTableSeeder');
 		#$this->command->info('UsersTableSeeder seeded!');

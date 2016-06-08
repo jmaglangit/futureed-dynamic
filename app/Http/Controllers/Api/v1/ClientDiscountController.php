@@ -18,7 +18,7 @@ class ClientDiscountController extends ApiController {
 	/**
 	 * ClientDiscount Controller constructor
 	 *
-	 * @return void
+	 * @param ClientDiscount $client_discount
 	 */
 	public function __construct(ClientDiscount $client_discount) 
 	{
@@ -44,8 +44,8 @@ class ClientDiscountController extends ApiController {
 			$criteria['client_role'] = Input::get('client_role');
 		}
 
-		if(Input::get('client_id')) {
-			$criteria['client_id'] = Input::get('client_id');
+		if(Input::get('user_id')) {
+			$criteria['user_id'] = Input::get('user_id');
 		}
 				
 		if(Input::get('limit')) {
@@ -64,6 +64,7 @@ class ClientDiscountController extends ApiController {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param ClientDiscountRequest $request
 	 * @return Response
 	 */
 	public function store(ClientDiscountRequest $request)
@@ -91,7 +92,8 @@ class ClientDiscountController extends ApiController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 * @param ClientDiscountRequest $request
 	 * @return Response
 	 */
 	public function update($id,ClientDiscountRequest $request)

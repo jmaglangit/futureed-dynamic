@@ -232,6 +232,7 @@ class ClientRepository implements ClientRepositoryInterface
 	/**
 	 * @param $id
 	 * @param $client
+	 * @return bool
 	 * @throws Exception
 	 */
 	public function updateClientDetails($id, $client)

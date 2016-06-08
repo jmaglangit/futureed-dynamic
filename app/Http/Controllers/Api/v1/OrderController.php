@@ -47,4 +47,30 @@ class OrderController extends ApiController {
 
         return $this->respondWithData($order);
     }
+
+    /**
+     * Get order.
+     * @param $id
+     * @return mixed
+     */
+    public function show($id){
+
+        return $this->respondWithData($this->order->getOrder($id));
+    }
+
+    /**
+     * Update Order start and end dates.
+     * @param $id
+     * @param OrderRequest $request
+     * @return mixed
+     */
+    public function update($id, OrderRequest $request){
+
+        $order = $request->all();
+
+        $this->order->updateOrder($id,$order);
+
+        return $this->order->getOrder($id);
+
+    }
 }

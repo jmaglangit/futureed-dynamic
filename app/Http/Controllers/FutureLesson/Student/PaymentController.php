@@ -19,6 +19,10 @@ class PaymentController extends Controller {
 		return view('student.payment.index');
 	}
 
+	public function subscription(){
+		return view('student.payment.partials.subscribe');
+	}
+
 	public function list_form() {
 		return view('student.payment.partials.list');
 	}

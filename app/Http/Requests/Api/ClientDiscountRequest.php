@@ -21,12 +21,12 @@ class ClientDiscountRequest extends ApiRequest {
 	public function rules() {
 	    switch($this->method()){
 	        case 'POST':
-	            return ['client_id'     => 'required|numeric|unique:client_discounts,client_id,NULL,id,deleted_at,NULL',
+	            return ['user_id'     => 'required|numeric|unique:client_discounts,user_id,NULL,id,deleted_at,NULL',
             			'percentage'    => 'required|numeric|min:1.00|max:100.00',
             			'status'        => 'required|in:Enabled,Disabled'];
 	        break;
 	        case 'PUT':
-	            return ['client_id'     => 'required|numeric|unique:client_discounts,client_id,'.$this->client_id.',client_id,deleted_at,NULL',
+	            return ['user_id'     => 'required|numeric|unique:client_discounts,user_id,'. $this->user_id .',user_id,deleted_at,NULL',
             			'percentage'    => 'required|numeric|min:1.00|max:100.00',
             			'status'        => 'required|in:Enabled,Disabled'];
 	        break;
@@ -43,7 +43,7 @@ class ClientDiscountRequest extends ApiRequest {
 	public function messages() {
 		return [
 			'unique' => trans('errors.1007',['attribute' => trans('errors.2184')]),
-			'client_id.required' => trans('validation.required',['attribute' => trans('errors.2185')]),
+			'user_id.required' => trans('validation.required',['attribute' => trans('errors.2185')]),
 		];
 	}
 }

@@ -65,7 +65,7 @@ class OrderRepository implements OrderRepositoryInterface{
 	/**
      * @return null
      */
-    public function getNextOrderNo(){
+    public function getLastOrderNo(){
 
         DB::beginTransaction();
 

@@ -156,6 +156,11 @@ Routes::group([
 		'uses' => 'Api\v1\StudentController@checkBillingAddress'
 	]);
 
+	Routes::post('/student/billing-address/{id}',[
+		'as' => 'student.update.billing-address',
+		'uses' => 'Api\v1\StudentController@updateBillingAddress'
+	]);
+
 	Routes::get('/student/latest-details/{id}',
 	[
 		'as' => 'student.get.latest-details',

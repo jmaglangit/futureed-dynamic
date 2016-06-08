@@ -51,6 +51,11 @@ Routes::group(['prefix' => '/client'], function()
 		Routes::get('/check-billing-address/{id}',
 				   ['uses' => 'Api\v1\ClientController@checkBillingAddress',
 					'as' => 'api.v1.client.check.billing-address']);
+
+		Routes::post('/update-billing-address/{id}', [
+			'uses' => 'Api\v1\ClientController@updateBillingAddress',
+				'as' => 'api.v1.client.update.billing-address'
+		]);
 	});
 
 	Routes::group([

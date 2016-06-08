@@ -61,4 +61,8 @@ class ManageParentPaymentController extends Controller{
 
 		return view('client.partials.fail_payment');
 	}
+
+	public function subscription(){
+		return view('client.parent.payment.partials.subscribe');
+	}
 }
