@@ -25,6 +25,9 @@ class QuestionTableSeeder extends Seeder
 
 		$this->command->info('Loading Question Batch 3...');
 		$this->dataLoader('questions_three.csv');
+
+		$this->command->info('Loading Question Batch 4...');
+		$this->dataLoader('questions_four.csv');
     }
 
 	/**
