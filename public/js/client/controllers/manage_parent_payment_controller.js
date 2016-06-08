@@ -870,19 +870,19 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			case Constants.SUBSCRIPTION_COUNTRY :
 				self.subscriptionGenerateCountry(data);
 				break;
-			case Constants.SUBSCRIPTION_SUBJECT	:
+			case Constants.SUBSCRIPTION_SUBJECT :
 				self.subscriptionGenerateSubject(data);
 				break;
-			case Constants.SUBSCRIPTION_PLAN	:
+			case Constants.SUBSCRIPTION_PLAN :
 				self.subscriptionGeneratePlan(data);
 				break;
-			case Constants.SUBSCRIPTION_DAYS	:
+			case Constants.SUBSCRIPTION_DAYS :
 				self.subscriptionGenerateDays(data);
 				break;
-			case Constants.SUBSCRIPTION_STUDENTS:
+			case Constants.SUBSCRIPTION_STUDENTS :
 				self.subscriptionGenerateStudentList();
 				break;
-			case Constants.SUBSCRIPTION_OTHERS	:
+			case Constants.SUBSCRIPTION_OTHERS :
 				self.subscriptionGenerateOtherInfo();
 				break;
 			default :

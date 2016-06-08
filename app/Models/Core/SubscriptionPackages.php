@@ -32,6 +32,7 @@ class SubscriptionPackages extends Model{
 	];
 
 	//relationships
+
 	public function subject(){
 		return $this->belongsTo('FutureEd\Models\Core\Subject');
 	}
@@ -48,14 +49,8 @@ class SubscriptionPackages extends Model{
 		return $this->belongsTo('FutureEd\Models\Core\Subscription');
 	}
 
-// subject_id
-	//days_id
-	//subscription_id
-	//country_id
-	//price
-	//status
+	//scopes
 
-	//scope
 	public function scopeSubjectId($query, $subject_id){
 		return $query->where('subject_id',$subject_id);
 	}
@@ -75,9 +70,4 @@ class SubscriptionPackages extends Model{
 	public function scopeStatus($query, $status){
 		return $query->where('status',$status);
 	}
-
-
-
-
-
 }

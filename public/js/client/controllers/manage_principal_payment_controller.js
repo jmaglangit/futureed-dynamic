@@ -417,15 +417,12 @@ function ManagePrincipalPaymentController(
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
+
 					var data = response.data;
 
 					self.invoice = data;
 
-					//self.getStudents(self.invoice.order_no);
 					self.subscriptionView(data);
-					//if(angular.equals(self.invoice.payment_status, Constants.PAID)) {
-					//	getClient(self.invoice.client_id)
-					//}
 				}
 			}
 
@@ -1281,7 +1278,6 @@ function ManagePrincipalPaymentController(
 	self.addClassroom = function(data){
 
 		//get grade
-		//var classroom = self.new_classroom;
 		var classroom = data;
 
 		classroom.teacher = {
@@ -1289,8 +1285,6 @@ function ManagePrincipalPaymentController(
 			'name' : self.subscription_teacher.client_name
 		};
 
-
-		//classroom.grade = self.classroom_grade;
 		classroom.price = (((classroom.seats) ?  classroom.seats : 0) * self.subscription_invoice.package_price);
 
 		self.subscription_classroom.push({
@@ -1317,7 +1311,6 @@ function ManagePrincipalPaymentController(
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					$scope.grades = response.data.records;
-
 				}
 			}
 		}).error(function(response) {
@@ -1387,10 +1380,7 @@ function ManagePrincipalPaymentController(
 			discount_id	:	data.discount_id,
 			total_amount	:	data.total_amount,
 			subscription_package_id	:	data.subscription_package_id
-
 		};
-
-
 
 		self.getClassroomTotalPrice(self.subscription_invoice.classrooms);
 

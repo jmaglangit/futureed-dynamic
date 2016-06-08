@@ -46,7 +46,7 @@ class SubscriptionPackageRepository implements SubscriptionPackageRepositoryInte
 
 			$subscription_package = $subscription_package->with('subject','subscription_day','country','subscription');
 
-			$count = $subscription_package->get()->count();
+			$count = $subscription_package->count();
 
 			if ($offset >= 0 && $limit > 0) {
 				$subscription_package = $subscription_package->skip($offset)->take($limit);
@@ -69,7 +69,6 @@ class SubscriptionPackageRepository implements SubscriptionPackageRepositoryInte
 		DB::commit();
 
 		return $response;
-
 	}
 
 	/**
