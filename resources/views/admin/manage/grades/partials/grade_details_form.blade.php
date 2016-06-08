@@ -36,11 +36,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">{!! trans('messages.grade') !!} <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans_choice('messages.grade', 1) !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('name',''
 							, array(
-								'placeHolder' => trans('messages.grade')
+								'placeHolder' => trans_choice('messages.grade', 1)
 								, 'ng-model' => 'grade.record.name'
 								, 'class' => 'form-control'
 								, 'ng-class' => "{ 'required-field' : grade.fields['name'] }"

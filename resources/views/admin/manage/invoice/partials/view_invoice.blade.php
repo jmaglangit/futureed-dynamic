@@ -106,7 +106,7 @@
 					<tr>
 						<td>{!! trans('messages.no_of_seats') !!}</td>
 						<td>{!! trans('messages.seats_taken') !!}</td>
-						<td>{!! trans('messages.grade') !!}</td>
+						<td>{!! trans_choice('messages.grade', 1) !!}</td>
 						<td>{!! trans('messages.teacher') !!}</td>
 						<td>{!! trans('messages.class') !!}</td>
 						<td>{!! trans('messages.price') !!}</td>

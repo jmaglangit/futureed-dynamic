@@ -45,7 +45,7 @@
 		            <th>{!! trans('messages.event') !!}</th>
 		            <th>{!! trans('messages.description') !!}</th>
 		            <th>{!! trans('messages.admin_date_earned') !!}</th>
-		            <th ng-if="student.points.length">{!! trans('messages.action') !!}</th>
+		            <th ng-if="student.points.length">{!! trans_choice('messages.action', 1) !!}</th>
 		        </tr>
 		    </thead>
 
@@ -117,7 +117,7 @@
 		        <tr>
 		            <th>{!! trans('messages.admin_badge_name') !!}</th>
 		            <th>{!! trans('messages.admin_date_earned') !!}</th>
-		            <th ng-if="student.badges.length">{!! trans('messages.action') !!}</th>
+		            <th ng-if="student.badges.length">{!! trans_choice('messages.action', 1) !!}</th>
 		        </tr>
 		    </thead>
 

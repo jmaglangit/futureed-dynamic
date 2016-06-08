@@ -14,6 +14,13 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.getSnapModule = function(filename) {
+		return $http({
+			method	:	Constants.METHOD_GET,
+			url		:	serviceUrl + "snap/" + filename
+		});
+	}
+
 	service.validateAnswer = function(data){
 		return $http({
 			method	:	Constants.METHOD_POST,

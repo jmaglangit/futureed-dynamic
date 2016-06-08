@@ -111,7 +111,7 @@
 						<th>{!! trans('messages.created_by') !!}</th>
 						<th>{!! trans('messages.date_created') !!}</th>
 						<th>{!! trans('messages.status') !!}</th>
-						<th ng-if="answer.records.length">{!! trans('messages.action') !!}</th>
+						<th ng-if="answer.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 					</tr>
 				</thead>
 				<tbody>

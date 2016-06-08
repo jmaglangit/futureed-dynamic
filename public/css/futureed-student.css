@@ -1978,7 +1978,7 @@ a.payment-page-text {
 	border: 5px solid #EEEEEE;
 	width: 100%;
 	overflow: auto;
-	height: 450px;
+	height: 49em;
 }
 
 .module-icon, .locked-module-icon {
@@ -2072,8 +2072,8 @@ a.payment-page-text {
 		border: 5px solid #EEEEEE;
 		width: 100%;
 		overflow: auto;
-		max-height: 36em;
-		min-height: 36em;
+		max-height: 37.5em;
+		min-height: 37.5em;
 	}
 
 	@-moz-document url-prefix() {

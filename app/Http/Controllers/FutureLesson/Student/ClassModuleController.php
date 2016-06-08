@@ -26,6 +26,10 @@ class ClassModuleController extends Controller {
 		return view('student.class.module.partials.questions.message');
 	}
 
+	public function coding_module() {
+		return view('student.class.module.partials.questions.coding-module');
+	}
+
 	//For trial module
 	public function trial_module()
 	{

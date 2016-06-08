@@ -97,7 +97,7 @@
 			        <tr>
 			            <th>{!! trans('messages.admin_area_code') !!}</th>
 			            <th>{!! trans('messages.area') !!}</th>
-			            <th ng-if="area.records.length">{!! trans('messages.action') !!}</th>
+			            <th ng-if="area.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>

@@ -113,7 +113,7 @@
 				            <th>{!! trans('messages.admin_help_request_title') !!}</th>
 				            <th>{!! trans('messages.date_created') !!}</th>
 				            <th>{!! trans('messages.status') !!}</th>
-				            <th ng-if="help.records.length">{!! trans('messages.action') !!}</th>
+				            <th ng-if="help.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 				        </tr>
 			        </thead>
 			        <tbody>
