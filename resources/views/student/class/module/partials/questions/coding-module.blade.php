@@ -76,11 +76,11 @@
 				<span class="result-message col-xs-3"
                       ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
 					<h2 ng-if="mod.result.points_earned > 0">
-                        Correct!
+                        {{ trans('messages.correct') }}
                     </h2>
 
 					<h2 ng-if="mod.result.points_earned <= 0" >
-                        Wrong.
+                        {{ trans('messages.wrong') }}
                     </h2>
 				</span>
 				<span class="result-image col-xs-3">
@@ -95,7 +95,7 @@
             </div>
             <div class="proceed-btn-container btn-container">
                 <button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
-                    Proceed to next Question
+                    {{ trans('messages.proceed_to_next_questions') }}
                 </button>
             </div>
 
@@ -110,11 +110,11 @@
             <div class="quote-message"
                  ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
                 <p ng-if="mod.result.points_earned > 0">
-                    Correct!
+                    {{ trans('messages.correct') }}
                 </p>
 
                 <p ng-if="mod.result.points_earned <= 0">
-                    Wrong.
+                    {{ trans('messages.wrong') }}
                 </p>
             </div>
 
@@ -132,7 +132,7 @@
 
                         <div class="proceed-btn-container btn-container">
                             <button type="button" class="btn btn-maroon btn-large" ng-click="mod.nextQuestion()">
-                                Proceed to next Question
+                                {{ trans('messages.proceed_to_next_questions') }}
                             </button>
                         </div>
                     </div>
@@ -141,32 +141,4 @@
         </div>
     </div>
 
-    <div ng-if="mod.result.failed">
-        <div class="questions-container col-xs-12">
-            <div class="questions-header">
-                <h3> Question #{! mod.question_counter !} </h3>
-            </div>
-
-            <div class="result-failed message-container">
-                <div class="col-xs-12">
-                    <div class="col-xs-2"></div>
-                    <div class="failed-module-icon-holder col-xs-3">
-                        <img ng-src="{! user.avatar !}" />
-                    </div>
-
-                    <div class="col-xs-5">
-                        <p class="failed-module-message">
-                            You need to review and take the test again.
-                        </p>
-
-                        <div class="proceed-btn-container btn-container">
-                            <button type="button" class="btn btn-maroon btn-large" ng-click="mod.reviewContent()">
-                                Retake Test
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
