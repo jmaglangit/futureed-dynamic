@@ -19,7 +19,11 @@ Routes::group([
 
 	Routes::resource('/trial', 'Api\v1\StudentTrialModuleController');
 
-	Routes::resource('/snap', 'Api\v1\StudentSnapModuleController');
+	Routes::resource('/snap', 'Api\v1\StudentSnapModuleController',
+		[
+			'only' => ['show']
+		]
+	);
 
 	Routes::resource('/module/student','Api\v1\StudentModuleController',
 		['except' => ['create', 'edit', 'destroy']]);

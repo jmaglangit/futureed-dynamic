@@ -19,7 +19,7 @@ class StudentSnapModuleController extends ApiController
 		if(File::exists(storage_path('seeders/snap/'.$module.'.xml'))) {
 			return response()->download(storage_path('seeders/snap/'.$module.'.xml'), $module.'.xml',['Content-Type' => 'text/xml']);
 		}
-		return response('');
+		return $this->respondWithData(true);
 	}
 
 
