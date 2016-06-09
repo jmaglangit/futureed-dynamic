@@ -1718,6 +1718,19 @@ span.round-tab:hover {
 	padding: 4px 40px;
 }
 
+.border-radius-30
+{
+	border-radius: 30px;
+	height: 40px;
+	padding: 8px 40px;
+	background-color: #055A7F;
+	color: #FFFFFF;
+}
+
 .left-percent-20{
 	left : 20%;
+}
+
+.header-progress {
+	margin-top: -8px;
 }
