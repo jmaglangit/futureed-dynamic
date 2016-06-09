@@ -72,11 +72,7 @@ class ClassStudentRequest extends ApiRequest {
 
 			case 'PUT':
 
-				$class_student_id = $this->__get('id');
-
-				$class_student = ClassStudent::find($class_student_id);
-
-				return['date_removed' => 'required|date_format:Ymd|after:'.$class_student->date_started.'|before:Tomorrow'];
+				return ['date_removed' => 'required|date_format:Ymd|before:Tomorrow'];
 			
         }
 
