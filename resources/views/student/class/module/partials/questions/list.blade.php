@@ -14,8 +14,8 @@
 					</div>
 				</div>
 				<div class="col-xs-6">
-					<div class="row col-xs-6 bottom-6">
-						<h3 class="border-radius-10">Progress {! mod.current_points !} / {! mod.points_to_finish !}</h3>
+					<div class="header-progress col-xs-6 bottom-6">
+						<h3 class="border-radius-30">Progress {! mod.current_points !} / {! mod.points_to_finish !}</h3>
 					</div>
 					<div class="row col-xs-6">
 						<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed"
