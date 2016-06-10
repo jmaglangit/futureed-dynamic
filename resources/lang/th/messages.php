@@ -1976,6 +1976,10 @@ return [
 
 	"user_credentials" => "สิทธิของผู้ใช้",
 
-	"youre_almost_done" => "เกือบเสร็จแล้ว"
+	"youre_almost_done" => "เกือบเสร็จแล้ว",
+
+	"logged_out" => "ออกจากระบบ",
+
+	"multiple_login_message" => "คุณได้รับการออกจากระบบเนื่องจากบัญชีจะเข้าสู่ระบบในขณะนี้",
 
 ];

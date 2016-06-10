@@ -1327,5 +1327,7 @@ return [
 
 	'did_not_receive_email_confirmation' => 'Did not receive email confirmation?',
 	'resend_confirmation' => 'resend confirmation',
-	'youre_almost_done' => 'You\'re almost done'
+	'youre_almost_done' => 'You\'re almost done',
+	'logged_out' => 'Logged out',
+	'multiple_login_message' => 'You have been logged out because the account is currently logged in.',
 ];
