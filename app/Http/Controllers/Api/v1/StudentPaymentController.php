@@ -110,7 +110,7 @@ class StudentPaymentController extends ApiController {
 			'subscription_id' => $order['subscription_id'],
 			'payment_status' => $order['payment_status'],
 			'subscription_package_id' => $order['subscription_package_id'],
-			'discount_id' => $order['discount_id'],
+			'discount_id' => (isset($order['discount_id']))? $order['discount_id'] : 0,
 			'discount' => $order['discount']
 		];
 
@@ -144,7 +144,7 @@ class StudentPaymentController extends ApiController {
 
 		//form data for invoice detail
 		$invoice_detail = [
-			'invoice_id' => $inserted_invoice['id'],
+			'invoice_id' => (isset($inserted_invoice['id'])) ? $inserted_invoice['id'] : 0 ,
 			'class_id' => $inserted_classroom['id'],
 			'grade_id' => $student['grade']['id'],
 			'price' => $order['total_amount']
