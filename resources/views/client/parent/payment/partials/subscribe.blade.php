@@ -76,7 +76,7 @@
                 {!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="step1">
-                            <h3>{!! trans('messages.country') !!}</h3>
+                            <h3>{!! trans('messages.select_a_country') !!}</h3>
 
                             {{--Display subject options --}}
                             {{--TODO get subject list--}}
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
-                            <h3>{!! trans('messages.subject') !!}</h3>
+                            <h3>{!! trans('messages.select_a_subject') !!}</h3>
 
                             {{--Display subject options --}}
                             {{--TODO get subject list--}}
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step3">
-                            <h3>{!! trans('messages.plans') !!}</h3>
+                            <h3>{!! trans('messages.select_a_plan') !!}</h3>
 
                             {{--Display list of plan--}}
                             <div class="row">
@@ -128,7 +128,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step4">
-                            <h3>{!! trans('messages.admin_days') !!}</h3>
+                            <h3>{!! trans('messages.select_a_day') !!}</h3>
 
                             {{--List plans available days.--}}
                             <div class="row">
@@ -144,7 +144,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step5">
-                            <h3>{!! trans_choice('messages.student',2) !!}</h3>
+                            <h3>{!! trans('messages.select_students') !!}</h3>
                             {{--TODO List Students under parents--}}
                             <div class="row">
                                 <div class="col-xs-12" data-toggle="buttons">
@@ -157,7 +157,7 @@
                             </div>
                             <ul class="list-inline pull-right">
                                 <li>
-                                    <button type="button" class="btn btn-primary btn-info-full"
+                                    <button type="button" class="btn btn-primary btn-info-full" ng-disabled="payment.enlist_student == futureed.FALSE"
                                             ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_STUDENTS)">{!! trans('messages.add_student') !!}</button>
                                 </li>
                             </ul>

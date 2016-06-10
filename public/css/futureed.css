@@ -1584,10 +1584,6 @@ span.round-tab:hover {
 .wizard .tab-content .tab-pane .row [class*="col-"] {
 	padding-top: 15px;
 	padding-bottom: 15px;
-	/*background-color: #eee;*/
-	/*border: 1px solid #ddd;*/
-	/*background-color: rgba(86, 61, 124, .15);*/
-	/*border: 1px solid rgba(86, 61, 124, .2);*/
 	margin-bottom: 20px;
 }
 
@@ -1606,6 +1602,12 @@ span.round-tab:hover {
 	border-radius: 10px;
 	padding-top: 25px;
 }
+
+/*TODO to be discussed with PM.
+.wizard-box:hover{*/
+	/*background-color: #ac2a4e;*/
+	/*border-color: #ac2a4e;*/
+/*}*/
 
 .wizard-box:after {
 	transition: 2s ease-in-out;
@@ -1733,4 +1735,12 @@ span.round-tab:hover {
 
 .header-progress {
 	margin-top: -8px;
+}
+
+.step-header {
+	margin-top : -10px;
+}
+
+.round-tab .fa {
+	margin: 0 10px 0 10px;
 }

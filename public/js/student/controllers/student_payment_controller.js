@@ -436,6 +436,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				self.subscription_option.subject_id = Constants.FALSE;
 				self.subscription_option.subscription_id = Constants.FALSE;
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_SUBJECT);
@@ -449,6 +450,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				//empty values
 				self.subscription_option.subscription_id = Constants.FALSE;
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_PLAN);
@@ -461,6 +463,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 				//empty values
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_DAYS);
@@ -473,6 +476,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_OTHERS);
+				disableTab();
 				navigateTab();
 				break;
 
@@ -480,6 +484,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			case Constants.SUBSCRIPTION_OTHERS	:
 				self.subscription_option.others = {};
 				self.subscriptionPackage();
+				disableTab();
 
 				break;
 			default:
