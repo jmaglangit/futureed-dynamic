@@ -361,10 +361,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 		updateModuleStudent(data);
 
-		if(self.record.content.length == 0) {
-			if(self.record.question[0].question_type === Constants.CODING){
+		if(self.record.content.length == 0 && self.record.question[0].question_type === Constants.CODING){
 				self.setActive(Constants.ACTIVE_QUESTIONS);
-			}
 		}
 	}
 
