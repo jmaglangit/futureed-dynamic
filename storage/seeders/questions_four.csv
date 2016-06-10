@@ -1,3 +1,4 @@
+id,module_id,code,question_type,question_text,question_image_original,question_image,answer,question_order_text,question_graph_content,seq_no,difficulty,points_earned,status,created_by,updated_by,created_by,updated_by,deleted_by
 20335,15,1000341,FIB,"What is the missing number: 89, 86, ...,80, 77, 74",,,83,,,17,2,,,,,,,
 20336,2,1000342,FIB,26+11=,,,37,,,18,1,,,,,,,
 20337,3,1000343,FIB,55-14=,,,41,,,34,1,,,,,,,
@@ -649,3 +650,8 @@
 20983,41,1000989,FIB,There were 24 flowers in 3 vases. Billy broke a vase. He wants to put an equal number of flowers in the remaining vases. He must put…flowers in each vase.,pink_flower.png,pink_flower.png,12,,,48,3,,,,,,,
 20984,17,1000990,FIB,There are 4 fish in a tank. How many fish are there in 3 such tanks?,,,12,,,39,3,,,,,,,
 20985,41,1000991,FIB,Beth has a total of 18 balls. She wants to put all the balls equally into 3 baskets. In each basket there are… balls.,,,6,,,49,3,,,,,,,
+20986,440,1000992,COD,,,,TRUE,,,1,1,12,,,,,,
+20987,440,1000993,COD,,,,TRUE,,,2,1,12,,,,,,
+20988,440,1000994,COD,,,,TRUE,,,3,1,12,,,,,,
+20989,440,1000995,COD,,,,TRUE,,,4,1,12,,,,,,
+20990,440,1000996,COD,,,,TRUE,,,5,1,12,,,,,,

@@ -14,6 +14,7 @@ function SnapModuleController($scope, $window, $interval, $filter, apiService, S
     var canvas_parent_div;
     var canvas_offset;
     var x_offset;
+    var cur_code;
 
     self.loading = Constants.TRUE;
 
@@ -166,8 +167,8 @@ function SnapModuleController($scope, $window, $interval, $filter, apiService, S
     {
         if(!isAnswering)
         {
-            $('.btn-code-run').text('Reset');
             updateCode();
+            $('.btn-code-run').text('Reset');
             FutureEd_IDE.stage.doCustomBroadcastEvent("run_code");
             isAnswering = !isAnswering;
         }
