@@ -6,7 +6,7 @@
                 Logged out
             </div>
             <div class="modal-body">
-                This user is currently logged-in on another browser.
+                You have been logged out because the account is currently logged in.
             </div>
             <div class="modal-footer">
                 <div class="col-md-8 col-md-offset-4 pull-left">
