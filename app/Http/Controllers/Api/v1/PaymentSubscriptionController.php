@@ -170,7 +170,7 @@ class PaymentSubscriptionController extends ApiController {
 			'subscription_id' => $order['subscription_id'],
 			'payment_status' => $order['payment_status'],
 			'subscription_package_id' => $order['subscription_package_id'],
-			'discount_id' => $order['discount_id'],
+			'discount_id' => (isset($order['discount_id'])) ? $order['discount_id']: 0,
 			'discount' => $order['discount']
 		];
 
