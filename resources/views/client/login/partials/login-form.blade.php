@@ -25,7 +25,7 @@
 						'placeholder' => trans('messages.email_or_username')
 						, 'ng-model' => 'login.username'
 						, 'autocomplete' => 'off'
-						, 'style' => 'font-size:16px;'
+						, 'class' => 'font-size-16'
 					)
 				) !!}
 			</div>
@@ -38,7 +38,7 @@
 					, array(
 						'placeholder' => trans('messages.password')
 						, 'ng-model' => 'login.password'
-						, 'style' => 'font-size:16px;'
+						, 'class' => 'font-size-16'
 					)
 				) !!}
 			</div>
