@@ -360,6 +360,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			data.last_answered_question_id = parseInt(self.current_question.id);
 
 		updateModuleStudent(data);
+
+		if(self.record.content.length == 0 && self.record.question[0].question_type === Constants.CODING){
+				self.setActive(Constants.ACTIVE_QUESTIONS);
+		}
 	}
 
 
