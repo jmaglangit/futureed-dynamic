@@ -68,6 +68,7 @@ function ManagePrincipalPaymentController(
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
 				self.active_view = Constants.TRUE;
+				lastTab();
 				self.viewPayment(id);
 				break;
 
@@ -692,8 +693,12 @@ function ManagePrincipalPaymentController(
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
 				self.invoice = response.data;
-				self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject.id;
-				self.invoice.subject_name = self.invoice.invoice_detail[0].classroom.subject.name;
+
+				if(self.invoice.invoice_detail.length){
+					self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject.id;
+					self.invoice.subject_name = self.invoice.invoice_detail[0].classroom.subject.name;
+				}
+
 
 
 				self.listClassroom(self.invoice.order_no);
@@ -865,6 +870,7 @@ function ManagePrincipalPaymentController(
 				self.subscription_option.subject_id = Constants.FALSE;
 				self.subscription_option.subscription_id = Constants.FALSE;
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_SUBJECT);
@@ -878,6 +884,7 @@ function ManagePrincipalPaymentController(
 				//empty values
 				self.subscription_option.subscription_id = Constants.FALSE;
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_PLAN);
@@ -890,6 +897,7 @@ function ManagePrincipalPaymentController(
 
 				//empty values
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_DAYS);
@@ -902,6 +910,7 @@ function ManagePrincipalPaymentController(
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_OTHERS);
+				disableTab();
 
 				navigateTab();
 				break;
@@ -909,12 +918,14 @@ function ManagePrincipalPaymentController(
 			case Constants.SUBSCRIPTION_CLASSROOM:
 
 				self.subscriptionPackage(Constants.SUBSCRIPTION_STUDENTS);
+				disableTab();
 				navigateTab();
 				break;
 
 			case Constants.SUBSCRIPTION_OTHERS	:
 				self.subscription_option.others = {};
 				self.subscriptionPackage();
+				disableTab();
 
 				break;
 			default:
