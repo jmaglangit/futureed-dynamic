@@ -1980,6 +1980,17 @@ a.payment-page-text {
 	overflow: auto;
 	height: 49em;
 }
+@-moz-document url-prefix() {
+	.questions-container {
+		background-color: #FFFFFF;
+		border-radius: 5px;
+		border: 5px solid #EEEEEE;
+		width: 100%;
+		overflow: auto;
+		max-height: 43em;
+		min-height: 43em;
+	}
+}
 
 .module-icon, .locked-module-icon {
 	border-radius: 50%;
@@ -2083,8 +2094,8 @@ a.payment-page-text {
 			border: 5px solid #EEEEEE;
 			width: 100%;
 			overflow: auto;
-			max-height: 33em;
-			min-height: 33em;
+			max-height: 37.5em;
+			min-height: 37.5em;
 		}
 	}
 
