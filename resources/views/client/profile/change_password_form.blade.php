@@ -47,7 +47,7 @@
         {!! Form::button(trans('messages.cancel')
             , array(
                 'class' => 'btn btn-gold btn-medium'
-                , 'ng-click' => "profile.setClientProfileActive('index')"
+                , 'ng-click' => 'profile.setClientProfileActive("index")'
             )
         ) !!}
 	</div>
@@ -59,10 +59,10 @@
 	</div>
 
 	<div class="btn-container">
-        {!! Form::button(trans('messages.view_profile') !!}'
+        {!! Form::button(trans('messages.view_profile')
             , array(
                 'class' => 'btn btn-blue btn-medium'
-                , 'ng-click' => "profile.setClientProfileActive('index')"
+                , 'ng-click' => 'profile.setClientProfileActive("index")'
             )
         ) !!}
 	</div>

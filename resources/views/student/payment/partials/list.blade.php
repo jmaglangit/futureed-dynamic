@@ -90,7 +90,7 @@
 			            <th>{!! trans('messages.total_no_seats') !!}</th>
 			            <th>{!! trans('messages.total_price') !!}</th>
 			            <th>{!! trans('messages.payment_status') !!}</th>
-			            <th>{!! trans('messages.action') !!}</th>
+			            <th>{!! trans_choice('messages.action', 2) !!}</th>
 			        </tr>
 			    </thead>
 

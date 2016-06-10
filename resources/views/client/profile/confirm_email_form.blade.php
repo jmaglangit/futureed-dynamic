@@ -44,7 +44,7 @@
 
 	    <br />
 	    <div class="form-group">
-	        {!! Form::label(null, trans('messages.client_enter_email_confirmation_code') !!}
+	        {!! Form::label(null, trans('messages.client_enter_email_confirmation_code')) !!}
 
 	        {!! Form::text('confirm_code', '',
 	              array(
@@ -87,7 +87,7 @@
             	{!! Form::button(trans('messages.view_profile')
 		            , array(
 		                'class' => 'btn btn-gold'
-		                , 'ng-click' => "profile.setClientProfileActive('index')"
+		                , 'ng-click' => 'profile.setClientProfileActive("index")'
 		            )
 		        ) !!}
         </div> 

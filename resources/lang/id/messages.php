@@ -1976,6 +1976,10 @@ Jika anda memindahkan hak administrasi organisasi anda kepada orang lain dalam o
 
 	"resend_confirmation" => "Kirim kembali konfirmasi",
 
-	"youre_almost_done" => "Kamu hampir selesai"
+	"youre_almost_done" => "Kamu hampir selesai",
+
+	"logged_out" => "Keluar",
+
+	"multiple_login_message" => "Anda telah keluar karena account saat login.",
 
 ];
