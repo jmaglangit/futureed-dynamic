@@ -25,6 +25,10 @@ class OrderRequest extends ApiRequest {
 
             case 'PUT':
 
+                return [
+                    'date_start' => 'required|date_format:Ymd',
+                    'date_end' => 'required|date_format:Ymd',
+                ];
                 break;
 
             case 'PATCH':

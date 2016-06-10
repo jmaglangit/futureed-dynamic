@@ -65,7 +65,7 @@
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'class.record.grade.name'
-							, 'placeholder' => trans('messages.grade')
+							, 'placeholder' => trans_choice('messages.grade', 1)
 						)
 					) !!}
 				</div>
@@ -184,7 +184,7 @@
 			        <tr>
 			            <th>{!! trans('messages.student_name') !!}</th>
 			            <th class="width-medium">{!! trans('messages.email') !!}</th>
-			            <th ng-if="class.students.length">{!! trans('messages.action') !!}</th>
+			            <th ng-if="class.students.length">{!! trans_choice('messages.action', 1) !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>

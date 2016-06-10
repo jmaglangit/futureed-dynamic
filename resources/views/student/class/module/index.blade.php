@@ -38,6 +38,7 @@
 			<div ng-if="mod.active_questions">
 				<div template-directive template-url="{!! route('student.class.module.partials.questions') !!}"></div>
 			</div>
+
 		</div>
 		<!-- End of Main Container -->
 
@@ -131,5 +132,24 @@
 	{!! Html::script('//code.jquery.com/ui/1.9.2/jquery-ui.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}
+
+	{{--SNAP--}}
+	{!! Html::script('js/snap/morphic.js')  !!}
+	{!! Html::script('js/snap/widgets.js')  !!}
+	{!! Html::script('js/snap/blocks.js')   !!}
+	{!! Html::script('js/snap/threads.js')  !!}
+	{!! Html::script('js/snap/objects.js')  !!}
+	{!! Html::script('js/snap/lists.js')    !!}
+	{!! Html::script('js/snap/byob.js')     !!}
+	{!! Html::script('js/snap/tables.js')   !!}
+	{!! Html::script('js/snap/gui.js')      !!}
+	{!! Html::script('js/snap/paint.js')    !!}
+	{!! Html::script('js/snap/xml.js')      !!}
+	{!! Html::script('js/snap/store.js')    !!}
+	{!! Html::script('js/snap/locale.js')   !!}
+	{!! Html::script('js/snap/cloud.js')    !!}
+	{!! Html::script('js/snap/sha512.js')   !!}
+	{!! Html::script('js/snap/FileSaver.min.js') !!}
+	{!! Html::script('js/snap/main.js') !!}
 @stop
 

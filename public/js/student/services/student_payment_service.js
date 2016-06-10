@@ -96,5 +96,80 @@ function StudentPaymentService($http) {
 		});
 	}
 
+	service.subscriptionPackages = function(data) {
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	serviceUrl + 'subscription-package?'
+				+ 'subject_id=' + ((data.subject_id) ? data.subject_id : '')
+				+ '&days_id=' + ((data.days_id) ? data.days_id : '')
+				+ '&subscription_id=' + ((data.subscription_id) ? data.subscription_id : '')
+				+ '&country_id=' + ((data.country_id) ? data.country_id : '')
+				+ '&status=' + Constants.ENABLED
+		});
+	}
+
+	//service.subs  api/v1/subscription-package/{id}
+	service.subscriptionPackage = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	serviceUrl + 'subscription-package/' + id
+		});
+	}
+
+	service.getCountry = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	serviceUrl + 'countries/' + id
+		});
+	}
+
+	service.getCountryList = function(){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	serviceUrl + 'countries'
+		});
+	}
+
+	service.updateStudentAddress = function(data){
+		//api/v1/student/billing-address/{id}
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			,url	: serviceUrl + 'student/billing-address/' + data.id
+		});
+	}
+
+	service.getClientDiscount = function(user_id){
+
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: serviceUrl + 'client-discount?'
+			+ 'user_id=' + ((user_id) ? user_id : '')
+		});
+	}
+
+	service.getOrder = function(order_id){
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: serviceUrl + 'order/' + order_id
+		});
+	}
+
+	service.updateOrder = function(order_id,data){
+		return $http({
+			method	: Constants.METHOD_PUT
+			, data	: data
+			, url	: serviceUrl + 'order/' + order_id
+		});
+	}
+
+	service.saveSubscription = function(data){
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: serviceUrl + 'save-subscription'
+		});
+	}
+
 	return service;
 }

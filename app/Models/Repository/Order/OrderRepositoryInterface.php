@@ -7,7 +7,7 @@ interface OrderRepositoryInterface {
 
     public function updateOrder($id, $data);
 
-    public function getNextOrderNo();
+    public function getLastOrderNo();
 
     public function getOrderByOrderNo($order_no);
 

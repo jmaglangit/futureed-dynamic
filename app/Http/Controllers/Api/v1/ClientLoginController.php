@@ -5,10 +5,29 @@ use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Services\PasswordServices;
+use FutureEd\Services\UserServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class ClientLoginController extends ClientController {
+
+    protected $user_service;
+
+    protected $client;
+
+    protected $password;
+
+    public function __construct(
+        UserServices $userServices,
+        ClientRepositoryInterface $clientRepositoryInterface,
+        PasswordServices $passwordServices
+    ){
+        $this->user_service = $userServices;
+        $this->client = $clientRepositoryInterface;
+        $this->password = $passwordServices;
+    }
 
 	public function login(){
         $input = Input::only('username','password','role');
@@ -34,7 +53,7 @@ class ClientLoginController extends ClientController {
 
         
         //check username and password
-        $response =$this->user->checkLoginName($input['username'], 'Client');
+        $response =$this->user_service->checkLoginName($input['username'], 'Client');
 
         if($response['status'] <> 200){
 
@@ -42,7 +61,7 @@ class ClientLoginController extends ClientController {
         }
 
         //check if facebook_app_id and google_app_id is empty
-        if($this->user->getFacebookId($response['data']) || $this->user->getGoogleId($response['data'])){
+        if($this->user_service->getFacebookId($response['data']) || $this->user_service->getGoogleId($response['data'])){
 
             return $this->respondErrorMessage(2001);
         }
@@ -68,17 +87,17 @@ class ClientLoginController extends ClientController {
 
          //match username and password
         $input['password'] = sha1($input['password']);
-        $return  = $this->user->checkPassword($response['data'],$input['password']);
+        $return  = $this->user_service->checkPassword($response['data'],$input['password']);
 
         if(!$return){
 
-            $this->user->addLoginAttempt($response['data']);
+            $this->user_service->addLoginAttempt($response['data']);
 
-            $user = $this->user->getUserDetail($response['data'],'Client');
+            $user = $this->user_service->getUserDetail($response['data'],'Client');
 
             if($user['login_attempt'] >=3){
 
-                $this->user->lockAccount($response['data']);
+                $this->user_service->lockAccount($response['data']);
 
                 return $this->respondErrorMessage(2014);
 
@@ -89,7 +108,7 @@ class ClientLoginController extends ClientController {
         }
 
 		//get user details
-		$user_details = $this->user->getUserDetail($response['data'],config('futureed.client'));
+		$user_details = $this->user_service->getUserDetail($response['data'],config('futureed.client'));
 
 		//check if user is Disabled
 		if($user_details['status'] === config('futureed.user_disabled')){
@@ -104,10 +123,10 @@ class ClientLoginController extends ClientController {
 			$country = $client_detail->school['country_id'];
 		} else {
 
-			$country =$client_detail['country_id'];
+			$country = $client_detail['country_id'];
 		}
 
-        $this->user->resetLoginAttempt($return['id']);
+        $this->user_service->resetLoginAttempt($return['id']);
 
         return $this->respondWithData([
 			'id' => $client_detail['id'],

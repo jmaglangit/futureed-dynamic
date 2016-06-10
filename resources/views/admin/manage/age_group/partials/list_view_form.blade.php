@@ -44,7 +44,7 @@
 					<tr>
 						<th>{!! trans('messages.age') !!}</th>
 						<th>{!! trans('messages.admin_total_points_earned') !!}</th>
-						<th ng-if="age.records.length">{!! trans('messages.action') !!}</th>
+						<th ng-if="age.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 					</tr>
 				</thead>
 				<tbody>

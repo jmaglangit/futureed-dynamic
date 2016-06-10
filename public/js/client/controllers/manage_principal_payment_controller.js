@@ -7,9 +7,19 @@ ManagePrincipalPaymentController.$inject = ['$scope'
 	, 'managePrincipalPaymentService'
 	, 'clientProfileApiService'
 	, 'TableService'
-	, 'SearchService'];
+	, 'SearchService'
+	, 'apiService'];
 
-function ManagePrincipalPaymentController($scope, $window, $filter, managePrincipalPaymentService, clientProfileApiService, TableService, SearchService) {
+function ManagePrincipalPaymentController(
+	$scope,
+	$window,
+	$filter,
+	managePrincipalPaymentService,
+	clientProfileApiService,
+	TableService,
+	SearchService,
+	apiService) {
+
 	var self = this;
 
 	TableService(self);
@@ -35,12 +45,31 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
 
+		//subscription
+		self.active_renew = Constants.FALSE;
+		self.active_pay = Constants.FALSE;
+		self.active_save = Constants.FALSE;
+		self.subscription_option = {};
+		self.subscription_packages = {};
+		self.subscription_invoice = {};
+		self.subscription_views = {};
+		self.subscription_classroom = [];
+		self.subscription_continue = Constants.TRUE;
+		self.subscription_discount = Constants.FALSE;
+		self.subscription_teacher = {};
+		self.new_classroom = {};
+		self.classroom_grade = Constants.FALSE;
+
+
 		self.tableDefaults();
 		self.searchDefaults();
+		self.getClientDetails();
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
 				self.active_view = Constants.TRUE;
+				lastTab();
+				self.viewPayment(id);
 				break;
 
 			case Constants.ACTIVE_EDIT:
@@ -58,6 +87,9 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 				self.active_add = Constants.TRUE;
 				self.getSubject();
+
+				self.subscriptionOption();
+				self.subscriptionPackage(Constants.SUBSCRIPTION_COUNTRY);
 				break;
 
 			case Constants.ACTIVE_LIST:
@@ -235,13 +267,13 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		}
 	});
 
-	self.getPaymentUri = function() {
+	self.getPaymentUri = function(data) {
 		self.payment = {};
-		self.payment.invoice_id = self.invoice.id;
+		self.payment.invoice_id = data.id;
 		self.payment.quantity = Constants.TRUE;
-		self.payment.price = self.invoice.total_amount;
-		self.payment.client_id = self.invoice.client_id;
-		self.payment.order_no = self.invoice.order_no;
+		self.payment.price = data.total_amount;
+		self.payment.client_id = data.client_id;
+		self.payment.order_no = data.order_no;
 
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/principal/payment/success"
@@ -300,6 +332,108 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
+	self.saveSubscription = function(){
+
+		self.paySubscription(Constants.TRUE);
+		self.setActive();
+
+	};
+
+	self.paySubscription = function(isSave) {
+		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
+		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
+		//subscription_package_id
+
+		if(self.active_view && self.invoice.renew || self.active_view){
+			managePrincipalPaymentService.getOrder(self.invoice.order.id).success(function(response){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					var invoice = response.data;
+					var order_data = {
+						order_id : self.invoice.order.id,
+						date_start : self.subscription_invoice.date_start,
+						date_end : self.subscription_invoice.date_end
+					};
+
+					self.updateOrderDates(order_data);
+
+					if(!isSave){
+						self.getPaymentUri(invoice.invoice);
+					}
+				}
+
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			$scope.ui_block();
+			managePrincipalPaymentService.paySubscription(self.subscription_invoice).success(function(response) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+
+					$scope.ui_unblock();
+				} else if(response.data) {
+					var invoice = response.data;
+
+					if(!isSave){
+						self.getPaymentUri(invoice);
+					}
+
+				}
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+	};
+
+	self.updateOrderDates = function(data){
+		var dates = {
+			date_start	: 	data.date_start,
+			date_end	:	data.date_end
+		};
+		managePrincipalPaymentService.updateOrder(data.order_id,dates).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.viewPayment = function(id) {
+		self.errors = Constants.FALSE;
+		self.client = {};
+
+		$scope.ui_block();
+		managePrincipalPaymentService.viewPayment(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+
+					var data = response.data;
+
+					self.invoice = data;
+
+					self.subscriptionView(data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
 	self.getSchoolCode = function() {
 		clientProfileApiService.getClientDetails($scope.user.id).success(function(response) {
 			if(response.errors) {
@@ -321,6 +455,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.validation.c_loading = Constants.TRUE;
 		self.classroom.client_role = Constants.TEACHER;
 		self.classroom.school_code = self.invoice.school_code;
+
 
 		managePrincipalPaymentService.getTeacherDetails(self.classroom).success(function(response) {
 			self.validation.c_loading = Constants.FALSE;
@@ -346,6 +481,8 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.classroom.client_id = teacher.id;
 		self.classroom.client_name = teacher.first_name + " " + teacher.last_name;
 		self.teachers = {};
+
+		self.subscription_teacher = self.classroom;
 	}
 
 	self.clearClassroom = function() {
@@ -556,11 +693,16 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
 				self.invoice = response.data;
-				self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject.id;
-				self.invoice.subject_name = self.invoice.invoice_detail[0].classroom.subject.name;
+
+				if(self.invoice.invoice_detail.length){
+					self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject.id;
+					self.invoice.subject_name = self.invoice.invoice_detail[0].classroom.subject.name;
+				}
+
+
 
 				self.listClassroom(self.invoice.order_no);
-				self.setActive(active);
+				self.setActive(active,id);
 			}
 
 			$scope.ui_unblock();
@@ -713,4 +855,551 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			$scope.ui_unblock();
 		});
 	}
+
+	//new subscription
+
+	self.subscriptionOption = function(category,id){
+
+		switch(category){
+
+			case Constants.SUBSCRIPTION_COUNTRY :
+
+				self.subscription_option.country_id = id;
+
+				//empty values
+				self.subscription_option.subject_id = Constants.FALSE;
+				self.subscription_option.subscription_id = Constants.FALSE;
+				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
+
+				//next tab
+				self.subscriptionPackage(Constants.SUBSCRIPTION_SUBJECT);
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_SUBJECT	:
+
+				self.subscription_option.subject_id = id;
+
+				//empty values
+				self.subscription_option.subscription_id = Constants.FALSE;
+				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
+
+				//next tab
+				self.subscriptionPackage(Constants.SUBSCRIPTION_PLAN);
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_PLAN	:
+
+				self.subscription_option.subscription_id = id;
+
+				//empty values
+				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
+
+				//next tab
+				self.subscriptionPackage(Constants.SUBSCRIPTION_DAYS);
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_DAYS	:
+
+				self.subscription_option.days_id = id;
+
+				//next tab
+				self.subscriptionPackage(Constants.SUBSCRIPTION_OTHERS);
+				disableTab();
+
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_CLASSROOM:
+
+				self.subscriptionPackage(Constants.SUBSCRIPTION_STUDENTS);
+				disableTab();
+				navigateTab();
+				break;
+
+			case Constants.SUBSCRIPTION_OTHERS	:
+				self.subscription_option.others = {};
+				self.subscriptionPackage();
+				disableTab();
+
+				break;
+			default:
+				self.subscription_option = {};
+				break;
+		}
+	};
+
+	self.subscriptionPackage = function(category){
+
+		self.errors = Constants.FALSE;
+
+		managePrincipalPaymentService.subscriptionPackages(self.subscription_option).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+
+				self.subscription_packages = response.data.records;
+				self.subscriptionOptionGenerator(category,self.subscription_packages);
+
+				if(self.subscription_packages.length == Constants.TRUE){
+					self.subscription_packages = self.subscription_packages[0];
+				}
+
+			}else{
+				self.errors = $scope.errorHandler(response.errors);
+			}
+
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+	};
+
+	self.subscriptionOptionGenerator = function(category, data){
+
+		self.getClientSubscriptionDiscount();
+		self.getInvoice();
+
+		switch(category){
+			case Constants.SUBSCRIPTION_COUNTRY :
+				self.subscriptionGenerateCountry(data);
+				break;
+			case Constants.SUBSCRIPTION_SUBJECT	:
+				self.subscriptionGenerateSubject(data);
+				break;
+			case Constants.SUBSCRIPTION_PLAN	:
+				self.subscriptionGeneratePlan(data);
+				break;
+			case Constants.SUBSCRIPTION_DAYS	:
+				self.subscriptionGenerateDays(data);
+				break;
+			case Constants.SUBSCRIPTION_CLASSROOM:
+				self.subscriptionGenerateStudentList();
+				break;
+			case Constants.SUBSCRIPTION_OTHERS	:
+				self.subscriptionGenerateOtherInfo();
+				break;
+			default :
+				break;
+		}
+
+	};
+
+	self.subscriptionGenerateCountry = function(data){
+
+		self.subscription_country = [];
+		var hasCountry = 0;
+		angular.forEach(data, function(value,key){
+			angular.forEach(self.subscription_country,function(v,k){
+				if(v.id == value.country_id){
+					hasCountry = 1;
+				}
+			});
+
+			if(hasCountry == 0){
+				self.subscription_country.push(value.country);
+			}else {
+				hasCountry = 0;
+			}
+		});
+	};
+
+	self.subscriptionGenerateSubject = function(data){
+
+		self.subscription_subject = [];
+		var hasSubject = 0;
+		angular.forEach(data, function(value,key){
+			angular.forEach(self.subscription_subject,function(v,k){
+				if(v.id == value.subject_id){
+					hasSubject = 1;
+				}
+			});
+
+			if(hasSubject == 0){
+				self.subscription_subject.push(value.subject);
+			}else {
+				hasSubject = 0;
+			}
+		});
+	};
+
+	self.subscriptionGeneratePlan = function(data){
+
+		self.subscription_plan = [];
+		var hasPlan = 0;
+		angular.forEach(data, function(value,key){
+			angular.forEach(self.subscription_plan,function(v,k){
+				if(v.id == value.subscription_id){
+					hasPlan = 1;
+				}
+			});
+
+			if(hasPlan == 0){
+				self.subscription_plan.push(value.subscription);
+			}else {
+				hasPlan = 0;
+			}
+		});
+	};
+
+	self.subscriptionGenerateDays = function(data){
+
+		self.subscription_days = [];
+		var hasDays = 0;
+		angular.forEach(data, function(value,key){
+			angular.forEach(self.subscription_days,function(v,k){
+				if(v.id == value.days_id){
+					hasDays = 1;
+				}
+			});
+
+			if(hasDays == 0){
+				self.subscription_days.push(value.subscription_day);
+			}else {
+				hasDays = 0;
+			}
+		});
+	};
+
+	self.subscriptionGenerateOtherInfo = function(data){
+		//get user information -- student for billing
+
+		self.billing_information = [];
+
+
+		self.billing_information.name = self.client_details.first_name + ' ' + self.client_details.last_name;
+		self.billing_information.city = self.client_details.city;
+		self.billing_information.state = self.client_details.state;
+
+		//get country
+		self.getCountry($scope.user.country_id);
+
+		self.subscription_packages.others = self.billing_information;
+
+		if(!self.billing_information.city && !self.billing_information.state && !self.billing_information.country){
+
+			self.subscription_continue = Constants.FALSE;
+		}
+	};
+
+	self.modifyUserAddress = function(data){
+
+		//if edit == true
+		if(data == Constants.TRUE){
+
+			self.billing_info = Constants.TRUE;
+
+		}else {
+
+			//save new billing info
+			if(self.billing_information.city && self.billing_information.state && self.billing_information.country.id){
+
+				//update user address information.
+				self.updateUserBillingInformation();
+				self.subscription_continue = Constants.TRUE;
+				self.billing_info = Constants.FALSE;
+			};
+		}
+	};
+
+	self.updateUserBillingInformation = function(){
+
+		var addr_data = {};
+
+		addr_data.id = $scope.user.id;
+		addr_data.country_id = self.billing_information.country.id;
+		addr_data.city = self.billing_information.city;
+		addr_data.state = self.billing_information.state;
+
+		managePrincipalPaymentService.updateBillingAddress(addr_data).success(function(response){
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	};
+
+	self.generateStudentSubscriptionView = function(data){
+
+		var students = data.invoice_detail[0].classroom.class_student;
+		var subscription_package = data.subscription_package;
+		var sub_total = Constants.FALSE;
+
+		angular.forEach(students, function(value){
+			value.student.price = subscription_package.price;
+			sub_total += parseFloat(value.student.price);
+			self.subscription_invoice.students.push(value.student);
+
+		});
+
+		self.subscription_invoice.sub_total = sub_total;
+
+	}
+
+	self.checkSubscription = function(){
+
+		managePrincipalPaymentService.subscriptionPackage(self.subscription_invoice.subscription_package_id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data) {
+				self.active_renew = Constants.TRUE;
+			} else {
+				self.active_renew = Constants.FALSE;
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	};
+
+	self.getCountry = function(id){
+
+		managePrincipalPaymentService.getCountry(id).success(function(response){
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			} else{
+				self.billing_information.country =  response.data[0];
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+	};
+
+	self.getCountryList = function(){
+
+		managePrincipalPaymentService.getCountryList().success(function(response){
+
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}else {
+				self.countries = response.data;
+			}
+
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	};
+
+	self.getClientSubscriptionDiscount = function(){
+
+		managePrincipalPaymentService.getClientSubscriptionDiscount(self.client_details.user_id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}else if(response.data.total == Constants.TRUE) {
+				self.subscription_discount = response.data.records[0];
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	};
+
+	self.getInvoice = function(){
+
+		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
+		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
+
+		if (self.subscription_packages.length == 1 && self.active_add) {
+
+			var subscription = self.subscription_packages[0];
+
+			self.subscription_invoice.subject_id = subscription.subject_id;
+
+			self.subscription_invoice.order_date = moment().format('YYYYMMDD');
+			self.subscription_invoice.date_start = moment().format('YYYYMMDD');
+			self.subscription_invoice.date_end = moment().add(subscription.subscription_day.days,'days').format('YYYYMMDD');
+			self.subscription_invoice.date_start_string = moment().format('MMMM DD YYYY');
+			self.subscription_invoice.date_end_string = moment().add(subscription.subscription_day.days,'days').format('MMMM DD YYYY');
+
+			self.subscription_invoice.client_id = $scope.user.id;
+			self.subscription_invoice.subscription_id = subscription.subscription_id;
+			self.subscription_invoice.seats_total = (self.subscription_invoice.students) ? self.subscription_invoice.students.length : Constants.FALSE ;
+			self.subscription_invoice.seats_taken = (self.subscription_invoice.students) ? self.subscription_invoice.students.length : Constants.FALSE ;
+			self.subscription_invoice.payment_status = Constants.PENDING;
+			self.subscription_invoice.country_id = subscription.country_id;
+
+			self.subscription_invoice.package_price = subscription.price;
+			self.subscription_invoice.sub_total = 0;
+			self.subscription_invoice.discount = (self.subscription_discount.percentage) ? self.subscription_discount.percentage : 0;
+			self.subscription_invoice.discount_id = (self.subscription_discount.id) ? self.subscription_discount.id : 0;
+
+			self.subscription_invoice.classrooms = self.subscription_classroom;
+
+			self.getClassroomTotalPrice(self.subscription_invoice.classrooms);
+
+			(self.subscription_discount.percentage) ?
+				self.subscription_invoice.total_amount = self.subscription_invoice.sub_total
+					- ((self.subscription_invoice.sub_total * self.subscription_discount.percentage) / 100)
+				: self.subscription_invoice.total_amount = self.subscription_invoice.sub_total;
+
+			self.subscription_invoice.subscription_package_id = subscription.id;
+
+			//order_no,parent_id,subject_id,order_date,subscription_id,date_start,date_end,total_amount,
+			//discount_type,discount_id,discount,total_amount,subscription_id,
+
+		}
+	};
+
+	self.getClientDetails = function(){
+
+		managePrincipalPaymentService.getClient($scope.user.id).success(function (response) {
+			if (angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data;
+
+					self.client_details = data;
+				}
+			}
+
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+		});
+	};
+
+
+	self.getClassroomGrade = function(id){
+
+		managePrincipalPaymentService.getGrade(id).success(function (response) {
+			if (angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+
+					self.new_classroom.grade = response.data;
+
+					self.addClassroom(self.new_classroom);
+				}
+			}
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+		});
+	};
+
+	self.addClassroom = function(data){
+
+		//get grade
+		var classroom = data;
+
+		classroom.teacher = {
+			'id' : self.subscription_teacher.client_id,
+			'name' : self.subscription_teacher.client_name
+		};
+
+		classroom.price = (((classroom.seats) ?  classroom.seats : 0) * self.subscription_invoice.package_price);
+
+		self.subscription_classroom.push({
+			'grade': classroom.grade,
+			'class_name': classroom.class_name,
+			'price': classroom.price,
+			'seats': classroom.seats,
+			'teacher': classroom.teacher
+		});
+
+		self.new_classroom = {};
+		self.subscription_teacher = {};
+		self.classroom = {};
+	};
+
+
+
+	self.getGradeLevel = function(country_id) {
+		self.grades = Constants.FALSE;
+
+		apiService.getGradeLevel(country_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$scope.grades = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	};
+
+	self.removeClassroom = function(key,data){
+
+		var index = self.subscription_classroom.indexOf(key);
+
+		self.subscription_classroom.splice(index,1);
+	};
+
+	self.getClassroomTotalPrice = function(classrooms){
+
+		var total_price = Constants.FALSE;
+
+		angular.forEach(classrooms, function(value){
+			total_price += value.price;
+		});
+
+		self.subscription_invoice.sub_total = total_price;
+	};
+
+	self.generateClassroom = function(data){
+
+		self.subscription_classroom = [];
+
+		angular.forEach(data,function(value){
+			self.subscription_classroom.push({
+				'grade': value.grade,
+				'class_name': value.classroom.name,
+				'price': value.price,
+				'seats': value.classroom.seats_total,
+				'teacher': value.classroom.client.user
+			});
+		});
+
+	}
+
+	self.subscriptionView = function(data){
+
+		lastTab();
+
+		self.subscription_packages = data.subscription_package;
+		self.subscription_packages.subscription = data.subscription;
+
+		self.generateClassroom(data.invoice_detail);
+
+		self.subscription_invoice = {
+			subject_id	:	self.subscription_packages.subject_id,
+			order_date	:	moment(data.order.order_date).format('YYYYMMDD'),
+			date_start	:	moment(data.date_start).format('YYYYMMDD'),
+			date_end	:	moment(data.date_end).format('YYYYMMDD'),
+			date_start_string	:	moment(data.date_start,'YYYY-MM-DD').format('MMMM DD YYYY'),
+			date_end_string	:	moment(data.date_end,'YYYY-MM-DD').format('MMMM DD YYYY'),
+
+			classrooms	: self.subscription_classroom,
+			subscription_id	:	data.subscription_id,
+			seats_total	:	data.seats_total,
+			payment_status	:	data.payment_status,
+			country_id	:	self.subscription_packages.country_id,
+
+			sub_total	:	0,
+			discount	:	data.discount,
+			discount_id	:	data.discount_id,
+			total_amount	:	data.total_amount,
+			subscription_package_id	:	data.subscription_package_id
+		};
+
+		self.getClassroomTotalPrice(self.subscription_invoice.classrooms);
+
+		self.subscription_option = data.subscription_package;
+
+		if(data.status == Constants.ENABLED){
+			self.checkSubscription();
+		}
+	};
+
 }

@@ -123,11 +123,14 @@ class InvoiceController extends ApiController {
 
         $now = Carbon::now();
 
-        if($now > $invoice['date_end']){
+        if ($now > $invoice['date_end']) {
 
-             $invoice['expired'] = true;
+            $invoice['expired'] = true;
+        } else {
 
+            $invoice['expired'] = false;
         }
+
         return $this->respondWithData($invoice);
     }
 
@@ -215,8 +218,8 @@ class InvoiceController extends ApiController {
             $this->invoice->deleteInvoice($id);
 
             //delete order.
-            $order = $this->order->getOrderByOrderNo($invoice->order_no);
-            $this->order->deleteOrder($order['id']);
+            //$order = $this->order->getOrderByOrderNo($invoice->order_no);
+            //$this->order->deleteOrder($order['id']);
 
             //delete class.
             //$this->classrooms->deleteClassroomByOrderNo($invoice->order_no);
@@ -225,7 +228,7 @@ class InvoiceController extends ApiController {
             $this->invoice_detail->deleteInvoiceDetailByInvoiceId($id);
 
             //delete order detail.
-            $this->order_detail->deleteOrderDetailByOrderId($order['id']);
+            //$this->order_detail->deleteOrderDetailByOrderId($order['id']);
         }
 
         return $this->respondWithData($invoice);

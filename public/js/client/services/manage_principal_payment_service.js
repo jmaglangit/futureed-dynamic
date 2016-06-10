@@ -165,5 +165,112 @@ function managePrincipalPaymentService($http){
 		});
 	}
 
+	//pay-subscription
+	api.paySubscription = function(data){
+		return $http({
+			method	:	Constants.METHOD_POST
+			, data	:	data
+			, url	: apiUrl + 'pay-subscription'
+		});
+	}
+
+	//api/v1/client/update-billing-address/{id}
+	api.updateBillingAddress = function(data){
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: apiUrl + 'client/update-billing-address/' + data.id
+		});
+	}
+
+	//service.subs  api/v1/subscription-package/{id}
+	api.subscriptionPackages = function(data) {
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'subscription-package?'
+			+ 'subject_id=' + ((data.subject_id) ? data.subject_id : '')
+			+ '&days_id=' + ((data.days_id) ? data.days_id : '')
+			+ '&subscription_id=' + ((data.subscription_id) ? data.subscription_id : '')
+			+ '&country_id=' + ((data.country_id) ? data.country_id : '')
+			+ '&status=' + Constants.ENABLED
+		});
+	}
+
+	//service.subs  api/v1/subscription-package/{id}
+	api.subscriptionPackage = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'subscription-package/' + id
+		});
+	}
+
+	api.updateOrder = function(order_id,data){
+		return $http({
+			method	: Constants.METHOD_PUT
+			, data	: data
+			, url	: apiUrl + 'order/' + order_id
+		});
+	}
+
+	api.getOrder = function(order_id){
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: apiUrl + 'order/' + order_id
+		});
+	}
+
+	api.getClient = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: apiUrl + 'client/' + id
+		})
+	}
+
+	api.getClientSubscriptionDiscount = function(user_id){
+
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: apiUrl + 'client-discount?'
+			+ 'user_id=' + ((user_id) ? user_id : '')
+		});
+	}
+
+	api.getCountry = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'countries/' + id
+		});
+	}
+
+	api.getCountryList = function(){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'countries'
+		});
+	}
+
+	//api/v1/grade/{grade}
+	api.getGrade = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'grade/' + id
+		});
+	}
+
+	api.viewPayment = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: apiUrl + 'invoice/' + id
+		})
+	}
+
+	api.updateOrder = function(order_id,data){
+		return $http({
+			method	: Constants.METHOD_PUT
+			, data	: data
+			, url	: apiUrl + 'order/' + order_id
+		});
+	}
+
 	return api;
 }

@@ -13,9 +13,10 @@
 
 			<div template-directive template-url="{!! route('student.payment.partials.list') !!}"></div>
 
-			<div template-directive template-url="{!! route('student.payment.partials.add') !!}"></div>
+			{{--<div template-directive template-url="{!! route('student.payment.partials.add') !!}"></div>--}}
+			<div template-directive template-url="{!! route('student.payment.partials.subscribe') !!}"></div>
 			
-			<div template-directive template-url="{!! route('student.payment.partials.view') !!}"></div>
+			{{--<div template-directive template-url="{!! route('student.payment.partials.view') !!}"></div>--}}
 		</div>
 	</div>
 @stop
@@ -26,4 +27,5 @@
 
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/moment.min.js')!!}
 @stop

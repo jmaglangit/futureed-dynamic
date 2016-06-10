@@ -184,7 +184,7 @@
 							<th>{!! trans('messages.email') !!}</th>
 							<th>{!! trans('messages.role') !!}</th>
 							<th>{!! trans('messages.discount') !!}</th>
-							<th ng-if="discount.records.length">{!! trans('messages.action') !!}</th>
+							<th ng-if="discount.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 						</tr>
 						</thead>
 					<tbody>

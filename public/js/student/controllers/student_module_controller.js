@@ -69,7 +69,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-		});	
+		});
 	}
 
 	var createModuleStudent = function(data, successCallback) {
@@ -89,7 +89,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-		});	
+		});
 	}
 
 	var getClassrooms = function(successCallback) {
@@ -105,8 +105,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
-		});	
-	} 
+		});
+	}
 
 
 	self.launchModule = function(module_id) {
@@ -114,6 +114,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.getModuleDetail(module_id, function(response) {
 			if(response.data) {
 				self.record = response.data;
+				self.student_module_subject_name = self.record.subject.name;
+
 				var class_id = Constants.FALSE;
 
 				var student_modules = self.record.student_module_valid;
@@ -132,12 +134,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						}
 						break;
 					}
-				};
+				}
 
 				// if student module data exists; continue.
 				if(student_module) {
 					self.record.student_module = student_module;
-					loadModuleView();
+					loadModuleView(self.student_module_subject_name);
 				} else {
 					// else; get class list to get the class id for this module
 					getClassrooms(function(response) {
@@ -171,7 +173,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 									, module_status					: data.module_status
 								}
 
-								loadModuleView();
+								loadModuleView(self.student_module_subject_name);
 							} else {
 								self.errors = $scope.internalError();
 							}
@@ -184,9 +186,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
-	var loadModuleView = function() {
-		self.getTeachingContents(self.record.id);
-		self.startQuestions();
+	var loadModuleView = function(subject_name) {
+		if(subject_name != "Programming")
+		{
+			self.getTeachingContents(self.record.id);
+			self.startQuestions();
+		}
+		else
+		{
+			var data = {};
+			data.module_id = self.record.student_module.id;
+			updateModuleStudent(data);
+		}
 	}
 
 	var getAvatarPose = function(avatar_id) {
@@ -315,7 +326,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		// get question list; offset to 0
 		getAvatarPose($scope.user.avatar_id);
 		listAvatarQuotes($scope.user.avatar_id);
-		
+
 		if(parseInt(self.record.student_module.last_answered_question_id)) {
 			angular.forEach(self.questions, function(value, key) {
 				if(angular.equals(parseInt(self.record.student_module.last_answered_question_id), parseInt(value.id))) {
@@ -349,6 +360,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			data.last_answered_question_id = parseInt(self.current_question.id);
 
 		updateModuleStudent(data);
+
+		if(self.record.content.length == 0 && self.record.question[0].question_type === Constants.CODING){
+				self.setActive(Constants.ACTIVE_QUESTIONS);
+		}
 	}
 
 
@@ -388,7 +403,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					if(self.contents) {
 						var data = {};
 							data.module_id = self.record.student_module.id;
-
+						
 							if(self.active_contents) {
 								data.last_viewed_content_id = self.contents.id;
 							}
@@ -554,7 +569,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 									self.module_message.show = Constants.TRUE;
 									self.module_message.title = avatar_wiki.title;
 									self.module_message.name = self.record.name;
-									
+
 									self.module_message.description_summary = avatar_wiki.description_summary;
 									self.module_message.description_full = avatar_wiki.description_full;
 									self.module_message.message = self.module_message.description_summary;
@@ -581,7 +596,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						var data = {};
 							data.module_id = self.result.id;
 							data.last_answered_question_id = parseInt(self.result.next_question);
-				
+
 							updateModuleStudent(data, function(response) {
 								setAvatarQuote();
 							});
@@ -829,10 +844,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	    	return true;
 	    }
 	    , itemMoved: function (event) {
-	    	
+
 	    }
 	    , orderChanged: function(event) {
-	    	
+
 	    }
 	    , containment: '#board'//optional param.
 	};
@@ -858,7 +873,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						, module_status					: data.module_status
 					}
 
-					loadModuleView();
+					loadModuleView(self.student_module_subject_name);
 				} else {
 					self.errors = $internalError();
 				}

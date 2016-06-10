@@ -14,7 +14,7 @@ class ClientDiscount extends Model {
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['client_id', 'percentage', 'status'];
+    protected $fillable = ['user_id', 'percentage', 'status'];
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
@@ -27,6 +27,10 @@ class ClientDiscount extends Model {
     public function client()
     {
         return $this->belongsTo('FutureEd\Models\Core\Client')->with('user');
+    }
+
+    public function user(){
+        return $this->belongsTo('FutureEd\Models\Core\User');
     }
 
     //------------scopes
@@ -43,8 +47,8 @@ class ClientDiscount extends Model {
         });
     }
 
-    public function scopeClientId($query,$client_id){
-        return $query->where('client_id',$client_id);
+    public function scopeUserId($query,$user_id){
+        return $query->where('user_id',$user_id);
     }
 
 	

@@ -202,6 +202,13 @@
 							, 'uses' => 'FutureLesson\Student\TipsController@view_tip'
 						]);
 
+					Routes::get('/code',
+						[
+							'as'    => 'student.class.module.code.activity',
+							'uses'  => 'FutureLesson\Student\ClassModuleController@coding_module'
+						]
+					);
+
 					Routes::get('/contents', [
 						'as' => 'student.class.module.partials.contents'
 						, 'uses' => 'FutureLesson\Student\ClassModuleController@contents'
@@ -257,6 +264,11 @@
 						'as' => 'student.payment.partials.add'
 						, 'uses' => 'FutureLesson\Student\PaymentController@add_form'
 					]);
+
+				Routes::get('/subscribe', [
+					'as' => 'student.payment.partials.subscribe'
+					, 'uses' => 'FutureLesson\Student\PaymentController@subscription'
+				]);
 
 				Routes::get('/view', [ 
 						'as' => 'student.payment.partials.view'

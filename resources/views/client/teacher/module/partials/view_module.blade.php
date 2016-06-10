@@ -55,7 +55,7 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'module.record.grade.name'
-						, 'placeholder' => trans('messages.grade')
+						, 'placeholder' => trans_choice('messages.grade', 1)
 					)
 				) !!}
 			</div>

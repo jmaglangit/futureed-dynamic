@@ -1449,6 +1449,260 @@ fieldset legend {
 	height: 100px;
 }
 
+
+/*Subscription*/
+.wizard {
+	margin: 20px auto;
+	background: #fff;
+}
+
+.wizard-content-title{
+	border-bottom: 1px solid #DCDCDC;
+	margin: 15px 0px -13px 25px;
+	height: 30px;
+}
+.wizard-row {
+	margin: 20px;
+	padding-top: 0px;
+}
+.wizard .nav-tabs {
+	position: relative;
+	margin: 40px auto;
+	margin-bottom: 0;
+	border-bottom-color: #e0e0e0;
+}
+
+.wizard > div.wizard-inner {
+	position: relative;
+}
+
+.connecting-line {
+	height: 2px;
+	background: #e0e0e0;
+	position: absolute;
+	width: 80%;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: 50%;
+	z-index: 1;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+	color: #555555;
+	cursor: default;
+	border: 0;
+	border-bottom-color: transparent;
+}
+
+span.round-tab {
+	width: 70px;
+	height: 70px;
+	line-height: 70px;
+	display: inline-block;
+	border-radius: 100px;
+	background: #fff;
+	border: 2px solid #e0e0e0;
+	z-index: 2;
+	position: absolute;
+	left: 0;
+	text-align: center;
+	font-size: 25px;
+}
+span.round-tab i{
+	color:#555555;
+	text-align: center;
+}
+
+.wizard li.active span.round-tab {
+	background: #fff;
+	border: 2px solid #055A7F;
+}
+.wizard li.active span.round-tab i{
+	color: #055A7F;
+}
+
+span.round-tab:hover {
+	color: #333;
+	border: 2px solid #333;
+}
+
+.wizard .nav-tabs > li {
+	width: 16%;
+}
+
+.wizard li:after {
+	content: " ";
+	position: absolute;
+	left: 44%;
+	opacity: 0;
+	margin: 0 auto;
+	bottom: 0px;
+	border: 5px solid transparent;
+	border-bottom-color: #5bc0de;
+	transition: 0.1s ease-in-out;
+}
+
+.wizard li.active:after {
+	content: " ";
+	position: absolute;
+	left: 44%;
+	opacity: 1;
+	margin: 0 auto;
+	bottom: 0px;
+	border: 10px solid transparent;
+	border-bottom-color: #055A7F;
+}
+
+.wizard .nav-tabs > li a {
+	width: 70px;
+	height: 70px;
+	margin: 20px auto;
+	border-radius: 100%;
+	padding: 0;
+}
+
+.wizard .nav-tabs > li a:hover {
+	background: transparent;
+}
+
+.wizard .tab-pane {
+	position: relative;
+	padding-top: 0px;
+}
+
+.wizard h3 {
+	margin-top: 0;
+}
+
+/*added*/
+.wizard .tab-content>.active {
+	display: block;
+	margin: 23px;
+}
+
+.wizard .tab-content .tab-pane .row [class*="col-"] {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-bottom: 20px;
+}
+
+.wizard .tab-content .tab-pane .row .invoice-form [class*="col-"] {
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+/*Subject*/
+.wizard-box {
+	width : 150px;
+	height: 150px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	border-radius: 10px;
+	padding-top: 25px;
+}
+
+/*TODO to be discussed with PM.
+.wizard-box:hover{*/
+	/*background-color: #ac2a4e;*/
+	/*border-color: #ac2a4e;*/
+/*}*/
+
+.wizard-box:after {
+	transition: 2s ease-in-out;
+}
+
+.wizard-box:before {
+	transition: 2s ease-in-out;
+}
+
+.wizard-box-lone {
+	width : 150px;
+	height: 150px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	border-radius: 10px;
+	padding-top: 25px;
+}
+
+.wizard-box-lone:after {
+	transition: 2s ease-in-out;
+}
+
+.wizard-box-lone:before {
+	transition: 2s ease-in-out;
+}
+
+.wizard-subject {
+	width : 150px;
+	height: 150px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	border-radius: 10px;
+	padding-top: 25px;
+}
+
+.wizard-subject:after {
+	transition: 2s ease-in-out;
+}
+
+.wizard-subject:before {
+	transition: 2s ease-in-out;
+}
+
+/*Plan*/
+.wizard-panel {
+	width: 175px;
+	height: 200px;
+	float: left;
+	margin: 10px;
+	transition: 0.1s ease-in-out;
+}
+
+
+.wizard-panel .panel-heading {
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+
+.wizard-panel .panel-heading .panel-title {
+	padding-top: 17px;
+}
+.wizard-panel .panel-body {
+	text-align: center;
+}
+
+
+
+@media( max-width : 585px ) {
+
+	.wizard {
+		width: 90%;
+		height: auto !important;
+	}
+
+	span.round-tab {
+		font-size: 16px;
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+	}
+
+	.wizard .nav-tabs > li a {
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+	}
+
+	.wizard li.active:after {
+		content: " ";
+		position: absolute;
+		left: 35%;
+	}
+}
+
 .border-radius-3
 {
 	-webkit-border-radius: 3px;
@@ -1466,6 +1720,27 @@ fieldset legend {
 	padding: 4px 40px;
 }
 
+.border-radius-30
+{
+	border-radius: 30px;
+	height: 40px;
+	padding: 8px 40px;
+	background-color: #055A7F;
+	color: #FFFFFF;
+}
+
 .left-percent-20{
 	left : 20%;
+}
+
+.header-progress {
+	margin-top: -8px;
+}
+
+.step-header {
+	margin-top : -10px;
+}
+
+.round-tab .fa {
+	margin: 0 10px 0 10px;
 }

@@ -193,7 +193,7 @@
                     <th>{!! trans('messages.answer') !!}</th>
                     <th>{!! trans('messages.admin_correct_answer') !!}</th>
                     <th>{!! trans('messages.admin_points_equivalent') !!}</th>
-                    <th ng-if="qa.answers.records.length">{!! trans('messages.action') !!}</th>
+                    <th ng-if="qa.answers.records.length">{!! trans_choice('messages.action', 1) !!}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -387,7 +387,7 @@
                     <th>{!! trans('messages.admin_field') !!}</th>
                     <th>{!! trans('messages.image') !!}</th>
                     <th>{!! trans('messages.admin_count') !!}</th>
-                    <th ng-if="qa.answers.records.answer.length">{!! trans('messages.action') !!}</th>
+                    <th ng-if="qa.answers.records.answer.length">{!! trans_choice('messages.action', 1) !!}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -559,7 +559,7 @@
                 <tr>
                     <th>{!! trans('messages.admin_x_coordinates') !!}</th>
                     <th>{!! trans('messages.admin_y_coordinates') !!}</th>
-                    <th ng-if="qa.record.answer.length">{!! trans('messages.action') !!}</th>
+                    <th ng-if="qa.record.answer.length">{!! trans_choice('messages.action', 1) !!}</th>
                 </tr>
                 </thead>
                 <tbody>

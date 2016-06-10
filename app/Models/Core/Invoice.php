@@ -33,6 +33,7 @@ class Invoice extends Model {
 		'discount',
 		'total_amount',
 		'subscription_id',
+		'subscription_package_id',
 		'payment_status',
 		'student_id',
 		'student_name',
@@ -68,6 +69,10 @@ class Invoice extends Model {
 
 	public function subscription() {
 		return $this->belongsTo('FutureEd\Models\Core\Subscription');
+	}
+
+	public function subscriptionPackage() {
+		return $this->belongsTo('FutureEd\Models\Core\SubscriptionPackages')->with('subscription_day','country','subject');
 	}
 
 	public function order() {

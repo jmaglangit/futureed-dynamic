@@ -37,6 +37,15 @@ class ParentStudentRequest extends ApiRequest {
 							'client_id' => 'required|integer',
 							'invitation_code' => 'required|integer'];
 						break;
+					case 'parent-student.add.student':
+						return [
+							'student_id' => 'required|integer|exists:students,id,deleted,NULL',
+							'parent_id' => 'required|integer',
+							'order_id' => 'required',
+							'price' => 'required|numeric',
+							'subject_id' => 'required|integer'
+						];
+						break;
 					case 'parent-student.add.student.by.email':
 						return [
 							'email' => 'required|email',
@@ -69,7 +78,7 @@ class ParentStudentRequest extends ApiRequest {
 							'discount_type' => 'in:Client,Volume,',
 							'discount_id' => 'integer',
 							'discount' => 'numeric',
-							'order_no' => 'required',
+//							'order_no' => 'required',
 							'subject_id' => 'required|integer'
 							];
 						break;
