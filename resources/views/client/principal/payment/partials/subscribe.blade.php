@@ -140,7 +140,7 @@
                                     <table ng-table="tableClassroom" class="table table-condensed table-classroom">
                                         <thead>
                                         <tr>
-                                            <td class="h5">{!! trans('messages.no_of_seats') !!}</td>
+                                            <td class="h5">{!! trans_choice('messages.no_of_seats',2) !!}</td>
                                             <td class="h5">{!! trans_choice('messages.grade',1) !!}</td>
                                             <td class="h5">{!! trans('messages.teacher') !!}</td>
                                             <td class="h5">{!! trans('messages.class') !!}</td>
@@ -162,7 +162,7 @@
                                                 {!! Form::text('seats', ''
                                                         , [
                                                             'class' => 'form-control'
-                                                            , 'placeholder' => trans('messages.no_of_seats')
+                                                            , 'placeholder' => trans_choice('messages.no_of_seats',2)
                                                             , 'ng-model' => 'payment.new_classroom.seats']
                                                     ) !!}
                                             </td>
