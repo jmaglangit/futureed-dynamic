@@ -769,7 +769,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.subscription_invoice.country_id = subscription.country_id;
 
 			self.subscription_invoice.sub_total = subscription.price;
-			self.subscription_invoice.discount = self.subscription_discount.percentage;
+			self.subscription_invoice.discount = (self.subscription_discount.percentage) ? self.subscription_discount.percentage : 0;
 			self.subscription_invoice.discount_id = self.subscription_discount.id;
 			self.subscription_invoice.total_amount = subscription.price - ((subscription.price * self.subscription_discount.percentage) / 100);
 			self.subscription_invoice.subscription_package_id = subscription.id;
