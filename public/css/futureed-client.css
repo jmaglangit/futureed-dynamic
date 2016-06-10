@@ -947,3 +947,7 @@ content legend {
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
 }
+
+.font-size-16 {
+	font-size:16px;
+}
