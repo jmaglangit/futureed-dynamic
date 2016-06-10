@@ -62,3 +62,16 @@ function lastTab() {
     $last.removeClass('disabled');
     $last.find('a[data-toggle="tab"]').click();
 }
+
+function disableTab() {
+    var all = $('.wizard .nav-tabs li');
+    var ctr = 0;
+
+    all.each(function(){
+        if($(this).hasClass('active')){
+            ctr = 1;
+        }else if( ctr == 1){
+            $(this).addClass('disabled');
+        }
+    });
+}
