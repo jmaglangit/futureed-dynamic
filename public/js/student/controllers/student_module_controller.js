@@ -322,7 +322,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.skipModule = function() {
 		// update current view
 		self.setActive(Constants.ACTIVE_CONTENTS);
-
+console.log(self.record);
 		// get question list; offset to 0
 		getAvatarPose($scope.user.avatar_id);
 		listAvatarQuotes($scope.user.avatar_id);
@@ -360,6 +360,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			data.last_answered_question_id = parseInt(self.current_question.id);
 
 		updateModuleStudent(data);
+
+		if(self.record.content.length == 0 && self.record.question[0].question_type === Constants.CODING) {
+			self.setActive(Constants.ACTIVE_QUESTIONS);
+		}
 	}
 
 
