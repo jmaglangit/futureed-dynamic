@@ -73,6 +73,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 			case Constants.ACTIVE_VIEW 	:
 				self.active_view = Constants.TRUE;
+				lastTab();
 				self.viewPayment(id);
 				break;
 
@@ -775,6 +776,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				self.subscription_option.subject_id = Constants.FALSE;
 				self.subscription_option.subscription_id = Constants.FALSE;
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_SUBJECT);
@@ -788,6 +790,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				//empty values
 				self.subscription_option.subscription_id = Constants.FALSE;
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_PLAN);
@@ -800,6 +803,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 				//empty values
 				self.subscription_option.days_id = Constants.FALSE;
+				disableTab();
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_DAYS);
@@ -812,6 +816,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 				//next tab
 				self.subscriptionPackage(Constants.SUBSCRIPTION_OTHERS);
+				disableTab();
 
 				//generate parent students
 				self.getStudentList();
@@ -822,6 +827,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 				self.subscription_option.students = {};
 				self.subscriptionPackage(Constants.SUBSCRIPTION_STUDENTS);
+				disableTab();
 				navigateTab();
 				break;
 
