@@ -159,12 +159,15 @@
                                         </tr>
                                         <tr>
                                             <td class="h5">
-                                                {!! Form::text('seats', ''
-                                                        , [
-                                                            'class' => 'form-control'
-                                                            , 'placeholder' => trans_choice('messages.no_of_seats',2)
-                                                            , 'ng-model' => 'payment.new_classroom.seats']
-                                                    ) !!}
+                                                {{--{!! Form::text('seats', ''--}}
+                                                        {{--, [--}}
+                                                            {{--'class' => 'form-control'--}}
+                                                            {{--, 'placeholder' => trans_choice('messages.no_of_seats',2)--}}
+                                                            {{--, 'ng-model' => 'payment.new_classroom.seats']--}}
+                                                    {{--) !!}--}}
+                                                <input type="number" class='form-control ng-valid ng-dirty ng-valid-parse ng-touched'
+                                                       placeholder="{!! trans_choice('messages.no_of_seats',2) !!}"
+                                                       ng-model="payment.new_classroom.seats" name="seats">
                                             </td>
                                             <td class="h5">
                                                 <select name="grade_id" ng-disabled="!grades.length" ng-class="{ 'required-field' : payment.fields['grade_id'] }" class="form-control" ng-model="payment.new_classroom.grade_id">
