@@ -76,7 +76,7 @@
                 {!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="step1">
-                            <h3>{!! trans('messages.country') !!}</h3>
+                            <h3>{!! trans('messages.select_a_country') !!}</h3>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <p>
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
-                            <h3>{!! trans('messages.subject') !!}</h3>
+                            <h3>{!! trans('messages.select_a_subject') !!}</h3>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <p>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step3">
-                            <h3>{!! trans('messages.plans') !!}</h3>
+                            <h3>{!! trans('messages.select_a_plan') !!}</h3>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div ng-repeat="plan in payment.subscription_plan" class="wizard-panel panel panel-primary panel-horizontal"
@@ -120,7 +120,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step4">
-                            <h3>{!! trans('messages.admin_days') !!}</h3>
+                            <h3>{!! trans('messages.select_a_day') !!}</h3>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div ng-repeat="days in payment.subscription_days" class="wizard-panel panel panel-primary panel-horizontal"
@@ -134,7 +134,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step5">
-                            <h3>{!! trans('messages.classroom') !!}</h3>
+                            <h3>{!! trans('messages.add_classroom') !!}</h3>
                             <div class="row">
                                 <div class="form-group" ng-init="payment.getGradeLevel(user.country_id); payment.getSchoolCode()">
                                     <table ng-table="tableClassroom" class="table table-condensed table-classroom">
