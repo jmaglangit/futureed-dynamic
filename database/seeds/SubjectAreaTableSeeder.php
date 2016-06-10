@@ -55,7 +55,7 @@ class SubjectAreaTableSeeder extends Seeder
 			[3,217,'Vocab M-P','','Enabled'],
 			[3,218,'Vocab Q-T','','Enabled'],
 			[3,219,'Vocab U-Z','','Enabled'],
-	        [4,190,'Basic Movement','Basic coding for kids','Enabled']
+	        [4,190,'Motion','Basic motion coding for kids','Enabled']
 		];
 
 		\DB::table('subject_areas')->truncate();

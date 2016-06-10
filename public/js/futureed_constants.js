@@ -131,6 +131,7 @@ var Constants = {
 	, PROVIDE 			: "N"
 	, GRAPH				: "GR"
 	, QUADRANT			: "QUAD"
+	, CODING			: "COD"
 
 	, HORIZONTAL		: "horizontal"
 	, VERTICAL			: "vertical"

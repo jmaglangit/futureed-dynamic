@@ -1,3 +1,4 @@
+id,subject_id,area_id,grade_id,code,name,icon_image,original_icon_image,description,common_core_area,common_core_url,points_earned,points_to_unlock,points_to_finish,status,created_by,updated_by,created_at,updated_at,deleted_at
 1,1,5,1,1101,Counting,icon-counting.png,icon-counting.png,"Numbers is learning to count ordinal numbers to 100, ordering and comparing numbers.  This module emphasis basic counting skills that is the foundation for all advance math.  ",Grade 1: Number and Operations in Base Ten,http://www.corestandards.org/Math/Content/1/introduction/,12,0,12,Enabled,,,,,
 2,1,1,1,1102,Addition ,icon-addition.png,icon-addition.png,"Addition is one of the three core skills in Grade 1 - counting , adding and subtracting.  This introduction course introduces the concept of addition and the ""+"" sign.  It pushes you to learn how to add up to 100.",Grade 1: Operations and Algebraic Thinking,http://www.corestandards.org/Math/Content/1/introduction/,12,0,12,Enabled,,,,,
 3,1,23,1,1103,Subtraction,icon-subtraction.png,icon-subtraction.png,"Subtraction is one of the three core skills in Grade 1 - counting , adding and subtracting.  This introduction course introduces the concept of subtraction and the ""-"" sign.  It pushes you to learn how to subtract within 100.",Grade 1: Operations and Algebraic Thinking,http://www.corestandards.org/Math/Content/1/introduction/,12,0,12,Enabled,,,,,
@@ -155,9 +156,9 @@
 155,2,31,1,2116,Conjuctions,icon-conjunctions.png,icon-conjunctions.png,,,,12,0,12,Enabled,,,,,
 156,2,31,1,2117,Describing Words,icon-describing-words.png,icon-describing-words.png,,,,12,0,12,Enabled,,,,,
 157,2,31,1,2118,Compound Words,icon-compound-words.png,icon-compound-words.png,,,,12,0,12,Enabled,,,,,
-158,2,33,1,2119,Exclamatory Sentences In Response To Prompts,icon-exclamatory-sentences.png,icon-exclamatory-sentences.png,,,,12,0,12,Enabled,,,,,
-159,2,29,1,2120,Commas In Dates,icon-commas-in-dates.png,icon-commas-in-dates.png,,,,12,0,12,Enabled,,,,,
-160,2,36,1,2121,Separate Single Words In A Series,icon-separate-single-words-series.png,icon-separate-single-words-series.png,,,,12,0,12,Enabled,,,,,
+158,2,33,1,2119,Commas in dates,icon-commas-in-dates.png,icon-commas-in-dates.png,,,,12,0,12,Enabled,,,,,
+159,2,29,1,2120,Use of commas,icon-commas.png,icon-commas.png,,,,12,0,12,Enabled,,,,,
+160,2,36,1,2121,Contractions,icon-separate-single-words-series.png,icon-contractions.png,,,,12,0,12,Enabled,,,,,
 161,2,33,2,2201,Sentence Types,icon-sentence-types.png,icon-sentence-types.png,,,,12,0,12,Enabled,,,,,
 162,2,31,2,2202,Subject And Predicate,icon-subject-and-predicate.png,icon-subject-and-predicate.png,,,,12,0,12,Enabled,,,,,
 163,2,33,2,2203,Combining Sentences,icon-combining-sentences.png,icon-combining-sentences.png,,,,12,0,12,Enabled,,,,,
@@ -436,4 +437,4 @@
 436,3,42,6,26104,Vocab Grade 6 M-P,m-p.png,m-p.png,Focuses on Synonyns for Grade 6 between M and P,,,12,0,12,Enabled,,,,,
 437,3,43,6,26105,Vocab Grade 6 Q-T,q-t.png,q-t.png,Focuses on Synonyns for Grade 6 between Q and T,,,12,0,12,Enabled,,,,,
 438,3,44,6,26106,Vocab Grade 6 U-Z,u-z.png,u-z.png,Focuses on Synonyns for Grade 6 between U and Z,,,12,0,12,Enabled,,,,,
-439,4,45,0,21190,Basic Movement,,,Learning basic movement,,,12,0,1,Enabled,,,,,
+439,4,45,0,21190,Motion,,,,,,12,0,5,Enabled,,,,,

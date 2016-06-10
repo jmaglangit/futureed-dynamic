@@ -39,13 +39,6 @@
 				<div template-directive template-url="{!! route('student.class.module.partials.questions') !!}"></div>
 			</div>
 
-			<div ng-if="mod.student_module_subject_name == 'Programming'"
-				 ng-controller="SnapModuleController as snap"
-				 ng-cloak
-			>
-				<div template-directive template-url="{!! route('student.class.module.code.activity') !!}"></div>
-			</div>
-
 		</div>
 		<!-- End of Main Container -->
 
