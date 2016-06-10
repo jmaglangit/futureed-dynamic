@@ -3,10 +3,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                Logged out
+                {{ trans('messages.logged_out') }}
             </div>
             <div class="modal-body">
-                You have been logged out because the account is currently logged in.
+                {{ trans('messages.multiple_login_message') }}
             </div>
             <div class="modal-footer">
                 <div class="col-md-8 col-md-offset-4 pull-left">
