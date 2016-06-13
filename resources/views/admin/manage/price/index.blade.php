@@ -20,12 +20,16 @@
 
 				
 				<ul class="nav nav-pills nav-admin">
-					<li ng-class="{ 'active' : sale.active_price_settings }">
-						<a ng-click="sale.setActive('price_settings')" href="javascript:void(0)"><span><i class="fa fa-dollar"></i>{!! trans('messages.admin_price_settings') !!}</span></a></li>
+					<li ng-class="{ 'active' : sale.active_subscription }">
+						<a ng-click="sale.setActive(futureed.SUBSCRIPTION)" href="javascript:void(0)"><span><i class="fa fa-dollar"></i>{!! trans('messages.subscription') !!}</span></a></li>
+					<li ng-class="{ 'active' : sale.active_subscription_days }">
+						<a ng-click="sale.setActive(futureed.SUBSCRIPTION_DAYS)" href="javascript:void(0)"><span><i class="fa fa-calendar-o"></i>{!! trans('messages.subscription_days') !!}</span></a></li>
+					<li ng-class="{ 'active' : sale.active_subscription_packages }">
+						<a ng-click="sale.setActive(futureed.SUBSCRIPTION_PACKAGES)" href="javascript:void(0)"><span><i class="fa fa-archive"></i>{!! trans('messages.subscription_packages') !!}</span></a></li>
 					<li ng-class="{ 'active' : sale.active_client_discount }">
-						<a ng-click="sale.setActive('client_discount')" href="javascript:void(0)"><span><i class="fa fa-tags"></i>{!! trans('messages.admin_client_discount') !!}</span></a></li>
+						<a ng-click="sale.setActive(futureed.CLIENT_DISCOUNT)" href="javascript:void(0)"><span><i class="fa fa-tags"></i>{!! trans('messages.admin_client_discount') !!}</span></a></li>
 					<li ng-class="{ 'active' : sale.active_bulk_settings }">
-						<a ng-click="sale.setActive('bulk_settings')" href="javascript:void(0)"><span><i class="fa fa-database"></i>{!! trans('messages.admin_bulk_settings') !!}</span></a></li>
+						<a ng-click="sale.setActive(futureed.BULK_SETTINGS)" href="javascript:void(0)"><span><i class="fa fa-database"></i>{!! trans('messages.admin_bulk_settings') !!}</span></a></li>
 				</ul>
 					
 				<div ng-if="sale.active_price_settings" ng-controller="ManagePriceController as price" ng-init="price.setActive()" 
