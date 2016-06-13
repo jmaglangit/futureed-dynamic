@@ -488,6 +488,12 @@ return [
 	'select_a_plan' => 'Select a Plan',
 	'select_a_day' => 'Select No. of Days',
 	'select_students' => 'Select one or more students.',
+	'add_subscription' => 'Add Subscription',
+	'update_subscription' => 'Update Subscription',
+	'subscription_days' => 'Days',
+	'subscription_packages' => 'Packages',
+	'lsp' => 'LSP',
+
 
 	//resources/views/admin/dashboard/index.blade.php
 	'admin_dashboard' => 'Admin Dashboard',
