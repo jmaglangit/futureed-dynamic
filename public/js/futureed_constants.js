@@ -67,7 +67,7 @@ var Constants = {
 	, SUBSCRIPTION_COUNTRY	:	"country"
 	, SUBSCRIPTION_SUBJECT	: 	"subject"
 	, SUBSCRIPTION_PLAN		:	"plan"
-	, SUBSCRIPTION_DAYS		:	"days"
+	, SUBSCRIPTION_DAYS		:	"Days"
 	, SUBSCRIPTION_OTHERS	: 	"others"
 	, SUBSCRIPTION_STUDENTS	:	"students"
 	, SUBSCRIPTION_CLASSROOM:	"classrooms"
