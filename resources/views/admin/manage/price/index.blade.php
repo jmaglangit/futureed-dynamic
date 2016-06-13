@@ -32,8 +32,8 @@
 						<a ng-click="sale.setActive(futureed.BULK_SETTINGS)" href="javascript:void(0)"><span><i class="fa fa-database"></i>{!! trans('messages.admin_bulk_settings') !!}</span></a></li>
 				</ul>
 					
-				<div ng-if="sale.active_price_settings" ng-controller="ManagePriceController as price" ng-init="price.setActive()" 
-					template-directive template-url="{!! route('admin.manage.price.partials.price_settings') !!}"></div>
+				<div ng-if="sale.active_subscription" ng-controller="ManagePriceController as price" ng-init="price.setActive()"
+					template-directive template-url="{!! route('admin.manage.price.partials.subscription') !!}"></div>
 
 				<div ng-if="sale.active_client_discount" ng-controller="ManageDiscountController as discount" ng-init="discount.setActive()" 
 					template-directive template-url="{!! route('admin.manage.price.partials.client_discount') !!}"></div>
