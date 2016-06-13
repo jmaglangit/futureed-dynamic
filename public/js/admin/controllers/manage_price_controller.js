@@ -32,6 +32,10 @@ function ManagePriceController($scope, salesService, TableService) {
 				self.details(id);
 				break;
 
+			case	Constants.ACTIVE_CANCEL :
+				self.active_list = Constants.TRUE;
+				break;
+
 			default	:
 				self.active_list = Constants.TRUE;
 				self.list();
@@ -136,7 +140,6 @@ function ManagePriceController($scope, salesService, TableService) {
 					var id = self.record.id;
 					
 					self.setActive();
-					self.setActive(Constants.ACTIVE_EDIT, id);
 					self.success = Constants.MSG_UPDATED("Subscription");
 				}
 			}
