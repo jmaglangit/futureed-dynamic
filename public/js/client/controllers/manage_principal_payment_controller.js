@@ -1230,7 +1230,7 @@ function ManagePrincipalPaymentController(
 			self.subscription_invoice.package_price = subscription.price;
 			self.subscription_invoice.sub_total = 0;
 			self.subscription_invoice.discount = (self.subscription_discount.percentage) ? self.subscription_discount.percentage : 0;
-			self.subscription_invoice.discount_id = (self.subscription_discount.id) ? self.subscription_discount.id : 0;
+			self.subscription_invoice.discount_id = self.subscription_discount.id;
 
 			self.subscription_invoice.classrooms = self.subscription_classroom;
 
