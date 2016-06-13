@@ -490,9 +490,11 @@ return [
 	'select_students' => 'Select one or more students.',
 	'add_subscription' => 'Add Subscription',
 	'update_subscription' => 'Update Subscription',
-	'subscription_days' => 'Days',
 	'subscription_packages' => 'Packages',
 	'lsp' => 'LSP',
+	'add_days' => 'Add Days',
+	'update_days' => 'Update Days',
+	'subscription_days' => 'Subscription Days',
 
 
 	//resources/views/admin/dashboard/index.blade.php
