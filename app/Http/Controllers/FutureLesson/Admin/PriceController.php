@@ -26,6 +26,14 @@ class PriceController extends Controller{
 	}
 
 	/**
+	 * Partial subscription days
+	 * @return \Illuminate\View\View
+	 */
+	public function subscription_days(){
+		return view('admin.manage.price.partials.subscription_days');
+	}
+
+	/**
 	* Partial client discount
 	* @return view
 	*/
