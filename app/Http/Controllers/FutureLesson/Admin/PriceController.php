@@ -18,11 +18,11 @@ class PriceController extends Controller{
 	}
 
 	/**
-	* Partial price settings
+	* Partial subscription
 	* @return view
 	*/
-	public function price_settings(){
-		return view('admin.manage.price.partials.price_settings');
+	public function subscription(){
+		return view('admin.manage.price.partials.subscription');
 	}
 
 	/**
