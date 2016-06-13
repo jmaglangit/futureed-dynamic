@@ -365,9 +365,9 @@
 							$price_controller = 'FutureLesson\Admin\PriceController';
 							Routes::get('price_settings',
 								[
-									'as' => 'admin.manage.price.partials.price_settings'
+									'as' => 'admin.manage.price.partials.subscription'
 									, 'middleware' => 'admin'
-									, 'uses' => $price_controller . '@price_settings'
+									, 'uses' => $price_controller . '@subscription'
 								]);
 							Routes::get('client_discount',
 								[
