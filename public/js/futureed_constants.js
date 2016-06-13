@@ -71,7 +71,14 @@ var Constants = {
 	, SUBSCRIPTION_OTHERS	: 	"others"
 	, SUBSCRIPTION_STUDENTS	:	"students"
 	, SUBSCRIPTION_CLASSROOM:	"classrooms"
+	, SUBSCRIPTION_PACKAGES	: 	"packages"
+	, SUBSCRIPTION			:	"subscription"
 
+	/**
+	 * Admin Subscription
+	 */
+	, BULK_SETTINGS : 'bulk_settings'
+	, CLIENT_DISCOUNT : 'client_discount'
 	/**
 	* Media Types
 	*/
@@ -98,6 +105,7 @@ var Constants = {
 	, ACTIVE_ADD	: "add"
 	, ACTIVE_EMAIL	: "email"
 	, ACTIVE_IMPORT	: "import"
+	, ACTIVE_CANCEL	: "cancel"
 
 	, ACTIVE_QUESTIONS 	: "questions"
 	, ACTIVE_CONTENTS 	: "contents"
