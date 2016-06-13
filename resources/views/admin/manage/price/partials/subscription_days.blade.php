@@ -1,4 +1,4 @@
-<div ng-if="price.active_list">
+<div ng-if="price.active_subscription_days">
 	<div class="col-xs-12 search-container" ng-if="price.active_add">
 		<div class="col-xs-12">
 			<div class="title-mid">
