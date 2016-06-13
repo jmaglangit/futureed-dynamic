@@ -9,7 +9,6 @@ function SalesController($scope) {
 	self.setActive = function(active) {
 		self.errors = Constants.FALSE;
 
-		self.active_price_settings = Constants.FALSE;
 		self.active_client_discount = Constants.FALSE;
 		self.active_bulk_settings = Constants.FALSE;
 		self.active_subscription = Constants.FALSE;
@@ -35,7 +34,7 @@ function SalesController($scope) {
 
 			case Constants.SUBSCRIPTION:
 			default:
-				self.active_price_settings = Constants.TRUE;
+				self.active_subscription = Constants.TRUE;
 				break;
 		}
 	}
