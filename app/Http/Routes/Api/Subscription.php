@@ -46,3 +46,7 @@ Routes::group([
         'as' => 'api.v1.subscription-package.show'
     ]);
 });
+
+//Subscription Days
+Routes::resource('/subscription-day','Api\v1\SubscriptionDayController',
+    ['except' => ['create','edit']]);
