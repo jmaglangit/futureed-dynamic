@@ -23,7 +23,7 @@
 					<li ng-class="{ 'active' : sale.active_subscription }">
 						<a ng-click="sale.setActive(futureed.SUBSCRIPTION)" href="javascript:void(0)"><span><i class="fa fa-dollar"></i>{!! trans('messages.subscription') !!}</span></a></li>
 					<li ng-class="{ 'active' : sale.active_subscription_days }">
-						<a ng-click="sale.setActive(futureed.SUBSCRIPTION_DAYS)" href="javascript:void(0)"><span><i class="fa fa-calendar-o"></i>{!! trans('messages.subscription_days') !!}</span></a></li>
+						<a ng-click="sale.setActive(futureed.SUBSCRIPTION_DAYS)" href="javascript:void(0)"><span><i class="fa fa-calendar-o"></i>{!! trans('messages.admin_days') !!}</span></a></li>
 					<li ng-class="{ 'active' : sale.active_subscription_packages }">
 						<a ng-click="sale.setActive(futureed.SUBSCRIPTION_PACKAGES)" href="javascript:void(0)"><span><i class="fa fa-archive"></i>{!! trans('messages.subscription_packages') !!}</span></a></li>
 					<li ng-class="{ 'active' : sale.active_client_discount }">
@@ -34,6 +34,9 @@
 					
 				<div ng-if="sale.active_subscription" ng-controller="ManagePriceController as price" ng-init="price.setActive()"
 					template-directive template-url="{!! route('admin.manage.price.partials.subscription') !!}"></div>
+
+				<div ng-if="sale.active_subscription_days" ng-controller="ManageSubscriptionDaysController as days" ng-init="days.setActive()"
+					 template-directive template-url="{!! route('admin.manage.price.partials.subscription_days') !!}"></div>
 
 				<div ng-if="sale.active_client_discount" ng-controller="ManageDiscountController as discount" ng-init="discount.setActive()" 
 					template-directive template-url="{!! route('admin.manage.price.partials.client_discount') !!}"></div>
@@ -51,6 +54,7 @@
 	{!! Html::script('/js/admin/services/sales_service.js')!!}
 
 	{!! Html::script('/js/admin/controllers/manage_price_controller.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_subscription_days_controller.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_discount_controller.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_bulk_controller.js')!!}
 	
