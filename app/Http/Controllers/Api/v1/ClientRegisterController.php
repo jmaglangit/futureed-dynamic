@@ -2,6 +2,12 @@
 
 use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Requests;
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Services\ClientServices;
+use FutureEd\Services\MailServices;
+use FutureEd\Services\PasswordServices;
+use FutureEd\Services\SchoolServices;
+use FutureEd\Services\UserServices;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Http\Requests\Api\ClientRegisterRequest;
 
@@ -9,6 +15,34 @@ use FutureEd\Http\Requests\Api\ClientRegisterRequest;
 class ClientRegisterController extends ClientController {
 	
 	use ClientValidatorTrait;
+
+	protected $password;
+
+	protected $client;
+
+	protected $client_service;
+
+	protected $school_service;
+
+	protected $user_service;
+
+	protected $mail_service;
+
+	public function __construct(
+		PasswordServices $passwordServices,
+		ClientRepositoryInterface $clientRepositoryInterface,
+		ClientServices $clientServices,
+		SchoolServices $schoolServices,
+		UserServices $userServices,
+		MailServices $mailServices
+	){
+		$this->password = $passwordServices;
+		$this->client = $clientRepositoryInterface;
+		$this->client_service = $clientServices;
+		$this->user_service = $userServices;
+		$this->school_service = $schoolServices;
+		$this->mail_service = $mailServices;
+	}
 
 	public function register(ClientRegisterRequest $request)
 	{
@@ -38,7 +72,7 @@ class ClientRegisterController extends ClientController {
 				->errorMessage());
 		}
 
-		$email_check = $this->client->checkClientEmail($user);
+		$email_check = $this->client_service->checkClientEmail($user);
 
 		if (!$email_check) {
 
@@ -49,7 +83,7 @@ class ClientRegisterController extends ClientController {
 
 		}
 
-		$username_check = $this->client->checkClientUsername($user);
+		$username_check = $this->client_service->checkClientUsername($user);
 
 		if (!$username_check) {
 
@@ -62,7 +96,7 @@ class ClientRegisterController extends ClientController {
 
 
 		if (strtolower($client['client_role']) == strtolower(config('futureed.principal'))) {
-			$check_school_name = $this->client->schoolNameCheck($school);
+			$check_school_name = $this->client_service->schoolNameCheck($school);
 
 			if (!$check_school_name) {
 
@@ -86,12 +120,12 @@ class ClientRegisterController extends ClientController {
 		$client['account_status'] = config('futureed.accepted');
 
 		// add user, return status
-		$user_response = $this->user->addUser($user);
+		$user_response = $this->user_service->addUser($user);
 
 		if ($client['client_role'] == config('futureed.principal')) {
 
 		// add school, return status
-			$school_response = $this->school->addSchool($school);
+			$school_response = $this->school_service->addSchool($school);
 		}
 
 		if (isset($user_response['status']) || isset($school_response['status'])) {
@@ -101,20 +135,20 @@ class ClientRegisterController extends ClientController {
 				'school_code' => (isset($school_response)) ? $school_response : null,
 			]);
 
-			$client_response = $this->client->addClient($client);
+			$client_response = $this->client_service->addClient($client);
 
 		}
 
 		if (isset($client_response['status'])) {
 
-			$data = $this->user->getUser($user_response['id'], 'Client');
+			$data = $this->user_service->getUser($user_response['id'], 'Client');
 
-			$code = $this->user->getConfirmationCode($user_response['id']);
+			$code = $this->user_service->getConfirmationCode($user_response['id']);
 
 			$data['client_role'] = $client['client_role'];
 
 			// TODO send email with link where code is embedded. fyi no need for client to confirm code.
-			$this->mail->sendClientRegister($data, $code['confirmation_code'], $input['callback_uri']);
+			$this->mail_service->sendClientRegister($data, $code['confirmation_code'], $input['callback_uri']);
 
 			return $this->respondWithData([
 				'id' => $client_response['id'],
