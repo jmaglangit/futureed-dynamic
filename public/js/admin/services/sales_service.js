@@ -159,7 +159,7 @@ function salesService($http){
 		return $http({
 			method	:	Constants.METHOD_POST
 			, data	:	data
-			, url	: salesApiUrl + 'subscription-day'
+			, url	:	salesApiUrl + 'subscription-day'
 		});
 	}
 
