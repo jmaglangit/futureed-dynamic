@@ -34,6 +34,14 @@ class PriceController extends Controller{
 	}
 
 	/**
+	 * Partial subscription packages
+	 * @return \Illuminate\View\View
+	 */
+	public function subscription_packages(){
+		return view('admin.manage.price.partials.subscription_packages');
+	}
+
+	/**
 	* Partial client discount
 	* @return view
 	*/
