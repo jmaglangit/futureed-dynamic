@@ -375,6 +375,11 @@
 									, 'middleware' => 'admin'
 									, 'uses' => $price_controller . '@subscription_days'
 								]);
+							Routes::get('subscription_packages',[
+								'as' => 'admin.manage.price.partials.subscription_packages'
+								, 'middleware' => 'admin'
+								, 'uses' => $price_controller . '@subscription_packages'
+							]);
 							Routes::get('client_discount',
 								[
 									'as' => 'admin.manage.price.partials.client_discount'
