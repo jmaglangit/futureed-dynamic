@@ -23,13 +23,13 @@ class SubscriptionDayRequest extends ApiRequest {
 
 			case 'POST':
 				return [
-					'days'		=> 'required|integer',
+					'days'	=> 'required|integer',
 					'status'	=> 'required|in:'.config('futureed.enabled').','.config('futureed.disabled')
 				];
 				break;
 			case 'PUT':
 				return [
-					'days'		=> 'required|integer',
+					'days'	=> 'required|integer',
 					'status'	=> 'required|in:'.config('futureed.enabled').','.config('futureed.disabled')
 				];
 				break;
