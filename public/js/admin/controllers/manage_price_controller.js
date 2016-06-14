@@ -32,10 +32,6 @@ function ManagePriceController($scope, salesService, TableService) {
 				self.details(id);
 				break;
 
-			case	Constants.ACTIVE_CANCEL :
-				self.active_list = Constants.TRUE;
-				break;
-
 			default	:
 				self.active_list = Constants.TRUE;
 				self.list();
