@@ -942,10 +942,7 @@ content legend {
 }
 
 .box-name {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
+	white-space: initial;
 }
 
 .font-size-16 {
