@@ -17,8 +17,6 @@ class SubscriptionDayRepository implements SubscriptionDayRepositoryInterface{
 	 */
 	public function getSubscriptionDays($criteria = [], $limit = 0, $offset = 0) {
 
-		DB::beginTransaction();
-
 		try {
 
 			$subscription_day = new SubscriptionDay();
@@ -46,14 +44,10 @@ class SubscriptionDayRepository implements SubscriptionDayRepositoryInterface{
 
 		} catch (\Exception $e) {
 
-			DB::rollback();
-
 			$this->errorLog($e->getMessage());
 
 			return false;
 		}
-
-		DB::commit();
 
 		return $response;
 	}
