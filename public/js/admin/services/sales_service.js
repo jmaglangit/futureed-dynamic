@@ -180,5 +180,67 @@ function salesService($http){
 		});
 	}
 
+	/**
+	 * Subscription packages
+	 */
+	//api/v1/subscription-package
+	salesAPI.getSubscriptionPackages = function(table){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'subscription-package?limit=' + table.size + '&offset=' + table.offset
+		});
+	}
+	//get subject list
+	salesAPI.getSubject = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: salesApiUrl + 'subject'
+		});
+	}
+	//get subscription
+	salesAPI.getSubscriptions = function(){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'subscription'
+		});
+	}
+	//get country
+	salesAPI.getCountries = function(){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'countries'
+		});
+	}
+	//api/v1/subscription-package/{subscription_package}
+	salesAPI.getSubscriptionPackage = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'subscription-package/' + id
+		});
+	}
+	// POST api/v1/subscription-package
+	salesAPI.addSubscriptionPackage = function(data){
+		return $http({
+			method	: 	Constants.METHOD_POST
+			, data	: 	data
+			, url	:	salesApiUrl + 'subscription-package'
+		});
+	}
+	//PUT api/v1/subscription-package/{subscription_package}
+	salesAPI.updateSubscriptionPackage = function(data){
+		return $http({
+			method	: 	Constants.METHOD_PUT
+			, data	: 	data
+			, url	:	salesApiUrl + 'subscription-package/' + data.id
+		});
+	}
+	// DELETE api/v1/subscription-package/{subscription_package}
+	salesAPI.deleteSubscriptionPackage = function(id){
+		return $http({
+			method	:	Constants.METHOD_DELETE
+			, url	:	salesApiUrl + 'subscription-package/' + id
+		});
+	}
+
 	return salesAPI;
 }
