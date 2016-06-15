@@ -934,8 +934,8 @@ content legend {
 	line-height: 50px;
 }
 
-.wizard-panel-student .panel-heading .panel-title {
-	padding-top: 17px;
+.wizard-panel .panel-heading .panel-title {
+	padding-top: 5%;
 }
 .wizard-panel-student .panel-body {
 	text-align: center;
