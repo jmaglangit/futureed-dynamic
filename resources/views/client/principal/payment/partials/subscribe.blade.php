@@ -80,7 +80,9 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <p>
-                                        <a ng-repeat="country in payment.subscription_country" href="#" class="wizard-box btn btn-sq-lg btn-primary"
+                                        <a ng-repeat="country in payment.subscription_country" href="#"
+                                                ng-class="payment.subscription_option.country_id == country.id ? 'btn-primary-selected' : 'btn-primary'"
+                                                class="wizard-box btn btn-sq-lg "
                                                 ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_COUNTRY,country.id)">
                                             <span><i class="fa fa-5x fa-flag " aria-hidden="true"></i></span>
                                             <br>
@@ -95,7 +97,9 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <p>
-                                        <a ng-repeat="subject in payment.subscription_subject" href="#" class="wizard-subject wizard-box btn btn-sq-lg btn-primary"
+                                        <a ng-repeat="subject in payment.subscription_subject" href="#"
+                                           ng-class="payment.subscription_option.subject_id == subject.id ? 'btn-primary-selected' : 'btn-primary'"
+                                           class="wizard-subject wizard-box btn btn-sq-lg"
                                            ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_SUBJECT,subject.id)">
                                             <span><i class="fa fa-5x fa-folder-open-o" aria-hidden="true"></i></span>
                                             <br>
@@ -109,12 +113,15 @@
                             <h3>{!! trans('messages.select_a_plan') !!}</h3>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div ng-repeat="plan in payment.subscription_plan" class="wizard-panel panel panel-primary panel-horizontal"
+                                    <div ng-repeat="plan in payment.subscription_plan"
+                                         ng-class="payment.subscription_option.subscription_id == plan.id ? 'panel-primary-selected' : 'panel-primary'"
+                                         class="wizard-panel panel panel-horizontal"
                                          ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_PLAN,plan.id)">
                                         <div class="panel-heading">
                                             <h3 class="panel-title">{! plan.name !}</h3>
                                         </div>
-                                        <div class="panel-body">{! plan.description !}</div>
+                                        <div ng-class="payment.subscription_option.subscription_id == plan.id ? 'panel-body-selected' : ''"
+                                                class="panel-body">{! plan.description !}</div>
                                     </div>
                                 </div>
                             </div>
@@ -123,12 +130,15 @@
                             <h3>{!! trans('messages.select_a_day') !!}</h3>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div ng-repeat="days in payment.subscription_days" class="wizard-panel panel panel-primary panel-horizontal"
+                                    <div ng-repeat="days in payment.subscription_days"
+                                         ng-class="payment.subscription_option.days_id == days.id ? 'panel-primary-selected' : 'panel-primary'"
+                                         class="wizard-panel panel panel-horizontal"
                                          ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_DAYS,days.id)">
                                         <div class="panel-heading">
                                             <h3 class="panel-title"><i class="fa fa-calendar" aria-hidden="true"></i></h3>
                                         </div>
-                                        <div class="panel-body"><h3>{! days.days!} days</h3></div>
+                                        <div ng-class="payment.subscription_option.days_id == days.id ? 'panel-body-selected' : ''"
+                                                class="panel-body"><h3>{! days.days!} days</h3></div>
                                     </div>
                                 </div>
                             </div>
