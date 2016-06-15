@@ -150,6 +150,19 @@ function ManagePrincipalPaymentController(
 		});
 	}
 
+	self.getEnrolledStudents = function(invoice){
+
+		var seats = 0;
+		var classrooms = invoice.invoice_detail;
+
+		angular.forEach(classrooms, function(classroom){
+
+			seats += classroom.classroom.seats_total;
+		});
+
+		return seats;
+	}
+
 	self.listSubscription = function() {
 		self.subscriptions = [];
 
