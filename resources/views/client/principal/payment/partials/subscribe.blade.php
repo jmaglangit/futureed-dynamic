@@ -380,7 +380,7 @@
                                             <table class="table table-condensed">
                                                 <thead>
                                                     <tr>
-                                                        <td class="h5">{!! trans('messages.no_of_seats') !!}</td>
+                                                        <td class="h5">{!! trans_choice('messages.no_of_seats',2) !!}</td>
                                                         <td class="h5">{!! trans_choice('messages.grade',1) !!}</td>
                                                         <td class="h5">{!! trans('messages.teacher') !!}</td>
                                                         <td class="h5">{!! trans('messages.class') !!}</td>
