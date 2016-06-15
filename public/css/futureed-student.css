@@ -2176,3 +2176,7 @@ a.payment-page-text {
 .auto-login-form {
 	text-align: center;
 }
+
+.wizard-panel .panel-heading .panel-title {
+	padding-top: 17px;
+}

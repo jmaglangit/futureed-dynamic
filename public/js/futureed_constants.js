@@ -71,7 +71,7 @@ var Constants = {
 	, SUBSCRIPTION_OTHERS	: 	"others"
 	, SUBSCRIPTION_STUDENTS	:	"students"
 	, SUBSCRIPTION_CLASSROOM:	"classrooms"
-	, SUBSCRIPTION_PACKAGES	: 	"packages"
+	, SUBSCRIPTION_PACKAGES	: 	"Packages"
 	, SUBSCRIPTION			:	"subscription"
 
 	/**
