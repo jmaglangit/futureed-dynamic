@@ -680,6 +680,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		if(data == Constants.TRUE){
 
 			self.billing_info = Constants.TRUE;
+			self.subscription_continue = Constants.FALSE;
 
 		}else {
 
