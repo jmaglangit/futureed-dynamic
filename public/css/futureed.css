@@ -1744,3 +1744,12 @@ span.round-tab:hover {
 .round-tab .fa {
 	margin: 0 10px 0 10px;
 }
+
+.btn-primary-selected, .panel-primary-selected {
+	background-color: #286090;
+	border-color: #204d74;
+}
+
+.panel-title-selected, .panel-body-selected {
+	color: #fff;
+}

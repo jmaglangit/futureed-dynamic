@@ -1006,6 +1006,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		if(data == Constants.TRUE){
 
 			self.billing_info = Constants.TRUE;
+			self.subscription_continue = Constants.FALSE;
 
 		}else {
 
@@ -1239,6 +1240,19 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.enlist_student[self.enlist_student.indexOf(student)] = student;
 		}
 	};
+
+	self.studentExists = function(id){
+
+		var ctr = 0;
+
+		angular.forEach(self.enlist_student,function(value){
+			if(value.id == id){
+				ctr = 1;
+			}
+		});
+
+		return ctr;
+	}
 
 	self.updateOrderDates = function(data){
 		var dates = {
