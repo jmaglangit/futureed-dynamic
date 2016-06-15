@@ -139,7 +139,6 @@ function ManagePrincipalPaymentController(
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.records = response.data.records;
-					console.log(self.records);
 					self.updatePageCount(response.data);
 				}
 			}
