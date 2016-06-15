@@ -363,12 +363,23 @@
 					Routes::group(['prefix' => '/partials'], function()
 						{
 							$price_controller = 'FutureLesson\Admin\PriceController';
-							Routes::get('price_settings',
+							Routes::get('subscription',
 								[
-									'as' => 'admin.manage.price.partials.price_settings'
+									'as' => 'admin.manage.price.partials.subscription'
 									, 'middleware' => 'admin'
-									, 'uses' => $price_controller . '@price_settings'
+									, 'uses' => $price_controller . '@subscription'
 								]);
+							Routes::get('subscription_days',
+								[
+									'as' => 'admin.manage.price.partials.subscription_days'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@subscription_days'
+								]);
+							Routes::get('subscription_packages',[
+								'as' => 'admin.manage.price.partials.subscription_packages'
+								, 'middleware' => 'admin'
+								, 'uses' => $price_controller . '@subscription_packages'
+							]);
 							Routes::get('client_discount',
 								[
 									'as' => 'admin.manage.price.partials.client_discount'

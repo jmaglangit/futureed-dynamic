@@ -25,9 +25,7 @@ class SubscriptionRequest extends ApiRequest {
 
         	    return [
 			            'name'          => 'required|regex:' . config('regex.name_numeric'),
-			            'price'         => 'required|numeric|min:0.01|max:999999.99',
 			            'description'   => 'required',
-			            'days'          => 'required|integer',
 			            'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
 			            'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
 	            ];
@@ -42,7 +40,6 @@ class SubscriptionRequest extends ApiRequest {
                     default:
                     return [
 		                    'name'          => 'required|regex:' . config('regex.name_numeric'),
-		                    'price'         => 'required|numeric|min:0.01|max:999999.99',
 		                    'description'   => 'required',
 		                    'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
 		                    'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
@@ -55,9 +52,7 @@ class SubscriptionRequest extends ApiRequest {
 
                 return [
 		                'name'          => 'required|regex:'. config('regex.name_numeric'),
-		                'price'         => 'required|numeric|min:0.01|max:999999.99',
 		                'description'   => 'required',
-		                'days'          => 'required|integer',
 		                'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
 		                'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
                 ];

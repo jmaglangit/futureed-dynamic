@@ -362,6 +362,7 @@ return [
 	'select_status' => '-- Select Status --',
 	'select_subject' => '-- Select Subject --',
 	'select_subscription' => '-- Select Subscription --',
+	'select_days' => '-- Select Days --',
 	'select_new_background_image' => 'Select new background image',
 	'select_pic_new_pic_password' => 'Select a picture for your new picture password',
 	'select_pic_confirm_pic_password' => 'Select a picture to confirm your new picture password',
@@ -488,6 +489,17 @@ return [
 	'select_a_plan' => 'Select a Plan',
 	'select_a_day' => 'Select No. of Days',
 	'select_students' => 'Select one or more students.',
+	'add_subscription' => 'Add Subscription',
+	'update_subscription' => 'Update Subscription',
+	'packages' => 'Packages',
+	'lsp' => 'LSP',
+	'add_days' => 'Add Days',
+	'update_days' => 'Update Days',
+	'subscription_days' => 'Subscription Days',
+	'add_package' => 'Add Package',
+	'update_package' => 'Update Package',
+	'subscription_packages' => 'Subscription Packages',
+
 
 	//resources/views/admin/dashboard/index.blade.php
 	'admin_dashboard' => 'Admin Dashboard',

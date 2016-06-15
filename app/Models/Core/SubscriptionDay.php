@@ -24,4 +24,13 @@ class SubscriptionDay extends Model {
 		'updated_by' => 1
 	];
 
+	//scopes
+
+	public function scopeDays($query,$days){
+		return $query->where('days',$days);
+	}
+
+	public function scopeStatus($query,$status){
+		return $query->where('status',$status);
+	}
 }

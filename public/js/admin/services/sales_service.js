@@ -6,7 +6,7 @@ function salesService($http){
 	var salesApiUrl = '/api/v1/';
 
 	/**
-	* Price Settings
+	* Subscription
 	*/
 	salesAPI.addPrice = function(data){
 		return $http({
@@ -135,6 +135,112 @@ function salesService($http){
 			, url 	: salesApiUrl + 'volume-discount/' + id
 		});
 	}
-	
+
+	/**
+	 * Subscription Days
+	 */
+	//api/v1/subscription-day
+	salesAPI.getSubscriptionDays = function(){
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: salesApiUrl + 'subscription-day'
+		});
+	}
+
+	// GET api/v1/subscription-day/{subscription_day}
+	salesAPI.getSubscriptionDay = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'subscription-day/' + id
+		});
+	}
+
+	salesAPI.addSubscriptionDay = function(data){
+		return $http({
+			method	:	Constants.METHOD_POST
+			, data	:	data
+			, url	:	salesApiUrl + 'subscription-day'
+		});
+	}
+
+	//PUT api/v1/subscription-day/{subscription_day}
+	salesAPI.updateSubscriptionDay = function(data){
+		return $http({
+			method	:	Constants.METHOD_PUT
+			, data	:	data
+			, url	:	salesApiUrl + 'subscription-day/' + data.id
+		});
+	}
+
+	//DELETE api/v1/subscription-day/{subscription_day}
+	salesAPI.deleteSubscriptionDay = function(id){
+		return $http({
+			method	:	Constants.METHOD_DELETE
+			, url	:	salesApiUrl + 'subscription-day/' + id
+		});
+	}
+
+	/**
+	 * Subscription packages
+	 */
+	//api/v1/subscription-package
+	salesAPI.getSubscriptionPackages = function(table){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'subscription-package?limit=' + table.size + '&offset=' + table.offset
+		});
+	}
+	//get subject list
+	salesAPI.getSubject = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: salesApiUrl + 'subject'
+		});
+	}
+	//get subscription
+	salesAPI.getSubscriptions = function(){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'subscription'
+		});
+	}
+	//get country
+	salesAPI.getCountries = function(){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'countries'
+		});
+	}
+	//api/v1/subscription-package/{subscription_package}
+	salesAPI.getSubscriptionPackage = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	salesApiUrl + 'subscription-package/' + id
+		});
+	}
+	// POST api/v1/subscription-package
+	salesAPI.addSubscriptionPackage = function(data){
+		return $http({
+			method	: 	Constants.METHOD_POST
+			, data	: 	data
+			, url	:	salesApiUrl + 'subscription-package'
+		});
+	}
+	//PUT api/v1/subscription-package/{subscription_package}
+	salesAPI.updateSubscriptionPackage = function(data){
+		return $http({
+			method	: 	Constants.METHOD_PUT
+			, data	: 	data
+			, url	:	salesApiUrl + 'subscription-package/' + data.id
+		});
+	}
+	// DELETE api/v1/subscription-package/{subscription_package}
+	salesAPI.deleteSubscriptionPackage = function(id){
+		return $http({
+			method	:	Constants.METHOD_DELETE
+			, url	:	salesApiUrl + 'subscription-package/' + id
+		});
+	}
+
 	return salesAPI;
 }
