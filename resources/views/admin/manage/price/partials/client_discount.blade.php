@@ -42,7 +42,7 @@
 								, 'ng-disabled' => 'discount.active_edit'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 								, 'ng-change' => 'discount.suggestClient()'
-								, 'ng-class' => "{ 'required-field' : discount.fields['name'] || discount.fields['client_id'] }"
+								, 'ng-class' => "{ 'required-field' : discount.fields['name'] || discount.fields['user_id'] }"
 							])
 						!!}
 						<div class="angucomplete-holder" ng-if="discount.clients && discount.active_add">
@@ -182,16 +182,16 @@
 						<tr>
 							<th>{!! trans('messages.name') !!}</th>
 							<th>{!! trans('messages.email') !!}</th>
-							<th>{!! trans('messages.role') !!}</th>
+							<th>{!! trans('messages.user') !!}</th>
 							<th>{!! trans('messages.discount') !!}</th>
 							<th ng-if="discount.records.length">{!! trans_choice('messages.action', 1) !!}</th>
 						</tr>
 						</thead>
 					<tbody>
 						<tr ng-repeat="record in discount.records">
-							<td>{! record.client.user.name !}</td>
-							<td>{! record.client.user.email !}</td>
-							<td>{! record.client.client_role !}</td>
+							<td>{! record.user.name !}</td>
+							<td>{! record.user.email !}</td>
+							<td>{! record.user.user_type !}</td>
 							<td>{! record.percentage | percent !}</td>
 							<td>
 								<div class="row">
