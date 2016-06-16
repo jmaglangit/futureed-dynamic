@@ -88,7 +88,8 @@ class PaymentSubscriptionController extends ApiController {
 			'subscription_id' => $invoice['subscription_id'],
 			'subscription_package_id' => $invoice['subscription_package_id'],
 			'renew' => config('futureed.true'),
-			'payment_status' => config('futureed.pending'),
+			'payment_status' => ($invoice['total_amount'] == config('futured.false'))
+				? config('futureed.paid') : config('futureed.pending'),
 			'seats_taken' => $invoice['order']['seats_taken']
 		];
 
@@ -140,6 +141,12 @@ class PaymentSubscriptionController extends ApiController {
 		}else{
 
 			$next_order_id = ++$prev_order['id'];
+		}
+
+		//if total amount is zero set status into Paid.
+		if($order['total_amount'] == config('futureed.false')){
+
+			$order['payment_status'] = config('futureed.paid');
 		}
 
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['student_id'],$next_order_id);
@@ -245,6 +252,12 @@ class PaymentSubscriptionController extends ApiController {
 		}else{
 
 			$next_order_id = ++$prev_order['id'];
+		}
+
+		//if total amount is zero set status into Paid.
+		if($order['total_amount'] == config('futureed.false')){
+
+			$order['payment_status'] = config('futureed.paid');
 		}
 
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
