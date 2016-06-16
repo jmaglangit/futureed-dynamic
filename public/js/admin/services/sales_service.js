@@ -194,7 +194,7 @@ function salesService($http){
 	salesAPI.getSubject = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: salesApiUrl + 'subject'
+			, url 	: salesApiUrl + 'subject?status=' + Constants.ENABLED
 		});
 	}
 	//get subscription
