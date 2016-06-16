@@ -1595,12 +1595,17 @@ span.round-tab:hover {
 
 /*Subject*/
 .wizard-box {
-	width : 150px;
-	height: 150px;
+	width : 15%;
+	height: 125px;
+	margin-top: 20px;
 	margin-bottom: 10px;
-	margin-left: 15px;
+	margin-left: 10px;
 	border-radius: 10px;
-	padding-top: 25px;
+	padding: 20px;
+}
+
+.wizard-box-text {
+	white-space: initial;
 }
 
 /*TODO to be discussed with PM.
@@ -1623,7 +1628,7 @@ span.round-tab:hover {
 	margin-bottom: 10px;
 	margin-left: 15px;
 	border-radius: 10px;
-	padding-top: 25px;
+	padding: 20px;
 }
 
 .wizard-box-lone:after {
@@ -1635,12 +1640,12 @@ span.round-tab:hover {
 }
 
 .wizard-subject {
-	width : 150px;
-	height: 150px;
+	width : 15%;
+	height: 125px;
 	margin-bottom: 10px;
 	margin-left: 15px;
 	border-radius: 10px;
-	padding-top: 25px;
+	padding: 20px;
 }
 
 .wizard-subject:after {
