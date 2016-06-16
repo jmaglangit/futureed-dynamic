@@ -35,7 +35,7 @@ class StudentPaymentRequest extends ApiRequest {
 					'date_end' => 'required|date_format:Ymd',
 					'seats_total' => 'required|numeric|between:1,999999',
 					'seats_taken' => 'numeric',
-					'total_amount' => 'required|numeric|between:1,999999.99',
+					'total_amount' => 'required|numeric|between:0,999999.99',
 					'payment_status' => 'required|in:Pending,Paid,Cancelled',
 
 
@@ -53,7 +53,7 @@ class StudentPaymentRequest extends ApiRequest {
 					'date_end' => 'required|date_format:Ymd',
 					'seats_total' => 'required|numeric|between:1,999999',
 					'seats_taken' => 'numeric',
-					'total_amount' => 'required|numeric|between:1,999999.99',
+					'total_amount' => 'required|numeric|between:0,999999.99',
 					'payment_status' => 'required|in:Pending,Paid,Cancelled',
 
 
