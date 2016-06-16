@@ -82,6 +82,12 @@ class StudentPaymentController extends ApiController {
 			$next_order_id = ++$prev_order['id'];
 		}
 
+		//if total amount is zero set status into Paid.
+		if($order['total_amount'] == config('futureed.false')){
+
+			$order['payment_status'] = config('futureed.paid');
+		}
+
 		$order['order_no'] = $this->invoice_services->createOrderNo($order['student_id'],$next_order_id);
 
 		//insert data into order
@@ -176,6 +182,12 @@ class StudentPaymentController extends ApiController {
 		if ($student_classroom && $order_record['order_no']!= $student_classroom[0]['order_no']) {
 
 			return $this->respondErrorMessage(2037);
+		}
+
+		//if total amount is zero set status into Paid.
+		if($order['total_amount'] == config('futureed.false')){
+
+			$order['payment_status'] = config('futureed.paid');
 		}
 
 		//get student details
