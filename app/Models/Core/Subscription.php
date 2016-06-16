@@ -29,4 +29,8 @@ class Subscription extends Model {
 		return $query->where('name', 'like', '%'.$name.'%');
 				
 	}
+
+	public function scopeStatus($query,$status){
+		return $query->where('status',$status);
+	}
 }
