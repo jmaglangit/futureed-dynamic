@@ -668,19 +668,24 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/success";
 			payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/fail";
 
-		ManageParentPaymentService.getPaymentUri(payment).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-					$scope.ui_unblock();
-				} else if(response.data) {
-					$window.location.href = response.data.url;
+		if(payment.price > Constants.FALSE){
+			ManageParentPaymentService.getPaymentUri(payment).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+						$scope.ui_unblock();
+					} else if(response.data) {
+						$window.location.href = response.data.url;
+					}
 				}
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			$window.location.href = payment.success_callback_uri;
+		}
+
 	}
 
 	self.removeStudent = function() {
