@@ -214,6 +214,12 @@ class ParentStudentController extends ApiController {
             $next_order_id = ++$prev_order['id'];
         }
 
+        //if total amount is zero set status into Paid.
+        if($order['total_amount'] == config('futureed.false')){
+
+            $order['payment_status'] = config('futureed.paid');
+        }
+
         $order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
 
         $new_order = $this->order->addOrder($order);
