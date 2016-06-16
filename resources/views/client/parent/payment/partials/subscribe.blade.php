@@ -89,7 +89,7 @@
                                                 ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_COUNTRY,country.id)">
                                             <span><i class="fa fa-5x fa-flag " aria-hidden="true"></i></span>
                                             <br>
-                                            {! country.name !}
+                                            <span class="wizard-box-text">{! country.name !}</span>
                                         </a>
                                     </p>
                                 </div>
@@ -109,7 +109,7 @@
                                            ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_SUBJECT,subject.id)">
                                             <span><i class="fa fa-5x fa-folder-open-o" aria-hidden="true"></i></span>
                                             <br>
-                                            {! subject.name !}
+                                            <span class="wizard-box-text">{! subject.name !}</span>
                                         </a>
                                     </p>
                                 </div>
