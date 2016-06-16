@@ -13,6 +13,7 @@ use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\PaymentSubscriptionRequest;
+use FutureEd\Services\SubscriptionServices;
 
 class PaymentSubscriptionController extends ApiController {
 
@@ -26,6 +27,7 @@ class PaymentSubscriptionController extends ApiController {
 	protected $class_student;
 	protected $student;
 	protected $client;
+	protected $subscription_service;
 
 
 	public function __construct(
@@ -39,7 +41,8 @@ class PaymentSubscriptionController extends ApiController {
 		ClassroomRepositoryInterface $classroom,
 		ClassStudentRepositoryInterface $class_student,
 		StudentRepositoryInterface $studentRepositoryInterface,
-		ClientRepositoryInterface $clientRepositoryInterface
+		ClientRepositoryInterface $clientRepositoryInterface,
+		SubscriptionServices $subscriptionServices
 
 	){
 		$this->student = $studentRepositoryInterface;
@@ -52,6 +55,7 @@ class PaymentSubscriptionController extends ApiController {
 		$this->classroom = $classroom;
 		$this->class_student = $class_student;
 		$this->client = $clientRepositoryInterface;
+		$this->subscription_service = $subscriptionServices;
 	}
 
 	/**
@@ -143,11 +147,7 @@ class PaymentSubscriptionController extends ApiController {
 			$next_order_id = ++$prev_order['id'];
 		}
 
-		//if total amount is zero set status into Paid.
-		if($order['total_amount'] == config('futureed.false')){
-
-			$order['payment_status'] = config('futureed.paid');
-		}
+		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
 
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['student_id'],$next_order_id);
 
@@ -254,11 +254,7 @@ class PaymentSubscriptionController extends ApiController {
 			$next_order_id = ++$prev_order['id'];
 		}
 
-		//if total amount is zero set status into Paid.
-		if($order['total_amount'] == config('futureed.false')){
-
-			$order['payment_status'] = config('futureed.paid');
-		}
+		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
 
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
 
