@@ -143,7 +143,7 @@ function salesService($http){
 	salesAPI.getSubscriptionDays = function(){
 		return $http({
 			method	: Constants.METHOD_GET
-			, url	: salesApiUrl + 'subscription-day'
+			, url	: salesApiUrl + 'subscription-day?status=' + Constants.ENABLED
 		});
 	}
 
@@ -201,7 +201,7 @@ function salesService($http){
 	salesAPI.getSubscriptions = function(){
 		return $http({
 			method	:	Constants.METHOD_GET
-			, url	:	salesApiUrl + 'subscription'
+			, url	:	salesApiUrl + 'subscription?status=' + Constants.ENABLED
 		});
 	}
 	//get country
