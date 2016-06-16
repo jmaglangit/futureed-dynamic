@@ -36,7 +36,7 @@ class ParentStudentController extends ApiController {
     protected $parent_student;
     protected $invoice_service;
     protected $order_details;
-	protected $avatar;
+    protected $avatar;
     protected $subscription_service;
 
     public function __construct(
@@ -53,7 +53,7 @@ class ParentStudentController extends ApiController {
         InvoiceDetailRepositoryInterface $invoice_detail,
         InvoiceServices $invoice_service,
         OrderDetailRepositoryInterface $order_details,
-		AvatarServices $avatarServices,
+        AvatarServices $avatarServices,
         SubscriptionServices $subscriptionServices
     ){
 
