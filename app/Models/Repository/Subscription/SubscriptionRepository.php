@@ -38,6 +38,10 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
                     if (isset($criteria['name'])) {
                         $subscriptions = $subscriptions->name($criteria['name']);
                     }
+
+                    if (isset($criteria['status'])) {
+                        $subscriptions = $subscriptions->status($criteria['status']);
+                    }
                 }
 
                 $count = $subscriptions->count();
