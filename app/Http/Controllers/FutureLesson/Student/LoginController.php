@@ -118,6 +118,7 @@ class LoginController extends Controller {
 		if($invitation['id'] && $invitation['registration_token']){
 			return view('student.login.registration', [
 				'email' => null,
+				'code' => null,
 				'id' => $invitation['id'],
 				'registration_token' => $invitation['registration_token'
 				]]);
