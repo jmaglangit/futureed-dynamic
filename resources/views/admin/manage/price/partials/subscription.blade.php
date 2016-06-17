@@ -2,7 +2,7 @@
 	<div class="col-xs-12 search-container" ng-if="price.active_add">
 		<div class="col-xs-12">
 			<div class="title-mid">
-				{!! trans('messages.admin_add_price') !!}
+				{!! trans('messages.add_subscription') !!}
 			</div>
 		</div>
 	</div>
@@ -10,7 +10,7 @@
 	<div class="col-xs-12 search-container" ng-if="price.active_edit">
 		<div class="col-xs-12">
 			<div class="title-mid">
-				{!! trans('messages.admin_update_price') !!}
+				{!! trans('messages.update_subscription') !!}
 			</div>
 		</div>
 	</div>
@@ -53,35 +53,6 @@
 							, 'rows' => '4'
 							, 'ng-model' => 'price.record.description'
 							, 'ng-class' => "{ 'required-field' : price.fields['description'] }"
-						])
-					!!}
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-3 control-label">{!! trans('messages.price') !!} <span class="required">*</span></label>
-				<div class="col-xs-5">
-					<div class="input-group">
-						  <span class="input-group-addon" id="basic-addon1">{!! trans('messages.usd') !!}</span>
-						  {!! Form::text('total_amount',''
-							, [
-								'class' => 'form-control'
-								, 'ng-model' => 'price.record.price'
-								, 'ng-class' => "{ 'required-field' : price.fields['price'] }"
-								, 'placeholder' => trans('messages.price')
-							]
-						) !!}
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-3 control-label">{!! trans('messages.admin_days') !!} <span class="required">*</span></label>
-				<div class="col-xs-5">
-					{!! Form::text('days','',
-						[
-							'class' => 'form-control'
-							, 'placeholder' => trans('messages.admin_days')
-							, 'ng-class' => "{ 'required-field' : price.fields['days'] }"
-							, 'ng-model' => 'price.record.days'
 						])
 					!!}
 				</div>
@@ -162,7 +133,7 @@
 						)
 					) !!}
 
-					{!! Form::button(trans('messages.admin_add_price')
+					{!! Form::button(trans('messages.add_subscription')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "price.add()"
@@ -173,7 +144,7 @@
 					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "price.setActive()"
+							, 'ng-click' => "price.setActive(futureed.ACTIVE_CANCEL)"
 						)
 					) !!}
 				</div>
@@ -185,7 +156,7 @@
 		<button class="btn btn-blue btn-semi-medium" 
 			ng-click="price.setActive(futureed.ACTIVE_ADD)"
 			ng-if="!(price.active_add || price.active_edit)">
-			<span><i class="fa fa-plus-square"></i></span> {!! trans('messages.admin_add_price') !!}
+			<span><i class="fa fa-plus-square"></i></span> {!! trans('messages.add_subscription') !!}
 		</button>
 
 		<div class="list-container">
@@ -216,7 +187,7 @@
 				<tr>
 					<th>{!! trans('messages.admin_subscription_name') !!}</th>
 					<th>{!! trans('messages.description') !!}</th>
-					<th>{!! trans('messages.price') !!}</th>
+					<th>{!! trans('messages.lsp') !!}</th>
 					<th ng-if="price.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 				</tr>
 				</thead>
@@ -224,7 +195,8 @@
 				<tr ng-repeat="record in price.records">
 					<td>{! record.name !}</td>
 					<td>{! record.description !}</td>
-					<td>{! record.price | currency : "USD$ " : 2 !}</td>
+					<td ng-if="record.has_lsp">{!! trans('messages.yes') !!}</td>
+					<td ng-if="!record.has_lsp">{!! trans('messages.no') !!}</td>
 					<td>
 						<div class="row">
 							<div class="col-xs-4">

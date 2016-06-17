@@ -95,6 +95,7 @@ return [
 		2069 => 'You do not have enough points to buy this accessory',
 		2070 => 'Invalid graph answer.',
 		2071 => 'Module is not available',
+		Error::REMOVE_STUDENT_BEFORE_DATE => 'Student cannot be deleted if date removed is less than date added',
 
 
 		2100 => 'Reset code is invalid.',

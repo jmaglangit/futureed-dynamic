@@ -668,19 +668,24 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/success";
 			payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/fail";
 
-		ManageParentPaymentService.getPaymentUri(payment).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-					$scope.ui_unblock();
-				} else if(response.data) {
-					$window.location.href = response.data.url;
+		if(payment.price > Constants.FALSE){
+			ManageParentPaymentService.getPaymentUri(payment).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+						$scope.ui_unblock();
+					} else if(response.data) {
+						$window.location.href = response.data.url;
+					}
 				}
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			$window.location.href = payment.success_callback_uri;
+		}
+
 	}
 
 	self.removeStudent = function() {
@@ -1006,6 +1011,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		if(data == Constants.TRUE){
 
 			self.billing_info = Constants.TRUE;
+			self.subscription_continue = Constants.FALSE;
 
 		}else {
 
@@ -1239,6 +1245,19 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.enlist_student[self.enlist_student.indexOf(student)] = student;
 		}
 	};
+
+	self.studentExists = function(id){
+
+		var ctr = 0;
+
+		angular.forEach(self.enlist_student,function(value){
+			if(value.id == id){
+				ctr = 1;
+			}
+		});
+
+		return ctr;
+	}
 
 	self.updateOrderDates = function(data){
 		var dates = {

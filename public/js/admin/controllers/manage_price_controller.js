@@ -136,7 +136,6 @@ function ManagePriceController($scope, salesService, TableService) {
 					var id = self.record.id;
 					
 					self.setActive();
-					self.setActive(Constants.ACTIVE_EDIT, id);
 					self.success = Constants.MSG_UPDATED("Subscription");
 				}
 			}

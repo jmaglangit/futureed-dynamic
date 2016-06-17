@@ -1,10 +1,8 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
+use FutureEd\Http\Requests\Api\SubscriptionPackageRequest;
 use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class SubscriptionPackageController extends ApiController {
@@ -65,6 +63,41 @@ class SubscriptionPackageController extends ApiController {
 	public function show($id){
 
 		return $this->respondWithData($this->subscription_package->getSubscriptionPackage($id));
+	}
+
+	/**
+	 * store a new subscription package
+	 * @param SubscriptionPackageRequest $request
+	 * @return mixed
+	 */
+	public function store(SubscriptionPackageRequest $request){
+
+		$data = $request->all();
+
+		return $this->respondWithData($this->subscription_package->addSubscriptionPackage($data));
+	}
+
+	/**
+	 * update a subscription package
+	 * @param $id
+	 * @param SubscriptionPackageRequest $request
+	 * @return mixed
+	 */
+	public function update($id, SubscriptionPackageRequest $request){
+
+		$data = $request->all();
+
+		return $this->respondWithData($this->subscription_package->updateSubscriptionPackage($id,$data));
+	}
+
+	/**
+	 * delete a subscription package
+	 * @param $id
+	 * @return mixed
+	 */
+	public function destroy($id){
+
+		return $this->respondWithData($this->subscription_package->deleteSubscriptionPackage($id));
 	}
 
 }

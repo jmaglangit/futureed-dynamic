@@ -20,16 +20,26 @@
 
 				
 				<ul class="nav nav-pills nav-admin">
-					<li ng-class="{ 'active' : sale.active_price_settings }">
-						<a ng-click="sale.setActive('price_settings')" href="javascript:void(0)"><span><i class="fa fa-dollar"></i>{!! trans('messages.admin_price_settings') !!}</span></a></li>
+					<li ng-class="{ 'active' : sale.active_subscription }">
+						<a ng-click="sale.setActive(futureed.SUBSCRIPTION)" href="javascript:void(0)"><span><i class="fa fa-dollar"></i>{!! trans('messages.subscription') !!}</span></a></li>
+					<li ng-class="{ 'active' : sale.active_subscription_days }">
+						<a ng-click="sale.setActive(futureed.SUBSCRIPTION_DAYS)" href="javascript:void(0)"><span><i class="fa fa-calendar-o"></i>{!! trans('messages.admin_days') !!}</span></a></li>
+					<li ng-class="{ 'active' : sale.active_subscription_packages }">
+						<a ng-click="sale.setActive(futureed.SUBSCRIPTION_PACKAGES)" href="javascript:void(0)"><span><i class="fa fa-archive"></i>{!! trans('messages.packages') !!}</span></a></li>
 					<li ng-class="{ 'active' : sale.active_client_discount }">
-						<a ng-click="sale.setActive('client_discount')" href="javascript:void(0)"><span><i class="fa fa-tags"></i>{!! trans('messages.admin_client_discount') !!}</span></a></li>
+						<a ng-click="sale.setActive(futureed.CLIENT_DISCOUNT)" href="javascript:void(0)"><span><i class="fa fa-tags"></i>{!! trans('messages.admin_client_discount') !!}</span></a></li>
 					<li ng-class="{ 'active' : sale.active_bulk_settings }">
-						<a ng-click="sale.setActive('bulk_settings')" href="javascript:void(0)"><span><i class="fa fa-database"></i>{!! trans('messages.admin_bulk_settings') !!}</span></a></li>
+						<a ng-click="sale.setActive(futureed.BULK_SETTINGS)" href="javascript:void(0)"><span><i class="fa fa-database"></i>{!! trans('messages.admin_bulk_settings') !!}</span></a></li>
 				</ul>
 					
-				<div ng-if="sale.active_price_settings" ng-controller="ManagePriceController as price" ng-init="price.setActive()" 
-					template-directive template-url="{!! route('admin.manage.price.partials.price_settings') !!}"></div>
+				<div ng-if="sale.active_subscription" ng-controller="ManagePriceController as price" ng-init="price.setActive()"
+					template-directive template-url="{!! route('admin.manage.price.partials.subscription') !!}"></div>
+
+				<div ng-if="sale.active_subscription_days" ng-controller="ManageSubscriptionDaysController as days" ng-init="days.setActive()"
+					 template-directive template-url="{!! route('admin.manage.price.partials.subscription_days') !!}"></div>
+
+				<div ng-if="sale.active_subscription_packages" ng-controller="ManageSubscriptionPackagesController as package" ng-init="package.setActive()"
+					 template-directive template-url="{!! route('admin.manage.price.partials.subscription_packages') !!}"></div>
 
 				<div ng-if="sale.active_client_discount" ng-controller="ManageDiscountController as discount" ng-init="discount.setActive()" 
 					template-directive template-url="{!! route('admin.manage.price.partials.client_discount') !!}"></div>
@@ -47,6 +57,8 @@
 	{!! Html::script('/js/admin/services/sales_service.js')!!}
 
 	{!! Html::script('/js/admin/controllers/manage_price_controller.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_subscription_days_controller.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_subscription_packages_controller.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_discount_controller.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_bulk_controller.js')!!}
 	

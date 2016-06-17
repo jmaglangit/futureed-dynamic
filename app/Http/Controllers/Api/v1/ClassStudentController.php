@@ -322,6 +322,12 @@ class ClassStudentController extends ApiController {
 			return $this->respondErrorMessage(2147);
 		}
 
+		//student is not removed before added date.
+		if(Carbon::parse($data['date_removed']) < Carbon::parse($class_student->created_at)){
+
+			return $this->respondErrorMessage(2072);
+		}
+
 		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
 
 

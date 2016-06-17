@@ -14,6 +14,7 @@ use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface;
 use Carbon\Carbon;
 
+use FutureEd\Services\SubscriptionServices;
 use Illuminate\Http\Request;
 
 class StudentPaymentController extends ApiController {
@@ -26,6 +27,7 @@ class StudentPaymentController extends ApiController {
 	protected $classroom;
 	protected $class_student;
 	protected $invoice_detail;
+	protected $subscription_service;
 
 	public function __construct(
 							StudentRepositoryInterface $student,
@@ -35,7 +37,8 @@ class StudentPaymentController extends ApiController {
 							InvoiceRepositoryInterface $invoice,
 							ClassroomRepositoryInterface $classroom,
 							ClassStudentRepositoryInterface $class_student,
-							InvoiceDetailRepositoryInterface $invoice_detail
+							InvoiceDetailRepositoryInterface $invoice_detail,
+							SubscriptionServices $subscriptionServices
 								){
 
 		$this->student = $student;
@@ -46,6 +49,7 @@ class StudentPaymentController extends ApiController {
 		$this->classroom = $classroom;
 		$this->class_student = $class_student;
 		$this->invoice_detail = $invoice_detail;
+		$this->subscription_service = $subscriptionServices;
 	}
 
 	/**
@@ -81,6 +85,8 @@ class StudentPaymentController extends ApiController {
 
 			$next_order_id = ++$prev_order['id'];
 		}
+
+		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
 
 		$order['order_no'] = $this->invoice_services->createOrderNo($order['student_id'],$next_order_id);
 
@@ -177,6 +183,9 @@ class StudentPaymentController extends ApiController {
 
 			return $this->respondErrorMessage(2037);
 		}
+
+		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
+
 
 		//get student details
 		$student = $this->student->viewStudent($order['student_id']);

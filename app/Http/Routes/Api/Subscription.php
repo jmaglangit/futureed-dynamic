@@ -32,17 +32,9 @@ Routes::group([
 
 
 //Subscription Package
-Routes::group([
-    'prefix' => '/subscription-package'
-],function(){
+Routes::resource('/subscription-package','Api\v1\SubscriptionPackageController',
+    ['except' => ['create','edit']]);
 
-    Routes::get('/',[
-        'uses' => 'Api\v1\SubscriptionPackageController@index',
-        'as' => 'api.v1.subscription-package.index'
-    ]);
-
-    Routes::get('/{id}',[
-        'uses' => 'Api\v1\SubscriptionPackageController@show',
-        'as' => 'api.v1.subscription-package.show'
-    ]);
-});
+//Subscription Days
+Routes::resource('/subscription-day','Api\v1\SubscriptionDayController',
+    ['except' => ['create','edit']]);
