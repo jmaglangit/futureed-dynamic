@@ -4,6 +4,12 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="learning platform, learning, education, online education, adaptive online learning, adaptive education"/>
+    <meta name="description" content="Futurelesson is an adaptive online learning platform designed to help students learn at their own pace, and to optimize their learning path."/>
+    <meta name="site" content="Public" />
+    <meta name="rating" content="General" />
+    <meta name="revisit-after" content="4 weeks" />
+    <meta name="robots" content="all" />
 
     <title>FutureEd Online Education Platform</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
