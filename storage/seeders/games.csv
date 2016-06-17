@@ -1,4 +1,3 @@
-id,code,name,game_url,game_image,points_price,description,created_by,updated_by,created_at,updated_at,deleted_at
 ,1,The Sorcerer,http://showcase.codethislab.com/games/the_sorcerer/,img_sorcerer.jpg,300,The Sorcerer is a HTML5 puzzle game freely inspired to Zuma gameplay. The game contains 3 different progressive levels.,,,,,
 ,2,Jumper Frog,http://showcase.codethislab.com/games/jumper_frog/,img_jumper.jpg,300,Jumper Frog is a HTML5 Game. Enjoy this colorful version of the classic game Frogger.<br/>The goal of the game is to guide a frog from the bottom of the screen to the top into one of the fives available coves,,,,,
 ,3,Galactic War,http://showcase.codethislab.com/games/galactic_war/,img_galactic.jpg,300,"Galactic War is a HTML5 arcade game. Your goal is to survive as long as possible, shooting enemy starships.",,,,,
