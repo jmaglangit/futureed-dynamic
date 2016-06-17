@@ -112,6 +112,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('SubscriptionDaysTableSeeder');
 		$this->command->info('SubscriptionDaysTableSeeder seeded!');
+
+		$this->call('GameTableSeeder');
+		$this->command->info('GameTableSeeder seeded');
 		
 		#$this->call('UsersTableSeeder');
 		#$this->command->info('UsersTableSeeder seeded!');
