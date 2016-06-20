@@ -1,7 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 6/20/16
- * Time: 5:11 PM
- */
+
+Routes::group([
+	'middleware' => ['api_user', 'api_after'],
+	'permission' => ['admin', 'client', 'student'],
+	'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
+],function(){
+
+	Routes::resource('/game','Api\v1\GameController',[
+		'only' => ['index','show']
+	]);
+});
