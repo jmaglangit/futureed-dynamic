@@ -38,6 +38,7 @@ Routes::group([
 	include('Routes/Api/Countries.php');
 	include('Routes/Api/Event.php');
 	include('Routes/Api/Facebook.php');
+	include('Routes/Api/Game.php');
 	include('Routes/Api/Grade.php');
 	include('Routes/Api/Google.php');
 	include('Routes/Api/HelpRequest.php');
