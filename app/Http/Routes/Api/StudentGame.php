@@ -11,7 +11,7 @@ Routes::group([
 		'only' => ['index','show']
 	]);
 
-	Routes::get('/students-game/',[
+	Routes::get('/students-game/{user_id}',[
 		'uses' => 'Api\v1\StudentGameController@getStudentsGame',
 		'as' => 'students.game'
 	]);
