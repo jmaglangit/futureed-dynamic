@@ -127,7 +127,7 @@ class StudentPaymentController extends ApiController {
 		$classroom = [
 			'order_no' => $order['order_no'],
 			'name' => config('futureed.STU') . Carbon::now()->timestamp,
-			'grade_id' => $student['grade']['id'],
+			'grade_id' => ($student['grade']) ? $student['grade']['id'] : config('futureed.false'),
 			'student_id' => $order['student_id'],
 			'subject_id' => $order['subject_id'],
 			'seats_taken' => $order['seats_taken'],
@@ -152,7 +152,7 @@ class StudentPaymentController extends ApiController {
 		$invoice_detail = [
 			'invoice_id' => (isset($inserted_invoice['id'])) ? $inserted_invoice['id'] : 0 ,
 			'class_id' => $inserted_classroom['id'],
-			'grade_id' => $student['grade']['id'],
+			'grade_id' => ($student['grade']) ? $student['grade']['id'] : config('futureed.false'),
 			'price' => $order['total_amount']
 		];
 
