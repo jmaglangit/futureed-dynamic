@@ -1,11 +1,10 @@
-<?php
+<?php namespace FutureEd\Models\Repository\StudentGame;
 
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 6/20/16
- * Time: 5:41 PM
- */
 interface StudentGameRepositoryInterface {
 
+	public function getStudentGames($criteria = [], $limit = 0, $offset = 0);
+
+	public function getStudentGame($id);
+
+	public function getStudentsGame($user_id);
 }
