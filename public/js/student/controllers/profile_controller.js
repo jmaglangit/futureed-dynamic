@@ -60,6 +60,7 @@ function ProfileController($scope, $timeout,apiService, ProfileService) {
 		self.active_avatar_accessory = Constants.FALSE;
 		self.buy_avatar_accessory_modal = Constants.FALSE;
 		self.settings = Constants.FALSE;
+		self.active_games = Constants.FALSE;
 
 		self.validation = {};
 		self.select_password = Constants.FALSE;
@@ -116,6 +117,10 @@ function ProfileController($scope, $timeout,apiService, ProfileService) {
 			case Constants.SETTINGS    :
 				self.settings = Constants.TRUE;
 				self.getStudentBackgroundImage();
+				break;
+
+			case Constants.GAMES	:
+				self.active_games = Constants.TRUE;
 				break;
 
 			case Constants.INDEX            :
