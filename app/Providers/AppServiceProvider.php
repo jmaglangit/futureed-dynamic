@@ -337,5 +337,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\Game\GameRepositoryInterface',
 			'FutureEd\Models\Repository\Game\GameRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\StudentGame\StudentGameRepositoryInterface',
+			'FutureEd\Models\Repository\StudentGame\StudentGameRepository'
+		);
 	}
 }

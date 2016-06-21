@@ -61,6 +61,7 @@ Routes::group([
 	include('Routes/Api/School.php');
 	include('Routes/Api/Student.php');
 	include('Routes/Api/StudentBadge.php');
+	include('Routes/Api/StudentGame.php');
 	include('Routes/Api/StudentModule.php');
 	include('Routes/Api/StudentModuleAnswer.php');
 	include('Routes/Api/StudentPoint.php');
