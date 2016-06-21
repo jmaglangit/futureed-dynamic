@@ -399,6 +399,10 @@
 					'as' => 'student.partials.settings'
 					, 'uses' => 'FutureLesson\Student\ProfileController@settings'
 				]);
+				Routes::get('/games',[
+					'as' => 'student.partials.games_list',
+					'users' => 'FutureLesson\Student\ProfileController@games'
+				]);
 			});
 		});
 
