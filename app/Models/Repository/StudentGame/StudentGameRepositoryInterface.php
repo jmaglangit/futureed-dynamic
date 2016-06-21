@@ -7,4 +7,6 @@ interface StudentGameRepositoryInterface {
 	public function getStudentGame($id);
 
 	public function getStudentsGame($user_id);
+
+	public function studentBuyGame($data);
 }

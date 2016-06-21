@@ -15,4 +15,9 @@ Routes::group([
 		'uses' => 'Api\v1\StudentGameController@getStudentsGame',
 		'as' => 'students.game'
 	]);
+
+	Routes::post('/student-game/buy',[
+		'uses' => 'Api\v1\StudentGameController@studentBuyGame',
+		'as' => 'student.buy.game'
+	]);
 });

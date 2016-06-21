@@ -1,6 +1,8 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use Carbon\Carbon;
 use FutureEd\Http\Requests;
+use FutureEd\Http\Requests\Api\StudentGameRequest;
 use FutureEd\Models\Repository\StudentGame\StudentGameRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
@@ -62,6 +64,20 @@ class StudentGameController extends ApiController {
 	public function getStudentsGame($user_id){
 
 		return $this->respondWithData($this->student_game->getStudentsGame($user_id));
+	}
+
+	/**
+	 * Student Buys Game
+	 * @param StudentGameRequest $request
+	 * @return mixed
+	 */
+	public function studentBuyGame(StudentGameRequest $request){
+
+		$data = $request->all();
+
+		$data['earned_at'] = Carbon::now();
+
+		return $this->respondWithData($this->student_game->studentBuyGame($data));
 	}
 
 }
