@@ -7,6 +7,7 @@ var Constants = {
 	, DEFAULT_PAGE	: 1
 
 	, CUSTOM_TABLE_SIZE : 5
+	, CUSTOM_LIST_SIZE	: 9
 
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
