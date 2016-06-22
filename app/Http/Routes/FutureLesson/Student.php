@@ -401,7 +401,7 @@
 				]);
 				Routes::get('/games',[
 					'as' => 'student.partials.games_list',
-					'users' => 'FutureLesson\Student\ProfileController@games'
+					'uses' => 'FutureLesson\Student\ProfileController@games'
 				]);
 			});
 		});
