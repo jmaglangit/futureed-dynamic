@@ -27,4 +27,5 @@ class ErrorMessageServices
 
 	//Student
 	const	REMOVE_STUDENT_BEFORE_DATE	= 2072;
+	const 	NOT_ENOUGH_POINTS_ON_GAME = 2073;
 }
