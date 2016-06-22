@@ -93,7 +93,7 @@ function ProfileService($http) {
 			method	:	Constants.METHOD_GET
 			, url	:	apiUrl + 'game-student/' + user_id
 				+ '?limit=' + table.size
-			+ '&offset=' + table.offset
+				+ '&offset=' + table.offset
 		});
 	}
 
