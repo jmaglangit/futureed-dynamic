@@ -4,6 +4,7 @@
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Filesystem;
 
 class Game extends Model{
 
@@ -31,6 +32,23 @@ class Game extends Model{
 		'updated_by' => 1,
 	];
 
+	//Accessor
+	public function getGameImageAttribute($value){
+		//get path
+		if(!empty($value)){
+			return config('futureed.game_images_folder') . '/' . $this->attributes['id'] . '/' . $value;
+		} else {
+			return 'None';
+		}
+	}
+
+	//relationships
+
+	public function student_game(){
+
+		return $this->hasMany('FutureEd\Models\Core\StudentGame','games_id');
+	}
+
 	//scopes
 
 	public function scopeCode($query,$code){
@@ -46,6 +64,13 @@ class Game extends Model{
 	public function scopePointsPrice($query,$points_price){
 
 		return $query->where('points_price',$points_price);
+	}
+
+	public function scopeStudentGameUser($query, $user_id){
+
+		return $query->whereHas('student_game', function($query) use ($user_id) {
+			$query->where('user_id',$user_id);
+		});
 	}
 
 
