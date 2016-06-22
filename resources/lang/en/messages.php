@@ -36,7 +36,7 @@ return [
 	'avatar_accessories' => 'Avatar Accessories',
 	'back' => 'Back',
 	'background_image' => 'background image',
-	'back_to_dashboard' => '> Back to Dashboard',
+	'back_to_dashboard' => 'Back to Dashboard',
 	'badge' => 'Badge',
 	'bank_account_number' => 'Bank Account Number',
 	'bank_address' => 'Bank Address',
@@ -500,6 +500,10 @@ return [
 	'update_package' => 'Update Package',
 	'subscription_packages' => 'Subscription Packages',
 	'game' => 'Game|Games',
+	'buy_game' => 'Buy Game',
+	'are_you_sure_you_want_to_buy_game' => 'Are you sure you want to buy this game?',
+	'play' => 'Play',
+
 
 
 	//resources/views/admin/dashboard/index.blade.php
