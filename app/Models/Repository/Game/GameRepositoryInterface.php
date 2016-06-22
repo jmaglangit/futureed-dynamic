@@ -7,4 +7,6 @@ interface GameRepositoryInterface {
 
 	public function getGame($id);
 
+	public function getGamesWithUser($user_id, $limit = 0, $offset = 0);
+
 }
