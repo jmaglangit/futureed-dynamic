@@ -7,6 +7,7 @@ use FutureEd\Models\Repository\Game\GameRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentGame\StudentGameRepositoryInterface;
 use Illuminate\Support\Facades\Input;
+use FutureEd\Services\ErrorMessageServices as Error;
 
 class StudentGameController extends ApiController {
 
@@ -95,7 +96,7 @@ class StudentGameController extends ApiController {
 		$available_points = $student_points - $student_points_used;
 
 		if($item_points_required->points_price > $available_points){
-			return $this->respondErrorMessage(2073);
+			return $this->respondErrorMessage(Error::NOT_ENOUGH_POINTS_ON_GAME);
 		}
 
 		$current_points_used = $student_points_used + $item_points_required->points_price;
