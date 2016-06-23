@@ -403,6 +403,11 @@
 					'as' => 'student.partials.games_list',
 					'uses' => 'FutureLesson\Student\ProfileController@games'
 				]);
+				Routes::get('/play-game',[
+					'as' => 'student.partials.play-game',
+					'uses' => 'FutureLesson\Student\ProfileController@play_game'
+				]);
+
 			});
 		});
 
