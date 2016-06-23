@@ -432,11 +432,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					for (var key = 0; key < student_modules.length; key++) {
 						if(angular.equals(parseInt(student_modules[key].student_id), student_id)) {
 							student_module = {
-								id								: student_modules[key].id
-								, class_id						: student_modules[key].class_id
-								, last_answered_question_id		: student_modules[key].last_answered_question_id
-								, question_counter				: student_modules[key].question_counter
-								, module_status					: student_modules[key].module_status
+								id                          : student_modules[key].id,
+								class_id                    : student_modules[key].class_id,
+								last_answered_question_id   : student_modules[key].last_answered_question_id,
+								question_counter            : student_modules[key].question_counter,
+								module_status               : student_modules[key].module_status
 							}
 							break;
 						}
