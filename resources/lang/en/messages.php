@@ -499,6 +499,7 @@ return [
 	'add_package' => 'Add Package',
 	'update_package' => 'Update Package',
 	'subscription_packages' => 'Subscription Packages',
+	'back_to_games' => 'Back to Games',
 
 
 	//resources/views/admin/dashboard/index.blade.php
