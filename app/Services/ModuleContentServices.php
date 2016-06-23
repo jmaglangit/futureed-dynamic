@@ -98,8 +98,8 @@ class ModuleContentServices
 		foreach($questions as $data){
 
 			if(!in_array($data->difficulty, config('futureed.question_difficulty_levels'))){
-
-				return false;
+				if(!($data->question_type === config('futureed.question_type_coding')))
+					return false;
 			}
 		}
 

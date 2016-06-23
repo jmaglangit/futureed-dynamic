@@ -108,3 +108,99 @@
 		</div>
 	</div>
 </div>
+{{--Snap--}}
+<div id="snap_message_modal" ng-show="mod.module_message.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-body message-container">
+				<div ng-if="mod.module_message.skip_module">
+					<div class="row">
+						<div class="col-xs-offset-1 col-xs-3 module-icon-holder">
+							<img ng-src="{! user.avatar !}" />
+						</div>
+
+						<div class="col-xs-6">
+							<p hidden class="skip-module-message exercise_completed">You already completed this Exercise <br> You can still answer by clicking proceed, or you can skip to answer the next exercise</p>
+							<p hidden class="skip-module-message correct_answer">Congratulations! <br>You completed the exercise</p>
+							<p hidden class="skip-module-message wrong_answer">Not quite.<br> Try using a block you aren’t using yet, or you can skip to the next question.</p>
+							<p hidden class="skip-module-message module_complete">You completed this module! Kindly proceed to the next set of questions.</p>
+							<center>
+								<div class="cur_code dropdown">
+								</div>
+							</center>
+							<div class="snap_proceed_btn" hidden >
+								{!! Form::button('Proceed'
+                                    , array(
+                                        'class' => 'btn btn-maroon btn-semi-medium exercise_completed'
+                                        , 'data-dismiss' => 'modal'
+                                        , 'type' => 'button'
+                                    )
+                                ) !!}
+							</div>
+							<div class="snap_try_again_btn" hidden >
+								{!! Form::button('Try again'
+                                    , array(
+                                        'class' => 'btn btn-maroon btn-semi-medium'
+                                        , 'data-dismiss' => 'modal'
+                                        , 'type' => 'button'
+                                    )
+                                ) !!}
+							</div>
+							<br>
+							<div class="snap_skip_btn" hidden >
+								{!! Form::button('Skip'
+                                    , array(
+                                        'class' => 'btn btn-maroon btn-semi-medium'
+                                        , 'data-dismiss' => 'modal'
+                                        , 'ng-click' => 'mod.skipSnapQuestion()'
+                                    )
+                                ) !!}
+							</div>
+							<div class="snap_next_exercise_btn" hidden >
+								{!! Form::button('Skip'
+                                    , array(
+                                        'class' => 'btn btn-maroon btn-semi-medium'
+                                        , 'data-dismiss' => 'modal'
+                                        , 'ng-click' => 'mod.continueToNextSnapExercise()'
+                                    )
+                                ) !!}
+							</div>
+							<div class="snap_module_done_btn" hidden >
+								{!! Form::button('Proceed'
+                                    , array(
+                                        'class' => 'btn btn-maroon btn-semi-medium'
+                                        , 'data-dismiss' => 'modal'
+                                        , 'ng-click' => 'mod.nextQuestion()'
+                                    )
+                                ) !!}
+							</div>
+							<center>
+								<div style="border-top: 1px solid #e5e5e5; margin-top: 20px;width: 80%; align-self: center;"></div>
+							</center>
+							<div class="share_btn" style="margin-top:20px;">
+								<a href="{{ 'https://www.facebook.com/sharer/sharer.php?u='.urlencode(url('/')) }}"
+								   target="_blank"
+								   style="text-decoration: none;"
+								>
+									<img src="{{ url('/images/facebook.png') }}" border="0" alt="Facebook"/>
+								</a>
+								<a href="{{ 'https://twitter.com/intent/tweet?url='.urlencode(url('/')).'&text='.urlencode("I've written my first program. Try FutureEd Now!") }}"
+								   target="_blank"
+								   style="text-decoration: none;"
+								>
+									<img src="{{ url('/images/twitter.png') }}" border="0" alt="Twitter"/>
+								</a>
+								<a href="{{ 'https://plus.google.com/share?url='.urlencode(url('/')) }}"
+								   target="_blank"
+								   style="text-decoration: none;"
+								>
+									<img src="{{ url('/images/google_plusone_share.png') }}" border="0" alt="Twitter"/>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

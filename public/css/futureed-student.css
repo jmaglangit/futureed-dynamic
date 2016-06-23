@@ -2187,3 +2187,15 @@ a.payment-page-text {
 .auto-login-form {
 	text-align: center;
 }
+
+pre.dropdown-menu {
+	width: 80%;
+	min-width: 320px;
+	margin-left: 40px;
+	padding-left: 10px;
+	-webkit-box-shadow: 0 0 0 #FFFFFF;
+	-moz-box-shadow: 0 0 0 #FFFFFF;
+	box-shadow: 0 0 0 #FFFFFF;
+	position: relative;
+	margin-bottom: 15px;
+}

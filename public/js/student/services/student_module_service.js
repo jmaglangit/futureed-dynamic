@@ -21,6 +21,21 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.getSnapQuestionDetails = function(questionId) {
+		return $http({
+			method	:	Constants.METHOD_PUT,
+			url		:	serviceUrl + "snap/" + questionId
+		});
+	}
+
+	service.answerSnapExercise = function(data) {
+		return $http({
+			method  : Constants.METHOD_POST
+			, data  : data
+			, url  	: serviceUrl + "snap"
+		});
+	}
+
 	service.validateAnswer = function(data){
 		return $http({
 			method	:	Constants.METHOD_POST,

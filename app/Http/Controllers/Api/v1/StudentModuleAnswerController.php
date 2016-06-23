@@ -11,6 +11,7 @@ use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
 use FutureEd\Models\Repository\Quote\QuoteRepositoryInterface;
+use FutureEd\Models\Repository\SnapExerciseDetails\SnapExerciseDetailsRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
@@ -40,6 +41,7 @@ class StudentModuleAnswerController extends ApiController{
 	protected $module_content;
 	protected $module_content_services;
 	protected $badge_services;
+	protected $snap_exercise_details;
 
 
 	public function __construct(
@@ -58,7 +60,8 @@ class StudentModuleAnswerController extends ApiController{
 		ModuleContentServices $moduleContentServices,
 		QuestionServices $questionServices,
 		BadgeServices $badgeServices,
-		ModuleRepositoryInterface $moduleRepositoryInterface
+		ModuleRepositoryInterface $moduleRepositoryInterface,
+		SnapExerciseDetailsRepositoryInterface $snapExerciseDetailsRepositoryInterface
 	)
 	{
 
@@ -78,6 +81,7 @@ class StudentModuleAnswerController extends ApiController{
 		$this->question_service = $questionServices;
 		$this->badge_services = $badgeServices;
 		$this->module = $moduleRepositoryInterface;
+		$this->snap_exercise_details = $snapExerciseDetailsRepositoryInterface;
 	}
 
 //+-------------------+-------------------------+------+-----+---------------------+----------------+
@@ -108,7 +112,6 @@ class StudentModuleAnswerController extends ApiController{
 	 * @return mixed
 	 */
 	public function store(StudentModuleAnswerRequest $request){
-
 
 		$data = $request->only(
 			'student_module_id',
@@ -214,8 +217,22 @@ class StudentModuleAnswerController extends ApiController{
 				: 0;
 
 
-		}else {
+		}
+		else if($question_type == config('futureed.question_type_coding'))
+		{
+			$completed_exercise = $this->snap_exercise_details->getCompletedExercises()->orderBy('question_id', 'desc')->get();
+			$data['question_id'] = $completed_exercise->first()->question_id;
+			$data['total_time'] = 0;
 
+			foreach($completed_exercise as $exercise)
+			{
+				$data['total_time'] += $exercise->date_start->diffInSeconds($exercise->date_end);
+			}
+			$data['points_earned'] = 0;
+			$data['answer_status'] = config('futureed.answer_status_correct');
+			$data['seq_no'] = $completed_exercise->first()->question_seq_no;
+		}
+		else {
 			//Get answer and point from Question.
 			$question_answer = $this->question->getQuestionAnswer($data['question_id']);
 
@@ -231,16 +248,18 @@ class StudentModuleAnswerController extends ApiController{
 		}
 
 		//check total_time
+
 		$data['date_start'] = Carbon::parse($data['date_start']);
 		$data['date_end'] = Carbon::parse($data['date_end']);
-		$data['total_time'] = Carbon::parse($data['date_start'])->diffInSeconds(Carbon::parse($data['date_end']));
 
+		if($question_type != config('futureed.question_type_coding')){
+			$data['total_time'] = Carbon::parse($data['date_start'])->diffInSeconds(Carbon::parse($data['date_end']));
+		}
 
 		//to be computed
 		// points_earned, total_time, answer_status
 
-
-		//Adding to record.
+		//Adding to record to student_module_answer table
 		$student_answer = $this->student_module_answer->addStudentModuleAnswer($data);
 
 
@@ -253,7 +272,8 @@ class StudentModuleAnswerController extends ApiController{
 		//CURRENT UPDATE
 
 		//question counter
-		$student_module->question_counter++;
+		if($question_type != config('futureed.question_type_coding'))
+			$student_module->question_counter++;
 
 		//wrong counter
 		if($student_answer->answer_status == config('futureed.answer_status_wrong')){
@@ -273,12 +293,14 @@ class StudentModuleAnswerController extends ApiController{
 		$student_module->total_time = Carbon::parse($student_module->date_start)->diffInSeconds(Carbon::parse($data['date_end']));
 
 		//correct counter
-		if($student_answer->answer_status == config('futureed.answer_status_correct')){
-
-			$student_module->running_points += $student_answer->points_earned;
-			$student_module->correct_counter++;
+		if($student_answer->answer_status == config('futureed.answer_status_correct'))
+		{
+			if($question_type != config('futureed.question_type_coding'))
+			{
+				$student_module->running_points += $student_answer->points_earned;
+				$student_module->correct_counter++;
+			}
 			$student_module->wrong_counter = 0;
-
 		}
 
 		//points just earned
@@ -288,7 +310,7 @@ class StudentModuleAnswerController extends ApiController{
 		$student_module->last_viewed_content_id = $this->teaching_content->getTeachingContentId($data['module_id']);
 
 		//last_answered_question_id
-		//$student_module->last_answered_question_id = $data['module_id'];
+		//$student_module->last_answered_question_id = $data['question_id'];
 
 		//update module_status
 		if($student_module->running_points >= $points_to_finish){
@@ -337,6 +359,8 @@ class StudentModuleAnswerController extends ApiController{
 		} else {
 
 			$return->next_question = $next_question;
+			if($question_type === config('futureed.question_type_coding'))
+				$return->snap_module_completed = config('futureed.true');
 			return $this->respondWithData($return);
 		}
 

@@ -108,16 +108,15 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
-
 	self.launchModule = function(module_id) {
 		// get module details
 		self.getModuleDetail(module_id, function(response) {
-			if(response.data) {
+			if(response.data)
+			{
 				self.record = response.data;
 				self.student_module_subject_name = self.record.subject.name;
 
 				var class_id = Constants.FALSE;
-
 				var student_modules = self.record.student_module_valid;
 				var student_id = parseInt($scope.user.id);
 				var student_module = Constants.FALSE;
@@ -135,11 +134,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						break;
 					}
 				}
-
 				// if student module data exists; continue.
 				if(student_module) {
 					self.record.student_module = student_module;
-					loadModuleView(self.student_module_subject_name);
+					loadModuleView();
 				} else {
 					// else; get class list to get the class id for this module
 					getClassrooms(function(response) {
@@ -173,7 +171,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 									, module_status					: data.module_status
 								}
 
-								loadModuleView(self.student_module_subject_name);
+								loadModuleView();
 							} else {
 								self.errors = $scope.internalError();
 							}
@@ -184,20 +182,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.errors = $scope.internalError();
 			}
 		});
+
 	}
 
-	var loadModuleView = function(subject_name) {
-		if(subject_name != "Programming")
-		{
+	var loadModuleView = function() {
 			self.getTeachingContents(self.record.id);
 			self.startQuestions();
-		}
-		else
-		{
-			var data = {};
-			data.module_id = self.record.student_module.id;
-			updateModuleStudent(data);
-		}
 	}
 
 	var getAvatarPose = function(avatar_id) {
@@ -319,22 +309,54 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
-	self.skipModule = function() {
-		// update current view
-		self.setActive(Constants.ACTIVE_CONTENTS);
+	self.skipModule = function()
+	{
+		if(self.result != Constants.FALSE && self.has_coding_exercise)
+			self.record.student_module.last_answered_question_id = self.result.next_question;
 
-		// get question list; offset to 0
+		if(self.questions[0].question_type == Constants.CODING)
+			self.setActive(Constants.ACTIVE_QUESTIONS);
+		else
+			self.setActive(Constants.ACTIVE_CONTENTS);
+
 		getAvatarPose($scope.user.avatar_id);
 		listAvatarQuotes($scope.user.avatar_id);
 
 		if(parseInt(self.record.student_module.last_answered_question_id)) {
 			angular.forEach(self.questions, function(value, key) {
+
+				if(value.question_type == Constants.CODING) {
+					self.has_coding_exercise = Constants.TRUE;
+				}
+
 				if(angular.equals(parseInt(self.record.student_module.last_answered_question_id), parseInt(value.id))) {
 					self.current_question = self.questions[key];
-					return;
+					if(self.record.content.length == 0 && self.current_question.question_type === Constants.CODING)
+					{
+						self.getSnapQuestionDetails(self.record.student_module.last_answered_question_id, function(resp)
+						{
+							var data = resp.data;
+							var curr_exercise = data.snap;
+
+							if(data.all_exercises_completed)
+							{
+								self.continueToNextSnapExercise();
+							}
+							else if(curr_exercise)
+							{
+								if(curr_exercise.is_exercise_completed == Constants.TRUE)
+								{
+									snap.isSnapExerciseCompleted = Constants.TRUE;
+									snap.showModal();
+								}
+								snap.finish_count = data.completed_exercises_count;
+							}
+						});
+					}
 				}
 			});
-		} else {
+		}
+		else {
 			self.current_question = self.questions[0];
 		}
 
@@ -360,12 +382,108 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			data.last_answered_question_id = parseInt(self.current_question.id);
 
 		updateModuleStudent(data);
-
-		if(self.record.content.length == 0 && self.record.question[0].question_type === Constants.CODING){
-				self.setActive(Constants.ACTIVE_QUESTIONS);
-		}
 	}
 
+	self.skipSnapQuestion = function() {
+		var found = false;
+
+		snap.isSnapExerciseCompleted = Constants.FALSE;
+		snap.code = '';
+		snap.correct = Constants.FALSE;
+
+		self.setActive(Constants.ACTIVE_QUESTIONS);
+
+		getAvatarPose($scope.user.avatar_id);
+		listAvatarQuotes($scope.user.avatar_id);
+
+		if(parseInt(self.record.student_module.last_answered_question_id)) {
+			angular.forEach(self.questions, function(value, key) {
+				if(value.id > self.current_question.id && value.question_type === Constants.CODING && !found) {
+					self.current_question = self.questions[key];
+					found = true;
+				}
+			});
+			if(!found) {
+				self.current_question = self.questions[0];
+			}
+		}
+
+		var data = {};
+			data.module_id = self.record.student_module.id;
+			data.last_answered_question_id = parseInt(self.current_question.id);
+
+		updateModuleStudent(data, function(resp){
+			self.getModuleDetail(self.record.id, function(response) {
+				if(response.data) {
+					self.record = response.data;
+					self.student_module_subject_name = self.record.subject.name;
+
+					var student_modules = self.record.student_module_valid;
+					var student_id = parseInt($scope.user.id);
+					var student_module = Constants.FALSE;
+
+					// Check if student has existing data
+					for (var key = 0; key < student_modules.length; key++) {
+						if(angular.equals(parseInt(student_modules[key].student_id), student_id)) {
+							student_module = {
+								id								: student_modules[key].id
+								, class_id						: student_modules[key].class_id
+								, last_answered_question_id		: student_modules[key].last_answered_question_id
+								, question_counter				: student_modules[key].question_counter
+								, module_status					: student_modules[key].module_status
+							}
+							break;
+						}
+					}
+
+					// if student module data exists; continue.
+					if(student_module) {
+						self.record.student_module = student_module;
+					}
+
+					self.getSnapQuestionDetails(self.current_question.id, function(resp)
+					{
+						var data = resp.data;
+						var curr_exercise = data.snap;
+
+						if(data.all_exercises_completed)
+						{
+							self.continueToNextSnapExercise();
+						}
+						else if(curr_exercise)
+						{
+							if(curr_exercise.is_exercise_completed == Constants.TRUE)
+							{
+								snap.isSnapExerciseCompleted = Constants.TRUE;
+								snap.showModal();
+							}
+						}
+
+						self.set_IDE();
+					});
+				} else {
+					self.errors = $scope.internalError();
+				}
+			});
+		});
+	}
+
+	self.getSnapQuestionDetails = function(q_id, callBack) {
+		StudentModuleService.getSnapQuestionDetails(q_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					if(callBack) {
+						callBack(response);
+					}
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
 
 	self.getModuleDetail = function(id, successCallback) {
 		$scope.ui_block();
@@ -440,10 +558,56 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
-	self.checkAnswer = function() {
+	self.continueToNextSnapExercise = function () {
 		self.errors = Constants.FALSE;
 		var answer = {};
 
+		answer.student_module_id = self.record.student_module.id;
+		answer.module_id = self.record.id;
+		answer.seq_no = self.current_question.seq_no;
+		answer.question_id = self.current_question.id;
+		answer.classroom_id = self.record.student_module.class_id;
+		answer.answer_id = self.current_question.answer_id;
+		answer.student_id = $scope.user.id;
+		answer.date_start = self.snap_exercise_start;
+		answer.date_end = new Date();
+
+		self.current_student_module = {
+			module_id : self.record.id,
+			question_id : self.current_question.id,
+			seq_no	:	self.current_question.seq_no
+		};
+
+		answer.answer_text = Constants.TRUE;
+
+		//$scope.ui_block();
+		StudentModuleService.answerSnapExercise(answer).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+					self.result = {};
+
+					if(response.errors[0].error_code == 2056) {
+						self.result.failed = Constants.TRUE;
+					}
+				}
+				else if(response.data) {
+					if(response.data.all_exercises_completed) {
+						snap.finish_count = response.data.completed_exercises_count;
+						snap.isSnapModuleCompleted = Constants.TRUE;
+						self.checkAnswer();
+					}
+					else {
+						self.skipSnapQuestion();
+					}
+				}
+			}
+		});
+	}
+
+	self.checkAnswer = function() {
+		self.errors = Constants.FALSE;
+		var answer = {};
 		answer.student_module_id = self.record.student_module.id;
 		answer.module_id = self.record.id;
 		answer.seq_no = self.current_question.seq_no;
@@ -461,7 +625,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
 			answer.answer_text = self.current_question.answer_text.join(",");
-		} else if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
+		}
+		else if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
 			var answer_text_array = [];
 
 			angular.forEach(self.current_question.answer_text, function(value, key) {
@@ -469,7 +634,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 
 			answer.answer_text = answer_text_array.join(",");
-		} else if(angular.equals(self.current_question.question_type, Constants.GRAPH)) {
+		}
+		else if(angular.equals(self.current_question.question_type, Constants.GRAPH)) {
 
 			var answer_graph_array = [];
 
@@ -494,7 +660,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			obj = {"answer" : answer_graph_array};
 			answer.answer_text = JSON.stringify(obj);
-		} else if(angular.equals(self.current_question.question_type, Constants.QUADRANT)) {
+		}
+		else if(angular.equals(self.current_question.question_type, Constants.QUADRANT)) {
 
 			quadData = self.quad.getData();
 			answer_quad_array = [];
@@ -509,7 +676,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			obj = {"answer" : answer_quad_array};
 			answer.answer_text = JSON.stringify(obj);
 
-		} else {
+		}
+		else if(angular.equals(self.current_question.question_type, Constants.CODING)) {
+			answer.answer_text = Constants.TRUE.toString();
+		}
+		else {
 			answer.answer_text = self.current_question.answer_text;
 		}
 
@@ -525,10 +696,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					}
 
 					$scope.ui_unblock();
-				} else if(response.data) {
+				}
+				else if(response.data) {
 					// show message
 					self.result = response.data;
 					self.result.failed = Constants.FALSE;
+					self.snap_exercise_commpleted = self.result.snap_module_completed | 0;
 
 					if(angular.equals(self.result.module_status, "Completed")) {
 						// get points
@@ -586,10 +759,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 								});
 							});
 						});
-					} else if(angular.equals(self.result.module_status, "Failed")) {
+					}
+					else if(angular.equals(self.result.module_status, "Failed")) {
 						self.result.failed = Constants.TRUE;
 						$scope.ui_unblock();
-					} else {
+					}
+					else {
 						$scope.ui_unblock();
 
 						// update student_module
@@ -597,9 +772,16 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 							data.module_id = self.result.id;
 							data.last_answered_question_id = parseInt(self.result.next_question);
 
-							updateModuleStudent(data, function(response) {
+						updateModuleStudent(data, function(response)
+						{
+							if(snap.isSnapModuleCompleted && self.snap_exercise_commpleted)
+							{
+								self.nextQuestion();
+								self.snap_module_completed = Constants.FALSE;
+							}
+							else
 								setAvatarQuote();
-							});
+						});
 					}
 				}
 			}
@@ -801,11 +983,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.current_question = {};
-
 		angular.forEach(self.questions, function(value, key) {
 			if(angular.equals(parseInt(value.id), parseInt(self.result.next_question))) {
 				self.current_question = value;
-
 				self.current_question.answer_text = Constants.EMPTY_STR;
 				self.current_question.answer_id = Constants.EMPTY_STR;
 
@@ -873,7 +1053,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						, module_status					: data.module_status
 					}
 
-					loadModuleView(self.student_module_subject_name);
+					loadModuleView();
 				} else {
 					self.errors = $internalError();
 				}
@@ -1070,4 +1250,246 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	}
 
+	/**
+	 * SNAP Methods and Variables
+	 */
+
+	/** -------------------------- **/
+
+	// Variables
+	var world;
+	var FutureEd_IDE;
+	var target_script;
+	var isAnswering;
+	var canvas;
+	var canvas_parent_div;
+	var canvas_offset;
+	var x_offset;
+	var cur_code;
+
+	// self methods and variables
+	self.loading = Constants.TRUE;
+
+	self.set_IDE = function() {
+
+		canvas = document.getElementById('world');
+		canvas_parent_div = document.getElementById('snap_container');
+
+		canvas.setAttribute('width', ($('#snap_container').width() - 10).toString());
+		canvas.setAttribute('height', ($('#snap_main_div_container').height() - 80).toString());
+
+		self.snap_done_answering = Constants.FALSE;
+		$('.btn-code-run').text('Run');
+
+		world = new WorldMorph(canvas, false);
+
+		FutureEd_IDE = new IDE_Morph();
+		FutureEd_IDE.openIn(world);
+
+		hideIDE();
+
+		self.retrieveModule(self.current_question.id,
+			function(resp)
+			{
+
+				FutureEd_IDE.rawOpenProjectString(resp);
+				FutureEd_IDE.selectSprite(FutureEd_IDE.children[1].children[0]);//select sprites e.i images in the stage
+
+				FutureEd_IDE.corral.hide();
+				FutureEd_IDE.corralBar.hide();
+
+				FutureEd_IDE.children[4].bounds = new Rectangle(0,0,0,0);
+				FutureEd_IDE.children[4].hide();
+				FutureEd_IDE.children[4].drawNew();
+
+				FutureEd_IDE.children[0].bounds = new Rectangle(0,0,0,0);
+				FutureEd_IDE.children[0].hide();
+
+				//Left most pane
+				FutureEd_IDE.children[2].bounds =
+					new Rectangle(
+						0, //origin x
+						getActualHeightByPercent(0.009),//origin y
+						getActualWidthByPercent(0.18348),//corner x
+						getActualHeightByPercent(0.99107)//corner y
+					);
+				FutureEd_IDE.children[2].children[1].bounds =
+					new Rectangle(
+						0,
+						getActualHeightByPercent(0.96964),
+						getActualWidthByPercent(0.17247),
+						getActualHeightByPercent(0.99107)
+					);
+				FutureEd_IDE.children[2].children[1].children[0].bounds =
+					new Rectangle(
+						getActualWidthByPercent(0.19174),
+						getActualHeightByPercent(0.97321),
+						getActualWidthByPercent(0.15045),
+						getActualHeightByPercent(0.98928)
+					);
+				FutureEd_IDE.children[2].children[2].bounds = new Rectangle(0,0,0,0);
+				FutureEd_IDE.children[2].children[2].hide();
+				FutureEd_IDE.children[2].drawNew();
+
+				//Center Pane
+				FutureEd_IDE.children[3].bounds =
+					new Rectangle(
+						getActualWidthByPercent(0.18807),
+						getActualHeightByPercent(0.009),
+						getActualWidthByPercent(0.55504),
+						getActualHeightByPercent(0.99107)
+					);
+
+				// Center Pane horizontal slider line
+				FutureEd_IDE.children[3].children[1].bounds =
+					new Rectangle(
+						getActualWidthByPercent(0.18807),
+						getActualHeightByPercent(0.96964),
+						getActualWidthByPercent(0.54403),
+						getActualHeightByPercent(0.99107)
+					);
+				// Center Pane horizontal slider
+				FutureEd_IDE.children[3].children[1].children[0].bounds =
+					new Rectangle(
+						getActualWidthByPercent(0.19174),
+						getActualHeightByPercent(0.97321),
+						getActualWidthByPercent(0.50733),
+						getActualHeightByPercent(0.98928)
+					);
+
+				FutureEd_IDE.children[3].children[2].bounds = new Rectangle(0,0,0,0);
+				FutureEd_IDE.children[3].children[2].hide();
+				FutureEd_IDE.children[3].drawNew();
+
+				var ref_height = FutureEd_IDE.children[3].bounds.corner.y;
+				var scale = Math.abs((ref_height) / FutureEd_IDE.children[1].bounds.corner.y);
+				var old_stage_width_x = FutureEd_IDE.children[1].bounds.origin.x;
+
+				// Stage location x-axis
+				FutureEd_IDE.children[1].bounds.origin.y = getActualHeightByPercent(0.00901);
+				FutureEd_IDE.children[1].bounds.origin.x = getActualWidthByPercent(0.55963);
+
+				var gap = Math.abs(FutureEd_IDE.children[3].bounds.corner.x - FutureEd_IDE.children[1].bounds.origin.x);
+				var new_stage_width_x = FutureEd_IDE.children[1].bounds.origin.x;
+
+				// Scale stage to fit
+				FutureEd_IDE.children[1].setScale(scale);
+
+				// To be used in stageElemsOffset
+				x_offset = ((new_stage_width_x  - old_stage_width_x) + gap) / 2;
+
+				// Remove unused px lengthwise due to stage scaling
+				canvas_offset = ($(canvas).width() - FutureEd_IDE.children[1].bounds.corner.x);
+				canvas.width -= canvas_offset;
+
+				// offset all elements inside stage
+				stageElemsOffset(FutureEd_IDE.children[1]);
+
+				// find target script with name "sprite" to be used in fireGreenFlagEvent()
+				findTargetScript();
+				FutureEd_IDE.stage.fireGreenFlagEvent();
+
+				self.loading = Constants.FALSE;
+				self.snap_exercise_start = new Date();
+			}
+		);
+
+		loop();
+	}
+
+	self.retrieveModule = function(filename, callback) {
+		StudentModuleService.getSnapModule(filename).success(
+			function(response)
+			{
+				if(callback)
+				{
+					callback(response);
+				}
+				$scope.ui_unblock();
+			}
+		).
+		error(
+			function(response)
+			{
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			}
+		);
+	}
+
+	self.runCode = function() {
+		if(!self.snap_done_answering) {
+			updateCode();
+			$('.btn-code-run').text('Reset');
+			FutureEd_IDE.stage.doCustomBroadcastEvent("run_code");
+			self.snap_done_answering = !self.snap_done_answering;
+		}
+		else {
+			self.snap_done_answering = !self.snap_done_answering;
+			$('.btn-code-run').text('Run');
+			FutureEd_IDE.stage.fireGreenFlagEvent();
+		}
+	}
+
+	// other methods
+	function hideIDE()
+	{
+		FutureEd_IDE.corral.hide();
+		FutureEd_IDE.corralBar.hide();
+		FutureEd_IDE.children[4].bounds = new Rectangle(0,0,0,0);
+		FutureEd_IDE.children[4].hide();
+		FutureEd_IDE.children[0].bounds = new Rectangle(0,0,0,0);
+		FutureEd_IDE.children[0].hide();
+		FutureEd_IDE.children[1].hide();
+		FutureEd_IDE.children[2].hide();
+	}
+
+	function stageElemsOffset(stage) {
+		if(stage.children.length)
+		{
+			for(var i = 0; i < stage.children.length; i++)
+			{
+				stageElemsOffset(stage.children[i]);
+			}
+		}
+		else
+		{
+			stage.bounds.origin.x += x_offset;
+			stage.bounds.corner.x += x_offset;
+		}
+	}
+
+	function getActualHeightByPercent(percent) {
+		var h = $(canvas).height();
+		return Math.ceil(h * percent);
+	}
+
+	function getActualWidthByPercent(percent) {
+		var w = $(canvas).width();
+		return Math.ceil(w * percent);
+	}
+
+	function updateCode() {
+		target_script.mouseClickLeft(true);
+	}
+
+	function loop() {
+		requestAnimationFrame(loop);
+		world.doOneCycle();
+	}
+
+	function findTargetScript() {
+		var len = FutureEd_IDE.sprites.contents.length;
+		for(var i = 0; i < len; i++)
+		{
+			if(FutureEd_IDE.sprites.contents[i].name == "Sprite")
+			{
+				target_script =  FutureEd_IDE.sprites.contents[i].scripts.children[FutureEd_IDE.sprites.contents[i].scripts.children.length-1];
+				target_script.isDraggable = false;
+				target_script.fixLayout();
+			}
+		}
+	}
+
+	/** -------------------------- **/
 }
