@@ -1351,4 +1351,22 @@ return [
 	'youre_almost_done' => 'You\'re almost done',
 	'logged_out' => 'Logged out',
 	'multiple_login_message' => 'You have been logged out because the account is currently logged in.',
+	'canvas_not_supported' => 'Your browser does not support canvas',
+	'review_and_retake_test' => 'You need to review and take the test again.',
+	'retake_test' => 'Retake test',
+	'run' => 'Run',
+
+	'snap_modal_msg_1' => 'You already completed this Exercise',
+	'snap_modal_msg_2' => 'You can still answer by clicking proceed, or you can skip to answer the next exercise',
+	'snap_modal_msg_3' => 'Congratulations!',
+	'snap_modal_msg_4' => 'You completed the exercise',
+	'snap_modal_msg_5' => 'Not quite.',
+	'snap_modal_msg_6' => 'Try using a block you aren’t using yet, or you can skip to the next question.',
+	'snap_modal_msg_7' => 'You completed this module! Kindly proceed to the next set of questions.',
+	'snap_modal_msg_8' => 'Try again',
+	'snap_modal_msg_9' => 'I\'ve written my first program. Try FutureEd Now!',
+
+	'you_earned' => 'You have earned',
+	'point_s' => 'point(s)'
+
 ];

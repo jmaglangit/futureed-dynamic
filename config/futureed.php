@@ -193,6 +193,7 @@ return [
 	'question_type_ordering' => 'O',
 	'question_type_graph' => 'GR',
 	'question_type_quad' => 'QUAD',
+	'question_type_coding' => 'COD',
 
 	//Graph setup
 	'graph_divisible' => 5,
