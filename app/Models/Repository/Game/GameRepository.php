@@ -66,4 +66,33 @@ class GameRepository implements GameRepositoryInterface{
 
 		return Game::find($id);
 	}
+
+	/**
+	 * Getting games with user id
+	 * @param $user_id
+	 * @param int $limit
+	 * @param int $offset
+	 * @return \Illuminate\Database\Eloquent\Collection|static[]
+	 */
+	public function getGamesWithUser($user_id, $limit = 0, $offset = 0){
+
+		$games = Game::with(['student_game' => function ($query) use ($user_id) {
+			$query->where('user_id', $user_id);
+		}]);
+
+		$count = $games->count();
+
+		if($limit > 0 && $offset >= 0) {
+
+			$games = $games->limit($limit)->offset($offset);
+		}
+
+		$response = [
+			'total' => $count,
+			'records' => $games->get()->toArray()
+		];
+
+		return $response;
+
+	}
 }

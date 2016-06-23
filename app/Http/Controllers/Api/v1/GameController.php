@@ -60,5 +60,26 @@ class GameController extends ApiController {
 		return $this->respondWithData($this->game->getGame($id));
 	}
 
+	/**
+	 * Getting games with user id
+	 * @param $user_id
+	 * @return mixed
+	 */
+	public function getGamesWithUser($user_id){
+
+		$limit = 0;
+		$offset = 0;
+
+		if (Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if (Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		return $this->respondWithData($this->game->getGamesWithUser($user_id,$limit,$offset));
+	}
+
 
 }

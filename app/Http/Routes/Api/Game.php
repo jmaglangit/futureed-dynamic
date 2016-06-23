@@ -9,4 +9,9 @@ Routes::group([
 	Routes::resource('/game','Api\v1\GameController',[
 		'only' => ['index','show']
 	]);
+
+	Routes::get('/game-student/{user_id}',[
+		'as' => 'game.with.student',
+		'uses' => 'Api\v1\GameController@getGamesWithUser'
+	]);
 });
