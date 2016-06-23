@@ -46,10 +46,13 @@ class ClientCustomController extends ApiController {
 
 		foreach ($client_details as $key => $value) {
 
-			$client[$key]['id'] = $value['id'];
-			$client[$key]['first_name'] = $value['first_name'];
-			$client[$key]['last_name'] = $value['last_name'];
-			$client[$key]['email'] = $value['user']['email'];
+			$client[$key] = [
+				'id' => $value['id'],
+				'user_id' => $value['user_id'],
+				'first_name' => $value['first_name'],
+				'last_name' => $value['last_name'],
+				'email' => $value['user']['email']
+			];
 
 		}
 

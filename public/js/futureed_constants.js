@@ -7,6 +7,7 @@ var Constants = {
 	, DEFAULT_PAGE	: 1
 
 	, CUSTOM_TABLE_SIZE : 5
+	, CUSTOM_LIST_SIZE	: 9
 
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
@@ -47,6 +48,7 @@ var Constants = {
 	, CONFIRM_EMAIL : "confirm_email"
 	, AVATAR_ACCESSORY	:"avatar_accessory"
 	, SETTINGS		: 'settings'
+	, GAMES			: 'games'
 
 	, AGEGROUP		: "agegroup"
 	, CONTENTS 		: "contents"
@@ -67,11 +69,18 @@ var Constants = {
 	, SUBSCRIPTION_COUNTRY	:	"country"
 	, SUBSCRIPTION_SUBJECT	: 	"subject"
 	, SUBSCRIPTION_PLAN		:	"plan"
-	, SUBSCRIPTION_DAYS		:	"days"
+	, SUBSCRIPTION_DAYS		:	"Days"
 	, SUBSCRIPTION_OTHERS	: 	"others"
 	, SUBSCRIPTION_STUDENTS	:	"students"
 	, SUBSCRIPTION_CLASSROOM:	"classrooms"
+	, SUBSCRIPTION_PACKAGES	: 	"Packages"
+	, SUBSCRIPTION			:	"subscription"
 
+	/**
+	 * Admin Subscription
+	 */
+	, BULK_SETTINGS : 'bulk_settings'
+	, CLIENT_DISCOUNT : 'client_discount'
 	/**
 	* Media Types
 	*/
@@ -98,6 +107,7 @@ var Constants = {
 	, ACTIVE_ADD	: "add"
 	, ACTIVE_EMAIL	: "email"
 	, ACTIVE_IMPORT	: "import"
+	, ACTIVE_CANCEL	: "cancel"
 
 	, ACTIVE_QUESTIONS 	: "questions"
 	, ACTIVE_CONTENTS 	: "contents"

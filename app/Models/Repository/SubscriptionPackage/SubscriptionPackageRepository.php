@@ -92,4 +92,91 @@ class SubscriptionPackageRepository implements SubscriptionPackageRepositoryInte
 		return $subscription_package->with('country')->groupBy('country_id')->get();
 	}
 
+	/**
+	 * Add a subscription package
+	 * @param $data
+	 * @return array|bool
+	 */
+	public function addSubscriptionPackage($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = SubscriptionPackages::create($data)->toArray();
+
+		}catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * update a subscription package
+	 * @param $id
+	 * @param $data
+	 * @return bool|int
+	 */
+	public function updateSubscriptionPackage($id, $data){
+
+		DB::beginTransaction();
+
+		try{
+
+			$package = SubscriptionPackages::find($id);
+
+			$response = !is_null($package) ? $package->update($data) : false;
+
+		}catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
+
+	/**
+	 * Delete a subscription package
+	 * @param $id
+	 * @return bool|null
+	 */
+	public function deleteSubscriptionPackage($id){
+
+		DB::beginTransaction();
+
+		try{
+
+			$package = SubscriptionPackages::find($id);
+
+			$response = $package->delete();
+
+		}catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
 }

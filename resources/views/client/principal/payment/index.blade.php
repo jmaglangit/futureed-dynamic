@@ -15,11 +15,8 @@
 			<div class="client-content">
 				<div template-directive template-url="{!! route('client.principal.payment.partials.payment_form') !!}"></div>
 
-				{{--client.principal.payment.partials.subscribe--}}
 				<div template-directive template-url="{!! route('client.principal.payment.partials.subscribe') !!}"></div>
-				{{--<div template-directive template-url="{!! route('client.principal.payment.partials.add_payment_form') !!}"></div>--}}
 
-				{{--<div template-directive template-url="{!! route('client.principal.payment.partials.view_payment_form') !!}"></div>--}}
 			</div>
 			
 		</div>

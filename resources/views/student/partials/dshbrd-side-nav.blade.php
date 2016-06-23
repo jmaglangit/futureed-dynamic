@@ -5,30 +5,34 @@
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_index || profile.active_edit_email || profile.active_confirm_email}">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('index')">{!! trans('messages.my_profile') !!}</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.INDEX)">{!! trans('messages.my_profile') !!}</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_edit }">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('edit')">{!! trans('messages.edit_profile') !!}</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.EDIT)">{!! trans('messages.edit_profile') !!}</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_rewards }">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('rewards')">{!! trans('messages.student_rewards') !!}</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.REWARDS)">{!! trans('messages.student_rewards') !!}</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_avatar_accessory }">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('avatar_accessory')">{!! trans('messages.avatar_accessories') !!}</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.AVATAR_ACCESSORY)">{!! trans('messages.avatar_accessories') !!}</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_avatar }">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('avatar')">{!! trans('messages.change_avatar') !!}</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.AVATAR)">{!! trans('messages.change_avatar') !!}</a>
 	</li>
 
 	<li ng-if="!user.media_login" ng-class="{ 'active' : profile.active_password }">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('password')">{!! trans('messages.student_change_picture_password') !!}</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.PASSWORD)">{!! trans('messages.student_change_picture_password') !!}</a>
 	</li>
 
 	<li ng-if="!user.media_login" ng-class="{ 'active' : profile.settings }">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('settings')">{{ trans('messages.change_background') }}</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.SETTINGS)">{{ trans('messages.change_background') }}</a>
+	</li>
+
+	<li ng-class="{ 'active' : profile.active_games}">
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.GAMES)">{{ trans_choice('messages.game',2) }}</a>
 	</li>
 </ul>

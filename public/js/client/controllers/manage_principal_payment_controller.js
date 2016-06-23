@@ -150,6 +150,19 @@ function ManagePrincipalPaymentController(
 		});
 	}
 
+	self.getEnrolledStudents = function(invoice){
+
+		var seats = 0;
+		var classrooms = invoice.invoice_detail;
+
+		angular.forEach(classrooms, function(classroom){
+
+			seats += classroom.classroom.seats_total;
+		});
+
+		return seats;
+	}
+
 	self.listSubscription = function() {
 		self.subscriptions = [];
 
@@ -279,20 +292,24 @@ function ManagePrincipalPaymentController(
 		self.payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/principal/payment/success"
 		self.payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/principal/payment/fail"
 
-		managePrincipalPaymentService.getPaymentUri(self.payment).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-					$scope.ui_unblock();
-				} else if(response.data) {
-					self.paying = Constants.TRUE;
-					$window.location.href = response.data.url;
+		if(self.payment.price > Constants.FALSE){
+			managePrincipalPaymentService.getPaymentUri(self.payment).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+						$scope.ui_unblock();
+					} else if(response.data) {
+						self.paying = Constants.TRUE;
+						$window.location.href = response.data.url;
+					}
 				}
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			$window.location.href = self.payment.success_callback_uri;
+		}
 	}
 	
 	/**
@@ -1092,6 +1109,7 @@ function ManagePrincipalPaymentController(
 		if(data == Constants.TRUE){
 
 			self.billing_info = Constants.TRUE;
+			self.subscription_continue = Constants.FALSE;
 
 		}else {
 

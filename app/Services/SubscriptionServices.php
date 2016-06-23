@@ -61,4 +61,15 @@ class SubscriptionServices {
 		return $subscription;
 	}
 
+	/**
+	 * check total amount value
+	 * @param $value
+	 * @return mixed
+	 */
+	public function checkPriceValue($value){
+
+		return ($value == config('futureed.false')) ?
+			config('futureed.paid') : config('futureed.pending');
+	}
+
 }

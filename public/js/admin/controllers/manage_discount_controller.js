@@ -108,9 +108,9 @@ function ManageDiscountController($scope, salesService, TableService) {
 					self.errors = $scope.errorHandler();
 				} else if(response.data) {
 					self.record.id 			= response.data.id;
-					self.record.client_id 	= response.data.client_id;
-					self.record.name 		= response.data.client.user.name;
-					self.record.email 		= response.data.client.user.email;
+					self.record.user_id 	= response.data.user_id;
+					self.record.name 		= response.data.user.name;
+					self.record.email 		= response.data.user.email;
 					self.record.percentage 	= response.data.percentage;
 					self.record.status 		= response.data.status;
 				}
@@ -204,7 +204,7 @@ function ManageDiscountController($scope, salesService, TableService) {
 	}
 
 	self.selectClient = function(client) {
-		self.record.client_id = client.id;
+		self.record.user_id = client.user_id;
 		self.record.email = client.email;
 		self.record.name = client.first_name + " " + client.last_name;
 

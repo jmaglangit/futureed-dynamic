@@ -23,6 +23,7 @@
     padding: 5px;
     margin-bottom: 4px;
     list-style: none;
+    white-space: initial;
 }
 
 .angucomplete-selected-row, .angucomplete-row:hover {

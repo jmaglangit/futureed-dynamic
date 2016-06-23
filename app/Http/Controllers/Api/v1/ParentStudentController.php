@@ -18,6 +18,7 @@ use FutureEd\Services\ErrorMessageServices as Error;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\InvoiceServices;
 use Carbon\Carbon;
+use FutureEd\Services\SubscriptionServices;
 
 class ParentStudentController extends ApiController {
 
@@ -35,7 +36,8 @@ class ParentStudentController extends ApiController {
     protected $parent_student;
     protected $invoice_service;
     protected $order_details;
-	protected $avatar;
+    protected $avatar;
+    protected $subscription_service;
 
     public function __construct(
         StudentRepositoryInterface $student,
@@ -51,7 +53,9 @@ class ParentStudentController extends ApiController {
         InvoiceDetailRepositoryInterface $invoice_detail,
         InvoiceServices $invoice_service,
         OrderDetailRepositoryInterface $order_details,
-		AvatarServices $avatarServices){
+        AvatarServices $avatarServices,
+        SubscriptionServices $subscriptionServices
+    ){
 
         $this->student = $student;
         $this->client = $client;
@@ -67,6 +71,7 @@ class ParentStudentController extends ApiController {
         $this->invoice_service = $invoice_service;
         $this->order_details = $order_details;
 		$this->avatar = $avatarServices;
+        $this->subscription_service = $subscriptionServices;
     }
 
     public function addExistingStudent(ParentStudentRequest $request){
@@ -213,6 +218,8 @@ class ParentStudentController extends ApiController {
 
             $next_order_id = ++$prev_order['id'];
         }
+
+        $order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
 
         $order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
 

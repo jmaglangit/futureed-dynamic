@@ -113,7 +113,7 @@
 		            <td>{! record.order_no !}</td>
 		            <td>{! record.date_start | ddMMyy !}</td>
 		            <td>{! record.date_end | ddMMyy !}</td>
-		            <td>{! record.seats_total !}</td>
+		            <td>{! payment.getEnrolledStudents(record) !}</td>
 		            <td>{! record.total_amount | currency : "USD$ " : 2 !}</td>
 		            <td>{! record.payment_status !}</td>
 		            <td>

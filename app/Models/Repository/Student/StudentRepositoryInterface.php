@@ -63,4 +63,6 @@ interface StudentRepositoryInterface {
     public function getStudentLSP($student_id);
 
     public function getStudentLSPDate($student_id);
+
+    public function updateStudentPointsUsed($id,$points);
 }

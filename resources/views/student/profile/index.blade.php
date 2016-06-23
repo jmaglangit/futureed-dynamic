@@ -93,6 +93,8 @@
 
 				<div template-directive template-url="{!! route('student.partials.settings') !!}"></div>
 
+				<div template-directive template-url="{!! route('student.partials.games_list') !!}"></div>
+
 			</div>
 		</div>
 	</div>

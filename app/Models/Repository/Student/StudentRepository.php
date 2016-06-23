@@ -1034,5 +1034,37 @@ class StudentRepository implements StudentRepositoryInterface
 		return Student::whereId($student_id)->pluck('learning_style_date');
 	}
 
+	/**
+	 * Updated Points Used.
+	 * @param $id
+	 * @param $points
+	 * @return bool|int
+	 */
+	public function updateStudentPointsUsed($id,$points){
+
+		DB::beginTransaction();
+
+		try {
+
+			$student = Student::find($id);
+
+			$response = $student->update([
+				'points_used' => $points
+			]);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
 
 }

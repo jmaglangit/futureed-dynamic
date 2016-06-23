@@ -14,7 +14,7 @@ class Subscription extends Model {
 	
 	protected $dates = ['deleted_at'];
 	
-	protected $fillable = ['name', 'price', 'description','days', 'status','created_by','updated_by', 'has_lsp'];
+	protected $fillable = ['name', 'description', 'status','created_by','updated_by', 'has_lsp'];
 	
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
@@ -28,5 +28,9 @@ class Subscription extends Model {
 		
 		return $query->where('name', 'like', '%'.$name.'%');
 				
+	}
+
+	public function scopeStatus($query,$status){
+		return $query->where('status',$status);
 	}
 }
