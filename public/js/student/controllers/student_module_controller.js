@@ -585,8 +585,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		};
 
 		answer.answer_text = Constants.TRUE;
-
-		//$scope.ui_block();
+		
 		StudentModuleService.answerSnapExercise(answer).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
