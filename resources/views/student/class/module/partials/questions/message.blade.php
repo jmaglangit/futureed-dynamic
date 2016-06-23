@@ -134,49 +134,49 @@
 							</center>
 							<div class="snap_proceed_btn" hidden >
 								{!! Form::button(trans('messages.client_proceed')
-                                    , array(
-                                        'class' => 'btn btn-maroon btn-semi-medium exercise_completed'
-                                        , 'data-dismiss' => 'modal'
-                                        , 'type' => 'button'
-                                    )
-                                ) !!}
+									, array(
+										'class' => 'btn btn-maroon btn-semi-medium exercise_completed'
+										, 'data-dismiss' => 'modal'
+										, 'type' => 'button'
+									)
+								) !!}
 							</div>
 							<div class="snap_try_again_btn" hidden >
 								{!! Form::button(trans('messages.snap_modal_msg_8')
-                                    , array(
-                                        'class' => 'btn btn-maroon btn-semi-medium'
-                                        , 'data-dismiss' => 'modal'
-                                        , 'type' => 'button'
-                                    )
-                                ) !!}
+									, array(
+										'class' => 'btn btn-maroon btn-semi-medium'
+										, 'data-dismiss' => 'modal'
+										, 'type' => 'button'
+									)
+								) !!}
 							</div>
 							<br>
 							<div class="snap_skip_btn" hidden >
 								{!! Form::button(trans('messages.skip')
-                                    , array(
-                                        'class' => 'btn btn-maroon btn-semi-medium'
-                                        , 'data-dismiss' => 'modal'
-                                        , 'ng-click' => 'mod.skipSnapQuestion()'
-                                    )
-                                ) !!}
+									, array(
+										'class' => 'btn btn-maroon btn-semi-medium'
+										, 'data-dismiss' => 'modal'
+										, 'ng-click' => 'mod.skipSnapQuestion()'
+									)
+								) !!}
 							</div>
 							<div class="snap_next_exercise_btn" hidden >
 								{!! Form::button(trans('messages.skip')
-                                    , array(
-                                        'class' => 'btn btn-maroon btn-semi-medium'
-                                        , 'data-dismiss' => 'modal'
-                                        , 'ng-click' => 'mod.continueToNextSnapExercise()'
-                                    )
-                                ) !!}
+									, array(
+										'class' => 'btn btn-maroon btn-semi-medium'
+										, 'data-dismiss' => 'modal'
+										, 'ng-click' => 'mod.continueToNextSnapExercise()'
+									)
+								) !!}
 							</div>
 							<div class="snap_module_done_btn" hidden >
 								{!! Form::button(trans('messages.client_proceed')
-                                    , array(
-                                        'class' => 'btn btn-maroon btn-semi-medium'
-                                        , 'data-dismiss' => 'modal'
-                                        , 'ng-click' => 'mod.nextQuestion()'
-                                    )
-                                ) !!}
+									, array(
+										'class' => 'btn btn-maroon btn-semi-medium'
+										, 'data-dismiss' => 'modal'
+										, 'ng-click' => 'mod.nextQuestion()'
+									)
+								) !!}
 							</div>
 							<center>
 								<div style="border-top: 1px solid #e5e5e5; margin-top: 20px;width: 80%; align-self: center;"></div>
