@@ -2188,6 +2188,7 @@ a.payment-page-text {
 	text-align: center;
 }
 
+<<<<<<< HEAD
 pre.dropdown-menu {
 	width: 80%;
 	min-width: 320px;
@@ -2199,3 +2200,8 @@ pre.dropdown-menu {
 	position: relative;
 	margin-bottom: 15px;
 }
+=======
+.wizard-panel .panel-heading .panel-title {
+	padding-top: 17px;
+}
+>>>>>>> ff81ec9ec4812dd565d5a33c00c7316d6faa03e5
