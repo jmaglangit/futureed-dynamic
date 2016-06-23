@@ -49,6 +49,7 @@ var Constants = {
 	, AVATAR_ACCESSORY	:"avatar_accessory"
 	, SETTINGS		: 'settings'
 	, GAMES			: 'games'
+	, PLAY_GAME		: 'play game'
 
 	, AGEGROUP		: "agegroup"
 	, CONTENTS 		: "contents"

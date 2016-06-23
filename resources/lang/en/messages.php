@@ -503,7 +503,7 @@ return [
 	'buy_game' => 'Buy Game',
 	'are_you_sure_you_want_to_buy_game' => 'Are you sure you want to buy this game?',
 	'play' => 'Play',
-
+	'back_to_games' => 'Back to Games',
 
 
 	//resources/views/admin/dashboard/index.blade.php

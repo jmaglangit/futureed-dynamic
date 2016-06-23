@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ['$scope', '$timeout','apiService', 'ProfileService','TableService'];
+ProfileController.$inject = ['$scope', '$sce', '$timeout','apiService', 'ProfileService','TableService'];
 
-function ProfileController($scope, $timeout,apiService, ProfileService, TableService) {
+function ProfileController($scope,$sce, $timeout,apiService, ProfileService, TableService) {
 	var self = this;
 
 	TableService(self);
@@ -65,6 +65,8 @@ function ProfileController($scope, $timeout,apiService, ProfileService, TableSer
 		self.buy_avatar_accessory_modal = Constants.FALSE;
 		self.settings = Constants.FALSE;
 		self.active_games = Constants.FALSE;
+		self.active_play_game = Constants.FALSE;
+		self.selected_game = Constants.FALSE;
 
 		self.validation = {};
 		self.select_password = Constants.FALSE;
@@ -126,6 +128,10 @@ function ProfileController($scope, $timeout,apiService, ProfileService, TableSer
 
 			case Constants.GAMES	:
 				self.active_games = Constants.TRUE;
+				break;
+
+			case Constants.PLAY_GAME	:
+				self.active_play_game = Constants.TRUE;
 				break;
 
 			case Constants.INDEX            :
@@ -869,9 +875,23 @@ function ProfileController($scope, $timeout,apiService, ProfileService, TableSer
 		self.getGamesList();
 	}
 
-	self.playGame = function(){
+	self.playGame = function(game_id){
+		self.active_play_game = Constants.TRUE;
 
-		//On other ticket.
+		ProfileService.getGameDetails(game_id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+
+			self.selected_game = response.data;
+			self.selected_game.game_url = $sce.trustAsResourceUrl(self.selected_game.game_url);
+			self.active_games = Constants.FALSE;
+
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
 	}
 
 	self.getStudentPoints = function(){

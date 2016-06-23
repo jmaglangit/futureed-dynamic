@@ -1,4 +1,5 @@
-<ul ng-init="profile.setStudentProfileActive()">
+<ul ng-if="!profile.active_play_game" ng-init=" profile.active_games ? futureed.false : profile.setStudentProfileActive()">
+
 	<li class="active">
 		<a href="{!! route('student.dashboard.index') !!}">
 			<i class="fa fa-arrow-left"></i> {!! trans('messages.back_to_dashboard') !!}</a>
@@ -34,5 +35,11 @@
 
 	<li ng-class="{ 'active' : profile.active_games}">
 		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.GAMES)">{{ trans_choice('messages.game',2) }}</a>
+	</li>
+</ul>
+<ul ng-if="profile.active_play_game">
+	<li ng-class="{ 'active' : profile.active_play_game}">
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.GAMES)">
+			<i class="fa fa-arrow-left"></i> {{ trans('messages.back_to_games') }}</a>
 	</li>
 </ul>
