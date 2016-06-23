@@ -310,7 +310,7 @@ class StudentModuleAnswerController extends ApiController{
 		$student_module->last_viewed_content_id = $this->teaching_content->getTeachingContentId($data['module_id']);
 
 		//last_answered_question_id
-		//$student_module->last_answered_question_id = $data['question_id'];
+		//$student_module->last_answered_question_id = $data['module_id'];
 
 		//update module_status
 		if($student_module->running_points >= $points_to_finish){
