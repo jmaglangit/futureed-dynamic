@@ -1758,3 +1758,21 @@ span.round-tab:hover {
 .panel-title-selected, .panel-body-selected {
 	color: #fff;
 }
+
+.game-box, .detcon{
+	padding: 20px 0;
+	float: left;
+}
+.game-box{
+	width: 30%;
+	text-align: center;
+}
+
+.game-box img {
+	width: 110px;
+	height: 110px;
+	border: 5px solid #fff;
+	background: #fff;
+	display: block;
+	margin: 0 auto;
+}
