@@ -1982,4 +1982,30 @@ Jika anda memindahkan hak administrasi organisasi anda kepada orang lain dalam o
 
 	"multiple_login_message" => "Anda telah keluar karena account saat login.",
 
+	"canvas_not_supported" => "browser anda tidak mendukung canvas",
+
+	"review_and_retake_test" => "Anda perlu meninjau dan mengambil tes lagi.",
+
+	"retake_test" => "Merebut kembali tes",
+
+	"run" => "Menjalankan",
+
+	"snap_modal_msg_1" => "Anda sudah selesai Latihan ini",
+
+	"snap_modal_msg_2" => "Anda masih bisa menjawab dengan mengklik melanjutkan, atau Anda dapat melewatkan untuk menjawab latihan berikutnya",
+
+	"snap_modal_msg_3" => "Selamat!",
+
+	"snap_modal_msg_4" => "Anda menyelesaikan latihan",
+
+	"snap_modal_msg_5" => "Tidak cukup.",
+
+	"snap_modal_msg_6" => "Coba gunakan blok Anda tidak menggunakan belum, atau Anda dapat melompat ke pertanyaan berikutnya.",
+
+	"snap_modal_msg_7" => "Anda menyelesaikan modul ini! Mohon lanjutkan ke set berikutnya pertanyaan.",
+
+	"snap_modal_msg_8" => "Coba lagi",
+
+	"snap_modal_msg_9" => "Saya telah menulis program pertama saya. Coba FutureEd Sekarang!"
+
 ];

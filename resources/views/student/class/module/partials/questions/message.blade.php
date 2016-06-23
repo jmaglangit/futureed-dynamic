@@ -11,7 +11,7 @@
 						<div class="col-xs-12">
 							<div class="points-badge-holder row">
 								<div class="col-xs-12 reward-message">
-									Reward points to earn
+									{{ trans('messages.rewards_points_earn') }}
 								</div>
 								<div class="col-xs-6">
 									<img ng-src="/images/icons/icon-reward.png" class="image-badge pull-right"/>
@@ -27,7 +27,7 @@
 						</div>
 
 						<div class="col-xs-6">
-							<p class="skip-module-message">{! mod.module_message.description !} <br><br>Let's get started...</p>
+							<p class="skip-module-message">{! mod.module_message.description !} <br><br>{{ trans('messages.lets_get_started') }}.</p>
 						</div>
 					</div>
 				</div>
@@ -120,16 +120,16 @@
 						</div>
 
 						<div class="col-xs-6">
-							<p hidden class="skip-module-message exercise_completed">You already completed this Exercise <br> You can still answer by clicking proceed, or you can skip to answer the next exercise</p>
-							<p hidden class="skip-module-message correct_answer">Congratulations! <br>You completed the exercise</p>
-							<p hidden class="skip-module-message wrong_answer">Not quite.<br> Try using a block you aren’t using yet, or you can skip to the next question.</p>
-							<p hidden class="skip-module-message module_complete">You completed this module! Kindly proceed to the next set of questions.</p>
+							<p hidden class="skip-module-message exercise_completed">{{ trans('messages.snap_modal_msg_1') }} <br> {{ trans('messages.snap_modal_msg_2') }}</p>
+							<p hidden class="skip-module-message correct_answer">{{ trans('messages.snap_modal_msg_3') }} <br>{{ trans('messages.snap_modal_msg_4') }}</p>
+							<p hidden class="skip-module-message wrong_answer">{{ trans('messages.snap_modal_msg_5') }}<br> {{ trans('messages.snap_modal_msg_6') }}</p>
+							<p hidden class="skip-module-message module_complete">{{ trans('messages.snap_modal_msg_7') }}</p>
 							<center>
 								<div class="cur_code dropdown">
 								</div>
 							</center>
 							<div class="snap_proceed_btn" hidden >
-								{!! Form::button('Proceed'
+								{!! Form::button(trans('messages.client_proceed')
                                     , array(
                                         'class' => 'btn btn-maroon btn-semi-medium exercise_completed'
                                         , 'data-dismiss' => 'modal'
@@ -138,7 +138,7 @@
                                 ) !!}
 							</div>
 							<div class="snap_try_again_btn" hidden >
-								{!! Form::button('Try again'
+								{!! Form::button(trans('messages.snap_modal_msg_8')
                                     , array(
                                         'class' => 'btn btn-maroon btn-semi-medium'
                                         , 'data-dismiss' => 'modal'
@@ -148,7 +148,7 @@
 							</div>
 							<br>
 							<div class="snap_skip_btn" hidden >
-								{!! Form::button('Skip'
+								{!! Form::button(trans('messages.skip')
                                     , array(
                                         'class' => 'btn btn-maroon btn-semi-medium'
                                         , 'data-dismiss' => 'modal'
@@ -157,7 +157,7 @@
                                 ) !!}
 							</div>
 							<div class="snap_next_exercise_btn" hidden >
-								{!! Form::button('Skip'
+								{!! Form::button(trans('messages.skip')
                                     , array(
                                         'class' => 'btn btn-maroon btn-semi-medium'
                                         , 'data-dismiss' => 'modal'
@@ -166,7 +166,7 @@
                                 ) !!}
 							</div>
 							<div class="snap_module_done_btn" hidden >
-								{!! Form::button('Proceed'
+								{!! Form::button(trans('messages.client_proceed')
                                     , array(
                                         'class' => 'btn btn-maroon btn-semi-medium'
                                         , 'data-dismiss' => 'modal'

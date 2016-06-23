@@ -7,7 +7,7 @@
 				<div ng-class="{'col-xs-6':mod.current_question.question_type != futureed.CODING,'col-xs-4':mod.current_question.question_type == futureed.CODING}">
 					<div class="row col-xs-6">
 						<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
-							Exit Module
+							{{ trans('messages.exit_module') }}
 						</button>
 					</div>
 					<div class="row col-xs-6"
@@ -28,11 +28,11 @@
 						<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed && mod.current_question.question_type != futureed.CODING"
 								type="button"
 								class="btn btn-orange next-btn right-0"
-								ng-click="mod.checkAnswer()"> Submit </button>
+								ng-click="mod.checkAnswer()"> {{ trans('messages.submit') }} </button>
 						<button type="button"
 								ng-if="mod.current_question.question_type == futureed.CODING"
 								class="btn btn-orange next-btn right-0 btn-code-run"
-								ng-click="mod.runCode();"> Run </button>
+								ng-click="mod.runCode();"> {{ trans('messages.run') }} </button>
 					</div>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 					 style="margin-top:40px;"
 				>
 					<center>
-						<h1>Loading...</h1>
+						<h1>{{ trans('messages.loading') }}</h1>
 					</center>
 				</div>
 				{{--Main Question Contents--}}
@@ -81,7 +81,7 @@
 						<div class="questions-tips"
 							 ng-class="{'question-tip-pos-top-10' : mod.current_question.questions_image != 'None', 'question-tip-pos-top-130' : mod.current_question.questions_image == 'None'}"
 							 ng-if="mod.current_question.question_type == futureed.ORDERING">
-							<p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
+							<p> <img ng-src="{! user.avatar !}" /> <span>{{ trans('messages.drag_items_reorder') }}</span></p>
 						</div>
 					</div>
 
@@ -170,7 +170,7 @@
 
 									</table>
 									<div class="col-xs-3 pull-right reset-graph">
-										<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+										<button class="btn btn-gold" ng-click="mod.resetGraph()">{{ trans('messages.reset_caps') }}</button>
 									</div>
 								</div>
 							</div>
@@ -181,7 +181,7 @@
 								<div ng-init="mod.getQuadrant(mod.current_question.id)">
 									<div id="placeholder" style="width:300px;height:300px;margin:0 auto;"></div>
 									<div class="col-xs-3 pull-right reset-graph">
-										<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+										<button class="btn btn-gold" ng-click="mod.resetGraph()">{{ trans('messages.reset_caps') }}</button>
 									</div>
 								</div>
 							</div>
@@ -200,7 +200,7 @@
 											border-right: 5px solid #fff;
 									"
 							>
-								<p>Your browser doesn't support canvas.</p>
+								<p>{{ trans('messages.canvas_not_supported') }}</p>
 							</canvas>
 						</div>
 					</center>
@@ -219,11 +219,11 @@
 				<span class="result-message col-xs-3"
 					 ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
 					<h2 ng-if="mod.result.points_earned > 0">
-						Correct!
+						{{ trans('messages.correct') }}
 					</h2>
 
 					<h2 ng-if="mod.result.points_earned <= 0" >
-						Wrong.
+						{{ trans('messages.wrong') }}
 					</h2>
 				</span>
 				<span class="result-image col-xs-3">
@@ -238,7 +238,7 @@
 			</div>
 			<div class="proceed-btn-container btn-container">
 				<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
-					Proceed to next Question
+					{{ trans('messages.proceed_to_next_questions') }}
 				</button>
 			</div>
 		</div>
@@ -251,11 +251,11 @@
 			<div class="quote-message"
 				ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
 					<p ng-if="mod.result.points_earned > 0">
-						Correct!
+						{{ trans('messages.correct') }}
 					</p>
 
 					<p ng-if="mod.result.points_earned <= 0">
-						Wrong.
+						{{ trans('messages.wrong') }}
 					</p>
 			</div>
 
@@ -273,7 +273,7 @@
 
 						<div class="proceed-btn-container btn-container">
 							<button type="button" class="btn btn-maroon btn-large" ng-click="mod.nextQuestion()">
-								Proceed to next Question
+								{{ trans('messages.proceed_to_next_questions') }}
 							</button>
 						</div>
 					</div>
@@ -296,14 +296,14 @@
 
 					<div class="col-xs-5">
 						<p class="failed-module-message">
-							You need to review and take the test again.
+							{{ trans('messages.review_and_retake_test') }}
 						</p>
 
 						<div class="proceed-btn-container btn-container">
 							<button type="button" class="btn btn-maroon btn-large"
 									ng-click="mod.reviewContent()"
 							>
-								Retake Test
+								{{ trans('messages.retake_test') }}
 							</button>
 
 						</div>
