@@ -49,7 +49,7 @@
 					<div class="row">
 						<div class="col-xs-1"></div>
 						<div class="col-xs-10 wiki-earn-message">
-							You have earned {! mod.module_message.points_earned !} point(s).
+							{{ trans('messages.you_earned') }} {! mod.module_message.points_earned !} {{ trans('messages.point_s') }}.
 						</div>
 					</div>
 

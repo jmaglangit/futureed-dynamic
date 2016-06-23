@@ -1364,6 +1364,9 @@ return [
 	'snap_modal_msg_6' => 'Try using a block you aren’t using yet, or you can skip to the next question.',
 	'snap_modal_msg_7' => 'You completed this module! Kindly proceed to the next set of questions.',
 	'snap_modal_msg_8' => 'Try again',
-	'snap_modal_msg_9' => 'I\'ve written my first program. Try FutureEd Now!'
+	'snap_modal_msg_9' => 'I\'ve written my first program. Try FutureEd Now!',
+
+	'you_earned' => 'You have earned',
+	'point_s' => 'point(s)'
 
 ];

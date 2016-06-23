@@ -2006,6 +2006,10 @@ Jika anda memindahkan hak administrasi organisasi anda kepada orang lain dalam o
 
 	"snap_modal_msg_8" => "Coba lagi",
 
-	"snap_modal_msg_9" => "Saya telah menulis program pertama saya. Coba FutureEd Sekarang!"
+	"snap_modal_msg_9" => "Saya telah menulis program pertama saya. Coba FutureEd Sekarang!",
+
+	"you_earned" => "Anda telah mendapatkan",
+
+	"point_s" => "poin"
 
 ];

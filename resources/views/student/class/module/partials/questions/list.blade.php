@@ -13,13 +13,13 @@
 					<div class="row col-xs-6"
 						 ng-if="mod.current_question.question_type != futureed.CODING"
 					>
-						<div><h3> Question #{! mod.question_counter !} </h3></div>
+						<div><h3> {{ trans('messages.question') }} #{! mod.question_counter !} </h3></div>
 					</div>
 				</div>
 				<div ng-class="{'col-xs-6':mod.current_question.question_type != futureed.CODING,'col-xs-8':mod.current_question.question_type == futureed.CODING}"
 				>
 					<div class="header-progress col-xs-6 bottom-6" ng-if="mod.current_question.question_type != futureed.CODING">
-						<h3 class="border-radius-30">Progress {! mod.current_points !} / {! mod.points_to_finish !}</h3>
+						<h3 class="border-radius-30">{{ trans('messages.progress') }} {! mod.current_points !} / {! mod.points_to_finish !}</h3>
 					</div>
 					<div class="header-progress col-xs-6 bottom-6" ng-if="mod.current_question.question_type == futureed.CODING">
 						<h3 class="border-radius-30">{! mod.current_question.questions_text !}</h3>
@@ -246,7 +246,7 @@
 	<div ng-if="mod.result.quoted">
 		<div class="questions-container col-xs-12">
 			<div class="questions-header">
-				<h3> Question #{! mod.question_counter !} </h3>
+				<h3> {{ trans('messages.question') }} #{! mod.question_counter !} </h3>
 			</div>
 			<div class="quote-message"
 				ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
@@ -284,7 +284,7 @@
 	<div ng-if="mod.result.failed">
 		<div class="questions-container col-xs-12">
 			<div class="questions-header">
-				<h3> Question #{! mod.question_counter !} </h3>
+				<h3> {{ trans('messages.question') }} #{! mod.question_counter !} </h3>
 			</div>
 
 			<div class="result-failed message-container">
