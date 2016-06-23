@@ -67,7 +67,7 @@
 					{{--Image--}}
 					<div class="col-xs-12">
 						<div class="questions-image">
-							<img ng-if="mod.current_question.questions_image != 'None' " ng-src="{! mod.current_question.questions_image !}"/>
+							<img ng-if="mod.current_question.questions_image != futureed.NONE " ng-src="{! mod.current_question.questions_image !}"/>
 						</div>
 					</div>
 					{{--Message--}}
@@ -79,7 +79,7 @@
 					{{--Tips--}}
 					<div class="col-xs-12">
 						<div class="questions-tips"
-							 ng-class="{'question-tip-pos-top-10' : mod.current_question.questions_image != 'None', 'question-tip-pos-top-130' : mod.current_question.questions_image == 'None'}"
+							 ng-class="{'question-tip-pos-top-10' : mod.current_question.questions_image != futureed.NONE, 'question-tip-pos-top-130' : mod.current_question.questions_image == futureed.NONE}"
 							 ng-if="mod.current_question.question_type == futureed.ORDERING">
 							<p> <img ng-src="{! user.avatar !}" /> <span>{{ trans('messages.drag_items_reorder') }}</span></p>
 						</div>
@@ -96,7 +96,7 @@
 							<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.current_question.question_answers"
 								ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">
 								<div ng-if="choices.answer_text != '' ">{! choices.answer_text !}</div>
-								<img ng-if="choices.answer_image != 'None' " ng-src="{! choices.answer_image !}" />
+								<img ng-if="choices.answer_image != futureed.NONE " ng-src="{! choices.answer_image !}" />
 							</a>
 						</div>
 						{{--mod.current_question.question_type == futureed.FILLINBLANK--}}

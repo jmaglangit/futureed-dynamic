@@ -126,6 +126,10 @@
 							<p hidden class="skip-module-message module_complete">{{ trans('messages.snap_modal_msg_7') }}</p>
 							<center>
 								<div class="cur_code dropdown">
+									<p class="dropdown-toggle cur_code_header" data-toggle="dropdown">
+										Show code <i class="fa fa-caret-down"></i>
+									</p>
+									<pre class="dropdown-menu cur_code_content"></pre>
 								</div>
 							</center>
 							<div class="snap_proceed_btn" hidden >

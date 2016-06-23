@@ -1,7 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use Carbon\Carbon;
-use Carbon\CarbonInterval;
 use FutureEd\Http\Requests\Api\StudentModuleAnswerRequest;
 use FutureEd\Models\Repository\AvatarPose\AvatarPoseRepositoryInterface;
 use FutureEd\Models\Repository\AvatarQuote\AvatarQuoteRepositoryInterface;
@@ -20,8 +19,6 @@ use FutureEd\Services\BadgeServices;
 use FutureEd\Services\ModuleContentServices;
 use FutureEd\Services\QuestionServices;
 use FutureEd\Services\StudentModuleServices;
-use Illuminate\Support\Facades\Input;
-use SebastianBergmann\Environment\Console;
 
 class StudentModuleAnswerController extends ApiController{
 
@@ -272,8 +269,9 @@ class StudentModuleAnswerController extends ApiController{
 		//CURRENT UPDATE
 
 		//question counter
-		if($question_type != config('futureed.question_type_coding'))
+		if($question_type != config('futureed.question_type_coding')) {
 			$student_module->question_counter++;
+		}
 
 		//wrong counter
 		if($student_answer->answer_status == config('futureed.answer_status_wrong')){
@@ -359,8 +357,9 @@ class StudentModuleAnswerController extends ApiController{
 		} else {
 
 			$return->next_question = $next_question;
-			if($question_type === config('futureed.question_type_coding'))
+			if($question_type === config('futureed.question_type_coding')) {
 				$return->snap_module_completed = config('futureed.true');
+			}
 			return $this->respondWithData($return);
 		}
 

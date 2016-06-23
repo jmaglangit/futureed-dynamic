@@ -312,12 +312,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.skipModule = function()
 	{
 		if(self.result != Constants.FALSE && self.has_coding_exercise)
+		{
 			self.record.student_module.last_answered_question_id = self.result.next_question;
+		}
 
 		if(self.questions[0].question_type == Constants.CODING)
+		{
 			self.setActive(Constants.ACTIVE_QUESTIONS);
+		}
 		else
+		{
 			self.setActive(Constants.ACTIVE_CONTENTS);
+		}
 
 		getAvatarPose($scope.user.avatar_id);
 		listAvatarQuotes($scope.user.avatar_id);
@@ -1191,12 +1197,14 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	//function to compare arrays - used to evaluate quadrant plots
 	self.arraysEqual = function(arr1, arr2) {
-		if(arr1.length !== arr2.length)
+		if(arr1.length !== arr2.length) {
 			return false;
+		}
 
 		for(var i = arr1.length; i--;) {
-			if(arr1[i] !== arr2[i])
-			return false;
+			if(arr1[i] !== arr2[i]) {
+				return false;
+			}
 		}
 
 		return true;

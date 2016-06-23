@@ -1,10 +1,10 @@
 var snap = {
-    code 			        : 	"",
-    correct 		        : 	Constants.FALSE,
+    code                    : 	"",
+    correct                 : 	Constants.FALSE,
     finish_count            :   0,
     isSnapExerciseCompleted :   Constants.FALSE,
     isSnapModuleCompleted   :   Constants.FALSE,
-    showModal              	:   function()
+    showModal               :   function()
                                 {
                                     var wrong_answer = $('.wrong_answer');
                                     var correct_answer = $('.correct_answer');
@@ -16,8 +16,10 @@ var snap = {
                                     var snap_module_done_btn = $('.snap_module_done_btn');
                                     var module_complete = $('.module_complete');
                                     var cur_code = $('.cur_code');
+                                    var cur_code_content = $('.cur_code_content');
 
-                                    cur_code.empty();
+                                    cur_code.hide();
+                                    cur_code_content.text('');
 
                                     if(snap.isSnapModuleCompleted )
                                     {
@@ -89,9 +91,10 @@ var snap = {
                                         correct_answer.show();
                                     }
 
-
-                                    if(snap.code.length > 0)
-                                        cur_code.append('<p class="dropdown-toggle" data-toggle="dropdown">Show code <i class="fa fa-caret-down"></i></p>').append('<pre class="dropdown-menu">'+ snap.code + '</pre>');
+                                    if(snap.code.length > 0) {
+                                        cur_code_content.text(snap.code);
+                                        cur_code.show();
+                                    }
 
                                     snap.code = '';
 
