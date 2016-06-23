@@ -29,9 +29,9 @@ class SnapExerciseDetailsRequest extends ApiRequest {
 					'question_id' => 'required|numeric',
 					'student_id' => 'required|numeric',
 					'date_start' => 'required|date',
-		            'date_end' => 'required|date',
 					'classroom_id' => 'required|numeric',
-                    'answer_text' => 'required|integer',
+					'date_end' => 'required|date',
+					'answer_text' => 'required|integer',
 				];
 				break;
 			default :
