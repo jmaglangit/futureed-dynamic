@@ -1,6 +1,6 @@
 var snap = {
-    code                    : 	"",
-    correct                 : 	Constants.FALSE,
+    code                    :   "",
+    correct                 :   Constants.FALSE,
     finish_count            :   0,
     isSnapExerciseCompleted :   Constants.FALSE,
     isSnapModuleCompleted   :   Constants.FALSE,
