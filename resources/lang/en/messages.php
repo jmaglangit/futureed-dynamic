@@ -505,6 +505,8 @@ return [
 	'play' => 'Play',
 	'click_view_rewards' => 'Click here to View Rewards!',
 	'click_view_badges' => 'Click here to View Badges',
+	'accessories_for_avatar' => 'Accessories for your Avatar',
+	'rewards_to_buy' => 'rewards to buy',
 
 
 
