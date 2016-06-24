@@ -11,28 +11,29 @@
 			<a href="{!! route('student.dashboard.index') !!}">{!! Html::image('/images/logo-sm-beta.png') !!}</a>
 			</div>
 
+			<div template-directive template-url="{!! route('student.dashboard.message') !!}"></div>
+
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="nav-label">{!! trans('messages.cash_points') !!}</li>
+					{{--<li class="nav-label"><div class="btn btn-primary">{!! trans('messages.rewards') !!}</div></li>--}}
 					<li class="nav-points-rewards">
-						{!! Html::image('/images/icons/icon-cash-points.png', ''
-							, array(
-								'class' => 'nav-icon-holder'
-							)
-						) !!} {! user.cash_points !}</li>
-					<li class="nav-label">{!! trans('messages.reward_points') !!}</li>
-					<li class="nav-points-rewards">
-						{!! Html::image('/images/icons/icon-reward.png', ''
-							, array(
-								'class' => 'nav-icon-holder'
-							)
-						) !!} {! user.points !}</li>
+						{{--Hover "click Points to see Rewards." pop-up modal--}}
+						<a class="btn" data-toggle="tooltip" data-placement="bottom"
+						   title="{!! trans('messages.click_view_rewards') !!}" ng-click="displayRewardsModal()">
+							<img src="/images/icons/icon-reward.png" class="nav-icon-holder"/>
+						</a>
+						{! user.cash_points !}
+					</li>
 					<li class="nav-points-rewards" ng-init="getStudentBadges()">
-						{!! Html::image('/images/icons/icon-badges.png', ''
-							, array(
-								'class' => 'nav-icon-holder'
-							)
-						) !!} {! badges.total !}</li>
+						{{--Hover "Badges" if possible linked to badges--}}
+						<a class="btn" data-toggle="tooltip" data-placement="bottom"
+						   title="{!! trans('messages.click_view_badges') !!}"
+						   ng-click="redirectRewards('{!! route('student.profile.index') !!}', futureed.REWARDS)">
+							<img src="/images/icons/icon-badges.png" class="nav-icon-holder" />
+						</a>
+						{! badges.total !}
+						{{--|| {!! $tab !!}--}}
+					</li>
 
 					<li class="nav-label"></li>
 					<li class="nav-label"></li>
