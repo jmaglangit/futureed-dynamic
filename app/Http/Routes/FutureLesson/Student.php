@@ -113,6 +113,10 @@
 					'as' => 'student.dashboard.follow_up_registration'
 					, 'uses' => 'FutureLesson\Student\DashboardController@follow_up_registration'
 				]);
+			Routes::get('/messages',[
+					'as' => 'student.dashboard.message',
+					'uses' => 'FutureLesson\Student\DashboardController@messages'
+				]);
 		});
 
 		Routes::group([

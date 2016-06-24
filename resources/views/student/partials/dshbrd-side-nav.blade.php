@@ -1,4 +1,5 @@
-<ul ng-if="!profile.active_play_game" ng-init=" profile.active_games ? futureed.false : profile.setStudentProfileActive()">
+<ul ng-if="!profile.active_play_game" ng-init=" profile.active_games ? futureed.false
+	: profile.setStudentProfileActive('{!! $tab !!}') ">
 
 	<li class="active">
 		<a href="{!! route('student.dashboard.index') !!}">

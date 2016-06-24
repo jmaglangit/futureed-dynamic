@@ -14,6 +14,7 @@ function TemplateDirective() {
 function FutureedController($scope, $window, apiService, futureed) {
 	$scope.futureed = futureed;
 	$scope.display_date = new Date();
+	$scope.messages = Constants.FALSE;
 	
 	/**
 	* Common API calls
@@ -691,5 +692,22 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$scope.internalError();
 		});
 	}
+
+	$scope.displayRewardsModal = function(){
+
+		$scope.messages = Constants.TRUE;
+
+		$("#message_rewards").modal({
+			backdrop: 'static',
+			keyboard: Constants.FALSE,
+			show    : Constants.TRUE
+		});
+	}
+
+	$scope.redirectRewards = function(url,tab_name){
+
+		$window.location.href = url + '?tab=' + tab_name;
+	}
+
 	
 };
