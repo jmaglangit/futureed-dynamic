@@ -21,7 +21,7 @@ Routes::group([
 
 	Routes::resource('/snap', 'Api\v1\StudentSnapModuleController',
 		[
-			'only' => ['show']
+			'only' => ['show', 'store', 'update']
 		]
 	);
 

@@ -95,6 +95,8 @@
 
 				<div template-directive template-url="{!! route('student.partials.games_list') !!}"></div>
 
+				<div template-directive template-url="{!! route('student.partials.play-game') !!}"></div>
+
 			</div>
 		</div>
 	</div>

@@ -48,6 +48,10 @@ class ProfileController extends Controller {
 		return view('student.profile.games_list');
 	}
 
+	public function play_game(){
+		return view('student.profile.play_game');
+	}
+
 	public function enter_email_code() {
 		$input = Input::only('email');
 		$student_session = Session::get('student');

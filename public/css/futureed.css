@@ -1776,3 +1776,8 @@ span.round-tab:hover {
 	display: block;
 	margin: 0 auto;
 }
+
+.play-game-box {
+	width: 100%;
+	height: 672px;
+}

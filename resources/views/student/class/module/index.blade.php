@@ -133,7 +133,6 @@
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}
 
-	{{--SNAP--}}
 	{!! Html::script('js/snap/morphic.js')  !!}
 	{!! Html::script('js/snap/widgets.js')  !!}
 	{!! Html::script('js/snap/blocks.js')   !!}
@@ -150,6 +149,6 @@
 	{!! Html::script('js/snap/cloud.js')    !!}
 	{!! Html::script('js/snap/sha512.js')   !!}
 	{!! Html::script('js/snap/FileSaver.min.js') !!}
-	{!! Html::script('js/snap/main.js') !!}
+	{!! Html::script('js/snap/snap_variables.js') !!}
 @stop
 

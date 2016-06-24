@@ -105,6 +105,13 @@ function ProfileService($http) {
 		});
 	}
 
+	api.getGameDetails = function(game_id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'game/' + game_id
+		});
+	}
+
 	api.getStudentPoints = function(student_id){
 		return $http({
 			method	:	Constants.METHOD_GET
