@@ -503,6 +503,8 @@ return [
 	'buy_game' => 'Buy Game',
 	'are_you_sure_you_want_to_buy_game' => 'Are you sure you want to buy this game?',
 	'play' => 'Play',
+	'click_view_rewards' => 'Click here to View Rewards!',
+	'click_view_badges' => 'Click here to View Badges',
 
 
 
