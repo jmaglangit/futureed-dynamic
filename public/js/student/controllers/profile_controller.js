@@ -42,6 +42,17 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 		});
 	});
 
+	$scope.$watch("profile.games_list", function (newValue, oldValue) {
+		$timeout(function() {
+			$('.game-box').each(function() {
+				$(this).magnificPopup({
+					delegate: '.game-box-image',
+					type:'image',
+				});
+			});
+		});
+	});
+
 	function setStudentProfileActive(active) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -861,12 +872,14 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 			'games_id' : game_id
 		};
 
+		$scope.ui_block();
 		ProfileService.buyGame(data).success(function(response){
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			}
 			self.getStudentPoints();
 			$('#buy_game_modal').modal('toggle');
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();

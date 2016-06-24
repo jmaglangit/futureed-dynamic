@@ -20,7 +20,9 @@
                         ng-repeat="game in profile.games_list"
                             {{--ng-class="{ 'accessory-bought' : accessory.is_bought }"--}}
                             >
-                        <img ng-src="{! game.game_image !}">
+                        <a href="{! game.game_image !}" alt="{! game.name !}" class="game-box-image">
+                            <img ng-src="{! game.game_image !}">
+                        </a>
                         <p>{! game.name !}</p>
                         <p>{! game.points_price !}</p>
                         {!! Form::button(trans('messages.buy')
