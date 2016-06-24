@@ -1775,6 +1775,7 @@ span.round-tab:hover {
 	background: #fff;
 	display: block;
 	margin: 0 auto;
+	cursor: zoom-in;
 }
 
 .play-game-box {
