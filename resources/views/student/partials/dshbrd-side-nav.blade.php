@@ -1,4 +1,4 @@
-<ul ng-init="profile.setStudentProfileActive()">
+<ul ng-init="'{!! $tab !!}' && profile.setStudentProfileActive() || profile.setStudentProfileActive('{!! $tab !!}') ">
 	<li class="active">
 		<a href="{!! route('student.dashboard.index') !!}">
 			<i class="fa fa-arrow-left"></i> {!! trans('messages.back_to_dashboard') !!}</a>
