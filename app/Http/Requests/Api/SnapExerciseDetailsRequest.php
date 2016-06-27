@@ -20,7 +20,8 @@ class SnapExerciseDetailsRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		switch($this->method()) {
+		switch($this->method())
+		{
 			case 'POST' :
 				return [
 					'student_module_id' => 'required|numeric',
@@ -34,6 +35,13 @@ class SnapExerciseDetailsRequest extends ApiRequest {
 					'answer_text' => 'required|integer',
 				];
 				break;
+
+			case 'PUT' :
+				return [
+					'class' => 'required|numeric',
+				];
+				break;
+
 			default :
 				return [
 

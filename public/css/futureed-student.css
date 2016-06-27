@@ -2240,3 +2240,7 @@ pre.dropdown-menu {
 .modal-rewards-items .col-xs-6 .h4 {
 	color: #055A7F;
 }
+
+.cur_code {
+	cursor: pointer;
+}

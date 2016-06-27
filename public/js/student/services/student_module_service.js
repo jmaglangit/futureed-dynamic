@@ -21,10 +21,10 @@ function StudentModuleService($http){
 		});
 	}
 
-	service.getSnapQuestionDetails = function(questionId) {
+	service.getSnapQuestionDetails = function(data) {
 		return $http({
 			method  :	Constants.METHOD_PUT,
-			url     :	serviceUrl + "snap/" + questionId
+			url     :	serviceUrl + "snap/" + data.q_id + "?class=" + data.c_id
 		});
 	}
 
