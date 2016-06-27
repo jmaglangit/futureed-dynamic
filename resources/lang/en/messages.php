@@ -508,6 +508,7 @@ return [
 	'accessories_for_avatar' => 'Accessories for your Avatar',
 	'rewards_to_buy' => 'rewards to buy',
 	'back_to_games' => 'Back to Games',
+	'continue_to_rewards' => 'Continue to Rewards',
 
 
 	//resources/views/admin/dashboard/index.blade.php
