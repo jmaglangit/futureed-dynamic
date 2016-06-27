@@ -694,6 +694,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
+	// Displaying Rewards modal and enable elements based on parameter passed, if exist.
 	$scope.displayRewardsModal = function(from){
 
 		$scope.messages = Constants.TRUE;
