@@ -23,9 +23,9 @@ class SnapExerciseDetailsRepository implements SnapExerciseDetailsRepositoryInte
 		return $response;
 	}
 
-	public function getCompletedExercises()
+	public function getCompletedExercises($order_id)
 	{
-		$response = SnapExerciseDetail::whereIsExerciseCompleted(1);
+		$response = SnapExerciseDetail::whereIsExerciseCompleted(1)->whereOrderId($order_id);
 		return $response;
 	}
 
@@ -35,9 +35,9 @@ class SnapExerciseDetailsRepository implements SnapExerciseDetailsRepositoryInte
 		return $response;
 	}
 
-	public function getSnapExerciseDetails($question_id)
+	public function getSnapExerciseDetails($question_id, $order_id)
 	{
-		$response = SnapExerciseDetail::whereQuestionId($question_id);
+		$response = SnapExerciseDetail::whereQuestionId($question_id)->whereOrderId($order_id);
 		return $response;
 	}
 

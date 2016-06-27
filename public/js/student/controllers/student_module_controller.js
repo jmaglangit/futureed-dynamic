@@ -339,7 +339,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					self.current_question = self.questions[key];
 					if(self.record.content.length == 0 && self.current_question.question_type === Constants.CODING)
 					{
-						self.getSnapQuestionDetails(self.record.student_module.last_answered_question_id, function(resp)
+						var data = {};
+						data.q_id = self.current_question.id;
+						data.c_id = self.record.student_module.class_id;
+						console.log(data);
+						self.getSnapQuestionDetails(data, function(resp)
 						{
 							var data = resp.data;
 							var curr_exercise = data.snap;
@@ -447,7 +451,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						self.record.student_module = student_module;
 					}
 
-					self.getSnapQuestionDetails(self.current_question.id, function(resp)
+					var data = {};
+					data.q_id = self.current_question.id;
+					data.c_id = self.record.student_module.class_id;
+
+					self.getSnapQuestionDetails(data, function(resp)
 					{
 						var data = resp.data;
 						var curr_exercise = data.snap;
@@ -474,8 +482,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
-	self.getSnapQuestionDetails = function(q_id, callBack) {
-		StudentModuleService.getSnapQuestionDetails(q_id).success(function(response) {
+	self.getSnapQuestionDetails = function(data, callBack) {
+		StudentModuleService.getSnapQuestionDetails(data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -575,7 +583,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		answer.classroom_id = self.record.student_module.class_id;
 		answer.answer_id = self.current_question.answer_id;
 		answer.student_id = $scope.user.id;
-		answer.date_start = self.snap_exercise_start;
+		answer.date_start = self.snap_exercise_start || new Date();
 		answer.date_end = new Date();
 
 		self.current_student_module = {
