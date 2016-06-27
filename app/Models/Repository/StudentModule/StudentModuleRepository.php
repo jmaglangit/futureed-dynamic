@@ -417,4 +417,10 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 
 		return $response;
 	}
+
+    public function getStudentModuleClassId($id)
+    {
+        $response = $this->getStudentModule($id)->class_id;
+        return $response;
+    }
 }

@@ -28,4 +28,6 @@ interface StudentModuleRepositoryInterface
 
 	public function getStudentModuleStatusByModuleStudent($module_id, $student_id);
 
+	public function getStudentModuleClassId($id);
+
 }

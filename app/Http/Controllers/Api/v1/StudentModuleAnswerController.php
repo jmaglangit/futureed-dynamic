@@ -217,16 +217,17 @@ class StudentModuleAnswerController extends ApiController{
 		}
 		else if($question_type == config('futureed.question_type_coding'))
 		{
-			$class_id = $this->student_module->getStudentModule($data['student_module_id'])->class_id;
-			$order_id = $this->snap_exercise_details->findOrderByClassroomId($class_id)->id;
-			$completed_exercise = $this->snap_exercise_details->getCompletedExercises($order_id)->orderBy('question_id', 'desc')->get();
-			$data['question_id'] = $completed_exercise->first()->question_id;
+			$class_id = $this->student_module->getStudentModuleClassId($data['student_module_id']);
+			$order_id = $this->snap_exercise_details->findOrderIdByClassroomId($class_id);
+			$completed_exercise = $this->snap_exercise_details->getCompletedExercisesByOrder($order_id);
+			$data['question_id'] = $this->snap_exercise_details->getFirstCompletedExercises($order_id);
 			$data['total_time'] = 0;
 
 			foreach($completed_exercise as $exercise)
 			{
 				$data['total_time'] += $exercise->date_start->diffInSeconds($exercise->date_end);
 			}
+
 			$data['points_earned'] = 0;
 			$data['answer_status'] = config('futureed.answer_status_correct');
 			$data['seq_no'] = $completed_exercise->first()->question_seq_no;

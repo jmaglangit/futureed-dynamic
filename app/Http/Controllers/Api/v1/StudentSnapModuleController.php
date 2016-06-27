@@ -27,15 +27,15 @@ class StudentSnapModuleController extends ApiController
 		//Retrieve from request
 		$class_id = $request->get('class');
 		//Find order_id with given $class_id
-		$order_id = $this->snapExerciseDetails->findOrderByClassroomId($class_id)->id;
+		$order_id = $this->snapExerciseDetails->findOrderIdByClassroomId($class_id);
 		//Find SnapExerciseDetail by given $question_id and $order_id
-		$exercise_details = $this->snapExerciseDetails->getSnapExerciseDetails($question_id, $order_id)->first();
+		$exercise_details = $this->snapExerciseDetails->getFirstSnapExerciseDetails($question_id, $order_id);
 
 		return $this->respondWithData(
 			[
 				'snap' => $exercise_details,
 				'all_exercises_completed' => $this->checkIfSnapExerciseFinished($question_id, $order_id),
-				'completed_exercises_count' => $this->snapExerciseDetails->getCompletedExercises($order_id)->count()
+				'completed_exercises_count' => $this->snapExerciseDetails->getCountCompletedExercise($order_id)
 			]
 		);
 	}
@@ -63,7 +63,7 @@ class StudentSnapModuleController extends ApiController
 	{
 		$from_request = $request->all();
 		$is_completed = $this->checkIfSnapExerciseFinished($from_request['question_id'], $from_request['classroom_id']);
-		$order_id = $this->snapExerciseDetails->findOrderByClassroomId($from_request['classroom_id'])->id;
+		$order_id = $this->snapExerciseDetails->findOrderIdByClassroomId($from_request['classroom_id']);
 
 		if(!$is_completed)
 		{
@@ -87,7 +87,7 @@ class StudentSnapModuleController extends ApiController
 
 		return $this->respondWithData([
 			'all_exercises_completed' => $this->checkIfSnapExerciseFinished($from_request['question_id'], $order_id),
-			'completed_exercises_count' => $this->snapExerciseDetails->getCompletedExercises($order_id)->count()
+			'completed_exercises_count' => $this->snapExerciseDetails->getCountCompletedExercise($order_id)
 		]);
 	}
 
@@ -102,11 +102,11 @@ class StudentSnapModuleController extends ApiController
 		$is_completed = true;
 
 		//Get completed exercises by with given $order_id
-		$completed_exercise = $this->snapExerciseDetails->getCompletedExercises($order_id)->lists('question_id');
+		$completed_exercise = $this->snapExerciseDetails->getCompletedExercisesListByQuestionId($order_id);
 		//Get module id
-		$module_id = $this->snapExerciseDetails->getModuleByQuestionId($question_id)->id;
+		$module_id = $this->snapExerciseDetails->getModuleIdByQuestionId($question_id);
 		//Get question with question_type COD
-		$question_ids = $this->snapExerciseDetails->getQuestionByModuleId($module_id)->whereQuestionType(config('futureed.question_type_coding'))->lists('id');
+		$question_ids = $this->snapExerciseDetails->getQuestionIdsByModuleId($module_id);
 
 		foreach($question_ids as $q_id)
 		{
