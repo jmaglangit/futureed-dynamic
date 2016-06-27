@@ -23,7 +23,7 @@ class SnapExerciseDetailsRepository implements SnapExerciseDetailsRepositoryInte
 		{
 			DB::rollback();
 			$this->errorLog($e->getMessage());
-			
+
 			return $e->getMessage();
 		}
 

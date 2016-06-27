@@ -342,7 +342,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						var data = {};
 						data.q_id = self.current_question.id;
 						data.c_id = self.record.student_module.class_id;
-						console.log(data);
+
 						self.getSnapQuestionDetails(data, function(resp)
 						{
 							var data = resp.data;
