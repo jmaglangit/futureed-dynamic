@@ -5,6 +5,7 @@ use FutureEd\Http\Requests\Api\StudentModuleAnswerRequest;
 use FutureEd\Models\Repository\AvatarPose\AvatarPoseRepositoryInterface;
 use FutureEd\Models\Repository\AvatarQuote\AvatarQuoteRepositoryInterface;
 use FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepositoryInterface;
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
@@ -39,7 +40,6 @@ class StudentModuleAnswerController extends ApiController{
 	protected $module_content_services;
 	protected $badge_services;
 	protected $snap_exercise_details;
-
 
 	public function __construct(
 		AvatarPoseRepositoryInterface $avatar_pose,
@@ -217,7 +217,9 @@ class StudentModuleAnswerController extends ApiController{
 		}
 		else if($question_type == config('futureed.question_type_coding'))
 		{
-			$completed_exercise = $this->snap_exercise_details->getCompletedExercises()->orderBy('question_id', 'desc')->get();
+			$class_id = $this->student_module->getStudentModule($data['student_module_id'])->class_id;
+			$order_id = $this->snap_exercise_details->findOrderByClassroomId($class_id)->id;
+			$completed_exercise = $this->snap_exercise_details->getCompletedExercises($order_id)->orderBy('question_id', 'desc')->get();
 			$data['question_id'] = $completed_exercise->first()->question_id;
 			$data['total_time'] = 0;
 
