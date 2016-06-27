@@ -265,6 +265,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 		}
 
+	}
+
 	self.viewRewards = function(){
 
 		self.module_message.show = Constants.FALSE;
