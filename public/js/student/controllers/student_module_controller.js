@@ -25,6 +25,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	*/
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		$scope.from_module = Constants.FALSE;
 
 		self.active_questions = Constants.FALSE;
 		self.active_contents = Constants.FALSE;
@@ -264,6 +265,13 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 		}
 
+	}
+
+	self.viewRewards = function(){
+
+		self.module_message.show = Constants.FALSE;
+
+		$scope.displayRewardsModal(Constants.MODULE);
 
 	}
 

@@ -15,6 +15,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.futureed = futureed;
 	$scope.display_date = new Date();
 	$scope.messages = Constants.FALSE;
+	$scope.from_module = Constants.FALSE;
 	
 	/**
 	* Common API calls
@@ -693,9 +694,14 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
-	$scope.displayRewardsModal = function(){
+	// Displaying Rewards modal and enable elements based on parameter passed, if exist.
+	$scope.displayRewardsModal = function(from){
 
 		$scope.messages = Constants.TRUE;
+
+		if(from == Constants.MODULE){
+			$scope.from_module = Constants.TRUE;
+		}
 
 		$("#message_rewards").modal({
 			backdrop: 'static',
