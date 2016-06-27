@@ -14,7 +14,6 @@
 			<div template-directive template-url="{!! route('student.dashboard.message') !!}"></div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				{!! Html::script('/js/common/tooltip_service.js')!!}
 				<ul class="nav navbar-nav navbar-right">
 					{{--<li class="nav-label"><div class="btn btn-primary">{!! trans('messages.rewards') !!}</div></li>--}}
 					<li class="nav-points-rewards">
