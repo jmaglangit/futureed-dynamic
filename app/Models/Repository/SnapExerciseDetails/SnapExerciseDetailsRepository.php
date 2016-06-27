@@ -6,6 +6,7 @@ use FutureEd\Models\Core\Classroom;
 use FutureEd\Models\Core\Question;
 use FutureEd\Models\Core\SnapExerciseDetail;
 use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class SnapExerciseDetailsRepository implements SnapExerciseDetailsRepositoryInterface
 {
@@ -13,7 +14,19 @@ class SnapExerciseDetailsRepository implements SnapExerciseDetailsRepositoryInte
 
 	public function addSnapExerciseDetails($data)
 	{
-		$response = SnapExerciseDetail::create($data);
+		DB::transaction();
+		try
+		{
+			$response = SnapExerciseDetail::create($data);
+		}
+		catch(\Exception $e)
+		{
+			DB::rollback();
+			$this->errorLog($e->getMessage());
+			
+			return $e->getMessage();
+		}
+
 		return $response;
 	}
 
