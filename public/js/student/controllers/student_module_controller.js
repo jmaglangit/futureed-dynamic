@@ -1432,14 +1432,20 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		StudentModuleService.getSnapModule(filename).success(
 			function(response)
 			{
-				if(response.data.no_file == undefined) {
+				try
+				{
+					if(response.data.no_file)
+					{
+						$('#world_container').hide();
+					}
+				}
+				catch (err)
+				{
+					$('#world_container').show();
 					if(callback)
 					{
 						callback(response);
 					}
-				}
-				else {
-					$('#world_container').hide();
 				}
 				$scope.ui_unblock();
 			}
