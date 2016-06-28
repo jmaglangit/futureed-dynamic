@@ -1432,9 +1432,14 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		StudentModuleService.getSnapModule(filename).success(
 			function(response)
 			{
-				if(callback)
-				{
-					callback(response);
+				if(response.data.no_file == undefined) {
+					if(callback)
+					{
+						callback(response);
+					}
+				}
+				else {
+					$('#world_container').hide();
 				}
 				$scope.ui_unblock();
 			}

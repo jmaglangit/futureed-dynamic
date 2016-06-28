@@ -148,22 +148,22 @@ class Question extends Model {
 
 	public function scopeOrderBySeqNo($query) {
 
-		return $query->OrderBy('seq_no');
+		return $query->orderBy('seq_no');
 	}
 
 	public function scopeOrderByDifficulty($query) {
 
-		return $query->OrderBy('difficulty');
+		return $query->orderBy('difficulty');
 	}
 
 	public function scopeOrderBySeqNoDesc($query) {
 
-		return $query->OrderBy('seq_no', 'desc');
+		return $query->orderBy('seq_no', 'desc');
 	}
 
 	public function scopeOrderById($query) {
 
-		return $query->OrderBy('id');
+		return $query->orderBy('id');
 	}
 
 	public function scopeDifficulty($query, $difficulty) {

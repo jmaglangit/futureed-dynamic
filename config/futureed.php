@@ -170,6 +170,8 @@ return [
 	'icon_image_path_final' => base_path() . '/public/uploads/icon',
 	'icon_image_path_final_public' => '/uploads/icon',
 
+	//snap exercise path
+	'snap_exercise_path' => storage_path('app/snap/'),
 
 	//answer status
 	'answer_status_correct' => 'Correct',

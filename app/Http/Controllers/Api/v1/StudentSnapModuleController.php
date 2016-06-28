@@ -48,18 +48,10 @@ class StudentSnapModuleController extends ApiController
 	 */
 	public function show($question_id)
 	{
-		$file = glob(storage_path('app/snap/'.$question_id.'/*.xml'));
-
-		if(empty($file))
-		{
-			return $this->respondWithData(true);
+		if(File::exists(config('futureed.snap_exercise_path').$question_id.'/cod.xml')) {
+			return response()->download(config('futureed.snap_exercise_path').$question_id.'/cod.xml', 'cod.xml', ['Content-Type' => 'text/xml']);
 		}
-
-		if(File::exists($file[0]))
-		{
-				return response()->download($file[0], 'cod.xml',['Content-Type' => 'text/xml']);
-		}
-
+		return $this->respondWithData(['no_file' => config('futureed.true')]);
 	}
 
 	/**
