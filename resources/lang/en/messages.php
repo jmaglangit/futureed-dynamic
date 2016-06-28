@@ -509,6 +509,7 @@ return [
 	'rewards_to_buy' => 'rewards to buy',
 	'back_to_games' => 'Back to Games',
 	'continue_to_rewards' => 'Continue to Rewards',
+	'download_lsp_report' => 'Download LSP Report',
 
 
 	//resources/views/admin/dashboard/index.blade.php

@@ -68,6 +68,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                 } else if (response.data) {
                     self.records = response.data.rows;
                     self.student = response.data.additional_information;
+                    self.getIAssessReportLink();
                 }
             }
 
@@ -332,5 +333,23 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
             $scope.ui_unblock();
         });
 
+    }
+
+    self.getIAssessReportLink = function(){
+
+        $scope.ui_block();
+        StudentReportsService.getIAssessDownloadLinkReport($scope.user.id).success(function (response){
+            if(angular.equals(response.status, Constants.STATUS_OK)){
+                if (response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if (response.data) {
+                    self.student_iassess_report = response.data;
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
     }
 }

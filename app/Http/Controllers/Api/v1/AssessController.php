@@ -112,7 +112,9 @@ class AssessController extends ApiController {
 		$student_id = $input['student_id'];
 				
 		if($this->iassess->saveTestData($input)) {
-		
+
+			$this->iassess->calculateTestData($this->student->getStudent($student_id));
+
 			#save answers
 			if($input['user_answers']) {
 				$sequence_no = 1;
@@ -180,6 +182,16 @@ class AssessController extends ApiController {
 		}
 
     }
+
+	/**
+	 * Get downloadable report from iAssess on LSP
+	 * @param $student_id
+	 * @return mixed
+	 */
+	public function getReport($student_id){
+
+		return $this->respondWithData($this->iassess->downloadReport($student_id));
+	}
 
 
 }
