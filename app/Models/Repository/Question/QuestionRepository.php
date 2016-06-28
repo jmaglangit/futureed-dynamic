@@ -98,6 +98,8 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 				$count = $question->count();
 
+				$question = $question->OrderByDifficulty();
+
 				$question = $question->orderBySeqNo();
 
 				$question = $question->orderById();
