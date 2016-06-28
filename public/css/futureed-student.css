@@ -78,8 +78,9 @@
 	font-size: 15px;
 }
 
-.nav-points-rewards .btn {
+.nav-points-rewards a.btn {
 	padding-bottom: 0px;
+	padding-top: 4px;
 }
 
 .ul-left {
