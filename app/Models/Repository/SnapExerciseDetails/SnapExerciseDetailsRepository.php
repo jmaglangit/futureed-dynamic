@@ -14,7 +14,7 @@ class SnapExerciseDetailsRepository implements SnapExerciseDetailsRepositoryInte
 
 	public function addSnapExerciseDetails($data)
 	{
-		DB::transaction();
+		DB::beginTransaction();
 		try
 		{
 			$response = SnapExerciseDetail::create($data);
@@ -26,7 +26,7 @@ class SnapExerciseDetailsRepository implements SnapExerciseDetailsRepositoryInte
 
 			return $e->getMessage();
 		}
-
+		DB::commit();
 		return $response;
 	}
 

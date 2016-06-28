@@ -399,7 +399,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			data.module_id = self.record.student_module.id;
 			data.last_answered_question_id = parseInt(self.current_question.id);
 
-		updateModuleStudent(data);
+		updateModuleStudent(data, function(resp) {
+			if(resp.data)
+			{
+				self.record.student_module.last_answered_question_id = resp.data.last_answered_question_id;
+			}
+		});
 	}
 
 	self.skipSnapQuestion = function() {
@@ -722,7 +727,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					// show message
 					self.result = response.data;
 					self.result.failed = Constants.FALSE;
-					self.snap_exercise_commpleted = self.result.snap_module_completed | 0;
+
+					if(self.result.snap_module_completed) {
+						self.snap_exercise_commpleted = self.result.snap_module_completed;
+					}
 
 					if(angular.equals(self.result.module_status, "Completed")) {
 						// get points
@@ -1424,9 +1432,20 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		StudentModuleService.getSnapModule(filename).success(
 			function(response)
 			{
-				if(callback)
+				try
 				{
-					callback(response);
+					if(response.data.no_file)
+					{
+						$('#world_container').hide();
+					}
+				}
+				catch (err)
+				{
+					$('#world_container').show();
+					if(callback)
+					{
+						callback(response);
+					}
 				}
 				$scope.ui_unblock();
 			}
