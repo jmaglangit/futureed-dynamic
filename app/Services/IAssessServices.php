@@ -215,6 +215,12 @@ class IAssessServices {
 			}
 	}
 
+	/**
+	 * IAssess Link to LSP report.
+	 * @param $student_id
+	 * @param bool|false $is_adult
+	 * @return bool|string
+	 */
 	public function downloadReport($student_id,$is_adult = false){
 
 		if($this->login()) {
