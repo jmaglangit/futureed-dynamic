@@ -19,7 +19,7 @@
 					<li class="nav-points-rewards">
 						{{--Hover "click Points to see Rewards." pop-up modal--}}
 						<a class="btn"  ng-click="displayRewardsModal()">
-							<img data-toggle="reward" data-placement="bottom" title="{!! trans('messages.click_view_rewards') . ' ' !!}"
+							<img data-toggle="reward" data-placement="bottom" title="{!! trans('messages.click_view_rewards') !!}"
 								 src="/images/icons/icon-reward.png" class="nav-icon-holder"/>
 						</a>
 						<span class="user-points">{! user.cash_points !}</span>
