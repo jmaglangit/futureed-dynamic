@@ -330,8 +330,10 @@ class AppServiceProvider extends ServiceProvider {
 
 		$this->app->bind(
 			'FutureEd\Models\Repository\SnapExerciseDetails\SnapExerciseDetailsRepositoryInterface',
-			'FutureEd\Models\Repository\SnapExerciseDetails\SnapExerciseDetailsRepository',
+			'FutureEd\Models\Repository\SnapExerciseDetails\SnapExerciseDetailsRepository'
+		);
 
+		$this->app->bind(
 			'FutureEd\Models\Repository\SubscriptionDay\SubscriptionDayRepositoryInterface',
 			'FutureEd\Models\Repository\SubscriptionDay\SubscriptionDayRepository'
 		);

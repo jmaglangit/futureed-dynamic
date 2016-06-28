@@ -100,6 +100,8 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 				$question = $question->orderBySeqNo();
 
+				$question = $question->orderById();
+
 				//set offset to last_answered_question
 				if (isset($criteria['last_answered_question_id'])) {
 
@@ -473,7 +475,9 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 			$response = Question::whereModuleId($module_id)
 				->whereStatus(config('futureed.enabled'))
-				->orderBySeqNo()->get();
+				->orderBySeqNo()
+				->whereBetween('difficulty', [1,3])
+				->get();
 
 		} catch (\Exception $e) {
 

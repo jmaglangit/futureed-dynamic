@@ -156,6 +156,11 @@ class Question extends Model {
 		return $query->OrderBy('seq_no', 'desc');
 	}
 
+	public function scopeOrderById($query) {
+
+		return $query->OrderBy('id');
+	}
+
 	public function scopeDifficulty($query, $difficulty) {
 
 		return $query->whereDifficulty($difficulty);

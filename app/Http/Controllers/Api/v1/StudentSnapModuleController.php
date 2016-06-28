@@ -48,10 +48,18 @@ class StudentSnapModuleController extends ApiController
 	 */
 	public function show($question_id)
 	{
-		if(File::exists(storage_path('app/snap/'.$question_id.'/cod.xml'))) {
-			return response()->download(storage_path('app/snap/'.$question_id.'/cod.xml'), 'cod.xml',['Content-Type' => 'text/xml']);
+		$file = glob(storage_path('app/snap/'.$question_id.'/*.xml'));
+
+		if(empty($file))
+		{
+			return $this->respondWithData(true);
 		}
-		return $this->respondWithData(true);
+
+		if(File::exists($file[0]))
+		{
+				return response()->download($file[0], 'cod.xml',['Content-Type' => 'text/xml']);
+		}
+
 	}
 
 	/**

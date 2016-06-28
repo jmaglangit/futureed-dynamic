@@ -53,6 +53,11 @@ return [
 			'root'   => base_path().'/resources/lang/',
 		],
 
+		'snap' => [
+			'driver' => 'local',
+			'root' => storage_path().'/app/snap',
+		],
+
 		's3' => [
 			'driver' => 's3',
 			'key'    => 'your-key',
