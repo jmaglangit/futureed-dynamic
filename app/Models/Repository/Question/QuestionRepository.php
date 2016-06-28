@@ -98,11 +98,7 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 				$count = $question->count();
 
-				$question = $question->OrderByDifficulty();
-
-				$question = $question->orderBySeqNo();
-
-				$question = $question->orderById();
+				$question = $question->orderByDifficulty()->orderBySeqNo()->orderById();
 
 				//set offset to last_answered_question
 				if (isset($criteria['last_answered_question_id'])) {
