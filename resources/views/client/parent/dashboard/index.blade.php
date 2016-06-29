@@ -51,7 +51,7 @@
 				<select ng-model="reports.student_id"
 					ng-change="reports.changeStudentId()"
 					class="form-control">
-				<option ng-repeat="student in reports.student_list"
+				<option ng-repeat="student in reports.enabled_lists"
 						ng-value="student.id"
 						ng-selected="reports.student_id == student.id"
 						>{! student.first_name + ' ' +  student.last_name !}
