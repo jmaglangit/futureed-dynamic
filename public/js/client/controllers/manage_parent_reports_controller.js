@@ -359,8 +359,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 								);
 							}
 						}
-                        
-                        self.enabled_lists = list;
+self.enabled_lists = list;
 						self.changeStudentId(self.enabled_lists[0].id);
 					}
 				}
