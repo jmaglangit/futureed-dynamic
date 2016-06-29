@@ -1199,7 +1199,7 @@ hr {
 }
 
 .result-image {
-	margin: 87px auto 0px -70%;
+	margin: 100px auto 0px auto;
 	text-align: center;
 	background: #e8e8e8;
 	border-radius: 50%;
@@ -1222,7 +1222,7 @@ hr {
 }
 
 .result-message {
-	margin: 100px 40% 40px 40%;
+	margin: 100px 40% 40px 37.3%;
 	padding: 20px;
 	border-radius: 5px;
 	font-size: 22px;
