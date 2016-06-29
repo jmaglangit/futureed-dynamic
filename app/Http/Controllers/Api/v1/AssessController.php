@@ -51,8 +51,13 @@ class AssessController extends ApiController {
 	/**
 	 * Assess Controller constructor
 	 *
-	 * @param IAssessServices
-	 * @return void
+	 * @param iAssess $iassess
+	 * @param StudentLsScore $student_ls_score
+	 * @param StudentLsAnswer $student_ls_answer
+	 * @param LearningStyle $learning_style
+	 * @param Student $student
+	 * @param StudentServices $student_service
+	 * @internal param $IAssessServices
 	 */
 	public function __construct(iAssess $iassess,
 		StudentLsScore $student_ls_score,
@@ -77,13 +82,7 @@ class AssessController extends ApiController {
 	 */
 	 public function getTest(){
 		
-		$is_adult = false;
-		
-		if($student_id = Input::get('student_id')) {
-			if($this->student_service->getAge($student_id) >= config('futureed.lsp_for_adult_age')) {
-				$is_adult = true;
-			}
-		}
+		$is_adult = $this->iassess->isAdult(Input::get('student_id'));
 		
 		if($this->iassess->getTestData($is_adult)) {
 		
@@ -110,10 +109,14 @@ class AssessController extends ApiController {
 		$input = Input::all();
 		
 		$student_id = $input['student_id'];
-				
+
 		if($this->iassess->saveTestData($input)) {
 
-			$this->iassess->calculateTestData($this->student->getStudent($student_id));
+			$score_data = $this->iassess->data;
+
+			$is_adult = $this->iassess->isAdult($student_id);
+
+			$this->iassess->calculateTestData($this->student->getStudent($student_id),$is_adult);
 
 			#save answers
 			if($input['user_answers']) {
@@ -133,7 +136,7 @@ class AssessController extends ApiController {
 						$answer_data['ls_question_answer_id'] = $answer['answers'][0]['answer_id'];
 						$answer_data['ls_answer_text'] = $answer['answers'][0]['answer_text'];
 						$answer_data['ls_raw_score'] = 0;
-						
+
 						$added_answer = $this->student_ls_answer->addAnswer($answer_data);
 						
 						$sequence_no++;
@@ -141,11 +144,9 @@ class AssessController extends ApiController {
 				}
 			}
 		
-			$data = $this->iassess->data;
-			
 			$response = ['learning_style_id' => config('futureed.default_lsp')];
 			
-			foreach($data as $score) {
+			foreach($score_data as $score) {
 				#save scores
 				
 				$save_data = array();
@@ -190,7 +191,9 @@ class AssessController extends ApiController {
 	 */
 	public function getReport($student_id){
 
-		return $this->respondWithData($this->iassess->downloadReport($student_id));
+		$is_adult = $this->iassess->isAdult($student_id);
+
+		return $this->respondWithData($this->iassess->downloadReport($student_id,$is_adult));
 	}
 
 
