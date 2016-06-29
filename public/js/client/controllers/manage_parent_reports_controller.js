@@ -344,6 +344,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 				} else if(response.data) {
 					if(response.data.total){
 						var list = [];
+
 						self.active_report = Constants.TRUE;
 						self.student_list = response.data.records;
 
@@ -358,7 +359,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 								);
 							}
 						}
-
+                        
                         self.enabled_lists = list;
 						self.changeStudentId(self.enabled_lists[0].id);
 					}
