@@ -42,10 +42,8 @@ class ClientRequest extends ApiRequest {
 					case 'PUT':
 						$common_validations = [
 							'id' => 'required|numeric',
-							'street_address' => 'string|max:128',
-							'city' => 'max:128|regex:' . config('regex.state_city'),
+
 							'country' => 'string|max:128',
-							'country_id' => 'numeric',
 							'state' => 'max:128|regex:' . config('regex.state_city'),
 							'zip' => 'max:10|regex:' . config('regex.zip_code')
 						];
@@ -61,7 +59,24 @@ class ClientRequest extends ApiRequest {
 								'school_city' => 'max:128|regex:' . config('regex.state_city'),
 								'school_zip' => 'max:10|regex:' . config('regex.zip_code'),
 								'school_contact_name' => 'required|min:2|regex:' . config('regex.name') . '|max:128',
-								'school_contact_number' => 'required|max:20|regex:' . config('regex.phone')
+								'school_contact_number' => 'required|max:20|regex:' . config('regex.phone'),
+								'street_address' => 'string|max:128',
+								'city' => 'max:128|regex:' . config('regex.state_city'),
+								'country_id' => 'numeric',
+							];
+						}
+
+						if($role == config('futureed.teacher')) {
+							$specific_role_validations = [
+								'school_name' => 'required|string|max:128',
+							];
+						}
+
+						if($role == config('futureed.parent')) {
+							$specific_role_validations = [
+								'street_address' => 'required|string|max:128',
+								'city' => 'required|max:128|regex:' . config('regex.state_city'),
+								'country_id' => 'required|numeric',
 							];
 						}
 						break;
@@ -71,11 +86,8 @@ class ClientRequest extends ApiRequest {
 							'client_role' => 'required|in:' . config('futureed.parent') . ',' . config('futureed.principal') . ',' . config('futureed.teacher'),
 							'callback_uri' => 'required|string|max:128',
 							'status' => 'required|in:Enabled,Disabled',
-							'street_address' => 'string|max:128',
 							'country' => 'string|max:128',
-							'country_id' => 'numeric',
 							'zip' => 'max:10|regex:' . config('regex.zip_code'),
-							'city' => 'max:128|regex:' . config('regex.state_city'),
 							'state' => 'max:128|regex:' . config('regex.state_city'),
 						];
 
@@ -85,27 +97,39 @@ class ClientRequest extends ApiRequest {
 							];
 						}
 
-						if ($role === config('futureed.principal') || $role === config('futureed.parent')) {
-							if (strtolower($role) === config('futureed.principal')) {
-								$principal_validations = [
-									'school_name' => 'required|string|max:128',
-									'school_state' => 'required|string|max:128',
-									'school_country' => 'string|max:128',
-									'school_country_id' => 'required|numeric',
-									'school_address' => 'required|string|max:128',
-									'school_city' => 'string|max:128',
-									'school_zip' => 'max:10|regex:' . config('regex.zip_code'),
-									'contact_name' => 'required|min:2|regex:' . config('regex.name') . '|max:128',
-									'contact_number' => 'required|max:20'
-								];
-								$specific_role_validations = array_merge($specific_role_validations, $principal_validations);
-							}
+						if ($role === config('futureed.principal')) {
+							$principal_validations = [
+								'school_name' => 'required|string|max:128',
+								'school_state' => 'required|string|max:128',
+								'school_country' => 'string|max:128',
+								'school_country_id' => 'required|numeric',
+								'school_address' => 'required|string|max:128',
+								'school_city' => 'string|max:128',
+								'school_zip' => 'max:10|regex:' . config('regex.zip_code'),
+								'contact_name' => 'required|min:2|regex:' . config('regex.name') . '|max:128',
+								'contact_number' => 'required|max:20',
+
+								'country_id' => 'numeric',
+								'city' => 'max:128|regex:' . config('regex.state_city'),
+								'street_address' => 'string|max:128',
+							];
+							$specific_role_validations = array_merge($specific_role_validations, $principal_validations);
+						}
+
+						if ($role === config('futureed.parent')) {
+							$parent_validations = [
+								'country_id' => 'required|numeric',
+								'city' => 'required|max:128|regex:' . config('regex.state_city'),
+								'street_address' => 'required|string|max:128',
+							];
+							$specific_role_validations = array_merge($specific_role_validations, $parent_validations);
 						}
 
 						break;
 				}
 				break;
 		}
+
 		return (array_merge($default_validations, $specific_role_validations, $common_validations));
 	}
 
@@ -128,7 +152,7 @@ class ClientRequest extends ApiRequest {
 			'school_country_id.required' => trans('validation.required',['attribute' => trans('errors.2154')]),
 			'school_country_id.numeric' => trans('validation.numeric',['attribute' => trans('errors.2154')]),
 
-			'country_id.required' => trans('validation.required',['attribute' => trans('errors.2154')]),
+			'country_id.required' => trans('validation.required',['attribute' => strtolower(trans('errors.2154'))]),
 			'country_id.numeric' => trans('validation.numeric',['attribute' => trans('errors.2154')]),
 
 			'contact_number.max' => trans('errors.1011',['attribute' => trans('errors.2188')]),
