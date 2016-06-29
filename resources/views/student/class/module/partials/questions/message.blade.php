@@ -72,6 +72,10 @@
 									{!! trans('messages.view_more') !!}
 								</button>
 							</div>
+							<div class="wiki-link">
+								<div class="col-lg-4 h5">Wikipedia Source :</div>
+								<div class="col-lg-6 h5"><a target="__blank" href="{! mod.module_message.source !}">{! mod.module_message.source !}</a></div>
+							</div>
 						</div>
 					</div>
 				</div>

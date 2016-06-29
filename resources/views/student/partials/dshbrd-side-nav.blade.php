@@ -3,7 +3,8 @@
 
 	<li class="active">
 		<a href="{!! route('student.dashboard.index') !!}">
-			<i class="fa fa-arrow-left"></i> {!! trans('messages.back_to_dashboard') !!}</a>
+			{!! trans('messages.back_to_dashboard') !!}
+		</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_index || profile.active_edit_email || profile.active_confirm_email}">
