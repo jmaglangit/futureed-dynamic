@@ -83,6 +83,10 @@
 	padding-top: 4px;
 }
 
+.nav-points-rewards .tooltip .tooltip-inner {
+	max-width: 250px;
+}
+
 .ul-left {
 	margin-left: 30px;
 }
