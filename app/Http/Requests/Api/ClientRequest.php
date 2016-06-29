@@ -144,9 +144,9 @@ class ClientRequest extends ApiRequest {
 		];
 	}
 
-	private function common_principal_school_validation($is_required = false)
+	private function common_principal_school_validation($has_state_city_regex = false)
 	{
-		$validation = $is_required == true ? '|regex:'.config('regex.state_city') : '';
+		$validation = $has_state_city_regex == true ? '|regex:'.config('regex.state_city') : '';
 		return [
 			'school_state'	=> 'required|string|max:128'.$validation,
 			'school_city'   => 'string|max:128'.$validation,
