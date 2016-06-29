@@ -24,7 +24,7 @@
 					<li class="nav-points-rewards">
 						{{--Hover "click Points to see Rewards." pop-up modal--}}
 						<a class="btn"  >
-							<img data-toggle="reward" data-placement="bottom" title="{!! trans('messages.rewards') !!}"
+							<img data-toggle="reward" data-placement="bottom" title="{!! trans('messages.points') !!}"
 								 src="/images/icons/icon-reward.png" class="nav-icon-holder"/>
 						</a>
 						<span class="user-points">{! user.cash_points !}</span>
