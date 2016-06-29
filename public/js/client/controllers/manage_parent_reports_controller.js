@@ -342,25 +342,25 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					if(response.data.total){
-						var list = [];
+					if(response.data.total) {
+                        var list = [];
+                        self.active_report = Constants.TRUE;
+                        self.student_list = response.data.records;
 
-						self.active_report = Constants.TRUE;
-						self.student_list = response.data.records;
-
-						for(var i = 0; i < self.student_list.length; i++) {
-							if(self.student_list[i].parent.status == Constants.ENABLED){
-								list.push(
-									{
-										id          :   self.student_list[i].id,
-										first_name  :   self.student_list[i].first_name,
-										last_name   :   self.student_list[i].last_name
-									}
-								);
-							}
-						}
+                        for (var i = 0; i < self.student_list.length; i++) {
+                            if (self.student_list[i].parent.status == Constants.ENABLED) {
+                                list.push(
+                                    {
+                                        id: self.student_list[i].id,
+                                        first_name: self.student_list[i].first_name,
+                                        last_name: self.student_list[i].last_name
+                                    }
+                                );
+                            }
+                        }
+                        self.enabled_lists = list;
                         self.changeStudentId(self.enabled_lists[0].id);
-					}
+                    }
 				}
 			}
 			$scope.ui_unblock();
