@@ -2257,3 +2257,7 @@ pre.dropdown-menu {
 .wiki-link a {
 	margin-left: -50px;
 }
+
+.accessory-user-points, .accessory-user-points:hover {
+	padding-top: 6px;
+}
