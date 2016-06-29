@@ -33,9 +33,17 @@ class IAssessServices {
      */
 	var $data;
 
-	public function __construct() {
+	/**
+	 *  holds student services
+	 */
+	protected $student_service;
+
+	public function __construct(
+		StudentServices $studentServices
+	) {
 		$curl = new \Curl\Curl();
 		$this->curl = $curl;
+		$this->student_service = $studentServices;
 	}
 	
     /**
@@ -239,5 +247,10 @@ class IAssessServices {
 			$this->errorLog('IASSESS : Invalid login');
 			return FALSE;
 		}
+	}
+
+	public function isAdult($student_id){
+
+		return ($this->student_service->getAge($student_id) >= config('futureed.lsp_for_adult_age')) ? true : false;
 	}
 }
