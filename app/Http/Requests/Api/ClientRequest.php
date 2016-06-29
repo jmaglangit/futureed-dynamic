@@ -65,8 +65,8 @@ class ClientRequest extends ApiRequest {
 								'school_contact_name' 	=> 'required|min:2|regex:' . config('regex.name') . '|max:128',
 								'school_contact_number' => 'required|max:20|regex:' . config('regex.phone'),
 							];
+							$specific_role_validations = array_merge($specific_role_validations, $this->common_parent_principal_validation(), $this->common_principal_school_validation(true));
 							$specific_role_validations = array_merge($specific_role_validations, $principal_validations, $common_principal_validations);
-							$specific_role_validations = array_merge($specific_role_validations, $this->common_parent_principal_validation(), $this->common_principal_school_validation(config('regex.state_city')));
 						}
 
 						if($role == config('futureed.teacher')) {
@@ -74,7 +74,7 @@ class ClientRequest extends ApiRequest {
 						}
 
 						if($role == config('futureed.parent')) {
-							$specific_role_validations = $this->common_parent_principal_validation('required');
+							$specific_role_validations = $this->common_parent_principal_validation(true);
 						}
 						break;
 					case 'POST':
@@ -99,7 +99,7 @@ class ClientRequest extends ApiRequest {
 						}
 
 						if ($role === config('futureed.parent')) {
-							$specific_role_validations = $this->common_parent_principal_validation('required');
+							$specific_role_validations = $this->common_parent_principal_validation(true);
 						}
 
 						break;
@@ -134,12 +134,9 @@ class ClientRequest extends ApiRequest {
 		];
 	}
 
-	private function common_parent_principal_validation($validation = '')
+	private function common_parent_principal_validation($is_required = false)
 	{
-		if(!empty($validation))
-		{
-			$validation = $validation.'|';
-		}
+		$validation = $is_required == true ? 'required|' : '';
 		return [
 			'country_id' 		=> $validation.'numeric',
 			'city'              => $validation.'max:128|regex:' . config('regex.state_city'),
@@ -147,12 +144,9 @@ class ClientRequest extends ApiRequest {
 		];
 	}
 
-	private function common_principal_school_validation($validation = '')
+	private function common_principal_school_validation($is_required = false)
 	{
-		if(!empty($validation))
-		{
-			$validation = '|regex:'.$validation;
-		}
+		$validation = $is_required == true ? '|regex:'.config('regex.state_city') : '';
 		return [
 			'school_state'	=> 'required|string|max:128'.$validation,
 			'school_city'   => 'string|max:128'.$validation,
