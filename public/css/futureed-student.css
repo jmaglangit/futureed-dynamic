@@ -2245,3 +2245,11 @@ pre.dropdown-menu {
 .cur_code {
 	cursor: pointer;
 }
+
+.wiki-link {
+	padding-top: 70px;
+}
+
+.wiki-link a {
+	margin-left: -50px;
+}
