@@ -127,7 +127,7 @@
 							<div class="form-group" ng-if="record.parent.status == futureed.DISABLED" ng-cloak>
 								<div class="col-xs-12 btn-container">
 									<a href="javascript:void(0)" class="btn btn-blue"
-									   ng-click="student.setActive('invite')">{!! trans('messages.confirm_invitation') !!}</a>
+									   ng-click="student.setActive(futureed.INVITE)">{!! trans('messages.confirm_invitation') !!}</a>
 								</div>
 							</div>
 

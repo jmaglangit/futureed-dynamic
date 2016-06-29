@@ -13,6 +13,7 @@ var Constants = {
 	, ALL			: 'all'
 	, UNDEFINED		: 'undefined'
 	, NULL 			: null
+	, INVITE        : 'invite'
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
