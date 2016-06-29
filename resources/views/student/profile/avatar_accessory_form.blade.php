@@ -3,13 +3,13 @@
 		<div class="form-class">
 			<div class="clearfix" ng-if="profile.has_accessories">
 				<ul class="nav navbar-nav">
-					<li class="nav-label">{!! trans('messages.cash_points') !!}</li>
-					<li class="nav-points-rewards">
-						{!! Html::image('/images/icons/icon-cash-points.png', ''
+					<li class="nav-label">{!! trans('messages.points') !!}</li>
+					<li class="nav-points-rewards accessory-user-points">
+						{!! Html::image('/images/icons/icon-reward.png', ''
 							, array(
 								'class' => 'nav-icon-holder'
 							)
-						) !!} {! user.cash_points !}
+						) !!} <span>{! user.cash_points !}</span>
 					</li>
 				</ul>
 			</div>
