@@ -87,6 +87,11 @@
 	max-width: 250px;
 }
 
+.nav-label div.tooltip div.tooltip-inner {
+	max-width: 250px;
+	white-space: nowrap;
+}
+
 .ul-left {
 	margin-left: 30px;
 }
