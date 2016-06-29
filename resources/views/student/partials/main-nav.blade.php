@@ -15,11 +15,16 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					{{--<li class="nav-label"><div class="btn btn-primary">{!! trans('messages.rewards') !!}</div></li>--}}
+					<li class="nav-label">
+						<div class="btn btn-blue" ng-click="displayRewardsModal()"
+							 data-toggle="reward" data-placement="bottom" title="{!! trans('messages.click_view_rewards') !!}">
+							{!! trans('messages.rewards') !!}
+						</div>
+					</li>
 					<li class="nav-points-rewards">
 						{{--Hover "click Points to see Rewards." pop-up modal--}}
-						<a class="btn"  ng-click="displayRewardsModal()">
-							<img data-toggle="reward" data-placement="bottom" title="{!! trans('messages.click_view_rewards') !!}"
+						<a class="btn"  >
+							<img data-toggle="reward" data-placement="bottom" title="{!! trans('messages.rewards') !!}"
 								 src="/images/icons/icon-reward.png" class="nav-icon-holder"/>
 						</a>
 						<span class="user-points">{! user.cash_points !}</span>
