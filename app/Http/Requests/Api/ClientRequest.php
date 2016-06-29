@@ -19,7 +19,8 @@ class ClientRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		switch($this->route()->getName()) {
+		switch($this->route()->getName())
+		{
 			case 'api.v1.client.update.billing-address':
 				return [
 					'country_id' => 'numeric',
@@ -34,50 +35,56 @@ class ClientRequest extends ApiRequest {
 					'email' => 'required|email',
 					'first_name' => 'required|min:2|regex:' . config('regex.name') . '|max:64',
 					'last_name' => 'required|min:2|regex:' . config('regex.name') . '|max:64',
+					'country' => 'string|max:128',
+					'zip' => 'max:10|regex:' . config('regex.zip_code'),
+					'state' => 'max:128|regex:' . config('regex.state_city'),
 				];
+
 				$common_validations = [];
 				$specific_role_validations = [];
+				$parent_validations = [
+					'country_id' => 'required|numeric',
+					'city' => 'required|max:128|regex:' . config('regex.state_city'),
+					'street_address' => 'required|string|max:128',
+				];
+				$common_principal_validations = [
+					'country_id' => 'numeric',
+					'city' => 'max:128|regex:' . config('regex.state_city'),
+					'street_address' => 'string|max:128',
+					'school_name' => 'required|string|max:128',
+					'school_country' => 'string|max:128',
+					'school_country_id' => 'required|numeric',
+					'school_zip' => 'max:10|regex:' . config('regex.zip_code'),
+				];
+				$common_teacher_validation = [
+					'school_name' => 'required|string|max:128',
+				];
 				$role = $this->input('client_role');
+
 				switch ($this->method()) {
 					case 'PUT':
 						$common_validations = [
 							'id' => 'required|numeric',
-
-							'country' => 'string|max:128',
-							'state' => 'max:128|regex:' . config('regex.state_city'),
-							'zip' => 'max:10|regex:' . config('regex.zip_code')
 						];
 
 						if ($role === config('futureed.principal')) {
-							$specific_role_validations = [
+							$principal_validations = [
 								'school_code' => 'required|numeric|exists:schools,code,deleted_at,NULL',
-								'school_name' => 'required|string|max:128',
 								'school_state' => 'required|max:128|regex:' . config('regex.state_city'),
-								'school_country' => 'string|max:128',
-								'school_country_id' => 'required|numeric',
 								'school_street_address' => 'required|string|max:128',
 								'school_city' => 'max:128|regex:' . config('regex.state_city'),
-								'school_zip' => 'max:10|regex:' . config('regex.zip_code'),
 								'school_contact_name' => 'required|min:2|regex:' . config('regex.name') . '|max:128',
 								'school_contact_number' => 'required|max:20|regex:' . config('regex.phone'),
-								'street_address' => 'string|max:128',
-								'city' => 'max:128|regex:' . config('regex.state_city'),
-								'country_id' => 'numeric',
 							];
+							$specific_role_validations = array_merge($specific_role_validations, $principal_validations, $common_principal_validations);
 						}
 
 						if($role == config('futureed.teacher')) {
-							$specific_role_validations = [
-								'school_name' => 'required|string|max:128',
-							];
+							$specific_role_validations = $common_teacher_validation;
 						}
 
 						if($role == config('futureed.parent')) {
-							$specific_role_validations = [
-								'street_address' => 'required|string|max:128',
-								'city' => 'required|max:128|regex:' . config('regex.state_city'),
-								'country_id' => 'required|numeric',
-							];
+							$specific_role_validations = $parent_validations;
 						}
 						break;
 					case 'POST':
@@ -86,43 +93,25 @@ class ClientRequest extends ApiRequest {
 							'client_role' => 'required|in:' . config('futureed.parent') . ',' . config('futureed.principal') . ',' . config('futureed.teacher'),
 							'callback_uri' => 'required|string|max:128',
 							'status' => 'required|in:Enabled,Disabled',
-							'country' => 'string|max:128',
-							'zip' => 'max:10|regex:' . config('regex.zip_code'),
-							'state' => 'max:128|regex:' . config('regex.state_city'),
 						];
 
 						if ($role == config('futureed.teacher')) {
-							$specific_role_validations = [
-								'school_name' => 'required|string|max:128',
-							];
+							$specific_role_validations = $common_teacher_validation;
 						}
 
 						if ($role === config('futureed.principal')) {
 							$principal_validations = [
-								'school_name' => 'required|string|max:128',
 								'school_state' => 'required|string|max:128',
-								'school_country' => 'string|max:128',
-								'school_country_id' => 'required|numeric',
 								'school_address' => 'required|string|max:128',
 								'school_city' => 'string|max:128',
-								'school_zip' => 'max:10|regex:' . config('regex.zip_code'),
 								'contact_name' => 'required|min:2|regex:' . config('regex.name') . '|max:128',
 								'contact_number' => 'required|max:20',
-
-								'country_id' => 'numeric',
-								'city' => 'max:128|regex:' . config('regex.state_city'),
-								'street_address' => 'string|max:128',
 							];
-							$specific_role_validations = array_merge($specific_role_validations, $principal_validations);
+							$specific_role_validations = array_merge($specific_role_validations, $principal_validations, $common_principal_validations);
 						}
 
 						if ($role === config('futureed.parent')) {
-							$parent_validations = [
-								'country_id' => 'required|numeric',
-								'city' => 'required|max:128|regex:' . config('regex.state_city'),
-								'street_address' => 'required|string|max:128',
-							];
-							$specific_role_validations = array_merge($specific_role_validations, $parent_validations);
+							$specific_role_validations = $parent_validations;
 						}
 
 						break;
