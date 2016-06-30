@@ -104,7 +104,7 @@
 			<table id="class-list" class="table table-striped table-bordered" ng-if="!invoice.view_students_tables">
 				<thead>
 					<tr>
-						<td>{!! trans('messages.no_of_seats') !!}</td>
+						<td>{!! trans_choice('messages.no_of_seats', 1) !!}</td>
 						<td>{!! trans('messages.seats_taken') !!}</td>
 						<td>{!! trans_choice('messages.grade', 1) !!}</td>
 						<td>{!! trans('messages.teacher') !!}</td>

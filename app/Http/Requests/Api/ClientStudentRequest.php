@@ -1,7 +1,5 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
-
 class ClientStudentRequest extends ApiRequest {
 
 	/**
