@@ -92,7 +92,17 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if (response.data) {
-					self.summary.columns = response.data.column_header[0];
+					var data = [];
+
+					angular.forEach(response.data.column_header[0],function(value,key){
+						data.push({
+							'grade'	:	value,
+							'key'	:	key
+						});
+					});
+
+					self.summary.columns = data;
+
 
 					$timeout(function () {
 						self.summary.records = response.data.rows.progress;
@@ -105,7 +115,6 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 					}, 500);
 				}
 			}
-
 			$scope.ui_unblock();
 		}).error(function (response) {
 			self.errors = $scope.internalError();
