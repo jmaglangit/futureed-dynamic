@@ -103,7 +103,6 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 
 					self.summary.columns = data;
 
-
 					$timeout(function () {
 						self.summary.records = response.data.rows.progress;
 						self.student = response.data.additional_information;
