@@ -118,9 +118,6 @@ class AssessController extends ApiController {
 
 			$this->iassess->calculateTestData($this->student->getStudent($student_id),$is_adult);
 
-			//initialize call report to process.
-			$this->iassess->downloadReport($student_id,$is_adult);
-
 			#save answers
 			if($input['user_answers']) {
 				$sequence_no = 1;
