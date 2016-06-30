@@ -1234,9 +1234,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 						self.student_list.push(temp_list[i]);
 					}
 				}
-
-				console.log(self.student_list);
-
+				
 				self.enlist_student = [];
 			}
 		}).error(function(response) {
