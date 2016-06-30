@@ -70,7 +70,6 @@ function ManageInvoiceController($scope, ManageInvoiceService, apiService, Table
 					self.records = [];
 
 					for(var i = 0; i < temp_records.length; i++) {
-						console.log(temp_records[i].invoice_detail.length > 0);
 						if(temp_records[i].invoice_detail.length > 0) {
 							self.records.push(temp_records[i]);
 						}
