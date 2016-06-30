@@ -2270,3 +2270,7 @@ pre.dropdown-menu {
 .top-6 {
 	top: 6px;
 }
+
+.nav-points-rewards a .tooltip .tooltip-inner, .nav-label .tooltip .tooltip-inner {
+	text-transform: capitalize;
+}
