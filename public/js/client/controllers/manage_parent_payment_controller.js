@@ -1224,7 +1224,17 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			}else {
-				self.student_list = response.data.records;
+				var temp_list = response.data.records;
+				self.student_list = [];
+
+				for(var i = 0; i < temp_list.length; i++)
+				{
+					if(temp_list[i].parent.status === Constants.ENABLED)
+					{
+						self.student_list.push(temp_list[i]);
+					}
+				}
+				
 				self.enlist_student = [];
 			}
 		}).error(function(response) {
