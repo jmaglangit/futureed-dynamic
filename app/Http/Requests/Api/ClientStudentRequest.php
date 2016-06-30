@@ -61,8 +61,9 @@ class ClientStudentRequest extends ApiRequest {
 	public function messages()
 	{
 		return [
-			'country_id.required' => trans('errors.1012',['attribute' => strtolower(trans('errors.2154'))]),
-			'grade_code.required' => trans('errors.1012',['attribute' => trans('errors.2153')]),
+			'country_id.required'    => trans('errors.1012',['attribute' => strtolower(trans('errors.2154'))]),
+			'grade_code.required'    => trans('errors.1012',['attribute' => trans('errors.2153')]),
+			'birth_date.date_format' => trans('errors.1003',['attribute' => strtolower(trans('errors.2224'))])
 		];
 	}
 
