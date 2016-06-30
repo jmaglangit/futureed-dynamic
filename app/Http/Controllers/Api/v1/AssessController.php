@@ -196,14 +196,14 @@ class AssessController extends ApiController {
 
 		$is_adult = $this->iassess->isAdult($student_id);
 
-		$link = $this->iassess->downloadReport($student_id,$is_adult);
+		$iAssess_report = $this->iassess->downloadReport($student_id,$is_adult);
 
-		if($link && $link['response']){
+		if($iAssess_report && $iAssess_report['response']){
 
-			return $this->respondWithData($link['link']);
-		} elseif ($link && !$link['response']){
+			return $this->respondWithData($iAssess_report['link']);
+		} elseif ($iAssess_report && !$iAssess_report['response']){
 
-			$error_msg = $link['error'];
+			$error_msg = $iAssess_report['error'];
 
 			$iAssess_error = $this->setErrorCode($error_msg->code)
 				->setMessage(trans('errors.2217') . ': ' .$error_msg->message)
