@@ -223,6 +223,7 @@ return [
 		2221 => 'Teaching Module',
 		2222 => 'Minimum Seats already exists.',
 		2223 => 'Title',
+		2224 => 'Birth date',
 
 		//  Parent Client Error Messages
 		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',

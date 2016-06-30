@@ -1135,7 +1135,7 @@ return [
 	'client_teacher_dashboard_msg1' => 'To get started on using Future Lesson, you need to add a student under a',
 	'client_teacher_dashboard_msg2' => 'To see all your students, click',
 	'client_teacher_dashboard_msg3' => 'To review the lessons and practice questions, click on',
-	'client_view_class_list' => 'View class list',
+	'client_view_class_list' => ' Class list',
 	
 	//views/errors/503.blade.php
 	'be_right_back' => 'Be right back.',
