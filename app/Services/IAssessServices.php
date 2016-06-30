@@ -234,9 +234,32 @@ class IAssessServices {
 		if($this->login()) {
 			if($this->user_id && $this->token) {
 
-				return env('IASSESS_URL').'/api/v1/clients/student/' . $student_id  . '/test/'
+				$link =  env('IASSESS_URL').'/api/v1/clients/student/' . $student_id  . '/test/'
 				. ($is_adult ? config('futureed.lsp_adult_id') : config('futureed.lsp_child_id') )
 				. '/download-report?user_id=' . $this->user_id . '&token=' . $this->token;
+
+				$this->curl->get($link);
+
+				if ($this->curl->error) {
+
+					$this->error_code = $this->curl->error_code;
+
+					$this->errorLog('IASSESS : '. $this->error_code . '/ '. $this->curl->error_message
+						. '/ ' . $this->curl->http_error_message);
+
+					return [
+						'response' => false,
+						'error' => json_decode($this->curl->response)
+					];
+
+				} else {
+
+					return [
+						'response' => true,
+						'link' => $link
+					];
+				}
+
 			} else {
 
 				$this->errorLog('IASSESS : Invalid user and token, ' . $this->user_id . ', ' . $this->token );
