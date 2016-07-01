@@ -25,12 +25,6 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 		try{
 			$invoice = new Invoice();
 
-			// included deleted information for admin users.
-			if ( User::where('id',session('current_user'))->pluck('user_type') == config('futureed.admin')) {
-
-				$invoice = $invoice->withTrashed();
-			}
-
 			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
 				$count = $invoice->count();
