@@ -266,7 +266,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_zip',''
 	        				, array(
-	        					'placeHolder' => 'trans(messages.postal_code)'
+	        					'placeHolder' => trans('messages.postal_code')
 	        					, 'ng-model' => 'client.record.school_zip'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_zip'] }"

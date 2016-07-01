@@ -170,6 +170,8 @@ return [
 	'icon_image_path_final' => base_path() . '/public/uploads/icon',
 	'icon_image_path_final_public' => '/uploads/icon',
 
+	//snap exercise path
+	'snap_exercise_path' => storage_path('app/snap/'),
 
 	//answer status
 	'answer_status_correct' => 'Correct',
@@ -193,6 +195,7 @@ return [
 	'question_type_ordering' => 'O',
 	'question_type_graph' => 'GR',
 	'question_type_quad' => 'QUAD',
+	'question_type_coding' => 'COD',
 
 	//Graph setup
 	'graph_divisible' => 5,
@@ -286,6 +289,9 @@ return [
 
 	//background images folder
 	'background_images_folder' => 'images/background-images',
+
+	//games images folder
+	'game_images_folder' => '/uploads/games',
 
 	'accepted_csv' => [
 		'text/csv',

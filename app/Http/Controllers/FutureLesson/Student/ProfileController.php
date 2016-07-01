@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Session;
 class ProfileController extends Controller {
 
 	public function index() {
-		return view('student.profile.index');
+		$tab = Input::get('tab');
+		return view('student.profile.index', ['tab' => $tab]);
 	}
 
 	public function profile_form() {
@@ -41,6 +42,14 @@ class ProfileController extends Controller {
 
 	public function settings(){
 		return view('student.profile.settings');
+	}
+
+	public function games(){
+		return view('student.profile.games_list');
+	}
+
+	public function play_game(){
+		return view('student.profile.play_game');
 	}
 
 	public function enter_email_code() {

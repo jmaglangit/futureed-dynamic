@@ -113,6 +113,10 @@
 					'as' => 'student.dashboard.follow_up_registration'
 					, 'uses' => 'FutureLesson\Student\DashboardController@follow_up_registration'
 				]);
+			Routes::get('/messages',[
+					'as' => 'student.dashboard.message',
+					'uses' => 'FutureLesson\Student\DashboardController@messages'
+				]);
 		});
 
 		Routes::group([
@@ -399,6 +403,15 @@
 					'as' => 'student.partials.settings'
 					, 'uses' => 'FutureLesson\Student\ProfileController@settings'
 				]);
+				Routes::get('/games',[
+					'as' => 'student.partials.games_list',
+					'uses' => 'FutureLesson\Student\ProfileController@games'
+				]);
+				Routes::get('/play-game',[
+					'as' => 'student.partials.play-game',
+					'uses' => 'FutureLesson\Student\ProfileController@play_game'
+				]);
+
 			});
 		});
 

@@ -38,6 +38,7 @@ Routes::group([
 	include('Routes/Api/Countries.php');
 	include('Routes/Api/Event.php');
 	include('Routes/Api/Facebook.php');
+	include('Routes/Api/Game.php');
 	include('Routes/Api/Grade.php');
 	include('Routes/Api/Google.php');
 	include('Routes/Api/HelpRequest.php');
@@ -60,6 +61,7 @@ Routes::group([
 	include('Routes/Api/School.php');
 	include('Routes/Api/Student.php');
 	include('Routes/Api/StudentBadge.php');
+	include('Routes/Api/StudentGame.php');
 	include('Routes/Api/StudentModule.php');
 	include('Routes/Api/StudentModuleAnswer.php');
 	include('Routes/Api/StudentPoint.php');

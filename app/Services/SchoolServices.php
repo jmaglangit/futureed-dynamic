@@ -29,6 +29,11 @@ class SchoolServices {
 	protected $excelling = 0;
 
 	/**
+	 * @var SchoolRepositoryInterface $schools
+	 */
+	protected $schools;
+
+	/**
 	 * @param SchoolRepositoryInterface $schools
 	 */
 	public function __construct(
@@ -74,7 +79,7 @@ class SchoolServices {
 	 */
 	public function getSchoolDetails($id) {
 
-		return $this->school->getSchoolDetails($id);
+		return $this->schools->getSchoolDetails($id);
 
 	}
 
@@ -85,7 +90,7 @@ class SchoolServices {
 	 */
 	public function checkSchoolNameExist($input) {
 
-		return $this->school->checkSchoolNameExist($input);
+		return $this->schools->checkSchoolNameExist($input);
 	}
 
 	/**
@@ -93,7 +98,7 @@ class SchoolServices {
 	 */
 	public function updateSchoolDetails($input) {
 
-		$this->school->updateSchoolDetails($input);
+		$this->schools->updateSchoolDetails($input);
 
 	}
 
@@ -103,7 +108,7 @@ class SchoolServices {
 	 */
 	public function getSchoolCode($school_name) {
 
-		return $this->school->getSchoolCode($school_name);
+		return $this->schools->getSchoolCode($school_name);
 
 	}
 
@@ -113,7 +118,7 @@ class SchoolServices {
 	 */
 	public function searchSchool($school_name) {
 
-		return $this->school->searchSchool($school_name);
+		return $this->schools->searchSchool($school_name);
 	}
 
 

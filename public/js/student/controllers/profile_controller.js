@@ -1,10 +1,14 @@
 angular.module('futureed.controllers')
 	.controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ['$scope', '$timeout','apiService', 'ProfileService'];
+ProfileController.$inject = ['$scope', '$sce', '$timeout','apiService', 'ProfileService','TableService'];
 
-function ProfileController($scope, $timeout,apiService, ProfileService) {
+function ProfileController($scope,$sce, $timeout,apiService, ProfileService, TableService) {
 	var self = this;
+
+	TableService(self);
+	self.tableDefaults();
+
 	self.prof = {};
 	self.user_type = Constants.STUDENT;
 	
@@ -38,6 +42,17 @@ function ProfileController($scope, $timeout,apiService, ProfileService) {
 		});
 	});
 
+	$scope.$watch("profile.games_list", function (newValue, oldValue) {
+		$timeout(function() {
+			$('.game-box').each(function() {
+				$(this).magnificPopup({
+					delegate: '.game-box-image',
+					type:'image',
+				});
+			});
+		});
+	});
+
 	function setStudentProfileActive(active) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -60,11 +75,15 @@ function ProfileController($scope, $timeout,apiService, ProfileService) {
 		self.active_avatar_accessory = Constants.FALSE;
 		self.buy_avatar_accessory_modal = Constants.FALSE;
 		self.settings = Constants.FALSE;
+		self.active_games = Constants.FALSE;
+		self.active_play_game = Constants.FALSE;
+		self.selected_game = Constants.FALSE;
 
 		self.validation = {};
 		self.select_password = Constants.FALSE;
 		self.email_confirmed = Constants.FALSE;
 
+		self.getStudentPoints();
 		switch (active) {
 
 			case Constants.REWARDS        :
@@ -116,6 +135,14 @@ function ProfileController($scope, $timeout,apiService, ProfileService) {
 			case Constants.SETTINGS    :
 				self.settings = Constants.TRUE;
 				self.getStudentBackgroundImage();
+				break;
+
+			case Constants.GAMES	:
+				self.active_games = Constants.TRUE;
+				break;
+
+			case Constants.PLAY_GAME	:
+				self.active_play_game = Constants.TRUE;
 				break;
 
 			case Constants.INDEX            :
@@ -780,4 +807,120 @@ function ProfileController($scope, $timeout,apiService, ProfileService) {
 			$scope.ui_unblock();
 		});
 	}
+
+	self.getGamesList = function(){
+		self.games_list = Constants.FALSE;
+
+		self.table.size = Constants.CUSTOM_LIST_SIZE;
+
+		ProfileService.getGamesWithUser($scope.user.user.id,self.table).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data){
+				self.games_list = response.data.records;
+				self.updatePageCount(response.data);
+				}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.previousPage = function()
+	{
+		if(self.table.page > 1)
+		{
+			self.total_module_items_loaded -= self.table.size;
+			self.table.page--;
+			self.paginateByPage();
+		}
+	}
+
+	self.nextPage = function()
+	{
+
+		if(self.table.page < self.table.total_items)
+		{
+			self.total_module_items_loaded += self.table.size;
+			self.table.page++;
+			self.paginateByPage();
+		}
+	}
+
+	self.list = function(){
+
+		self.getGamesList();
+	}
+
+
+	self.confirmBuyGame = function(game_id){
+		self.buy_game_id = game_id;
+		self.errors = Constants.FALSE;
+
+		self.buy_game_modal = Constants.TRUE;
+		$("#buy_game_modal").modal({
+			backdrop : 'static',
+			keyboard : Constants.FALSE,
+			show : Constants.TRUE
+		});
+	}
+
+	self.buyGame = function(game_id){
+
+		var data = {
+			'user_id' : $scope.user.user.id,
+			'games_id' : game_id
+		};
+
+		$scope.ui_block();
+		ProfileService.buyGame(data).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+			self.getStudentPoints();
+			$('#buy_game_modal').modal('toggle');
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+		self.getGamesList();
+	}
+
+	self.playGame = function(game_id){
+		self.active_play_game = Constants.TRUE;
+
+		ProfileService.getGameDetails(game_id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+
+			self.selected_game = response.data;
+			self.selected_game.game_url = $sce.trustAsResourceUrl(self.selected_game.game_url);
+			self.active_games = Constants.FALSE;
+
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+	}
+
+	self.getStudentPoints = function(){
+
+		ProfileService.getStudentPoints($scope.user.id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+			$scope.user.cash_points = response.data.cash_points;
+
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+	}
+
+
 }

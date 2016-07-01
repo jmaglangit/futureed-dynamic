@@ -36,7 +36,7 @@ return [
 	'avatar_accessories' => 'Avatar Accessories',
 	'back' => 'Back',
 	'background_image' => 'background image',
-	'back_to_dashboard' => '> Back to Dashboard',
+	'back_to_dashboard' => 'Back to Dashboard',
 	'badge' => 'Badge',
 	'bank_account_number' => 'Bank Account Number',
 	'bank_address' => 'Bank Address',
@@ -499,6 +499,17 @@ return [
 	'add_package' => 'Add Package',
 	'update_package' => 'Update Package',
 	'subscription_packages' => 'Subscription Packages',
+	'game' => 'Game|Games',
+	'buy_game' => 'Buy Game',
+	'are_you_sure_you_want_to_buy_game' => 'Are you sure you want to buy this game?',
+	'play' => 'Play',
+	'click_view_rewards' => 'Click here to View Rewards!',
+	'click_view_badges' => 'Click here to View Badges',
+	'accessories_for_avatar' => 'Accessories for your Avatar',
+	'rewards_to_buy' => 'rewards to buy',
+	'back_to_games' => 'Back to Games',
+	'continue_to_rewards' => 'Continue to Rewards',
+	'download_lsp_report' => 'Download LSP Report',
 
 
 	//resources/views/admin/dashboard/index.blade.php
@@ -1124,7 +1135,7 @@ return [
 	'client_teacher_dashboard_msg1' => 'To get started on using Future Lesson, you need to add a student under a',
 	'client_teacher_dashboard_msg2' => 'To see all your students, click',
 	'client_teacher_dashboard_msg3' => 'To review the lessons and practice questions, click on',
-	'client_view_class_list' => 'View class list',
+	'client_view_class_list' => ' Class list',
 	
 	//views/errors/503.blade.php
 	'be_right_back' => 'Be right back.',
@@ -1346,4 +1357,22 @@ return [
 	'youre_almost_done' => 'You\'re almost done',
 	'logged_out' => 'Logged out',
 	'multiple_login_message' => 'You have been logged out because the account is currently logged in.',
+	'canvas_not_supported' => 'Your browser does not support canvas',
+	'review_and_retake_test' => 'You need to review and take the test again.',
+	'retake_test' => 'Retake test',
+	'run' => 'Run',
+
+	'snap_modal_msg_1' => 'You already completed this Exercise',
+	'snap_modal_msg_2' => 'You can still answer by clicking proceed, or you can skip to answer the next exercise',
+	'snap_modal_msg_3' => 'Congratulations!',
+	'snap_modal_msg_4' => 'You completed the exercise',
+	'snap_modal_msg_5' => 'Not quite.',
+	'snap_modal_msg_6' => 'Try using a block you aren’t using yet, or you can skip to the next question.',
+	'snap_modal_msg_7' => 'You completed this module! Kindly proceed to the next set of questions.',
+	'snap_modal_msg_8' => 'Try again',
+	'snap_modal_msg_9' => 'I\'ve written my first program. Try FutureEd Now!',
+
+	'you_earned' => 'You have earned',
+	'point_s' => 'point(s)'
+
 ];

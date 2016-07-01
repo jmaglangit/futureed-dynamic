@@ -92,7 +92,16 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if (response.data) {
-					self.summary.columns = response.data.column_header[0];
+					var data = [];
+
+					angular.forEach(response.data.column_header[0],function(value,key){
+						data.push({
+							'grade'	:	value,
+							'key'	:	key
+						});
+					});
+
+					self.summary.columns = data;
 
 					$timeout(function () {
 						self.summary.records = response.data.rows.progress;
@@ -105,7 +114,6 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 					}, 500);
 				}
 			}
-
 			$scope.ui_unblock();
 		}).error(function (response) {
 			self.errors = $scope.internalError();
@@ -342,10 +350,24 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					if(response.data.total){
+					if(response.data.total) {
+						var list = [];
 						self.active_report = Constants.TRUE;
 						self.student_list = response.data.records;
-						self.changeStudentId(self.student_list[0].id);
+
+						for (var i = 0; i < self.student_list.length; i++) {
+							if (self.student_list[i].parent.status == Constants.ENABLED) {
+								list.push(
+									{
+										id: self.student_list[i].id,
+										first_name: self.student_list[i].first_name,
+										last_name: self.student_list[i].last_name
+									}
+								);
+							}
+						}
+						self.enabled_lists = list;
+						self.changeStudentId(self.enabled_lists[0].id);
 					}
 				}
 			}

@@ -329,8 +329,24 @@ class AppServiceProvider extends ServiceProvider {
 		);
 
 		$this->app->bind(
+			'FutureEd\Models\Repository\SnapExerciseDetails\SnapExerciseDetailsRepositoryInterface',
+			'FutureEd\Models\Repository\SnapExerciseDetails\SnapExerciseDetailsRepository'
+		);
+
+		$this->app->bind(
 			'FutureEd\Models\Repository\SubscriptionDay\SubscriptionDayRepositoryInterface',
 			'FutureEd\Models\Repository\SubscriptionDay\SubscriptionDayRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\Game\GameRepositoryInterface',
+			'FutureEd\Models\Repository\Game\GameRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\StudentGame\StudentGameRepositoryInterface',
+			'FutureEd\Models\Repository\StudentGame\StudentGameRepository'
+
 		);
 	}
 }

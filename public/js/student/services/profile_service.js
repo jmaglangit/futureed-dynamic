@@ -88,5 +88,35 @@ function ProfileService($http) {
 		});
 	}
 
+	api.getGamesWithUser = function(user_id,table) {
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'game-student/' + user_id
+				+ '?limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
+	api.buyGame = function(data){
+		return $http({
+			method	:	Constants.METHOD_POST
+			, data	:	data
+			, url	:	apiUrl + 'student-game/buy'
+		});
+	}
+
+	api.getGameDetails = function(game_id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'game/' + game_id
+		});
+	}
+
+	api.getStudentPoints = function(student_id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'student-point-cash?student_id=' + student_id
+		});
+	}
 	return api;
 }

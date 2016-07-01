@@ -14,6 +14,8 @@ function TemplateDirective() {
 function FutureedController($scope, $window, apiService, futureed) {
 	$scope.futureed = futureed;
 	$scope.display_date = new Date();
+	$scope.messages = Constants.FALSE;
+	$scope.from_module = Constants.FALSE;
 	
 	/**
 	* Common API calls
@@ -691,5 +693,27 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$scope.internalError();
 		});
 	}
+
+	// Displaying Rewards modal and enable elements based on parameter passed, if exist.
+	$scope.displayRewardsModal = function(from){
+
+		$scope.messages = Constants.TRUE;
+
+		if(from == Constants.MODULE){
+			$scope.from_module = Constants.TRUE;
+		}
+
+		$("#message_rewards").modal({
+			backdrop: 'static',
+			keyboard: Constants.FALSE,
+			show    : Constants.TRUE
+		});
+	}
+
+	$scope.redirectRewards = function(url,tab_name){
+
+		$window.location.href = url + '?tab=' + tab_name;
+	}
+
 	
 };

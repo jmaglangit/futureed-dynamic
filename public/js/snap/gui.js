@@ -4258,11 +4258,11 @@ IDE_Morph.prototype.toggleStageSize = function (isSmall) {
 
 IDE_Morph.prototype.createNewProject = function () {
     var myself = this;
-    this.confirm(
-        'Replace the current project with a new one?',
-        'New Project',
-        function () {myself.newProject(); }
-    );
+    //this.confirm(
+    //    'Replace the current project with a new one?',
+    //    'New Project',
+    //    function () {myself.newProject(); }
+    //);
 };
 
 IDE_Morph.prototype.openProjectsBrowser = function () {
@@ -4956,13 +4956,13 @@ IDE_Morph.prototype.inform = function (title, message) {
     );
 };
 
-IDE_Morph.prototype.confirm = function (message, title, action) {
-    new DialogBoxMorph(null, action).askYesNo(
-        title,
-        localize(message),
-        this.world()
-    );
-};
+//IDE_Morph.prototype.confirm = function (message, title, action) {
+//    new DialogBoxMorph(null, action).askYesNo(
+//        title,
+//        localize(message),
+//        this.world()
+//    );
+//};
 
 IDE_Morph.prototype.prompt = function (message, callback, choices, key) {
     (new DialogBoxMorph(null, callback)).withKey(key).prompt(
@@ -5581,16 +5581,16 @@ ProjectDialogMorph.prototype.saveProject = function () {
                     this.projectList,
                     function (item) {return item.ProjectName === name; }
                 )) {
-                this.ide.confirm(
-                    localize(
-                        'Are you sure you want to replace'
-                    ) + '\n"' + name + '"?',
-                    'Replace Project',
-                    function () {
-                        myself.ide.setProjectName(name);
-                        myself.saveCloudProject();
-                    }
-                );
+                //this.ide.confirm(
+                //    localize(
+                //        'Are you sure you want to replace'
+                //    ) + '\n"' + name + '"?',
+                //    'Replace Project',
+                //    function () {
+                //        myself.ide.setProjectName(name);
+                //        myself.saveCloudProject();
+                //    }
+                //);
             } else {
                 this.ide.setProjectName(name);
                 myself.saveCloudProject();
@@ -5600,18 +5600,18 @@ ProjectDialogMorph.prototype.saveProject = function () {
                     this.projectList,
                     function (item) {return item.name === name; }
                 )) {
-                this.ide.confirm(
-                    localize(
-                        'Are you sure you want to replace'
-                    ) + '\n"' + name + '"?',
-                    'Replace Project',
-                    function () {
-                        myself.ide.setProjectName(name);
-                        myself.ide.source = 'local';
-                        myself.ide.saveProject(name);
-                        myself.destroy();
-                    }
-                );
+                //this.ide.confirm(
+                //    localize(
+                //        'Are you sure you want to replace'
+                //    ) + '\n"' + name + '"?',
+                //    'Replace Project',
+                //    function () {
+                //        myself.ide.setProjectName(name);
+                //        myself.ide.source = 'local';
+                //        myself.ide.saveProject(name);
+                //        myself.destroy();
+                //    }
+                //);
             } else {
                 this.ide.setProjectName(name);
                 myself.ide.source = 'local';
@@ -5645,47 +5645,47 @@ ProjectDialogMorph.prototype.deleteProject = function () {
     if (this.source === 'cloud') {
         proj = this.listField.selected;
         if (proj) {
-            this.ide.confirm(
-                localize(
-                    'Are you sure you want to delete'
-                ) + '\n"' + proj.ProjectName + '"?',
-                'Delete Project',
-                function () {
-                    SnapCloud.reconnect(
-                        function () {
-                            SnapCloud.callService(
-                                'deleteProject',
-                                function () {
-                                    SnapCloud.disconnect();
-                                    myself.ide.hasChangedMedia = true;
-                                    idx = myself.projectList.indexOf(proj);
-                                    myself.projectList.splice(idx, 1);
-                                    myself.installCloudProjectList(
-                                        myself.projectList
-                                    ); // refresh list
-                                },
-                                myself.ide.cloudError(),
-                                [proj.ProjectName]
-                            );
-                        },
-                        myself.ide.cloudError()
-                    );
-                }
-            );
+            //this.ide.confirm(
+            //    localize(
+            //        'Are you sure you want to delete'
+            //    ) + '\n"' + proj.ProjectName + '"?',
+            //    'Delete Project',
+            //    function () {
+            //        SnapCloud.reconnect(
+            //            function () {
+            //                SnapCloud.callService(
+            //                    'deleteProject',
+            //                    function () {
+            //                        SnapCloud.disconnect();
+            //                        myself.ide.hasChangedMedia = true;
+            //                        idx = myself.projectList.indexOf(proj);
+            //                        myself.projectList.splice(idx, 1);
+            //                        myself.installCloudProjectList(
+            //                            myself.projectList
+            //                        ); // refresh list
+            //                    },
+            //                    myself.ide.cloudError(),
+            //                    [proj.ProjectName]
+            //                );
+            //            },
+            //            myself.ide.cloudError()
+            //        );
+            //    }
+            //);
         }
     } else { // 'local, examples'
         if (this.listField.selected) {
             name = this.listField.selected.name;
-            this.ide.confirm(
-                localize(
-                    'Are you sure you want to delete'
-                ) + '\n"' + name + '"?',
-                'Delete Project',
-                function () {
-                    delete localStorage['-snap-project-' + name];
-                    myself.setSource(myself.source); // refresh list
-                }
-            );
+            //this.ide.confirm(
+            //    localize(
+            //        'Are you sure you want to delete'
+            //    ) + '\n"' + name + '"?',
+            //    'Delete Project',
+            //    function () {
+            //        delete localStorage['-snap-project-' + name];
+            //        myself.setSource(myself.source); // refresh list
+            //    }
+            //);
         }
     }
 };
@@ -5697,46 +5697,46 @@ ProjectDialogMorph.prototype.shareProject = function () {
         entry = this.listField.active;
 
     if (proj) {
-        this.ide.confirm(
-            localize(
-                'Are you sure you want to publish'
-            ) + '\n"' + proj.ProjectName + '"?',
-            'Share Project',
-            function () {
-                myself.ide.showMessage('sharing\nproject...');
-                SnapCloud.reconnect(
-                    function () {
-                        SnapCloud.callService(
-                            'publishProject',
-                            function () {
-                                SnapCloud.disconnect();
-                                proj.Public = 'true';
-                                myself.unshareButton.show();
-                                myself.shareButton.hide();
-                                entry.label.isBold = true;
-                                entry.label.drawNew();
-                                entry.label.changed();
-                                myself.buttons.fixLayout();
-                                myself.drawNew();
-                                myself.ide.showMessage('shared.', 2);
-                            },
-                            myself.ide.cloudError(),
-                            [proj.ProjectName]
-                        );
-                        // Set the Shared URL if the project is currently open
-                        if (proj.ProjectName === ide.projectName) {
-                            var usr = SnapCloud.username,
-                                projectId = 'Username=' +
-                                    encodeURIComponent(usr.toLowerCase()) +
-                                    '&ProjectName=' +
-                                    encodeURIComponent(proj.ProjectName);
-                            location.hash = 'present:' + projectId;
-                        }
-                    },
-                    myself.ide.cloudError()
-                );
-            }
-        );
+        //this.ide.confirm(
+        //    localize(
+        //        'Are you sure you want to publish'
+        //    ) + '\n"' + proj.ProjectName + '"?',
+        //    'Share Project',
+        //    function () {
+        //        myself.ide.showMessage('sharing\nproject...');
+        //        SnapCloud.reconnect(
+        //            function () {
+        //                SnapCloud.callService(
+        //                    'publishProject',
+        //                    function () {
+        //                        SnapCloud.disconnect();
+        //                        proj.Public = 'true';
+        //                        myself.unshareButton.show();
+        //                        myself.shareButton.hide();
+        //                        entry.label.isBold = true;
+        //                        entry.label.drawNew();
+        //                        entry.label.changed();
+        //                        myself.buttons.fixLayout();
+        //                        myself.drawNew();
+        //                        myself.ide.showMessage('shared.', 2);
+        //                    },
+        //                    myself.ide.cloudError(),
+        //                    [proj.ProjectName]
+        //                );
+        //                // Set the Shared URL if the project is currently open
+        //                if (proj.ProjectName === ide.projectName) {
+        //                    var usr = SnapCloud.username,
+        //                        projectId = 'Username=' +
+        //                            encodeURIComponent(usr.toLowerCase()) +
+        //                            '&ProjectName=' +
+        //                            encodeURIComponent(proj.ProjectName);
+        //                    location.hash = 'present:' + projectId;
+        //                }
+        //            },
+        //            myself.ide.cloudError()
+        //        );
+        //    }
+        //);
     }
 };
 
@@ -5748,41 +5748,41 @@ ProjectDialogMorph.prototype.unshareProject = function () {
 
 
     if (proj) {
-        this.ide.confirm(
-            localize(
-                'Are you sure you want to unpublish'
-            ) + '\n"' + proj.ProjectName + '"?',
-            'Unshare Project',
-            function () {
-                myself.ide.showMessage('unsharing\nproject...');
-                SnapCloud.reconnect(
-                    function () {
-                        SnapCloud.callService(
-                            'unpublishProject',
-                            function () {
-                                SnapCloud.disconnect();
-                                proj.Public = 'false';
-                                myself.shareButton.show();
-                                myself.unshareButton.hide();
-                                entry.label.isBold = false;
-                                entry.label.drawNew();
-                                entry.label.changed();
-                                myself.buttons.fixLayout();
-                                myself.drawNew();
-                                myself.ide.showMessage('unshared.', 2);
-                            },
-                            myself.ide.cloudError(),
-                            [proj.ProjectName]
-                        );
-                        // Remove the shared URL if the project is open.
-                        if (proj.ProjectName === ide.projectName) {
-                            location.hash = '';
-                        }
-                    },
-                    myself.ide.cloudError()
-                );
-            }
-        );
+        //this.ide.confirm(
+        //    localize(
+        //        'Are you sure you want to unpublish'
+        //    ) + '\n"' + proj.ProjectName + '"?',
+        //    'Unshare Project',
+        //    function () {
+        //        myself.ide.showMessage('unsharing\nproject...');
+        //        SnapCloud.reconnect(
+        //            function () {
+        //                SnapCloud.callService(
+        //                    'unpublishProject',
+        //                    function () {
+        //                        SnapCloud.disconnect();
+        //                        proj.Public = 'false';
+        //                        myself.shareButton.show();
+        //                        myself.unshareButton.hide();
+        //                        entry.label.isBold = false;
+        //                        entry.label.drawNew();
+        //                        entry.label.changed();
+        //                        myself.buttons.fixLayout();
+        //                        myself.drawNew();
+        //                        myself.ide.showMessage('unshared.', 2);
+        //                    },
+        //                    myself.ide.cloudError(),
+        //                    [proj.ProjectName]
+        //                );
+        //                // Remove the shared URL if the project is open.
+        //                if (proj.ProjectName === ide.projectName) {
+        //                    location.hash = '';
+        //                }
+        //            },
+        //            myself.ide.cloudError()
+        //        );
+        //    }
+        //);
     }
 };
 

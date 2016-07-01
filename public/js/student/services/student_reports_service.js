@@ -51,5 +51,12 @@ function StudentReportsService($http) {
 		});
 	}
 
+	api.getIAssessDownloadLinkReport = function (student_id) {
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: apiUrl + 'v1/assess/download-report/' + student_id
+		});
+	}
+
 	return api;	
 }

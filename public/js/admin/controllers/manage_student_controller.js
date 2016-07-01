@@ -232,9 +232,9 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				} else if(response.data) {
 					self.setActive(Constants.ACTIVE_ADD);
 					self.success = Constants.MSG_CREATED("Account");
-					$('div.birth-date-wrapper select.day option:eq(0)').attr('selected', true);
-					$('div.birth-date-wrapper select.month option:eq(0)').attr('selected', true);
-					$('div.birth-date-wrapper select.year option:eq(0)').attr('selected', true);
+					$('div.birth-date-wrapper select.day option:contains("Day")').prop('selected', true);
+					$('div.birth-date-wrapper select.month option:contains("Month")').prop('selected', true);
+					$('div.birth-date-wrapper select.year option:contains("Year")').prop('selected', true);
 				}
 			}
 			$scope.ui_unblock();

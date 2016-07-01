@@ -52,4 +52,11 @@ class DashboardController extends Controller {
 		
 		return view('student.dashboard.follow-up-registration');
 	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function messages() {
+		return view('student.partials.message');
+	}
 }

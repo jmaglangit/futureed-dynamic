@@ -33,9 +33,17 @@ class IAssessServices {
      */
 	var $data;
 
-	public function __construct() {
+	/**
+	 *  holds student services
+	 */
+	protected $student_service;
+
+	public function __construct(
+		StudentServices $studentServices
+	) {
 		$curl = new \Curl\Curl();
 		$this->curl = $curl;
+		$this->student_service = $studentServices;
 	}
 	
     /**
@@ -52,7 +60,7 @@ class IAssessServices {
 			    'login' => env('IASSESS_LOGIN', ''),
 			    'password' => env('IASSESS_PASSWORD', ''),
 			));
-			
+
 			if ($this->curl->error) {
 			
 				$this->error_code = $this->curl->error_code;
@@ -65,7 +73,7 @@ class IAssessServices {
 			} else {
 				
 				$response = json_decode($this->curl->response);
-	
+
 				$this->user_id = $response->user_id;
 				$this->token = $response->token;
 				
@@ -153,7 +161,7 @@ class IAssessServices {
 				} else {
 					
 					$this->data = json_decode($this->curl->response, true);
-					
+
 					return TRUE;
 				}
 	    	} else {
@@ -165,4 +173,107 @@ class IAssessServices {
 	    	return FALSE;
     	}
     }
+
+	/**
+	 * Call IAssess api for calculation.
+	 * @param $student
+	 * @param bool|false $is_adult
+	 * @return bool
+	 */
+	public function calculateTestData($student,$is_adult = false){
+
+			if($this->user_id && $this->token){
+
+				$data = [
+					'first_name' => $student->first_name,
+					'last_name' => $student->last_name,
+					'nric_fin_passport' => '-',
+					'client_name' => env('APP_NAME','FutureEd'),
+					'gender' => strtolower($student->gender),
+					'user_id' => $this->user_id,
+					'token' => $this->token,
+				];
+
+				$json = json_encode($data);
+
+				$this->curl->setHeader('Content-Type','application/json');
+
+				$this->curl->post(env('IASSESS_URL') . '/api/v1/clients/student/' . $student->id . '/test/'
+						. ($is_adult ? config('futureed.lsp_adult_id')
+						: config('futureed.lsp_child_id') ) . '/end-test', $json);
+
+				if($this->curl->error){
+
+					$this->error_code = $this->curl->error_code;
+
+					$this->errorLog('IASSESS : '. $this->error_code . '/ '. $this->curl->error_message
+						. '/ ' . $this->curl->http_error_message);
+
+					return FALSE;
+				} else {
+
+					$this->data = json_decode($this->curl->response, true);
+
+					return TRUE;
+				}
+
+			} else {
+				$this->errorLog('IASSESS : Invalid user and token, ' . $this->user_id . ', ' . $this->token );
+				return FALSE;
+			}
+	}
+
+	/**
+	 * IAssess Link to LSP report.
+	 * @param $student_id
+	 * @param bool|false $is_adult
+	 * @return bool|string
+	 */
+	public function downloadReport($student_id,$is_adult = false){
+
+		if($this->login()) {
+			if($this->user_id && $this->token) {
+
+				$link =  env('IASSESS_URL').'/api/v1/clients/student/' . $student_id  . '/test/'
+				. ($is_adult ? config('futureed.lsp_adult_id') : config('futureed.lsp_child_id') )
+				. '/download-report?user_id=' . $this->user_id . '&token=' . $this->token;
+
+				$this->curl->get($link);
+
+				if ($this->curl->error) {
+
+					$this->error_code = $this->curl->error_code;
+
+					$this->errorLog('IASSESS : '. $this->error_code . '/ '. $this->curl->error_message
+						. '/ ' . $this->curl->http_error_message);
+
+					return [
+						'response' => false,
+						'error' => json_decode($this->curl->response)
+					];
+
+				} else {
+
+					return [
+						'response' => true,
+						'link' => $link
+					];
+				}
+
+			} else {
+
+				$this->errorLog('IASSESS : Invalid user and token, ' . $this->user_id . ', ' . $this->token );
+				return FALSE;
+			}
+		} else {
+
+			$this->errorLog('IASSESS : Invalid login');
+			return FALSE;
+		}
+	}
+
+	public function isAdult($student_id){
+
+		return ($this->student_service->getAge($student_id) >= config('futureed.lsp_for_adult_age')) ? true : false;
+	}
 }

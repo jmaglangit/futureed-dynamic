@@ -4,7 +4,8 @@
             {{--Header--}}
             <div class="row questions-header col-xs-12">
                 <div class="row col-xs-3">
-                    <button type="button" class="btn btn-gold next-btn left-0"
+                    <button type="button"
+                            class="btn btn-gold next-btn left-0 top-6"
                             ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')"> {{ trans('messages.exit_module') }} </button>
                 </div>
 
@@ -13,9 +14,8 @@
                 </div>
 
                 <div class="row col-xs-3">
-                    <button
-                            {{--ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed"--}}
-                            type="button" class="btn btn-orange next-btn right-0"
+                    <button type="button"
+                            class="btn btn-orange next-btn right-0 top-6"
                             ng-click="mod.validateAnswer()"> {{ trans('messages.submit')}} </button>
                 </div>
 
@@ -183,20 +183,22 @@
                 <h3> {{ trans('messages.question') }} #{! mod.question_number + 1 !} </h3>
             </div>
 
-            <div class="result-image">
-                <i class="fa fa-5x img-rounded text-center"
-                   ng-class="{ 'fa-times' : !mod.answer_valid, 'fa-check' : mod.answer_valid }"></i>
-            </div>
+            <div class="col-xs-12 col-md-12">
+                <span class="result-message col-xs-3"
+                     ng-class="{ 'result-correct' : mod.answer_valid, 'result-incorrect' : !mod.answer_valid }">
+                    <h2 ng-if="mod.answer_valid">
+                        {{ trans('messages.correct') }}
+                    </h2>
 
-            <div class="result-message"
-                 ng-class="{ 'result-correct' : mod.answer_valid, 'result-incorrect' : !mod.answer_valid }">
-                <p ng-if="mod.answer_valid">
-                    {{ trans('messages.correct') }}
-                </p>
-
-                <p ng-if="!mod.answer_valid">
-                    {{ trans('messages.wrong') }}
-                </p>
+                    <p ng-if="!mod.answer_valid">
+                        {{ trans('messages.wrong') }}
+                    </p>
+                </span>
+                <span class="result-image col-xs-3">
+                    <i class="fa fa-5x img-rounded text-center"
+                       ng-class="{ 'fa-times' : !mod.answer_valid, 'fa-check' : mod.answer_valid }">
+                    </i>
+                </span>
             </div>
 
             <div class="proceed-btn-container btn-container">

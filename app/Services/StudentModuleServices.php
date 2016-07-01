@@ -276,10 +276,11 @@ class StudentModuleServices {
 			//Check if there are no wrong questions.
 			if(empty($wrong_answers)){
 
-				return -1;
+				return $student_answer->question_id;
 			}
 
 			//else Answer is correct and get first next wrong question.
+
 			current($data);
 
 			//find the correct answer id.
@@ -294,7 +295,6 @@ class StudentModuleServices {
 					break;
 				}
 			}
-
 
 			//Check if current is equal to wrong.
 			for(;$i < count($data); $i++){

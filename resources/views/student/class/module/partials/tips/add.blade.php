@@ -11,29 +11,30 @@
 
 		<div class="col-xs-12">
 			<div class="clearfix"></div>
-			{!! Form::open(['class' => 'form-horizontal margin-top-15']) !!}
-			<div class="form-group">
-				<label class="control-label col-xs-2">{!! trans('messages.title') !!}</label>
-				<div class="col-xs-10">
-					{!! Form::text('title', ''
-						, array(
-						    'class' => 'form-control sidebar-input'
-						    , 'placeholder' => trans('messages.title')
-						    , 'ng-model' => 'tips.record.title'
-						    , 'autocomplete' => 'off')
-					) !!}
+			<div class="form-horizontal margin-top-15 add_tip_form">
+				<div class="form-group">
+					<label class="control-label col-xs-2">{!! trans('messages.title') !!}</label>
+					<div class="col-xs-10">
+						{!! Form::text('title', ''
+							, array(
+								'class' => 'form-control sidebar-input'
+								, 'placeholder' => trans('messages.title')
+								, 'ng-model' => 'tips.record.title'
+								, 'autocomplete' => 'off')
+						) !!}
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-xs-2">{!! trans('messages.description') !!}</label>
-				<div class="col-xs-10">
-					{!! Form::textarea('content', ''
-		                , array(
-		                    'class' => 'form-control sidebar-input disabled-textarea'
-		                    , 'placeholder' => trans('messages.description')
-		                    , 'ng-model' => 'tips.record.content'
-		                    , 'autocomplete' => 'off')
-		            ) !!}
+				<div class="form-group">
+					<label class="control-label col-xs-2">{!! trans('messages.description') !!}</label>
+					<div class="col-xs-10">
+						{!! Form::textarea('content', ''
+							, array(
+								'class' => 'form-control sidebar-input disabled-textarea'
+								, 'placeholder' => trans('messages.description')
+								, 'ng-model' => 'tips.record.content'
+								, 'autocomplete' => 'off')
+						) !!}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -54,5 +55,4 @@
 				)
 		) !!}
 	</div>
-	{!! Form::close() !!}
 </div>

@@ -7,11 +7,13 @@ var Constants = {
 	, DEFAULT_PAGE	: 1
 
 	, CUSTOM_TABLE_SIZE : 5
+	, CUSTOM_LIST_SIZE	: 9
 
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
 	, UNDEFINED		: 'undefined'
 	, NULL 			: null
+	, INVITE        : 'invite'
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
@@ -47,6 +49,8 @@ var Constants = {
 	, CONFIRM_EMAIL : "confirm_email"
 	, AVATAR_ACCESSORY	:"avatar_accessory"
 	, SETTINGS		: 'settings'
+	, GAMES			: 'games'
+	, PLAY_GAME		: 'play game'
 
 	, AGEGROUP		: "agegroup"
 	, CONTENTS 		: "contents"

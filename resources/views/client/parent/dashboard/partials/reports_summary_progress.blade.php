@@ -28,7 +28,7 @@
 
 	<div class="reports-container" ng-cloak>
 		<div class="progress-holder" ng-repeat="(key, value) in reports.summary.columns track by $index">
-			<p>{! value !}</p>
+			<p>{! value.grade !}</p>
 
 			<div class="progress">
 				<div class="progress-bar progress-bar-success"

@@ -96,6 +96,7 @@ return [
 		2070 => 'Invalid graph answer.',
 		2071 => 'Module is not available',
 		Error::REMOVE_STUDENT_BEFORE_DATE => 'Student cannot be deleted if date removed is less than date added',
+		Error::NOT_ENOUGH_POINTS_ON_GAME => 'You do not have enough points to buy this game',
 
 
 		2100 => 'Reset code is invalid.',
@@ -222,6 +223,7 @@ return [
 		2221 => 'Teaching Module',
 		2222 => 'Minimum Seats already exists.',
 		2223 => 'Title',
+		2224 => 'Birth date',
 
 		//  Parent Client Error Messages
 		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',
