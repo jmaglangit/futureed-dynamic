@@ -3,6 +3,7 @@
 use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Services\ClientServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\PasswordServices;
@@ -132,7 +133,7 @@ class ClientRegisterController extends ClientController {
 
 			$client = array_merge($client, [
 				'user_id' => $user_response['id'],
-				'school_code' => (isset($school_response)) ? $school_response : null,
+				'school_code' => (isset($school_response['message'])) ? $school_response['message'] : null,
 			]);
 
 			$client_response = $this->client_service->addClient($client);
