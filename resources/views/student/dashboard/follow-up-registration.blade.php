@@ -15,7 +15,7 @@
             <div class="follow-up-form">
                 <div ng-if="!has_avatar">
                     <div class="lmtcontain form-select-password form-group">
-                        <h4>Pick an Avatar for your Profile</h4>
+                        <h4>{{ trans('messages.pick_an_avatar') }}</h4>
                         <div class="alert alert-danger" ng-if="errors">
                             <p ng-repeat="error in errors" > 
                               {! error !}
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="btmcon">
-                        <button type="button" ng-if="enable" class="btn btn-maroon btn-medium" ng-click="$parent.selectAvatar()">Proceed</button>
+                        <button type="button" ng-if="enable" class="btn btn-maroon btn-medium" ng-click="$parent.selectAvatar()">{{ trans('messages.client_proceed') }}</button>
                     </div>
                 </div>
             </div>
