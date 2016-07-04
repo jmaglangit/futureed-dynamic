@@ -27,7 +27,7 @@
 						   alt="{! accessory.name !}">
 					</a>
 					<p class="text-gold text-center">{! accessory.points_to_unlock !} points</p>
-					<p class="text-gold text-center">{! accessory.name !}</p>
+					<p class="text-gold text-center min-height-50">{! accessory.name !}</p>
 					{!! Form::button(trans('messages.buy')
 						, array(
 							'class' => 'btn btn-maroon btn-medium center-block'
