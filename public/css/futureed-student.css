@@ -1909,6 +1909,7 @@ hr {
 .text-gold {
 	color: #E9AB17;
 	font-size:15px;
+	padding: 0 18px 0 18px;
 }
 
 .greyscale {
@@ -2273,4 +2274,8 @@ pre.dropdown-menu {
 
 .nav-points-rewards a .tooltip .tooltip-inner, .nav-label .tooltip .tooltip-inner {
 	text-transform: capitalize;
+}
+
+.min-height-43 {
+	min-height: 50px;
 }
