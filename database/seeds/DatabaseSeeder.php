@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder {
 		
 		$this->call('AgeGroupTableSeeder');
 		$this->command->info('AgeGroupTableSeeder seeded!');
+
+		$this->call('AvatarAccessoriesTableSeeder');
+		$this->command->info('AvatarAccessoriesTableSeeder seeded!');
 		
 		$this->call('AvatarPosesTableSeeder');
 		$this->command->info('AvatarPosesTableSeeder seeded!');
