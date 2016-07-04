@@ -157,7 +157,7 @@ function ManagePrincipalPaymentController(
 
 		angular.forEach(classrooms, function(classroom){
 
-			seats += classroom.classroom.seats_total;
+			seats = parseInt(seats) + parseInt(classroom.classroom.seats_total);
 		});
 
 		return seats;
