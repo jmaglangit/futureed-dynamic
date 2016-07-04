@@ -8,7 +8,6 @@ use FutureEd\Services\MailServices;
 use FutureEd\Services\PasswordServices;
 use FutureEd\Services\SchoolServices;
 use FutureEd\Services\UserServices;
-use Illuminate\Support\Facades\Input;
 use FutureEd\Http\Requests\Api\ClientRegisterRequest;
 
 
@@ -132,7 +131,7 @@ class ClientRegisterController extends ClientController {
 
 			$client = array_merge($client, [
 				'user_id' => $user_response['id'],
-				'school_code' => (isset($school_response)) ? $school_response : null,
+				'school_code' => (isset($school_response['message'])) ? $school_response['message'] : null,
 			]);
 
 			$client_response = $this->client_service->addClient($client);
