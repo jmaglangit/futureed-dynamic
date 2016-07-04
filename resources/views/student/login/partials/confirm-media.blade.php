@@ -114,8 +114,7 @@
 						<div class="col-xs-4">
 							<select name="country_id" id="country" class="form-control" 
 								ng-class="{ 'required-field' : login.fields['country_id'] }"
-								ng-model="login.record.country_id" 
-								ng-change="getGradeLevel(login.record.country_id)">
+								ng-model="login.record.country_id">
 								<option value="">{!! trans('messages.select_country') !!}</option>
 								<option ng-repeat="country in countries" ng-value="country.id">{! country.name !}</option>
 							</select>
