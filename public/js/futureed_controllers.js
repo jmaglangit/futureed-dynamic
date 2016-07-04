@@ -505,8 +505,10 @@ function FutureedController($scope, $window, apiService, futureed) {
 					$scope.user.avatar = response.data.url;
 					$scope.user.thumbnail = response.data.thumbnail;
 
+					$scope.user.background = response.data.background_url;
 					$scope.session_user = $scope.user;
 					$scope.has_avatar = Constants.TRUE;
+
 					apiService.updateUserSession($scope.user).success(function(response) {
 						$("ul.avatar_list li").removeClass('selected');
 						window.location.href = '/student/dashboard';
