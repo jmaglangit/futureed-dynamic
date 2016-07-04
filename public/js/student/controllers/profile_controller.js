@@ -878,6 +878,7 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 				self.errors = $scope.errorHandler(response.errors);
 			}
 			self.getStudentPoints();
+			self.getGamesList();
 			$('#buy_game_modal').modal('toggle');
 			$scope.ui_unblock();
 		}).error(function(response){
@@ -885,7 +886,6 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 			$scope.ui_unblock();
 		});
 
-		self.getGamesList();
 	}
 
 	self.playGame = function(game_id){
