@@ -3,13 +3,11 @@
 use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
-use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Services\ClientServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\PasswordServices;
 use FutureEd\Services\SchoolServices;
 use FutureEd\Services\UserServices;
-use Illuminate\Support\Facades\Input;
 use FutureEd\Http\Requests\Api\ClientRegisterRequest;
 
 
