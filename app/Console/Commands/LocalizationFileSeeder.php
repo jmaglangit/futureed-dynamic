@@ -120,8 +120,8 @@ class LocalizationFileSeeder extends Command {
 		$text_var_array = [];
 		$lang_id_array = [];
 
-		$content = '<?php'."\n\r";
-		$content = $content.'return ['."\n\r";
+		$content = '<?php'.PHP_EOL.PHP_EOL;
+		$content = $content.'return ['.PHP_EOL.PHP_EOL;
 		$this->info('Retrieving Language File');
 
 		foreach($lang_id_reader as $index => $value)
@@ -153,12 +153,12 @@ class LocalizationFileSeeder extends Command {
 
 				if(!empty($numIndex))
 				{
-					$content = $content."\t".'"'.$text_var_array[$index-1].'" => "'.$lang_id_array[$numIndex+1].'",'."\n\r";
+					$content = $content."\t".'"'.$text_var_array[$index-1].'" => "'.$lang_id_array[$numIndex+1].'",'.PHP_EOL;
 				}
 			}
 		}
 
-		$content = $content.'];';
+		$content = $content.PHP_EOL.'];';
 
 		Storage::disk('language_local')->put($LangCode."/".'messages.php', $content);
 	}
