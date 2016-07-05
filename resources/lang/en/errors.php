@@ -259,7 +259,7 @@ return [
 		Error::SUBSCRIPTION_LSP_INVALID => 'The learning style format is invalid',
 
 		//  For trial module error messages
-			Error::TRIAL_MODULE_ANSWER_IS_REQUIRED => 'Answer is required',
+		Error::TRIAL_MODULE_ANSWER_IS_REQUIRED => 'Answer is required',
 		Error::TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED => 'Answers are required',
 		Error::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED => 'Plot a point to answer',
 		Error::TRIAL_MODULE_DRAG_DROP_REQUIRED => 'Drag at least one object to answer',
