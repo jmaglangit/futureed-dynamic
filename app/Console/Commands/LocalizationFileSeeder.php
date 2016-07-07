@@ -38,15 +38,15 @@ class LocalizationFileSeeder extends Command {
 	 */
 	public function fire()
 	{
-		if(($CsvFileName = $this->option('csvFile')) != '' && ($LangCode = $this->option('langCode')) != '' )
+		if(($csvFileName = $this->option('csvFile')) != '' && ($langCode = $this->option('langCode')) != '' )
 		{
 			if($this->option('isErrorMessage'))
 			{
-				$this->errors_local($CsvFileName, $LangCode);
+				$this->errors_local($csvFileName, $langCode);
 			}
 			else
 			{
-				$this->messages_local($CsvFileName, $LangCode);
+				$this->messages_local($csvFileName, $langCode);
 			}
 		}
 		else
