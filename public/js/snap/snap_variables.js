@@ -1,5 +1,9 @@
 var snap = {
-    code                    :   "",
+    code                    :   {
+                                    JavaScript: '',
+                                    Python: '',
+                                    Java: ''
+                                },
     correct                 :   Constants.FALSE,
     finish_count            :   0,
     isSnapExerciseCompleted :   Constants.FALSE,
@@ -15,11 +19,12 @@ var snap = {
                                     var snap_next_exercise_btn = $('.snap_next_exercise_btn');
                                     var snap_module_done_btn = $('.snap_module_done_btn');
                                     var module_complete = $('.module_complete');
-                                    var cur_code = $('.cur_code');
-                                    var cur_code_content = $('.cur_code_content');
+                                    var cur_code_tabs = $('.cur_code_tabs');
+                                    var js_pane = $('#js_pane pre');
+                                    var python_pane = $('#python_pane pre');
+                                    var java_pane = $('#java_pane pre');
 
-                                    cur_code.hide();
-                                    cur_code_content.text('');
+                                    cur_code_tabs.hide();
 
                                     if(snap.isSnapModuleCompleted )
                                     {
@@ -91,12 +96,16 @@ var snap = {
                                         correct_answer.show();
                                     }
 
-                                    if(snap.code.length > 0) {
-                                        cur_code_content.text(snap.code);
-                                        cur_code.show();
+                                    if(snap.code.JavaScript.length > 0 && snap.code.Java.length > 0 && snap.code.Python.length > 0) {
+                                        js_pane.text(snap.code.JavaScript);
+                                        python_pane.text(snap.code.Python);
+                                        java_pane.text(snap.code.Java);
+                                        cur_code_tabs.show();
                                     }
 
-                                    snap.code = '';
+                                    snap.code.Python = '';
+                                    snap.code.Java = '';
+                                    snap.code.JavaScript = '';
 
                                     $('#snap_message_modal').modal({
                                         backdrop: 'static',
