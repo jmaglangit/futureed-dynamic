@@ -3,6 +3,6 @@
 
 interface AnswerExplanationRepositoryInterface {
 
-	public function getAnswerExplanation($module_id, $question_id,$seq_no);
+	public function getAnswerExplanation($module_id, $question_id);
 
 }
