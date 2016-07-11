@@ -2288,3 +2288,13 @@ pre.dropdown-menu {
 .top-7 {
 	top: 7px;
 }
+
+.result-tip-quoted-image {
+	width: 21px;
+	margin-right: 0;
+	padding-bottom: 7px;
+}
+
+.result-tip-quoted-span {
+	margin: 10px 0 10px 0;
+}
