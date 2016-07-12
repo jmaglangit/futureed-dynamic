@@ -1272,6 +1272,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.errors = $scope.errorHandler(response.errors);
 			} else {
 				self.answer_explanation = response.data;
+				self.answer_explanation.count = response.data.length;
+				self.answer_exp_offset = 0;
+				console.log(self.answer_explanation);
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
