@@ -1,4 +1,4 @@
-<div class="col-xs-12 padding-0" ng-init="mod.getAnswerExplanation();">
+<div class="col-xs-12 padding-0">
 	<div ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed">
 		{{--mod.current_question.question_type != futureed.CODING--}}
 		<div class="questions-container col-xs-12 col-md-12" id="snap_main_div_container">
@@ -231,26 +231,29 @@
 					   ng-class="{ 'fa-times' : !mod.result.points_earned, 'fa-check' : mod.result.points_earned }"></i>
 				</span>
 			</div>
-			<div class="result-tip col-xs-12" ng-if="mod.result.points_earned <= 0">
-				<span ng-show="mod.answer_explanation.count > 0">
+			<div class="result-tip col-xs-12" ng-if="mod.result.points_earned <= 0"
+				 ng-init="mod.getAnswerExplanation();"
+			>
+				<span ng-show="mod.answer_explanation.count > 0 && mod.answer_explanation_fully_loaded == futureed.TRUE">
 					<img src="/images/icon-tipbulb.png">
 				</span>
 				<i class="fa fa-caret-left fa-2x"
 				   aria-hidden="true"
-				   ng-show="mod.answer_explanation.count > 0"
+				   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 				   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 				</i>
-				<span class="h4" ng-show="mod.answer_explanation.count > 0">
-					{! mod.answer_explanation[mod.index_offset].answer_explanation !}
+				<span class="h4" ng-show="mod.answer_explanation.count > 0 && mod.answer_explanation_fully_loaded == futureed.TRUE">
+					{! mod.answer_explanation[mod.answer_exp_offset].answer_explanation !}
 				</span>
 				<i class="fa fa-caret-right fa-2x"
 				   aria-hidden="true"
-				   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1)"
+				   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
 				   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
 				</i>
 			</div>
 			<div class="proceed-btn-container btn-container">
-				<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
+				<button type="button" class="btn btn-maroon btn-medium"
+						ng-click="mod.answer_explanation_fully_loaded=futureed.FALSE;mod.answer_exp_offset=0;mod.answer_explanation.count=0;mod.nextQuestion();">
 					{{ trans('messages.proceed_to_next_questions') }}
 				</button>
 			</div>
@@ -283,28 +286,31 @@
 						<p class="quoted-module-message">
 							{! mod.avatar_quote_info.quote !}
 						</p>
-						<div class="result-tip" ng-if="mod.result.points_earned <= 0">
-							<span ng-show="mod.answer_explanation.count > 0">
+						<div class="result-tip" ng-if="mod.result.points_earned <= 0"
+							 ng-init="mod.getAnswerExplanation();"
+						>
+							<span ng-show="mod.answer_explanation.count > 0 && mod.answer_explanation_fully_loaded == futureed.TRUE">
 								<img class='result-tip-quoted-image'src="/images/icon-tipbulb.png" >
 							</span>
 							<i class="fa fa-caret-left"
 							   aria-hidden="true"
-							   ng-show="mod.answer_exp_offset > 0"
+							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 							</i>
 							<span class="h5"
-								  ng-show="mod.answer_explanation.count > 0"
+								  ng-show="mod.answer_explanation.count > 0 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 							>
-								{! mod.answer_explanation[mod.index_offset].answer_explanation !}
+								{! mod.answer_explanation[mod.answer_exp_offset].answer_explanation !}
 							</span>
 							<i class="fa fa-caret-right"
 							   aria-hidden="true"
-							   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1)"
+							   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
 							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
 							</i>
 						</div>
 						<div class="proceed-btn-container btn-container">
-							<button type="button" class="btn btn-maroon btn-large" ng-click="mod.nextQuestion()">
+							<button type="button" class="btn btn-maroon btn-large"
+									ng-click="mod.answer_explanation_fully_loaded=futureed.FALSE;mod.answer_exp_offset=0;mod.answer_explanation.count=0;mod.nextQuestion()">
 								{{ trans('messages.proceed_to_next_questions') }}
 							</button>
 						</div>

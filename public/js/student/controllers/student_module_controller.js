@@ -1266,7 +1266,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			'question_id' : self.current_student_module.question_id,
 			'seq_no' : self.current_student_module.seq_no
 		};
-
+		self.answer_explanation_fully_loaded = Constants.FALSE;
 		StudentModuleService.getAnswerExplanation(data).success(function(response){
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
@@ -1274,7 +1274,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.answer_explanation = response.data;
 				self.answer_explanation.count = response.data.length;
 				self.answer_exp_offset = 0;
-				console.log(self.answer_explanation);
+				self.answer_explanation_fully_loaded = Constants.TRUE;
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
