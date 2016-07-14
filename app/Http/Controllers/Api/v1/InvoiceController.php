@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Http\Requests\Api\InvoiceRequest;
 
+use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -25,19 +26,24 @@ class InvoiceController extends ApiController {
     protected $invoice_service;
     protected $order;
     protected $order_detail;
+    protected $class_student;
 
     public function __construct(ClassroomRepositoryInterface $classroom,
                                 InvoiceRepositoryInterface $invoice,
                                 InvoiceDetailRepositoryInterface $invoice_detail,
                                 InvoiceServices $invoice_service,
                                 OrderRepositoryInterface $order,
-                                OrderDetailRepositoryInterface $order_detail){
+                                OrderDetailRepositoryInterface $order_detail,
+                                ClassStudentRepositoryInterface $class_student
+                                ){
         $this->classrooms = $classroom;
         $this->invoice = $invoice;
         $this->invoice_detail = $invoice_detail;
         $this->invoice_service = $invoice_service;
         $this->order = $order;
         $this->order_detail = $order_detail;
+        $this->class_student = $class_student;
+
     }
     /**
      * Display a listing of the resource.
@@ -218,17 +224,20 @@ class InvoiceController extends ApiController {
             $this->invoice->deleteInvoice($id);
 
             //delete order.
-            //$order = $this->order->getOrderByOrderNo($invoice->order_no);
-            //$this->order->deleteOrder($order['id']);
+            $order = $this->order->getOrderByOrderNo($invoice->order_no);
+            $this->order->deleteOrder($order['id']);
+
+            //delete class students
+            $this->class_student->deleteClassStudent($this->classrooms->getClassroomByOrderNo($invoice->order_no)[0]['id']);
 
             //delete class.
-            //$this->classrooms->deleteClassroomByOrderNo($invoice->order_no);
+            $this->classrooms->deleteClassroomByOrderNo($invoice->order_no);
 
             //delete invoice details
             $this->invoice_detail->deleteInvoiceDetailByInvoiceId($id);
 
             //delete order detail.
-            //$this->order_detail->deleteOrderDetailByOrderId($order['id']);
+            $this->order_detail->deleteOrderDetailByOrderId($order['id']);
         }
 
         return $this->respondWithData($invoice);

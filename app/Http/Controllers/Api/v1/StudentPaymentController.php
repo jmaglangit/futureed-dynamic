@@ -61,7 +61,7 @@ class StudentPaymentController extends ApiController {
 	public function studentPayment(StudentPaymentRequest $request)
 	{
 
-		$order = $request->only('subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
+		$order = $request->only('subject_id', 'order_date','student_id', 'subscription_id',
 								'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status',
 								'subscription_package_id','discount_id','discount','sub_total');
 
@@ -69,7 +69,7 @@ class StudentPaymentController extends ApiController {
 		$student = $this->student->viewStudent($order['student_id']);
 
 		//check if student have existing subscription to a subject
-		$student_classroom = $this->classroom->getClassroomBySubjectId($order['subject_id'],$order['student_id']);
+		$student_classroom = $this->classroom->getClassroomBySuabjectId($order['subject_id'],$order['student_id']);
 
 		if ($student_classroom) {
 
@@ -86,8 +86,12 @@ class StudentPaymentController extends ApiController {
 			$next_order_id = ++$prev_order['id'];
 		}
 
-		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
+		$num_of_days = $order['date_end'];
+		$now = Carbon::now();
 
+		$order['date_start'] = $now->toDateTimeString();
+		$order['date_end'] = $now->addDays($num_of_days)->toDateTimeString();
+		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
 		$order['order_no'] = $this->invoice_services->createOrderNo($order['student_id'],$next_order_id);
 
 		//insert data into order

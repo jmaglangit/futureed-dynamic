@@ -32,8 +32,9 @@ class PaymentSubscriptionRequest extends ApiRequest {
 							'order_date' => 'required|date_format:Ymd',
 							'student_id' => 'required|numeric',
 							'subscription_id' => 'required|numeric|exists:subscription,id,deleted_at,NULL',
-							'date_start' => 'required|date_format:Ymd',
-							'date_end' => 'required|date_format:Ymd',
+//							'date_start' => 'required|date_format:Ymd',
+//							'date_end' => 'required|date_format:Ymd',
+							'date_end' => 'required|numeric',
 							'seats_total' => 'required|numeric|between:1,999999',
 							'seats_taken' => 'numeric',
 							'total_amount' => 'required|numeric|between:0,999999.99',
@@ -47,8 +48,9 @@ class PaymentSubscriptionRequest extends ApiRequest {
 							'subject_id' => 'required|numeric',
 							'order_date' => 'required|date_format:Ymd',
 							'subscription_id' => 'required|numeric|exists:subscription,id,deleted_at,NULL',
-							'date_start' => 'required|date_format:Ymd',
-							'date_end' => 'required|date_format:Ymd',
+//							'date_start' => 'required|date_format:Ymd',
+//							'date_end' => 'required|date_format:Ymd',
+							'date_end' => 'required|numeric',
 							'seats_taken' => 'numeric',
 							'total_amount' => 'required|numeric|between:0,999999.99',
 							'payment_status' => 'required|in:Pending,Paid,Cancelled',
@@ -59,8 +61,9 @@ class PaymentSubscriptionRequest extends ApiRequest {
 					default:
 						return [
 							'order_date' => 'required|date_format:Ymd',
-							'date_start' => 'required|date_format:Ymd',
-							'date_end' => 'required|date_format:Ymd',
+//							'date_start' => 'required|date_format:Ymd',
+//							'date_end' => 'required|date_format:Ymd',
+							'date_end' => 'required|numeric',
 							'discount' => 'required|numeric|between:0,999.99',
 							'total_amount' => 'required|numeric|between:0,999999.99'
 

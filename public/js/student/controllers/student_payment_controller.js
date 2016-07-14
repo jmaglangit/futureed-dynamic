@@ -762,8 +762,9 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.subscription_invoice.subject_id = subscription.subject_id;
 
 			self.subscription_invoice.order_date = moment().format('YYYYMMDD');
-			self.subscription_invoice.date_start = moment().format('YYYYMMDD');
-			self.subscription_invoice.date_end = moment().add(subscription.subscription_day.days,'days').format('YYYYMMDD');
+			// self.subscription_invoice.date_start = moment().format('YYYY-MM-DD HH:mm:ss'); commented out but can still be used for future reference
+			// self.subscription_invoice.date_end  = moment().add(subscription.subscription_day.days,'days').format('YYYY-MM-DD HH:mm:ss');
+			self.subscription_invoice.date_end = subscription.subscription_day.days;
 			self.subscription_invoice.date_start_string = moment().format('MMMM DD YYYY');
 			self.subscription_invoice.date_end_string = moment().add(subscription.subscription_day.days,'days').format('MMMM DD YYYY');
 
