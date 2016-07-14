@@ -258,13 +258,27 @@ class PaymentSubscriptionController extends ApiController {
 			$next_order_id = ++$prev_order['id'];
 		}
 
-		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
+		$num_of_days = $order['date_end'];
+		$now = Carbon::now();
 
+		$order['date_start'] = $now->toDateTimeString();
+		$order['date_end'] = $now->addDays($num_of_days)->toDateTimeString();
+		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
 
 		$new_order = $this->order->addOrder($order);
 
 		$client = $this->client->getClientDetails($order['client_id']);
+
+		//form data for order_details
+		$order_detail = [
+			'order_id' => $new_order['id'],
+			'client_id' => $order['client_id'],
+			'price' => $order['sub_total']
+		];
+
+		//insert data to order_details table
+		$this->order_detail->addOrderDetail($order_detail);
 
 		//create invoice
 		$invoice = [

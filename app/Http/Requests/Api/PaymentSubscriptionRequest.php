@@ -61,9 +61,8 @@ class PaymentSubscriptionRequest extends ApiRequest {
 					default:
 						return [
 							'order_date' => 'required|date_format:Ymd',
-//							'date_start' => 'required|date_format:Ymd',
-//							'date_end' => 'required|date_format:Ymd',
-							'date_end' => 'required|numeric',
+							'date_start' => 'required|date_format:Ymd',
+							'date_end' => 'required|date_format:Ymd',
 							'discount' => 'required|numeric|between:0,999.99',
 							'total_amount' => 'required|numeric|between:0,999999.99'
 
