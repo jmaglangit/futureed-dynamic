@@ -565,7 +565,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		//'subject_id', 'order_date','student_id', 'subscription_id', 'date_start',
 		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
 		//subscription_package_id
-		console.log('self.active_view && self.invoice.renew || self.active_view: ' + self.active_view && self.invoice.renew || self.active_view);
+
 		if(self.active_view && self.invoice.renew || self.active_view){
 			ManageParentPaymentService.getOrder(self.invoice.order.id).success(function(response){
 				if(response.errors){
