@@ -194,7 +194,6 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			$class_student = ClassStudent::find($id);
 			$response = is_null($class_student) ? null : $class_student->delete();
 		}catch (\Exception $e) {
-			DB::rollback();
 			$this->errorLog($e->getMessage());
 			return false;
 		}
