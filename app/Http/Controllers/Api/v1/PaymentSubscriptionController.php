@@ -147,11 +147,8 @@ class PaymentSubscriptionController extends ApiController {
 			$next_order_id = ++$prev_order['id'];
 		}
 
-		$num_of_days = $order['date_end'];
-		$now = Carbon::now();
-
-		$order['date_start'] = $now->toDateTimeString();
-		$order['date_end'] = $now->addDays($num_of_days)->toDateTimeString();
+		$order['date_start'] = Carbon::now()->toDateTimeString();
+		$order['date_end'] = Carbon::now()->addDays($order['date_end'])->toDateTimeString();
 		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['student_id'],$next_order_id);
 
@@ -258,11 +255,8 @@ class PaymentSubscriptionController extends ApiController {
 			$next_order_id = ++$prev_order['id'];
 		}
 
-		$num_of_days = $order['date_end'];
-		$now = Carbon::now();
-
-		$order['date_start'] = $now->toDateTimeString();
-		$order['date_end'] = $now->addDays($num_of_days)->toDateTimeString();
+		$order['date_start'] = Carbon::now()->toDateTimeString();
+		$order['date_end'] = Carbon::now()->addDays($order['date_end'])->toDateTimeString();
 		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
 
