@@ -3,8 +3,7 @@
 use Carbon\Carbon;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests;
-
-use Illuminate\Http\Request;
+use FutureEd\Http\Requests\Api\AnnouncementRequest;
 use Illuminate\Support\Facades\Input;
 
 use FutureEd\Models\Repository\Announcement\AnnouncementRepositoryInterface as Announcement;
@@ -49,18 +48,9 @@ class AnnouncementController extends ApiController {
      *   store announcement.
      *   @return announcement record.
      */
-    public function store(){
-        $input = Input::only('announcement','date_start','date_end');
-        
-        $this->addMessageBag($this->validateString($input,'announcement'));
-        $this->addMessageBag($this->validateDate($input,'date_start'));
-        $this->addMessageBag($this->validateDate($input,'date_end'));
+    public function store(AnnouncementRequest $request){
 
-        $msg_bag = $this->getMessageBag();
-        
-        if(!empty($msg_bag)){
-            return $this->respondWithError($this->getMessageBag());
-        }
+        $input = $request->only('announcement','date_start','date_end');
 
         $date_start = Carbon::parse($input['date_start'])->toDateTimeString();
         $date_end = Carbon::parse($input['date_end'])->toDateTimeString();
