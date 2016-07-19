@@ -41,7 +41,7 @@
 			                              <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#">
 			                                <div class="input-group">
 			                                    <input readonly="readonly" type="text" name="date_start" placeholder="DD/MM/YY" class="form-control" value="{! announce.data.date_start | date:'dd/MM/yy' !}">
-			                                    <input type="hidden" name="hidden_start" value="{! announce.data.date_start | date:'yyyyMMdd' !}">
+			                                    <input type="hidden" name="hidden_start" value="{! announce.data.date_start | date:'y-MM-d' !}">
 			                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                                </div>
 			                              </a>
@@ -56,7 +56,7 @@
 			                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
 			                                <div class="input-group">
 			                                    <input readonly="readonly" type="text" name="date_end" placeholder="DD/MM/YY" class="form-control" value="{! announce.data.date_end | date:'dd/MM/yy' !}">
-			                                    <input type="hidden" name="hidden_end" value="{! announce.data.date_end | date:'yyyyMMdd' !}">
+			                                    <input type="hidden" name="hidden_end" value="{! announce.data.date_end | date:'y-MM-d' !}">
 			                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                                </div>
 			                              </a>
