@@ -300,15 +300,20 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		self.records = {};
 
 		$scope.div_block('tip_list');
-		StudentTipsService.list(self.search, self.table).success(function(response) {
+		StudentTipsService.list(self.search, self.table).success(function(response, status, headers, config) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.records = response.data.records;
 
+					$scope.server_datetime = moment.utc(headers()['date']);
+					$scope.server_timezone = moment(headers()['date']).format('Z z');
+
 					angular.forEach(self.records, function(value, key) {
-						value.created_at = moment(value.created_at).startOf("minute").fromNow();
+						var created_at = moment(value.created_at).zone($scope.server_timezone).format('YYYY-MM-DD hh:mm:ss Z z');
+
+						value.created_at = moment(created_at).startOf('minute').from($scope.server_datetime);
 						value.stars = new Array(5);
 					});
 
