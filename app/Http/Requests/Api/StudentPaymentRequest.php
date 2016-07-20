@@ -1,7 +1,5 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
-
 class StudentPaymentRequest extends ApiRequest {
 
 	/**
@@ -31,14 +29,11 @@ class StudentPaymentRequest extends ApiRequest {
 					'order_date' => 'required|date_format:Ymd',
 					'student_id' => 'required|numeric',
 					'subscription_id' => 'required|numeric',
-					'date_start' => 'required|date_format:Ymd',
-					'date_end' => 'required|date_format:Ymd',
+					'date_end' => 'required|numeric',
 					'seats_total' => 'required|numeric|between:1,999999',
 					'seats_taken' => 'numeric',
 					'total_amount' => 'required|numeric|between:0,999999.99',
 					'payment_status' => 'required|in:Pending,Paid,Cancelled',
-
-
 				];
 				break;
 
@@ -55,8 +50,6 @@ class StudentPaymentRequest extends ApiRequest {
 					'seats_taken' => 'numeric',
 					'total_amount' => 'required|numeric|between:0,999999.99',
 					'payment_status' => 'required|in:Pending,Paid,Cancelled',
-
-
 				];
 				break;
 		}
@@ -71,8 +64,6 @@ class StudentPaymentRequest extends ApiRequest {
 			'student_id.numeric' => trans('errors.1004',['attribute' => trans('errors.2192')]),
 			'subscription_id.required' => trans('errors.1003',['attribute' => trans('errors.2199')]),
 			'subscription_id.numeric' => trans('errors.1004',['attribute' => trans('errors.2199')]),
-
-
 		];
 	}
 

@@ -21,4 +21,6 @@ interface InvoiceRepositoryInterface {
 
 	public function updateStatus($id,$status);
 
+	public function deleteInvoice($id);
+
 }
