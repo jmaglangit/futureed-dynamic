@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Services;
 
 
+use Illuminate\Contracts\Hashing\Hasher;
 class WikipediaServices {
 
 	//get url json result from other site.
@@ -23,22 +24,15 @@ class WikipediaServices {
 		//do string replace subject
 		$wikipedia_api_url = str_replace("{ATTRIBUTE_SUBJECT}",$subject, $wikipedia_api_url);
 
-		//string replace image size
-//		$wikipedia_api_url= str_replace("{ATTRIBUTE_SIZE}",$image_size, $wikipedia_api_url);
-
 		return $wikipedia_api_url;
-
 	}
 
 
 	//parse and get image base on size.
 	public function getImage($api_url){
 
-		$wikipedia = 'https://en.wikipedia.org/wiki/';
-
-		//remove wikipedia site. 'https://en.wikipedia.org/wiki/'
-		$subject = trim($api_url,$wikipedia);
-
+		//remove wikipedia sites. 'https://en.wikipedia.org/wiki/'
+		$subject = str_replace(config('regex.wikisite'),'',$api_url);
 
 		//remove string from wikipedia site.
 		//TODO: get api url for wikipedia.
@@ -59,8 +53,9 @@ class WikipediaServices {
 
 				$subject_thumbnail_image = $get_file_content['query']['pages'][$subject_wiki_id]['thumbnail']['source'];
 
-				return $subject_thumbnail_image;
+				$subject_thumbnail_image = preg_replace(config('regex.pixel'),'250px',$subject_thumbnail_image);
 
+				return $subject_thumbnail_image;
 			}
 
 		} else {
