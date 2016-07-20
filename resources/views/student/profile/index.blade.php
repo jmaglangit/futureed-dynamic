@@ -13,7 +13,7 @@
 
   	<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
-	<div class="wrapr"> 
+	<div class="wrapr" ng-init="profile.studentDetails();">
 		<div class="side-nav">
 			@include('student.partials.dshbrd-side-nav')
 		</div>

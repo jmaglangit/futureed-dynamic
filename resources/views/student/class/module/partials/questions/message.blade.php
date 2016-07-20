@@ -113,7 +113,7 @@
 	</div>
 </div>
 {{--Snap--}}
-<div id="snap_message_modal" ng-show="mod.module_message.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="snap_message_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-body message-container">
@@ -129,11 +129,29 @@
 							<p hidden class="skip-module-message wrong_answer">{{ trans('messages.snap_modal_msg_5') }}<br> {{ trans('messages.snap_modal_msg_6') }}</p>
 							<p hidden class="skip-module-message module_complete">{{ trans('messages.snap_modal_msg_7') }}</p>
 							<center>
-								<div class="cur_code dropdown">
-									<p class="dropdown-toggle cur_code_header" data-toggle="dropdown">
-										Show code <i class="fa fa-caret-down"></i>
-									</p>
-									<pre class="dropdown-menu cur_code_content"></pre>
+								<div class="cur_code_tabs">
+									<ul class="nav nav-tabs">
+										<li class="active">
+											<a data-toggle="tab" href="#js_pane">Java Script</a>
+										</li>
+										<li>
+											<a data-toggle="tab" href="#java_pane">Java</a>
+										</li>
+										<li>
+											<a data-toggle="tab" href="#python_pane">Python</a>
+										</li>
+									</ul>
+									<div class="tab-content">
+										<div id="js_pane" class="tab-pane fade in active">
+											<pre></pre>
+										</div>
+										<div id="java_pane" class="tab-pane fade">
+											<pre></pre>
+										</div>
+										<div id="python_pane" class="tab-pane fade">
+											<pre></pre>
+										</div>
+									</div>
 								</div>
 							</center>
 							<div class="snap_proceed_btn" hidden >

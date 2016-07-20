@@ -21,12 +21,11 @@ class AnswerExplanationController extends ApiController {
 	 */
 	public function getAnswerExplanation(){
 
-		$input = Input::only('module_id','question_id','seq_no');
+		$input = Input::only('module_id','question_id');
 
 		return $this->respondWithData($this->answer_explanation->getAnswerExplanation(
 			$input['module_id'],
-			$input['question_id'],
-			$input['seq_no']
+			$input['question_id']
 		));
 	}
 }
