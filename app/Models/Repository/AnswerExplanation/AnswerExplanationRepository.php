@@ -15,7 +15,7 @@ class AnswerExplanationRepository implements  AnswerExplanationRepositoryInterfa
 
 		return AnswerExplanation::moduleId($module_id)
 			->questionId($question_id)
-			->first();
+			->get();
 	}
 
 }

@@ -233,8 +233,9 @@
 			</div>
 			<div class="result-tip col-xs-12" ng-if="mod.result.points_earned <= 0"
 				 ng-init="mod.getAnswerExplanation();"
+				 ng-show="mod.answer_explanation.length"
 			>
-				<span ng-show="mod.answer_explanation.count > 0 && mod.answer_explanation_fully_loaded == futureed.TRUE">
+				<span>
 					<img src="/images/icon-tipbulb.png">
 				</span>
 				<i class="fa fa-caret-left fa-2x"
@@ -242,7 +243,7 @@
 				   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 				   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 				</i>
-				<span class="h4" ng-show="mod.answer_explanation.count > 0 && mod.answer_explanation_fully_loaded == futureed.TRUE">
+				<span class="h4">
 					{! mod.answer_explanation[mod.answer_exp_offset].answer_explanation !}
 				</span>
 				<i class="fa fa-caret-right fa-2x"
@@ -288,18 +289,18 @@
 						</p>
 						<div class="result-tip" ng-if="mod.result.points_earned <= 0"
 							 ng-init="mod.getAnswerExplanation();"
+							 ng-show="mod.answer_explanation.length"
 						>
-							<span ng-show="mod.answer_explanation.count > 0 && mod.answer_explanation_fully_loaded == futureed.TRUE">
+							<span>
 								<img class='result-tip-quoted-image'src="/images/icon-tipbulb.png" >
 							</span>
+
 							<i class="fa fa-caret-left"
 							   aria-hidden="true"
 							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 							</i>
-							<span class="h5"
-								  ng-show="mod.answer_explanation.count > 0 && mod.answer_explanation_fully_loaded == futureed.TRUE"
-							>
+							<span class="h5">
 								{! mod.answer_explanation[mod.answer_exp_offset].answer_explanation !}
 							</span>
 							<i class="fa fa-caret-right"
