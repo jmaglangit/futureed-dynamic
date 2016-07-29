@@ -21,4 +21,14 @@ return [
 
 	//confirmation_code
 	'email_code' => '/^[0-9]{4}(\-[0-9]{4})?$/',
+
+	//pixel value e.g. 1px,20px,300px used by wikipedia pixels.
+	'pixel' => '/([0-9]*)px/',
+
+	//http or https of wikipedia
+	//TODO look for better regex
+	'wikisite' => [
+		'http://en.wikipedia.org/wiki/',
+		'https://en.wikipedia.org/wiki/'
+	],
 ];

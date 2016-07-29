@@ -156,8 +156,7 @@ function ManagePrincipalPaymentController(
 		var classrooms = invoice.invoice_detail;
 
 		angular.forEach(classrooms, function(classroom){
-
-			seats = parseInt(seats) + parseInt(classroom.classroom.seats_total);
+			seats = parseInt(seats, 10) + parseInt(classroom.classroom.seats_total, 10);
 		});
 
 		return seats;
@@ -1233,8 +1232,7 @@ function ManagePrincipalPaymentController(
 			self.subscription_invoice.subject_id = subscription.subject_id;
 
 			self.subscription_invoice.order_date = moment().format('YYYYMMDD');
-			self.subscription_invoice.date_start = moment().format('YYYYMMDD');
-			self.subscription_invoice.date_end = moment().add(subscription.subscription_day.days,'days').format('YYYYMMDD');
+			self.subscription_invoice.date_end = subscription.subscription_day.days;
 			self.subscription_invoice.date_start_string = moment().format('MMMM DD YYYY');
 			self.subscription_invoice.date_end_string = moment().add(subscription.subscription_day.days,'days').format('MMMM DD YYYY');
 

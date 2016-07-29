@@ -2,11 +2,11 @@
 <div class="col-xs-12 padding-0">
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.VIDEO">
 
-		<div class="content-container col-xs-12 col-md-12">
-			<div class="content-header">
+		<div class="questions-container col-xs-12 col-md-12">
+			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
-						Exit Module
+					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
 
@@ -16,7 +16,7 @@
 
 				<div class="row col-xs-3">
 
-					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+					<button type="button" class="btn btn-gold next-btn top-7" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> {{ trans('messages.skip') }} </button>
 				</div>
 			</div>
 			<div class="content-video-body">
@@ -33,11 +33,11 @@
 	</div>
 
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.IMAGE">
-		<div class="content-container col-xs-12">
-			<div class="content-header">
+		<div class="questions-container col-xs-12 col-md-12">
+			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
-						Exit Module
+					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
 
@@ -47,7 +47,7 @@
 
 				<div class="row col-xs-3">
 
-					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+					<button type="button" class="btn btn-gold next-btn top-7" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> {{ trans('messages.skip') }} </button>
 				</div>
 			</div>
 
@@ -60,11 +60,11 @@
 	</div>
 
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.TEXT">
-		<div class="content-container col-xs-12">
-			<div class="content-header">
+		<div class="questions-container col-xs-12 col-md-12">
+			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
-						Exit Module
+					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
 
@@ -74,7 +74,7 @@
 
 				<div class="row col-xs-3">
 
-					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+					<button type="button" class="btn btn-gold next-btn top-7" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> {{ trans('messages.skip') }} </button>
 				</div>
 			</div>
 
@@ -88,11 +88,11 @@
 
 	<div ng-if="!mod.contents.teaching_content">
 
-		<div class="content-container col-xs-12 col-md-12">
-			<div class="content-text-header">
+		<div class="questions-container col-xs-12 col-md-12">
+			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
-						Exit Module
+					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
 
@@ -101,7 +101,7 @@
 				</div>
 
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+					<button type="button" class="btn btn-gold next-btn top-7" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> {{ trans('messages.skip') }} </button>
 				</div>
 			</div>
 			<div class="content-body">

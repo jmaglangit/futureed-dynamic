@@ -84,8 +84,8 @@ function AnnouncementController($scope, announcementApiService){
     self.data.success = Constants.FALSE;
     self.errors = Constants.FALSE;
 
-    var date_start = $("input[name='hidden_start']").val();
-    var date_end = $("input[name='hidden_end']").val();
+    var date_start = moment($("input[name='hidden_start']").val()).zone(moment().format("Z z")).format('YYYY-MM-DD hh:mm:ss Z z');
+    var date_end = moment($("input[name='hidden_end']").val()).zone(moment().format("Z z")).format('YYYY-MM-DD hh:mm:ss Z z');
 
     $scope.ui_block();
     announcementApiService.saveAnnounce(date_start, date_end, self.data.announcement).success(function(response){

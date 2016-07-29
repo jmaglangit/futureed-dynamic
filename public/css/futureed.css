@@ -1294,7 +1294,7 @@ fieldset legend {
 	content: "";
 	display: inline-block;
 	width: calc(48% - 26px);
-	margin: 2px 8px;
+	margin: 2px 3px;
 }
 
 .btn-fb{
