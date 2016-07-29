@@ -103,9 +103,11 @@ var snap = {
                                         cur_code_tabs.show();
                                     }
 
-                                    snap.code.Python = '';
-                                    snap.code.Java = '';
-                                    snap.code.JavaScript = '';
+                                    snap.code = {
+                                        JavaScript: '',
+                                        Python: '',
+                                        Java: ''
+                                    };
 
                                     $('#snap_message_modal').modal({
                                         backdrop: 'static',
