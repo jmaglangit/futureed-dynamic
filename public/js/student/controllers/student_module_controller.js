@@ -411,7 +411,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		var found = false;
 
 		snap.isSnapExerciseCompleted = Constants.FALSE;
-		snap.code = '';
 		snap.correct = Constants.FALSE;
 
 		self.setActive(Constants.ACTIVE_QUESTIONS);
