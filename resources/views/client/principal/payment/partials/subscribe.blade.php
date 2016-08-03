@@ -332,6 +332,17 @@
                         <div class="tab-pane" role="tabpanel" id="complete">
                             <h3>{!! ucfirst(trans('messages.billing_invoice')) !!}</h3>
 
+                            <div>
+                                Ref : KCGA {! payment.invoice.client_name !} {! payment.invoice.id !}/{!! date('Y') !!}<br>
+                                {!! trans('messages.date') !!} : {! payment.subscription_invoice.order_date_string !}<br><br>
+                                {! futureed.BILL_COMPANY !}.<br>
+                                {! futureed.BILL_STREET !}<br>
+                                {! futureed.BILL_ADDRESS !}<br>
+                                {! futureed.BILL_COUNTRY !}<br><br>
+                                {!! trans('messages.bill_to') !!} : {! payment.invoice.client_name !}<br>
+                                {! payment.invoice.client.street_address !},{! payment.invoice.client.city !},{! payment.invoice.client.state !},{! payment.invoice.client.country.name !}<br>
+                                Attention : {! payment.invoice.client.school.contact_name !}<br>
+                            </div>
                             <div class="row">
                                 <div class="col-xs-12 invoice-form">
                                     <div class="form-search">
@@ -368,7 +379,7 @@
                                             <label ng-if="payment.subscription_packages.subscription.has_lsp" class="col-lg-4 h5 form-label">{! futureed.YES !}</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h5">{!! trans('messages.price') !!} : </label>
+                                            <label class="col-xs-4 control-label h5">{!! trans('messages.rate') !!} : </label>
                                             <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.price !} USD</label>
                                         </div>
 
@@ -414,6 +425,14 @@
                                             <label class="col-xs-4 control-label h5">{!! trans('messages.total') !!} : </label>
                                             <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.total_amount !} USD</label>
                                         </div>
+                                    </div>
+                                    <div><br>
+                                        {!! trans('messages.payment_method') !!} :<br/>
+                                        {!! trans('messages.direct_credit_to') !!} : {! futureed.CC_NAME !}<br/>
+                                        {!! trans('messages.bank_name') !!} : {! futureed.BANK_NAME !}<br/>
+                                        {!! trans('messages.bank_account_number') !!} : {! futureed.BANK_ACCT_NO_SGD !} ; {! futureed.BANK_ACCT_NO_USD !}<br/>
+                                        {!! trans('messages.bank_address') !!} : {! futureed.BANK_ADDRESS !}<br/>
+                                        {!! trans('messages.bank_code') !!} : {! futureed.BANK_CODE !}
                                     </div>
                                 </div>
                             </div>
