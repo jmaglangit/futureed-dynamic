@@ -64,7 +64,11 @@ class Invoice extends Model {
 	//-------------relationships
 
 	public function client() {
-		return $this->belongsTo('FutureEd\Models\Core\Client');
+		return $this->belongsTo('FutureEd\Models\Core\Client')->with('country','school');
+	}
+
+	public function student() {
+		return $this->belongsTo('FutureEd\Models\Core\Student')->with('country','school');
 	}
 
 	public function subscription() {
