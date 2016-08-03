@@ -90,6 +90,16 @@
 					'as' => 'client.principal.payment.fail',
 					'uses' => $manage_payment_controller . '@payment_fail'
 				]);
+
+			Routes::get('/invoice-header', [
+				'as' => 'client.principal.payment.partial.invoice-header',
+				'uses' => $manage_payment_controller . '@invoice_header'
+			]);
+
+			Routes::get('/invoice-footer', [
+				'as' => 'client.principal.payment.partial.invoice-footer',
+				'uses' => $manage_payment_controller . '@invoice_footer'
+			]);
 		});
 
 		/**
