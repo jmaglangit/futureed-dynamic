@@ -1,5 +1,10 @@
 <div class="login-container form-style" ng-if="login.active_login">
+
     {!! Form::open(array('ng-submit' => 'login.validateUser($event)')) !!}
+
+    <div class="pull-right">
+        @include('common.language-option')
+    </div>
     <div class="logo-container">
         {!! Html::image('/images/logo-md-beta.png') !!}
     </div>

@@ -1,6 +1,9 @@
 <div ng-if="login.active_login">
 	<div class="col-xs-5">
 		<div class="login-container form-style form-narrow">
+			<div class="pull-right">
+				@include('common.language-option')
+			</div>
 			<div class="title">{!! trans('messages.login_to_your_account') !!}</div>
 			
 			<div class="alert alert-danger" style="text-align:left;" ng-if="login.errors">
@@ -139,64 +142,5 @@
 		</h4>
 		<br />
 		<p>{! announce.announcement !}</p>
-	</div>
-
-	<div class="col-xs-12 border-radius-3" style="padding-top: 10px;padding-bottom: 10px; background-color: #A92147;">
-		<center class="col-xs-12">
-			{!! Html::link(url('/lang/ar'), 'Arabic, '
-				, array(
-					'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-				)
-			) !!}
-
-			{!! Html::link(url('/lang/id'), 'Bahasa Indonesia, '
-					, array(
-						'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-					)
-				) !!}
-
-
-			{!! Html::link(url('/lang/ms'), 'Bahasa Malaysia, '
-					, array(
-						'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-					)
-				) !!}
-
-			{!! Html::link(url('/lang/my'), 'Burmese, '
-					, array(
-						'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-					)
-				) !!}
-
-			{!! Html::link(url('/lang/es'), 'Español, '
-					, array(
-						'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-					)
-				) !!}
-
-			{!! Html::link(url('/lang/en'), 'English - US, '
-				  , array(
-					  'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-				  )
-			  ) !!}
-
-			{!! Html::link(url('/lang/pt'), 'Portuguese, '
-					, array(
-						'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-					)
-				) !!}
-
-			{!! Html::link(url('/lang/th'), 'Thai, '
-					, array(
-						'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-					)
-				) !!}
-
-			{!! Html::link(url('/lang/vi'), 'Vietnamese '
-					, array(
-						'style' => 'text-decoration:none;color: whitesmoke;font-size: 13px;margin-right: 7px; background-color: #A92147;',
-					)
-				) !!}
-		</center>
 	</div>
 </div>
