@@ -66,12 +66,4 @@ class ManagePrincipalPaymentController extends Controller{
 	public function subscription(){
 		return view('client.principal.payment.partials.subscribe');
 	}
-
-	public function invoice_header(){
-		return view('client.principal.payment.partials.invoice_header');
-	}
-
-	public function invoice_footer(){
-		return view('client.principal.payment.partials.invoice_footer');
-	}
 }
