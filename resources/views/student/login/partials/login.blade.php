@@ -2,7 +2,7 @@
 
     {!! Form::open(array('ng-submit' => 'login.validateUser($event)')) !!}
 
-    <div class="">
+    <div class="pull-right">
         @include('common.language-option')
     </div>
     <div class="logo-container">
