@@ -1,4 +1,41 @@
 <div class="login-container form-style" ng-if="login.active_login">
+    <div>
+        <ul class="dropdown-menu">
+            {{--arabic--}}
+            <li>
+                <a href="#">
+                    <img border="0" alt="" src="/images/flags/ar/sa.png" width="30" height="20">
+                </a>
+            </li>
+            {{--bahasa--}}
+            <li>
+                <a href="#">
+                    <img border="0" alt="" src="/images/flags/bh/my.png" width="30" height="20">
+                </a>
+            </li>
+            {{--burmese--}}
+            <li>
+                <a href="#">
+                    <img border="0" alt="" src="/images/flags/my/mm.png" width="30" height="20">
+                </a>
+            </li>
+            {{--latin--}}
+            <li>
+                <a href="#">
+                    <img border="0" alt="" src="/images/flags/bh/my.png" width="30" height="20">
+                </a>
+            </li>
+            {{--english-us--}}
+            <li>
+                <a href="#">
+                    <img border="0" alt="" src="/images/flags/bh/my.png" width="30" height="20">
+                </a>
+            </li>
+            {{--portugese--}}
+            {{--th--}}
+            {{--vi--}}
+        </ul>
+    </div>
     {!! Form::open(array('ng-submit' => 'login.validateUser($event)')) !!}
     <div class="logo-container">
         {!! Html::image('/images/logo-md-beta.png') !!}
