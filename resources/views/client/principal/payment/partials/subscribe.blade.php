@@ -332,7 +332,7 @@
                         <div class="tab-pane" role="tabpanel" id="complete">
                             <h3>{!! ucfirst(trans('messages.billing_invoice')) !!}</h3>
 
-                            <div template-directive template-url="{!! route('client.principal.payment.partial.invoice-header') !!}"></div>
+                            @include('client.partials.invoice_header')
                             <div class="row">
                                 <div class="col-xs-12 invoice-form">
                                     <div class="form-search">
@@ -416,7 +416,7 @@
                                             <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.total_amount !} USD</label>
                                         </div>
                                     </div>
-                                    <div template-directive template-url="{!! route('client.principal.payment.partial.invoice-footer') !!}"></div>
+                                    @include('client.partials.invoice_footer')
                                 </div>
                             </div>
                             <ul class="list-inline pull-right">
