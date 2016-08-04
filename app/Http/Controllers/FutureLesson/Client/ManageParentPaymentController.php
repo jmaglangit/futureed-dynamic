@@ -65,12 +65,4 @@ class ManageParentPaymentController extends Controller{
 	public function subscription(){
 		return view('client.parent.payment.partials.subscribe');
 	}
-
-	public function invoice_header(){
-		return view('client.parent.payment.partials.invoice_header');
-	}
-
-	public function invoice_footer(){
-		return view('client.parent.payment.partials.invoice_footer');
-	}
 }
