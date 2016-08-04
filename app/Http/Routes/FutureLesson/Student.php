@@ -278,16 +278,6 @@
 						'as' => 'student.payment.partials.view'
 						, 'uses' => 'FutureLesson\Student\PaymentController@view_form'
 					]);
-
-				Routes::get('/invoice-header', [
-					'as' => 'student.payment.partials.invoice-header'
-					, 'uses' => 'FutureLesson\Student\PaymentController@invoice_header'
-				]);
-
-				Routes::get('/invoice-footer', [
-					'as' => 'student.payment.partials.invoice-footer'
-					, 'uses' => 'FutureLesson\Student\PaymentController@invoice_footer'
-				]);
 			});
 		});
 
