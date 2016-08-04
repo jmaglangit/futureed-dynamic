@@ -96,6 +96,7 @@
 					'as' => 'client.parent.payment.fail',
 					'uses' => $manage_parent_payment_controller . '@payment_fail'
 				]);
+
 		});
 
 		Routes::group(['prefix' => 'module'], function() {

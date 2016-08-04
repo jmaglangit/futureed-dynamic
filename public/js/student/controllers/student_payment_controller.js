@@ -762,6 +762,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.subscription_invoice.subject_id = subscription.subject_id;
 
 			self.subscription_invoice.order_date = moment().format('YYYYMMDD');
+			self.subscription_invoice.order_date_string = moment().format('DD/MM/YYY');
 			self.subscription_invoice.date_end = subscription.subscription_day.days;
 			self.subscription_invoice.date_start_string = moment().format('MMMM DD YYYY');
 			self.subscription_invoice.date_end_string = moment().add(subscription.subscription_day.days,'days').format('MMMM DD YYYY');
@@ -792,6 +793,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.subscription_invoice = {
 			subject_id	:	self.subscription_packages.subject_id,
 			order_date	:	moment(data.order.order_date).format('YYYYMMDD'),
+			order_date_string : moment(data.order.order_date).format('DD/MM/YYYY'),
 			date_start	:	moment(data.date_start).format('YYYYMMDD'),
 			date_end	:	moment(data.date_end).format('YYYYMMDD'),
 			date_start_string	:	moment(data.date_start,'YYYY-MM-DD').format('MMMM DD YYYY'),
