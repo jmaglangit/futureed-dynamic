@@ -97,15 +97,6 @@
 					'uses' => $manage_parent_payment_controller . '@payment_fail'
 				]);
 
-			Routes::get('/invoice-header', [
-				'as' => 'client.parent.payment.partial.invoice-header',
-				'uses' => $manage_parent_payment_controller . '@invoice_header'
-			]);
-
-			Routes::get('/invoice-footer', [
-				'as' => 'client.parent.payment.partial.invoice-footer',
-				'uses' => $manage_parent_payment_controller . '@invoice_footer'
-			]);
 		});
 
 		Routes::group(['prefix' => 'module'], function() {
