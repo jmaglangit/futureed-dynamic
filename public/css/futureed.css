@@ -1783,7 +1783,28 @@ span.round-tab:hover {
 	height: 672px;
 }
 
-.lang-opt, .lang-opt > dropdown, .lang-opt > dropdown > dropdown-menu {
+.lang-opt, .lang-opt .dropdown, .lang-opt .dropdown .btn a img,.lang-opt .dropdown .dropdown-menu, .lang-opt .dropdown .dropdown-menu li a img {
 	width: 50px;
-	height: 30px;
+	height: 25px;
+}
+
+.lang-opt .dropdown .btn, .lang-opt .dropdown .dropdown-menu,.lang-opt .dropdown .dropdown-menu li a img {
+	padding: 0px;
+	margin: 0px;
+}
+
+.lang-opt .dropdown .dropdown-menu {
+	min-width: 50px;
+}
+
+.dropdown-menu>li>a {
+	padding: 3px 0px;
+}
+
+.nav-label {
+	color: #055A7F;
+	padding: 3px 0px;
+	margin: 10px;
+	font-size: 20px;
+	text-transform: capitalize;
 }
