@@ -56,12 +56,4 @@ class PaymentController extends Controller {
 
 		return view('student.payment.partials.fail');
 	}
-
-	public function invoice_header(){
-		return view('student.payment.partials.invoice_header');
-	}
-
-	public function invoice_footer(){
-		return view('student.payment.partials.invoice_footer');
-	}
 }
