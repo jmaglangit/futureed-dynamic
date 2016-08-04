@@ -1,7 +1,7 @@
 <div class="lang-opt ">
     <div class="dropdown">
         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-            <a href="/lang/{{ session('appLanguage') }}"><img border="0" alt="" src="/images/flags/{{ session('appLanguage') }}.png" width="50" height="30"></a>
+            <a href="/lang/{{ (session('appLanguage')) ? session('appLanguage') : 'en' }}"><img border="0" alt="" src="/images/flags/{{ (session('appLanguage')) ? session('appLanguage') : 'en' }}.png" width="50" height="30"></a>
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
