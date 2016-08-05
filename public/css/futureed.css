@@ -1784,8 +1784,8 @@ span.round-tab:hover {
 }
 
 .lang-opt, .lang-opt .dropdown, .lang-opt .dropdown .btn a img,.lang-opt .dropdown .dropdown-menu, .lang-opt .dropdown .dropdown-menu li a img {
-	width: 50px;
-	height: 25px;
+	width: 40px;
+	height: 20px;
 }
 
 .lang-opt .dropdown .btn, .lang-opt .dropdown .dropdown-menu,.lang-opt .dropdown .dropdown-menu li a img {
@@ -1794,10 +1794,18 @@ span.round-tab:hover {
 }
 
 .lang-opt .dropdown .dropdown-menu {
-	min-width: 50px;
+	min-width: 200px;
+	min-height: 160px;
+	background-color: #FFF;
+	margin-top: 3px;
+	padding-top: 10px;
 }
 
-.dropdown-menu>li>a {
+.lang-opt .dropdown .dropdown-menu>li {
+	margin-left: 10px;
+}
+
+.lang-opt .dropdown .dropdown-menu>li>a {
 	padding: 3px 0px;
 }
 
