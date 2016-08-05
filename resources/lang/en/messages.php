@@ -1373,6 +1373,13 @@ return [
 	'snap_modal_msg_9' => 'I\'ve written my first program. Try FutureEd Now!',
 
 	'you_earned' => 'You have earned',
-	'point_s' => 'point(s)'
+	'point_s' => 'point(s)',
+
+	'bahasa_indonesia' => 'Bahasa Indonesia',
+	'burmese' => 'Burmese',
+	'portuguese' => 'Portuguese',
+	'thai' => 'Thai',
+	'vietnamese' => 'Vietnamese',
+	'english_uk' => 'English UK',
 
 ];
