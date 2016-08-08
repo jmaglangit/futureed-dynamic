@@ -1375,11 +1375,11 @@ return [
 	'you_earned' => 'You have earned',
 	'point_s' => 'point(s)',
 
-	'bahasa_indonesia' => 'Bahasa Indonesia',
-	'burmese' => 'Burmese',
-	'portuguese' => 'Portuguese',
-	'thai' => 'Thai',
-	'vietnamese' => 'Vietnamese',
-	'english_uk' => 'English UK',
+	'id' => 'Bahasa Indonesia',
+	'my' => 'Burmese',
+	'pt' => 'Portuguese',
+	'th' => 'Thai',
+	'vi' => 'Vietnamese',
+	'en' => 'English UK',
 
 ];
