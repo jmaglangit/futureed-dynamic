@@ -46,7 +46,7 @@ class ModuleTranslationController extends ApiController {
 		}
 
 		// check if column is english(en) and target language(lang code)
-		$header = ['module_id',config('futureed.language_default'),$target_lang];
+		$header = ['module_id',config('translatable.fallback_locale'),$target_lang];
 
 		$records = $this->excel->importCsv($file,$header);
 
@@ -106,7 +106,7 @@ class ModuleTranslationController extends ApiController {
 		$translations = $this->module_translation->getModuleTranslations($locale);
 
 		//export files
-		$filename = config('futureed.module_translation_two_column') . '_'.config('futureed.language_default') . '_'
+		$filename = config('futureed.module_translation_two_column') . '_'.config('translatable.fallback_locale') . '_'
 			. $locale . '_' . Carbon::now()->toDateString();
 
 		return $this->excel->exportCsv($translations,$filename)->download('csv');
