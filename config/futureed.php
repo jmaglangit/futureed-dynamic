@@ -320,4 +320,8 @@ return [
 	//language options
 	'language_default' => 'en',
 	'language_options' => ['id','my','en','pt','th','vi'],
+
+	//translation export filename
+	'module_translation_two_column' => 'Module_translation',
+
 ];
