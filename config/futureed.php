@@ -318,5 +318,6 @@ return [
 	'rating_points_5' => 20,
 
 	//language options
+	'language_default' => 'en',
 	'language_options' => ['id','my','en','pt','th','vi'],
 ];
