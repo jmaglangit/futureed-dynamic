@@ -89,7 +89,7 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 		try {
 
 
-			$translation = $this->module->where('id',$data->module_id)->first()->translate($target_lang);
+			$translation = $this->module->find($data->module_id)->translate($target_lang);
 
 			$translation->name = $data->{$target_lang};
 
