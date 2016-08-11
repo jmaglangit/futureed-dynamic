@@ -4,7 +4,6 @@ use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInterface;
 use FutureEd\Services\ExcelServices;
-use FutureEd\Services\ModuleTranslationServices;
 use FutureEd\Http\Requests\Api\ModuleTranslationRequest;
 use FutureEd\Services\ErrorMessageServices as Error;
 
@@ -12,17 +11,13 @@ class ModuleTranslationController extends ApiController {
 
 	protected $module_translation;
 
-	protected $module_translation_service;
-
 	protected $excel;
 
 	public function __construct(
 		ModuleTranslationRepositoryInterface $moduleTranslationRepositoryInterface,
-		ModuleTranslationServices $moduleTranslationServices,
 		ExcelServices $excelServices
 	){
 		$this->module_translation = $moduleTranslationRepositoryInterface;
-		$this->module_translation_service = $moduleTranslationServices;
 		$this->excel = $excelServices;
 	}
 
