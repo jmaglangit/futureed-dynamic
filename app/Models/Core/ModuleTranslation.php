@@ -4,7 +4,7 @@ use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ModuleTranslation  extends Model {
+class ModuleTranslation extends Model {
 
 	use SoftDeletes;
 
@@ -16,6 +16,10 @@ class ModuleTranslation  extends Model {
 		'created_at','updated_at','deleted_at'
 	];
 
-	protected $attribute = '';
+	protected $fillable = [
+		'module_id',
+		'name',
+		'locale'
+	];
 
 }
