@@ -6,6 +6,7 @@ use FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInte
 use FutureEd\Services\ExcelServices;
 use FutureEd\Services\ModuleTranslationServices;
 use FutureEd\Http\Requests\Api\ModuleTranslationRequest;
+use FutureEd\Services\ErrorMessageServices as Error;
 
 class ModuleTranslationController extends ApiController {
 
@@ -40,7 +41,7 @@ class ModuleTranslationController extends ApiController {
 		//check target language already on the table, else ask admin-user to create 1.
 		if(!$this->module_translation->checkLanguageAvailability($target_lang)){
 
-			return $this->respondErrorMessage(2074);
+			return $this->respondErrorMessage(Error::MODULE_TRANSLATION_LOCALE);
 		}
 
 		//check csv file type
@@ -50,7 +51,7 @@ class ModuleTranslationController extends ApiController {
 		}
 
 		// check if column is english(en) and target language(lang code)
-		$header = ['module_id','en',$target_lang];
+		$header = ['module_id',config('futureed.language_default'),$target_lang];
 
 		$records = $this->excel->importCsv($file,$header);
 
@@ -68,7 +69,7 @@ class ModuleTranslationController extends ApiController {
 		}
 
 		//return true else error message
-		return ($status) ? $this->respondWithData(true) : $this->respondErrorMessage(2075);
+		return ($status) ? $this->respondWithData(true) : $this->respondErrorMessage(Error::MODULE_TRANSLATION_UPDATE_FAIL);
 	}
 
 	/**
@@ -110,7 +111,8 @@ class ModuleTranslationController extends ApiController {
 		$translations = $this->module_translation->getModuleTranslations($locale);
 
 		//export files
-		$filename = config('futureed.module_translation_two_column') . '_en_' . $locale . '_' . Carbon::now()->toDateString();
+		$filename = config('futureed.module_translation_two_column') . '_'.config('futureed.language_default') . '_'
+			. $locale . '_' . Carbon::now()->toDateString();
 
 		return $this->excel->exportCsv($translations,$filename)->download('csv');
 
