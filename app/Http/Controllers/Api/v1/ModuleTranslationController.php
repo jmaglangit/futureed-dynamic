@@ -100,6 +100,11 @@ class ModuleTranslationController extends ApiController {
 	 */
 	public function generateTranslationFile($locale){
 
+		//check if locale language code exists
+		if($this->module_translation->checkLanguageAvailability($locale)){
+			return $this->respondErrorMessage(2074);
+		}
+
 		//get module translation records
 		$translations = $this->module_translation->getModuleTranslations($locale);
 
