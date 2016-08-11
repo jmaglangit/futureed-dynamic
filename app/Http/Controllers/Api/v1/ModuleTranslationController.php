@@ -99,7 +99,7 @@ class ModuleTranslationController extends ApiController {
 
 		//check if locale language code exists
 		if(!$this->module_translation->checkLanguageAvailability($locale)){
-			return $this->respondErrorMessage(2074);
+			return $this->respondErrorMessage(Error::MODULE_TRANSLATION_LOCALE);
 		}
 
 		//get module translation records
