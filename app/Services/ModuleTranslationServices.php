@@ -22,8 +22,11 @@ class ModuleTranslationServices {
 		$this->module = $module;
 	}
 
-	//auto generate default translation on table
-	//reset of all translation to config defualt translations.
+	/**
+	 * Auto generate default translation on table. Reset of all translation to config defualt translations.
+	 * @param $locale
+	 * @return bool
+	 */
 	public function generateDefaultTranslation($locale){
 
 		DB::beginTransaction();
@@ -64,7 +67,6 @@ class ModuleTranslationServices {
 
 		DB::commit();
 		return true;
-
 	}
 
 
