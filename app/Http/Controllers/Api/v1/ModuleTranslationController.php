@@ -1,7 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use Carbon\Carbon;
-use FutureEd\Http\Requests;
 use FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInterface;
 use FutureEd\Services\ExcelServices;
 use FutureEd\Http\Requests\Api\ModuleTranslationRequest;
