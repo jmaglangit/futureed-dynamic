@@ -19,6 +19,8 @@ class CreateModuleTranslationTable extends Migration {
 			$table->integer('module_id')->unsigned();
 			$table->string('name');
 			$table->string('locale')->index();
+			$table->bigInteger('created_by');
+			$table->bigInteger('updated_by');
 			$table->timestamps();
 			$table->softDeletes();
 		});
