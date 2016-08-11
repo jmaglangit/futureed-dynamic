@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInterface;
 use FutureEd\Services\ExcelServices;
@@ -101,7 +102,7 @@ class ModuleTranslationController extends ApiController {
 	public function generateTranslationFile($locale){
 
 		//check if locale language code exists
-		if($this->module_translation->checkLanguageAvailability($locale)){
+		if(!$this->module_translation->checkLanguageAvailability($locale)){
 			return $this->respondErrorMessage(2074);
 		}
 
@@ -109,7 +110,9 @@ class ModuleTranslationController extends ApiController {
 		$translations = $this->module_translation->getModuleTranslations($locale);
 
 		//export files
-		return $this->excel->exportCsv($translations,['module_id','en',$locale])->download('csv');
+		$filename = config('futureed.module_translation_two_column') . '_en_' . $locale . '_' . Carbon::now()->toDateString();
+
+		return $this->excel->exportCsv($translations,$filename)->download('csv');
 
 	}
 }
