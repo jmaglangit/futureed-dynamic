@@ -51,6 +51,7 @@ Routes::group([
 	include('Routes/Api/MediaType.php');
 	include('Routes/Api/Module.php');
 	include('Routes/Api/ModuleGroup.php');
+	include('Routes/Api/ModuleTranslation.php');
 	include('Routes/Api/Order.php');
 	include('Routes/Api/OrderDetail.php');
 	include('Routes/Api/Payment.php');
