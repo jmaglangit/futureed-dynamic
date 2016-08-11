@@ -5,7 +5,7 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            @foreach(config('futureed.language_options' ) as $lang)
+            @foreach(config('translatable.locales' ) as $lang)
              <li ng-hide="{!! session('appLanguage') == $lang !!}"><a href="{!! "/lang/" . $lang !!}"><img alt="" src="{!! "/images/flags/" . $lang . ".png" !!}"> {!! trans('messages.' . $lang) !!}</a></li>
             @endforeach
         </ul>
