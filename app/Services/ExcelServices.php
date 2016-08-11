@@ -16,11 +16,11 @@ class ExcelServices extends Excel{
 
 	}
 
-	public function exportCsv($rows,$headers){
+	public function exportCsv($rows,$filename){
 
-		return Excel::create('Filename', function($excel) use ($rows,$headers){
+		return Excel::create($filename, function($excel) use ($rows,$filename){
 
-			$excel->sheet('Sheetname', function($sheet) use ($rows,$headers) {
+			$excel->sheet(substr($filename,0,29), function($sheet) use ($rows) {
 
 				$sheet->fromArray($rows);
 			});
