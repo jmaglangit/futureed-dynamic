@@ -1,7 +1,35 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 8/9/16
- * Time: 1:48 PM
- */
+Routes::group([
+	'middleware' => ['api_user','api_after'],
+	'permission' => ['admin'],
+	'role' => ['admin','super admin']
+], function(){
+
+	Routes::group([
+		'prefix' => '/module-translation',
+	], function (){
+
+		Routes::post('/upload',[
+			'as' => 'module-translation.upload',
+			'uses' => 'Api\v1\ModuleTranslationController@addModuleTranslation'
+		]);
+
+		Routes::get('/generate-language/{locale}',[
+			'as' => 'module-translate.generate-language',
+			'uses' => 'Api\v1\ModuleTranslationController@generateNewLanguage'
+		]);
+
+		Routes::get('/check-language/{locale}',[
+			'as' => 'module-translation.check-language',
+			'uses' => 'Api\v1\ModuleTranslationController@checkLanguageAvailability'
+		]);
+
+		Routes::get('/generate/{local}',[
+			'as' => 'module-translation.generate',
+			'uses' => 'Api\v1\ModuleTranslationController@generateTranslationFile'
+		]);
+
+	});
+
+
+});
