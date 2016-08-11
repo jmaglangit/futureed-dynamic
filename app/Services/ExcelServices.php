@@ -16,4 +16,17 @@ class ExcelServices extends Excel{
 
 	}
 
+	public function exportCsv($rows,$headers){
+
+		return Excel::create('Filename', function($excel) use ($rows,$headers){
+
+			$excel->sheet('Sheetname', function($sheet) use ($rows,$headers) {
+
+				$sheet->row(1,$headers);
+				$sheet->appendRow(2,$rows);
+			});
+
+		});
+	}
+
 }
