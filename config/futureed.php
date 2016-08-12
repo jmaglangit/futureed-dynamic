@@ -317,6 +317,7 @@ return [
 	'rating_points_4' => 16,
 	'rating_points_5' => 20,
 
-	//language options
-	'language_options' => ['id','my','en','pt','th','vi'],
+	//translation export filename
+	'module_translation_two_column' => 'Module_translation',
+
 ];
