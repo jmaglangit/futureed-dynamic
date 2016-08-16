@@ -111,4 +111,28 @@ class ModuleTranslationController extends ApiController {
 		return $this->excel->exportCsv($translations,$filename)->download('csv');
 
 	}
+
+	/**
+	 * Ger available languages
+	 * @return mixed
+	 */
+	public function getLanguageTranslation(){
+
+		//get config languages
+		$languages = config('translatable.locales');
+
+		//parse through out the languages if available.
+		$available_lang = [];
+
+		foreach($languages as $lang){
+			if($this->module_translation->checkLanguageAvailability($lang)){
+				array_push($available_lang,[
+					'code' => $lang,
+					'word' => trans('messages.' . $lang)
+				]);
+			}
+		}
+
+		return $this->respondWithData($available_lang);
+	}
 }
