@@ -1,8 +1,8 @@
 <?php
 Routes::group([
-	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin'],
-	'role' => ['admin','super admin']
+//	'middleware' => ['api_user','api_after'],
+//	'permission' => ['admin'],
+//	'role' => ['admin','super admin']
 ], function(){
 
 	Routes::group([
@@ -27,6 +27,11 @@ Routes::group([
 		Routes::get('/generate/{local}',[
 			'as' => 'module-translation.generate',
 			'uses' => 'Api\v1\ModuleTranslationController@generateTranslationFile'
+		]);
+
+		Routes::get('/languages',[
+			'as' => 'module-translation.languages',
+			'uses' => 'Api\v1\ModuleTranslationController@getLanguageTranslation'
 		]);
 
 	});
