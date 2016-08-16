@@ -1375,7 +1375,8 @@ return [
 	'you_earned' => 'You have earned',
 	'point_s' => 'point(s)',
 
-	'translation' => 'Translation',
+	'translation' => 'Translation | Translations',
+	'localization' => 'Localization',
 	'select_language' => '-- Select Language --',
 	'upload' => 'Upload',
 	'translation_settings' => 'Translation Settings',
