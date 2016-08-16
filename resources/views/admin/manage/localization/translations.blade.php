@@ -1,7 +1,7 @@
 <div ng-if="localization.active_translation">
     <div class="content-title">
         <div class="title-main-content">
-            <span>{!! trans('messages.translation') !!}</span>
+            <span>{!! trans_choice('messages.translation',1) !!}</span>
         </div>
     </div>
 
