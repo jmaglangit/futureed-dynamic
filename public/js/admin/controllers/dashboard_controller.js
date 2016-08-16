@@ -84,6 +84,21 @@ function AdminDashboardController($scope){
 				self.active_announcement = Constants.FALSE;
 				break;
 
+			case Constants.LOCALIZATION:
+				self.price = Constants.FALSE;
+				self.active_price = Constants.FALSE;
+				self.announcement = Constants.FALSE;
+				self.active_client = Constants.FALSE;
+				self.active_student = Constants.FALSE;
+				self.active_add_client = Constants.FALSE;
+				self.add_client = Constants.FALSE;
+				self.client_list = Constants.FALSE;
+				self.active_announcement = Constants.FALSE;
+
+				self.active_localization = Constants.TRUE;
+				self.module_translation = Constants.TRUE;
+				break;
+
 			case Constants.CLIENT:
 			default:
 				self.active_client = Constants.TRUE;
@@ -92,6 +107,7 @@ function AdminDashboardController($scope){
 				self.add_client = Constants.FALSE;
 				self.active_announcement = Constants.FALSE;
 				self.announcement = Constants.FALSE;
+				self.active_localization = Constants.FALSE;
 				break;
 		}
 
