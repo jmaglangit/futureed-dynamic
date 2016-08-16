@@ -57,11 +57,11 @@
         </ul>
 
         <li data-toggle="collapse" data-target="#localization" data-parent="#menu-content" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_localization}">
-            <a href="" class="nav-link">{{ 'Localization' }} <i class="fa fa-caret-down"></i></a>
+            <a href="" class="nav-link">{!! trans('messages.localization') !!} <i class="fa fa-caret-down"></i></a>
         </li>
         <ul class="sub-menu collapse" ng-class="{ 'in' : module_translation }" id="localization">
             <li>
-                <a href="{!! route('admin.manage.localization.index') !!}" ng-init="localization.setActive(futureed.LOCALIZATION_TRANSLATION)" ><span><i class="fa fa-language"></i>{{ 'Translations' }}</span></a>
+                <a href="{!! route('admin.manage.localization.index') !!}" ng-init="localization.setActive(futureed.LOCALIZATION_TRANSLATION)" ><span><i class="fa fa-language"></i>{!! trans_choice('messages.translation',2) !!}</span></a>
             </li>
         </ul>
 
