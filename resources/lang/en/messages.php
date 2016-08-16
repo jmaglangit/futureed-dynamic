@@ -1378,6 +1378,7 @@ return [
 	'translation' => 'Translation',
 	'select_language' => '-- Select Language --',
 	'upload' => 'Upload',
+	'translation_settings' => 'Translation Settings',
 	'id' => 'Bahasa Indonesia',
 	'my' => 'Burmese',
 	'pt' => 'Portuguese',
