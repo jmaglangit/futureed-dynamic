@@ -24,8 +24,5 @@ function ManageLocalizationService($http) {
         });
     }
 
-
-    //upload translations
-
     return api;
 }
