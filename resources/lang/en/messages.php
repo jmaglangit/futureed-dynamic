@@ -1375,6 +1375,9 @@ return [
 	'you_earned' => 'You have earned',
 	'point_s' => 'point(s)',
 
+	'translation' => 'Translation',
+	'select_language' => '-- Select Language --',
+	'upload' => 'Upload',
 	'id' => 'Bahasa Indonesia',
 	'my' => 'Burmese',
 	'pt' => 'Portuguese',
