@@ -59,14 +59,15 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
     self.downloadTranslation = function(){
         self.errors = Constants.FALSE;
 
-        ManageLocalizationService.downloadTranslation(self.locale_code).success(function(response){
+        ManageLocalizationService.downloadTranslation(self.locale_code).success(function(data,status,headers,config){
+            if (status != Constants.STATUS_OK) {
+                self.errors = $scope.errorHandler(data);
+            } else if (data) {
+                var filename = headers('content-disposition').split(";")[1].trim().split("=")[1];
 
-                if(response.errors) {
-                    self.errors = $scope.errorHandler(response.errors);
-                } else if(response) {
-                    var blob = new Blob([response.data], {type: "application/csv;charset=UTF-8"});
-                    saveAs(blob, "language_code.csv");
-                }
+                var blob = new Blob([data], {type: "application/csv; charset=UTF-8"});
+                saveAs(blob, filename.replace(/"/g, ''));
+            }
         }).error(function (response) {
             self.errors = $scope.internalError();
             $scope.ui_unblock();
