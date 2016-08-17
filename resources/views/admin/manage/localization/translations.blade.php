@@ -30,7 +30,7 @@
                             <div class="col-xs-12">
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="control-label col-xs-2">Language</label>
+                                        <label class="control-label col-xs-2">{!! trans('messages.language') !!}</label>
                                         <div class="col-xs-4" ng-init="localization.getLanguages()">
                                             <select name="language_options" class="form-control"
                                                     ng-model="localization.locale_code"
