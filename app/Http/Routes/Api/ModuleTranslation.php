@@ -29,6 +29,11 @@ Routes::group([
 			'uses' => 'Api\v1\ModuleTranslationController@generateTranslationFile'
 		]);
 
+		Routes::get('/languages',[
+			'as' => 'module-translation.languages',
+			'uses' => 'Api\v1\ModuleTranslationController@getLanguageTranslation'
+		]);
+
 	});
 
 

@@ -1375,6 +1375,12 @@ return [
 	'you_earned' => 'You have earned',
 	'point_s' => 'point(s)',
 
+	'translation' => 'Translation | Translations',
+	'localization' => 'Localization',
+	'language' => 'Language',
+	'select_language' => '-- Select Language --',
+	'upload' => 'Upload',
+	'translation_settings' => 'Translation Settings',
 	'id' => 'Bahasa Indonesia',
 	'my' => 'Burmese',
 	'pt' => 'Portuguese',
