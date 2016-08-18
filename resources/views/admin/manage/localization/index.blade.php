@@ -6,7 +6,8 @@
 
 @section('content')
     <div class="container dshbrd-con" ng-controller="ManageLocalizationController as localization"
-         ng-controller="ManageLocalizationController as localization" ng-cloak>
+         ng-controller="ManageLocalizationController as localization"
+         ng-init="localization.setActive(futureed.LOCALIZATION_TRANSLATION)" ng-cloak>
 
         <div template-directive template-url="{!! route('admin.partials.base_url') !!}"></div>
 
@@ -24,8 +25,6 @@
 @section('scripts')
     {!! Html::script('/js/admin/controllers/manage_localization_controller.js') !!}
     {!! Html::script('/js/admin/services/manage_localization_service.js')!!}
-
-
 
     {!! Html::script('/js/common/search_service.js') !!}
     {!! Html::script('/js/common/table_service.js')!!}

@@ -705,6 +705,10 @@
 				'as' => 'admin.manage.localization.settings',
 				'uses' => 'FutureLesson\Admin\ManageTranslationController@settings'
 			]);
+			Routes::get('/settings/main',[
+				'as' => 'admin.manage.localization.settings.main',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@settings_main'
+			]);
 		});
 	});
 ?>

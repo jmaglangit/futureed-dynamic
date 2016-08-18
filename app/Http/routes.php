@@ -47,6 +47,7 @@ Routes::group([
 	include('Routes/Api/IconImage.php');
 	include('Routes/Api/Image.php');
 	include('Routes/Api/Invoice.php');
+	include('Routes/Api/Language.php');
 	include('Routes/Api/LearningStyle.php');
 	include('Routes/Api/MediaType.php');
 	include('Routes/Api/Module.php');
