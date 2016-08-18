@@ -55,6 +55,47 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         });
     }
 
+    //get all languages enabled by the
+    self.getAllLanguages = function(){
+        self.errors = Constants.FALSE;
+
+        self.locale_code = Constants.NONE;
+
+        //get app call to get all languages.
+        ManageLocalizationService.getAllLanguages().success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if(response.data) {
+                    self.all_languages = response.data;
+                }
+            }
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+
+
+    }
+
+    //initialize language translation
+    self.initializeTranslation = function(){
+        self.errors = Constants.FALSE;
+
+        $scope.ui_block();
+        ManageLocalizationService.initializeTranslation(self.locale_code).success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
     //download translation per language
     self.downloadTranslation = function(){
         self.errors = Constants.FALSE;
@@ -72,7 +113,6 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
             self.errors = $scope.internalError();
             $scope.ui_unblock();
         });
-
     }
 
     //upload translation
