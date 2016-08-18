@@ -61,7 +61,10 @@
         </li>
         <ul class="sub-menu collapse" ng-class="{ 'in' : module_translation }" id="localization">
             <li>
-                <a href="{!! route('admin.manage.localization.index') !!}" ng-init="localization.setActive(futureed.LOCALIZATION_TRANSLATION)" ><span><i class="fa fa-language"></i>{!! trans_choice('messages.translation',2) !!}</span></a>
+                <a href="{!! route('admin.manage.localization.index') !!}"><span><i class="fa fa-language"></i>{!! trans_choice('messages.translation',2) !!}</span></a>
+            </li>
+            <li>
+                <a href="{!! route('admin.manage.localization.settings') !!}"><span><i class="fa fa-cog"></i>{!! trans_choice('messages.translation_settings',2) !!}</span></a>
             </li>
         </ul>
 
