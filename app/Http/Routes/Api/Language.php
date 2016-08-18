@@ -1,7 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 8/18/16
- * Time: 11:23 AM
- */
+Routes::group([
+	'prefix' => '/localization',
+	'middleware' => ['api_user','api_after'],
+	'permission' => ['admin'],
+	'role' => ['admin','super admin']
+], function(){
+
+	Routes::get('/languages',[
+		'as' => 'api.v1.localization.languages',
+		'uses' => 'Api\v1\LanguageController@getLanguages'
+	]);
+	Routes::post('/initialize-language',[
+		'as' => 'api.v1.localization.initialize-language',
+		'uses' => 'Api\v1\LanguageController@initializeLanguage'
+	]);
+});
