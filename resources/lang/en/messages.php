@@ -1381,6 +1381,8 @@ return [
 	'select_language' => '-- Select Language --',
 	'upload' => 'Upload',
 	'translation_settings' => 'Translation Settings',
+	'initialize_language' => 'Initialize Language',
+	'initialize' => 'Initialize',
 	'id' => 'Bahasa Indonesia',
 	'my' => 'Burmese',
 	'pt' => 'Portuguese',
