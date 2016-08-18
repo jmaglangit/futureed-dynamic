@@ -16,6 +16,24 @@ function ManageLocalizationService($http) {
         });
     }
 
+    //get all languages list defined.
+    api.getAllLanguages = function(){
+        return $http({
+            method  :   Constants.METHOD_GET,
+            url     :   apiUrl + 'localization/languages'
+        });
+    }
+
+    //initialize all database translation
+    api.initializeTranslation = function(locale){
+        return $http({
+            method  :   Constants.METHOD_POST,
+            data    :   { locale : locale},
+            url     :   apiUrl + 'localization/initialize-language'
+
+        });
+    }
+
     //download translation
     api.downloadTranslation = function(locale){
         return $http({
