@@ -18,4 +18,8 @@ class ManageTranslationController extends Controller {
 	public function settings(){
 		return view('admin.manage.localization.settings');
 	}
+
+	public function settings_main(){
+		return view('admin.manage.localization.partials.main_settings');
+	}
 }
