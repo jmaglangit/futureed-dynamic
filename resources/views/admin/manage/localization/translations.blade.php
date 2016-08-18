@@ -37,14 +37,12 @@
                                                     ng-change="localization.setLocale()"
                                                     ng-options="lang.code as lang.word for lang in localization.languages">
                                                 <option value="" ng-selected="selected">{!! trans('messages.select_language') !!}</option>
-                                                {{--<option ng-repeat="lang in localization.languages" ng-value="lang.code">{! lang.word !}</option>--}}
                                             </select>
                                         </div>
                                     </div>
 
                                 </fieldset>
                                 <fieldset>
-                                    {{--download--}}
                                     <div class="form-group">
                                         <div class="btn-container col-xs-12">
                                             <div class="btn btn-blue btn-medium" ng-click="localization.downloadTranslation()">{!! trans('messages.admin_download') !!}</div>
