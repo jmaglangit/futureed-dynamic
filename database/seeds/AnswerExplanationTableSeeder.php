@@ -12,7 +12,8 @@ class AnswerExplanationTableSeeder extends Seeder
 
         $this->dataLoader([
             'answer_explanations.csv',
-            'answer_explanations_two.csv'
+            'answer_explanations_two.csv',
+            'answer_explanations_three.csv'
         ]);
 
     }
