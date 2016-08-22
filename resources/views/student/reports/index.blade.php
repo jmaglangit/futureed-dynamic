@@ -30,7 +30,7 @@
 								<li><a href="{!reports.student_report_export!}/xls">Excel</a></li>
 							</ul>
 						</div>
-						<div class="pull-right export-buttons" ng-if="reports.active_report_card">
+						<div class="pull-right export-buttons" ng-show="reports.active_lsp_download">
 							<a class="btn btn-gold" href="{! reports.student_iassess_report !}">{!! strtoupper(trans('messages.download_lsp_report')) !!}</a>
 						</div>
 					</div>
