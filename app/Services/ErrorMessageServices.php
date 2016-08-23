@@ -32,4 +32,5 @@ class ErrorMessageServices
 	//translation
 	const MODULE_TRANSLATION_LOCALE	= 2074;
 	const MODULE_TRANSLATION_UPDATE_FAIL = 2075;
+	const LANGUAGE_NOT_AVAILABLE = 2076;
 }
