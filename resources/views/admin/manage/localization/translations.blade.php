@@ -5,11 +5,14 @@
         </div>
     </div>
 
-    <div class="col-xs-12 search-container" ng-show="localization.errors">
+    <div class="col-xs-12 search-container" ng-show="localization.errors || localization.success">
         <div class="alert alert-error" ng-if="localization.errors">
             <p ng-repeat="error in localization.errors track by $index">
                 {! error !}
             </p>
+        </div>
+        <div class="alert alert-success" ng-if="localization.success">
+            <p>{! localization.success !}</p>
         </div>
     </div>
 

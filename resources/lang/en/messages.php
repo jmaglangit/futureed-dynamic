@@ -1380,6 +1380,8 @@ return [
 	'language' => 'Language',
 	'select_language' => '-- Select Language --',
 	'upload' => 'Upload',
+	'success_trans_upload' => 'Translation has been successfully uploaded. You can view the translation by clicking on Download.',
+	'success_initialize_language' => 'Language has successfully initialized. You can now go to Translation Menu to upload.',
 	'translation_settings' => 'Translation Settings',
 	'initialize_language' => 'Initialize Language',
 	'initialize' => 'Initialize',

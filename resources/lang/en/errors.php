@@ -266,4 +266,7 @@ return [
 		Error::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED => 'Plot a point to answer',
 		Error::TRIAL_MODULE_DRAG_DROP_REQUIRED => 'Drag at least one object to answer',
 
+		// localization
+		Error::LANGUAGE_NOT_AVAILABLE => 'Language code does not match.',
+
 ];

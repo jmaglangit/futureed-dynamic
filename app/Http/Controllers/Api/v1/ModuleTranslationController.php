@@ -49,6 +49,10 @@ class ModuleTranslationController extends ApiController {
 
 		$records = $this->excel->importCsv($file,$header);
 
+		// check if target language is correctly set.
+		if(!isset($records[0][$target_lang])){
+			return $this->respondErrorMessage(Error::LANGUAGE_NOT_AVAILABLE);
+		}
 
 		//parse csv files by 2 column row.
 		$status = true;
@@ -63,7 +67,8 @@ class ModuleTranslationController extends ApiController {
 		}
 
 		//return true else error message
-		return ($status) ? $this->respondWithData(true) : $this->respondErrorMessage(Error::MODULE_TRANSLATION_UPDATE_FAIL);
+		return ($status) ? $this->respondWithData(trans('messages.success_trans_upload'))
+			: $this->respondErrorMessage(Error::MODULE_TRANSLATION_UPDATE_FAIL);
 	}
 
 	/**

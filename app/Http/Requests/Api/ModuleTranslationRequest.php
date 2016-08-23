@@ -25,7 +25,7 @@ class ModuleTranslationRequest extends ApiRequest {
 
 				return [
 					'file' => 'required',
-					'target_lang' => 'required',
+					'target_lang' => 'required|in:' . implode(",",config('translatable.locales')),
 				];
 				break;
 
