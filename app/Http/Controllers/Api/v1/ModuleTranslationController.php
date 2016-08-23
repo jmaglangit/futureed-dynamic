@@ -54,7 +54,6 @@ class ModuleTranslationController extends ApiController {
 			return $this->respondErrorMessage(Error::LANGUAGE_NOT_AVAILABLE);
 		}
 
-
 		//parse csv files by 2 column row.
 		$status = true;
 		foreach($records as $data){
