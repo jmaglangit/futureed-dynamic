@@ -72,6 +72,6 @@ class LanguageController extends ApiController {
 			$this->module_translation->generateInitialLanguageTranslation($locale);
 		}
 
-		return $this->respondWithData(true);
+		return $this->respondWithData(trans('messages.success_initialize_language'));
 	}
 }
