@@ -44,6 +44,7 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         ManageLocalizationService.getLanguages().success(function(response){
             if(angular.equals(response.status, Constants.STATUS_OK)) {
                 if(response.errors) {
+                    self.success = Constants.FALSE;
                     self.errors = $scope.errorHandler(response.errors);
                 } else if(response.data) {
                     self.languages = response.data;
@@ -65,6 +66,7 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         ManageLocalizationService.getAllLanguages().success(function(response){
             if(angular.equals(response.status, Constants.STATUS_OK)) {
                 if(response.errors) {
+                    self.success = Constants.FALSE;
                     self.errors = $scope.errorHandler(response.errors);
                 } else if(response.data) {
                     self.all_languages = response.data;
@@ -86,7 +88,10 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         ManageLocalizationService.initializeTranslation(self.locale_code).success(function(response){
             if(angular.equals(response.status, Constants.STATUS_OK)) {
                 if(response.errors) {
+                    self.success = Constants.FALSE;
                     self.errors = $scope.errorHandler(response.errors);
+                } else {
+                    self.success = response.data;
                 }
             }
             $scope.ui_unblock();
@@ -101,8 +106,9 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         self.errors = Constants.FALSE;
 
         ManageLocalizationService.downloadTranslation(self.locale_code).success(function(data,status,headers,config){
-            if (status != Constants.STATUS_OK) {
-                self.errors = $scope.errorHandler(data);
+            if (data.errors) {
+                self.success = Constants.FALSE;
+                self.errors = $scope.errorHandler(data.errors);
             } else if (data) {
                 var filename = headers('content-disposition').split(";")[1].trim().split("=")[1];
 
@@ -129,20 +135,12 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
             }).success(function(response) {
                 if(angular.equals(response.status, Constants.STATUS_OK)) {
                     if(response.errors) {
+                        self.success = Constants.FALSE;
                         self.errors = $scope.errorHandler(response.errors);
                     }else if(response.data){
                         var data = response.data;
                         self.errors = Constants.FALSE;
-                        self.upload_records = data;
-                        self.report_status = Constants.TRUE;
-
-                        if(data.fail_count > 0){
-                            self.fail_count = Constants.TRUE;
-                        }
-
-                        if(data.inserted_count > 0){
-                            self.inserted_count = Constants.TRUE;
-                        }
+                        self.success = data;
                     }
                 }
 
