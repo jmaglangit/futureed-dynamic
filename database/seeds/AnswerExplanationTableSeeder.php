@@ -2,8 +2,6 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-
-use Laracasts\TestDummy\Factory as TestDummy;
 use League\Csv\Reader;
 
 class AnswerExplanationTableSeeder extends Seeder
@@ -14,7 +12,8 @@ class AnswerExplanationTableSeeder extends Seeder
 
         $this->dataLoader([
             'answer_explanations.csv',
-            'answer_explanations_two.csv'
+            'answer_explanations_two.csv',
+            'answer_explanations_three.csv'
         ]);
 
     }
