@@ -12,7 +12,8 @@ class ExcelServices extends Excel{
 	 */
 	public function importCsv($csv_file,$headers = []){
 
-		return Excel::load($csv_file,function ($reader){})->get($headers);
+
+		return Excel::load($csv_file,function ($reader){},config('translatable.translation_encoding'))->get($headers);
 
 	}
 
