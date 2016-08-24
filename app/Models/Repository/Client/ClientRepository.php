@@ -286,7 +286,9 @@ class ClientRepository implements ClientRepositoryInterface
 
 			if($user && $client){
 
-				return Client::with('user','school')->find($id);
+				$response = Client::with('user','school')->find($id);
+			} else {
+				$response = false;
 			}
 
 
