@@ -143,6 +143,7 @@ return [
 		'Webpatser\Countries\CountriesServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
 		Barryvdh\DomPDF\ServiceProvider::class,
+		Dimsav\Translatable\TranslatableServiceProvider::class,
 
 		/*
 		 * Project Specific Service Providers...

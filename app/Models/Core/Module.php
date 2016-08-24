@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Core;
 
+use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -7,6 +8,8 @@ use Illuminate\Filesystem\Filesystem;
 
 class Module extends Model
 {
+
+	use Translatable;
 
 	use SoftDeletes;
 
@@ -22,6 +25,8 @@ class Module extends Model
 		'created_at',
 		'updated_at',
 		'deleted_at'];
+
+	public $translatedAttributes = ['name'];
 
 	protected $fillable = [
 		'subject_id',
@@ -46,6 +51,9 @@ class Module extends Model
 		'grade_id' => 0,
 		'points_earned' => 0
 	];
+
+	//Translation
+	public $translationModel = 'FutureEd\Models\Core\ModuleTranslation';
 
 	//Accessors
 	/**
@@ -121,6 +129,13 @@ class Module extends Model
 
 		return $query->where('grade_id', '=',  $grade_id );
 
+	}
+
+	public function scopeLocale($query,$locale){
+
+		return $query->whereHas('translations',function($query) use ($locale){
+			$query->where('locale','=',$locale);
+		});
 	}
 
 	public function scopeSubjectName($query, $name) {

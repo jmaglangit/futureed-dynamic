@@ -97,6 +97,8 @@ return [
 		2071 => 'Module is not available',
 		Error::REMOVE_STUDENT_BEFORE_DATE => 'Student cannot be deleted if date removed is less than date added',
 		Error::NOT_ENOUGH_POINTS_ON_GAME => 'You do not have enough points to buy this game',
+		Error::MODULE_TRANSLATION_LOCALE => 'Need to initialize new language.',
+		Error::MODULE_TRANSLATION_UPDATE_FAIL => 'Failed translation update.',
 
 
 		2100 => 'Reset code is invalid.',
@@ -263,5 +265,8 @@ return [
 		Error::TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED => 'Answers are required',
 		Error::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED => 'Plot a point to answer',
 		Error::TRIAL_MODULE_DRAG_DROP_REQUIRED => 'Drag at least one object to answer',
+
+		// localization
+		Error::LANGUAGE_NOT_AVAILABLE => 'Language code does not match.',
 
 ];

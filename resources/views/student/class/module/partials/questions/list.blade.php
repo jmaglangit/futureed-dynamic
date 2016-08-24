@@ -124,7 +124,7 @@
 						<div class="margin-top-30">
 							<div ng-if="mod.current_question.question_type == futureed.ORDERING">
 								<ul as-sortable="mod.dragControlListeners" ng-model="mod.current_question.answer_text">
-									<li ng-repeat="item in mod.current_question.answer_text" as-sortable-item class="as-sortable-item">
+									<li ng-repeat="item in mod.current_question.answer_text track by $index" as-sortable-item class="as-sortable-item">
 										<div as-sortable-item-handle class="as-sortable-item-handle">
 											<span data-ng-bind="item"></span>
 										</div>
@@ -243,9 +243,7 @@
 				   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 				   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 				</i>
-				<span class="h4">
-					{! mod.answer_explanation[mod.answer_exp_offset].answer_explanation !}
-				</span>
+				<p class="h4" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
 				<i class="fa fa-caret-right fa-2x"
 				   aria-hidden="true"
 				   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
@@ -300,9 +298,7 @@
 							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 							</i>
-							<span class="h5">
-								{! mod.answer_explanation[mod.answer_exp_offset].answer_explanation !}
-							</span>
+							<p class="h5" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
 							<i class="fa fa-caret-right"
 							   aria-hidden="true"
 							   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
