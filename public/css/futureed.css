@@ -1816,3 +1816,7 @@ span.round-tab:hover {
 	font-size: 20px;
 	text-transform: capitalize;
 }
+
+.answer-explanation {
+	margin: 0px 50px 0px 50px;
+}
