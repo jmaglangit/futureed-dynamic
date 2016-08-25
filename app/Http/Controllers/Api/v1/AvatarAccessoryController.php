@@ -55,7 +55,7 @@ class AvatarAccessoryController extends ApiController {
 		$canBuyAvatarAccessory = $this->avatar_accessory->canBuyAvatarAccessory($accessory['student_id'], $accessory['avatar_accessories_id']);
 
 		if(!$canBuyAvatarAccessory){
-			return $this->respondErrorMessage(2067); //This accessory is not available for your avatar
+			return $this->respondErrorMessage(2068); //This accessory is not available for your avatar
 		}
 
 		//check if user already has the accessory
@@ -71,7 +71,7 @@ class AvatarAccessoryController extends ApiController {
 		$points_left = ($total_points - $points_used) - $accessory['points_to_unlock'];
 
 		if($points_left < 0){
-			return $this->respondErrorMessage(2068); //You do not have enough points to buy this accessory
+			return $this->respondErrorMessage(2069); //You do not have enough points to buy this accessory
 		};
 
 		//update points used on students table here

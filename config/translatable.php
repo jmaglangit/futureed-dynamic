@@ -106,6 +106,6 @@ return [
     'always_fillable' => false,
 
     // added encoding to be used by latin, arabic, and chinese characters
-    'translation_encoding' => 'ISO-8859-1',
+    'translation_encoding' => 'ISO-8859-2',
 
 ];
