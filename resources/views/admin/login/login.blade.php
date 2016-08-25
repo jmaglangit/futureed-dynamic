@@ -3,7 +3,7 @@
 @section('content')
 	<div class="container login" ng-controller="AdminLoginController as login" ng-cloak>
 		<div class="login-container">
-			<div class="form-style form-narrow">
+			<div class="form-style">
 				<div class="pull-right">
 					@include('common.language-option')
 				</div>
