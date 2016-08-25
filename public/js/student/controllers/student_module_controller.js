@@ -379,7 +379,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		}
 
 		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
-			self.current_question.answer_text = self.current_question.question_order_text.split(",");
+			self.answerTextOrderGenerator();
 		}
 
 		if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
@@ -405,6 +405,21 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.record.student_module.last_answered_question_id = resp.data.last_answered_question_id;
 			}
 		});
+	}
+
+	//ordering parse strings into object
+	self.answerTextOrderGenerator = function(){
+		self.order_items = self.current_question.question_order_text.split(",");
+
+		var answer_text = [];
+		angular.forEach(self.order_items,function(v,i){
+			var object = {
+				value : v,
+				key : i
+			};
+			answer_text.push(object);
+		});
+		self.current_question.answer_text = answer_text;
 	}
 
 	self.skipSnapQuestion = function() {
@@ -648,9 +663,21 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			seq_no	:	self.current_question.seq_no
 		};
 
+		//form answer text ordering into array of objects.
 		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
-			answer.answer_text = self.current_question.answer_text.join(",");
+			var order_answer = self.current_question.answer_text;
+
+			self.order_answer_text = '';
+			angular.forEach(order_answer,function(v,i){
+				if(i > Constants.FALSE){
+					self.order_answer_text += (',' + v.value);
+				}else {
+					self.order_answer_text += v.value;
+				}
+			});
+			answer.answer_text = self.order_answer_text;
 		}
+
 		else if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
 			var answer_text_array = [];
 
@@ -1018,7 +1045,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.current_question.answer_id = Constants.EMPTY_STR;
 
 				if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
-					self.current_question.answer_text = self.current_question.question_order_text.split(",");
+					self.answerTextOrderGenerator();
 				}
 
 				if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {

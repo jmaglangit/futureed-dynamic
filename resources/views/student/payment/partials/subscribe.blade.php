@@ -255,6 +255,7 @@
 
                             <div class="row">
                                 <div class="col-xs-12 invoice-form">
+                                    @include('common.invoice_header')
                                     {{--subscription summary--}}
                                     <div class="form-search">
                                         <div>
@@ -311,6 +312,7 @@
                                             <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.total_amount !} USD</label>
                                         </div>
                                     </div>
+                                    @include('common.invoice_footer')
                                 </div>
                             </div>
                             <ul class="list-inline pull-right">

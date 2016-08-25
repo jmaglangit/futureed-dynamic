@@ -96,6 +96,10 @@ class Student extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Avatar');
 	}
 
+	public function country(){
+		return $this->belongsTo('Webpatser\Countries\Countries');
+	}
+
 	//get student with relation to ClassStudent with relation to classroom
 	public function studentClassroom(){
 

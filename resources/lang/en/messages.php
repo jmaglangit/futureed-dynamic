@@ -925,7 +925,7 @@ return [
 	//resources/views/client/login/registration-success.blade.php
 	'client_thank_you_for_register' => 'Thank you for registering to Future Lesson!',
 	'client_confirm_code_sent' => 'A confirmation code has been sent to your email account.',
-	'client_enter_confirm_code' => 'Please enter the confirmation code to verify your email address and to setup your new password.',
+	'client_enter_confirm_code' => 'Please click on the confirmation link to verify your email address.',
 	
 	//resources/views/client/login/enter-confirmation-code.blade.php
 	'client_new_confirmation_code' => 'A new confirmation code has been sent to your email account.',
@@ -1373,6 +1373,23 @@ return [
 	'snap_modal_msg_9' => 'I\'ve written my first program. Try FutureEd Now!',
 
 	'you_earned' => 'You have earned',
-	'point_s' => 'point(s)'
+	'point_s' => 'point(s)',
+
+	'translation' => 'Translation | Translations',
+	'localization' => 'Localization',
+	'language' => 'Language',
+	'select_language' => '-- Select Language --',
+	'upload' => 'Upload',
+	'success_trans_upload' => 'Translation has been successfully uploaded. You can view the translation by clicking on Download.',
+	'success_initialize_language' => 'Language has successfully initialized. You can now go to Translation Menu to upload.',
+	'translation_settings' => 'Translation Settings',
+	'initialize_language' => 'Initialize Language',
+	'initialize' => 'Initialize',
+	'id' => 'Bahasa Indonesia',
+	'my' => 'Burmese',
+	'pt' => 'Portuguese',
+	'th' => 'Thai',
+	'vi' => 'Vietnamese',
+	'en' => 'English UK',
 
 ];

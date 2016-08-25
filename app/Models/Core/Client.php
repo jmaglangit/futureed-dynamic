@@ -55,15 +55,16 @@ class Client extends Model
 
 	public function school()
 	{
-
 		return $this->belongsTo('FutureEd\Models\Core\School', 'school_code', 'code');
 	}
 
 	public function student()
 	{
-
-
 		return $this->hasMany('FutureEd\Models\Core\ParentStudent', 'parent_id', 'id');
+	}
+
+	public function country(){
+		return $this->belongsTo('Webpatser\Countries\Countries');
 	}
 
 	//-------------scopes

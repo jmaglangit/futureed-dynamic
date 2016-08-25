@@ -691,5 +691,24 @@
 					, 'uses' => 'FutureLesson\Admin\LoginController@base_url'
 				]);
 		});
+
+		Routes::group(['prefix' => '/localization'],function(){
+			Routes::get('/index',[
+				'as' => 'admin.manage.localization.index',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@index'
+			]);
+			Routes::get('/translations',[
+				'as' => 'admin.manage.localization.translations',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@translation'
+			]);
+			Routes::get('/settings',[
+				'as' => 'admin.manage.localization.settings',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@settings'
+			]);
+			Routes::get('/settings/main',[
+				'as' => 'admin.manage.localization.settings.main',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@settings_main'
+			]);
+		});
 	});
 ?>

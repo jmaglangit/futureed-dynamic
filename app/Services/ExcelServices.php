@@ -12,8 +12,21 @@ class ExcelServices extends Excel{
 	 */
 	public function importCsv($csv_file,$headers = []){
 
-		return Excel::load($csv_file,function ($reader){})->get($headers);
 
+		return Excel::load($csv_file,function ($reader){},config('translatable.translation_encoding'))->get($headers);
+
+	}
+
+	public function exportCsv($rows,$filename){
+
+		return Excel::create($filename, function($excel) use ($rows,$filename){
+
+			$excel->sheet(substr($filename,0,29), function($sheet) use ($rows) {
+
+				$sheet->fromArray($rows);
+			});
+
+		});
 	}
 
 }

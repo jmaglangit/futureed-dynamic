@@ -316,4 +316,8 @@ return [
 	'rating_points_3' => 12,
 	'rating_points_4' => 16,
 	'rating_points_5' => 20,
+
+	//translation export filename
+	'module_translation_two_column' => 'Module_translation',
+
 ];

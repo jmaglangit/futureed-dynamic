@@ -276,7 +276,7 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="complete">
                             <h3>{!! ucfirst(trans('messages.billing_invoice')) !!}</h3>
-
+                            @include('common.invoice_header')
                             <div class="row">
                                 <div class="col-xs-12 invoice-form">
                                     {{--subscription summary--}}
@@ -314,7 +314,7 @@
                                             <label ng-if="payment.subscription_packages.subscription.has_lsp" class="col-lg-4 h5 form-label">{! futureed.YES !}</label>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label h5">{!! trans('messages.price') !!} : </label>
+                                            <label class="col-xs-4 control-label h5">{!! trans('messages.rate') !!} : </label>
                                             <label class="col-lg-4 h5 form-label">{! payment.subscription_packages.price !} USD</label>
                                         </div>
 
@@ -357,6 +357,7 @@
                                             <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.total_amount !} USD</label>
                                         </div>
                                     </div>
+                                    @include('common.invoice_footer')
                                 </div>
                             </div>
                             <ul class="list-inline pull-right">

@@ -90,6 +90,7 @@
 					'as' => 'client.principal.payment.fail',
 					'uses' => $manage_payment_controller . '@payment_fail'
 				]);
+
 		});
 
 		/**

@@ -13,6 +13,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
+					<li class="nav-label">@include('common.language-option')</li>
 					<li>
 						<a>{{ trans('messages.welcome') }}, {! user.first_name !}</a>
 					</li>

@@ -120,6 +120,7 @@ var Constants = {
 	, ADD_STUDENT	: "add_student"
 	, ANNOUNCEMENT 	: "announcement"
 	, PRICE 		: "price"
+	, LOCALIZATION	: "localization"
 
 	, DELETE_ERROR 		: "Error deleting."
 	, DELETE_SUCCESS	: "successfully deleted."
@@ -272,6 +273,10 @@ var Constants = {
 
 	/*Country Codes*/
 	, UNITED_STATES				: 840
+
+	/* Localization */
+	, LOCALIZATION_SETTING		: 'localization settings'
+	, LOCALIZATION_TRANSLATION	: 'localization translation'
 
 	, REPORT_PROGRESS_PASS	: 81
 	, REPORT_PROGRESS_MEDIAN_CEILING	: 80

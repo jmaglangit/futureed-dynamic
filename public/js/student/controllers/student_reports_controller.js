@@ -21,6 +21,8 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
         self.active_subject_area = Constants.FALSE;
         self.active_subject_area_heatmap = Constants.FALSE;
         self.student_report_export = Constants.FALSE;
+        self.active_lsp_download = Constants.FALSE;
+
 
         self.searchDefaults();
 
@@ -344,6 +346,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
                     self.student_iassess_report = response.data;
+                    self.active_lsp_download = Constants.TRUE;
                 }
             }
             $scope.ui_unblock();

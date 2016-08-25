@@ -191,6 +191,12 @@ class AssessController extends ApiController {
 	 */
 	public function getReport($student_id){
 
+		//check student if has already taken LSP else return false.
+		if(!$this->student->getStudentLSP($student_id)){
+
+			return $this->respondWithData(false);
+		}
+
 		$is_adult = $this->iassess->isAdult($student_id);
 
 		$iAssess_report = $this->iassess->downloadReport($student_id,$is_adult);
