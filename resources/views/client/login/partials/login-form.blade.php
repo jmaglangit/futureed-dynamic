@@ -1,6 +1,6 @@
 <div ng-if="login.active_login">
 	<div class="col-xs-5">
-		<div class="login-container form-style form-narrow">
+		<div class="login-container form-style">
 			<div class="pull-right">
 				@include('common.language-option')
 			</div>
