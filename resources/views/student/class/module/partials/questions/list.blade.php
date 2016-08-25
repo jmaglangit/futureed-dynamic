@@ -124,9 +124,9 @@
 						<div class="margin-top-30">
 							<div ng-if="mod.current_question.question_type == futureed.ORDERING">
 								<ul as-sortable="mod.dragControlListeners" ng-model="mod.current_question.answer_text">
-									<li ng-repeat="item in mod.current_question.answer_text track by $index" as-sortable-item class="as-sortable-item">
+									<li ng-repeat="item in mod.current_question.answer_text track by item.key" as-sortable-item class="as-sortable-item">
 										<div as-sortable-item-handle class="as-sortable-item-handle">
-											<span data-ng-bind="item"></span>
+											<span data-ng-bind="item.value"></span>
 										</div>
 									</li>
 								</ul>
