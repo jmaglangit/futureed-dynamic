@@ -116,6 +116,10 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	 */
 	public function getModuleTranslations($locale){
 
+		$current_locale = App::getLocale();
+
+		App::setLocale(config('translatable.fallback_locale'));
+
 		$module = new Module();
 		$response = $module->with('translations')->get();
 
@@ -128,6 +132,9 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 				$locale => $data->translate($locale)->name
 			]);
 		}
+
+		//return to current locale
+		App::setLocale($current_locale);
 
 		return $translations;
 	}
