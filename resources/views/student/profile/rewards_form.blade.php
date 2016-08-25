@@ -15,7 +15,7 @@
                         'class' => 'form-control'
                         , 'placeholder' => trans('messages.points')
                         , 'ng-disabled' => 'true'
-                        , 'ng-model' => 'profile.prof.points')
+                        , 'ng-model' => '(profile.prof.points - profile.prof.points_used)')
                 ) !!}
 			</div>
 		</div>
