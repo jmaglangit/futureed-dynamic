@@ -925,7 +925,7 @@ return [
 	//resources/views/client/login/registration-success.blade.php
 	'client_thank_you_for_register' => 'Thank you for registering to Future Lesson!',
 	'client_confirm_code_sent' => 'A confirmation code has been sent to your email account.',
-	'client_enter_confirm_code' => 'Please click on the confirmation link to verify you email address.',
+	'client_enter_confirm_code' => 'Please click on the confirmation link to verify your email address.',
 	
 	//resources/views/client/login/enter-confirmation-code.blade.php
 	'client_new_confirmation_code' => 'A new confirmation code has been sent to your email account.',
