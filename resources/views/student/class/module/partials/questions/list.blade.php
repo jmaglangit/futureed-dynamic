@@ -243,7 +243,7 @@
 				   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 				   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 				</i>
-				<p class="h4" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
+				<p class="answer-explanation h4" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
 				<i class="fa fa-caret-right fa-2x"
 				   aria-hidden="true"
 				   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
@@ -298,7 +298,7 @@
 							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 							</i>
-							<p class="h5" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
+							<p class="answer-explanation h5" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
 							<i class="fa fa-caret-right"
 							   aria-hidden="true"
 							   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
