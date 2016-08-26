@@ -99,7 +99,7 @@ class Module extends Model
 	}
 
 	public function studentModule() {
-		return $this->hasMany('FutureEd\Models\Core\StudentModule')->notFailed();
+		return $this->hasMany('FutureEd\Models\Core\StudentModule')->with('classroom_order')->notFailed()->validClass();
 	}
 
 	public function studentModuleValid() {
