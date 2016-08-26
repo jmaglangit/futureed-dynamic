@@ -130,7 +130,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		self.errors = Constants.FALSE;
 		self.records = {};
 		self.table.loading = Constants.TRUE;
-		
+
 		$scope.ui_block();
 		manageStudentService.getStudentlist(self.search, self.table).success(function(response){
 			self.table.loading = Constants.FALSE;
@@ -365,7 +365,15 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				}else if(response.data){
 					self.modules = response.data.records;
 					angular.forEach(self.modules, function(value,key){
-						value.student_module_id = value.student_module[0].id;
+
+						//get student module id of the student_id
+						var mod_id = 0;
+						angular.forEach(value.student_module, function(v){
+							if(v.student_id == id){
+								mod_id = v.id;
+							}
+						});
+						value.student_module_id = mod_id;
 					});
 
 					self.updatePageCount(response.data);
