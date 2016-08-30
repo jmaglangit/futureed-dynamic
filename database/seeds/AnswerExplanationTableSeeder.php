@@ -17,7 +17,7 @@ class AnswerExplanationTableSeeder extends Seeder
             'answer_explanations_three.csv'
         ]);
 
-        //TODO initialize translation
+        //initialize translation
         $this->addTranslation();
     }
 
