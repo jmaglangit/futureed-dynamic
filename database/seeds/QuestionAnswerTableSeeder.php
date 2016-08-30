@@ -60,13 +60,13 @@ class QuestionAnswerTableSeeder extends Seeder
 		//count records
 		$question_answer_count = DB::table('question_answers')->count();
 
-		//command info
-		$this->command->info('Initializing translation ' . ceil(($question_answer_count/1000)) . ' batch of '
-			. $question_answer_count . ' records.');
-
 		//initialize batch record.
 		$limit = config('futureed.seeder_record_limit');
 		$offset = 0;
+
+		//command info
+		$this->command->info('Initializing translation ' . ceil(($question_answer_count/$limit)) . ' batch of '
+			. $question_answer_count . ' records.');
 
 		//truncate translation table
 		DB::table('question_answer_translations')->truncate();
