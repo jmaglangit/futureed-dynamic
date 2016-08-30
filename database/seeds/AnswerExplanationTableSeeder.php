@@ -63,11 +63,11 @@ class AnswerExplanationTableSeeder extends Seeder
         //count records
         $answer_count = DB::table('answer_explanations')->count();
 
-        $this->command->info('Initializing translation ' . ceil(($answer_count/1000)) . ' batch of ' . $answer_count . ' records.');
-
         //initialize batch record.
         $limit = config('futureed.seeder_record_limit');
         $offset = 0;
+
+        $this->command->info('Initializing translation ' . ceil(($answer_count/$limit)) . ' batch of ' . $answer_count . ' records.');
 
         // truncate translation
         DB::table('answer_explanation_translations')->truncate();
