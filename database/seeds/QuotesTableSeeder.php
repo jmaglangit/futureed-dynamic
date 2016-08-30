@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-// composer require laracasts/testdummy
-use Laracasts\TestDummy\Factory as TestDummy;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class QuotesTableSeeder extends Seeder
@@ -11,8 +10,7 @@ class QuotesTableSeeder extends Seeder
 
 	public function run()
 	{
-		\DB::table('quotes')->truncate();
-		\DB::table('quotes')->insert([
+		$seeds = [
 			[
 				'quote' => 'This is a challenging topic but you can do it',
 				'percent' => '20',
@@ -304,6 +302,41 @@ class QuotesTableSeeder extends Seeder
 				'updated_at' => Carbon::now()
 			]
 
-		]);
+		];
+
+		// clear and insert quotes data.
+		DB::table('quotes')->truncate();
+		DB::table('quotes')->insert($seeds);
+
+		//initialize translations.
+		$this->addTranslation();
+
+	}
+
+	/**
+	 * Initialize translations for quote.
+	 */
+	public function addTranslation(){
+
+		//loop throughout the quote table.
+		$quotes = DB::table('quotes')->select('id','quote')->get();
+
+		$translation = [];
+		foreach($quotes as $quote => $q){
+
+			array_push($translation,[
+				'quote_id' => $q->id,
+				'quote' => $q->quote,
+				'locale' => 'en',
+				'created_by' => 1,
+				'updated_by' => 1,
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
+			]);
+		}
+
+		//clear and insert quotes data
+		DB::table('quote_translations')->truncate();
+		DB::table('quote_translations')->insert($translation);
 	}
 }
