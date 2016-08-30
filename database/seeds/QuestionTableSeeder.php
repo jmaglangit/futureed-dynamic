@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
 use Carbon\Carbon;
 
@@ -15,7 +16,7 @@ class QuestionTableSeeder extends Seeder
 //id,module_id,code,question_type,question_text,question_image,answer,seq_no,difficulty,points_earned,status
 //,created_by,updated_by,created_by,updated_by,deleted_by
 
-		\DB::table('questions')->truncate();
+		DB::table('questions')->truncate();
 
 		$this->command->info('Loading Question Batch 1...');
 		$this->dataLoader('questions.csv');
@@ -28,6 +29,8 @@ class QuestionTableSeeder extends Seeder
 
 		$this->command->info('Loading Question Batch 4...');
 		$this->dataLoader('questions_four.csv');
+
+		$this->addTranslation();
     }
 
 	/**
@@ -40,7 +43,7 @@ class QuestionTableSeeder extends Seeder
 
 		foreach($reader as $index => $row){
 
-			\DB::table('questions')->insert([
+			DB::table('questions')->insert([
 				[
 					'module_id' => ($row[1]) ? $row[1] : 0,
 					'code' => $row[2],
@@ -61,6 +64,59 @@ class QuestionTableSeeder extends Seeder
 					'updated_at' => Carbon::now()
 				]
 			]);
+
+		}
+	}
+
+	/**
+	 * Initialize translation for questions.
+	 */
+	public function addTranslation(){
+
+		//count records
+		$question_count = DB::table('questions')->count();
+
+		//command info
+		$this->command->info('Initializing translation ' . ceil(($question_count/1000)) . ' batch of '
+			. $question_count . ' records.');
+
+		//initialize batch record
+		$limit = config('futureed.seeder_record_limit');
+		$offset = 0;
+
+		//truncate translation table
+		DB::table('question_translations')->truncate();
+
+		//loop through each question record
+		for($i=0;$i < ceil(($question_count/$limit)); $i++) {
+
+			//get record by batch
+			$questions = DB::table('questions')->select('id','questions_text','answer')
+				->skip($offset)->limit($limit)->get();
+
+			//update offset
+			$offset += $limit;
+
+			$this->command->info('Inserting batch ' . ($i+1) . ' of '. (ceil(($question_count/$limit))));
+
+			//loop through each command
+			$translation = [];
+			foreach($questions as $question => $q){
+
+				array_push($translation,[
+					'question_id' => $q->id,
+					'questions_text' => $q->questions_text,
+					'answer' => $q->answer,
+					'locale' => 'en',
+					'created_by' => 1,
+					'updated_by' => 1,
+					'created_at' => Carbon::now(),
+					'updated_at' => Carbon::now()
+				]);
+			}
+
+			//insert batch record
+			DB::table('question_translations')->insert($translation);
 
 		}
 	}
