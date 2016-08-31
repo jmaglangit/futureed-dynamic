@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Core;
 
+use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -7,6 +8,8 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Session;
 
 class QuestionAnswer extends Model {
+
+	use Translatable;
 
 	use SoftDeletes;
 
@@ -45,6 +48,15 @@ class QuestionAnswer extends Model {
 		'original_image_name' => 0,
 
 	];
+
+	//translatable
+	public $translatedAttributes = [
+		'answer_text'
+	];
+
+	public $translationModel = 'FutureEd\Models\Core\QuestionAnswerTranslation';
+
+
 
 	//Accessor
 	public function getAnswerImageAttribute($value){
