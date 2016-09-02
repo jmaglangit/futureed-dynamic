@@ -24,12 +24,14 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 
 	// Initialize FB API on load
 	self.fbAsyncInit = function() {
-	    FB.init({ 
-	      appId: self.DI_PPA_BF
-	      , status: true 
-	      , xfbml: true
-	      , version: 'v2.3'
-	    });
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId: self.DI_PPA_BF
+				, status: true
+				, xfbml: true
+				, version: 'v2.3'
+			});
+		}
 	};
 
 	self.loginViaFacebook = function() {
