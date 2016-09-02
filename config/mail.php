@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'no-reply@futureed.com', 'name' => 'FutureEd'],
+	'from' => ['address' => 'no-reply@futurelesson.com', 'name' => 'FutureLesson'],
 
 	/*
 	|--------------------------------------------------------------------------
