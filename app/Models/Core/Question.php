@@ -34,6 +34,7 @@ class Question extends Model {
 		'seq_no',
 		'difficulty',
 		'points_earned',
+		'translatable',
 		'original_image_name',
 		'question_graph_content',
 		'status',
