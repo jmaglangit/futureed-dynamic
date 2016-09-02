@@ -34,6 +34,7 @@ class QuestionAnswer extends Model {
 		'original_image_name',
 		'correct_answer',
 		'point_equivalent',
+		'translatable',
 		'difficulty',
 		'created_by',
 		'updated_by'];
