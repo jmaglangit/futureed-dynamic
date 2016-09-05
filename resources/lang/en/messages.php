@@ -1376,6 +1376,7 @@ return [
 	'point_s' => 'point(s)',
 
 	'translation' => 'Translation | Translations',
+	'translatable' => 'Translatable',
 	'localization' => 'Localization',
 	'language' => 'Language',
 	'select_language' => '-- Select Language --',
