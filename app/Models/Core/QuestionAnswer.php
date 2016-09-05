@@ -36,6 +36,7 @@ class QuestionAnswer extends Model {
 		'point_equivalent',
 		'translatable',
 		'difficulty',
+		'translatable',
 		'created_by',
 		'updated_by'];
 
