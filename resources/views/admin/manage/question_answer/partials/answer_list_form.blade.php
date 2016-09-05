@@ -46,6 +46,40 @@
             </div>
 
             <div class="form-group">
+                <label class="col-xs-4 control-label">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
+                <div class="col-xs-5">
+                    <div class="col-xs-6 checkbox">
+                        <label>
+                            {!! Form::radio('yes'
+                                , 1
+                                , true
+                                , array(
+                                    'class' => 'field'
+                                    , 'ng-model' => 'qa.answers.record.translatable'
+                                    , 'checked' => 'checked'
+                                )
+                            ) !!}
+                            <span class="lbl padding-8">{!! trans('messages.yes') !!}</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 checkbox">
+                        <label>
+                            {!! Form::radio('no'
+                                , 0
+                                , false
+                                , array(
+                                    'class' => 'field'
+                                    , 'ng-model' => 'qa.answers.record.translatable'
+                                    , 'checked' => 'qa.answers.record.translatable'
+                                )
+                            ) !!}
+                            <span class="lbl padding-8">{!! trans('messages.no') !!}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-xs-4 control-label">{!! trans('messages.admin_label') !!} </label>
 
                 <div class="col-xs-5">
@@ -193,6 +227,7 @@
                     <th>{!! trans('messages.answer') !!}</th>
                     <th>{!! trans('messages.admin_correct_answer') !!}</th>
                     <th>{!! trans('messages.admin_points_equivalent') !!}</th>
+                    <th>{!! trans('messages.translatable') !!}</th>
                     <th ng-if="qa.answers.records.length">{!! trans_choice('messages.action', 1) !!}</th>
                 </tr>
                 </thead>
@@ -203,6 +238,10 @@
                     <td>{! record.answer_text !}</td>
                     <td>{! record.correct_answer !}</td>
                     <td>{! record.point_equivalent !}</td>
+                    <td>
+                        <div ng-if="record.translatable == futureed.TRUE"><i class="margin-top-8 fa fa-check-circle-o"></i></div>
+                        <div ng-if="record.translatable == futureed.FALSE"><i class="margin-top-8 fa fa-ban"></i></div>
+                    </td>
                     <td ng-if="qa.answers.records.length">
                         <div class="row">
                             <div class="col-xs-6">
