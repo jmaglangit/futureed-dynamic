@@ -37,6 +37,7 @@ class Question extends Model {
 		'translatable',
 		'original_image_name',
 		'question_graph_content',
+		'translatable',
 		'status',
 		'created_by',
 		'updated_by'
