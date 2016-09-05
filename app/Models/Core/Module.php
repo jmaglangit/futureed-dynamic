@@ -41,6 +41,7 @@ class Module extends Model
 		'common_core_url',
 		'points_to_unlock',
 		'points_to_finish',
+		'translatable',
 		'status',
 		'created_by',
 		'updated_by'];
