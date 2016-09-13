@@ -90,7 +90,7 @@ class ModuleTranslationController extends ApiController {
 	}
 
 	/**
-	 * Check if langauge exist.
+	 * Check if language exist.
 	 * @param $lang
 	 * @return mixed
 	 */
@@ -206,13 +206,25 @@ class ModuleTranslationController extends ApiController {
 			foreach($module['records'] as $record){
 
 				//get translation of the field.
-
+				//TODO call google translate.
 
 				$data = [
 					'module_id' => $record['id'],
-					'string' => '**' . $record[$input['field']]
+					'string' => $record[$input['field']]
 				];
-				$this->module_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
+
+				//check if translatable and tagged
+				if($input['tagged'] == config('futureed.true') && $record['translatable'] == config('futureed.true')){
+
+					$this->module_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
+
+				} elseif($input['tagged'] == config('futureed.false')){
+
+					//if all are translatable
+					$this->module_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
+
+				}
+
 			}
 
 		}
@@ -222,10 +234,7 @@ class ModuleTranslationController extends ApiController {
 		//get back the previous locale
 		App::setLocale($current_lang);
 
-
-
-		//save the called batch
-
+		return $this->respondWithData(trans('messages.success_trans_upload'));
 
 	}
 }
