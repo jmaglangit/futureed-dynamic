@@ -320,4 +320,7 @@ return [
 	//translation export filename
 	'module_translation_two_column' => 'Module_translation',
 
+	//seeder limit per record
+	'seeder_record_limit' => 1000,
+
 ];
