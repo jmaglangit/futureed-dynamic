@@ -60,6 +60,7 @@ Routes::group([
 	include('Routes/Api/Question.php');
 	include('Routes/Api/QuestionAnswer.php');
 	include('Routes/Api/Quote.php');
+	include('Routes/Api/QuoteTranslation.php');
 	include('Routes/Api/School.php');
 	include('Routes/Api/Student.php');
 	include('Routes/Api/StudentBadge.php');

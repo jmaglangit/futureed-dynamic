@@ -325,6 +325,12 @@ return [
 		'name' => 'name'
 	],
 
+	//Google Translate config
+	'google_translate_api' => env('GOOGLE_TRANSLATE_API','https://www.googleapis.com/language/translate/v2'),
+
+	//Google API key
+	'google_api_key' => env('GOOGLE_API_KEY','AIzaSyB_J5d86u2w2wkkEABDWP4SytYQuAXj_oY'),
+
 	//seeder limit per record
 	'seeder_record_limit' => 1000,
 
