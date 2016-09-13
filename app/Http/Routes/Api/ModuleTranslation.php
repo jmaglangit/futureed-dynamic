@@ -1,8 +1,8 @@
 <?php
 Routes::group([
-	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin'],
-	'role' => ['admin','super admin']
+//	'middleware' => ['api_user','api_after'],
+//	'permission' => ['admin'],
+//	'role' => ['admin','super admin']
 ], function(){
 
 	Routes::group([
@@ -32,6 +32,16 @@ Routes::group([
 		Routes::get('/languages',[
 			'as' => 'module-translation.languages',
 			'uses' => 'Api\v1\ModuleTranslationController@getLanguageTranslation'
+		]);
+
+		Routes::get('/attributes',[
+			'as' => 'module-translation.attributes',
+			'uses' => 'Api\v1\ModuleTranslationController@getTranslatedAttributes'
+		]);
+
+		Routes::post('/google-translate',[
+			'as' => 'module-translation.google-translate',
+			'uses' => 'Api\v1\ModuleTranslationController@googleTranslate'
 		]);
 
 	});
