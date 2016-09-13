@@ -9,6 +9,6 @@
 namespace FutureEd\Models\Repository\QuoteTranslation;
 
 
-class QuoteTranslationRepositoryInterface {
+interface QuoteTranslationRepositoryInterface {
 
 }
