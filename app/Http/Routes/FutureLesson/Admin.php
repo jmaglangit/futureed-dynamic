@@ -701,6 +701,26 @@
 				'as' => 'admin.manage.localization.translations',
 				'uses' => 'FutureLesson\Admin\ManageTranslationController@translation'
 			]);
+			Routes::get('/translations/module',[
+				'as' => 'admin.manage.localization.translations.module',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@module'
+			]);
+			Routes::get('/translations/question',[
+				'as' => 'admin.manage.localization.translations.question',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@question'
+			]);
+			Routes::get('/translations/question-answer',[
+				'as' => 'admin.manage.localization.translations.question-answer',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@question_answer'
+			]);
+			Routes::get('/translations/answer-explanation',[
+				'as' => 'admin.manage.localization.translations.answer-explanation',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@answer_explanation'
+			]);
+			Routes::get('/translations/quote',[
+				'as' => 'admin.manage.localization.translations.quote',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@quote'
+			]);
 			Routes::get('/settings',[
 				'as' => 'admin.manage.localization.settings',
 				'uses' => 'FutureLesson\Admin\ManageTranslationController@settings'
