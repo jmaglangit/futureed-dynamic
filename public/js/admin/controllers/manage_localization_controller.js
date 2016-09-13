@@ -19,6 +19,8 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         self.active_translation = Constants.FALSE;
         self.active_setting = Constants.FALSE;
         self.locale_code = Constants.NONE;
+        self.module_google_translate = Constants.FALSE;
+        self.module_field = Constants.FALSE;
 
         switch(active) {
             case Constants.LOCALIZATION_TRANSLATION:
@@ -34,6 +36,103 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         }
 
     }
+
+    //to activate every accordion
+    self.translationActive = function(active){
+
+        switch (active) {
+            case Constants.LOCALIZATION_MODULE:
+
+                self.active_loc_module == Constants.TRUE ? self.active_loc_module = Constants.FALSE
+                    : self.active_loc_module = Constants.TRUE;
+
+                self.active_loc_question =
+                    self.active_loc_question_ans =
+                        self.active_loc_answer_exp =
+                            self.active_loc_quote = Constants.FALSE;
+                break;
+            case Constants.LOCALIZATION_QUESTION:
+
+                self.active_loc_question == Constants.TRUE ? self.active_loc_question = Constants.FALSE
+                    : self.active_loc_question = Constants.TRUE;
+
+                self.active_loc_module =
+                    self.active_loc_question_ans =
+                        self.active_loc_answer_exp =
+                            self.active_loc_quote = Constants.FALSE;
+                break;
+            case Constants.LOCALIZATION_QUESTION_ANS:
+
+                self.active_loc_question_ans == Constants.TRUE ? self.active_loc_question_ans = Constants.FALSE
+                    : self.active_loc_question_ans = Constants.TRUE;
+
+                self.active_loc_module =
+                    self.active_loc_question =
+                        self.active_loc_answer_exp =
+                            self.active_loc_quote = Constants.FALSE;
+                break;
+            case Constants.LOCALIZATION_ANSWER_EXP:
+
+                self.active_loc_answer_exp == Constants.TRUE ? self.active_loc_answer_exp = Constants.FALSE
+                    : self.active_loc_answer_exp = Constants.TRUE;
+
+                self.active_loc_module =
+                    self.active_loc_question =
+                        self.active_loc_question_ans =
+                            self.active_loc_quote = Constants.FALSE;
+                break;
+            case Constants.LOCALIZATION_QUOTE:
+
+                self.active_loc_quote == Constants.TRUE ? self.active_loc_quote = Constants.FALSE
+                    : self.active_loc_quote = Constants.TRUE;
+
+                self.active_loc_module =
+                    self.active_loc_question =
+                        self.active_loc_question_ans =
+                            self.active_loc_answer_exp = Constants.FALSE;
+                break;
+            default:
+                self.active_loc_module == Constants.TRUE ? self.active_loc_module = Constants.FALSE
+                    : self.active_loc_module = Constants.FALSE;
+
+                self.active_loc_question =
+                    self.active_loc_question_ans =
+                        self.active_loc_answer_exp =
+                            self.active_loc_quote = Constants.FALSE;
+                break;
+        }
+    }
+
+    //get translatable module field
+    self.getTranslatableModuleField = function(){
+
+        ManageLocalizationService.getModuleTranslationFields().success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+                    self.success = Constants.FALSE;
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if(response.data) {
+                    self.module_translated_field = response.data;
+                }
+            }
+        }).error(function () {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
+    //set field for module translation options
+    self.setModuleField = function(){
+
+        self.module_google_translate = Constants.FALSE;
+
+        //check of automated translation
+        if(self.module_field && self.module_field.auto == Constants.TRUE){
+            //activate google translate
+            self.module_google_translate = Constants.TRUE;
+        }
+    }
+
 
     //get languages available
     self.getLanguages = function(){
