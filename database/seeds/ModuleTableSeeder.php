@@ -58,7 +58,7 @@ class ModuleTableSeeder extends Seeder
 	public function addTranslation(){
 
 		//loop throughout the table.
-		$modules = \DB::table('modules')->select('id', 'name')->get();
+		$modules = \DB::table('modules')->select('id', 'name','description')->get();
 
 		$translation = [];
 		foreach ($modules as $module => $m) {
@@ -66,6 +66,7 @@ class ModuleTableSeeder extends Seeder
 			array_push($translation, [
 				'module_id' => $m->id,
 				'name' => $m->name,
+				'description' => $m->description,
 				'locale' => 'en',
 				'created_by' => 1,
 				'updated_by' => 1,
