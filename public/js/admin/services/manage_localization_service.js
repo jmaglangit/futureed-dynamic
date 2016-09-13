@@ -42,5 +42,13 @@ function ManageLocalizationService($http) {
         });
     }
 
+    //get module translatable fields.
+    api.getModuleTranslationFields = function(){
+        return $http({
+            method  :   Constants.METHOD_GET,
+            url     :   apiUrl + 'module-translation/attributes'
+        });
+    }
+
     return api;
 }
