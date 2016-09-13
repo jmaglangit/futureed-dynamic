@@ -510,6 +510,8 @@ return [
 	'back_to_games' => 'Back to Games',
 	'continue_to_rewards' => 'Continue to Rewards',
 	'download_lsp_report' => 'Download LSP Report',
+	'quote' => 'Quote|Quotes',
+	'answer_explanation' => 'Answer Explanation',
 
 
 	//resources/views/admin/dashboard/index.blade.php
@@ -1378,8 +1380,11 @@ return [
 	'translation' => 'Translation | Translations',
 	'translatable' => 'Translatable',
 	'localization' => 'Localization',
+	'google_translate' => 'Google Translate',
 	'language' => 'Language',
 	'select_language' => '-- Select Language --',
+	'field' => 'Field',
+	'select_field' => '-- Select Field --',
 	'upload' => 'Upload',
 	'success_trans_upload' => 'Translation has been successfully uploaded. You can view the translation by clicking on Download.',
 	'success_initialize_language' => 'Language has successfully initialized. You can now go to Translation Menu to upload.',
