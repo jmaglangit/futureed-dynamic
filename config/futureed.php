@@ -320,4 +320,9 @@ return [
 	//translation export filename
 	'module_translation_two_column' => 'Module_translation',
 
+	//Module manual translation fields
+	'module_manual_translated' => [
+		'name' => 'name'
+	],
+
 ];
