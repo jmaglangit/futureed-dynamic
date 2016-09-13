@@ -277,6 +277,11 @@ var Constants = {
 	/* Localization */
 	, LOCALIZATION_SETTING		: 'localization settings'
 	, LOCALIZATION_TRANSLATION	: 'localization translation'
+	, LOCALIZATION_MODULE		: 'localization module'
+	, LOCALIZATION_QUESTION		: 'localization question'
+	, LOCALIZATION_QUESTION_ANS	: 'localization question answer'
+	, LOCALIZATION_ANSWER_EXP	: 'localization answer explanation'
+	, LOCALIZATION_QUOTE		: 'localization quote'
 
 	, REPORT_PROGRESS_PASS	: 81
 	, REPORT_PROGRESS_MEDIAN_CEILING	: 80
