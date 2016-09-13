@@ -5,6 +5,7 @@ use FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInte
 use FutureEd\Services\ExcelServices;
 use FutureEd\Http\Requests\Api\ModuleTranslationRequest;
 use FutureEd\Services\ErrorMessageServices as Error;
+use Illuminate\Support\Facades\App;
 
 class ModuleTranslationController extends ApiController {
 
@@ -56,10 +57,14 @@ class ModuleTranslationController extends ApiController {
 
 		//parse csv files by 2 column row.
 		$status = true;
-		foreach($records as $data){
+		foreach($records as $record){
 
 			//insert per row.
-			$status = $this->module_translation->updatedTranslation($data,$target_lang);
+			$data = [
+				'module_id' => $record->module_id,
+				'string' => $record->{$target_lang}
+			];
+			$status = $this->module_translation->updatedTranslation($data,$target_lang,config('futureed.module_manual_translated.name'));
 
 			if(!$status){
 				break;
@@ -139,5 +144,88 @@ class ModuleTranslationController extends ApiController {
 		}
 
 		return $this->respondWithData($available_lang);
+	}
+
+	/**
+	 * Get translatable fields defined by the model.
+	 * @return mixed
+	 */
+	public function getTranslatedAttributes(){
+
+		$fields = $this->module_translation->getTranslatedAttributes();
+
+		// add manual translation indicators.
+		$data = [];
+
+		foreach($fields as $field){
+			array_push($data,[
+				'field' => $field,
+				'auto' => (in_array($field,config('futureed.module_manual_translated'))) ? 0 : 1
+			]);
+		}
+
+		return $this->respondWithData($data);
+	}
+
+	//TODO google translate all of the field subject for translate in google.
+	public function googleTranslate(ModuleTranslationRequest $request){
+
+		//check if input has translate only flagged or all.
+		$input = $request->only(
+			'target_lang',
+			'field',
+			'tagged'
+		);
+
+		//check if field exist for manual translation
+		if(in_array($input['field'],config('futureed.module_manual_translated'))){
+			return $this->respondErrorMessage(Error::LANGUAGE_FIELD_NOT_AVAILABLE);
+		}
+
+		//check if field is for google translate
+		$fields = $this->module_translation->getTranslatedAttributes();
+
+		if(!in_array($input['field'],$fields)){
+			return $this->respondErrorMessage(Error::LANGUAGE_FIELD_NOT_AVAILABLE);
+		}
+
+		//loop on every 1000 rows, or translate by batch
+		$offset = 0;
+		$limit = 1000;
+
+		$current_lang = App::getLocale();
+
+		for($i=0; $i <= ceil($this->module_translation->moduleCount()/$limit);$i++){
+
+			App::setLocale($input['target_lang']);
+
+			$module = $this->module_translation->getModules([],$limit,$offset);
+			$offset = $limit;
+
+			//parse to array and add translations to target_language
+			foreach($module['records'] as $record){
+
+				//get translation of the field.
+
+
+				$data = [
+					'module_id' => $record['id'],
+					'string' => '**' . $record[$input['field']]
+				];
+				$this->module_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
+			}
+
+		}
+
+
+
+		//get back the previous locale
+		App::setLocale($current_lang);
+
+
+
+		//save the called batch
+
+
 	}
 }
