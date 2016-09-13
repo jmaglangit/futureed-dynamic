@@ -1,10 +1,13 @@
 <?php namespace FutureEd\Models\Core;
 
+use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AnswerExplanation extends Model {
+
+	use Translatable;
 
 	use SoftDeletes;
 
@@ -29,6 +32,11 @@ class AnswerExplanation extends Model {
 		'created_by' => 1,
 		'updated_by' => 1
 	];
+
+	//Translation
+	public $translatedAttribute = ['answer_explanation'];
+
+	public $translationModel = 'FutureEd\Models\Core\AnswerExplanationTranslation';
 
 	//scopes
 
