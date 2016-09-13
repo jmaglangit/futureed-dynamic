@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
 
 class AnswerExplanationTableSeeder extends Seeder
@@ -16,6 +17,8 @@ class AnswerExplanationTableSeeder extends Seeder
             'answer_explanations_three.csv'
         ]);
 
+        //initialize translation
+        $this->addTranslation();
     }
 
     /**
@@ -49,6 +52,54 @@ class AnswerExplanationTableSeeder extends Seeder
             }
 
             DB::table('answer_explanations')->insert($seeds);
+        }
+    }
+
+    /**
+     * Initialize translation for answer explanation.
+     */
+    public function addTranslation(){
+
+        //count records
+        $answer_count = DB::table('answer_explanations')->count();
+
+        //initialize batch record.
+        $limit = config('futureed.seeder_record_limit');
+        $offset = 0;
+
+        $this->command->info('Initializing translation ' . ceil(($answer_count/$limit)) . ' batch of ' . $answer_count . ' records.');
+
+        // truncate translation
+        DB::table('answer_explanation_translations')->truncate();
+
+        //loop through answer_explanation each record.
+        for($i=0;$i < ceil(($answer_count/$limit)); $i++){
+
+            //get data by batch
+            $answer_data = DB::table('answer_explanations')->select('id','answer_explanation')
+                ->skip($offset)->limit($limit)->get();
+
+            $offset += $limit;
+
+            $this->command->info('Inserting batch ' . ($i+1) . ' of '. (ceil(($answer_count/$limit))));
+
+            //loop through each batch record
+            $translation = [];
+            foreach($answer_data as $answer => $ans){
+
+                array_push($translation,[
+                    'answer_explanation_id' => $ans->id,
+                    'answer_explanation' => $ans->answer_explanation,
+                    'locale' => 'en',
+                    'created_by' => 1,
+                    'updated_by' => 1,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+            }
+
+            //insert batch record.
+            DB::table('answer_explanation_translations')->insert($translation);
         }
     }
 }
