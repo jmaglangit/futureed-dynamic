@@ -41,6 +41,7 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 				$data = [
 					'module_id' => $module['id'],
 					'name' => $module['name'],
+					'description' => $module['description'],
 					'locale' => $locale
 				];
 
@@ -82,16 +83,17 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	 * Add new module translations.
 	 * @param $data
 	 * @param $target_lang
+	 * @param $field
 	 * @return bool
 	 */
-	public function updatedTranslation($data,$target_lang){
+	public function updatedTranslation($data,$target_lang, $field){
 
 		try {
 
 
-			$translation = $this->module->find($data->module_id)->translate($target_lang);
+			$translation = $this->module->find($data['module_id'])->translate($target_lang);
 
-			$translation->name = $data->{$target_lang};
+			$translation->{$field} = $data['string'];
 
 			$translation->save();
 
@@ -138,5 +140,59 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 
 		return $translations;
 	}
+
+	/**
+	 * Get fields to be translated.
+	 * @return mixed
+	 */
+	public function getTranslatedAttributes(){
+
+		return with(new Module)->translatedAttributes;
+	}
+
+	/**
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return bool
+	 */
+	public function getModules($criteria = [], $limit=0, $offset = 0){
+
+		DB::beginTransaction();
+
+		try{
+
+			$module = new Module();
+
+			$count = $module->count();
+
+			if ($limit > 0 && $offset >= 0) {
+				$module = $module->offset($offset)->limit($limit);
+			}
+
+			$response = ['total' => $count, 'records' => $module->get()->toArray()];
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
+
+	/**
+	 * Module count
+	 * @return mixed
+	 */
+	public function moduleCount(){
+
+		return Module::count();
+	}
+
 
 }
