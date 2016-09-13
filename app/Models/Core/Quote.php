@@ -1,10 +1,13 @@
 <?php namespace FutureEd\Models\Core;
 
+use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quote extends Model {
+
+    use Translatable;
 
     use SoftDeletes;
 
@@ -20,6 +23,11 @@ class Quote extends Model {
 		'created_by' => 1,
 		'updated_by' => 1
 	];
+
+    //translatable
+    protected $translatedAttribute = ['quote'];
+
+    public $translationModel = 'FutureEd\Models\Core\QuoteTranslation';
 
 	//relationships
 	public function avatarQuote(){

@@ -325,4 +325,7 @@ return [
 		'name' => 'name'
 	],
 
+	//seeder limit per record
+	'seeder_record_limit' => 1000,
+
 ];

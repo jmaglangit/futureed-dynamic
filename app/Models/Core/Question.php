@@ -64,8 +64,6 @@ class Question extends Model {
 
 	public $translationModel = 'FutureEd\Models\Core\QuestionTranslation';
 
-
-
 	//Accessor
 	public function getQuestionsImageAttribute($value) {
 

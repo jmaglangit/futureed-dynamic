@@ -1,13 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 9/13/16
- * Time: 2:58 PM
- */
 
-namespace FutureEd\Models\Core;
-
+<?php namespace FutureEd\Models\Core;
 
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -29,5 +21,6 @@ class AnswerExplanationTranslation extends Model{
 		'answer_explanation_id',
 		'answer_explanation',
 		'locale',
+
 	];
 }
