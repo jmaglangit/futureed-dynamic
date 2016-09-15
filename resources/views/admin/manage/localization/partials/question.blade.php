@@ -15,7 +15,51 @@
         <div id="question_translation" class="panel-collapse collapse">
             <div class="panel-body">
                 {{--translation activities--}}
-                <p>Question translations</p>
+                <div class="accordion-inner">
+                    {!! Form::open(array('class' => 'form-horizontal')) !!}
+                    <div class="col-xs-12">
+                        <fieldset>
+                            {{--dropdowns--}}
+                            <div class="form-group">
+                                <label class="control-label col-xs-2">{!! trans('messages.language') !!}</label>
+                                <div class="col-xs-3" ng-init="localization.getQuestionLanguages()">
+                                    <select name="language_options" class="form-control"
+                                            ng-model="localization.question_locale_code"
+                                            ng-options="lang.code as lang.word for lang in localization.question_languages">
+                                        <option value="" ng-selected="selected">{!! trans('messages.select_language') !!}</option>
+                                    </select>
+                                </div>
+
+                                <label class="control-label col-xs-2">{!! trans('messages.field') !!}</label>
+                                <div class="col-xs-3" ng-init="localization.getTranslatableQuestionField()">
+                                    <select name="module_field_options" class="form-control"
+                                            ng-model="localization.question_field"
+                                            ng-options="field.field for field in localization.question_translated_field">
+                                        <option value="" ng-selected="selected">{!! trans('messages.select_field') !!}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="from-group">
+                                <div class="btn-container col-xs-12">
+                                    <div class="btn btn-blue btn-medium" ng-click="localization.questionGoogleTranslate()">
+                                        {!! trans('messages.google_translate') !!}
+                                    </div>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-success btn-medium active" ng-click="localization.questionActiveTag(futureed.TRUE)">
+                                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Tag
+                                        </label>
+                                        <label class="btn btn-success btn-medium" ng-click="localization.questionActiveTag(futureed.FALSE)">
+                                            <input type="radio" name="options" id="option2" autocomplete="off"> All
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
             </div>
 
         </div>

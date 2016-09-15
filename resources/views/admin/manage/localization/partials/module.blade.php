@@ -20,11 +20,10 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="control-label col-xs-2">{!! trans('messages.language') !!}</label>
-                                <div class="col-xs-3" ng-init="localization.getLanguages()">
+                                <div class="col-xs-3" ng-init="localization.getModuleLanguages()">
                                     <select name="language_options" class="form-control"
-                                            ng-model="localization.locale_code"
-                                            ng-change="localization.setLocale()"
-                                            ng-options="lang.code as lang.word for lang in localization.languages">
+                                            ng-model="localization.module_locale_code"
+                                            ng-options="lang.code as lang.word for lang in localization.module_languages">
                                         <option value="" ng-selected="selected">{!! trans('messages.select_language') !!}</option>
                                     </select>
                                 </div>
@@ -44,18 +43,18 @@
                         <fieldset>
                             <div class="form-group">
                                 <div class="btn-container col-xs-12">
-                                    <div ng-show="!localization.module_google_translate" class="btn btn-blue btn-medium" ng-click="localization.downloadTranslation()">{!! trans('messages.admin_download') !!}</div>
-                                    <div ng-show="!localization.module_google_translate" class="btn btn-blue btn-medium" ngf-select ngf-change="localization.uploadTranslation($files)" accept="text/csv">
+                                    <div ng-show="!localization.module_google_translate" class="btn btn-blue btn-medium" ng-click="localization.moduleDownloadTranslation()">{!! trans('messages.admin_download') !!}</div>
+                                    <div ng-show="!localization.module_google_translate" class="btn btn-blue btn-medium" ngf-select ngf-change="localization.moduleUploadTranslation($files)" accept="text/csv">
                                         {!! trans('messages.upload') !!}
                                     </div>
-                                    <div ng-show="localization.module_google_translate" class="btn btn-blue btn-medium" ngf-select ngf-change="localization.uploadTranslation($files)">
+                                    <div ng-show="localization.module_google_translate" class="btn btn-blue btn-medium" ng-click="localization.moduleGoogleTranslate()">
                                         {!! trans('messages.google_translate') !!}
                                     </div>
                                     <div ng-show="localization.module_google_translate" class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-success btn-medium active">
+                                        <label class="btn btn-success btn-medium active" ng-click="localization.moduleActiveTag(futureed.TRUE)">
                                             <input type="radio" name="options" id="option1" autocomplete="off" checked> Tag
                                         </label>
-                                        <label class="btn btn-success btn-medium">
+                                        <label class="btn btn-success btn-medium" ng-click="localization.moduleActiveTag(futureed.FALSE)">
                                             <input type="radio" name="options" id="option2" autocomplete="off"> All
                                         </label>
                                     </div>
