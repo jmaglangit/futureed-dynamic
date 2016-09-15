@@ -1,4 +1,3 @@
-
 <?php namespace FutureEd\Models\Core;
 
 use FutureEd\Models\Traits\TransactionTrait;

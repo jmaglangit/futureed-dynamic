@@ -60,7 +60,7 @@ class Question extends Model {
 	];
 
 	//Translation
-	public $translatedAttributes = ['question_text','answer'];
+	public $translatedAttributes = ['questions_text','answer'];
 
 	public $translationModel = 'FutureEd\Models\Core\QuestionTranslation';
 

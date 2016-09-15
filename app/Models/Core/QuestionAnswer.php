@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Session;
 
-class QuestionAnswer extends Model {
+class 	QuestionAnswer extends Model {
 
 	use Translatable;
 
@@ -52,9 +52,7 @@ class QuestionAnswer extends Model {
 	];
 
 	//translatable
-	public $translatedAttributes = [
-		'answer_text'
-	];
+	public $translatedAttributes = ['answer_text'];
 
 	public $translationModel = 'FutureEd\Models\Core\QuestionAnswerTranslation';
 
