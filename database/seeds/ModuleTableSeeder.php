@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
 use Carbon\Carbon;
 
@@ -57,27 +58,44 @@ class ModuleTableSeeder extends Seeder
 	 */
 	public function addTranslation(){
 
-		//loop throughout the table.
-		$modules = \DB::table('modules')->select('id', 'name','description')->get();
+		DB::table('module_translations')->truncate();
 
-		$translation = [];
-		foreach ($modules as $module => $m) {
+		$modules_count = DB::table('modules')->count();
 
-			array_push($translation, [
-				'module_id' => $m->id,
-				'name' => $m->name,
-				'description' => $m->description,
-				'locale' => 'en',
-				'created_by' => 1,
-				'updated_by' => 1,
-				'created_at' => Carbon::now(),
-				'updated_at' => Carbon::now()
-			]);
+		foreach(config('translatable.locales') as $locale){
+
+			$limit = config('futureed.seeder_record_limit');
+			$offset = 0;
+
+			for($i=0;$i < ceil(($modules_count/$limit)); $i++){
+
+				//loop throughout the table.
+				$module_data =  DB::table('modules')->select('id', 'name','description')
+					->skip($offset)->limit($limit)->get();
+
+				$offset += $limit;
+
+				$translation = [];
+				foreach ($module_data as $module => $m) {
+
+					array_push($translation, [
+						'module_id' => $m->id,
+						'name' => $m->name,
+						'description' => $m->description,
+						'locale' => $locale,
+						'created_by' => 1,
+						'updated_by' => 1,
+						'created_at' => Carbon::now(),
+						'updated_at' => Carbon::now()
+					]);
+				}
+
+				DB::table('module_translations')->insert($translation);
+			}
 		}
 
-		//clear table before initial insert.
-		\DB::table('module_translations')->truncate();
-		\DB::table('module_translations')->insert($translation);
+
+
 	}
 }
 
