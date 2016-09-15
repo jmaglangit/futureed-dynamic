@@ -17,11 +17,11 @@ interface QuestionTranslationRepositoryInterface {
 
 	public function updatedTranslation($data,$target_lang,$field);
 
-	public function getModuleTranslations($locale);
-
 	public function getTranslatedAttributes();
 
 	public function getQuestions($criteria,$limit,$offset);
 
 	public function questionCount();
+
+	public function updateQuestionTranslation($data);
 }
