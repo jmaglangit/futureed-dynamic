@@ -88,8 +88,8 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	 */
 	public function updatedTranslation($data,$target_lang, $field){
 
+		DB::beginTransaction();
 		try {
-
 
 			$translation = $this->module->find($data['module_id'])->translate($target_lang);
 
