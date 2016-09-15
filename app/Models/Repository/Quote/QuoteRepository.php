@@ -90,4 +90,31 @@ class QuoteRepository implements QuoteRepositoryInterface{
 
 		return $response;
     }
+
+	/**
+	 * @param $id
+	 * @param $data
+	 * @return bool|int
+	 */
+	public function updateQuote($id,$data){
+		DB::beginTransaction();
+
+		try{
+
+			$response = Quote::find($id)
+				->update($data);
+
+		}catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 }
