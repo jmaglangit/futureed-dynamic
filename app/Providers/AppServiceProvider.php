@@ -352,5 +352,25 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInterface',
 			'FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionTranslation\QuestionTranslationRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionTranslation\QuestionTranslationRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionAnswerTranslation\QuestionAnswerTranslationRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionAnswerTranslation\QuestionAnswerTranslationRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\AnswerExplanationTranslation\AnswerExplanationTranslationRepositoryInterface',
+			'FutureEd\Models\Repository\AnswerExplanationTranslation\AnswerExplanationTranslationRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuoteTranslation\QuoteTranslationRepositoryInterface',
+			'FutureEd\Models\Repository\QuoteTranslation\QuoteTranslationRepository'
+		);
 	}
 }
