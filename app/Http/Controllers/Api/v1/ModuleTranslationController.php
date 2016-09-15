@@ -1,10 +1,12 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use Carbon\Carbon;
+use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInterface;
 use FutureEd\Services\ExcelServices;
 use FutureEd\Http\Requests\Api\ModuleTranslationRequest;
 use FutureEd\Services\ErrorMessageServices as Error;
+use FutureEd\Services\GoogleTranslateServices;
 use Illuminate\Support\Facades\App;
 
 class ModuleTranslationController extends ApiController {
@@ -13,12 +15,20 @@ class ModuleTranslationController extends ApiController {
 
 	protected $excel;
 
+	protected $google_translate;
+
+	protected $module;
+
 	public function __construct(
 		ModuleTranslationRepositoryInterface $moduleTranslationRepositoryInterface,
-		ExcelServices $excelServices
+		ModuleRepositoryInterface $moduleRepositoryInterface,
+		ExcelServices $excelServices,
+		GoogleTranslateServices $googleTranslateServices
 	){
 		$this->module_translation = $moduleTranslationRepositoryInterface;
 		$this->excel = $excelServices;
+		$this->google_translate = $googleTranslateServices;
+		$this->module = $moduleRepositoryInterface;
 	}
 
 	/**
@@ -167,7 +177,11 @@ class ModuleTranslationController extends ApiController {
 		return $this->respondWithData($data);
 	}
 
-	//TODO google translate all of the field subject for translate in google.
+	/**
+	 * Translate fields using Google translate.
+	 * @param ModuleTranslationRequest $request
+	 * @return mixed
+	 */
 	public function googleTranslate(ModuleTranslationRequest $request){
 
 		//check if input has translate only flagged or all.
@@ -191,50 +205,60 @@ class ModuleTranslationController extends ApiController {
 
 		//loop on every 1000 rows, or translate by batch
 		$offset = 0;
-		$limit = 1000;
+		$limit = config('futureed.seeder_record_limit');
 
 		$current_lang = App::getLocale();
 
 		for($i=0; $i <= ceil($this->module_translation->moduleCount()/$limit);$i++){
 
-			App::setLocale($input['target_lang']);
+			App::setLocale(config('translatable.fallback_locale'));
 
 			$module = $this->module_translation->getModules([],$limit,$offset);
-			$offset = $limit;
+			$offset += $limit;
 
 			//parse to array and add translations to target_language
 			foreach($module['records'] as $record){
 
-				//get translation of the field.
-				//TODO call google translate.
-
-				$data = [
-					'module_id' => $record['id'],
-					'string' => $record[$input['field']]
-				];
-
 				//check if translatable and tagged
-				if($input['tagged'] == config('futureed.true') && $record['translatable'] == config('futureed.true')){
+				$translable = 0;
+				if($input['tagged'] == config('futureed.true')
+					&& $record['translatable'] == config('futureed.true')){
 
-					$this->module_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
+					$translable++;
 
 				} elseif($input['tagged'] == config('futureed.false')){
 
 					//if all are translatable
-					$this->module_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
-
+					$translable++;
 				}
 
+				if($translable == config('futureed.true')){
+
+					// set target language
+					$this->google_translate->setTarget($input['target_lang']);
+
+					// get translation using google translate.
+					$translated_text = $this->google_translate->translate($record[$input['field']]);
+
+					$data = [
+						'module_id' => $record['id'],
+						'string' => $translated_text
+					];
+
+					$this->module_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
+
+					//update translatable tag to 0 on module
+					$this->module->updateModule($record['id'],[
+						'translatable' => config('futureed.false')
+					]);
+
+				}
 			}
-
 		}
-
-
 
 		//get back the previous locale
 		App::setLocale($current_lang);
 
-		return $this->respondWithData(trans('messages.success_trans_upload'));
-
+		return $this->respondWithData(trans('messages.success_trans_google'));
 	}
 }
