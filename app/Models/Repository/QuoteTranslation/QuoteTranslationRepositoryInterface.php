@@ -11,4 +11,15 @@ namespace FutureEd\Models\Repository\QuoteTranslation;
 
 interface QuoteTranslationRepositoryInterface {
 
+	public function generateInitialLanguageTranslation($locale);
+
+	public function checkLanguageAvailability($locale);
+
+	public function updatedTranslation($data,$target_lang,$field);
+
+	public function getTranslatedAttributes();
+
+	public function getQuote($criteria,$limit,$offset);
+
+	public function quoteCount();
 }
