@@ -25,6 +25,7 @@ Routes::group([
 	include('Routes/Api/AgeGroup.php');
 	include('Routes/Api/Announcement.php');
 	include('Routes/Api/AnswerExplanation.php');
+	include('Routes/Api/AnswerExplanationTranslation.php');
 	include('Routes/Api/Assess.php');
 	include('Routes/Api/AvatarAccessory.php');
 	include('Routes/Api/AvatarPose.php');
@@ -59,6 +60,8 @@ Routes::group([
 	include('Routes/Api/PointLevel.php');
 	include('Routes/Api/Question.php');
 	include('Routes/Api/QuestionAnswer.php');
+	include('Routes/Api/QuestionAnswerTranslation.php');
+	include('Routes/Api/QuestionTranslation.php');
 	include('Routes/Api/Quote.php');
 	include('Routes/Api/QuoteTranslation.php');
 	include('Routes/Api/School.php');
