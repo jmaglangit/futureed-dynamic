@@ -9,6 +9,17 @@
 namespace FutureEd\Models\Repository\QuestionAnswerTranslation;
 
 
-interface QuestionAnswerRepositoryInterface {
+interface QuestionAnswerTranslationRepositoryInterface {
 
+	public function generateInitialLanguageTranslation($locale);
+
+	public function checkLanguageAvailability($locale);
+
+	public function updatedTranslation($data,$target_lang,$field);
+
+	public function getTranslatedAttributes();
+
+	public function getQuestionsAnswer($criteria,$limit,$offset);
+
+	public function questionAnswerCount();
 }
