@@ -1,9 +1,9 @@
 <?php
 Routes::group([
 	'prefix' => '/localization',
-	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin'],
-	'role' => ['admin','super admin']
+//	'middleware' => ['api_user','api_after'],
+//	'permission' => ['admin'],
+//	'role' => ['admin','super admin']
 ], function(){
 
 	Routes::get('/languages',[
