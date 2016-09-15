@@ -1378,7 +1378,7 @@ return [
 	'point_s' => 'point(s)',
 
 	'translation' => 'Translation | Translations',
-	'translatable' => 'Translatable',
+	'translatable' => 'Translated',
 	'localization' => 'Localization',
 	'google_translate' => 'Google Translate',
 	'language' => 'Language',
@@ -1387,6 +1387,7 @@ return [
 	'select_field' => '-- Select Field --',
 	'upload' => 'Upload',
 	'success_trans_upload' => 'Translation has been successfully uploaded. You can view the translation by clicking on Download.',
+	'success_trans_google' => 'Successfully translated by Google Translate.',
 	'success_initialize_language' => 'Language has successfully initialized. You can now go to Translation Menu to upload.',
 	'translation_settings' => 'Translation Settings',
 	'initialize_language' => 'Initialize Language',
