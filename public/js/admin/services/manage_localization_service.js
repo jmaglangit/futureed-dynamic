@@ -167,6 +167,14 @@ function ManageLocalizationService($http) {
         });
     }
 
+    //Job Queue
 
+    //get queue list
+    api.getJobList = function(){
+        return $http({
+            method  : Constants.METHOD_GET,
+            url     : apiUrl + 'job/queue'
+        });
+    }
     return api;
 }
