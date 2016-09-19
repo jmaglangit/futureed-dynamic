@@ -568,4 +568,24 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         });
     }
 
+    self.jobList = function(){
+
+        ManageLocalizationService.getJobList().success(function (response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+                    self.success = Constants.FALSE;
+                    self.errors = $scope.errorHandler(response.errors);
+                }else if(response.data){
+                    var data = response.data;
+                    self.errors = Constants.FALSE;
+                    self.job_list = data;
+                }
+            }
+
+        }).error(function () {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
 }
