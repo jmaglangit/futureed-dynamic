@@ -66,11 +66,11 @@ class AnswerExplanationTableSeeder extends Seeder
 
         //count records
         $answer_count = DB::table('answer_explanations')->count();
+        $limit = config('futureed.seeder_record_limit');
 
         //loop for each language.
         foreach(config('translatable.locales') as $locale){
             //initialize batch record.
-            $limit = config('futureed.seeder_record_limit');
             $offset = 0;
 
             $this->command->info('Initializing '. strtoupper($locale) . ' translation '

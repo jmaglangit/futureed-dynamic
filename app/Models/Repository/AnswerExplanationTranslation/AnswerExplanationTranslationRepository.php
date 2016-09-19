@@ -27,9 +27,10 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 
 			$offset = 0;
 			$limit = confgi('futureed.seeder_record_limit');
+			$record_count = $this->answerExplanationCount();
 
 			//process by batch
-			for($i=0; $i <= ceil($this->answerExplanationCount()/$limit);$i++){
+			for($i=0; $i <= ceil($record_count/$limit);$i++){
 
 				$explanation_list = $this->getAnswerExplanation([],$limit,$offset);
 

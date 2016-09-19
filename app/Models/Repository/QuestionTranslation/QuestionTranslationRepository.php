@@ -31,9 +31,10 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 
 			$offset = 0;
 			$limit = config('futureed.seeder_record_limit');
+			$record_count = $this->questionCount();
 
 			//process by batch
-			for($i=0; $i <= ceil($this->questionCount()/$limit);$i++){
+			for($i=0; $i <= ceil($record_count/$limit);$i++){
 
 				$question_list = $this->getQuestions([],$limit,$offset);
 

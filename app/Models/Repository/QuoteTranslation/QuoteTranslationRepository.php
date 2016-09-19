@@ -28,9 +28,10 @@ class QuoteTranslationRepository implements QuoteTranslationRepositoryInterface{
 
 			$offset = 0;
 			$limit = config('futureed.seeder_record_limit');
+			$record_count = $this->quoteCount();
 
 			//process by batch
-			for($i=0; $i <= ceil($this->quoteCount()/$limit);$i++){
+			for($i=0; $i <= ceil($record_count/$limit);$i++){
 
 				$quote_list = $this->getQuote([],$limit,$offset);
 
