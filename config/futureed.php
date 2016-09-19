@@ -320,6 +320,15 @@ return [
 	//translation export filename
 	'module_translation_two_column' => 'Module_translation',
 
+	//translatable models
+	'translatable_models' => [
+		'module' => 'module',
+		'question' => 'question',
+		'question_answer' => 'question_answer',
+		'answer_explanation' => 'answer_explanation',
+		'quote' => 'quote'
+	],
+
 	//Module manual translation fields
 	'module_manual_translated' => [
 		'name' => 'name'
@@ -332,6 +341,6 @@ return [
 	'google_api_key' => env('GOOGLE_API_KEY','AIzaSyB_J5d86u2w2wkkEABDWP4SytYQuAXj_oY'),
 
 	//seeder limit per record
-	'seeder_record_limit' => 1000,
+	'seeder_record_limit' => 500,
 
 ];
