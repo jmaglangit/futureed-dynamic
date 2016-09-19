@@ -37,11 +37,12 @@ class QuestionAnswerTranslationServices {
 		//loop throughout every 1000 rows.
 		$offset = 0;
 		$limit = config('futureed.seeder_record_limit');
+		$record_count = $this->question_answer_translation->questionAnswerCount();
 
 		$current_lang = App::getLocale();
 		App::setLocale(config('translatable.fallback_locale'));
 
-		for ($i = 0; $i <= ceil($this->question_answer_translation->questionAnswerCount() / $limit); $i++) {
+		for ($i = 0; $i <= ceil( $record_count/ $limit); $i++) {
 
 			$question = $this->question_answer_translation->getQuestionsAnswer([], $limit, $offset);
 
