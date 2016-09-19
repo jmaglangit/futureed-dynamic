@@ -372,5 +372,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\QuoteTranslation\QuoteTranslationRepositoryInterface',
 			'FutureEd\Models\Repository\QuoteTranslation\QuoteTranslationRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\Job\JobRepositoryInterface',
+			'FutureEd\Models\Repository\Job\JobRepository'
+		);
 	}
 }
