@@ -42,4 +42,8 @@ class ManageTranslationController extends Controller {
 	public function quote(){
 		return view('admin.manage.localization.partials.quote');
 	}
+
+	public function job(){
+		return view('admin.manage.localization.partials.job');
+	}
 }
