@@ -6,8 +6,7 @@ use FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInte
 use FutureEd\Services\ExcelServices;
 use FutureEd\Http\Requests\Api\ModuleTranslationRequest;
 use FutureEd\Services\ErrorMessageServices as Error;
-use FutureEd\Services\GoogleTranslateServices;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 
 class ModuleTranslationController extends ApiController {
 
@@ -15,20 +14,17 @@ class ModuleTranslationController extends ApiController {
 
 	protected $excel;
 
-	protected $google_translate;
-
-	protected $module;
-
+	/**
+	 * @param ModuleTranslationRepositoryInterface $moduleTranslationRepositoryInterface
+	 * @param ExcelServices $excelServices
+	 * @internal param ModuleRepositoryInterface $moduleRepositoryInterface
+	 */
 	public function __construct(
 		ModuleTranslationRepositoryInterface $moduleTranslationRepositoryInterface,
-		ModuleRepositoryInterface $moduleRepositoryInterface,
-		ExcelServices $excelServices,
-		GoogleTranslateServices $googleTranslateServices
+		ExcelServices $excelServices
 	){
 		$this->module_translation = $moduleTranslationRepositoryInterface;
 		$this->excel = $excelServices;
-		$this->google_translate = $googleTranslateServices;
-		$this->module = $moduleRepositoryInterface;
 	}
 
 	/**
@@ -203,62 +199,15 @@ class ModuleTranslationController extends ApiController {
 			return $this->respondErrorMessage(Error::LANGUAGE_FIELD_NOT_AVAILABLE);
 		}
 
-		//loop on every 1000 rows, or translate by batch
-		$offset = 0;
-		$limit = config('futureed.seeder_record_limit');
+		//Queue translation
+		// -m module --language {lang} -f {field} --tagged {tagged|boolean}
+		Artisan::queue('fl:google-translate',[
+			'--model' => config('futureed.translatable_models.module'),
+			'--language' => $input['target_lang'],
+			'--field' => $input['field'],
+			'--tagged' => $input['tagged']
+		]);
 
-		$current_lang = App::getLocale();
-
-		for($i=0; $i <= ceil($this->module_translation->moduleCount()/$limit);$i++){
-
-			App::setLocale(config('translatable.fallback_locale'));
-
-			$module = $this->module_translation->getModules([],$limit,$offset);
-			$offset += $limit;
-
-			//parse to array and add translations to target_language
-			foreach($module['records'] as $record){
-
-				//check if translatable and tagged
-				$translable = 0;
-				if($input['tagged'] == config('futureed.true')
-					&& $record['translatable'] == config('futureed.true')){
-
-					$translable++;
-
-				} elseif($input['tagged'] == config('futureed.false')){
-
-					//if all are translatable
-					$translable++;
-				}
-
-				if($translable == config('futureed.true')){
-
-					// set target language
-					$this->google_translate->setTarget($input['target_lang']);
-
-					// get translation using google translate.
-					$translated_text = $this->google_translate->translate($record[$input['field']]);
-
-					$data = [
-						'module_id' => $record['id'],
-						'string' => $translated_text
-					];
-
-					$this->module_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
-
-					//update translatable tag to 0 on module
-					$this->module->updateModule($record['id'],[
-						'translatable' => config('futureed.false')
-					]);
-
-				}
-			}
-		}
-
-		//get back the previous locale
-		App::setLocale($current_lang);
-
-		return $this->respondWithData(trans('messages.success_trans_google'));
+		return $this->respondWithData(trans('messages.queue_trans_google'));
 	}
 }

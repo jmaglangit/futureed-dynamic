@@ -1,28 +1,21 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Models\Repository\Quote\QuoteRepositoryInterface;
 use FutureEd\Models\Repository\QuoteTranslation\QuoteTranslationRepositoryInterface;
-use FutureEd\Services\GoogleTranslateServices;
 use FutureEd\Http\Requests\Api\QuoteTranslationRequest;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 
 class QuoteTranslationController extends ApiController {
 
 	protected $quote_translation;
 
-	protected $quote;
-
-	protected $google_translate;
-
+	/**
+	 * @param QuoteTranslationRepositoryInterface $quoteTranslationRepositoryInterface
+	 */
 	public function __construct(
-		QuoteTranslationRepositoryInterface $quoteTranslationRepositoryInterface,
-		QuoteRepositoryInterface $quoteRepositoryInterface,
-		GoogleTranslateServices $googleTranslateServices
+		QuoteTranslationRepositoryInterface $quoteTranslationRepositoryInterface
 	){
 		$this->quote_translation = $quoteTranslationRepositoryInterface;
-		$this->quote = $quoteRepositoryInterface;
-		$this->google_translate = $googleTranslateServices;
 	}
 
 	/**
@@ -102,64 +95,16 @@ class QuoteTranslationController extends ApiController {
 			'tagged'
 		);
 
-		//loop throughout every 1000 rows.
-		$offset = 0;
-		$limit = config('futureed.seeder_record_limit');
+		//Queue translation
+		// -m quote --language {lang} -f {field} --tagged {tagged|boolean}
+		Artisan::queue('fl:google-translate',[
+			'--model' => config('futureed.translatable_models.quote'),
+			'--language' => $input['target_lang'],
+			'--field' => $input['field'],
+			'--tagged' => $input['tagged']
+		]);
 
-		$current_lang = App::getLocale();
-
-		for($i=0; $i <= ceil($this->quote_translation->quoteCount()/$limit);$i++){
-
-			App::setLocale(config('translatable.fallback_locale'));
-
-			$quote = $this->quote_translation->getQuote([],$limit,$offset);
-
-			$offset += $limit;
-
-			//parse to array and add translations to target_language
-			foreach($quote['records'] as $record){
-
-				//check if translatable and tagged
-				$translatable = 0;
-
-				if($input['tagged'] == config('futureed.true')
-					&& $record['translatable'] == config('futureed.true')){
-
-					$translatable++;
-
-				} elseif($input['tagged'] == config('futureed.false')){
-
-					//if all are translatable
-					$translatable++;
-				}
-
-				if($translatable == config('futureed.true')){
-
-					//set target language
-					$this->google_translate->setTarget($input['target_lang']);
-
-					//get translation using google translate
-					$translated_text = $this->google_translate->translate($record[$input['field']]);
-
-					$data = [
-						'quote_id' => $record['id'],
-						'string' => $translated_text
-					];
-
-					$this->quote_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
-
-					//update translatable into 0
-					$this->quote->updateQuote($record['id'],[
-						'translatable' => config('futureed.false')
-					]);
-				}
-			}
-		}
-
-		//get back previous locale
-		App::setLocale($current_lang);
-
-		return $this->respondWithData(trans('messages.success_trans_google'));
+		return $this->respondWithData(trans('messages.queue_trans_google'));
 	}
 
 

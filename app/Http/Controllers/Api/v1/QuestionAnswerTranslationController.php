@@ -6,23 +6,19 @@ use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
 use FutureEd\Models\Repository\QuestionAnswerTranslation\QuestionAnswerTranslationRepositoryInterface;
 use FutureEd\Services\GoogleTranslateServices;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 
 class QuestionAnswerTranslationController extends ApiController {
 
 	protected $question_answer_translation;
 
-	protected $question_answer;
-
-	protected $google_translate;
-
+	/**
+	 * @param QuestionAnswerTranslationRepositoryInterface $questionAnswerTranslationRepositoryInterface
+	 */
 	public function __construct(
-		QuestionAnswerRepositoryInterface $questionAnswerRepositoryInterface,
-		GoogleTranslateServices $googleTranslateServices,
 		QuestionAnswerTranslationRepositoryInterface $questionAnswerTranslationRepositoryInterface
 	){
 		$this->question_answer_translation = $questionAnswerTranslationRepositoryInterface;
-		$this->question_answer = $questionAnswerRepositoryInterface;
-		$this->google_translate = $googleTranslateServices;
 	}
 
 	/**
@@ -89,7 +85,10 @@ class QuestionAnswerTranslationController extends ApiController {
 		return $this->respondWithData($data);
 	}
 
-
+	/**
+	 * @param QuestionAnswerTranslationRequest $request
+	 * @return mixed
+	 */
 	public function googleTranslate(QuestionAnswerTranslationRequest $request){
 
 		//check if input has translate only flagged or all.
@@ -99,63 +98,15 @@ class QuestionAnswerTranslationController extends ApiController {
 			'tagged'
 		);
 
-		//loop throughout every 1000 rows.
-		$offset = 0;
-		$limit = 50;//config('futureed.seeder_record_limit');
+		//Queue translation
+		// -m question_answer --language {lang} -f {field} --tagged {tagged|boolean}
+		Artisan::queue('fl:google-translate',[
+			'--model' => config('futureed.translatable_models.question_answer'),
+			'--language' => $input['target_lang'],
+			'--field' => $input['field'],
+			'--tagged' => $input['tagged']
+		]);
 
-		$current_lang = App::getLocale();
-
-		for($i=0; $i <= ceil($this->question_answer_translation->questionAnswerCount()/$limit);$i++){
-
-			App::setLocale(config('translatable.fallback_locale'));
-
-			$question = $this->question_answer_translation->getQuestionsAnswer([],$limit,$offset);
-
-			$offset += $limit;
-
-			//parse to array and add translations to target_language
-			foreach($question['records'] as $record){
-
-				//check if translatable and tagged
-				$translatable = 0;
-
-				if($input['tagged'] == config('futureed.true')
-					&& $record['translatable'] == config('futureed.true')){
-
-					$translatable++;
-
-				} elseif($input['tagged'] == config('futureed.false')){
-
-					//if all are translatable
-					$translatable++;
-				}
-
-				if($translatable == config('futureed.true')){
-
-					//set target language
-					$this->google_translate->setTarget($input['target_lang']);
-
-					//get translation using google translate
-					$translated_text = $this->google_translate->translate($record[$input['field']]);
-
-					$data = [
-						'question_answer_id' => $record['id'],
-						'string' => $translated_text
-					];
-
-					$this->question_answer_translation->updatedTranslation($data,$input['target_lang'],$input['field']);
-
-					//update translatable into 0
-					$this->question_answer->updateQuestionAnswer($record['id'],[
-						'translatable' => config('futureed.false')
-					]);
-				}
-			}
-		}
-
-		//get back previous locale
-		App::setLocale($current_lang);
-
-		return $this->respondWithData(trans('messages.success_trans_google'));
+		return $this->respondWithData(trans('messages.queue_trans_google'));
 	}
 }
