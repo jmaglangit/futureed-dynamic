@@ -729,6 +729,10 @@
 				'as' => 'admin.manage.localization.settings.main',
 				'uses' => 'FutureLesson\Admin\ManageTranslationController@settings_main'
 			]);
+			Routes::get('/settings/job',[
+				'as' => 'admin.manage.localization.settings.job',
+				'uses' => 'FutureLesson\Admin\ManageTranslationController@job'
+			]);
 		});
 	});
 ?>
