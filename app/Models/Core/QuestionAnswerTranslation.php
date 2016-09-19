@@ -19,7 +19,7 @@ class QuestionAnswerTranslation extends Model{
 	protected $fillable = [
 		'question_answer_id',
 		'answer_text',
-		'locale',
+		'locale'
 	];
 
 }

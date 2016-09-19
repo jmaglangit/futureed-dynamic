@@ -1,14 +1,16 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 9/19/16
- * Time: 1:58 PM
- */
+<?php namespace FutureEd\Models\Core;
 
-namespace FutureEd\Models\Core;
+use FutureEd\Models\Traits\TransactionTrait;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
+class Job extends Model {
 
-class Job {
+	use TransactionTrait;
 
+	protected $table = 'jobs';
+
+	protected $dates = [
+		'reserved_at','available_at','created_at'
+	];
 }
