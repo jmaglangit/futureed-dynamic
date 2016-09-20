@@ -349,8 +349,9 @@ class QuotesTableSeeder extends Seeder
 
 		DB::table('quote_translations')->truncate();
 
+		$locales = config('translatable.locales');
 		//loop throughout the languages
-		foreach(config('translatable.locales') as $locale){
+		foreach($locales as $locale){
 			//loop throughout the quote table.
 			$quotes = DB::table('quotes')->select('id','quote')->get();
 
