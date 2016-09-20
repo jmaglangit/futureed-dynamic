@@ -25,7 +25,7 @@ class Quote extends Model {
 	];
 
     //translatable
-    protected $translatedAttribute = ['quote'];
+    public $translatedAttributes = ['quote'];
 
     public $translationModel = 'FutureEd\Models\Core\QuoteTranslation';
 

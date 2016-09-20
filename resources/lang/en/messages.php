@@ -510,6 +510,8 @@ return [
 	'back_to_games' => 'Back to Games',
 	'continue_to_rewards' => 'Continue to Rewards',
 	'download_lsp_report' => 'Download LSP Report',
+	'quote' => 'Quote|Quotes',
+	'answer_explanation' => 'Answer Explanation',
 
 
 	//resources/views/admin/dashboard/index.blade.php
@@ -1376,11 +1378,22 @@ return [
 	'point_s' => 'point(s)',
 
 	'translation' => 'Translation | Translations',
+	'translatable' => 'Translated',
 	'localization' => 'Localization',
+	'google_translate' => 'Google Translate',
 	'language' => 'Language',
 	'select_language' => '-- Select Language --',
+	'field' => 'Field',
+	'select_field' => '-- Select Field --',
 	'upload' => 'Upload',
 	'success_trans_upload' => 'Translation has been successfully uploaded. You can view the translation by clicking on Download.',
+	'success_trans_google' => 'Successfully translated by Google Translate.',
+	'queue_trans_google' => 'Translation has been put on queue.',
+	'job_on_queue' => 'Job on Queue',
+	'job_on_queue_none' => 'Nothing on queue...',
+	'job_on_queue_message' => 'Job queue :command with :table table, translating :tagged into :language. :attempts',
+	'job_on_queue_attempts' => 'Translation attempts :attempt',
+	'tag' => 'tag | tagged',
 	'success_initialize_language' => 'Language has successfully initialized. You can now go to Translation Menu to upload.',
 	'translation_settings' => 'Translation Settings',
 	'initialize_language' => 'Initialize Language',

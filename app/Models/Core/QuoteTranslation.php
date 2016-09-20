@@ -1,6 +1,5 @@
 <?php namespace FutureEd\Models\Core;
 
-
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,7 +19,6 @@ class QuoteTranslation extends Model{
 	protected $fillable = [
 		'quote_id',
 		'quote',
-		'locale'
+		'locale',
 	];
-
 }

@@ -20,15 +20,23 @@ class ModuleTranslationRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		switch ($this->method()) {
-			case 'POST':
-
+		switch ($this->route()->getName()){
+			case 'module-translation.upload';
 				return [
 					'file' => 'required',
 					'target_lang' => 'required|in:' . implode(",",config('translatable.locales')),
 				];
 				break;
+			case 'module-translation.google-translate':
+				return [
+					'target_lang' => 'required',
+					'field' => 'required',
+					'tagged' => 'required'
+				];
+				break;
 
+			default:
+				break;
 		}
 	}
 

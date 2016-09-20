@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Session;
 
-class QuestionAnswer extends Model {
+class 	QuestionAnswer extends Model {
 
 	use Translatable;
 
@@ -37,7 +37,9 @@ class QuestionAnswer extends Model {
 		'original_image_name',
 		'correct_answer',
 		'point_equivalent',
+		'translatable',
 		'difficulty',
+		'translatable',
 		'created_by',
 		'updated_by'];
 
@@ -50,9 +52,7 @@ class QuestionAnswer extends Model {
 	];
 
 	//translatable
-	public $translatedAttributes = [
-		'answer_text'
-	];
+	public $translatedAttributes = ['answer_text'];
 
 	public $translationModel = 'FutureEd\Models\Core\QuestionAnswerTranslation';
 

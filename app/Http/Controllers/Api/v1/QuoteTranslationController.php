@@ -1,37 +1,20 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use FutureEd\Http\Controllers\Api\Traits\TranslationTrait;
 use FutureEd\Http\Requests;
-use FutureEd\Models\Repository\Quote\QuoteRepositoryInterface;
-use FutureEd\Services\GoogleTranslateServices;
-use FutureEd\Http\Requests\Api\QuoteTranslationRequest;
+use FutureEd\Models\Repository\QuoteTranslation\QuoteTranslationRepositoryInterface;
 
 class QuoteTranslationController extends ApiController {
 
-	protected $quote;
-
-	protected $translate_services;
-
+	use TranslationTrait;
+	
+	/**
+	 * @param QuoteTranslationRepositoryInterface $quoteTranslationRepositoryInterface
+	 */
 	public function __construct(
-		GoogleTranslateServices $googleTranslateServices,
-		QuoteRepositoryInterface $quoteRepositoryInterface
+		QuoteTranslationRepositoryInterface $quoteTranslationRepositoryInterface
 	){
-		$this->translate_services = $googleTranslateServices;
-		$this->quote = $quoteRepositoryInterface;
+		$this->model = $quoteTranslationRepositoryInterface;
+		$this->translatable_model = config('futureed.translatable_models.quote');
 	}
-
-	//TODO translate quote
-	public function generateTranslation(QuoteTranslationRequest $request){
-
-		$translate = $request->all();
-
-		$this->translate_services->setTarget($translate['target']);
-
-		//TODO loop throughout each record and translate.
-
-		$translation = $this->translate_services->translate($translate['text']);
-
-		return $this->respondWithData($translation);
-	}
-
-
 }

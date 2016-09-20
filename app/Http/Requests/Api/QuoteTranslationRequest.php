@@ -19,13 +19,17 @@ class QuoteTranslationRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		switch($this->method()) {
+		switch($this->route()->getName()){
 
-			case 'POST':
-
+			case 'quote-translate.google-translate':
 				return [
-					'text' => 'required|string',
+					'target_lang' => 'required',
+					'field' => 'required',
+					'tagged' => 'required'
 				];
+				break;
+
+			default:
 				break;
 		}
 	}

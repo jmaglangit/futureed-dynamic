@@ -1,6 +1,5 @@
 <?php namespace FutureEd\Models\Core;
 
-
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +19,7 @@ class AnswerExplanationTranslation extends Model{
 	protected $fillable = [
 		'answer_explanation_id',
 		'answer_explanation',
-		'locale'
+		'locale',
+
 	];
 }

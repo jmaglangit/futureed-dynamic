@@ -202,7 +202,8 @@ class AdminQuestionController extends ApiController {
 			'difficulty',
 			'seq_no',
 			'orientation',
-			'uploaded'
+			'uploaded',
+			'translatable'
 		);
 
 

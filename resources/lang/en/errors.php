@@ -268,5 +268,6 @@ return [
 
 		// localization
 		Error::LANGUAGE_NOT_AVAILABLE => 'Language code does not match.',
+		Error::LANGUAGE_FIELD_NOT_AVAILABLE => 'Field not available for translation.',
 
 ];

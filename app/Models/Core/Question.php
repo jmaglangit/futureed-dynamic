@@ -37,8 +37,10 @@ class Question extends Model {
 		'seq_no',
 		'difficulty',
 		'points_earned',
+		'translatable',
 		'original_image_name',
 		'question_graph_content',
+		'translatable',
 		'status',
 		'created_by',
 		'updated_by'
@@ -57,11 +59,8 @@ class Question extends Model {
 		'answer_text_field'
 	];
 
-	//translatable
-	public $translatedAttribute = [
-		'question_text',
-		'answer'
-	];
+	//Translation
+	public $translatedAttributes = ['questions_text','answer'];
 
 	public $translationModel = 'FutureEd\Models\Core\QuestionTranslation';
 
