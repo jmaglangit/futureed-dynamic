@@ -1378,7 +1378,7 @@ return [
 	'point_s' => 'point(s)',
 
 	'translation' => 'Translation | Translations',
-	'translatable' => 'Translated',
+	'translatable' => 'For Translation',
 	'localization' => 'Localization',
 	'google_translate' => 'Google Translate',
 	'language' => 'Language',
