@@ -158,8 +158,6 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	 */
 	public function getModules($criteria = [], $limit=0, $offset = 0){
 
-		DB::beginTransaction();
-
 		try{
 
 			$module = new Module();
@@ -174,15 +172,10 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 
 		}catch (\Exception $e){
 
-			DB::rollback();
-
 			return false;
 		}
 
-		DB::commit();
-
 		return $response;
-
 	}
 
 	/**
