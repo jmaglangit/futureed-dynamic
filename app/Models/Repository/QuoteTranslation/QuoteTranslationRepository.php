@@ -91,7 +91,7 @@ class QuoteTranslationRepository implements QuoteTranslationRepositoryInterface{
 
 		try{
 
-			$translation = Quote::find($data['quote_id'])->translate($target_lang);
+			$translation = Quote::find($data['id'])->translate($target_lang);
 
 			$translation->{$field} = $data['string'];
 
@@ -124,7 +124,7 @@ class QuoteTranslationRepository implements QuoteTranslationRepositoryInterface{
 	 * @param $offset
 	 * @return array|bool
 	 */
-	public function getQuote($criteria=[],$limit=0,$offset=0){
+	public function getCollection($criteria=[],$limit=0,$offset=0){
 
 		try{
 
@@ -150,7 +150,7 @@ class QuoteTranslationRepository implements QuoteTranslationRepositoryInterface{
 	/**
 	 * @return mixed
 	 */
-	public function quoteCount(){
+	public function count(){
 		return Quote::count();
 	}
 }

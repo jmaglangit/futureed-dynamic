@@ -19,7 +19,7 @@ interface QuoteTranslationRepositoryInterface {
 
 	public function getTranslatedAttributes();
 
-	public function getQuote($criteria,$limit,$offset);
+	public function getCollection($criteria,$limit,$offset);
 
-	public function quoteCount();
+	public function count();
 }
