@@ -62,7 +62,9 @@ class ModuleTableSeeder extends Seeder
 
 		$modules_count = DB::table('modules')->count();
 
-		foreach(config('translatable.locales') as $locale){
+		$locales = config('translatable.locales');
+
+		foreach($locales as $locale){
 
 			$limit = config('futureed.seeder_record_limit');
 			$offset = 0;
