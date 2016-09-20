@@ -68,8 +68,10 @@ class AnswerExplanationTableSeeder extends Seeder
         $answer_count = DB::table('answer_explanations')->count();
         $limit = config('futureed.seeder_record_limit');
 
+        $locales = config('translatable.locales');
+
         //loop for each language.
-        foreach(config('translatable.locales') as $locale){
+        foreach($locales as $locale){
             //initialize batch record.
             $offset = 0;
 
