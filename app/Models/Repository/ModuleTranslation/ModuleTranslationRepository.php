@@ -91,7 +91,7 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 		DB::beginTransaction();
 		try {
 
-			$translation = $this->module->find($data['module_id'])->translate($target_lang);
+			$translation = $this->module->find($data['id'])->translate($target_lang);
 
 			$translation->{$field} = $data['string'];
 
@@ -156,7 +156,7 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	 * @param int $offset
 	 * @return bool
 	 */
-	public function getModules($criteria = [], $limit=0, $offset = 0){
+	public function getCollection($criteria = [], $limit=0, $offset = 0){
 
 		try{
 
@@ -182,7 +182,7 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	 * Module count
 	 * @return mixed
 	 */
-	public function moduleCount(){
+	public function count(){
 
 		return Module::count();
 	}

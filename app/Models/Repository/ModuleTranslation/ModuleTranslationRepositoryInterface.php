@@ -13,7 +13,7 @@ interface ModuleTranslationRepositoryInterface {
 
 	public function getTranslatedAttributes();
 
-	public function getModules($criteria,$limit,$offset);
+	public function getCollection($criteria,$limit,$offset);
 
-	public function moduleCount();
+	public function count();
 }
