@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-// composer require laracasts/testdummy
-use Laracasts\TestDummy\Factory as TestDummy;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class QuotesTableSeeder extends Seeder
@@ -11,13 +10,13 @@ class QuotesTableSeeder extends Seeder
 
 	public function run()
 	{
-		\DB::table('quotes')->truncate();
-		\DB::table('quotes')->insert([
+		$seeds = [
 			[
 				'quote' => 'This is a challenging topic but you can do it',
 				'percent' => '20',
 				'answer_status' => 'Correct',
 				'seq_no' => '1',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -28,6 +27,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '20',
 				'answer_status' => 'Correct',
 				'seq_no' => '2',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -38,6 +38,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '20',
 				'answer_status' => 'Correct',
 				'seq_no' => '3',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -48,6 +49,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '20',
 				'answer_status' => 'Correct',
 				'seq_no' => '4',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -58,6 +60,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '20',
 				'answer_status' => 'Correct',
 				'seq_no' => '5',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -68,6 +71,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '20',
 				'answer_status' => 'Correct',
 				'seq_no' => '6',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -78,6 +82,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '40',
 				'answer_status' => 'Correct',
 				'seq_no' => '1',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -88,6 +93,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '40',
 				'answer_status' => 'Correct',
 				'seq_no' => '2',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -98,6 +104,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '40',
 				'answer_status' => 'Correct',
 				'seq_no' => '3',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -108,6 +115,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '40',
 				'answer_status' => 'Correct',
 				'seq_no' => '4',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -118,6 +126,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '40',
 				'answer_status' => 'Correct',
 				'seq_no' => '5',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -128,6 +137,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '40',
 				'answer_status' => 'Correct',
 				'seq_no' => '6',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -138,6 +148,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '60',
 				'answer_status' => 'Correct',
 				'seq_no' => '1',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -148,6 +159,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '60',
 				'answer_status' => 'Correct',
 				'seq_no' => '2',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -158,6 +170,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '60',
 				'answer_status' => 'Correct',
 				'seq_no' => '3',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -168,6 +181,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '60',
 				'answer_status' => 'Correct',
 				'seq_no' => '4',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -178,6 +192,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '60',
 				'answer_status' => 'Correct',
 				'seq_no' => '5',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -188,6 +203,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '80',
 				'answer_status' => 'Correct',
 				'seq_no' => '1',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -198,6 +214,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '80',
 				'answer_status' => 'Correct',
 				'seq_no' => '2',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -208,6 +225,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '80',
 				'answer_status' => 'Correct',
 				'seq_no' => '3',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -218,6 +236,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '80',
 				'answer_status' => 'Correct',
 				'seq_no' => '4',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -228,6 +247,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '100',
 				'answer_status' => 'Correct',
 				'seq_no' => '1',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -237,6 +257,7 @@ class QuotesTableSeeder extends Seeder
 				'quote' => 'You are ready for something more challenging',
 				'percent' => '100',
 				'answer_status' => 'Correct',
+				'translatable' => 1,
 				'seq_no' => '2',
 				'created_by' => 1,
 				'updated_by' => 1,
@@ -248,6 +269,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '0',
 				'answer_status' => 'Correct',
 				'seq_no' => '1',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -258,6 +280,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '0',
 				'answer_status' => 'Correct',
 				'seq_no' => '2',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -268,6 +291,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '0',
 				'answer_status' => 'Correct',
 				'seq_no' => '3',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -278,6 +302,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '0',
 				'answer_status' => 'Correct',
 				'seq_no' => '4',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -288,6 +313,7 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '0',
 				'answer_status' => 'Correct',
 				'seq_no' => '5',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
@@ -298,12 +324,54 @@ class QuotesTableSeeder extends Seeder
 				'percent' => '0',
 				'answer_status' => 'Correct',
 				'seq_no' => '6',
+				'translatable' => 1,
 				'created_by' => 1,
 				'updated_by' => 1,
 				'created_at' => Carbon::now(),
 				'updated_at' => Carbon::now()
 			]
 
-		]);
+		];
+
+		// clear and insert quotes data.
+		DB::table('quotes')->truncate();
+		DB::table('quotes')->insert($seeds);
+
+		//initialize translations.
+		$this->addTranslation();
+
+	}
+
+	/**
+	 * Initialize translations for quote.
+	 */
+	public function addTranslation(){
+
+		DB::table('quote_translations')->truncate();
+
+		$locales = config('translatable.locales');
+		//loop throughout the languages
+		foreach($locales as $locale){
+			//loop throughout the quote table.
+			$quotes = DB::table('quotes')->select('id','quote')->get();
+
+			$translation = [];
+			foreach($quotes as $quote => $q){
+
+				array_push($translation,[
+					'quote_id' => $q->id,
+					'quote' => $q->quote,
+					'locale' => $locale,
+					'created_by' => 1,
+					'updated_by' => 1,
+					'created_at' => Carbon::now(),
+					'updated_at' => Carbon::now()
+				]);
+			}
+
+			//clear and insert quotes data
+			DB::table('quote_translations')->insert($translation);
+		}
+
 	}
 }

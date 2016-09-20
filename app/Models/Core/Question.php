@@ -1,11 +1,14 @@
 <?php namespace FutureEd\Models\Core;
 
+use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
 
 class Question extends Model {
+
+	use Translatable;
 
 	use SoftDeletes;
 
@@ -34,8 +37,10 @@ class Question extends Model {
 		'seq_no',
 		'difficulty',
 		'points_earned',
+		'translatable',
 		'original_image_name',
 		'question_graph_content',
+		'translatable',
 		'status',
 		'created_by',
 		'updated_by'
@@ -53,6 +58,11 @@ class Question extends Model {
 	protected $appends = [
 		'answer_text_field'
 	];
+
+	//Translation
+	public $translatedAttributes = ['questions_text','answer'];
+
+	public $translationModel = 'FutureEd\Models\Core\QuestionTranslation';
 
 	//Accessor
 	public function getQuestionsImageAttribute($value) {

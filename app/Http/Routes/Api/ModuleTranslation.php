@@ -34,7 +34,16 @@ Routes::group([
 			'uses' => 'Api\v1\ModuleTranslationController@getLanguageTranslation'
 		]);
 
-	});
+		Routes::get('/attributes',[
+			'as' => 'module-translation.attributes',
+			'uses' => 'Api\v1\ModuleTranslationController@getTranslatedAttributes'
+		]);
 
+		Routes::post('/google-translate',[
+			'as' => 'module-translation.google-translate',
+			'uses' => 'Api\v1\ModuleTranslationController@googleTranslate'
+		]);
+
+	});
 
 });

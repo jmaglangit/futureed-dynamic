@@ -139,7 +139,7 @@ class AdminModuleController extends ApiController {
 	public function update($id, AdminModuleRequest $request)
 	{
 		$data = $request->only('subject_id','subject_area_id','name','description','common_core_area',
-					'common_core_url','status','points_to_unlock','points_to_finish','image');
+					'common_core_url','status','points_to_unlock','points_to_finish','image','translatable');
 
 		$module = $this->module->viewModule($id);
 

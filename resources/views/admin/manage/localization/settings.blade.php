@@ -18,6 +18,8 @@
 
             <div class="client-content" template-directive template-url="{!! route('admin.manage.localization.settings.main') !!}"></div>
 
+            <div class="client-content" template-directive template-url="{!! route('admin.manage.localization.settings.job') !!}"></div>
+
         </div>
     </div>
 @stop

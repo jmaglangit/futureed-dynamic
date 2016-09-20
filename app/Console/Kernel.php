@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel {
 		'FutureEd\Console\Commands\DatabaseRefreshCommand',
 		'FutureEd\Console\Commands\DeleteTempImageCommand',
 		'FutureEd\Console\Commands\RebootFutureLessonCommand',
-		'FutureEd\Console\Commands\LocalizationFileSeeder'
+		'FutureEd\Console\Commands\LocalizationFileSeeder',
+		'FutureEd\Console\Commands\GoogleTranslate',
 	];
 
 	/**

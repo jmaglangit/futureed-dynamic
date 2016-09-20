@@ -124,12 +124,13 @@ class AdminQuestionAnswerController extends ApiController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 * @param AdminQuestionAnswerRequest $request
 	 * @return Response
 	 */
 	public function update($id, AdminQuestionAnswerRequest $request)
 	{
-		$data = $request->only('answer_text','correct_answer','point_equivalent','answer_image','label','image');
+		$data = $request->only('answer_text','correct_answer','point_equivalent','answer_image','label','image','translatable');
 
 		$question_answer = $this->question_answer->viewQuestionAnswer($id);
 

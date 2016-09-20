@@ -10,14 +10,7 @@ return [
     | Contains an array with the applications available locales.
     |
     */
-    'locales' => [
-        'en',
-        'id',
-        'my',
-        'pt',
-        'th',
-        'vi'
-    ],
+    'locales' => explode(',',env('TRANSLATABLE_LOCALE',"en,id,my,pt,th,vi")),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +59,7 @@ return [
     | set it to false.
     |
     */
-    'fallback_locale' => 'en',
+    'fallback_locale' => env('TRANSLATABLE_FALLBACK_LOCALE','en'),
 
     /*
     |--------------------------------------------------------------------------
