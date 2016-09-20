@@ -89,7 +89,7 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 
 		try{
 
-			$translation = AnswerExplanation::find($data['answer_explanation_id'])->translate($target_lang);
+			$translation = AnswerExplanation::find($data['id'])->translate($target_lang);
 
 			$translation->{$field} = $data['string'];
 
@@ -121,7 +121,7 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 	 * @param int $offset
 	 * @return array|bool
 	 */
-	public function getAnswerExplanation($criteria = [] ,$limit = 0 ,$offset = 0){
+	public function getCollection($criteria = [] ,$limit = 0 ,$offset = 0){
 
 		try{
 			$explanation = new AnswerExplanation();
@@ -147,7 +147,7 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 	/**
 	 * @return mixed
 	 */
-	public function answerExplanationCount(){
+	public function count(){
 		return AnswerExplanation::count();
 	}
 }
