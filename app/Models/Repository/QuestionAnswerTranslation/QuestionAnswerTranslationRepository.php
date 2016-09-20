@@ -127,7 +127,6 @@ class QuestionAnswerTranslationRepository implements QuestionAnswerTranslationRe
 	 * @return array|bool
 	 */
 	public function getQuestionsAnswer($criteria,$limit,$offset){
-		DB::beginTransaction();
 
 		try{
 
@@ -145,15 +144,10 @@ class QuestionAnswerTranslationRepository implements QuestionAnswerTranslationRe
 
 			$this->errorLog($e->getMessage());
 
-			DB::rollback();
-
 			return false;
 		}
 
-		DB::commit();
-
 		return $response;
-
 	}
 
 	/**
