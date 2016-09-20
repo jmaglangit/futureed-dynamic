@@ -132,7 +132,6 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 	 */
 	public function getQuestions($criteria = [],$limit=0,$offset=0){
 
-		DB::beginTransaction();
 		try{
 
 			$question = new Question();
@@ -149,12 +148,8 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 
 			$this->errorLog($e->getMessage());
 
-			DB::rollback();
-
 			return false;
 		}
-
-		DB::commit();
 
 		return $response;
 	}
@@ -166,6 +161,10 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 		return Question::count();
 	}
 
+	/**
+	 * @param $data
+	 * @return bool
+	 */
 	public function updateQuestionTranslation($data){
 		DB::beginTransaction();
 
