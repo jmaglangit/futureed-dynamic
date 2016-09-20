@@ -80,8 +80,9 @@ class QuestionTableSeeder extends Seeder
 		//count records
 		$question_count = DB::table('questions')->count();
 
+		$locales = config('translatable.locales');
 		//loop through each locale
-		foreach(config('translatable.locales') as $locale){
+		foreach($locales as $locale){
 			//initialize batch record
 			$limit = config('futureed.seeder_record_limit');
 			$offset = 0;
