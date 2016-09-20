@@ -1,7 +1,7 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use Carbon\Carbon;
-use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
+use FutureEd\Http\Controllers\Api\Traits\TranslationTrait;
 use FutureEd\Models\Repository\ModuleTranslation\ModuleTranslationRepositoryInterface;
 use FutureEd\Services\ExcelServices;
 use FutureEd\Http\Requests\Api\ModuleTranslationRequest;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class ModuleTranslationController extends ApiController {
 
-	protected $module_translation;
+	use TranslationTrait;
 
 	protected $excel;
 
@@ -23,8 +23,9 @@ class ModuleTranslationController extends ApiController {
 		ModuleTranslationRepositoryInterface $moduleTranslationRepositoryInterface,
 		ExcelServices $excelServices
 	){
-		$this->module_translation = $moduleTranslationRepositoryInterface;
+		$this->model = $moduleTranslationRepositoryInterface;
 		$this->excel = $excelServices;
+		$this->translatable_model = config('futureed.translatable_models.module');
 	}
 
 	/**
@@ -40,7 +41,7 @@ class ModuleTranslationController extends ApiController {
 		$target_lang = $request->get('target_lang');
 
 		//check target language already on the table, else ask admin-user to create 1.
-		if(!$this->module_translation->checkLanguageAvailability($target_lang)){
+		if(!$this->model->checkLanguageAvailability($target_lang)){
 
 			return $this->respondErrorMessage(Error::MODULE_TRANSLATION_LOCALE);
 		}
@@ -70,7 +71,7 @@ class ModuleTranslationController extends ApiController {
 				'module_id' => $record->module_id,
 				'string' => $record->{$target_lang}
 			];
-			$status = $this->module_translation->updatedTranslation($data,$target_lang,config('futureed.module_manual_translated.name'));
+			$status = $this->model->updatedTranslation($data,$target_lang,config('futureed.module_manual_translated.name'));
 
 			if(!$status){
 				break;
@@ -83,29 +84,6 @@ class ModuleTranslationController extends ApiController {
 	}
 
 	/**
-	 * Initialize translation for the specific language.
-	 * @param $locale
-	 * @return mixed
-	 */
-	public function generateNewLanguage($locale){
-
-		//generate default languages.
-		$this->module_translation->generateInitialLanguageTranslation($locale);
-
-		return $this->respondWithData(true);
-	}
-
-	/**
-	 * Check if language exist.
-	 * @param $lang
-	 * @return mixed
-	 */
-	public function checkLanguageAvailability($lang){
-
-		return $this->respondWithData($this->module_translation->checkLanguageAvailability($lang));
-	}
-
-	/**
 	 * Generate Translation File.
 	 * @param $locale
 	 * @return mixed
@@ -113,12 +91,12 @@ class ModuleTranslationController extends ApiController {
 	public function generateTranslationFile($locale){
 
 		//check if locale language code exists
-		if(!$this->module_translation->checkLanguageAvailability($locale)){
+		if(!$this->model->checkLanguageAvailability($locale)){
 			return $this->respondErrorMessage(Error::MODULE_TRANSLATION_LOCALE);
 		}
 
 		//get module translation records
-		$translations = $this->module_translation->getModuleTranslations($locale);
+		$translations = $this->model->getModuleTranslations($locale);
 
 		//export files
 		$filename = config('futureed.module_translation_two_column') . '_'.config('translatable.fallback_locale') . '_'
@@ -126,51 +104,6 @@ class ModuleTranslationController extends ApiController {
 
 		return $this->excel->exportCsv($translations,$filename)->download('csv');
 
-	}
-
-	/**
-	 * Ger available languages
-	 * @return mixed
-	 */
-	public function getLanguageTranslation(){
-
-		//get config languages
-		$languages = config('translatable.locales');
-
-		//parse through out the languages if available.
-		$available_lang = [];
-
-		foreach($languages as $lang){
-			if($this->module_translation->checkLanguageAvailability($lang)){
-				array_push($available_lang,[
-					'code' => $lang,
-					'word' => trans('messages.' . $lang)
-				]);
-			}
-		}
-
-		return $this->respondWithData($available_lang);
-	}
-
-	/**
-	 * Get translatable fields defined by the model.
-	 * @return mixed
-	 */
-	public function getTranslatedAttributes(){
-
-		$fields = $this->module_translation->getTranslatedAttributes();
-
-		// add manual translation indicators.
-		$data = [];
-
-		foreach($fields as $field){
-			array_push($data,[
-				'field' => $field,
-				'auto' => (in_array($field,config('futureed.module_manual_translated'))) ? 0 : 1
-			]);
-		}
-
-		return $this->respondWithData($data);
 	}
 
 	/**
@@ -193,7 +126,7 @@ class ModuleTranslationController extends ApiController {
 		}
 
 		//check if field is for google translate
-		$fields = $this->module_translation->getTranslatedAttributes();
+		$fields = $this->model->getTranslatedAttributes();
 
 		if(!in_array($input['field'],$fields)){
 			return $this->respondErrorMessage(Error::LANGUAGE_FIELD_NOT_AVAILABLE);
@@ -202,7 +135,7 @@ class ModuleTranslationController extends ApiController {
 		//Queue translation
 		// -m module --language {lang} -f {field} --tagged {tagged|boolean}
 		Artisan::queue('fl:google-translate',[
-			'--model' => config('futureed.translatable_models.module'),
+			'--model' => $this->translatable_model,
 			'--language' => $input['target_lang'],
 			'--field' => $input['field'],
 			'--tagged' => $input['tagged']
