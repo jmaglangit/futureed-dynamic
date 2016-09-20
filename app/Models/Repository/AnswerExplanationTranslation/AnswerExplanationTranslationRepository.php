@@ -26,7 +26,7 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 		try{
 
 			$offset = 0;
-			$limit = confgi('futureed.seeder_record_limit');
+			$limit = config('futureed.seeder_record_limit');
 			$record_count = $this->answerExplanationCount();
 
 			//process by batch
@@ -122,7 +122,6 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 	 * @return array|bool
 	 */
 	public function getAnswerExplanation($criteria = [] ,$limit = 0 ,$offset = 0){
-		DB::beginTransaction();
 
 		try{
 			$explanation = new AnswerExplanation();
@@ -139,16 +138,15 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 
 			$this->errorLog($e->getMessage());
 
-			DB::rollback();
-
 			return false;
 		}
-
-		DB::commit();
 
 		return $response;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function answerExplanationCount(){
 		return AnswerExplanation::count();
 	}
