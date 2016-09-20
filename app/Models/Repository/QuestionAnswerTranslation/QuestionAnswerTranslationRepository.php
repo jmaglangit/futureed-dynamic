@@ -92,7 +92,7 @@ class QuestionAnswerTranslationRepository implements QuestionAnswerTranslationRe
 
 		try{
 
-			$translation = QuestionAnswer::find($data['question_answer_id'])->translate($target_lang);
+			$translation = QuestionAnswer::find($data['id'])->translate($target_lang);
 
 			$translation->{$field} = $data['string'];
 
@@ -126,7 +126,7 @@ class QuestionAnswerTranslationRepository implements QuestionAnswerTranslationRe
 	 * @param $offset
 	 * @return array|bool
 	 */
-	public function getQuestionsAnswer($criteria,$limit,$offset){
+	public function getCollection($criteria,$limit,$offset){
 
 		try{
 
@@ -153,7 +153,7 @@ class QuestionAnswerTranslationRepository implements QuestionAnswerTranslationRe
 	/**
 	 * @return mixed
 	 */
-	public function questionAnswerCount(){
+	public function count(){
 
 		return QuestionAnswer::count();
 	}

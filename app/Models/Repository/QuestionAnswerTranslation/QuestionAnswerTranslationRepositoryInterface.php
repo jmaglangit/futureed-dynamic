@@ -19,7 +19,7 @@ interface QuestionAnswerTranslationRepositoryInterface {
 
 	public function getTranslatedAttributes();
 
-	public function getQuestionsAnswer($criteria,$limit,$offset);
+	public function getCollection($criteria,$limit,$offset);
 
-	public function questionAnswerCount();
+	public function count();
 }
