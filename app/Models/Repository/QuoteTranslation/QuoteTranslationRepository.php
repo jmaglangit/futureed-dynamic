@@ -125,7 +125,6 @@ class QuoteTranslationRepository implements QuoteTranslationRepositoryInterface{
 	 * @return array|bool
 	 */
 	public function getQuote($criteria=[],$limit=0,$offset=0){
-		DB::beginTransaction();
 
 		try{
 
@@ -142,15 +141,10 @@ class QuoteTranslationRepository implements QuoteTranslationRepositoryInterface{
 
 			$this->errorLog($e->getMessage());
 
-			DB::rollback();
-
 			return false;
 		}
 
-		DB::commit();
-
 		return $response;
-
 	}
 
 	/**
