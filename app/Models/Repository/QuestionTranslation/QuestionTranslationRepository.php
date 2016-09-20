@@ -97,7 +97,7 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 		DB::beginTransaction();
 		try{
 
-			$translation = Question::find($data['question_id'])->translate($target_lang);
+			$translation = Question::find($data['id'])->translate($target_lang);
 
 			$translation->{$field} = $data['string'];
 
@@ -130,7 +130,7 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 	 * @param int $offset
 	 * @return array|bool
 	 */
-	public function getQuestions($criteria = [],$limit=0,$offset=0){
+	public function getCollection($criteria = [],$limit=0,$offset=0){
 
 		try{
 
@@ -157,31 +157,7 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 	/**
 	 * @return mixed
 	 */
-	public function questionCount(){
+	public function count(){
 		return Question::count();
-	}
-
-	/**
-	 * @param $data
-	 * @return bool
-	 */
-	public function updateQuestionTranslation($data){
-		DB::beginTransaction();
-
-		try{
-
-
-		} catch(\Exception $e){
-
-			$this->errorLog($e->getMessage());
-
-			DB::rolblack();
-
-			return false;
-		}
-
-		DB::commit();
-
-		return true;
 	}
 }
