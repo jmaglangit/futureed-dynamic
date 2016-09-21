@@ -9,6 +9,8 @@ trait TranslationTrait {
 
 	protected $translatable_model;
 
+	protected $manual_translate = [];
+
 	/**
 	 * Check if language exist.
 	 * @param $lang
@@ -70,7 +72,8 @@ trait TranslationTrait {
 		foreach($fields as $field){
 			array_push($data,[
 				'field' => $field,
-				'auto' => 1
+				'auto' => (empty($this->manual_translate)) ? 1 :
+					((in_array($field,$this->manual_translate)) ? 0 : 1)
 			]);
 		}
 

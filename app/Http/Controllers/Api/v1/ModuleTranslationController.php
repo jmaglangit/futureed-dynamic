@@ -26,6 +26,7 @@ class ModuleTranslationController extends ApiController {
 		$this->model = $moduleTranslationRepositoryInterface;
 		$this->excel = $excelServices;
 		$this->translatable_model = config('futureed.translatable_models.module');
+		$this->manual_translate = config('futureed.module_manual_translated');
 	}
 
 	/**
@@ -68,7 +69,7 @@ class ModuleTranslationController extends ApiController {
 
 			//insert per row.
 			$data = [
-				'module_id' => $record->module_id,
+				'id' => $record->module_id,
 				'string' => $record->{$target_lang}
 			];
 			$status = $this->model->updatedTranslation($data,$target_lang,config('futureed.module_manual_translated.name'));
