@@ -26,7 +26,7 @@ class Module extends Model
 		'updated_at',
 		'deleted_at'];
 
-	public $translatedAttributes = ['name'];
+	public $translatedAttributes = ['name','description'];
 
 	protected $fillable = [
 		'subject_id',

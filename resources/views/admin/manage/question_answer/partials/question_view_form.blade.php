@@ -87,6 +87,52 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-xs-3 control-label">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
+					<div class="col-xs-5" ng-if="qa.active_edit">
+						<div class="col-xs-6 checkbox">
+							<label>
+								{!! Form::radio('yes'
+                                    , 1
+                                    , true
+                                    , array(
+                                        'class' => 'field'
+                                        , 'ng-model' => 'qa.record.translatable'
+                                        , 'checked' => 'checked'
+                                    )
+                                ) !!}
+								<span class="lbl padding-8">{!! trans('messages.yes') !!}</span>
+							</label>
+						</div>
+						<div class="col-xs-6 checkbox">
+							<label>
+								{!! Form::radio('no'
+                                    , 0
+                                    , false
+                                    , array(
+                                        'class' => 'field'
+                                        , 'ng-model' => 'qa.record.translatable'
+                                        , 'checked' => 'qa.record.translatable'
+                                    )
+                                ) !!}
+								<span class="lbl padding-8">{!! trans('messages.no') !!}</span>
+							</label>
+						</div>
+					</div>
+					<div class="col-xs-3" ng-if="qa.active_view">
+						<label ng-if="qa.record.translatable == futureed.TRUE">
+							<b class="success-icon">
+								<i class="margin-top-8 fa fa-check-circle-o"></i> {!! trans('messages.yes') !!}
+							</b>
+						</label>
+
+						<label ng-if="qa.record.translatable == futureed.FALSE">
+							<b class="error-icon">
+								<i class="margin-top-8 fa fa-ban"></i> {!! trans('messages.no') !!}
+							</b>
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-xs-3">{!! trans('messages.admin_question_image') !!} </label>
 					<div class="col-xs-5" ng-if="qa.active_edit">
 						<div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.record)">{!! trans('messages.choose_image') !!}</div>

@@ -20,7 +20,7 @@
 				<div class="panel-body">
 					<div class="col-xs-12" ng-if="module.errors || module.success">
 						<div class="alert alert-error" ng-if="module.errors">
-							<p ng-repeat="error in module.errors track by $index" > 
+							<p ng-repeat="error in module.errors track by $index" >
 								{! error !}
 							</p>
 						</div>
@@ -40,10 +40,10 @@
 											<option ng-selected="module.record.subject.name == subject.name" ng-repeat="subject in module.subjects" ng-value="subject.id">{! subject.name!}</option>
 										</select>
 									</div>
-									
+
 									<label class="col-xs-2 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 									<div class="col-xs-4" ng-if="module.active_edit">
-										<div class="col-xs-6 checkbox">                                 
+										<div class="col-xs-6 checkbox">
 											<label>
 												{!! Form::radio('status'
 													, 'Enabled'
@@ -51,7 +51,7 @@
 													, array(
 														'class' => 'field'
 														, 'ng-model' => 'module.record.status'
-													) 
+													)
 												) !!}
 											<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 											</label>
@@ -105,7 +105,7 @@
 												</li>
 											</ul>
 										</div>
-										<div class="margin-top-8 center-err"> 
+										<div class="margin-top-8 center-err">
 											<i ng-if="module.validation.s_loading" class="fa fa-spinner fa-spin"></i>
 											<span ng-if="module.validation.s_error" class="error-msg-con">{! module.validation.s_error !}</span>
 										</div>
@@ -194,6 +194,52 @@
 												, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
 											)
 										) !!}
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xs-2 control-label">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
+									<div class="col-xs-5" ng-if="module.active_edit">
+										<div class="col-xs-6 checkbox">
+											<label>
+												{!! Form::radio('yes'
+													, 1
+													, true
+													, array(
+														'class' => 'field'
+														, 'ng-model' => 'module.record.translatable'
+														, 'checked' => 'checked'
+													)
+												) !!}
+												<span class="lbl padding-8">{!! trans('messages.yes') !!}</span>
+											</label>
+										</div>
+										<div class="col-xs-6 checkbox">
+											<label>
+												{!! Form::radio('no'
+													, 0
+													, false
+													, array(
+														'class' => 'field'
+														, 'ng-model' => 'module.record.translatable'
+														, 'checked' => 'module.record.translatable'
+													)
+												) !!}
+												<span class="lbl padding-8">{!! trans('messages.no') !!}</span>
+											</label>
+										</div>
+									</div>
+									<div class="col-xs-3" ng-if="module.active_view">
+										<label ng-if="module.record.translatable == futureed.TRUE">
+											<b class="success-icon">
+												<i class="margin-top-8 fa fa-check-circle-o"></i> {!! trans('messages.yes') !!}
+											</b>
+										</label>
+
+										<label ng-if="module.record.translatable == futureed.FALSE">
+											<b class="error-icon">
+												<i class="margin-top-8 fa fa-ban"></i> {!! trans('messages.no') !!}
+											</b>
+										</label>
 									</div>
 								</div>
 								<div class="form-group">
@@ -326,14 +372,14 @@
 								<div template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
 
 								<div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
-								
+
 								<div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
 							</div>
 						</div>
 
 						<div ng-if="module.record.current_view == futureed.CONTENTS" ng-controller="ManageModuleContentController as content" class="tab-pane fade" ng-init="content.setModule(module.record)" id="contents">
 							<div ng-init="content.setActive()">
-								
+
 								<div template-directive template-url="{!! route('admin.manage.module.content.partials.list') !!}"></div>
 
 								<div template-directive template-url="{!! route('admin.manage.module.content.partials.add') !!}"></div>

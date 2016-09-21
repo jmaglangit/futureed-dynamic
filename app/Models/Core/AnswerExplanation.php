@@ -34,7 +34,7 @@ class AnswerExplanation extends Model {
 	];
 
 	//Translation
-	public $translatedAttribute = ['answer_explanation'];
+	public $translatedAttributes = ['answer_explanation'];
 
 	public $translationModel = 'FutureEd\Models\Core\AnswerExplanationTranslation';
 

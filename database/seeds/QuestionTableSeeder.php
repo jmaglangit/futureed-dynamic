@@ -58,6 +58,7 @@ class QuestionTableSeeder extends Seeder
 					'difficulty' => ($row[11] == '')? 0 : $row[11],
 					'points_earned' => ($row[12])? $row[12] : 0 ,
 					'status' => ($row[13])? $row[13] : config('futureed.enabled'),
+					'translatable' => 1,
 					'created_by' => 1,
 					'updated_by' => 1,
 					'created_at' => Carbon::now(),
@@ -73,51 +74,56 @@ class QuestionTableSeeder extends Seeder
 	 */
 	public function addTranslation(){
 
-		//count records
-		$question_count = DB::table('questions')->count();
-
-		//initialize batch record
-		$limit = config('futureed.seeder_record_limit');
-		$offset = 0;
-
-		//command info
-		$this->command->info('Initializing translation ' . ceil(($question_count/$limit)) . ' batch of '
-			. $question_count . ' records.');
-
 		//truncate translation table
 		DB::table('question_translations')->truncate();
 
-		//loop through each question record
-		for($i=0;$i < ceil(($question_count/$limit)); $i++) {
+		//count records
+		$question_count = DB::table('questions')->count();
 
-			//get record by batch
-			$questions = DB::table('questions')->select('id','questions_text','answer')
-				->skip($offset)->limit($limit)->get();
+		$locales = config('translatable.locales');
+		//loop through each locale
+		foreach($locales as $locale){
+			//initialize batch record
+			$limit = config('futureed.seeder_record_limit');
+			$offset = 0;
 
-			//update offset
-			$offset += $limit;
+			//command info
+			$this->command->info('Initializing '.strtoupper($locale).' translation ' . ceil(($question_count/$limit)) . ' batch of '
+				. $question_count . ' records.');
 
-			$this->command->info('Inserting batch ' . ($i+1) . ' of '. (ceil(($question_count/$limit))));
+			//loop through each question record
+			for($i=0;$i < ceil(($question_count/$limit)); $i++) {
 
-			//loop through each command
-			$translation = [];
-			foreach($questions as $question => $q){
+				//get record by batch
+				$questions = DB::table('questions')->select('id','questions_text','answer')
+					->skip($offset)->limit($limit)->get();
 
-				array_push($translation,[
-					'question_id' => $q->id,
-					'questions_text' => $q->questions_text,
-					'answer' => $q->answer,
-					'locale' => 'en',
-					'created_by' => 1,
-					'updated_by' => 1,
-					'created_at' => Carbon::now(),
-					'updated_at' => Carbon::now()
-				]);
+				//update offset
+				$offset += $limit;
+
+				$this->command->info('Inserting batch ' . ($i+1) . ' of '. (ceil(($question_count/$limit))));
+
+				//loop through each command
+				$translation = [];
+				foreach($questions as $question => $q){
+
+					array_push($translation,[
+						'question_id' => $q->id,
+						'questions_text' => $q->questions_text,
+						'answer' => $q->answer,
+						'locale' => $locale,
+						'created_by' => 1,
+						'updated_by' => 1,
+						'created_at' => Carbon::now(),
+						'updated_at' => Carbon::now()
+					]);
+				}
+
+				//insert batch record
+				DB::table('question_translations')->insert($translation);
+
 			}
-
-			//insert batch record
-			DB::table('question_translations')->insert($translation);
-
 		}
+
 	}
 }

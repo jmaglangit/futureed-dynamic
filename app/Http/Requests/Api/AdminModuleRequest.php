@@ -50,7 +50,8 @@ class AdminModuleRequest extends ApiRequest {
 					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
 					'points_to_unlock' => 'required|integer',
-					'points_to_finish' => 'required|integer'
+					'points_to_finish' => 'required|integer',
+					'translatable' => 'required|integer'
 
 				];
 		}
