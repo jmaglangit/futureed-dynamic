@@ -36,4 +36,9 @@ return array(
          */
         'log.LogLevel' => env('PAYPAL_LOG_LEVEL','FINE')
     ),
+
+    /**
+     * Paypal response strings
+     */
+    'approved' => 'approved',
 );
