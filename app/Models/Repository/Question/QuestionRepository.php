@@ -415,10 +415,10 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		DB::beginTransaction();
 
 		try {
-			//TODO: Refactor remove supper_access.
-			session(['super_access' => 1]);
-			$response = Question::whereId($id)->pluck('answer');
-			Session::forget('super_access');
+
+			$question = Question::find($id);
+
+			$response = $question->answer;
 
 		} catch (\Exception $e) {
 
