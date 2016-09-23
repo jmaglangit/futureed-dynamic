@@ -150,6 +150,14 @@ Routes::group(['prefix' => '/client'], function()
 			'uses' => 'Api\v1\AdminClientController@setClientStatus',
 			'as' => 'api.v1.client.change-status'
 		]);
+
+		/**
+		 * Get client details
+		 */
+		Routes::get('/admin/{id}',[
+			'uses' => 'Api\v1\AdminClientController@show',
+			'as' => 'api.v1.client.admin.show'
+		]);
 	});
 
 });
