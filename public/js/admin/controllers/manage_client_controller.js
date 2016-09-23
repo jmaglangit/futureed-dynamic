@@ -206,6 +206,23 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 
 		self.schools = Constants.FALSE;
 
+		//add user information
+		self.record.username = self.record.user.username;
+		self.record.email = self.record.user.email;
+		self.record.curriculum_country = self.record.user.curriculum_country;
+
+		//add school information
+		if(self.record.school == Constants.NULL){
+			self.record.school = Constants.NULL;
+		} else {
+			self.record.school_name = self.record.school.name;
+			self.record.school_state = self.record.school.state;
+			self.record.school_street_address = self.record.school.street_address;
+			self.record.school_contact_name = self.record.school.contact_name;
+			self.record.school_contact_number = self.record.school.contact_number;
+			self.record.school_country_id = self.record.school.country_id;
+		}
+
 		if(!self.validation.s_error) {
 			$scope.ui_block();
 			manageClientService.updateClientDetails(self.record).success(function(response) {
