@@ -47,6 +47,14 @@ class AdminClientController extends ApiController {
 		
 	}
 
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
+	public function show($id){
+
+		return $this->respondWithData($this->client->getClientDetails($id));
+	}
 	
 
 }
