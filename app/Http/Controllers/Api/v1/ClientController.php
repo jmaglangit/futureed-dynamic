@@ -2,6 +2,7 @@
 
 use FutureEd\Http\Requests\Api\ClientRequest;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\ClientServices;
 use FutureEd\Services\SchoolServices;
 use FutureEd\Services\UserServices;
@@ -17,16 +18,20 @@ class ClientController extends ApiController {
 
 	protected $school_service;
 
+	protected $user;
+
 	public function __construct(
 		ClientServices $clientServices,
 		UserServices $userServices,
 		SchoolServices $schoolServices,
-		ClientRepositoryInterface $clientRepositoryInterface
+		ClientRepositoryInterface $clientRepositoryInterface,
+		UserRepositoryInterface $userRepositoryInterface
 	){
 		$this->client_service = $clientServices;
 		$this->user_service = $userServices;
 		$this->client = $clientRepositoryInterface;
 		$this->school_service = $schoolServices;
+		$this->user = $userRepositoryInterface;
 	}
 
 	/**
@@ -129,7 +134,7 @@ class ClientController extends ApiController {
 
 			$clientDetails = $this->client_service->getClientDetails($id)->toArray();
 
-			$user = $clientRequest->only('username','email');
+			$user = $clientRequest->only('username','email','curriculum_country');
 			$client = $clientRequest->only('first_name','last_name','street_address',
 								  'city','country','zip','state','country_id');
 
@@ -151,7 +156,7 @@ class ClientController extends ApiController {
 				if($clientDetails['client_role'] === config('futureed.parent') ||
 				   $clientDetails['client_role'] === config('futureed.teacher')){
 
-					$this->user_service->updateUsername($return['user_id'],$user);
+					$this->user->updateUser($return['user_id'],$user);
 					$this->client_service->updateClientDetails($return['id'],$client);
 
 				}else{
@@ -169,7 +174,7 @@ class ClientController extends ApiController {
 
 					}else{
 
-					    $this->user_service->updateUsername($return['user_id'],$user);
+						$this->user->updateUser($return['user_id'],$user);
 						$this->client_service->updateClientDetails($return['id'],$client);
 						$this->school_service->updateSchoolDetails($school);
 
