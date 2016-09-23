@@ -95,6 +95,7 @@ return [
 	'content' => 'Content',
 	'content_not_available' => 'Content Not Available',
 	'country' => 'Country',
+	'curriculum_country' => 'Curriculum Country',
 	'correct' => 'Correct!',
 	'created_by' => 'Created By',
 	'credentials_info' => 'Credentials Information',
