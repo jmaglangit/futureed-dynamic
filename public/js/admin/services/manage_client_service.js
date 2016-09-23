@@ -28,7 +28,7 @@ function manageClientService($http) {
 	api.getClientDetails = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: apiUrl + 'client/' + id
+			, url 	: apiUrl + 'client/admin/' + id
 		});
 	}
 
