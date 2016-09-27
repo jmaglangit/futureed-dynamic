@@ -370,4 +370,14 @@ class UserController extends ApiController{
         return ($this->user_service->emptySession($user->user_id))
             ? $this->respondWithData(true) : $this->respondWithData(false);
     }
+
+    /**
+     * Get Curriculum Country
+     * @param $user_id
+     * @return mixed
+     */
+    public function checkCurriculumCountry($user_id){
+
+        return $this->respondWithData($this->user->getConfirmationCode($user_id));
+    }
 }
