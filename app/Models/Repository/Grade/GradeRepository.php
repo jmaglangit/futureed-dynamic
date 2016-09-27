@@ -5,6 +5,7 @@ use FutureEd\Models\Core\CountryGrade;
 use FutureEd\Models\Core\Grade;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class GradeRepository implements GradeRepositoryInterface{
 	use LoggerTrait;
@@ -24,6 +25,13 @@ class GradeRepository implements GradeRepositoryInterface{
 
 
 			$count = 0;
+
+			//if current user not admin
+			if(empty(session('admin'))){
+				//select only enabled
+
+				$grade = $grade->status(config('futureed.enabled'));
+			}
 
 			if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
@@ -85,7 +93,14 @@ class GradeRepository implements GradeRepositoryInterface{
 		DB::beginTransaction();
 
 		try{
-			$response = Grade::where('code',$code)->with('countryGrade')->first();
+			$grade = Grade::where('code',$code)->with('countryGrade');
+
+			if(empty(session('admin'))){
+				//select only enabled
+				$grade = $grade->status(config('futureed.enabled'));
+			}
+
+			$response = $grade->first();
 
 		}catch (\Exception $e){
 
@@ -193,7 +208,15 @@ class GradeRepository implements GradeRepositoryInterface{
 		DB::beginTransaction();
 
 		try{
-			$response = Grade::where('id',$id)->first();
+			$grade = Grade::where('id',$id);
+
+			if(empty(session('admin'))){
+				//select only enabled
+				$grade = $grade->status(config('futureed.enabled'));
+			}
+
+			$response = $grade->first();
+
 
 		}catch (\Exception $e){
 
@@ -218,9 +241,14 @@ class GradeRepository implements GradeRepositoryInterface{
 		DB::beginTransaction();
 
 		try{
-			$grade_class = new Grade();
+			$grade = new Grade();
 
-			$grade_class = $grade_class->with('students')->where('id',"=",$id);
+			if(empty(session('admin'))){
+				//select only enabled
+				$grade = $grade->status(config('futureed.enabled'));
+			}
+
+			$grade_class = $grade->with('students')->where('id',"=",$id);
 			$response = $grade_class->first();
 
 		}catch (\Exception $e){
@@ -246,7 +274,14 @@ class GradeRepository implements GradeRepositoryInterface{
 		DB::beginTransaction();
 
 		try{
-			$response = Grade::countryid($country_id)->get()->toArray();
+			$grade = Grade::countryid($country_id);
+
+			if(empty(session('admin'))){
+				//select only enabled
+				$grade = $grade->status(config('futureed.enabled'));
+			}
+
+			$response = $grade->get()->toArray();
 
 		}catch (\Exception $e){
 
@@ -270,7 +305,14 @@ class GradeRepository implements GradeRepositoryInterface{
 		DB::beginTransaction();
 
 		try{
-			$response = Grade::select('country_id')->groupByCountry()->get();
+			$grade = Grade::select('country_id')->groupByCountry();
+
+			if(empty(session('admin'))){
+				//select only enabled
+				$grade = $grade->status(config('futureed.enabled'));
+			}
+
+			$response = $grade->get();
 
 		}catch (\Exception $e){
 
@@ -289,6 +331,7 @@ class GradeRepository implements GradeRepositoryInterface{
 	/**
 	 * Get Grades list by countries.
 	 * @param $country_id
+	 * @return bool
 	 */
 	public function getGradesByCountries($country_id){
 		/*
@@ -312,8 +355,15 @@ class GradeRepository implements GradeRepositoryInterface{
 				DB::raw('g.description'),
 				DB::raw('g.status')
 				)->leftJoin('country_grades as cg2','cg2.age_group_id','=','country_grades.age_group_id')
-				->leftJoin('grades as g','g.id','=','cg2.grade_id')
+				->leftJoin('grades as g',function($join){
+					if(empty(session('admin'))){
+						$join->on('g.id','=','cg2.grade_id')->where('g.status','=',config('futureed.enabled'));
+					} else {
+						$join->on('g.id','=','cg2.grade_id');
+					}
+				})
 				->where('cg2.country_id',$country_id)
+				->whereNotNull('g.status')
 				->groupBy('cg2.age_group_id')
 				->get();
 
