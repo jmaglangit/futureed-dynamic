@@ -59,6 +59,7 @@ class User extends Model {
         'registration_token',
         'status',
         'is_account_activated',
+        'curriculum_country',
         'created_by',
         'updated_by'
     ];

@@ -160,7 +160,7 @@ class UserRepository implements UserRepositoryInterface {
         DB::beginTransaction();
 
         try {
-		
+
 			$user = User::find($id);
 			
 			$user->update($data);

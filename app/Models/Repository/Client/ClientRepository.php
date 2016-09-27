@@ -23,7 +23,7 @@ class ClientRepository implements ClientRepositoryInterface
 
 		try{
 			$response = Client::with('user','school')
-							->userid($user_id)
+							->userId($user_id)
 							->first();
 
 		}catch (\Exception $e){
@@ -213,7 +213,7 @@ class ClientRepository implements ClientRepositoryInterface
 		DB::beginTransaction();
 
 		try{
-			$response = Client::with('user')->find($id);
+			$response = Client::with('user','school')->find($id);
 
 		}catch (\Exception $e){
 
