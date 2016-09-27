@@ -79,7 +79,7 @@ Routes::group([
         ['except' => ['create','edit']]);
 
     Routes::get('/user/curriculum-country/{user_id}',[
-        'uses' => 'Api\v1\AvatarController@checkCurriculumCountry',
+        'uses' => 'Api\v1\UserController@checkCurriculumCountry',
         'as' => 'api.v1.user.curriculum-country'
     ]);
 });
