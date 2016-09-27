@@ -77,6 +77,11 @@ Routes::group([
 
     Routes::resource('/user','Api\v1\UserController',
         ['except' => ['create','edit']]);
+
+    Routes::get('/user/curriculum-country/{user_id}',[
+        'uses' => 'Api\v1\AvatarController@checkCurriculumCountry',
+        'as' => 'api.v1.user.curriculum-country'
+    ]);
 });
 
 
