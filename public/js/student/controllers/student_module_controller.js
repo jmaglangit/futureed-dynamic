@@ -30,6 +30,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.active_questions = Constants.FALSE;
 		self.active_contents = Constants.FALSE;
 		self.result = Constants.FALSE;
+		self.date_start = new Date();
 
 		switch(active) {
 			case Constants.ACTIVE_QUESTIONS 	:
@@ -654,7 +655,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		answer.question_id = self.current_question.id;
 		answer.answer_id = self.current_question.answer_id;
 		answer.student_id = $scope.user.id;
-		answer.date_start = new Date();
+		answer.date_start = self.date_start;
 		answer.date_end = new Date();
 
 		self.current_student_module = {
@@ -839,6 +840,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						});
 					}
 				}
+				self.date_start = new Date();
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
