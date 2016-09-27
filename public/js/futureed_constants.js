@@ -247,7 +247,7 @@ var Constants = {
 
 	/*Birthdate dropdown config*/
 
-	, MIN_AGE					: 12
+	, MIN_AGE					: 6
 	, MAX_AGE					: 99
 	, AGE_RANGE					: 14
 
