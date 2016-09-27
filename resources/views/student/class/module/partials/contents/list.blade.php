@@ -11,7 +11,7 @@
 				</div>
 
 				<div class="row col-xs-6">
-					<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+					<h3> {! mod.contents.teaching_content.teaching_module +' '+ mod.record.grade.name  !} </h3>
 				</div>
 
 				<div class="row col-xs-3">
