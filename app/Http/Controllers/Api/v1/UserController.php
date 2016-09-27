@@ -7,6 +7,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\ClientServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
@@ -26,6 +27,7 @@ class UserController extends ApiController{
     protected $admin;
     protected $code_service;
     protected $mail_service;
+    protected $user;
 
     public function __construct(
         ClientRepositoryInterface $clientRepositoryInterface,
@@ -35,7 +37,8 @@ class UserController extends ApiController{
         StudentServices $studentServices,
         AdminRepositoryInterface $adminRepositoryInterface,
         CodeGeneratorServices $codeGeneratorServices,
-        MailServices $mailServices
+        MailServices $mailServices,
+        UserRepositoryInterface $userRepositoryInterface
     ){
         $this->client_service = $clientServices;
         $this->client = $clientRepositoryInterface;
@@ -45,6 +48,7 @@ class UserController extends ApiController{
         $this->admin = $adminRepositoryInterface;
         $this->code_service = $codeGeneratorServices;
         $this->mail_service = $mailServices;
+        $this->user = $userRepositoryInterface;
     }
 
     /**
@@ -378,6 +382,11 @@ class UserController extends ApiController{
      */
     public function checkCurriculumCountry($user_id){
 
-        return $this->respondWithData($this->user->getConfirmationCode($user_id));
+        //check user
+        if(empty($this->user->getUser($user_id))){
+            return $this->respondErrorMessage(2001);
+        }
+
+        return $this->respondWithData($this->user->getCurriculumCountry($user_id));
     }
 }
