@@ -748,6 +748,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * @param $student_id
 	 * @param $subject_id
 	 * @param $country_id
+	 * @return bool
 	 */
 	public function getStudentModulesWeekHours($student_id,$subject_id, $country_id){
 
