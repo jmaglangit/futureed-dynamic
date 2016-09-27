@@ -12,7 +12,7 @@
 		<ul class="breadcrumb">
 		    <li><i class="fa fa-home"></i></li>
 		    <li>{! mod.record.subject.name !}</li>
-		    <li>{! mod.record.name !}</li>
+		    <li>{! mod.record.name +' '+ mod.record.grade.name !}</li>
 		</ul>
 
 		<div class="col-xs-12" ng-if="mod.active_contents &&  mod.success">

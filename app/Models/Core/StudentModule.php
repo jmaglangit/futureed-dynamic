@@ -56,7 +56,7 @@ class StudentModule extends Model {
 
 	//-------------relationships
 	public function module() {
-		return $this->belongsTo('FutureEd\Models\Core\Module');
+		return $this->belongsTo('FutureEd\Models\Core\Module')->with('grade');
 	}
 
 	public function question(){

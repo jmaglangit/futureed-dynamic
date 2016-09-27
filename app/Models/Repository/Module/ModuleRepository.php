@@ -366,7 +366,8 @@ class ModuleRepository implements ModuleRepositoryInterface
 				'student_modules.date_end',
 				'student_modules.total_time'
 			)
-				->leftJoinStudentModule($criteria);
+				->leftJoinStudentModule($criteria)
+				->with('grade');
 
 			//Get module_name
 			if (isset($criteria['module_name'])) {

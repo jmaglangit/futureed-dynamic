@@ -2,8 +2,8 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div class="title-main-content" ng-if="mod.module_message.skip_module || mod.module_message.no_questions"> {! mod.module_message.name !} </div>
-				<div class="title-main-content" ng-if="mod.module_message.module_done"> {! mod.module_message.name !} Module Complete </div>
+				<div class="title-main-content" ng-if="mod.module_message.skip_module || mod.module_message.no_questions"> {! mod.module_message.name +' '+ mod.record.grade.name  !} </div>
+				<div class="title-main-content" ng-if="mod.module_message.module_done"> {! mod.module_message.name +' '+ mod.record.grade.name !} Module Complete </div>
 			</div>
 			<div class="modal-body message-container">
 				<div ng-if="mod.module_message.skip_module">
