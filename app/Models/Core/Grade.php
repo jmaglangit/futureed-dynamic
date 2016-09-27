@@ -84,6 +84,10 @@ class Grade extends Model {
         return $query->groupBy('country_id');
     }
 
+    public function scopeStatus($query,$status){
+
+        return $query->where('status','=',$status);
+    }
 
 
 

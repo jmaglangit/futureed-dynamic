@@ -197,7 +197,7 @@ return [
 	'last_name' => 'Last Name',
 	'later' => 'Later',
 	'learning_style' => 'Learning Style',
-	'learning_style_quiz' => 'Learning Style Quiz',
+	'learning_style_quiz' => 'Learning Styles Profiler',
 	'lets_get_started' => 'Let\'s get started...',
 	'loading' => 'Loading...',
 	'locked' => 'Locked',

@@ -573,7 +573,13 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 							DB::raw($country_id)
 						);
 				})
-				->leftJoin('grades as g', 'g.id', '=', 'cg2.grade_id')
+				->leftJoin('grades as g',function($join){
+					if(empty(session('admin'))){
+						$join->on('g.id','=','cg2.grade_id')->where('g.status','=',config('futureed.enabled'));
+					} else {
+						$join->on('g.id','=','cg2.grade_id');
+					}
+				})
 				->where('o.date_start', '<=', Carbon::now())
 				->where('o.date_end', '>=', Carbon::now())
 				->where('class_students.student_id','=',$student_id)
@@ -598,7 +604,13 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 							DB::raw($country_id)
 						);
 				})
-				->leftJoin('grades as g', 'g.id', '=', 'cg2.grade_id')
+				->leftJoin('grades as g',function($join){
+					if(empty(session('admin'))){
+						$join->on('g.id','=','cg2.grade_id')->where('g.status','=',config('futureed.enabled'));
+					} else {
+						$join->on('g.id','=','cg2.grade_id');
+					}
+				})
 				->where('o.date_start', '<=', Carbon::now())
 				->where('o.date_end', '>=', Carbon::now())
 				->where('class_students.student_id','=',$student_id)
@@ -748,6 +760,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * @param $student_id
 	 * @param $subject_id
 	 * @param $country_id
+	 * @return bool
 	 */
 	public function getStudentModulesWeekHours($student_id,$subject_id, $country_id){
 
@@ -976,7 +989,13 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 							DB::raw($country_id)
 						);
 				})
-				->leftJoin('grades as g', 'g.id', '=', 'cg2.grade_id')
+				->leftJoin('grades as g',function($join){
+					if(empty(session('admin'))){
+						$join->on('g.id','=','cg2.grade_id')->where('g.status','=',config('futureed.enabled'));
+					} else {
+						$join->on('g.id','=','cg2.grade_id');
+					}
+				})
 				->where('cs.student_id',DB::raw($student_id))
 				->where('s.id',DB::raw($subject_id))
 				->where('cs.subscription_status',DB::raw("'".config('futureed.active')."'"))
