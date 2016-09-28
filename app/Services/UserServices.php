@@ -1,26 +1,36 @@
 <?php namespace FutureEd\Services;
 
+use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
-use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 
 class UserServices {
     /**
-     *
+     * @param UserRepositoryInterface $users
+     * @param ValidatorRepositoryInterface $validator
+     * @param \FutureEd\Services\CodeGeneratorServices $code
+     * @param StudentRepositoryInterface $student
+     * @param InvoiceRepositoryInterface $invoiceRepositoryInterface
      */
     public function __construct(
         UserRepositoryInterface $users,
         ValidatorRepositoryInterface $validator,
-        CodeGeneratorServices $code,StudentRepositoryInterface $student){
+        CodeGeneratorServices $code,
+        StudentRepositoryInterface $student,
+        InvoiceRepositoryInterface $invoiceRepositoryInterface
+    ) {
         $this->users = $users;
         $this->validator = $validator;
         $this->code = $code;
         $this->student= $student;
+        $this->invoice = $invoiceRepositoryInterface;
     }
+
     public function getUsers(){
         return $this->users->getUsers();
     }
+
     public function getUser($id,$user_type){
 
         return $this->users->getUser($id,$user_type);
@@ -488,6 +498,28 @@ class UserServices {
 
         return $this->users->emptySessionToken($id);
     }
-    
+
+    /**
+     * Update curriculum country if not assigned.
+     * @param $user_id
+     * @param $country_id
+     * @return int
+     */
+    public function updateCurriculumCountry($user_id, $country_id){
+
+        //check if student or client and get user_id
+        $user = $this->users->getUser($user_id);
+
+        //check if users has curriculum country
+        if($user->curriculum_country == config('futureed.false')){
+
+            // add curriculum country if none else do nothing.
+            $this->users->updateUser($user_id,[
+                'curriculum_country' => $country_id
+            ]);
+        }
+
+        return 0;
+    }
 
 }
