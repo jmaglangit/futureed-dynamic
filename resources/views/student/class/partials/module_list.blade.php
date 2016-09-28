@@ -95,13 +95,13 @@
 									 ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 
 								<img ng-if="record.module_status !== 'Completed' && user.points < record.points_to_unlock" class="locked-module-icon"
-									 ng-src="/images/icons/icon-lock.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
+									 ng-src="/images/icons/icon-lock.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 
 								<img ng-if="record.module_status == 'Completed'" class="locked-module-icon"
-									 ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
+									 ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 							</div>
 
-							<p class="module-name">{! record.name !}</p>
+							<p class="module-name">{! record.name +' '+ record.grade.name !}</p>
 
 							<button ng-if="record.module_status == 'On Going' && user.points >= record.points_to_unlock"
 									ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
