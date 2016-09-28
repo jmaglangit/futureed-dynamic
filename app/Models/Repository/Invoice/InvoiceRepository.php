@@ -1,12 +1,9 @@
 <?php namespace FutureEd\Models\Repository\Invoice;
 
-
 use FutureEd\Models\Core\Invoice;
 use FutureEd\Models\Core\ClientDiscount;
-use FutureEd\Models\Core\User;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
-
 
 class InvoiceRepository implements InvoiceRepositoryInterface{
 	use LoggerTrait;
@@ -309,6 +306,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 	/**
 	 * get invoice by order_no.
 	 * @param $order_no
+	 * @param $status
 	 * @return bool|null|string
 	 */
 
