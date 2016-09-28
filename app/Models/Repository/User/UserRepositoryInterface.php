@@ -99,5 +99,6 @@ interface UserRepositoryInterface {
 
 	public function updateBackgroundImage($user_id,$background_image_i);
 
+	public function getCurriculumCountry($user_id);
 
 }
