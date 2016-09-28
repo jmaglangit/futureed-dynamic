@@ -1,10 +1,9 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\StudentPaymentRequest;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
-use FutureEd\Services\ClassroomServices;
+use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
 use FutureEd\Services\InvoiceServices;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
@@ -13,9 +12,8 @@ use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface;
 use Carbon\Carbon;
-
 use FutureEd\Services\SubscriptionServices;
-use Illuminate\Http\Request;
+use FutureEd\Services\UserServices;
 
 class StudentPaymentController extends ApiController {
 
@@ -28,7 +26,22 @@ class StudentPaymentController extends ApiController {
 	protected $class_student;
 	protected $invoice_detail;
 	protected $subscription_service;
+	protected $subscription_package;
+	protected $user_service;
 
+	/**
+	 * @param StudentRepositoryInterface $student
+	 * @param InvoiceServices $invoice_services
+	 * @param OrderRepositoryInterface $order
+	 * @param OrderDetailRepositoryInterface $order_detail
+	 * @param InvoiceRepositoryInterface $invoice
+	 * @param ClassroomRepositoryInterface $classroom
+	 * @param ClassStudentRepositoryInterface $class_student
+	 * @param InvoiceDetailRepositoryInterface $invoice_detail
+	 * @param SubscriptionServices $subscriptionServices
+	 * @param SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface
+	 * @param UserServices $userServices
+	 */
 	public function __construct(
 							StudentRepositoryInterface $student,
 							InvoiceServices	$invoice_services,
@@ -38,7 +51,9 @@ class StudentPaymentController extends ApiController {
 							ClassroomRepositoryInterface $classroom,
 							ClassStudentRepositoryInterface $class_student,
 							InvoiceDetailRepositoryInterface $invoice_detail,
-							SubscriptionServices $subscriptionServices
+							SubscriptionServices $subscriptionServices,
+							SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface,
+							UserServices $userServices
 								){
 
 		$this->student = $student;
@@ -50,6 +65,8 @@ class StudentPaymentController extends ApiController {
 		$this->class_student = $class_student;
 		$this->invoice_detail = $invoice_detail;
 		$this->subscription_service = $subscriptionServices;
+		$this->subscription_package = $subscriptionPackageRepositoryInterface;
+		$this->user_service = $userServices;
 	}
 
 	/**
@@ -162,6 +179,12 @@ class StudentPaymentController extends ApiController {
 
 		//insert data to invoice_detail
 		$this->invoice_detail->addInvoiceDetail($invoice_detail);
+
+		//get country on subscription package
+		$subscription = $this->subscription_package->getSubscriptionPackage($order['subscription_package_id']);
+
+		//updated user curr id
+		$this->user_service->updateCurriculumCountry($student->user_id,$subscription->country_id);
 
 		return $this->respondWithData($this->order->getOrder($inserted_order['id']));
 
