@@ -1317,6 +1317,15 @@ class UserRepository implements UserRepositoryInterface {
         return $response;
     }
 
+    /**
+     * Get Curriculum Country
+     * @param $user_id
+     */
+    public function getCurriculumCountry($user_id){
+
+        return User::find($user_id)->pluck('curriculum_country');
+    }
+
 
 
 
