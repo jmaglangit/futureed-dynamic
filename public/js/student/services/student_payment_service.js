@@ -175,7 +175,7 @@ function StudentPaymentService($http) {
 	service.getCurriculumCountry = function($user_id){
 		return $http({
 			method	:	Constants.METHOD_GET,
-			url		:	serviceUrl +'/user/curriculum-country/' + $user_id
+			url		:	serviceUrl +'user/curriculum-country/' + $user_id
 		});
 	}
 
