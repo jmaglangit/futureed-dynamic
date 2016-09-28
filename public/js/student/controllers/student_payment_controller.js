@@ -52,6 +52,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.subscription_views = {};
 		self.subscription_continue = Constants.TRUE;
 		self.subscription_discount = Constants.FALSE;
+		self.user_curr_country = Constants.FALSE;
 
 		//get curriculum country
 		self.getCurriculumCountry();
@@ -566,13 +567,13 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				}
 			});
 
-			if(hasCountry == 0 && $scope.user.user.curriculum_country == Constants.FALSE){
+			if(hasCountry == 0 && self.user_curr_country == Constants.FALSE){
 				self.subscription_country.push(value.country);
 			}else {
 				hasCountry = 0;
 			}
 
-			if($scope.user.user.curriculum_country == value.country.id){
+			if(self.user_curr_country == value.country.id){
 				self.subscription_country = [];
 				self.subscription_country.push(value.country);
 				self.subscription_option.country_id = value.country.id;
@@ -893,7 +894,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				self.errors = $scope.errorHandler(response.errors);
 			}
 
-			$scope.user.user.curriculum_country = response.data;
+			console.log(response.data);
+			self.user_curr_country = response.data;
 
 		}).error(function(response) {
 			self.errors = $scope.internalError();
