@@ -272,5 +272,13 @@ function managePrincipalPaymentService($http){
 		});
 	}
 
+	//get curriculum country
+	api.getCurriculumCountry = function($user_id){
+		return $http({
+			method	:	Constants.METHOD_GET,
+			url		:	apiUrl +'user/curriculum-country/' + $user_id
+		});
+	}
+
 	return api;
 }
