@@ -894,7 +894,6 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				self.errors = $scope.errorHandler(response.errors);
 			}
 
-			console.log(response.data);
 			self.user_curr_country = response.data;
 
 		}).error(function(response) {
