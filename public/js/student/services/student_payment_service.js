@@ -171,5 +171,13 @@ function StudentPaymentService($http) {
 		});
 	}
 
+	//get curriculum country
+	service.getCurriculumCountry = function($user_id){
+		return $http({
+			method	:	Constants.METHOD_GET,
+			url		:	serviceUrl +'user/curriculum-country/' + $user_id
+		});
+	}
+
 	return service;
 }

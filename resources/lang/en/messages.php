@@ -1406,4 +1406,6 @@ return [
 	'vi' => 'Vietnamese',
 	'en' => 'English UK',
 
+	'payment_change_curriculum' => 'To change curriculum country, you need to email helpdesk@futureedgroup.com',
+	'payment_choose_curriculum' => 'Please note that once you select the curriculum country, you will not be able to change it. If you need to change it, please contact helpdesk@futureedgroup.com',
 ];
