@@ -55,7 +55,7 @@ class Client extends Model
 
 	public function school()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\School', 'school_code', 'code');
+		return $this->belongsTo('FutureEd\Models\Core\School', 'school_code', 'code')->with('principal');
 	}
 
 	public function student()
