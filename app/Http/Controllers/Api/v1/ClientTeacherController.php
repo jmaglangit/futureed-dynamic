@@ -1,21 +1,11 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices as Mail;
-
-
-use FutureEd\Services\ErrorServices as Errors;
-
 use FutureEd\Http\Requests\Api\ClientTeacherRequest;
-
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface as Client;
-
 use FutureEd\Models\Repository\User\UserRepositoryInterface as User;
-
-
 use Illuminate\Support\Facades\Input;
 
 class ClientTeacherController extends ApiController {
@@ -210,6 +200,22 @@ class ClientTeacherController extends ApiController {
 		}
 
 		return $this->respondWithData($this->client->deleteClient($id));
+	}
+
+	/**
+	 * Get Teacher's curriculum country based on what is the curriculum country of the school principal.
+	 * @param $client_id
+	 * @return mixed
+	 */
+	public function getCurriculumCountry($client_id){
+
+		//get school - principal - curriculum country if none return 0.
+		$teacher = $this->client->getClientDetails($client_id);
+
+		//get curriculum country of the principal ang return
+		$country = $teacher->school->principal->user->curriculum_country;
+
+		return $this->respondWithData($country);
 	}
 
 }
