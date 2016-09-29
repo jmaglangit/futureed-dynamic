@@ -337,6 +337,12 @@ class PaymentSubscriptionController extends ApiController {
 			$this->invoice_detail->addInvoiceDetail($invoice_detail);
 		}
 
+		//get country on subscription package
+		$subscription = $this->subscription_package->getSubscriptionPackage($order['subscription_package_id']);
+
+		//updated user curr id
+		$this->user_service->updateCurriculumCountry($client->user_id,$subscription->country_id);
+
 		return $this->respondWithData($inserted_invoice);
 	}
 
