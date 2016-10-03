@@ -472,7 +472,6 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			$criteria['subject_id'] = $subject->studentClassroom->studentSubject->id;
 
 			$student_modules = $this->module->getModulesByStudentProgress($criteria);
-//			dd($student_modules['records']);
 
 			if ($student_modules) {
 
