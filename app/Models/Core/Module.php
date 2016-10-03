@@ -107,6 +107,9 @@ class Module extends Model
 		return $this->hasMany('FutureEd\Models\Core\StudentModule')->validClass()->notFailed();
 	}
 
+	public function moduleCountry(){
+		return $this->hasMany('FutureEd\Models\Core\ModuleCountry');
+	}
 
 
 
@@ -156,7 +159,6 @@ class Module extends Model
 	}
 
 	public function scopeAgeGroup($query, $age_group_id){
-
 
 		return $query->whereHas('grade', function($query) use ($age_group_id){
 
