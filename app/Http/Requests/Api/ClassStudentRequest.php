@@ -36,7 +36,7 @@ class ClassStudentRequest extends ApiRequest {
 							'gender' => 'required|alpha|in:male,female',
 							'birth_date' => 'required|date_format:Ymd',
 							'grade_code' => 'required|numeric',
-							'country_id' => 'required|integer',
+							'country_id' => 'integer',
 							'state' => 'string',
 							'city' => 'required|string',
 							'email' => 'required|email',
@@ -61,6 +61,7 @@ class ClassStudentRequest extends ApiRequest {
 							'student_id' => 'required|exists:class_students,student_id,deleted_at,NULL',
 							'class_id' => 'required|exists:classrooms,id,deleted_at,NULL',
 							'grade_id' => 'exists:grades,id,deleted_at,NULL',
+							'country_id' => 'exists:countries,id',
 							'module_status' => 'in:'. config('futureed.module_status_available')
 								.','.config('futureed.module_status_ongoing')
 								.','.config('futureed.module_status_completed')
