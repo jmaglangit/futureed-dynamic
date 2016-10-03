@@ -101,7 +101,7 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 		DB::beginTransaction();
 
 		try{
-			$response = Classroom::with('order','grade','client','subject')->find($id);
+			$response = Classroom::with('order','grade','client','subject','invoice')->find($id);
 
 		}catch (\Exception $e){
 
