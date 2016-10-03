@@ -6,9 +6,10 @@
  * Time: 3:16 PM
  */
 
-namespace FutureEd\Models\ModuleCountry;
+namespace FutureEd\Models\Repository\ModuleCountry;
 
 
 interface ModuleCountryRepositoryInterface {
 
+	public function getModuleCountries($criteria,$limit,$offset);
 }
