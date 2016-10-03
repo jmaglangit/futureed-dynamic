@@ -32,7 +32,7 @@
 						)
 					) !!}
 				</div>
-				<div class="col-xs-3" ng-init="getGradeLevel(user.country_id)">
+				<div class="col-xs-3" ng-init="getGradeLevel(user.user.curriculum_country)">
 					<select class="form-control" ng-model="class.search.grade_id">
 						<option value="">{!! trans('messages.select_grade') !!}</option>
 						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
