@@ -1,20 +1,16 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\ClassStudentRequest;
-
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
-
+use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
 use FutureEd\Services\ClassroomServices;
-use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 
@@ -27,6 +23,8 @@ class ClassStudentController extends ApiController {
     protected $user;
     protected $classroom;
 	protected $classroom_services;
+	protected $invoices;
+	protected $subscription_package;
 
     public function __construct(
 		ClassStudentRepositoryInterface $classStudentRepositoryInterface,
@@ -35,7 +33,9 @@ class ClassStudentController extends ApiController {
 		MailServices $mailServices,
 		StudentServices $studentRepositoryInterface,
 		ClassroomRepositoryInterface $classroom,
-        	ClassroomServices $classroomServices
+		ClassroomServices $classroomServices,
+		InvoiceRepositoryInterface $invoiceRepositoryInterface,
+		SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface
 	)
 	{
 		$this->class_student = $classStudentRepositoryInterface;
@@ -44,7 +44,9 @@ class ClassStudentController extends ApiController {
 		$this->student = $studentRepositoryInterface;
 		$this->user = $userServices;
 		$this->classroom = $classroom;
-        	$this->classroom_services = $classroomServices;
+		$this->classroom_services = $classroomServices;
+		$this->invoices = $invoiceRepositoryInterface;
+		$this->subscription_package = $subscriptionPackageRepositoryInterface;
     }
 
     /**
@@ -248,6 +250,7 @@ class ClassStudentController extends ApiController {
 
 	/**
 	 * Get Student Classes, with hierarchy class, module, current progress.
+	 * @param ClassStudentRequest $request
 	 * @return mixed
 	 */
 	public function studentCurrentClass(ClassStudentRequest $request){
@@ -278,6 +281,13 @@ class ClassStudentController extends ApiController {
 		if($request->get('module_status')){
 
 			$criteria['module_status'] = $request->get('module_status');
+		}
+
+		//Get country of module countries  from invoices
+		$classroom = $this->classroom->getClassroom($criteria['class_id']);
+
+		if(!empty($classroom)){
+			$criteria['country_id'] = $classroom->invoice->subscriptionPackage->country_id;
 		}
 
 		//Get Offset

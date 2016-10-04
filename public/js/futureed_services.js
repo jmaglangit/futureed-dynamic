@@ -78,6 +78,13 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getGradeCountry = function(country_id) {
+			return $http({
+				method	:	'GET',
+				url		:	futureedAPIUrl + 'module-country?country_id=' + country_id
+			});
+		}
+
 		// Student Please
 		futureedAPI.validateUsername = function(username, user_type) {
 			return $http({

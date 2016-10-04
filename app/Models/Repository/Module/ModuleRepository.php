@@ -346,7 +346,6 @@ class ModuleRepository implements ModuleRepositoryInterface
 				'modules.id as id',
 				'modules.subject_id',
 				'modules.subject_area_id',
-				'modules.grade_id',
 				'modules.code',
 				'modules.name',
 				'modules.icon_image',
@@ -364,10 +363,18 @@ class ModuleRepository implements ModuleRepositoryInterface
 				'student_modules.progress',
 				'student_modules.date_start',
 				'student_modules.date_end',
-				'student_modules.total_time'
+				'student_modules.total_time',
+				'module_countries.country_id',
+				'module_countries.grade_id'
 			)
 				->leftJoinStudentModule($criteria)
-				->with('grade');
+				->with('grade')
+				->leftJoin('module_countries', function($join) use ($criteria){
+					$join->on('modules.id','=','module_countries.module_id')
+						->where('module_countries.country_id','=',$criteria['country_id']);
+				})
+				->whereNotNull('country_id')
+				;
 
 			//Get module_name
 			if (isset($criteria['module_name'])) {
@@ -380,7 +387,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 			{
 				$country_grade = CountryGrade::whereGradeId($criteria['grade_id'])->with('gradeLevel')->first()->toArray();
 				
-				$student_module = $student_module->gradeId($country_grade['grade_level']['grade_id']);
+				$student_module = $student_module->where('module_countries.grade_id','=',$country_grade['grade_level']['grade_id']);
 			}
 
 			//module_status

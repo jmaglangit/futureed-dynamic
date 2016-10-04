@@ -73,6 +73,9 @@ class DatabaseSeeder extends Seeder {
 		
 		$this->call('ModuleTableSeeder');
 		$this->command->info('ModuleTableSeeder seeded!');
+
+		$this->call('ModuleCountryTableSeeder');
+		$this->command->info('ModuleCountryTableSeeder seeded!');
 		
 		#$this->call('OrdersTableSeeder');
 		#$this->command->info('OrdersTableSeeder seeded!');
