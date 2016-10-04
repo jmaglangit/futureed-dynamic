@@ -156,7 +156,7 @@ class PaymentSubscriptionController extends ApiController {
 
 		$order['date_start'] = Carbon::now()->toDateTimeString();
 		$order['date_end'] = Carbon::now()->addDays($order['date_end'])->toDateTimeString();
-		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
+		$order['payment_status'] = config('futureed.pending');
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['student_id'],$next_order_id);
 
 		//insert data into order
