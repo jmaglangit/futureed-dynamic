@@ -70,6 +70,9 @@ function ManageTeacherModuleController($scope, $window, clientProfileApiService,
 		self.table.loading = Constants.TRUE;
 		self.search.class_id = $scope.classid;
 
+		self.getCurriculumCountry();
+		self.search.country_id = $scope.user.user.curriculum_country;
+
 		$scope.ui_block();
 		ManageTeacherModuleService.listModule(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
@@ -84,6 +87,23 @@ function ManageTeacherModuleController($scope, $window, clientProfileApiService,
 			}
 
 			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//update client curriculum country.
+	self.getCurriculumCountry = function(){
+
+		ManageTeacherModuleService.getCurriculumCountry($scope.user.id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					 $scope.user.user.curriculum_country = response.data;
+				}
+			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();

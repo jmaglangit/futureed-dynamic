@@ -76,6 +76,7 @@ function ManageParentModuleController($scope, clientProfileApiService, ManagePar
 		self.records = [];
 		self.table.loading = Constants.TRUE;
 		self.search.class_id = $scope.classid;
+		self.search.country_id = $scope.user.user.curriculum_country;
 
 		$scope.ui_block();
 		ManageParentModuleService.listModule(self.search, self.table).success(function(response) {

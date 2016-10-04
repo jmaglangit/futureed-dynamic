@@ -51,6 +51,8 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 			$module = $module->with('subject', 'subjectArea', 'grade', 'studentModule');
 
+			$module = $module->leftJoin('module_countries','modules.id','=','module_countries.module_id');
+
 			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 				$count = $module->count();
 
@@ -66,7 +68,12 @@ class ModuleRepository implements ModuleRepositoryInterface
 					//check grade_id
 					if (isset($criteria['grade_id'])) {
 
-						$module = $module->gradeId($criteria['grade_id']);
+						$module = $module->where('module_countries.grade_id','=',$criteria['grade_id']);
+					}
+
+					//check country
+					if(isset($criteria['country_id'])){
+						$module = $module->where('module_countries.country_id','=',$criteria['country_id']);
 					}
 
 					//check module student_id
