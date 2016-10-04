@@ -71,6 +71,11 @@ class ModuleController extends ApiController {
 			$criteria['grade_id'] = Input::get('grade_id');
 		}
 
+		//for country / curriculum country
+		if(Input::get('country_id')){
+			$criteria['country_id'] = Input::get('country_id');
+		}
+
 		//Age Group
 		//for subject
 		if(Input::get('age_group_id')){
