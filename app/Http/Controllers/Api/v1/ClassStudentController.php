@@ -219,6 +219,13 @@ class ClassStudentController extends ApiController {
            return $this->respondErrorMessage(2037);
         }
 
+		//check student if on the same curriculum country
+		$student = $this->student->getStudent($student_id);
+		if($classroom->invoice->subscriptionPackage->country_id <> $student->user->curriculum_country){
+
+			return $this->respondErrorMessage(2078);
+		}
+
         //add to class student table.
         $data['student_id'] = $student_id;
         $data['status'] = 'Enabled';
