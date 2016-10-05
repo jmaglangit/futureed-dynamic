@@ -43,7 +43,7 @@ class ClassStudent extends Model {
 
 	public function classroom()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('subject','order');
+		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('subject','order','invoice');
 	}
 
 	//Student Class Modules
@@ -192,6 +192,18 @@ class ClassStudent extends Model {
 		return $query->whereHas('student_classroom_module', function($query) use ($module_id){
 			$query->whereHas('module', function($query) use ($module_id){
 				$query->whereId($module_id);
+			});
+		});
+	}
+
+	//check for package country
+	public function scopeSubscriptionCountry($query,$country_id){
+
+		return $query->whereHas('classroom',function($query) use ($country_id){
+			$query->whereHas('invoice',function($query) use ($country_id){
+				$query->whereHas('subscriptionPackage',function($query) use ($country_id){
+					$query->where('country_id','=',$country_id);
+				});
 			});
 		});
 	}
