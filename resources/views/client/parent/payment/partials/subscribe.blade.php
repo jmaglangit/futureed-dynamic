@@ -178,7 +178,7 @@
                             </div>
                             <ul class="list-inline pull-right">
                                 <li>
-                                    <button type="button" class="btn btn-primary btn-info-full" ng-disabled="payment.enlist_student == futureed.FALSE"
+                                    <button type="button" class="btn btn-primary btn-info-full" ng-disabled="!payment.enable_student_list"
                                             ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_STUDENTS)">{!! trans('messages.add_student') !!}</button>
                                 </li>
                             </ul>
