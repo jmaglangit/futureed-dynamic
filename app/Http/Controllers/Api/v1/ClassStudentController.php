@@ -6,6 +6,7 @@ use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
 use FutureEd\Services\ClassroomServices;
 use FutureEd\Services\MailServices;
@@ -20,6 +21,7 @@ class ClassStudentController extends ApiController {
     protected $client;
     protected $mail;
     protected $student;
+	protected $student_service;
     protected $user;
     protected $classroom;
 	protected $classroom_services;
@@ -31,7 +33,8 @@ class ClassStudentController extends ApiController {
 		ClientRepositoryInterface $clientRepositoryInterface,
 		UserServices $userServices,
 		MailServices $mailServices,
-		StudentServices $studentRepositoryInterface,
+		StudentServices $studentServices,
+		StudentRepositoryInterface $studentRepositoryInterface,
 		ClassroomRepositoryInterface $classroom,
 		ClassroomServices $classroomServices,
 		InvoiceRepositoryInterface $invoiceRepositoryInterface,
@@ -42,6 +45,7 @@ class ClassStudentController extends ApiController {
 		$this->client = $clientRepositoryInterface;
 		$this->mail = $mailServices;
 		$this->student = $studentRepositoryInterface;
+		$this->student_service = $studentServices;
 		$this->user = $userServices;
 		$this->classroom = $classroom;
 		$this->classroom_services = $classroomServices;
@@ -124,7 +128,7 @@ class ClassStudentController extends ApiController {
             ]);
 
             //add student, return status
-            $student_response = $this->student->addStudent($student);
+            $student_response = $this->student_service->addStudent($student);
 
         } else {
 
@@ -135,7 +139,7 @@ class ClassStudentController extends ApiController {
 
         if(isset($student_response['status'])){
 
-            $student_id = $this->student->getStudentId($user_response['id']);
+            $student_id = $this->student_service->getStudentId($user_response['id']);
 
             //add class student.
             $class_student['student_id'] = $student_id;
@@ -187,7 +191,7 @@ class ClassStudentController extends ApiController {
 			return $this->respondErrorMessage(2124);// Student does not exist.
 		}
 
-		$student_id = $this->student->getStudentId($check_email['user_id']);
+		$student_id = $this->student_service->getStudentId($check_email['user_id']);
 
 		//check classroom has not expired.
 		$classroom_status = $this->classroom_services->checkActiveClassroom($data['class_id']);
@@ -233,8 +237,7 @@ class ClassStudentController extends ApiController {
 		//update school code of student.
 		$client_school_code = $this->client->getSchoolCode($data['client_id']);
 
-		$this->student->updateSchool($student_id, $client_school_code);
-
+		$this->student_service->updateSchool($student_id, $client_school_code);
 
 		$data['user_id'] = $check_email['user_id'];
 		$data['class_name'] = $classroom ? $classroom['name'] : "";
@@ -313,7 +316,6 @@ class ClassStudentController extends ApiController {
 	 * @param $id
 	 * @return mixed
 	 */
-
 	public function removeStudentClass(ClassStudentRequest $request, $id){
 
 		$data = $request->only('date_removed');
@@ -356,7 +358,6 @@ class ClassStudentController extends ApiController {
 	 *
 	 * @return mixed
 	 */
-
 	public function index(){
 
 		$criteria = [];
@@ -366,21 +367,21 @@ class ClassStudentController extends ApiController {
 			$criteria['student_id'] = Input::get('student_id');
 
 			//Generate Active/Inactive classes
-			$this->student->getCurrentClass($criteria['student_id']);
+			$this->student_service->getCurrentClass($criteria['student_id']);
+
+			//get curriculum country of the student
+			$student = $this->student->getStudent($criteria['student_id']);
+
+			if($student->user->curriculum_country > config('futureed.false')){
+				$criteria['country_id'] = $student->user->curriculum_country;
+			}
 		}
 
 		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
 
 		$limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
 
-
-
 		return $this->respondWithData($this->class_student->getClassStudents($criteria,$limit,$offset));
-
-
-
-
-
 	}
 
 }
