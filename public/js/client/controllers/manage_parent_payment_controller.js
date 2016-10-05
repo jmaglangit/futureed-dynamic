@@ -1273,7 +1273,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.checkStudentSubscriptionCountry = function(){
 		self.enable_student_list = Constants.TRUE;
 		//scan through each enlisted students
-		//console.log(self.enlist_student);
 
 		var error_student = [];
 		angular.forEach(self.enlist_student,function(value){

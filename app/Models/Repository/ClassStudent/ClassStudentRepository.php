@@ -99,7 +99,6 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			$this->errorLog($e->getMessage());
 
-			dd($e);
 			return false;
 		}
 
