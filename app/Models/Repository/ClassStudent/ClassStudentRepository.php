@@ -548,7 +548,6 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			$this->errorLog($e);
 
-			dd($e);
 			return 0;
 		}
 
