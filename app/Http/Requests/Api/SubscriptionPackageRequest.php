@@ -25,7 +25,7 @@ class SubscriptionPackageRequest extends ApiRequest {
 				'subscription_id'	=> 'required|integer|exists:subscription,id,deleted_at,NULL',
 				'country_id'	=> 'required|integer|exists:countries,id',
 				'subject_id'	=> 'required|integer|exists:subjects,id,deleted_at,NULL',
-				'price'	=> 'required|numeric|between:1,999999.99',
+				'price'	=> 'required|numeric|between:0,999999.99',
 				'status'	=> 'required|in:'.config('futureed.enabled').','.config('futureed.disabled')
 			];
 		}
