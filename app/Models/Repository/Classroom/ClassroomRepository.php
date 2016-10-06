@@ -325,7 +325,7 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 	 *  @param $student_id
 	 *  @return boolean
 	 */
-	public function getActiveSubscription($subject_id, $student_id){
+	public function getActiveSubscription($subject_id, $student_id,$country){
 
 		DB::beginTransaction();
 
@@ -336,6 +336,7 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 			$class_student = $class_student->subscriptionSubjectId($subject_id);
 			$class_student = $class_student->subscriptionStudentId($student_id);
 			$class_student = $class_student->subscriptionStatus();
+			$class_student = $class_student->subscriptionCountry($country);
 
 			$response = count($class_student->get()->toArray());
 

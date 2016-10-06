@@ -213,7 +213,13 @@ class ClassStudentController extends ApiController {
         $classroom = $this->classroom->getClassroom($data['class_id']);
 
         //check if student have a subscription with the same subject_id
-        $check_subscription = $this->classroom->getActiveSubscription($classroom['subject_id'], $student_id);
+		// and country
+        $check_subscription = $this->classroom->getActiveSubscription(
+			$classroom['subject_id'],
+			$student_id,
+			$classroom->invoice->subscriptionPackage->country_id
+		);
+
         if ($check_subscription) {
 
            return $this->respondErrorMessage(2037);

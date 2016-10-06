@@ -31,4 +31,6 @@ interface ClassroomRepositoryInterface {
 
     public function checkClassroomActive($class_id);
 
+    public function getActiveSubscription($subject_id,$student_id,$school_country);
+
 }
