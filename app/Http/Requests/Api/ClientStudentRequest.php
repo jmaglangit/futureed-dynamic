@@ -47,7 +47,7 @@ class ClientStudentRequest extends ApiRequest {
 					'country_id'    => 'required|integer',
 					'state'         => 'string',
 					'city'          => 'required|string',
-					'grade_code' 	=> 'required|integer'
+					'grade_code' 	=> 'integer'
 				];
 
 		}
