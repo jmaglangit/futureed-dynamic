@@ -22,9 +22,9 @@
 
 
     <!-- Fonts -->
-    {{--{!! Html::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') !!}--}}
-    {{--{!! Html::style('//fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic') !!}--}}
-    {{--{!! Html::style('//fonts.googleapis.com/css?family=Schoolbell') !!}--}}
+    {!! Html::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') !!}
+    {!! Html::style('//fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic') !!}
+    {!! Html::style('//fonts.googleapis.com/css?family=Schoolbell') !!}
     {!! Html::style('/css/websleek/stylesheet.css') !!}
     {!! Html::style('/css/websleek/websleek.css') !!}
     
