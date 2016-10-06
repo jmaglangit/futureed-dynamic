@@ -4,6 +4,7 @@ namespace FutureEd\Models\Repository\ClassStudent;
 use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
+use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\Subject;
 use FutureEd\Models\Repository\Module\ModuleRepository as ModuleRepository;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
@@ -515,6 +516,8 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 		DB::beginTransaction();
 		try{
+				//get student country
+				$student = Student::with('user')->find($student_id);
 
 				 $subject = ClassStudent::select(
 					 'class_students.student_id', 'subjects.name',
@@ -523,6 +526,8 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				 )->leftJoin('classrooms', 'class_students.class_id', '=', 'classrooms.id')
 					 ->leftJoin('subjects', 'subjects.id', '=', 'classrooms.subject_id')
 					 ->leftJoin('orders', 'orders.order_no', '=', 'classrooms.order_no')
+					 ->leftJoin('invoices','invoices.order_no','=','orders.order_no')
+					 ->leftJoin('subscription_packages','subscription_packages.id','=','invoices.subscription_package_id')
 					 ->leftJoin('modules', 'modules.subject_id', '=', 'subjects.id')
 					 ->leftJoin('student_modules', function ($join) {
 						 $join->on('student_modules.module_id', '=', 'modules.id')
@@ -532,6 +537,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 					 ->where('orders.date_start', '<=', Carbon::now())
 					 ->where('orders.date_end', '>=', Carbon::now())
 					 ->where('class_students.student_id', $student_id)
+					 ->where('subscription_packages.country_id','=',$student->user->curriculum_country)
 					 ->whereNULL('student_modules.deleted_at')
 					 ->groupBy('subjects.name')
 					 ->get();
