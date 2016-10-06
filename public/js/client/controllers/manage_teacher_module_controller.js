@@ -71,7 +71,7 @@ function ManageTeacherModuleController($scope, $window, clientProfileApiService,
 		self.search.class_id = $scope.classid;
 
 		self.getCurriculumCountry();
-		self.search.country_id = $scope.user.user.curriculum_country;
+		self.search.country_id = $scope.user.country_id;
 
 		$scope.ui_block();
 		ManageTeacherModuleService.listModule(self.search, self.table).success(function(response) {
@@ -101,7 +101,7 @@ function ManageTeacherModuleController($scope, $window, clientProfileApiService,
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
-					 $scope.user.user.curriculum_country = response.data;
+					$scope.user.country_id = response.data;
 				}
 			}
 		}).error(function(response) {
