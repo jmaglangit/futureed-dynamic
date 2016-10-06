@@ -77,8 +77,8 @@
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             <h3>{!! trans('messages.select_a_country') !!}</h3>
-                            <h4 ng-show="payment.has_curr_country">{!! trans('messages.payment_change_curriculum') !!}</h4>
-                            <h4 ng-show="!payment.has_curr_country">{!! trans('messages.payment_choose_curriculum') !!}</h4>
+                            <h5 ng-show="payment.has_curr_country">{!! trans('messages.payment_change_curriculum') !!}</h5>
+                            <h5 ng-show="!payment.has_curr_country">{!! trans('messages.payment_choose_curriculum') !!}</h5>
                             {{--Display subject options --}}
                             {{--TODO get subject list--}}
                             <div class="row">

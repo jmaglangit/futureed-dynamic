@@ -59,7 +59,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					var student_update = response.data;
 
 					self.points_to_finish = student_update.module.points_to_finish;
-					self.current_points = student_update.correct_counter;
+					self.current_points = student_update.running_points;
 
 					if(successCallback) {
 						successCallback(response);
