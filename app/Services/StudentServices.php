@@ -229,6 +229,7 @@ class StudentServices
 		}
 
 		$criteria['student_id'] = $id;
+		$criteria['country_id'] = $student['user']['curriculum_country'];
 
 		//get class_student
 		$class_student = $this->class_student->getClassStudents($criteria);
@@ -243,7 +244,7 @@ class StudentServices
 				'background' => $avatar_url_background,
 				'school' => $school,
 				'grade' => isset($grade) ? $grade : null,
-				'class' => isset($class_student['records'][0]) ? $class_student['records'][0]['class_id'] : null,
+				'class' => isset($class_student['records'][0]) ? $class_student['records'][0]->class_id : null,
 				'avatar_id' => $student_reference['avatar_id']));
 
 
