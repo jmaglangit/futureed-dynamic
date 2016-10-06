@@ -74,6 +74,12 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			}
 
+			//if set by country
+			if(isset($criteria['country_id'])){
+
+				$class_student = $class_student->subscriptionCountry($criteria['country_id']);
+			}
+
 			if ($limit > 0 && $offset >= 0) {
 
 				$class_student = $class_student->offset($offset)->limit($limit);

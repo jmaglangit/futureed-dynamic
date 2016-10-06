@@ -190,6 +190,7 @@ var Constants = {
 	, DELETE_INVOICE_SUCCESS 	: "You have successfully deleted the selected invoice."
 	, ADD_STUDENT_SUCCESS 		: "You have successfully added the selected student."
 	, REMOVE_STUDENT_SUCCESS 	: "You have successfully removed the selected student."
+	, STUDENT_NOT_ALLOWED	:	"Cannot add student because student_name has a different curriculum."
 
 	, RESET_SUCCESS 		: "Your module was reset successfully."
 

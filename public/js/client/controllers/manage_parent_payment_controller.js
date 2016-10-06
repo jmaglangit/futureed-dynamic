@@ -1266,6 +1266,30 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.enlist_student.push(student);
 			self.enlist_student[self.enlist_student.indexOf(student)] = student;
 		}
+
+		self.checkStudentSubscriptionCountry();
+	};
+
+	self.checkStudentSubscriptionCountry = function(){
+		self.enable_student_list = Constants.TRUE;
+		//scan through each enlisted students
+
+		var error_student = [];
+		angular.forEach(self.enlist_student,function(value){
+
+			var student_user = value.user.curriculum_country;
+
+			if(!(student_user == Constants.FALSE
+				|| student_user > Constants.FALSE && student_user == self.subscription_invoice.country_id)){
+
+				self.enable_student_list = Constants.FALSE;
+				error_student.push(Constants.STUDENT_NOT_ALLOWED.replace("student_name",value.user.name));
+			}
+		});
+
+		self.errors = (error_student.length > Constants.FALSE) ? error_student :Constants.FALSE;
+
+		return Constants.TRUE;
 	};
 
 	self.studentExists = function(id){

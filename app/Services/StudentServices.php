@@ -22,18 +22,21 @@ class StudentServices
 	 * Initialized constructor.
 	 * @param StudentRepositoryInterface $student
 	 * @param PasswordImageServices $password
-	 * @param UserServices $user
+	 * @param UserRepositoryInterface $userRepositoryInterface
+	 * @param UserServices $userServices
 	 * @param ValidatorRepository $validator
 	 * @param SchoolServices $school
 	 * @param AvatarServices $avatar
 	 * @param GradeRepositoryInterface $gradeRepositoryInterface
 	 * @param ClassStudentRepositoryInterface $classStudentRepositoryInterface
 	 * @param StudentModuleRepositoryInterface $studentModuleRepositoryInterface
+	 * @internal param UserServices $user
 	 */
 	public function __construct(
 		StudentRepositoryInterface $student,
 		PasswordImageServices $password,
-		UserServices $user,
+		UserRepositoryInterface $userRepositoryInterface,
+		UserServices $userServices,
 		ValidatorRepository $validator,
 		SchoolServices $school,
 		AvatarServices $avatar,
@@ -44,7 +47,8 @@ class StudentServices
 	{
 		$this->student = $student;
 		$this->password = $password;
-		$this->user = $user;
+		$this->user = $userRepositoryInterface;
+		$this->user_service = $userServices;
 		$this->validator = $validator;
 		$this->school = $school;
 		$this->avatar = $avatar;
@@ -146,13 +150,13 @@ class StudentServices
 	{
 
 		$user_id = $this->student->getReferences($id);
-		$is_disabled = $this->user->checkUserDisabled($user_id['user_id']);
+		$is_disabled = $this->user_service->checkUserDisabled($user_id['user_id']);
 
 		if (!$is_disabled) {
 			$password_image = $this->student->getImagePassword($id);
 
 			if ($image_id == $password_image) {
-				$this->user->resetLoginAttempt($user_id['user_id']);
+				$this->user_service->resetLoginAttempt($user_id['user_id']);
 				return [
 					'status' => 200,
 					'data' => true
@@ -162,13 +166,13 @@ class StudentServices
 				//check if token has values.
 				if (!$token) {
 
-					$this->user->addLoginAttempt($user_id['user_id']);
+					$this->user_service->addLoginAttempt($user_id['user_id']);
 				}
 
-				if (!$this->user->exceedLoginAttempts($user_id['user_id'])) {
-					$this->user->lockAccount($user_id['user_id']);
+				if (!$this->user_service->exceedLoginAttempts($user_id['user_id'])) {
+					$this->user_service->lockAccount($user_id['user_id']);
 					return [
-						'status' => $this->user->checkUserDisabled($user_id['user_id'])
+						'status' => $this->user_service->checkUserDisabled($user_id['user_id'])
 					];
 				}
 				return [
@@ -198,7 +202,7 @@ class StudentServices
 		$age = $this->age($student['birth_date']);
 
 		//get user username and email
-		$user = $this->user->getUsernameEmail($student['user_id'])->toArray();
+		$user = $this->user_service->getUsernameEmail($student['user_id'])->toArray();
 
 		$avatar_url = '';
 		$avatar_url_background = '';
@@ -327,7 +331,7 @@ class StudentServices
 		$student_reference = $this->student->getReferences($id)->toArray();
 
 		//update user username and email
-		$this->user->updateUsernameEmail($student_reference['user_id'], $input);
+		$this->user_service->updateUsernameEmail($student_reference['user_id'], $input);
 
 		//update Student details
 		$this->student->updateStudentDetails($id, $input);
@@ -466,9 +470,27 @@ class StudentServices
 
 			return true;
 		}
-
-
 	}
 
+	/**
+	 * Check student if it has existing curriculum country else update record.
+	 * @param $student_id
+	 * @param $curriculum_country
+	 * @return bool
+	 */
+	public function checkStudentCurriculum($student_id, $curriculum_country){
+
+		//check curriculum country
+		$student = $this->student->getStudent($student_id);
+
+		//if exist return 0;
+		if($student->user->curriculum_country > config('futureed.false')){
+			return false;
+		} else {
+			return $this->user->updateUser($student->user_id,[
+				'curriculum_country' => $curriculum_country
+			]);
+		}
+	}
 
 }

@@ -19,6 +19,7 @@ use FutureEd\Services\ErrorMessageServices as Error;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\InvoiceServices;
 use Carbon\Carbon;
+use FutureEd\Services\StudentServices;
 use FutureEd\Services\SubscriptionServices;
 use FutureEd\Services\UserServices;
 
@@ -33,6 +34,7 @@ class ParentStudentController extends ApiController {
     protected $invoice_detail;
     protected $mail;
     protected $student;
+    protected $student_service;
     protected $user;
     protected $order;
     protected $parent_student;
@@ -60,7 +62,8 @@ class ParentStudentController extends ApiController {
         AvatarServices $avatarServices,
         SubscriptionServices $subscriptionServices,
         SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface,
-        UserServices $userServices
+        UserServices $userServices,
+        StudentServices $studentServices
     ){
 
         $this->student = $student;
@@ -80,6 +83,7 @@ class ParentStudentController extends ApiController {
         $this->subscription_service = $subscriptionServices;
         $this->subscription_package = $subscriptionPackageRepositoryInterface;
         $this->user_service = $userServices;
+        $this->student_service = $studentServices;
     }
 
     public function addExistingStudent(ParentStudentRequest $request){
@@ -291,6 +295,10 @@ class ParentStudentController extends ApiController {
                 'date_started' => $order['order_date'],
                 'subscription_status' => config('futureed.active')
             ]);
+
+            //check students for null curriculum country
+            $this->student_service->checkStudentCurriculum($student['id'],$order['country_id']);
+
         }
 
         //insert invoice details
