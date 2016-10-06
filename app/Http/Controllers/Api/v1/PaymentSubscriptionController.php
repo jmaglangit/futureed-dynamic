@@ -8,12 +8,14 @@ use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
 use FutureEd\Services\InvoiceServices;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\PaymentSubscriptionRequest;
 use FutureEd\Services\SubscriptionServices;
+use FutureEd\Services\UserServices;
 
 class PaymentSubscriptionController extends ApiController {
 
@@ -28,6 +30,8 @@ class PaymentSubscriptionController extends ApiController {
 	protected $student;
 	protected $client;
 	protected $subscription_service;
+	protected $subscription_package;
+	protected $user_service;
 
 
 	public function __construct(
@@ -42,8 +46,9 @@ class PaymentSubscriptionController extends ApiController {
 		ClassStudentRepositoryInterface $class_student,
 		StudentRepositoryInterface $studentRepositoryInterface,
 		ClientRepositoryInterface $clientRepositoryInterface,
-		SubscriptionServices $subscriptionServices
-
+		SubscriptionServices $subscriptionServices,
+		SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface,
+		UserServices $userServices
 	){
 		$this->student = $studentRepositoryInterface;
 		$this->invoice = $invoice;
@@ -56,6 +61,8 @@ class PaymentSubscriptionController extends ApiController {
 		$this->class_student = $class_student;
 		$this->client = $clientRepositoryInterface;
 		$this->subscription_service = $subscriptionServices;
+		$this->subscription_package = $subscriptionPackageRepositoryInterface;
+		$this->user_service = $userServices;
 	}
 
 	/**
@@ -149,7 +156,7 @@ class PaymentSubscriptionController extends ApiController {
 
 		$order['date_start'] = Carbon::now()->toDateTimeString();
 		$order['date_end'] = Carbon::now()->addDays($order['date_end'])->toDateTimeString();
-		$order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
+		$order['payment_status'] = config('futureed.pending');
 		$order['order_no'] = $this->invoice_service->createOrderNo($order['student_id'],$next_order_id);
 
 		//insert data into order
@@ -220,6 +227,12 @@ class PaymentSubscriptionController extends ApiController {
 
 		//insert data to invoice_detail
 		$this->invoice_detail->addInvoiceDetail($invoice_detail);
+
+		//get country on subscription package
+		$subscription = $this->subscription_package->getSubscriptionPackage($order['subscription_package_id']);
+
+		//updated user curr id
+		$this->user_service->updateCurriculumCountry($student->user_id,$subscription->country_id);
 
 		return $this->respondWithData($invoice);
 	}
@@ -323,6 +336,12 @@ class PaymentSubscriptionController extends ApiController {
 			//insert data to invoice_detail
 			$this->invoice_detail->addInvoiceDetail($invoice_detail);
 		}
+
+		//get country on subscription package
+		$subscription = $this->subscription_package->getSubscriptionPackage($order['subscription_package_id']);
+
+		//updated user curr id
+		$this->user_service->updateCurriculumCountry($client->user_id,$subscription->country_id);
 
 		return $this->respondWithData($inserted_invoice);
 	}

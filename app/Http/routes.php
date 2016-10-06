@@ -53,6 +53,7 @@ Routes::group([
 	include('Routes/Api/LearningStyle.php');
 	include('Routes/Api/MediaType.php');
 	include('Routes/Api/Module.php');
+	include('Routes/Api/ModuleCountry.php');
 	include('Routes/Api/ModuleGroup.php');
 	include('Routes/Api/ModuleTranslation.php');
 	include('Routes/Api/Order.php');

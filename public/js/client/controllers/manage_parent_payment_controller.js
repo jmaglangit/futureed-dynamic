@@ -57,8 +57,12 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.subscription_views = {};
 		self.subscription_continue = Constants.TRUE;
 		self.subscription_discount = Constants.FALSE;
+		self.user_curr_country = Constants.FALSE;
 
 		self.getClientDetails();
+
+		//get curriculum country
+		self.getCurriculumCountry();
 
 		switch(active){
 			case Constants.ACTIVE_ADD 	:
@@ -649,7 +653,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	$window.addEventListener('beforeunload', function() {
-		if(!self.paying && self.active_add) {
+		if(!self.paying && self.active_add && self.invoice_detail) {
 			self.deleteInvoice(self.invoice_detail.id);	
 		}
 	});
@@ -913,10 +917,17 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				}
 			});
 
-			if(hasCountry == 0){
+			if(hasCountry == 0 && self.user_curr_country == Constants.FALSE){
 				self.subscription_country.push(value.country);
 			}else {
 				hasCountry = 0;
+			}
+
+			if(self.user_curr_country == value.country.id){
+				self.subscription_country = [];
+				self.subscription_country.push(value.country);
+				self.subscription_option.country_id = value.country.id;
+				self.has_curr_country = Constants.TRUE;
 			}
 		});
 	};
@@ -1255,6 +1266,30 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.enlist_student.push(student);
 			self.enlist_student[self.enlist_student.indexOf(student)] = student;
 		}
+
+		self.checkStudentSubscriptionCountry();
+	};
+
+	self.checkStudentSubscriptionCountry = function(){
+		self.enable_student_list = Constants.TRUE;
+		//scan through each enlisted students
+
+		var error_student = [];
+		angular.forEach(self.enlist_student,function(value){
+
+			var student_user = value.user.curriculum_country;
+
+			if(!(student_user == Constants.FALSE
+				|| student_user > Constants.FALSE && student_user == self.subscription_invoice.country_id)){
+
+				self.enable_student_list = Constants.FALSE;
+				error_student.push(Constants.STUDENT_NOT_ALLOWED.replace("student_name",value.user.name));
+			}
+		});
+
+		self.errors = (error_student.length > Constants.FALSE) ? error_student :Constants.FALSE;
+
+		return Constants.TRUE;
 	};
 
 	self.studentExists = function(id){
@@ -1285,5 +1320,20 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		});
 	}
 
+	//get latest curriculum country
+	self.getCurriculumCountry = function(){
+
+		ManageParentPaymentService.getCurriculumCountry($scope.user.user.id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+
+			self.user_curr_country = response.data;
+
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
 
 }

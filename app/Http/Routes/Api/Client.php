@@ -33,6 +33,11 @@ Routes::group(['prefix' => '/client'], function()
 		Routes::resource('/teacher', 'Api\v1\ClientTeacherController',
 			['except' => ['create', 'edit']]);
 
+		Routes::get('/teacher/curriculum-country/{id}',[
+			'uses' => 'Api\v1\ClientTeacherController@getCurriculumCountry',
+			'as' => 'api.v1.client.teacher.curriculum-country'
+		]);
+
 		Routes::post('/change-password/{id}', [
 			'uses' => 'Api\v1\ClientPasswordController@changePassword',
 			'as' => 'api.v1.client.change-password'
@@ -149,6 +154,14 @@ Routes::group(['prefix' => '/client'], function()
 		Routes::post('/change-status/{id}', [
 			'uses' => 'Api\v1\AdminClientController@setClientStatus',
 			'as' => 'api.v1.client.change-status'
+		]);
+
+		/**
+		 * Get client details
+		 */
+		Routes::get('/admin/{id}',[
+			'uses' => 'Api\v1\AdminClientController@show',
+			'as' => 'api.v1.client.admin.show'
 		]);
 	});
 

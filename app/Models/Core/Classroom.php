@@ -32,6 +32,10 @@ class Classroom extends Model {
 		return $this->hasOne('FutureEd\Models\Core\Order', 'order_no', 'order_no');
 	}
 
+	public function invoice() {
+		return $this->hasOne('FutureEd\Models\Core\Invoice','order_no','order_no')->with('subscriptionPackage');
+	}
+
 	public function client() {
 
 		return $this->belongsTo('FutureEd\Models\Core\Client')->with('user');

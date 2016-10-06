@@ -308,6 +308,23 @@
 				</div>
 			</fieldset>
 			<fieldset>
+				<legend class="legend-name-mid">{!! trans('messages.subscription') !!}</legend>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">{!! trans('messages.curriculum_country') !!} <span class="required">*</span></label>
+					<div class="col-xs-5" ng-init="getCountries()">
+						<select name="country_id"
+								id="country"
+								class="form-control"
+								ng-model="student.record.user.curriculum_country"
+								ng-disabled="student.active_view"
+								ng-class="{ 'required-field' : student.fields['country_id'] }">
+							<option ng-selected="student.record.user.curriculum_country == futureed.FALSE" value="">{!! trans('messages.select_country') !!}</option>
+							<option ng-selected="student.record.user.curriculum_country == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
+						</select>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset>
 				<div class="form-group">
 					<div class="col-xs-9 col-xs-offset-1">
 						<div class="btn-container" ng-if="student.active_view">

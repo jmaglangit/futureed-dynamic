@@ -141,16 +141,19 @@ class AdminStudentController extends ApiController {
 	}
 
 	/**
-	* Update the specified resource in storage.
-	*
-	* @param  int  $id
-	* @return Response
-	*/
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int $id
+	 * @param AdminStudentRequest $request
+	 * @return Response
+	 */
 	public function update($id,AdminStudentRequest $request)
 	{
 		$data = $request->only('first_name','last_name', 'status','gender','birth_date','country','state','city','country_id','school_code','grade_code','points');
 		$user = $request->only('username','email', 'status');
-		$user_type = config('futureed.student');
+
+		//add curriculum
+		$user['curriculum_country'] = $request->only('user')['user']['curriculum_country'];
 
 		$user['name'] = $data['first_name'].' '.$data['last_name'];
 

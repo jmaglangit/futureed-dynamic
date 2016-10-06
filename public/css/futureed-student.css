@@ -792,7 +792,7 @@ hr {
 	margin: 20px 0px;
 	padding: 15px;
 	box-sizing: border-box;
-	font-family: 'Schoolbell', sans-serif;
+	font-family: 'WeblySleek UI Semibold', sans-serif;
 	width: 180px;
 }
 
@@ -2030,8 +2030,8 @@ a.payment-page-text {
 	padding: 5px 0px;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	white-space: nowrap;
-	height: 30px;
+	white-space: initial;
+	height: 40px;
 	font-size: 15px;
 	color: #055A7F;
 	max-width: 170px;
@@ -2161,8 +2161,8 @@ a.payment-page-text {
 		padding: 2px 0px;
 		text-overflow: ellipsis;
 		overflow: hidden;
-		white-space: nowrap;
-		height: 25px;
+		white-space: initial;
+		height: 30px;
 		font-size: 13px;
 		color: #055A7F;
 		max-width: 170px;
@@ -2249,7 +2249,7 @@ pre.dropdown-menu {
 	margin: 20px 0px;
 	padding: 15px;
 	box-sizing: border-box;
-	font-family: 'Schoolbell', sans-serif;
+	font-family: 'WeblySleek UI Semibold', sans-serif;
 	width: 180px;
 }
 

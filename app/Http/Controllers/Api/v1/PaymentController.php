@@ -6,6 +6,7 @@ use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
+use FutureEd\Models\Traits\LoggerTrait;
 use FutureEd\Services\MailServices;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -25,6 +26,8 @@ use PayPal\Rest\ApiContext;
 
 class PaymentController extends ApiController
 {
+    use LoggerTrait;
+
     private $_api_context;
     protected $invoice;
     protected $email;
@@ -161,14 +164,14 @@ class PaymentController extends ApiController
         try{
             $result = $payment->execute($execution, $this->_api_context);
 
-            if ($result->getState() == 'approved') { // payment made
+            if($result->getState() == config('paypal.approved')) { // payment made
                 //Update invoice status to paid.
                 $data['payment_status'] = config('futureed.paid');
                 $this->invoice->updateInvoice($invoice_id,$data);
                 $this->order->updateOrder($order_id,$data);
 
                 //send email
-                if(Session::has('paypal_payment_client_id')){
+                if(Session::has('paypal_payment_client_id') && Session::has('client') ){
                     $client_id = Session::get('paypal_payment_client_id');
                     $is_renewal = Session::get('is_renewal');
 
@@ -214,6 +217,8 @@ class PaymentController extends ApiController
             return Redirect::away($fail_callback_uri);
 
         }catch (\Exception $ex){
+
+            $this->errorLog($ex->getMessage());
 
             $fail_callback_uri = Session::get('fail_callback_uri');
             $fail_callback_uri = $fail_callback_uri.'?token='.Input::get('token');

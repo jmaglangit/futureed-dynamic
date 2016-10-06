@@ -31,10 +31,10 @@
 	        			{!! Form::text('username',''
 	        				, array(
 	        					'placeHolder' => trans('messages.username')
-	        					, 'ng-model' => 'client.record.username'
+	        					, 'ng-model' => 'client.record.user.username'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-	        					, 'ng-change' => 'client.checkUsername(client.record.username, futureed.CLIENT, futureed.TRUE)'
+	        					, 'ng-change' => 'client.checkUsername(client.record.user.username, futureed.CLIENT, futureed.TRUE)'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['username'] }"
 	        					, 'class' => 'form-control'
 	        				)
@@ -52,10 +52,10 @@
 	        			{!! Form::text('email',''
 	        				, array(
 	        					'placeHolder' => trans('email')
-	        					, 'ng-model' => 'client.record.email'
+	        					, 'ng-model' => 'client.record.user.email'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-	        					, 'ng-change' => 'client.checkEmail(client.record.email, futureed.CLIENT, futureed.TRUE)'
+	        					, 'ng-change' => 'client.checkEmail(client.record.user.email, futureed.CLIENT, futureed.TRUE)'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['email'] }"
 	        					, 'class' => 'form-control'
 	        				)
@@ -77,7 +77,7 @@
 	        						, false
 	        						, array(
 	        							'class' => 'field'
-	        							, 'ng-model' => 'client.record.status'
+	        							, 'ng-model' => 'client.record.user.status'
 	        							, 'ng-click' => 'client.clientChangeStatus()'
 	        						) 
 	        					) !!}
@@ -91,7 +91,7 @@
 	        						, false
 	        						, array(
 	        							'class' => 'field'
-	        							, 'ng-model' => 'client.record.status'
+	        							, 'ng-model' => 'client.record.user.status'
 	        							, 'ng-click' => 'client.clientChangeStatus()'
 	        						)
 	        					) !!}
@@ -101,15 +101,15 @@
 	        		</div>
 
 	        		<div ng-if="client.active_view">
-	        		<label class="col-xs-5" ng-if="client.record.status == 'Enabled'">
+	        		<label class="col-xs-5" ng-if="client.record.user.status == 'Enabled'">
 	        			<b class="success-icon">
-	        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! client.record.status !}
+	        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! client.record.user.status !}
 	        			</b>
 	        		</label>
 
-	        		<label class="col-xs-5" ng-if="client.record.status == 'Disabled'">
+	        		<label class="col-xs-5" ng-if="client.record.user.status == 'Disabled'">
 	        			<b class="error-icon">
-	        				<i class="margin-top-8 fa fa-ban"></i> {! client.record.status !}
+	        				<i class="margin-top-8 fa fa-ban"></i> {! client.record.user.status !}
 	        			</b>
 	        		</label>
 	        		</div>
@@ -180,7 +180,7 @@
 	        				, array(
 	        					'placeHolder' => trans('messages.school_name')
 	        					, 'ng-disabled' => 'true'
-	        					, 'ng-model' => 'client.record.school_name'
+	        					, 'ng-model' => 'client.record.school.name'
 	        					, 'ng-change' => "client.searchSchool('edit')"
                         		, 'ng-model-options' => "{ debounce : {'default' : 500} }"
                         		, 'ng-class' => "{ 'required-field' : client.fields['school_name'] }"
@@ -211,7 +211,7 @@
 	        			{!! Form::text('school_name',''
 	        				, array(
 	        					'placeHolder' => trans('messages.school_name')
-	        					, 'ng-model' => 'client.record.school_name'
+	        					, 'ng-model' => 'client.record.school.name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_name'] }"
 	        					, 'class' => 'form-control'
@@ -225,7 +225,7 @@
 	        			{!! Form::text('school_address',''
 	        				, array(
 	        					'placeHolder' => trans('messages.school_address')
-	        					, 'ng-model' => 'client.record.school_street_address'
+	        					, 'ng-model' => 'client.record.school.street_address'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_address'] }"
 	        					, 'class' => 'form-control'
@@ -239,7 +239,7 @@
 	        			{!! Form::text('school_city',''
 	        				, array(
 	        					'placeHolder' => trans('messages.school_city')
-	        					, 'ng-model' => 'client.record.school_city'
+	        					, 'ng-model' => 'client.record.school.city'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_city'] }"
 	        					, 'class' => 'form-control'
@@ -253,7 +253,7 @@
 	        			{!! Form::text('school_state',''
 	        				, array(
 	        					'placeHolder' => trans('messages.school_state')
-	        					, 'ng-model' => 'client.record.school_state'
+	        					, 'ng-model' => 'client.record.school.state'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_state'] }"
 	        					, 'class' => 'form-control'
@@ -267,7 +267,7 @@
 	        			{!! Form::text('school_zip',''
 	        				, array(
 	        					'placeHolder' => trans('messages.postal_code')
-	        					, 'ng-model' => 'client.record.school_zip'
+	        					, 'ng-model' => 'client.record.school.zip'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_zip'] }"
 	        					, 'class' => 'form-control'
@@ -278,9 +278,9 @@
 	        	<div class="form-group">
 	        		<label class="col-xs-3 control-label">{!! trans('messages.country') !!} <span class="required">*</span></label>
 				      <div class="col-xs-5" ng-init="getCountries()">
-				        <select  name="school_country_id" class="form-control" ng-class="{ 'required-field' : client.fields['school_country_id'] }" ng-disabled="client.active_view" ng-model="client.record.school_country_id">
-				          <option ng-selected="client.record.school_country_id == futureed.FALSE" value="">{!! trans('messages.select_country') !!}</option>
-				          <option ng-selected="client.record.school_country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
+				        <select  name="school_country_id" class="form-control" ng-class="{ 'required-field' : client.fields['school_country_id'] }" ng-disabled="client.active_view" ng-model="client.record.school.country_id">
+				          <option ng-selected="client.record.school.country_id == futureed.FALSE" value="">{!! trans('messages.select_country') !!}</option>
+				          <option ng-selected="client.record.school.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
@@ -295,7 +295,7 @@
 	        			{!! Form::text('school_contact_name',''
 	        				, array(
 	        					'placeHolder' => trans('messages.contact_person')
-	        					, 'ng-model' => 'client.record.school_contact_name'
+	        					, 'ng-model' => 'client.record.school.contact_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_contact_name'] }"
 	        					, 'class' => 'form-control'
@@ -309,7 +309,7 @@
 	        			{!! Form::text('school_contact_number',''
 	        				, array(
 	        					'placeHolder' => trans('messages.contact_number')
-	        					, 'ng-model' => 'client.record.school_contact_number'
+	        					, 'ng-model' => 'client.record.school.contact_number'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_contact_number'] }"
 	        					, 'class' => 'form-control'
@@ -391,6 +391,20 @@
 				      </div>
 	        	</div>
 	        </fieldset>
+			<fieldset>
+				<legend class="legend-name-mid">
+					{!! trans('messages.subscription') !!}
+				</legend>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">{!! trans('messages.curriculum_country') !!}</label>
+					<div class="col-xs-5" ng-init="getCountries()">
+						<select  name="school_country_id" class="form-control" ng-class="{ 'required-field' : client.fields['school_country_id'] }" ng-disabled="client.active_view" ng-model="client.record.user.curriculum_country">
+							<option ng-selected="client.record.user.curriculum_country == futureed.FALSE" value="">{!! trans('messages.select_country') !!}</option>
+							<option ng-selected="client.record.user.curriculum_country == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
+						</select>
+					</div>
+				</div>
+			</fieldset>
 	        <fieldset>
 		        <div class="btn-container">
 		        	<div ng-if="client.active_view">

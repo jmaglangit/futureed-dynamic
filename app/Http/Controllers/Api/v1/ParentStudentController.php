@@ -11,6 +11,7 @@ use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use FutureEd\Models\Repository\ParentStudent\ParentStudentRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\CodeGeneratorServices;
@@ -18,7 +19,9 @@ use FutureEd\Services\ErrorMessageServices as Error;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\InvoiceServices;
 use Carbon\Carbon;
+use FutureEd\Services\StudentServices;
 use FutureEd\Services\SubscriptionServices;
+use FutureEd\Services\UserServices;
 
 class ParentStudentController extends ApiController {
 
@@ -31,6 +34,7 @@ class ParentStudentController extends ApiController {
     protected $invoice_detail;
     protected $mail;
     protected $student;
+    protected $student_service;
     protected $user;
     protected $order;
     protected $parent_student;
@@ -38,6 +42,8 @@ class ParentStudentController extends ApiController {
     protected $order_details;
     protected $avatar;
     protected $subscription_service;
+    protected $subscription_package;
+    protected $user_service;
 
     public function __construct(
         StudentRepositoryInterface $student,
@@ -54,7 +60,10 @@ class ParentStudentController extends ApiController {
         InvoiceServices $invoice_service,
         OrderDetailRepositoryInterface $order_details,
         AvatarServices $avatarServices,
-        SubscriptionServices $subscriptionServices
+        SubscriptionServices $subscriptionServices,
+        SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface,
+        UserServices $userServices,
+        StudentServices $studentServices
     ){
 
         $this->student = $student;
@@ -72,6 +81,9 @@ class ParentStudentController extends ApiController {
         $this->order_details = $order_details;
 		$this->avatar = $avatarServices;
         $this->subscription_service = $subscriptionServices;
+        $this->subscription_package = $subscriptionPackageRepositoryInterface;
+        $this->user_service = $userServices;
+        $this->student_service = $studentServices;
     }
 
     public function addExistingStudent(ParentStudentRequest $request){
@@ -283,6 +295,10 @@ class ParentStudentController extends ApiController {
                 'date_started' => $order['order_date'],
                 'subscription_status' => config('futureed.active')
             ]);
+
+            //check students for null curriculum country
+            $this->student_service->checkStudentCurriculum($student['id'],$order['country_id']);
+
         }
 
         //insert invoice details
@@ -296,6 +312,12 @@ class ParentStudentController extends ApiController {
 
         //insert data to invoice_detail
         $this->invoice_detail->addInvoiceDetail($invoice_detail);
+
+        //get country on subscription package
+        $subscription = $this->subscription_package->getSubscriptionPackage($order['subscription_package_id']);
+
+        //updated user curr id
+        $this->user_service->updateCurriculumCountry($client->user_id,$subscription->country_id);
 
         return $this->respondWithData($inserted_invoice);
     }

@@ -52,6 +52,10 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.subscription_views = {};
 		self.subscription_continue = Constants.TRUE;
 		self.subscription_discount = Constants.FALSE;
+		self.user_curr_country = Constants.FALSE;
+
+		//get curriculum country
+		self.getCurriculumCountry();
 
 		switch(active) {
 			case Constants.ACTIVE_ADD 	:
@@ -563,10 +567,17 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				}
 			});
 
-			if(hasCountry == 0){
+			if(hasCountry == 0 && self.user_curr_country == Constants.FALSE){
 				self.subscription_country.push(value.country);
 			}else {
 				hasCountry = 0;
+			}
+
+			if(self.user_curr_country == value.country.id){
+				self.subscription_country = [];
+				self.subscription_country.push(value.country);
+				self.subscription_option.country_id = value.country.id;
+				self.has_curr_country = Constants.TRUE;
 			}
 		});
 	};
@@ -868,6 +879,23 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+
+	//get latest curriculum country
+	self.getCurriculumCountry = function(){
+
+		StudentPaymentService.getCurriculumCountry($scope.user.user.id).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+
+			self.user_curr_country = response.data;
+
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();

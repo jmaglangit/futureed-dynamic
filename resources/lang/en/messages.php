@@ -95,6 +95,7 @@ return [
 	'content' => 'Content',
 	'content_not_available' => 'Content Not Available',
 	'country' => 'Country',
+	'curriculum_country' => 'Curriculum Country',
 	'correct' => 'Correct!',
 	'created_by' => 'Created By',
 	'credentials_info' => 'Credentials Information',
@@ -1405,4 +1406,6 @@ return [
 	'vi' => 'Vietnamese',
 	'en' => 'English UK',
 
+	'payment_change_curriculum' => 'To change curriculum country, you need to email helpdesk@futureedgroup.com',
+	'payment_choose_curriculum' => 'Please note that once you select the curriculum country, you will not be able to change it. If you need to change it, please contact helpdesk@futureedgroup.com',
 ];

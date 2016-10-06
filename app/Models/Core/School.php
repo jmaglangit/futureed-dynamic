@@ -21,4 +21,12 @@ class School extends Model {
 		'created_by' => 1,
 		'updated_by' => 1
 	];
+
+	// relationships
+
+	public function principal()
+	{
+		return $this->belongsTo('FutureEd\Models\Core\Client','code','school_code')
+			->role(config('futureed.principal'))->with('user');
+	}
 }

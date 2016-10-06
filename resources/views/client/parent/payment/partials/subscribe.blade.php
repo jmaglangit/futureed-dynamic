@@ -77,7 +77,8 @@
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             <h3>{!! trans('messages.select_a_country') !!}</h3>
-
+                            <h5 ng-show="payment.has_curr_country">{!! trans('messages.payment_change_curriculum') !!}</h5>
+                            <h5 ng-show="!payment.has_curr_country">{!! trans('messages.payment_choose_curriculum') !!}</h5>
                             {{--Display subject options --}}
                             {{--TODO get subject list--}}
                             <div class="row">
@@ -94,6 +95,14 @@
                                     </p>
                                 </div>
                             </div>
+                            <ul class="list-inline pull-right">
+                                <li>
+                                    <button ng-model="button" ng-show="payment.has_curr_country"
+                                            type="button" class="btn btn-primary btn-info-full next-step"
+                                            ng-click="payment.subscriptionPackage(futureed.SUBSCRIPTION_SUBJECT)"
+                                            >{!! trans('messages.continue') !!}</button>
+                                </li>
+                            </ul>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
                             <h3>{!! trans('messages.select_a_subject') !!}</h3>
@@ -169,7 +178,7 @@
                             </div>
                             <ul class="list-inline pull-right">
                                 <li>
-                                    <button type="button" class="btn btn-primary btn-info-full" ng-disabled="payment.enlist_student == futureed.FALSE"
+                                    <button type="button" class="btn btn-primary btn-info-full" ng-disabled="!payment.enable_student_list"
                                             ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_STUDENTS)">{!! trans('messages.add_student') !!}</button>
                                 </li>
                             </ul>

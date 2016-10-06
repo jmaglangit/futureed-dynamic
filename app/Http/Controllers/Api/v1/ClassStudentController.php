@@ -1,20 +1,17 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\ClassStudentRequest;
-
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
-
+use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
 use FutureEd\Services\ClassroomServices;
-use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 
@@ -24,27 +21,36 @@ class ClassStudentController extends ApiController {
     protected $client;
     protected $mail;
     protected $student;
+	protected $student_service;
     protected $user;
     protected $classroom;
 	protected $classroom_services;
+	protected $invoices;
+	protected $subscription_package;
 
     public function __construct(
 		ClassStudentRepositoryInterface $classStudentRepositoryInterface,
 		ClientRepositoryInterface $clientRepositoryInterface,
 		UserServices $userServices,
 		MailServices $mailServices,
-		StudentServices $studentRepositoryInterface,
+		StudentServices $studentServices,
+		StudentRepositoryInterface $studentRepositoryInterface,
 		ClassroomRepositoryInterface $classroom,
-        	ClassroomServices $classroomServices
+		ClassroomServices $classroomServices,
+		InvoiceRepositoryInterface $invoiceRepositoryInterface,
+		SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface
 	)
 	{
 		$this->class_student = $classStudentRepositoryInterface;
 		$this->client = $clientRepositoryInterface;
 		$this->mail = $mailServices;
 		$this->student = $studentRepositoryInterface;
+		$this->student_service = $studentServices;
 		$this->user = $userServices;
 		$this->classroom = $classroom;
-        	$this->classroom_services = $classroomServices;
+		$this->classroom_services = $classroomServices;
+		$this->invoices = $invoiceRepositoryInterface;
+		$this->subscription_package = $subscriptionPackageRepositoryInterface;
     }
 
     /**
@@ -122,7 +128,7 @@ class ClassStudentController extends ApiController {
             ]);
 
             //add student, return status
-            $student_response = $this->student->addStudent($student);
+            $student_response = $this->student_service->addStudent($student);
 
         } else {
 
@@ -133,7 +139,7 @@ class ClassStudentController extends ApiController {
 
         if(isset($student_response['status'])){
 
-            $student_id = $this->student->getStudentId($user_response['id']);
+            $student_id = $this->student_service->getStudentId($user_response['id']);
 
             //add class student.
             $class_student['student_id'] = $student_id;
@@ -185,7 +191,7 @@ class ClassStudentController extends ApiController {
 			return $this->respondErrorMessage(2124);// Student does not exist.
 		}
 
-		$student_id = $this->student->getStudentId($check_email['user_id']);
+		$student_id = $this->student_service->getStudentId($check_email['user_id']);
 
 		//check classroom has not expired.
 		$classroom_status = $this->classroom_services->checkActiveClassroom($data['class_id']);
@@ -207,11 +213,24 @@ class ClassStudentController extends ApiController {
         $classroom = $this->classroom->getClassroom($data['class_id']);
 
         //check if student have a subscription with the same subject_id
-        $check_subscription = $this->classroom->getActiveSubscription($classroom['subject_id'], $student_id);
+		// and country
+        $check_subscription = $this->classroom->getActiveSubscription(
+			$classroom['subject_id'],
+			$student_id,
+			$classroom->invoice->subscriptionPackage->country_id
+		);
+
         if ($check_subscription) {
 
            return $this->respondErrorMessage(2037);
         }
+
+		//check student if on the same curriculum country
+		$student = $this->student->getStudent($student_id);
+		if($classroom->invoice->subscriptionPackage->country_id <> $student->user->curriculum_country){
+
+			return $this->respondErrorMessage(2078);
+		}
 
         //add to class student table.
         $data['student_id'] = $student_id;
@@ -231,8 +250,7 @@ class ClassStudentController extends ApiController {
 		//update school code of student.
 		$client_school_code = $this->client->getSchoolCode($data['client_id']);
 
-		$this->student->updateSchool($student_id, $client_school_code);
-
+		$this->student_service->updateSchool($student_id, $client_school_code);
 
 		$data['user_id'] = $check_email['user_id'];
 		$data['class_name'] = $classroom ? $classroom['name'] : "";
@@ -248,6 +266,7 @@ class ClassStudentController extends ApiController {
 
 	/**
 	 * Get Student Classes, with hierarchy class, module, current progress.
+	 * @param ClassStudentRequest $request
 	 * @return mixed
 	 */
 	public function studentCurrentClass(ClassStudentRequest $request){
@@ -280,6 +299,13 @@ class ClassStudentController extends ApiController {
 			$criteria['module_status'] = $request->get('module_status');
 		}
 
+		//Get country of module countries  from invoices
+		$classroom = $this->classroom->getClassroom($criteria['class_id']);
+
+		if(!empty($classroom)){
+			$criteria['country_id'] = $classroom->invoice->subscriptionPackage->country_id;
+		}
+
 		//Get Offset
 		if($request->get('offset')){
 			$criteria['offset'] = intval($request->get('offset'));
@@ -303,7 +329,6 @@ class ClassStudentController extends ApiController {
 	 * @param $id
 	 * @return mixed
 	 */
-
 	public function removeStudentClass(ClassStudentRequest $request, $id){
 
 		$data = $request->only('date_removed');
@@ -346,7 +371,6 @@ class ClassStudentController extends ApiController {
 	 *
 	 * @return mixed
 	 */
-
 	public function index(){
 
 		$criteria = [];
@@ -356,21 +380,21 @@ class ClassStudentController extends ApiController {
 			$criteria['student_id'] = Input::get('student_id');
 
 			//Generate Active/Inactive classes
-			$this->student->getCurrentClass($criteria['student_id']);
+			$this->student_service->getCurrentClass($criteria['student_id']);
+
+			//get curriculum country of the student
+			$student = $this->student->getStudent($criteria['student_id']);
+
+			if($student->user->curriculum_country > config('futureed.false')){
+				$criteria['country_id'] = $student->user->curriculum_country;
+			}
 		}
 
 		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
 
 		$limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
 
-
-
 		return $this->respondWithData($this->class_student->getClassStudents($criteria,$limit,$offset));
-
-
-
-
-
 	}
 
 }

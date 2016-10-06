@@ -160,7 +160,7 @@ class UserRepository implements UserRepositoryInterface {
         DB::beginTransaction();
 
         try {
-		
+
 			$user = User::find($id);
 			
 			$user->update($data);
@@ -1315,6 +1315,15 @@ class UserRepository implements UserRepositoryInterface {
         DB::commit();
 
         return $response;
+    }
+
+    /**
+     * Get Curriculum Country
+     * @param $user_id
+     */
+    public function getCurriculumCountry($user_id){
+
+        return User::find($user_id)->curriculum_country;
     }
 
 

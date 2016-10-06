@@ -11,6 +11,7 @@ function ManageTeacherModuleService($http){
 			, url 	: url + 'module?name=' + search.name
 				+ '&subject=' + search.subject
 				+ '&age_group_id=' + search.grade_id
+				+ '&country_id=' + search.country_id
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		})
@@ -30,5 +31,12 @@ function ManageTeacherModuleService($http){
 		})
 	}
 
+	//api/v1/client/teacher/curriculum-country/{id}
+	service.getCurriculumCountry = function(client_id){
+		return $http({
+			method	:	Constants.METHOD_GET,
+			url		:	url + 'client/teacher/curriculum-country/' + client_id
+		});
+	}
 	return service;
 }
