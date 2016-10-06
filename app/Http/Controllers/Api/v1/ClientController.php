@@ -4,6 +4,7 @@ use FutureEd\Http\Requests\Api\ClientRequest;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\ClientServices;
+use FutureEd\Services\MailServices;
 use FutureEd\Services\SchoolServices;
 use FutureEd\Services\UserServices;
 use Illuminate\Support\Facades\Input;
@@ -20,18 +21,22 @@ class ClientController extends ApiController {
 
 	protected $user;
 
+	protected $mail;
+
 	public function __construct(
 		ClientServices $clientServices,
 		UserServices $userServices,
 		SchoolServices $schoolServices,
 		ClientRepositoryInterface $clientRepositoryInterface,
-		UserRepositoryInterface $userRepositoryInterface
+		UserRepositoryInterface $userRepositoryInterface,
+		MailServices $mailServices
 	){
 		$this->client_service = $clientServices;
 		$this->user_service = $userServices;
 		$this->client = $clientRepositoryInterface;
 		$this->school_service = $schoolServices;
 		$this->user = $userRepositoryInterface;
+		$this->mail = $mailServices;
 	}
 
 	/**
