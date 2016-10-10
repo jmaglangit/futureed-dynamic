@@ -57,6 +57,7 @@ class UserRepository implements UserRepositoryInterface {
                 , 'password'
                 , 'name'
                 , 'user_type'
+                , 'curriculum_country'
                 , 'status')->where('id', $id);
 
 
