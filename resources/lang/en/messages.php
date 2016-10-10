@@ -1377,6 +1377,7 @@ return [
 
 	'you_earned' => 'You have earned',
 	'point_s' => 'point(s)',
+	'module_complete_message' => 'Congratulations! You have successfully completed this module.',
 
 	'translation' => 'Translation | Translations',
 	'translatable' => 'For Translation',
