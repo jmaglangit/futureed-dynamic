@@ -5,6 +5,7 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\StudentModuleRequest;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
 use FutureEd\Services\StudentModuleServices;
@@ -16,18 +17,21 @@ class StudentModuleController extends ApiController {
 	protected $student_module;
 	protected $question;
 	protected $student_module_services;
+	protected $student;
 
 
 	public function __construct(
 		ModuleRepositoryInterface $moduleRepositoryInterface,
 		StudentModuleRepositoryInterface $student_module,
 		QuestionRepositoryInterface $questionRepositoryInterface,
-		StudentModuleServices $studentModuleServices
+		StudentModuleServices $studentModuleServices,
+		StudentRepositoryInterface $studentRepositoryInterface
 	) {
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $student_module;
 		$this->question = $questionRepositoryInterface;
 		$this->student_module_services = $studentModuleServices;
+		$this->student = $studentRepositoryInterface;
 	}
 
 	/**
@@ -57,6 +61,11 @@ class StudentModuleController extends ApiController {
 		if(Input::get('student_id')){
 
 			$criteria['student_id'] = Input::get('student_id');
+
+			//get curriculum country if student_id exists
+			$student = $this->student->getStudent( Input::get('student_id'));
+
+			$criteria['country_id'] = $student->user->curriculum_country;
 		}
 
 		//for class_id
