@@ -128,7 +128,8 @@ class ModuleController extends ApiController {
 			//get student module
 			$criteria = [
 				'student_id' => $student_id,
-				'country_id' => $user->curriculum_country
+				'country_id' => $user->curriculum_country,
+				'module_id'	=> $id
 			];
 
 			//get current student module
