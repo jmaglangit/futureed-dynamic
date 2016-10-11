@@ -423,4 +423,25 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
         $response = $this->getStudentModule($id)->class_id;
         return $response;
     }
+
+	public function getStudentModuleCollection($criteria){
+
+		$student_module = new StudentModule();
+
+		$student_module = $student_module->with('classroom')->notFailed()->validClass();
+
+		if(isset($criteria['country_id'])){
+			$student_module = $student_module->curriculumCountry($criteria['country_id']);
+		}
+
+		if(isset($criteria['student_id'])){
+			$student_module = $student_module->studentId($criteria['student_id']);
+		}
+
+		if(isset($criteria['module_id'])){
+			$student_module = $student_module->moduleId($criteria['module_id']);
+		}
+
+		return $student_module->get();
+	}
 }

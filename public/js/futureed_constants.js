@@ -220,9 +220,9 @@ var Constants = {
 	/*Billing Information for invoice*/
 
 	, BILL_COMPANY				: "Futureed Pte. Ltd."
-	, BILL_STREET				: "545 Orchard Road, #03-24"
-	, BILL_ADDRESS				: "Far East Shopping Centre"
-	, BILL_COUNTRY				: "Singapore 238882"
+	, BILL_STREET				: "20 Maxwell Road #09-17"
+	, BILL_ADDRESS				: "Maxwell House"
+	, BILL_COUNTRY				: "Singapore 069113"
 	, CC_NAME					: "Futureed Pte Ltd"
 	, BANK_NAME					: "OCBC"
 	, BANK_ACCT_NO_SGD			: "582-066825 -001 SGD"
@@ -230,6 +230,10 @@ var Constants = {
 	, BANK_ADDRESS				: "65 Chulia Street, #01-00, OCBC Centre, Singapore 049513"
 	, BANK_CODE					: "7339"
 	, BRANCH_CODE				: "582 (SGD), 508 (USD)"
+	, SGD_BRANCH_CODE			: "582"
+	, SGD_ACCT_NO				: "066825001"
+	, USD_BRANCH_CODE			: "508"
+	, USD_ACCT_NO				: "011715-301"
 	, SWIFT_CODE				: "OCBCSGSG"
 
 	// attributes

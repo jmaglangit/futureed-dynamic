@@ -1,13 +1,11 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\StudentServices;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class ModuleController extends ApiController {
@@ -20,17 +18,21 @@ class ModuleController extends ApiController {
 
 	protected $user;
 
+	protected $student_module;
+
 	public function __construct(
 		ModuleRepositoryInterface $moduleRepositoryInterface,
 		StudentServices $studentServices,
 		StudentRepositoryInterface $studentRepositoryInterface,
-		UserRepositoryInterface $userRepositoryInterface
+		UserRepositoryInterface $userRepositoryInterface,
+		StudentModuleRepositoryInterface $studentModuleRepositoryInterface
 	){
 
 		$this->module = $moduleRepositoryInterface;
 		$this->student_services = $studentServices;
 		$this->student = $studentRepositoryInterface;
 		$this->user = $userRepositoryInterface;
+		$this->student_module = $studentModuleRepositoryInterface;
 
 	}
 
@@ -120,11 +122,31 @@ class ModuleController extends ApiController {
 
 				return $this->respondErrorMessage(2070);
 			}
-		}
 
-		return $this->respondWithData(
-			$this->module->viewModule($id)
-		);
+			$module = $this->module->viewModule($id);
+
+			//get student module
+			$criteria = [
+				'student_id' => $student_id,
+				'country_id' => $user->curriculum_country,
+				'module_id'	=> $id
+			];
+
+			//get current student module
+			$student_module = $this->student_module->getStudentModuleCollection($criteria);
+
+			//add valid student module data
+			$module->student_module_valid = (empty($student_module->toArray())) ? [] : $student_module;
+
+			return $this->respondWithData(
+				$module
+			);
+
+		} else {
+			return $this->respondWithData(
+				$this->module->viewModule($id)
+			);
+		}
 	}
 
 }

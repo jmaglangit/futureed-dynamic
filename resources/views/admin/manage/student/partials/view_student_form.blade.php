@@ -393,6 +393,7 @@
 					<tr>
 						<th>{!! trans_choice('messages.module', 1) !!}</th>
 						<th>{!! trans('messages.admin_age_group') !!}</th>
+						<th>{!! trans('messages.country') !!}</th>
 						<th ng-if="student.modules.length">{!! trans_choice('messages.action', 1) !!}</th>
 					</tr>
 				</thead>
@@ -401,6 +402,7 @@
 				<tr ng-repeat="module in student.modules">
 					<td>{! module.name !}</td>
 					<td>{! module.grade.country_grade.age_group.age !}</td>
+					<td>{! module.country.name !}</td>
 					<td ng-if="student.records.length">
 						<div class="row">
 							<div class="col-xs-12">
