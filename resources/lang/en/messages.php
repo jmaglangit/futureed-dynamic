@@ -43,7 +43,7 @@ return [
 	'bank_code' => 'Bank Code',
 	'bank_name' => 'Bank Name',
 	'sgd_branch_code' => 'SGD Account - Branch Code',
-	'usd_branch_code' => 'USD Account- Branch Code',
+	'usd_branch_code' => 'USD Account - Branch Code',
 	'account' => 'Account',
 	'swift_code' => 'SWIFT Code',
 	'begin' => 'Begin',
