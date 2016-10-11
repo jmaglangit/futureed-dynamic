@@ -53,6 +53,8 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 			$module = $module->leftJoin('module_countries','modules.id','=','module_countries.module_id');
 
+			$module = $module->with('country');
+
 			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 				$count = $module->count();
 
