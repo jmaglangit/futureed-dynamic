@@ -1,5 +1,3 @@
-﻿id,module_id,code,question_type,questions_text,questions_image,original_image_name,answer,question_order_text,question_graph_content,seq_no,difficulty,points_earned,translatable,status,created_by,updated_by,deleted_at,created_at,updated_at
-0,2,1000611,FIB,"David has 6 books. Bala has 11 books. How many books do they have altogether?",,,17,,,60,3,1,1,Enabled,1,1,NULL,"2016-09-20 13:46:37","2016-09-20 13:46:37"
 1,1,11001,MC,"How many balls are there in the picture?",6-basketballs.png,6-basketballs.png,,,,1,1,1,1,Enabled,1,1,NULL,"2016-09-20 13:44:24","2016-09-20 13:44:24"
 2,1,11002,MC,"How many pizzas are there in the picture?",3-pizzas.JPG,3-pizzas.JPG,,,,2,1,1,1,Enabled,1,1,NULL,"2016-09-20 13:44:24","2016-09-20 13:44:24"
 3,1,11003,MC,"How many baseballs are there in the picture?",8-baseball-bats.JPG,8-baseball-bats.JPG,,,,3,1,1,1,Enabled,1,1,NULL,"2016-09-20 13:44:24","2016-09-20 13:44:24"
@@ -13919,7 +13917,8 @@ When 1157 is divided by 5, which of these is the remainder?",,,,,,88,1,1,1,Enabl
 13675,159,216617,FIB,"Set the sentence with comma. 'If it's a nice day tomorrow let's go hiking.'",noun.jpg,noun.jpg,"If it's a nice day tomorrow, let's go hiking.",,,17,2,1,1,Enabled,1,1,NULL,"2016-09-20 13:45:51","2016-09-20 13:45:51"
 13676,159,216618,FIB,"Learn the basic usage of comma. Identify in this sentence. 'If I saved my allowance for a month I could buy a cat.'",noun.jpg,noun.jpg,"If I saved my allowance for a month, I could buy a cat.",,,17,3,1,1,Enabled,1,1,NULL,"2016-09-20 13:45:51","2016-09-20 13:45:51"
 13677,159,216619,FIB,"Set the sentence with proper punctuation mark, such as comma. 'Mean Alex Don Riz and Lina are in my homework group.'",noun.jpg,noun.jpg,"Mean Alex, Don, Riz and Lina are in my homework group.",,,17,1,1,1,Enabled,1,1,NULL,"2016-09-20 13:45:51","2016-09-20 13:45:51"
-13678,159,216620,FIB,"Write the proper punctuation mark.'If I don't get my homework done my teacher will be  mad.'",noun.jpg,noun.jpg,"If I don't get my homework done, my teacher will be mad.",,,18,2,1,1,Enabled,1,1,NULL,"2016-09-20 13:45:51","2016-09-20 13:45:51"
+13678,159,216620,FIB,"Write the proper punctuation mark.'If I don't get my homework done my teacher will be
+  mad.'",noun.jpg,noun.jpg,"If I don't get my homework done, my teacher will be mad.",,,18,2,1,1,Enabled,1,1,NULL,"2016-09-20 13:45:51","2016-09-20 13:45:51"
 13679,159,216621,FIB,"Correct the sentence through using proper comma. 'Later on we can go swimming.'",noun.jpg,noun.jpg,"Later on, we can go swimming.",,,18,3,1,1,Enabled,1,1,NULL,"2016-09-20 13:45:51","2016-09-20 13:45:51"
 13680,159,216622,FIB,"Make the sentence appropriately, but putting comma in it. 'Don't run so fast I can't catch up to you.'",noun.jpg,noun.jpg,"Don't run so fast, I can't catch up to you.",,,18,1,1,1,Enabled,1,1,NULL,"2016-09-20 13:45:51","2016-09-20 13:45:51"
 13681,159,216623,FIB,"Set the sentence with proper usage of punctuation mark, such as comma.'When the holidays arrive let's go to the fair together.",noun.jpg,noun.jpg,"When the holidays arrive, let's go to the fair together.",,,19,2,1,1,Enabled,1,1,NULL,"2016-09-20 13:45:51","2016-09-20 13:45:51"
@@ -20951,6 +20950,7 @@ My group (N) is going to the Grand Canyon(N).",,,43,1,1,1,Enabled,1,1,NULL,"2016
 20602,12,1000608,FIB,"Complete the number pattern:...,15,13,12,10,9,7,...,...,3",,,"16,6,4",,,13,1,1,1,Enabled,1,1,NULL,"2016-09-20 13:46:37","2016-09-20 13:46:37"
 20603,2,1000609,FIB,"Write addition equation using only 3 of the numbers where the sum is 30: 13,6,11,7",,,7+6=13,,,41,1,1,1,Enabled,1,1,NULL,"2016-09-20 13:46:37","2016-09-20 13:46:37"
 20604,3,1000610,FIB,"Write subtraction equation using only 3 of the numbers: 19,11,15,8",,,19-8=11,,,48,1,1,1,Enabled,1,1,NULL,"2016-09-20 13:46:37","2016-09-20 13:46:37"
+20605,2,1000611,FIB,"David has 6 books. Bala has 11 books. How many books do they have altogether?",,,17,,,60,3,1,1,Enabled,1,1,NULL,"2016-09-20 13:46:37","2016-09-20 13:46:37"
 20606,3,1000612,FIB,"There are 27 chairs. 8 chairs are sold. How many chairs are not sold?",,,19,,,53,3,1,1,Enabled,1,1,NULL,"2016-09-20 13:46:37","2016-09-20 13:46:37"
 20607,2,1000613,FIB,45+4=...,,,49,,,40,2,1,1,Enabled,1,1,NULL,"2016-09-20 13:46:37","2016-09-20 13:46:37"
 20608,3,1000614,FIB,57-31=...,,,26,,,48,2,1,1,Enabled,1,1,NULL,"2016-09-20 13:46:37","2016-09-20 13:46:37"
