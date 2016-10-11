@@ -817,12 +817,22 @@ hr {
 	padding: 5px;
 }
 
-.wiki-earn-message {
-	padding: 15px;
-	background-color: #d6d6d6;
+.wiki-earn-msg {
+	display: block;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+.wiki-earn-msg-block {
+	padding: 5px 15px 15px 15px;
+	background-color: #03658A;
 	border-radius: 7px;
-	color: #03658A;
-	font-size: 1.5em;
+}
+.wiki-earn-msg-block > .msg-point {
+	color: #F3D94F;
+}
+
+.wiki-earn-msg-block > .msg-congrats {
+	color: #e1e1e1;
 }
 
 .wiki-message {

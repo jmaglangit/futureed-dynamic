@@ -1035,14 +1035,17 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * Get modules listed on the classroom.
 	 * @param $student_id
 	 * @param $module_id
+	 * @param $country_id
 	 * @return bool
 	 */
-	public function getStudentValidModule($student_id, $module_id){
+	public function getStudentValidModule($student_id, $module_id, $country_id){
 
 		DB::beginTransaction();
 		try{
 
-			$response = ClassStudent::with('student_classroom_module')->module($module_id)->get();
+			$response = ClassStudent::with('student_classroom_module','classroom')
+				->subscriptionCountry($country_id)
+				->module($module_id)->get();
 		}catch (Exception $e){
 			DB::rollback();
 

@@ -462,7 +462,12 @@ class StudentServices
 	 */
 	public function checkStudentValidModule($student_id, $module_id){
 
-		$modules = $this->class_student->getStudentValidModule($student_id,$module_id);
+		//get student curriculum country
+		$student = $this->student->getStudent($student_id);
+
+		$country_id = $student->user->curriculum_country;
+
+		$modules = $this->class_student->getStudentValidModule($student_id,$module_id,$country_id);
 
 		if(empty($modules->toArray())){
 
