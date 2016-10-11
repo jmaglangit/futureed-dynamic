@@ -111,6 +111,10 @@ class Module extends Model
 		return $this->hasMany('FutureEd\Models\Core\ModuleCountry');
 	}
 
+	public function country(){
+		return $this->belongsTo('Webpatser\Countries\Countries');
+	}
+
 
 
 	//Scopes
