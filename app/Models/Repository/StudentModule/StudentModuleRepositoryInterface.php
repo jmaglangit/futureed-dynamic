@@ -30,4 +30,6 @@ interface StudentModuleRepositoryInterface
 
 	public function getStudentModuleClassId($id);
 
+	public function getStudentModuleCollection($criteria);
+
 }
