@@ -1,14 +1,10 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 
-use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Services\PasswordServices;
 use FutureEd\Services\UserServices;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class ClientLoginController extends ClientController {
@@ -139,9 +135,6 @@ class ClientLoginController extends ClientController {
             //curriculum country is parents'
             $curriculum_country = $client_detail->user->curriculum_country;
         }
-
-
-        $curriculum_country = 0;
 
         if(strcasecmp($client_detail['client_role'],config('futureed.teacher')) == 0){
 
