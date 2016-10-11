@@ -11,7 +11,10 @@ class QuestionAnswerTableSeeder extends Seeder
 	{
 		DB::table('question_answers')->truncate();
 
-		$this->dataLoader(['question_answers.csv', 'question_answers_two.csv']);
+		//id,module_id,question_id,code,label,answer_text,answer_image,original_image_name,
+		//correct_answer,point_equivalent,translatable,created_by,updated_by,deleted_at,created_at,updated_at
+
+		$this->dataLoader(['question_answers_1.csv']);
 
 		$this->addTranslation();
 	}
@@ -38,9 +41,9 @@ class QuestionAnswerTableSeeder extends Seeder
 							'label' => $row[4],
 							'answer_text' => $row[5],
 							'answer_image' => $row[6],
-							'original_image_name' => $row[6],
-							'correct_answer' => ($row['7']=='N' ? 'No' : 'Yes'),
-							'point_equivalent' => $row[8],
+							'original_image_name' => $row[7],
+							'correct_answer' => $row[8],
+							'point_equivalent' => $row[9],
 							'translatable' => 1,
 							'created_by' => 1,
 							'updated_by' => 1,
