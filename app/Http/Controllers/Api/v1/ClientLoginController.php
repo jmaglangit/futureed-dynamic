@@ -143,11 +143,11 @@ class ClientLoginController extends ClientController {
         $this->user_service->resetLoginAttempt($return['id']);
 
         return $this->respondWithData([
-			'id' => $client_detail['id'],
+            'id' => $client_detail['id'],
             'user' => $client_detail->user,
-			'first_name' => $client_detail['first_name'],
-			'last_name' => $client_detail['last_name'],
-			'country_id' => $country,
+            'first_name' => $client_detail['first_name'],
+            'last_name' => $client_detail['last_name'],
+            'country_id' => $country,
             'curriculum_country' => $curriculum_country
         ]);
     }
