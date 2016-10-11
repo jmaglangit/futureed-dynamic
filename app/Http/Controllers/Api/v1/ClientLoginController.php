@@ -1,14 +1,10 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 
-use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Services\PasswordServices;
 use FutureEd\Services\UserServices;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class ClientLoginController extends ClientController {
@@ -165,11 +161,11 @@ class ClientLoginController extends ClientController {
         $this->user_service->resetLoginAttempt($return['id']);
 
         return $this->respondWithData([
-            'id' => $client_detail['id'],
+			'id' => $client_detail['id'],
             'user' => $client_detail->user,
-            'first_name' => $client_detail['first_name'],
-            'last_name' => $client_detail['last_name'],
-            'country_id' => $country,
+			'first_name' => $client_detail['first_name'],
+			'last_name' => $client_detail['last_name'],
+			'country_id' => $country,
             'curriculum_country' => $curriculum_country
         ]);
     }
