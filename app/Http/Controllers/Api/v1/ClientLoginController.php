@@ -116,7 +116,6 @@ class ClientLoginController extends ClientController {
 			return $this->respondErrorMessage(2013);
 		}
 
-//        dd($client_detail->toArray());
 		// Determine return country id  by teacher and principal or parent
 		if(strcasecmp($client_detail['client_role'],config('futureed.teacher')) == 0
 			|| strcasecmp($client_detail['client_role'],config('futureed.principal')) == 0){
