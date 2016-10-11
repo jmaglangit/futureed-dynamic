@@ -438,6 +438,10 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 			$student_module = $student_module->studentId($criteria['student_id']);
 		}
 
+		if(isset($criteria['module_id'])){
+			$student_module = $student_module->moduleId($criteria['module_id']);
+		}
+
 		return $student_module->get();
 	}
 }
