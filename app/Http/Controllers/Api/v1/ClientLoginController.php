@@ -116,24 +116,39 @@ class ClientLoginController extends ClientController {
 			return $this->respondErrorMessage(2013);
 		}
 
-		// Determine return country id  by teacher and principal or parent
-		if(strcasecmp($client_detail['client_role'],config('futureed.teacher')) == 0
-			|| strcasecmp($client_detail['client_role'],config('futureed.principal')) == 0){
+        $curriculum_country = 0;
 
-			$country = $client_detail->school['country_id'];
-		} else {
+        if(strcasecmp($client_detail['client_role'],config('futureed.teacher')) == 0){
 
-			$country = $client_detail['country_id'];
-		}
+            $country = $client_detail->school['country_id'];
+
+            //curriculum country is principals'
+            $curriculum_country = $client_detail->school->principal->user->curriculum_country;
+
+        } elseif(strcasecmp($client_detail['client_role'],config('futureed.principal')) == 0){
+
+            $country = $client_detail->school['country_id'];
+
+            //curriculum country is principal'
+            $curriculum_country = $client_detail->user->curriculum_country;
+
+        } else {
+
+            $country = $client_detail['country_id'];
+
+            //curriculum country is parents'
+            $curriculum_country = $client_detail->user->curriculum_country;
+        }
 
         $this->user_service->resetLoginAttempt($return['id']);
 
         return $this->respondWithData([
-			'id' => $client_detail['id'],
+            'id' => $client_detail['id'],
             'user' => $client_detail->user,
-			'first_name' => $client_detail['first_name'],
-			'last_name' => $client_detail['last_name'],
-			'country_id' => $country,
+            'first_name' => $client_detail['first_name'],
+            'last_name' => $client_detail['last_name'],
+            'country_id' => $country,
+            'curriculum_country' => $curriculum_country
         ]);
     }
 
