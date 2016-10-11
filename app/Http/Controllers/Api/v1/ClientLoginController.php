@@ -140,14 +140,39 @@ class ClientLoginController extends ClientController {
             $curriculum_country = $client_detail->user->curriculum_country;
         }
 
+
+        $curriculum_country = 0;
+
+        if(strcasecmp($client_detail['client_role'],config('futureed.teacher')) == 0){
+
+            $country = $client_detail->school['country_id'];
+
+            //curriculum country is principals'
+            $curriculum_country = $client_detail->school->principal->user->curriculum_country;
+
+        } elseif(strcasecmp($client_detail['client_role'],config('futureed.principal')) == 0){
+
+            $country = $client_detail->school['country_id'];
+
+            //curriculum country is principal'
+            $curriculum_country = $client_detail->user->curriculum_country;
+
+        } else {
+
+            $country = $client_detail['country_id'];
+
+            //curriculum country is parents'
+            $curriculum_country = $client_detail->user->curriculum_country;
+        }
+
         $this->user_service->resetLoginAttempt($return['id']);
 
         return $this->respondWithData([
-            'id' => $client_detail['id'],
+			'id' => $client_detail['id'],
             'user' => $client_detail->user,
-            'first_name' => $client_detail['first_name'],
-            'last_name' => $client_detail['last_name'],
-            'country_id' => $country,
+			'first_name' => $client_detail['first_name'],
+			'last_name' => $client_detail['last_name'],
+			'country_id' => $country,
             'curriculum_country' => $curriculum_country
         ]);
     }
