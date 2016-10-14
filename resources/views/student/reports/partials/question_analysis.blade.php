@@ -8,24 +8,21 @@
 				]
 		) !!}
         <div class="form-group">
-            <div class="col-xs-4">
-                <span>Subject</span>
-                <select
-                        class="form-control">
+                <label class="col-xs-2 question-analysis-filter">{!! trans('messages.subject') !!}</label>
+                <div class="col-xs-2">
+                    <select class="form-control">
+                        <option value="">{!! trans('messages.select_subject') !!}</option>
+                    </select>
+                </div>
+            <label class="col-xs-2 question-analysis-filter">Subject</label>
+            <div class="col-xs-2">
+                <select class="form-control">
                     <option value="">Select Subject</option>
                 </select>
             </div>
-            <div class="col-xs-4">
-                <span>Subject</span>
-                <select
-                        class="form-control">
-                    <option value="">Select Subject</option>
-                </select>
-            </div>
-            <div class="col-xs-4">
-                <span>Subject</span>
-                <select
-                        class="form-control">
+            <label class="col-xs-2 question-analysis-filter">Subject</label>
+            <div class="col-xs-2">
+                <select class="form-control">
                     <option value="">Select Subject</option>
                 </select>
             </div>

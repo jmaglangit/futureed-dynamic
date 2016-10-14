@@ -2354,3 +2354,11 @@ pre.dropdown-menu {
 .cur_code_tabs {
 	margin-bottom: 18px;
 }
+
+.question-analysis-filter {
+	padding-top: 7px;
+	margin-bottom: 0;
+	text-align: right;
+	width: 14%;
+	color: #fff;
+}
