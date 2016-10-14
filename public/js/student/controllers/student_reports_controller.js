@@ -22,6 +22,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
         self.active_subject_area_heatmap = Constants.FALSE;
         self.student_report_export = Constants.FALSE;
         self.active_lsp_download = Constants.FALSE;
+        self.active_question_analysis = Constants.FALSE;
 
 
         self.searchDefaults();
@@ -47,9 +48,14 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                 self.listSubjectAreaSubject();
                 break;
 
-            case Constants.SUBJECT_AREA_HEATMAP            :
+            case Constants.SUBJECT_AREA_HEATMAP    :
                 self.active_subject_area_heatmap = Constants.TRUE;
                 self.listSubjectAreaHeatmapSubject();
+                break;
+
+            case Constants.QUESTION_ANALYSIS       :
+                console.log(Constants.QUESTION_ANALYSIS);
+                self.active_question_analysis = Constants.TRUE;
                 break;
 
             default                                :
