@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services\ImageServices;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class StudentReportRestController extends ReportController {
 
@@ -17,6 +18,7 @@ class StudentReportRestController extends ReportController {
 	/**
 	 * StudentReportRestController constructor.
 	 * @param StudentReportController $studentReportController
+	 * @param ImageServices $imageServices
 	 */
 	public function __construct(
 		StudentReportController $studentReportController,
@@ -107,6 +109,51 @@ class StudentReportRestController extends ReportController {
 			$report['column_header'],
 			$report['rows']
 		);
+	}
+
+	/**
+	 * Get student question report.
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentQuestionReport(){
+
+		$criteria = [];
+
+		//isset student
+		if(Input::get('student_id')){
+			$criteria['student_id'] = Input::get('student_id');
+		} else {
+			return $this->respond(
+				[
+					'status' => $this->getStatus(),
+					'errors' => str_replace(':attribute','Student',trans('errors.'. 1003))
+				]
+			);
+		}
+
+		//isset class
+		if(Input::get('class_id')){
+			$criteria['class_id'] = Input::get('class_id');
+		}
+
+		//isset subject
+		if(Input::get('subject_id')){
+			$criteria['subject_id'] = Input::get('subject_id');
+		}
+
+		//isset level
+		if(Input::get('grade_id')){
+			$criteria['grade_id'] = Input::get('grade_id');
+		}
+
+		//isset module
+		if(Input::get('module_id')){
+			$criteria['module_id'] = Input::get('module_id');
+		}
+
+		$report = $this->student_report->getStudentQuestionReport($criteria);
+
+		return $this->respondReport($report);
 	}
 
 }
