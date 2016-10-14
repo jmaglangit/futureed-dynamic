@@ -15,6 +15,8 @@ class QuestionAnswerTableSeeder extends Seeder
 		//correct_answer,point_equivalent,translatable,created_by,updated_by,deleted_at,created_at,updated_at
 
 		$this->dataLoader(['question_answers_1.csv']);
+		$this->dataLoader(['question_answers_2.csv']);
+		$this->dataLoader(['question_answers_3.csv']);
 
 		$this->addTranslation();
 	}
