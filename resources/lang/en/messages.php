@@ -307,6 +307,7 @@ return [
 	'proceed_to_next_questions' => 'Proceed to next Question',
 	'progress' => 'Progress',
 	'question' => 'Question',
+	'question_analysis' => 'Question Analysis',
 	'quick' => 'Quick',
 	'quick_stats' => 'Quick Stats',
 	'rate' => 'Rate',
