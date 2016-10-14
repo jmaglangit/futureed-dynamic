@@ -12,9 +12,11 @@ class AnswerExplanationTableSeeder extends Seeder
         DB::table('answer_explanations')->truncate();
 
         $this->dataLoader([
-            'answer_explanations.csv',
-            'answer_explanations_two.csv',
-            'answer_explanations_three.csv'
+            'answer_explanations_1.csv',
+            'answer_explanations_2.csv',
+            'answer_explanations_3.csv',
+            'answer_explanations_4.csv',
+            'answer_explanations_5.csv'
         ]);
 
         //initialize translation
