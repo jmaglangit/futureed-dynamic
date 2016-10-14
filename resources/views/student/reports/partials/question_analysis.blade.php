@@ -14,16 +14,16 @@
                         <option value="">{!! trans('messages.select_subject') !!}</option>
                     </select>
                 </div>
-            <label class="col-xs-2 question-analysis-filter">Subject</label>
+            <label class="col-xs-2 question-analysis-filter">{!! trans('messages.school_level') !!}</label>
             <div class="col-xs-2">
                 <select class="form-control">
-                    <option value="">Select Subject</option>
+                    <option value="">{!! trans('messages.select_level') !!}</option>
                 </select>
             </div>
-            <label class="col-xs-2 question-analysis-filter">Subject</label>
+            <label class="col-xs-2 question-analysis-filter">{!! trans('messages.module') !!}</label>
             <div class="col-xs-2">
                 <select class="form-control">
-                    <option value="">Select Subject</option>
+                    <option value="">{!! trans('messages.select_module') !!}</option>
                 </select>
             </div>
         </div>
@@ -31,7 +31,55 @@
     </div>
 
     <div class="list-container" ng-cloak>
-        <table id="tip-list" class="table table-striped table-bordered">
+        <table id="tip-list" class="table table-striped">
+            <thead>
+            <tr class="odd">
+                <th>{!! trans('messages.question') !!}</th>
+                <th>{!! trans('messages.answer') !!}</th>
+                <th>{!! trans('messages.tips') !!}</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="odd">
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                    <td valign="top" colspan="7">
+                        lol here...
+                    </td>
+                </tr>
+            </tbody>
 
         </table>
     </div>

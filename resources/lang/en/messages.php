@@ -363,6 +363,7 @@ return [
 	'select_help_request_status' => '-- Select Help Request Status --',
 	'select_learning_style' => '-- Select Learning Style --',
 	'select_level' => '-- Select Level --',
+	'select_module' => '-- Select Module --',
 	'select_rate' => '-- Select Rate --',
 	'select_role' => '-- Select Role --',
 	'select_status' => '-- Select Status --',
