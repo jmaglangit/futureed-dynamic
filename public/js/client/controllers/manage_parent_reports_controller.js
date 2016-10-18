@@ -22,6 +22,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.active_current_learning = Constants.FALSE;
 		self.active_subject_area = Constants.FALSE;
 		self.active_subject_area_heatmap = Constants.FALSE;
+		self.active_question_analysis = Constants.FALSE;
 
 		self.searchDefaults();
 
@@ -49,6 +50,12 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 			case Constants.SUBJECT_AREA_HEATMAP	:
 				self.active_subject_area_heatmap = Constants.TRUE;
 				self.listSubjectAreaHeatmapSubject();
+				break;
+
+			case Constants.QUESTION_ANALYSIS	:
+				self.listSubjects();
+				$scope.getGradeLevel(self.curriculum_country);
+				self.active_question_analysis = Constants.TRUE;
 				break;
 
 			default                                :
@@ -361,13 +368,14 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 									{
 										id: self.student_list[i].id,
 										first_name: self.student_list[i].first_name,
-										last_name: self.student_list[i].last_name
+										last_name: self.student_list[i].last_name,
+										curriculum_country: self.student_list[i].user.curriculum_country
 									}
 								);
 							}
 						}
 						self.enabled_lists = list;
-						self.changeStudentId(self.enabled_lists[0].id);
+						self.changeStudentId(self.enabled_lists[0]);
 					}
 				}
 			}
@@ -378,8 +386,58 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		})
 	}
 
-	self.changeStudentId = function(student_id){
-		self.student_id = (self.student_id) ? self.student_id : student_id;
+	self.changeStudentId = function(student){
+		self.student_id = (self.student_id) ? self.student_id : student.id;
+		self.curriculum_country = (self.curriculum_country) ? self.curriculum_country : student.curriculum_country;
 		self.setActive(Constants.REPORT_CARD);
+	}
+
+	self.getQuestionAnalysis = function(){
+		self.question_analysis = Constants.FALSE;
+
+		//initialize parameters for report
+		self.question_analysis_param = {
+			student_id  :   self.student_id,
+			subject_id  :   self.search.subject_id,
+			grade_id    :   self.search.grade_id,
+			module_id   :   self.search.module_id
+		};
+
+		//get subject class
+		$scope.ui_block;
+		ManageParentReportsService.questionAnalysis(self.question_analysis_param).success(function (response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					var data = response.data;
+					self.question_analysis = data;
+					self.student_question_analysis_export = Constants.TRUE
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//get list of modules by subject and level
+	self.getModuleList = function(){
+
+		//get country
+		//if module and grade is not null get module list
+		if(self.search.subject_id > Constants.FALSE && self.search.grade_id > Constants.FALSE){
+
+			//get module list
+			$scope.getGradeCountry(
+				self.curriculum_country,
+				Constants.EMPTY_STR,
+				self.search.grade_id,
+				self.search.subject_id
+			);
+		} else {
+			self.student_question_analysis_export = Constants.FALSE;
+		}
 	}
 }
