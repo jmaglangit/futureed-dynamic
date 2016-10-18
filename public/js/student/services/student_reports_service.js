@@ -51,6 +51,23 @@ function StudentReportsService($http) {
 		});
 	}
 
+	//student question analysis
+	//api/report/student-progress/question-answer-report
+	//student_id:1
+	//subject_id:1
+	//grade_id:1
+	//module_id:1
+	api.questionAnalysis = function(data){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'report/student-progress/question-answer-report'
+						+ '?student_id=' + data.student_id
+						+ '&subject_id=' + data.subject_id
+						+ '&grade_id='   + data.grade_id
+						+ '&module_id='  + data.module_id
+		});
+	}
+
 	api.getIAssessDownloadLinkReport = function (student_id) {
 		return $http({
 			method	: Constants.METHOD_GET
