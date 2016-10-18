@@ -500,7 +500,7 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 				->leftJoin('questions as q','q.id','=','sma.question_id')
 				->leftJoin('answer_explanations as ae','ae.question_id','=','q.id')
 				->where('mc.country_id','=',DB::raw("'". $criteria['country_id'] ."'"))
-				->where('student_modules.class_id','=',DB::raw("'". $criteria['class_id']."'"))
+				->whereIn('student_modules.class_id',$criteria['class_id'])
 				->where('student_modules.subject_id','=',DB::raw("'". $criteria['subject_id']."'"))
 				->where('mc.grade_id','=',DB::raw("'". $criteria['grade_id']."'"))
 				->where('student_modules.module_id','=',DB::raw("'". $criteria['module_id']."'"))
@@ -510,6 +510,7 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		} catch(\Exception $e){
 			DB::rollback();
 
+			dd($e->getMessage());
 			$this->errorLog($e->getMessage());
 
 			return false;
