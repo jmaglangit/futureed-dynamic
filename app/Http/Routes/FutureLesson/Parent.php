@@ -194,6 +194,11 @@
 			Routes::get('/current_learning', [
 				'as' => 'client.parent.partials.reports_current_learning',
 				'uses' => $reports_controller.'@current_learning'
-			]);			
+			]);
+
+			Routes::get('/student-question-analysis',[
+				'as' => 'client.parent.partials.reports_question_analysis',
+				'uses' => $reports_controller . '@question_analysis'
+			]);
 		});
 	});

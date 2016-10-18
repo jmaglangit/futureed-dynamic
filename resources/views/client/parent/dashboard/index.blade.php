@@ -47,16 +47,31 @@
 
 	<div ng-if="reports.active_report" class="reports">
 		<h3>{!! trans('messages.student_report') !!}</h3>
-			<div class="student-search">
-				<select ng-model="reports.student_id"
-					ng-change="reports.changeStudentId()"
-					class="form-control">
-				<option ng-repeat="student in reports.enabled_lists"
-						ng-value="student.id"
-						ng-selected="reports.student_id == student.id"
-						>{! student.first_name + ' ' +  student.last_name !}
-				</option>
-			</select>
+
+		<div class="student-search container">
+			<div class="form-group">
+				<div class="col-xs-2"></div>
+				<div class="col-xs-4">
+					<select ng-model="reports.student_id"
+							ng-change="reports.changeStudentId()"
+							class="form-control">
+						<option ng-repeat="student in reports.enabled_lists"
+								ng-value="student.id"
+								ng-selected="reports.student_id == student.id"
+								>{! student.first_name + ' ' +  student.last_name !}
+						</option>
+					</select>
+				</div>
+				<div class="col-xs-2">
+					<div class="btn-group pull-right export-buttons" ng-if="reports.student_question_analysis_export">
+						<button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i> {!! trans('messages.export') !!} </button>
+
+						<ul class="dropdown-menu">
+							<li><a href="{! reports.student_question_analysis_export_link !}">PDF</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div>
@@ -91,6 +106,12 @@
 						 {!! trans('messages.current_learning') !!}
 					</a>
 				</li>
+				<li role="presentation" ng-class="{ 'active' : reports.active_question_analysis }">
+					<a href="javascript:void(0)" ng-click="reports.setActive(futureed.QUESTION_ANALYSIS)">
+						<i class="fa fa-bar-chart"></i>
+						{!! trans('messages.question_analysis') !!}
+					</a>
+				</li>
 			</ul>
 
 			
@@ -99,6 +120,7 @@
 			<div template-directive template-url="{!! route('client.parent.partials.reports_subject_area') !!}"></div>
 			<div template-directive template-url="{!! route('client.parent.partials.reports_subject_area_heatmap') !!}"></div>
 			<div template-directive template-url="{!! route('client.parent.partials.reports_current_learning') !!}"></div>
+			<div template-directive template-url="{!! route('client.parent.partials.reports_question_analysis') !!}"></div>
 		</div>	
 	</div>	
 </div>

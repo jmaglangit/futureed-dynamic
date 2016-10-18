@@ -59,6 +59,18 @@ function ManageParentReportsService($http) {
 			+ '&offset=0'
 		})
 	}
+
+	//api/report/student-progress/question-answer-report
+	api.questionAnalysis = function(data){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'report/student-progress/question-answer-report'
+			+ '?student_id=' + data.student_id
+			+ '&subject_id=' + data.subject_id
+			+ '&grade_id='   + data.grade_id
+			+ '&module_id='  + data.module_id
+		});
+	}
 	
 	return api;
 }
