@@ -23,6 +23,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
         self.student_report_export = Constants.FALSE;
         self.active_lsp_download = Constants.FALSE;
         self.active_question_analysis = Constants.FALSE;
+        self.student_question_analysis_export = Constants.FALSE;
 
 
         self.searchDefaults();
@@ -54,12 +55,13 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                 break;
 
             case Constants.QUESTION_ANALYSIS       :
-                console.log(Constants.QUESTION_ANALYSIS);
                 self.active_question_analysis = Constants.TRUE;
                 break;
 
             default                                :
                 self.active_report_card = Constants.TRUE;
+                $scope.getGradeLevel($scope.user.user.curriculum_country);
+                self.listSubjects();
                 self.reportCard();
                 break;
         }
@@ -360,5 +362,63 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
             self.errors = $scope.internalError();
             $scope.ui_unblock();
         });
+    }
+
+
+    //get student question analysis
+    self.getQuestionAnalysis = function(){
+        self.question_analysis = Constants.FALSE;
+
+        //initialize parameters for report
+        self.question_analysis_param = {
+            student_id  :   $scope.user.id,
+            subject_id  :   self.search.subject_id,
+            grade_id    :   self.search.grade_id,
+            module_id   :   self.search.module_id
+        };
+
+        //get subject class
+        $scope.ui_block;
+        StudentReportsService.questionAnalysis(self.question_analysis_param).success(function (response){
+            if(angular.equals(response.status, Constants.STATUS_OK)){
+                if(response.errors){
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if(response.data){
+                    var data = response.data;
+                    self.question_analysis = data;
+                    self.student_question_analysis_export = Constants.TRUE
+
+                    //setup downloadable PDF link
+                    self.student_question_analysis_export_link = '/api/report/student-progress/question-analysis'
+                        + '?student_id=' + self.question_analysis_param.student_id
+                        + '&subject_id=' + self.question_analysis_param.subject_id
+                        + '&grade_id='   + self.question_analysis_param.grade_id
+                        + '&module_id='  + self.question_analysis_param.module_id;
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
+    //get list of modules by subject and level
+    self.getModuleList = function(){
+
+        //get country
+        //if module and grade is not null get module list
+        if(self.search.subject_id > Constants.FALSE && self.search.grade_id > Constants.FALSE){
+
+            //get module list
+            $scope.getGradeCountry(
+                $scope.user.user.curriculum_country,
+                Constants.EMPTY_STR,
+                self.search.grade_id,
+                self.search.subject_id
+            );
+        } else {
+            self.student_question_analysis_export = Constants.FALSE;
+        }
     }
 }
