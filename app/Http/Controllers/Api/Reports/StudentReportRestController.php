@@ -131,11 +131,6 @@ class StudentReportRestController extends ReportController {
 			);
 		}
 
-		//isset class
-		if(Input::get('class_id')){
-			$criteria['class_id'] = Input::get('class_id');
-		}
-
 		//isset subject
 		if(Input::get('subject_id')){
 			$criteria['subject_id'] = Input::get('subject_id');
