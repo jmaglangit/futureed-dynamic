@@ -23,6 +23,8 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.active_subject_area = Constants.FALSE;
 		self.active_subject_area_heatmap = Constants.FALSE;
 		self.active_question_analysis = Constants.FALSE;
+		self.student_question_analysis_export = Constants.FALSE;
+		self.question_analysis = Constants.FALSE;
 
 		self.searchDefaults();
 
@@ -413,6 +415,13 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 					var data = response.data;
 					self.question_analysis = data;
 					self.student_question_analysis_export = Constants.TRUE
+
+					//setup downloadable PDF link
+					self.student_question_analysis_export_link = '/api/report/student-progress/question-analysis'
+						+ '?student_id=' + self.question_analysis_param.student_id
+						+ '&subject_id=' + self.question_analysis_param.subject_id
+						+ '&grade_id='   + self.question_analysis_param.grade_id
+						+ '&module_id='  + self.question_analysis_param.module_id;
 				}
 			}
 			$scope.ui_unblock();
