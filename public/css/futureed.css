@@ -1825,3 +1825,20 @@ span.round-tab:hover {
 .question-analysis-text{
 	white-space: inherit !important;
 }
+
+/*export buttons*/
+.export-buttons button {
+	border-radius:3px !important;
+}
+.export-buttons .dropdown-menu{
+	text-align:center;
+	min-width: 100px;
+}
+
+.question-analysis-filter {
+	padding-top: 7px;
+	margin-bottom: 0;
+	text-align: right;
+	width: 14%;
+	color: #fff;
+}
