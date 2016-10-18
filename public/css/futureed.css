@@ -1823,5 +1823,5 @@ span.round-tab:hover {
 
 
 .question-analysis-text{
-	white-space: inherit;
+	white-space: inherit !important;
 }
