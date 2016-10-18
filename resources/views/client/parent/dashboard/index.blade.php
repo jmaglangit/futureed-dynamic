@@ -91,6 +91,12 @@
 						 {!! trans('messages.current_learning') !!}
 					</a>
 				</li>
+				<li role="presentation" ng-class="{ 'active' : reports.active_question_analysis }">
+					<a href="javascript:void(0)" ng-click="reports.setActive(futureed.QUESTION_ANALYSIS)">
+						<i class="fa fa-bar-chart"></i>
+						{!! trans('messages.question_analysis') !!}
+					</a>
+				</li>
 			</ul>
 
 			
@@ -99,6 +105,7 @@
 			<div template-directive template-url="{!! route('client.parent.partials.reports_subject_area') !!}"></div>
 			<div template-directive template-url="{!! route('client.parent.partials.reports_subject_area_heatmap') !!}"></div>
 			<div template-directive template-url="{!! route('client.parent.partials.reports_current_learning') !!}"></div>
+			<div template-directive template-url="{!! route('client.parent.partials.reports_question_analysis') !!}"></div>
 		</div>	
 	</div>	
 </div>
