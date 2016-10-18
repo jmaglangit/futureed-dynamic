@@ -1059,5 +1059,18 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		return $response;
 	}
 
+	//get current class by student with current country
+	public function getStudentCurrentClassCountry($student_id,$country_id){
+
+		$class_student = ClassStudent::with('classroom')
+			->isDateRemovedNull()
+			->paidOrder()
+			->active()
+			->studentId($student_id)
+			->subscriptionCountry($country_id);
+
+		return $class_student->get();
+	}
+
 
 }
