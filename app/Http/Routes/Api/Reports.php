@@ -98,6 +98,11 @@ Routes::group([
 			'as' => 'api.report.student.progress.current-learning.export'
 	]);
 
+	Routes::get('/student-progress/question-analysis',[
+		'uses' => 'Api\Reports\StudentReportExportController@exportStudentQuestionAnalysis',
+		'as' => 'api.report.student.progress.question-analysis'
+	]);
+
 	/**
 	 * School export
 	 */
