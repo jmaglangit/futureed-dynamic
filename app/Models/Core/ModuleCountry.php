@@ -42,4 +42,11 @@ class ModuleCountry extends Model{
 		return $this->belongsTo('Webpatser\Countries\Countries');
 	}
 
+	//scope
+	public function scopeSubjectId($query,$subject_id){
+		return $query->whereHas('module',function($query) use ($subject_id){
+			$query->where('subject_id',$subject_id);
+		});
+	}
+
 }

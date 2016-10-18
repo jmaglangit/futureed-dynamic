@@ -6,9 +6,9 @@ Routes::group([
 ], function () {
 
 	Routes::group([
-		'middleware' => ['api_user', 'api_after'],
-		'permission' => ['admin', 'client', 'student'],
-		'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
+//		'middleware' => ['api_user', 'api_after'],
+//		'permission' => ['admin', 'client', 'student'],
+//		'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
 	],function(){
 
 
@@ -38,6 +38,11 @@ Routes::group([
 		Routes::get('/student-progress/current-learning/{student_id}/{subject_id}',[
 			'uses' => 'Api\Reports\StudentReportRestController@studentCurrentLearning',
 			'as' => 'api.report.student.progress.current-learning'
+		]);
+
+		Routes::get('/student-progress/question-answer-report',[
+			'uses' => 'Api\Reports\StudentReportRestController@getStudentQuestionReport',
+			'as' => 'api.report.student.progress.question.answer'
 		]);
 
 
@@ -91,6 +96,11 @@ Routes::group([
 	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}/{file_type}',[
 			'uses' => 'Api\Reports\StudentReportExportController@studentCurrentLearning',
 			'as' => 'api.report.student.progress.current-learning.export'
+	]);
+
+	Routes::get('/student-progress/question-analysis',[
+		'uses' => 'Api\Reports\StudentReportExportController@exportStudentQuestionAnalysis',
+		'as' => 'api.report.student.progress.question-analysis'
 	]);
 
 	/**

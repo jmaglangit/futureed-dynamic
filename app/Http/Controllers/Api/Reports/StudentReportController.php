@@ -514,4 +514,38 @@ class StudentReportController extends ReportController {
 	}
 
 
+	/**
+	 * Get student question list report
+	 * @param array $criteria
+	 */
+	public function getStudentQuestionReport($criteria = []){
+
+		//student get country id
+		$student = $this->student->getStudent($criteria['student_id']);
+
+		$criteria['country_id'] = $student->user->curriculum_country;
+
+		$this->student_service->getCurrentClass($criteria['student_id']);
+
+		//get current class id
+		$current_class = $this->class_student->getStudentCurrentClassCountry(
+			$criteria['student_id'],
+			$criteria['country_id']
+		);
+
+		$class_ids = [];
+
+		foreach($current_class as $class){
+			array_push($class_ids,$class->class_id);
+		}
+
+		$criteria['class_id'] = $class_ids;
+
+
+		$question_list = $this->student_module->getStudentQuestionsReport($criteria);
+
+		return $question_list;
+	}
+
+
 }

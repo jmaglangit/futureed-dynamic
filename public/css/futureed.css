@@ -1820,3 +1820,8 @@ span.round-tab:hover {
 .answer-explanation {
 	margin: 0px 50px 0px 50px;
 }
+
+
+.question-analysis-text{
+	white-space: inherit;
+}

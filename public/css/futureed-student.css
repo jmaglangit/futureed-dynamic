@@ -656,7 +656,7 @@ img.drawer-button {
 .nav-pills > li {
 	min-width: 100px;
 	text-align: center;
-	font-size: 14px;
+	font-size: 11px;
 }
 
 .active > .pill-grey, .active > .pill-grey:hover, .pill-grey:hover {
@@ -1721,7 +1721,7 @@ hr {
 }
 
 .reports .nav-student li {
-	width: 186px;
+	width: 155px;
 }
 
 .reports .nav-student li a {
@@ -2353,4 +2353,12 @@ pre.dropdown-menu {
 
 .cur_code_tabs {
 	margin-bottom: 18px;
+}
+
+.question-analysis-filter {
+	padding-top: 7px;
+	margin-bottom: 0;
+	text-align: right;
+	width: 14%;
+	color: #fff;
 }

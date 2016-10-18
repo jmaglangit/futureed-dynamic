@@ -469,6 +469,11 @@
 						'as' => 'reports.partials.progress_bar'
 						, 'uses' => 'FutureLesson\Student\ReportsController@progress_bar'
 					]);
+
+					Routes::get('/question_analysis',[
+						'as' => 'reports.partials.question_analysis'
+						, 'uses' => 'FutureLesson\Student\ReportsController@question_analysis'
+					]);
 				});
 
 		Routes::group(['prefix' => 'partials'], function() {

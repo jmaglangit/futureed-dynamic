@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Services\ImageServices;
 use FutureEd\Services\ReportServices;
+use Illuminate\Support\Facades\Input;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpSpec\Exception\Exception;
 class StudentReportExportController extends ReportController {
@@ -502,5 +503,48 @@ class StudentReportExportController extends ReportController {
 		}
 
 		return $data;
+	}
+
+	public function exportStudentQuestionAnalysis(){
+
+		$criteria = [];
+
+		//isset student
+		if(Input::get('student_id')){
+			$criteria['student_id'] = Input::get('student_id');
+		} else {
+			return $this->respond(
+				[
+					'status' => $this->getStatus(),
+					'errors' => str_replace(':attribute','Student',trans('errors.'. 1003))
+				]
+			);
+		}
+
+		//isset subject
+		if(Input::get('subject_id')){
+			$criteria['subject_id'] = Input::get('subject_id');
+		}
+
+		//isset level
+		if(Input::get('grade_id')){
+			$criteria['grade_id'] = Input::get('grade_id');
+		}
+
+		//isset module
+		if(Input::get('module_id')){
+			$criteria['module_id'] = Input::get('module_id');
+		}
+
+		$report = $this->student_report->getStudentQuestionReport($criteria);
+
+		//generate pdf format
+		$data = [
+			'questions' => $report
+		];
+
+		return $this->pdf->loadView('export.student.question-analysis-pdf',$data)
+			->setPaper('a4')->setOrientation('portrait')->download('question-analysis.pdf');
+
 	}
 }

@@ -38,4 +38,8 @@ class ReportsController extends Controller {
 	public function progress_bar(){
 		return view('student.reports.partials.progress_bar');
 	}
+
+	public function question_analysis(){
+		return view('student.reports.partials.question_analysis');
+	}
 }
