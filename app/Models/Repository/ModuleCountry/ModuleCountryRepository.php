@@ -16,6 +16,8 @@ class ModuleCountryRepository implements ModuleCountryRepositoryInterface {
 
 		$module_country = new ModuleCountry();
 
+		$module_country = $module_country->with('grade','country','module');
+
 		//get by criteria
 		if(isset($criteria['module_id'])){
 			$module_country = $module_country->whereModuleId($criteria['module_id']);
@@ -29,6 +31,10 @@ class ModuleCountryRepository implements ModuleCountryRepositoryInterface {
 			$module_country = $module_country->whereGradeId($criteria['grade_id']);
 		}
 
+		if(isset($criteria['subject_id'])){
+			$module_country = $module_country->subjectId($criteria['subject_id']);
+		}
+
 		$count = $module_country->count();
 
 		if ($limit > 0 && $offset >= 0) {
@@ -37,7 +43,7 @@ class ModuleCountryRepository implements ModuleCountryRepositoryInterface {
 
 		$response = [
 			'total' => $count,
-			'records' => $module_country->with('grade','country')->get()->toArray()
+			'records' => $module_country->get()->toArray()
 		];
 
 		return $response;
