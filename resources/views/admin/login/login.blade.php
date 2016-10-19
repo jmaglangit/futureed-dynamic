@@ -30,6 +30,7 @@
 						{!! Form::text('login', ''
 								, array(
 										'placeholder' => 'Email or Username'
+										, 'class' => 'font-size-16'
 										, 'ng-model' => 'login.username'
 										, 'autocomplete' => 'off'
 								)
@@ -42,6 +43,7 @@
 						{!! Form::password('password'
 								, array(
 										'placeholder' => 'Password'
+										, 'class' => 'font-size-16'
 										, 'ng-model' => 'login.password'
 								)
 						) !!}
