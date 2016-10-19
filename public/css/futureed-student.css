@@ -1982,7 +1982,7 @@ li.questions-answers > a, li.questions-answers div {
 }
 
 .font-size-16 {
-	font-size: 16px;
+	font-size: 16px !important;
 }
 
 .margin-top-50 {
