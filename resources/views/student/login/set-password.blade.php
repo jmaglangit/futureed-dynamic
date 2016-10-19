@@ -5,8 +5,8 @@
 		ng-init="password.setPasswordStatus('{!! $id !!}')" ng-cloak>
 
 		<div class="form-style login-container form-select-password" ng-if="!password.password_isset">
-			<div  id="title" class="title">
-				<p ng-if="!password.password_selected">{!! trans('messages.select_pic_new_pic_password') !!}</p>
+			<div id="title" class="title">
+				<p ng-if="!password.password_selected" class="h4 col-xs-6">{!! trans('messages.select_pic_new_pic_password') !!}</p>
 				<p ng-if="password.password_selected">{!! trans('messages.select_pic_confirm_pic_password') !!}</p>
 			</div>
 
