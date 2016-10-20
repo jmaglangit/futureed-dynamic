@@ -59,9 +59,7 @@
                     <td class="col-md-3 text-center">
                         {! question.answer_status !}
                     </td>
-                    <td class="col-md-3 text-left">
-                        {! question.answer_explanation !}
-                    </td>
+                    <td class="col-md-3 text-left" ng-bind-html="question.answer_explanation | trustAsHtml"></td>
                 </tr>
             </tbody>
 
