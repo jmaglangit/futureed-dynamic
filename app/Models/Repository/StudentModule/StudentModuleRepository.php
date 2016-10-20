@@ -521,4 +521,29 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 
 		return $student_modules->get();
 	}
+
+	//TODO get student spent hours on answering modules.
+	public function getStudentSpentHours($student_id){
+		//-- filter country, class, student,
+		//select
+		//mc.id,
+		//mc.country_id,
+		//mc.grade_id,
+		//mc.module_id,
+		//sm.class_id,
+		//sm.student_id,
+		//sm.subject_id,
+		//sm.module_status,
+		//sum(sma.total_time) as summation,
+		//sma.created_at
+		//from module_countries mc
+		//left join student_modules sm on sm.module_id = mc.module_id
+		//left join student_module_answers sma on sma.student_module_id = sm.id
+		//where mc.country_id = 840 -- students current curriculum country
+		//and sm.student_id = 1 -- student id
+		//and sm.class_id in (2,4) -- gets the current class of the student
+		//and sma.created_at between DATE_SUB(NOW(),INTERVAL 30 DAY) AND NOW() -- differs the date
+		//group by sm.student_id
+		//;
+	}
 }
