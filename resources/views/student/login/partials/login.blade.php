@@ -20,7 +20,7 @@
     <div class="form-group">
         {!! Form::text('username', ''
             , array(
-                'class' => 'form-control'
+                'class' => 'form-control font-size-16'
                 , 'placeholder' => trans('messages.enter_your_username_email')
                 , 'autocomplete' => 'off'
                 , 'ng-model' => 'login.manual.username'
