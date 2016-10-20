@@ -90,7 +90,6 @@
 		{!! Html::script('/js/ng-file-upload-shim.min.js')!!}
 		{!! Html::script('/js/ng-file-upload.min.js')!!}
 
-
 		@yield('scripts')
 		<!-- END SCRIPTS -->
 	</body>
