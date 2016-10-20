@@ -2,6 +2,10 @@
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use FutureEd\Http\Requests;
+use FutureEd\Models\Repository\Grade\GradeRepositoryInterface;
+use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\Subject\SubjectRepositoryInterface;
 use FutureEd\Services\ImageServices;
 use FutureEd\Services\ReportServices;
 use Illuminate\Support\Facades\Input;
@@ -17,6 +21,10 @@ class StudentReportExportController extends ReportController {
 	protected $pdf;
 	protected $excel;
 	protected $report_services;
+	protected $student;
+	protected $subject;
+	protected $grade;
+	protected $module;
 
 	/**
 	 * StudentReportExportController constructor.
@@ -25,19 +33,28 @@ class StudentReportExportController extends ReportController {
 	 * @param PDF $PDF
 	 * @param Excel $excel
 	 * @param ReportServices $reportServices
+	 * @param StudentRepositoryInterface $studentRepositoryInterface
 	 */
 	public function __construct(
 		StudentReportController $studentReportController,
 		ImageServices $imageServices,
 		PDF $PDF,
 		Excel $excel,
-		ReportServices $reportServices
+		ReportServices $reportServices,
+		StudentRepositoryInterface $studentRepositoryInterface,
+		SubjectRepositoryInterface $subjectRepositoryInterface,
+		GradeRepositoryInterface $gradeRepositoryInterface,
+		ModuleRepositoryInterface $moduleRepositoryInterface
 	) {
 		$this->student_report = $studentReportController;
 		$this->image_service = $imageServices;
 		$this->pdf = $PDF;
 		$this->excel = $excel;
 		$this->report_services = $reportServices;
+		$this->student = $studentRepositoryInterface;
+		$this->subject = $subjectRepositoryInterface;
+		$this->grade = $gradeRepositoryInterface;
+		$this->module = $moduleRepositoryInterface;
 	}
 
 	/**
@@ -538,13 +555,26 @@ class StudentReportExportController extends ReportController {
 
 		$report = $this->student_report->getStudentQuestionReport($criteria);
 
+		//Can we place the Avatar, Name, Subject, Grade, Module Name
+		$student = $this->student->getStudent($criteria['student_id']);
+		$subject = $this->subject->getSubject($criteria['subject_id']);
+		$grade = $this->grade->getGradeById($criteria['grade_id']);
+		$module = $this->module->getModule($criteria['module_id']);
+
+		$student = [
+			'name' => $student->user->name,
+			'subject' => $subject->name,
+			'grade' => $grade->name,
+			'module' => $module->name
+		];
+
 		//generate pdf format
 		$data = [
+			'student' => $student,
 			'questions' => $report
 		];
 
 		return $this->pdf->loadView('export.student.question-analysis-pdf',$data)
 			->setPaper('a4')->setOrientation('portrait')->download('question-analysis.pdf');
-
 	}
 }
