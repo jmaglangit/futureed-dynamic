@@ -70,6 +70,7 @@
 
 		{!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
 		{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
+		{!! Html::script('//d3js.org/d3.v4.min.js') !!}
 
 		{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
 		{!! Html::script('/js/ng-sortable.min.js')!!}
