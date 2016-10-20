@@ -45,6 +45,11 @@ Routes::group([
 			'as' => 'api.report.student.progress.question.answer'
 		]);
 
+		Routes::get('/student-chart/platform-hours/{student_id}',[
+			'uses' => 'Api\Reports\StudentReportRestController@getStudentPlatformHours',
+			'as' => 'api.report.student.progress.platform-hours'
+		]);
+
 
 		/**
 		 * Class
