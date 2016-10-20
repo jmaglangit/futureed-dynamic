@@ -34,4 +34,6 @@ interface StudentModuleRepositoryInterface
 
 	public function getStudentQuestionsReport($criteria);
 
+	public function getStudentSpentHours($criteria);
+
 }

@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\Reports;
 
+use Carbon\Carbon;
 use FutureEd\Http\Requests;
 
 use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
@@ -547,5 +548,57 @@ class StudentReportController extends ReportController {
 		return $question_list;
 	}
 
+	/**
+	 * Get student spent hours.
+	 * @param $student_id
+	 * @return array
+	 */
+	public function getStudentPlatformHours($student_id){
+		//student_id, country_id, class_id,date_from,date_to
+		$criteria = [];
+
+		//get student detail for curriculum country
+		$student = $this->student->getStudent($student_id);
+
+		$criteria['student_id'] = $student_id;
+		$criteria['country_id'] = $student->user->curriculum_country;
+
+		//get current classes -- class_id in array
+		$this->student_service->getCurrentClass($student_id);
+
+		$current_class = $this->class_student->getStudentCurrentClassCountry(
+			$student_id,
+			$criteria['country_id']
+		);
+
+		$class_ids = [];
+
+		foreach($current_class as $class){
+			array_push($class_ids,$class->class_id);
+		}
+
+		$criteria['class_id'] = $class_ids;
+
+		$student_spent_hours = [];
+
+
+		// Get hours last seven days
+		$criteria['date_from'] = Carbon::now()->addDay(-7)->toDateTimeString();
+		$criteria['date_to'] = Carbon::now()->toDateTimeString();
+		$student_spent_hours['seven_days'] = $this->student_module->getStudentSpentHours($criteria);
+
+		// Get hours this month
+		$criteria['date_from'] = Carbon::now()->startOfMonth()->toDateTimeString();
+		$criteria['date_to'] = Carbon::now()->toDateTimeString();
+		$student_spent_hours['this_month'] = $this->student_module->getStudentSpentHours($criteria);
+
+		// Get hours last month
+		$criteria['date_from'] = Carbon::now()->subMonth(1)->startOfMonth()->toDateTimeString();
+		$criteria['date_to'] = Carbon::now()->subMonth(1)->lastOfMonth()->toDateTimeString();
+		$student_spent_hours['last_month'] = $this->student_module->getStudentSpentHours($criteria);
+
+		return $student_spent_hours;
+
+	}
 
 }

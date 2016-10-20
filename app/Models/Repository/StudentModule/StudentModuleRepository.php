@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Models\Repository\StudentModule;
 
 use Carbon\Carbon;
+use FutureEd\Models\Core\ModuleCountry;
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\StudentModule;
 use FutureEd\Models\Traits\LoggerTrait;
@@ -522,8 +523,12 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		return $student_modules->get();
 	}
 
-	//TODO get student spent hours on answering modules.
-	public function getStudentSpentHours($student_id){
+	/**
+	 * Get student spent total hours.
+	 * @param array $criteria
+	 * @return mixed
+	 */
+	public function getStudentSpentHours($criteria = []){
 		//-- filter country, class, student,
 		//select
 		//mc.id,
@@ -545,5 +550,27 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		//and sma.created_at between DATE_SUB(NOW(),INTERVAL 30 DAY) AND NOW() -- differs the date
 		//group by sm.student_id
 		//;
+
+		$student_hours = ModuleCountry::select(
+				DB::raw('module_countries.id'),
+				DB::raw('module_countries.country_id'),
+				DB::raw('module_countries.grade_id'),
+				DB::raw('module_countries.module_id'),
+				DB::raw('sm.class_id'),
+				DB::raw('sm.student_id'),
+				DB::raw('sm.subject_id'),
+				DB::raw('sm.module_status'),
+				DB::raw('sum(sma.total_time) as total_time'),
+				DB::raw('sma.created_at')
+			)->leftJoin('student_modules as sm','sm.module_id','=','module_countries.module_id')
+			->leftJoin('student_module_answers as sma','sma.student_module_id','=','sm.id')
+			->where('module_countries.country_id','=',DB::raw("'".$criteria['country_id']."'"))
+			->where('sm.student_id','=',DB::raw($criteria['student_id']))
+			->whereIn('sm.class_id',$criteria['class_id'])
+			->where('sma.created_at','>=',DB::raw("DATE('". $criteria['date_from'] ."')"))
+			->where('sma.created_at','<=',DB::raw("DATE('". $criteria['date_to'] ."')"))
+			->groupBy('sm.student_id');
+
+		return $student_hours->first();
 	}
 }
