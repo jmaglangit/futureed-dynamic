@@ -491,7 +491,7 @@ return [
 	'with_learning_style' => 'with Learning Style',
 	'total_price_computation' => 'Total Price Computation',
 	'classroom' => 'Classroom',
-	'select_a_country' => 'Select a country',
+	'select_a_country' => 'Select a Curriculum country',
 	'select_a_subject' => 'Select a subject',
 	'select_a_plan' => 'Select a Plan',
 	'select_a_day' => 'Select No. of Days',

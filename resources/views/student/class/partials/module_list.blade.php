@@ -63,10 +63,10 @@
 		<ul class="nav nav-pills module-pills" role="tablist">
 			<li role="presentation" class="module-tabs" ng-repeat="aClass in class.classes track by $index" ng-class="{ 'active' : aClass.class_id == class.current_class }"
 				ng-click="class.redirectClass('{!! route('student.class.index') !!}', aClass.class_id)">
-				<a href="#home" aria-controls="home" role="tab" data-toggle="tab" >{! aClass.classroom.subject.name !}</a>
+				<a href="#home" aria-controls="home" role="tab" data-toggle="tab" class="font-size-16">{! aClass.classroom.subject.name !}</a>
 			</li>
 			<li role="presentation" class="module-tabs" ng-class="{ 'active' : aClass.class_id == class.current_class }">
-				<a href="{!! route('student.reports.index') !!}">{!! trans('messages.reports') !!}</a>
+				<a href="{!! route('student.reports.index') !!}" class="font-size-16">{!! trans('messages.reports') !!}</a>
 			</li>
 		</ul>
 
