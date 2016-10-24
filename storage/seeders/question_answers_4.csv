@@ -1,4 +1,3 @@
-id,module_id,question_id,code,label,answer_text,answer_image,original_image_name,correct_flag,point_equivalent,translatable,created_by,updated_by,created_at,updated_at,deleted_at
 ,49,24450,130801,,less than,,,Yes,1,,,,,,
 ,49,24450,130802,,more than,,,No,0,,,,,,
 ,49,24450,130803,,equals,,,No,0,,,,,,
