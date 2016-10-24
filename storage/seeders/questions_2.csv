@@ -13,38 +13,38 @@
 21007,284,21007,MC,"Choose the best answer in the sentence. <br/> Help, there is a fire over there!",,,,,,19,1,1,,Enabled,,,,,,2501
 21008,284,21008,MC,Choose the best answer in the sentence. <br/> Waa! Somebody help me!,,,,,,20,1,1,,Enabled,,,,,,2501
 21009,285,21009,FIB,"Identify then write the subject and predicate of the sentence. 
-<u> John was running </u>  around.<br/>Subject________. <br/> Predicate_________",,,"John, was running",,,8,3,1,,Enabled,,,,,,2555
+<u> John was running </u>  around.<br/>Subject________. <br/> Predicate_________",,,"John,was running",,,8,3,1,,Enabled,,,,,,2555
 21010,285,21010,FiB,"Identify then write the subject and predicate of the sentence.
-<u> I am cleaning </u>  the house everyday.  <br/>Subject________. <br/> Predicate_________",,,"I, am cleaning",,,9,3,1,,Enabled,,,,,,2555
-21011,285,21011,FiB,Identify then write the subject and predicate of the sentence. <u> Rick and I are playing </u> baseball.<br/>Subject________. <br/> Predicate_________  ,,,"Rick and I, are playing",,,10,3,1,,Enabled,,,,,,2555
-21012,285,21012,FiB,"Identify then write the subject and predicate of the sentence. <u> Steve, Blake and Martha  went </u> to the mall.  <br/>Subject________. <br/> Predicate_________",,,"Steve, Blake and Martha, went",,,11,3,1,,Enabled,,,,,,2555
-21013,285,21013,FiB,Identify then write the subject and predicate of the sentence. <u> They will be arriving </u> tomorrow. <br/>Subject________. <br/> Predicate_________ ,,,"They, will be arriving",,,12,3,1,,Enabled,,,,,,2555
-21014,285,21014,FiB,Identify then write the subject and predicate of the sentence. <u> She is writing </u>  a poem.  <br/>Subject________. <br/> Predicate________,,,"She, is writing",,,13,3,1,,Enabled,,,,,,2555
-21015,285,21015,FIB,Identify then write the subject and predicate of the sentence.  <u> John  is singing and dancing </u> for the talent show. <br/>Subject________. <br/> Predicate_________ ,,,"John, is singing and dancing",,,14,3,1,,Enabled,,,,,,2555
-21016,285,21016,FIB,Identify then write the subject and predicate of the sentence. <u> Mike is </u> an artist. <br/>Subject________. <br/> Predicate_________ ,,,"Mike, is",,,15,3,1,,Enabled,,,,,,2555
-21017,285,21017,FIB,Identify then write the subject and predicate of the sentence. <u> He is trying </u> to win the contest. <br/>Subject________. <br/> Predicate_________ ,,,"He, is trying",,,16,3,1,,Enabled,,,,,,2555
-21018,285,21018,FIB,Identify then write the subject and predicate of the sentence. <u> Luke and John are running and jumping </u>  in the field.  <br/>Subject________. <br/> Predicate_________,,,"Luke and John, are running and jumping",,,17,3,1,,Enabled,,,,,,2555
+<u> I am cleaning </u>  the house everyday.  <br/>Subject________. <br/> Predicate_________",,,"I,am cleaning",,,9,3,1,,Enabled,,,,,,2555
+21011,285,21011,FiB,Identify then write the subject and predicate of the sentence. <u> Rick and I are playing </u> baseball.<br/>Subject________. <br/> Predicate_________  ,,,"Rick and I,are playing",,,10,3,1,,Enabled,,,,,,2555
+21012,285,21012,FiB,"Identify then write the subject and predicate of the sentence. <u> Steve, Blake and Martha  went </u> to the mall.  <br/>Subject________. <br/> Predicate_________",,,"Steve,Blake and Martha,went",,,11,3,1,,Enabled,,,,,,2555
+21013,285,21013,FiB,Identify then write the subject and predicate of the sentence. <u> They will be arriving </u> tomorrow. <br/>Subject________. <br/> Predicate_________ ,,,"They,will be arriving",,,12,3,1,,Enabled,,,,,,2555
+21014,285,21014,FiB,Identify then write the subject and predicate of the sentence. <u> She is writing </u>  a poem.  <br/>Subject________. <br/> Predicate________,,,"She,is writing",,,13,3,1,,Enabled,,,,,,2555
+21015,285,21015,FIB,Identify then write the subject and predicate of the sentence.  <u> John  is singing and dancing </u> for the talent show. <br/>Subject________. <br/> Predicate_________ ,,,"John,is singing and dancing",,,14,3,1,,Enabled,,,,,,2555
+21016,285,21016,FIB,Identify then write the subject and predicate of the sentence. <u> Mike is </u> an artist. <br/>Subject________. <br/> Predicate_________ ,,,"Mike,is",,,15,3,1,,Enabled,,,,,,2555
+21017,285,21017,FIB,Identify then write the subject and predicate of the sentence. <u> He is trying </u> to win the contest. <br/>Subject________. <br/> Predicate_________ ,,,"He,is trying",,,16,3,1,,Enabled,,,,,,2555
+21018,285,21018,FIB,Identify then write the subject and predicate of the sentence. <u> Luke and John are running and jumping </u>  in the field.  <br/>Subject________. <br/> Predicate_________,,,"Luke and John,are running and jumping",,,17,3,1,,Enabled,,,,,,2555
 21019,285,21019,FIB,"identify the subject and predicate. If there is no subject or predicate, write NS and NP. <br/> <br/> <u> Runs around at night. </u>",,,NS,,,18,3,1,,Enabled,,,,,,2555
 21020,285,21020,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS (no subject) and NP (no predicate). <br/> <br/>  <u> Jack and Martha </u>",,,NP,,,19,3,1,,Enabled,,,,,,2555
 21021,285,21021,FIB,"identify the subject and predicate. If there is no subject or predicate, write NS and NP. <br/> <br/>  <u> Mindy's favorite food </u>",,,NP,,,20,3,1,,Enabled,,,,,,2555
-21022,285,21022,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS and NP. <br/> <br/> <u> Jack will you take </u> out the trash?  <br/>Subject________. <br/> Predicate_________",,,"Jack, will you take out",,,8,2,1,,Enabled,,,,,,2555
+21022,285,21022,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS and NP. <br/> <br/> <u> Jack will you take </u> out the trash?  <br/>Subject________. <br/> Predicate_________",,,"Jack,will you take out",,,8,2,1,,Enabled,,,,,,2555
 21023,285,21023,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS and NP. <br/><br/> <u> Threw a rock  </u>",,,NS,,,9,2,1,,Enabled,,,,,,2555
 21024,285,21024,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS and NP.  <br/> <br/> <u> Waters the plants  </u>",,,NS,,,10,2,1,,Enabled,,,,,,2555
-21025,285,21025,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS and NP.  <br/> <br/>  <u> The ants are lifting </u> those pebbles.",,,"The ants, are lifting ",,,11,2,1,,Enabled,,,,,,2555
+21025,285,21025,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS and NP.  <br/> <br/>  <u> The ants are lifting </u> those pebbles.",,,"The ants,are lifting ",,,11,2,1,,Enabled,,,,,,2555
 21026,285,21026,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS and NP. <br/><br/> <u>Tigers and cats <u/>",,,NP,,,12,2,1,,Enabled,,,,,,2555
 21027,285,21027,FIB,"identify the subject and predicate. If there is no subject or predicate, write NS and NP. <br/> <br/> <u> Japan has a very humid weather today.  </u>",,,"Japan,has a very humid weather today.",,,13,2,1,,Enabled,,,,,,2555
 21028,285,21028,FIB,"Identify the subject and predicate. If there is no subject or predicate, write NS and NP. <br/> <br/> <u> Reading the news. </u>",,,NS,,,14,2,1,,Enabled,,,,,,2555
 21029,285,21029,MC,Pick the best answer that matches the sentence. I <u>am looking</u> forward for tomorrow's event.,,,,,,7,1,1,,Enabled,,,,,,2502
-21030,285,21030,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/>  ____ will return tomorrow. (Use one of these, It, Those, Yours)",,,It,,,8,1,1,,Enabled,,,,,,2555
-21031,285,21031,FiB,Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> Leo and jude___ going home.   <br/>  Word:__________   <br/>  Subject or Predicate? _______________,,,"are, Predicate",,,9,1,1,,Enabled,,,,,,2555
-21032,285,21032,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> Jim is ____ notes (cooking, working, writing).  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"writing, Predicate",,,10,1,1,,Enabled,,,,,,2555
-21033,285,21033,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/>  ______ (Our, Yours, He) is sleeping on the sofa.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"He, Subject",,,11,1,1,,Enabled,,,,,,2555
-21034,285,21034,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> Peter and ___ (We, Yours, I) are studying for the exam tomorrow.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"I, Subject",,,12,1,1,,Enabled,,,,,,2555
-21035,285,21035,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> Ethan is____ (eating, finding, shopping) dinner. <br/>  Word:__________   <br/>  Subject or Predicate? _______________ ",,,"eating, Predicate",,,13,1,1,,Enabled,,,,,,2555
-21036,285,21036,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> Yesterday, Jill_____ (is finding, was playing, were going) with her friends.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"was, Predicate",,,14,1,1,,Enabled,,,,,,2555
-21037,285,21037,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> Tomorrow, Sean___arrive from Malaysia.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"will, Predicate",,,15,1,1,,Enabled,,,,,,2555
-21038,285,21038,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> ______ (Our, I, We) are cleaning the house.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"We, Subject",,,16,1,1,,Enabled,,,,,,2555
-21039,285,21039,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/>  _____  (It, Our, They) were camping last night.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"They, Subject",,,17,1,1,,Enabled,,,,,,2555
+21030,285,21030,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/><br/>  ____ will return tomorrow. (Use one of these, It, Those, Yours)",,,It,,,8,1,1,,Enabled,,,,,,2555
+21031,285,21031,FiB,Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/><br/> Leo and jude___ going home.   <br/>  Word:__________   <br/>  Subject or Predicate? _______________,,,"are,Predicate",,,9,1,1,,Enabled,,,,,,2555
+21032,285,21032,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/><br/> Jim is ____ notes (cooking, working, writing).  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"writing,Predicate",,,10,1,1,,Enabled,,,,,,2555
+21033,285,21033,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/><br/>  ______ (Our, Yours, He) is sleeping on the sofa.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"He,Subject",,,11,1,1,,Enabled,,,,,,2555
+21034,285,21034,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/><br/> Peter and ___ (We, Yours, I) are studying for the exam tomorrow.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"I,Subject",,,12,1,1,,Enabled,,,,,,2555
+21035,285,21035,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/><br/> Ethan is____ (eating, finding, shopping) dinner. <br/>  Word:__________   <br/>  Subject or Predicate? _______________ ",,,"eating,Predicate",,,13,1,1,,Enabled,,,,,,2555
+21036,285,21036,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> Yesterday, Jill_____ (is finding, was playing, were going) with her friends.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"was,Predicate",,,14,1,1,,Enabled,,,,,,2555
+21037,285,21037,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> Tomorrow, Sean___arrive from Malaysia.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"will,Predicate",,,15,1,1,,Enabled,,,,,,2555
+21038,285,21038,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/> ______ (Our, I, We) are cleaning the house.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"We,Subject",,,16,1,1,,Enabled,,,,,,2555
+21039,285,21039,FiB,"Fill in the blanks with the appropriate word and identify if it's a subject or predicate. <br/>  _____  (It, Our, They) were camping last night.  <br/>  Word:__________   <br/>  Subject or Predicate? _______________",,,"They,Subject",,,17,1,1,,Enabled,,,,,,2555
 21040,285,21040,FiB,Identify and write the subject and predicate. <br/>  <u> George was sleeping </u> outside.  <br/>Subject________. <br/> Predicate_________ ,,,"George,was sleeping",,,18,1,1,,Enabled,,,,,,2555
 21041,285,21041,FiB,Identify and write the subject and predicate. <br/>  <u> Lucas can play  </u>the guitar really well. <br/>Subject________. <br/> Predicate_________ ,,,"Lucas,can play",,,19,1,1,,Enabled,,,,,,2555
 21042,285,21042,FiB,Identify and write the subject and predicate. <br/>  <u>  The cat is hiding </u> inside the box.  <br/> Subject________ <br/> Predicate_________ ,,,"The cat,is hiding",,,20,1,1,,Enabled,,,,,,2555
@@ -83,17 +83,17 @@
 21075,286,21075,MC,"Identify and choose whether the sentence is a run-on,fragmented or a complete sentence.  <br/> I can't understand a word he is saying, but,he is trying hard to relay his message to me.",,,,,,5,2,1,,Enabled,,,,,,2503
 21076,286,21076,MC,"Identify and choose whether the sentence is a run-on,fragmented or a complete sentence.  <br/> Maybe, I should check if dinner is ready.",,,,,,6,2,1,,Enabled,,,,,,2503
 21077,286,21077,MC,"Identify and choose whether the sentence is a run-on,fragmented or a complete sentence.  <br/> The brown haired girl wearing the pink dress.",,,,,,7,2,1,,Enabled,,,,,,2503
-21078,286,21078,FIB,"Correct the run-on or fragmented sentence.  <br/>   Sheila was riding her bike towards the hill, she suddenly fell off her bike.",,,"Sheila was riding her bike towards the hill. But, she suddenly fell off her bike.",,,8,2,1,,Enabled,,,,,,2554
+21078,286,21078,FIB,"Correct the run-on or fragmented sentence.  <br/>   Sheila was riding her bike towards the hill, she suddenly fell off her bike.",,,"Sheila was riding her bike towards the hill. But,she suddenly fell off her bike.",,,8,2,1,,Enabled,,,,,,2554
 21079,286,21079,FIB,Correct the run-on or fragmented sentence.  <br/>   The red hooded girl,,,The red hooded girl was picking apples.,,,9,2,1,,Enabled,,,,,,2554
-21080,286,21080,FIB,"Correct the run-on or fragmented sentence.  <br/>   Jack ran toward the exit,but, it was already too late.",,,"Jack ran toward the exit. But, it was already too late.",,,10,2,1,,Enabled,,,,,,2554
-21081,286,21081,FIB,"Correct the run-on or fragmented sentence.  <br/>   Although, he tried his best",,,"Although he tried his best, he was still unable to win the game.",,,11,2,1,,Enabled,,,,,,2554
-21082,286,21082,FIB,"Correct the run-on or fragmented sentence.  <br/>   Pete saw the fight,however,he was too scared to tell anyone.",,,"Pete saw the fight. However, he was too scared to tell anyone.",,,12,2,1,,Enabled,,,,,,2554
-21083,286,21083,FIB,Correct the run-on or fragmented sentence.  <br/>   After hurriedly running towards the room,,,"After hurriedly running towards the room, everybody was gasping for air.",,,13,2,1,,Enabled,,,,,,2554
-21084,286,21084,FIB,"Correct the run-on or fragmented sentence.  <br/>   John went inside the room an hour ago,everybody could not help but try to take a peek inside.",,,"John went inside the room an hour ago. However, everybody could not help but try to take a peek inside.",,,14,2,1,,Enabled,,,,,,2554
+21080,286,21080,FIB,"Correct the run-on or fragmented sentence.  <br/>   Jack ran toward the exit,but, it was already too late.",,,"Jack ran toward the exit. But,it was already too late.",,,10,2,1,,Enabled,,,,,,2554
+21081,286,21081,FIB,"Correct the run-on or fragmented sentence.  <br/>   Although, he tried his best",,,"Although he tried his best,he was still unable to win the game.",,,11,2,1,,Enabled,,,,,,2554
+21082,286,21082,FIB,"Correct the run-on or fragmented sentence.  <br/>   Pete saw the fight,however,he was too scared to tell anyone.",,,"Pete saw the fight. However,he was too scared to tell anyone.",,,12,2,1,,Enabled,,,,,,2554
+21083,286,21083,FIB,Correct the run-on or fragmented sentence.  <br/>   After hurriedly running towards the room,,,"After hurriedly running towards the room,everybody was gasping for air.",,,13,2,1,,Enabled,,,,,,2554
+21084,286,21084,FIB,"Correct the run-on or fragmented sentence.  <br/>   John went inside the room an hour ago,everybody could not help but try to take a peek inside.",,,"John went inside the room an hour ago. However,everybody could not help but try to take a peek inside.",,,14,2,1,,Enabled,,,,,,2554
 21085,286,21085,FIB,Correct the run-on or fragmented sentence.  <br/>   have gone to the park.,,,They have gone to the park,,,15,2,1,,Enabled,,,,,,2554
 21086,286,21086,FIB,Correct the run-on or fragmented sentence.  <br/>   The red haired girl,,,The red haired girl is walking down the street.,,,16,2,1,,Enabled,,,,,,2554
-21087,286,21087,FIB,"Correct the run-on or fragmented sentence.  <br/>   Jessica went home,she was sick.",,,"Jessica went home. Because, she was sick.",,,17,2,1,,Enabled,,,,,,2554
-21088,286,21088,FIB,Correct the run-on or fragmented sentence.  <br/>   Even though everything seemed fine.,,,"Even though everything seemed fine, everybody knew they felt bad about the bullying.",,,18,2,1,,Enabled,,,,,,2554
+21087,286,21087,FIB,"Correct the run-on or fragmented sentence.  <br/>   Jessica went home,she was sick.",,,"Jessica went home. Because,she was sick.",,,17,2,1,,Enabled,,,,,,2554
+21088,286,21088,FIB,Correct the run-on or fragmented sentence.  <br/>   Even though everything seemed fine.,,,"Even though everything seemed fine,everybody knew they felt bad about the bullying.",,,18,2,1,,Enabled,,,,,,2554
 21089,286,21089,FIB,"Correct the run-on or fragmented sentence.  <br/>   Jake is driving the car to work,he forgot to bring his lunch.",,,Jake is driving the car to work;he forgot to bring his lunch.,,,19,2,1,,Enabled,,,,,,2554
 21090,286,21090,FIB,Identify if it is a run-on or fragmented sentence. To form a group full of brave men.,,,Fragmented sentence.,,,2,1,1,,Enabled,,,,,,2554
 21091,286,21091,FIB,"Identify if it is a run-on or fragmented sentence. Roderick went to the park,he found his friends along the way.",,,Run-on,,,3,1,1,,Enabled,,,,,,2554
@@ -137,26 +137,26 @@ Run-on",,,6,1,1,,Enabled,,,,,,2555
 21128,287,21128,MC,Identify the sentence and choose the answer. My family ate in the nearest restaurant near school.,,,,,,11,2,1,,Enabled,,,,,,2504
 21129,287,21129,MC,"Identify the sentence and choose the answer. Richard has been studying all night long, yet he told me he was not finished.",,,,,,12,2,1,,Enabled,,,,,,2504
 21130,287,21130,MC,"Identify the sentence and choose the answer. The bunny was hopping toward its cage, and it was playing with its owner.",,,,,,13,2,1,,Enabled,,,,,,2504
-21131,287,21131,FIB,"Complete the compound-complex sentence using the following conjunctions <br/>  (and, or, hence, therefore, but). <br/> I like to read. My favorite genre is adventure. I find romance novels boring.",,,"I like to read and my favorite genre is adventure, hence I find romance novels boring.",,,14,2,1,,Enabled,,,,,,2553
-21132,287,21132,FIB,"Complete the compound-complex sentence using the following conjunctions <br/>  (as, or, hence, because, but). <br/>  The bird flew over the tree. It fell down. The wind blew it over.",,,"The bird flew over the tree as it fell down, because the wind blew it over.",,,15,2,1,,Enabled,,,,,,2553
+21131,287,21131,FIB,"Complete the compound-complex sentence using the following conjunctions <br/>  (and, or, hence, therefore, but). <br/> I like to read. My favorite genre is adventure. I find romance novels boring.",,,"I like to read and my favorite genre is adventure,hence I find romance novels boring.",,,14,2,1,,Enabled,,,,,,2553
+21132,287,21132,FIB,"Complete the compound-complex sentence using the following conjunctions <br/>  (as, or, hence, because, but). <br/>  The bird flew over the tree. It fell down. The wind blew it over.",,,"The bird flew over the tree as it fell down,because the wind blew it over.",,,15,2,1,,Enabled,,,,,,2553
 21133,287,21133,FIB,"Complete the compound-complex sentence. <br/> (hence, and, because, but).  <br/>  Tonight is going to be a harsh night. we have not prepared anything at all. the supplies just ran out.",,,Tonight is going to be a harsh night because we have not prepared anything at all and the supplies just ran out.,,,16,2,1,,Enabled,,,,,,2553
-21134,287,21134,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, if, so).  <br/>  I hate waking up early in the morning, I have to go to school. It would not hurt to have classes start later in the morning.",,,"I hate waking up early in the morning, but I have to go to school although it would not hurt to have classes start later in the morning.",,,17,2,1,,Enabled,,,,,,2553
+21134,287,21134,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, if, so).  <br/>  I hate waking up early in the morning, I have to go to school. It would not hurt to have classes start later in the morning.",,,"I hate waking up early in the morning,but I have to go to school although it would not hurt to have classes start later in the morning.",,,17,2,1,,Enabled,,,,,,2553
 21135,287,21135,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, however, After, so).  <br/>  I wanted to go get dinner. I watched a movie.  There was a long line.",,,I wanted to get dinner after watching a movie but there was a long line.,,,18,2,1,,Enabled,,,,,,2553
 21136,287,21136,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, however, if, so).  <br/>  Dogs are very playful. They often chase a lot of things. I still prefer cats.",,,"Dogs are very playful and they often chase a lot of things, however, I still prefer cats.",,,19,2,1,,Enabled,,,,,,2553
 21137,287,21137,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, however, if, so).  <br/>  Even if the line is long, I will wait here. Try to ask people questions.",,,"Even if the line is long, I will wait here and try to ask people questions.",,,5,3,1,,Enabled,,,,,,2553
 21138,287,21138,FIB,"Complete the compound-complex sentence.<br/>  (and, but, because, however, if, so).  <br/>   You should be careful at night. You can barely see anything. Many people have had their wallets stolen.",,,You should be careful at night because you can barely see anything and many people have had their wallets stolen.,,,6,3,1,,Enabled,,,,,,2553
 21139,287,21139,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, because, if, so).  <br/>  I got left behind. I woke up late. ",,,I got left behind because I woke up late.,,,7,3,1,,Enabled,,,,,,2553
-21140,287,21140,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, however, if, so).  <br/>  Although no one got hurt, everyone still needs to rest for the night. At least try to relax.",,,"Although no one got hurt, everyone still needs to rest for the night or at least try to relax.",,,8,3,1,,Enabled,,,,,,2554
+21140,287,21140,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, however, if, so).  <br/>  Although no one got hurt, everyone still needs to rest for the night. At least try to relax.",,,"Although no one got hurt,everyone still needs to rest for the night or at least try to relax.",,,8,3,1,,Enabled,,,,,,2554
 21141,287,21141,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, while, if, so).  <br/>  I went out to fish. I went out to hunt. I waited for my friends to set up camp.",,,I went out to fish and hunt while I waited for my friends to set up camp.,,,9,3,1,,Enabled,,,,,,2554
-21142,287,21142,FIB,"Complete the compound-complex sentence. <br/>  (and, but, eventhough, however, if, so).  <br/>  Richard and jack went to see a movie. it was late at night.",,,"Richard and Jack went to see a movie, eventhough if it was late at night.",,,10,3,1,,Enabled,,,,,,2554
-21143,287,21143,FIB,"Complete the compound-complex sentence. <br/>  (and, but, while, however, if, so).  <br/>  The blue bird flew down. The blue bird took the food. The owner was not looking.",,,"The blue bird flew down and took the food, while the owner was not looking.",,,11,3,1,,Enabled,,,,,,2554
+21142,287,21142,FIB,"Complete the compound-complex sentence. <br/>  (and, but, eventhough, however, if, so).  <br/>  Richard and jack went to see a movie. it was late at night.",,,"Richard and Jack went to see a movie,eventhough if it was late at night.",,,10,3,1,,Enabled,,,,,,2554
+21143,287,21143,FIB,"Complete the compound-complex sentence. <br/>  (and, but, while, however, if, so).  <br/>  The blue bird flew down. The blue bird took the food. The owner was not looking.",,,"The blue bird flew down and took the food,while the owner was not looking.",,,11,3,1,,Enabled,,,,,,2554
 21144,287,21144,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, because, if, so).  <br/>   Mike and Russell have been fighting for days. They were arguing about who would get the reward.",,,"Mike and Russell have been fighting for days, because they were arguing about who would get the reward.",,,12,3,1,,Enabled,,,,,,2554
 21145,287,21145,FIB,"Complete the compound-complex sentence. <br/>  (and, but, before, however, if, so).  <br/>  After cooking a hearty breakfast, John sat down to rest. John read the newspaper.  John fell asleep.",,,"After cooking a hearty breakfast, John sat down and read the newspaper before he fell asleep.",,,13,3,1,,Enabled,,,,,,2554
 21146,287,21146,FIB,"Complete the compound-complex sentence. <br/>  (and, but, before, however, if, so).  <br/>  Luke and Blake were singing. They got tired.  They decided to go home.",,,Luke and Blake were singing before they got tired and decided to go home.,,,14,3,1,,Enabled,,,,,,2554
-21147,287,21147,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, however, if, so).  <br/>  When I get my license, I will go to the mall. I will shop for new clothes.",,,"When I get my license, I will go to the mall and shop for new clothes.",,,15,3,1,,Enabled,,,,,,2554
+21147,287,21147,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, however, if, so).  <br/>  When I get my license, I will go to the mall. I will shop for new clothes.",,,"When I get my license,I will go to the mall and shop for new clothes.",,,15,3,1,,Enabled,,,,,,2554
 21148,287,21148,FIB,"Complete the compound-complex sentence. <br/>  (because, and, but, although, however, if, so).  <br/>  Henry and Andrew were discussing tomorrow's event.  They wanted to make sure nothing goes wrong.",,,Henry and Andrew were discussing  tomorrow's event because they wanted to make sure nothing goes wrong.,,,16,3,1,,Enabled,,,,,,2554
 21149,287,21149,FIB,"Complete the compound-complex sentence. <br/>  (and, but, because, however, if, so).  <br/>  Rick is studying in the library. Martha is studying in the library. There is a test tomorrow.",,,"Rick and Martha are studying in the library, because there is a test tomorrow.",,,17,3,1,,Enabled,,,,,,2554
-21150,287,21150,FIB,"Complete the compound-complex sentence. <br/>  (and, but, eventhough, however, if, so).  <br/>  Justin went to school. Arnold went to school. It was a holiday.",,,"Just and Arnold went to school, eventhough if it was a holiday.",,,18,3,1,,Enabled,,,,,,2554
+21150,287,21150,FIB,"Complete the compound-complex sentence. <br/>  (and, but, eventhough, however, if, so).  <br/>  Justin went to school. Arnold went to school. It was a holiday.",,,"Just and Arnold went to school,eventhough if it was a holiday.",,,18,3,1,,Enabled,,,,,,2554
 21151,287,21151,FIB,"Complete the compound-complex sentence. <br/>  (and, but, while, however, if, so).  <br/>  Richard is walking to school. I am walking to school. We talk to each other.",,,"Richard and I are walking to school, while we talk to each other.",,,19,3,1,,Enabled,,,,,,2554
 21152,287,21152,FIB,"Complete the compound-complex sentence. <br/>  (and, but, although, because, if, so).  <br/>  I will go to the doctor. I will ask for some medicine. I feel sick.",,,"I will go to the doctor and ask for some medicine, because I feel sick.",,,20,3,1,,Enabled,,,,,,2554
 21153,287,21153,FIB,"Complete the compound-complex sentence. <br/>  (and, until, although, however, if, so).  <br/>   Jane will not go home. Axel will not go home. They get their pay.",,,"Jane and Axel will not go home, until they get their pay.",,,21,3,1,,Enabled,,,,,,2554
@@ -400,35 +400,35 @@ Run-on",,,6,1,1,,Enabled,,,,,,2555
 21391,292,21391,FIB,"Identify if the verb is past, present or future. will sew",,,future,,,19,3,1,,Enabled,,,,,,2550
 21392,292,21392,FIB,"Identify if the verb is past, present or future. drew",,,past,,,20,3,1,,Enabled,,,,,,2550
 21393,293,21393,FIB,Rewrite the erroneous shift in verb tense. Yesterday I went home and I see a dog chasing a cat.,,,Yesterday I went home and I saw a dog chasing a cat.,,,1,1,1,,Enabled,,,,,,2548
-21394,293,21394,FIB,"Rewrite the erroneous shift in verb tense. Tomorrow, I will iron the clothes, but I had no idea what to do after.",,,"Tomorrow, I will iron the clothes, but I will have no idea what to do after.",,,2,1,1,,Enabled,,,,,,2548
-21395,293,21395,FIB,Rewrite the erroneous shift in verb tense. She cried for help. then the firemen goes to save her.,,,"She cried for help, then the firemen went to save her.",,,3,1,1,,Enabled,,,,,,2548
+21394,293,21394,FIB,"Rewrite the erroneous shift in verb tense. Tomorrow, I will iron the clothes, but I had no idea what to do after.",,,"Tomorrow,I will iron the clothes,but I will have no idea what to do after.",,,2,1,1,,Enabled,,,,,,2548
+21395,293,21395,FIB,Rewrite the erroneous shift in verb tense. She cried for help. then the firemen goes to save her.,,,"She cried for help,then the firemen went to save her.",,,3,1,1,,Enabled,,,,,,2548
 21396,293,21396,FIB,Rewrite the erroneous shift in verb tense. He goes to the lake and swam in it.,,,He goes to the lake and swims in it.,,,4,1,1,,Enabled,,,,,,2548
 21397,293,21397,FIB,Rewrite the erroneous shift in verb tense. Luke cleaned his room and bryan will change the bedsheets.,,,Luke cleaned his room and Bryan changed the bedsheets.,,,5,1,1,,Enabled,,,,,,2548
 21398,293,21398,FIB,Rewrite the erroneous shift in verb tense. I walked to school and suddenly someone tells me school is close.,,,I walked to school and suddenly someone told me school is closed.,,,6,1,1,,Enabled,,,,,,2548
-21399,293,21399,FIB,"Rewrite the erroneous shift in verb tense. I ran outside, then I suddenly feel like talking to my neighbor.",,,"I ran outside, then I suddenly felt like talking to my neighbor.",,,7,1,1,,Enabled,,,,,,2548
+21399,293,21399,FIB,"Rewrite the erroneous shift in verb tense. I ran outside, then I suddenly feel like talking to my neighbor.",,,"I ran outside,then I suddenly felt like talking to my neighbor.",,,7,1,1,,Enabled,,,,,,2548
 21400,293,21400,FIB,Rewrite the erroneous shift in verb tense. I spoke to my principal and he gives me the chance to improve my behavior.,,,I spoke to my principal and he gave me the chance to improve my behavior.,,,8,1,1,,Enabled,,,,,,2548
 21401,293,21401,FIB,Rewrite the erroneous shift in verb tense. I wrote a letter to my friend and he decides to write back to me.,,,I wrote a letter to my friend and he decided to write back to me.,,,9,1,1,,Enabled,,,,,,2548
-21402,293,21402,FIB,"Rewrite the erroneous shift in verb tense. Homer will go to the donut shop, afterwards he bought several pieces of donuts.",,,"Homer will go to the donut shop, afterwards he will buy several pieces of donuts.",,,10,1,1,,Enabled,,,,,,2548
-21403,293,21403,FIB,"Rewrite the erroneous shift in verb tense. The marathon will start tomorrow, and the participants were waiting in their hotels.",,,"The marathon will start tomorrow, and the participants will be waiting in their hotels.",,,11,1,1,,Enabled,,,,,,2548
+21402,293,21402,FIB,"Rewrite the erroneous shift in verb tense. Homer will go to the donut shop, afterwards he bought several pieces of donuts.",,,"Homer will go to the donut shop,afterwards he will buy several pieces of donuts.",,,10,1,1,,Enabled,,,,,,2548
+21403,293,21403,FIB,"Rewrite the erroneous shift in verb tense. The marathon will start tomorrow, and the participants were waiting in their hotels.",,,"The marathon will start tomorrow,and the participants will be waiting in their hotels.",,,11,1,1,,Enabled,,,,,,2548
 21404,293,21404,FIB,Rewrite the erroneous shift in verb tense. The eagle swooped down and catch the snake.,,,The eagle swooped down and caught the snake.,,,12,1,1,,Enabled,,,,,,2549
 21405,293,21405,FIB,Rewrite the erroneous shift in verb tense. He draws a circle and painted a picture.,,,He drew a circle and painted a picture.,,,13,1,1,,Enabled,,,,,,2549
 21406,293,21406,FIB,Rewrite the erroneous shift in verb tense. I He opens a hole and threw a rock inside.,,,He opened a hole and threw a rock inside.,,,14,1,1,,Enabled,,,,,,2549
 21407,293,21407,FIB,Rewrite the erroneous shift in verb tense. I will sing the anthem and I danced to the tune.,,,I will sing the anthem and I will dance to the tune.,,,15,1,1,,Enabled,,,,,,2549
 21408,293,21408,FIB,Rewrite the erroneous shift in verb tense. Jake prays for fortune and I hoped for the best.,,,Jake prays for fortune and I hope for the best.,,,16,1,1,,Enabled,,,,,,2549
-21409,293,21409,FIB,"Rewrite the erroneous shift in verb tense. The team is very excited, but unfortunately I was nervous.",,,"The team is very excited, but unfortunately I am nervous.",,,17,1,1,,Enabled,,,,,,2549
+21409,293,21409,FIB,"Rewrite the erroneous shift in verb tense. The team is very excited, but unfortunately I was nervous.",,,"The team is very excited,but unfortunately I am nervous.",,,17,1,1,,Enabled,,,,,,2549
 21410,293,21410,FIB,Rewrite the erroneous shift in verb tense. I lost my pen and I find a new one.,,,I lost my pen and I found a new one.,,,18,1,1,,Enabled,,,,,,2549
-21411,293,21411,FIB,"Rewrite the erroneous shift in verb tense. He is preparing to go to work, but the trains were still closed.",,,"He is preparing to go to work, but the trains are still closed.",,,19,1,1,,Enabled,,,,,,2549
+21411,293,21411,FIB,"Rewrite the erroneous shift in verb tense. He is preparing to go to work, but the trains were still closed.",,,"He is preparing to go to work,but the trains are still closed.",,,19,1,1,,Enabled,,,,,,2549
 21412,293,21412,FIB,Rewrite the erroneous shift in verb tense. Tom throws the ball and John caught it.,,,Tom threw the ball and John caught it.,,,20,1,1,,Enabled,,,,,,2549
 21413,293,21413,FIB,Rewrite the erroneous shift in verb tense. I was so excited to cook dinner and eat a hot bowl of soup.,,,I am so excited to cook dinner and eat a hot bowl of soup.,,,1,2,1,,Enabled,,,,,,2549
-21414,293,21414,FIB,"Rewrite the erroneous shift in verb tense. I Remembered he hated to sing, but he still continues to sing.",,,"I remember he hates to sing, but he still continues to sing.",,,2,2,1,,Enabled,,,,,,2549
+21414,293,21414,FIB,"Rewrite the erroneous shift in verb tense. I Remembered he hated to sing, but he still continues to sing.",,,"I remember he hates to sing,but he still continues to sing.",,,2,2,1,,Enabled,,,,,,2549
 21415,293,21415,FIB,Rewrite the erroneous shift in verb tense. They were speaking to the minister and they are willing to accept his proposal.,,,They were speaking to the minister and they were willing to accept his proposal.,,,3,2,1,,Enabled,,,,,,2549
 21416,293,21416,FIB,Rewrite the erroneous shift in verb tense. John entered the studio and starts to film for his next movie.,,,John entered the studio and started to film for his next movie.,,,4,2,1,,Enabled,,,,,,2549
-21417,293,21417,FIB,"Rewrite the erroneous shift in verb tense. The class is watching a classical movie, but we all suddenly heard the alarm go off.",,,"The class is watching a classical movie, but we all suddenly hear the alarm go off.",,,5,2,1,,Enabled,,,,,,2549
-21418,293,21418,FIB,"Rewrite the erroneous shift in verb tense. Merry is opening the shop, cleaned the tables and arranging the chairs.",,,"Merry is opening the shop, cleans the tables and arranging the chairs.",,,6,2,1,,Enabled,,,,,,2549
+21417,293,21417,FIB,"Rewrite the erroneous shift in verb tense. The class is watching a classical movie, but we all suddenly heard the alarm go off.",,,"The class is watching a classical movie,but we all suddenly hear the alarm go off.",,,5,2,1,,Enabled,,,,,,2549
+21418,293,21418,FIB,"Rewrite the erroneous shift in verb tense. Merry is opening the shop, cleaned the tables and arranging the chairs.",,,"Merry is opening the shop,cleans the tables and arranging the chairs.",,,6,2,1,,Enabled,,,,,,2549
 21419,293,21419,FIB,Rewrite the erroneous shift in verb tense. I will iron out the clothes and baked a pie.,,,I will iron out the clothes and will bake a pie.,,,7,2,1,,Enabled,,,,,,2549
 21420,293,21420,FIB,"Rewrite the erroneous shift in verb tense. I was looking for my pen, and I see a cockroach on the floor.",,,I was looking for my pen and I saw a cockroach on the floor.,,,8,2,1,,Enabled,,,,,,2549
 21421,293,21421,FIB,Rewrite the erroneous shift in verb tense. Mike is playing the guitar and he was singing in the streets.,,,Mike is playing the guitar and he is singing in the streets.,,,9,2,1,,Enabled,,,,,,2549
-21422,293,21422,FIB,"Rewrite the erroneous shift in verb tense. Daniel loves to eat anything, but his sister hated eating spinach.",,,"Daniel loves to eat anything, but his sister hates eating spinach.",,,10,2,1,,Enabled,,,,,,2549
+21422,293,21422,FIB,"Rewrite the erroneous shift in verb tense. Daniel loves to eat anything, but his sister hated eating spinach.",,,"Daniel loves to eat anything,but his sister hates eating spinach.",,,10,2,1,,Enabled,,,,,,2549
 21423,293,21423,MC,Identify if the sentence has a shift in verb or not. I like to walk on sunny days and drank a hot beverage.,,,,,,11,2,1,,Enabled,,,,,,2510
 21424,293,21424,MC,"Identify if the sentence has a shift in verb or not. Josh wrote to me  and in his letter, it tells me his problems.",,,,,,12,2,1,,Enabled,,,,,,2510
 21425,293,21425,MC,Identify if the sentence has a shift in verb or not. I decided to eat in the canteen and order a hot bowl of soup.,,,,,,13,2,1,,Enabled,,,,,,2510
@@ -643,7 +643,7 @@ Run-on",,,6,1,1,,Enabled,,,,,,2555
 21634,297,21634,FIB,Find then write the modal verb in the sentence. It should be the rain that cause the flood.,,,should,,,11,3,1,,Enabled,,,,,,2544
 21635,297,21635,FIB,Find then write the modal verb in the sentence. I will see you next Wednesday.,,,will,,,12,3,1,,Enabled,,,,,,2544
 21636,297,21636,FIB,Find then write the modal verb in the sentence. William told me he can tune a piano.,,,can,,,13,3,1,,Enabled,,,,,,2545
-21637,297,21637,FIB,Find then write the modal verb in the sentence. Just because you can doesn't mean you should.,,,"can, should",,,14,3,1,,Enabled,,,,,,2545
+21637,297,21637,FIB,Find then write the modal verb in the sentence. Just because you can doesn't mean you should.,,,"can,should",,,14,3,1,,Enabled,,,,,,2545
 21638,297,21638,FIB,Find then write the modal verb in the sentence. I can't swim fast.,,,can't,,,15,3,1,,Enabled,,,,,,2545
 21639,297,21639,FIB,Find then write the modal verb in the sentence. Jess will not attend the prom.,,,will not,,,16,3,1,,Enabled,,,,,,2545
 21640,297,21640,FIB,Find then write the modal verb in the sentence. I might not make it.,,,might not,,,17,3,1,,Enabled,,,,,,2545
@@ -695,22 +695,22 @@ Run-on",,,6,1,1,,Enabled,,,,,,2555
 21686,298,21686,FIB,Replace the noun with the correct pronoun. Cat,,,It,,,8,1,1,,Enabled,,,,,,2544
 21687,298,21687,FIB,Replace the noun with the correct pronoun. Daniel and I,,,We,,,9,1,1,,Enabled,,,,,,2544
 21688,298,21688,FIB,Replace the noun with the correct pronoun. Jesse and Ethan,,,They,,,10,1,1,,Enabled,,,,,,2544
-21689,298,21689,FIB,Identify the pronouns used in the sentence. I am sad that they left me behind.,,,"I, they, me",,,5,2,1,,Enabled,,,,,,2544
+21689,298,21689,FIB,Identify the pronouns used in the sentence. I am sad that they left me behind.,,,"I,they,me",,,5,2,1,,Enabled,,,,,,2544
 21690,298,21690,FIB,Identify the pronouns used in the sentence. Luke told me about his story.,,,his,,,6,2,1,,Enabled,,,,,,2544
-21691,298,21691,FIB,Identify the pronouns used in the sentence. Everyone left me behind.,,,"Everyone, me",,,7,2,1,,Enabled,,,,,,2544
-21692,298,21692,FIB,Identify the pronouns used in the sentence. Someone gave him a kiss.,,,"Someone, him",,,8,2,1,,Enabled,,,,,,2544
+21691,298,21691,FIB,Identify the pronouns used in the sentence. Everyone left me behind.,,,"Everyone,me",,,7,2,1,,Enabled,,,,,,2544
+21692,298,21692,FIB,Identify the pronouns used in the sentence. Someone gave him a kiss.,,,"Someone,him",,,8,2,1,,Enabled,,,,,,2544
 21693,298,21693,FIB,Identify the pronouns used in the sentence. Jeremy has been waiting for me.,,,me,,,9,2,1,,Enabled,,,,,,2544
-21694,298,21694,FIB,Identify the pronouns used in the sentence. I have seen them play in the park.,,,"I, them",,,10,2,1,,Enabled,,,,,,2544
+21694,298,21694,FIB,Identify the pronouns used in the sentence. I have seen them play in the park.,,,"I,them",,,10,2,1,,Enabled,,,,,,2544
 21695,298,21695,FIB,Identify the pronouns used in the sentence. Anyone can win in this game.,,,Anyone,,,11,2,1,,Enabled,,,,,,2544
 21696,298,21696,FIB,Identify the pronouns used in the sentence. She is very hard headed.,,,She,,,12,2,1,,Enabled,,,,,,2544
 21697,298,21697,FIB,Identify the pronouns used in the sentence. We can't go home just yet.,,,we,,,13,2,1,,Enabled,,,,,,2544
 21698,298,21698,FIB,Identify the pronouns used in the sentence. I hope there are no more accidents.,,,I,,,14,2,1,,Enabled,,,,,,2544
 21699,298,21699,FIB,Identify the pronouns used in the sentence.Can it be solved?,,,it,,,15,2,1,,Enabled,,,,,,2544
-21700,298,21700,FIB,Identify the pronouns used in the sentence. I am his only friend.,,,"I, his",,,16,2,1,,Enabled,,,,,,2544
+21700,298,21700,FIB,Identify the pronouns used in the sentence. I am his only friend.,,,"I,his",,,16,2,1,,Enabled,,,,,,2544
 21701,298,21701,FIB,Identify the pronouns used in the sentence. Her mother does not seem bad.,,,Her,,,17,2,1,,Enabled,,,,,,2544
-21702,298,21702,FIB,Identify the pronouns used in the sentence. She should be with her dad.,,,"She, her",,,18,2,1,,Enabled,,,,,,2544
+21702,298,21702,FIB,Identify the pronouns used in the sentence. She should be with her dad.,,,"She,her",,,18,2,1,,Enabled,,,,,,2544
 21703,298,21703,FIB,Identify the pronouns used in the sentence. We do not know if there are any problems left.,,,We,,,19,2,1,,Enabled,,,,,,2544
-21704,298,21704,FIB,Identify the pronouns used in the sentence. You can think of me as someone who cares.,,,"You, me, someone",,,20,2,1,,Enabled,,,,,,2544
+21704,298,21704,FIB,Identify the pronouns used in the sentence. You can think of me as someone who cares.,,,"You,me,someone",,,20,2,1,,Enabled,,,,,,2544
 21705,298,21705,FIB,Identify the pronouns used in the sentence.The police will protect us.,,,us,,,21,2,1,,Enabled,,,,,,2544
 21706,298,21706,FIB,Identify the pronouns used in the sentence. I remember seeing a cat.,,,I,,,22,2,1,,Enabled,,,,,,2544
 21707,298,21707,FIB,Identify the pronouns used in the sentence. They are very friendly.,,,they,,,23,2,1,,Enabled,,,,,,2544
@@ -1472,15 +1472,15 @@ Run-on",,,6,1,1,,Enabled,,,,,,2555
 22463,313,22463,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. My Kind of Girl, by Michael Buble.",,,"""My Kind of Girl,""",,,1,1,1,,Enabled,,,,,,2529
 22464,313,22464,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. He talked about world history for a few hours.",,,none,,,1,1,1,,Enabled,,,,,,2529
 22465,313,22465,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. He sang, ""Don't Let Me Down.""",,,none,,,2,1,1,,Enabled,,,,,,2529
-22466,313,22466,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Aristotle once said, We are what we repeatedly do. Excellence, then, is not an act, but a habit.",,,"""We are what we repeatedly do. Excellence, then, is not an act, but a habit.""",,,2,1,1,,Enabled,,,,,,2529
-22467,313,22467,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Are you familiar with the quote, Be kind, for everyone you meet is fighting a hard battle.",,,"""Be kind, for everyone you meet is fighting a hard battle.""",,,2,1,1,,Enabled,,,,,,2529
+22466,313,22466,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Aristotle once said, We are what we repeatedly do. Excellence, then, is not an act, but a habit.",,,"""We are what we repeatedly do. Excellence,then,is not an act,but a habit.""",,,2,1,1,,Enabled,,,,,,2529
+22467,313,22467,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Are you familiar with the quote, Be kind, for everyone you meet is fighting a hard battle.",,,"""Be kind,for everyone you meet is fighting a hard battle.""",,,2,1,1,,Enabled,,,,,,2529
 22468,313,22468,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. He said,""do not run in the halls, or you will hurt yourself.""",,,none,,,3,1,1,,Enabled,,,,,,2529
 22469,313,22469,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. My favorite book is ""Harry Potter"". by J.K. Rowling.",,,none,,,3,1,1,,Enabled,,,,,,2529
 22470,313,22470,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. My favorite film is, The Dark Knight.",,,"""The Dark Knight""",,,3,1,1,,Enabled,,,,,,2529
 22471,313,22471,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Tony said, ""I will leave my belongings to you.""",,,none,,,4,1,1,,Enabled,,,,,,2529
 22472,313,22472,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. You should sing, Can't Stop the Feeling,by Justin Timberlake.",,,"""Can't Stop the Feeling,""",,,4,1,1,,Enabled,,,,,,2529
 22473,313,22473,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. My father told me, ""Never give up on your dreams.""",,,none,,,4,1,1,,Enabled,,,,,,2529
-22474,313,22474,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Martin Luther King said, In the End, we will remember not the words of our enemies, but the silence of our friends.",,,"""In the End, we will remember not the words of our enemies, but the silence of our friends.""",,,5,1,1,,Enabled,,,,,,2529
+22474,313,22474,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Martin Luther King said, In the End, we will remember not the words of our enemies, but the silence of our friends.",,,"""In the End,we will remember not the words of our enemies,but the silence of our friends.""",,,5,1,1,,Enabled,,,,,,2529
 22475,313,22475,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Sasha told Andrew, do not play with fire.",,,"""do not play with fire.""",,,5,1,1,,Enabled,,,,,,2529
 22476,313,22476,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. The article, ""5 things you can cook easy,"" is a very informative read.",,,none,,,5,2,1,,Enabled,,,,,,2529
 22477,313,22477,FIB,"Add quotation marks, if the sentence requires it, otherwise write none. Bill is writing his essay. It is called, the effects of the internet, today.",,,"""The Effects of the Internet,Today.""",,,6,2,1,,Enabled,,,,,,2529
@@ -2366,102 +2366,102 @@ Run-on",,,6,1,1,,Enabled,,,,,,2555
 23357,390,23357,FIB,Write yes if the sentence is correct and no if it is not. The police wouldn't uncuff the man.,,,no,,,10,3,1,,Enabled,,,,,,2513
 23358,390,23358,FIB,Write yes if the sentence is correct and no if it is not. There won't be nothing in this area.,,,no,,,11,3,1,,Enabled,,,,,,2513
 23359,390,23359,FIB,Write yes if the sentence is correct and no if it is not.  He couldn't find his toy.,,,yes,,,12,3,1,,Enabled,,,,,,2513
-23360,391,23360,FIB,Rewrite the sentence by using the correct commas. Yes you are all required to attend the assembly.,,,"Yes, you are all required to attend the assembly.",,,1,1,1,,Enabled,,,,,,2510
-23361,391,23361,FIB,Rewrite the sentence by using the correct commas.After finding out about the results they immediately drove to the office.,,,"After finding out about the results, they immediately drove to the office.",,,2,1,1,,Enabled,,,,,,2510
-23362,391,23362,FIB,Rewrite the sentence by using the correct commas. The show was amazing wasn't it?,,,"The show was amazing, wasn't it?",,,3,1,1,,Enabled,,,,,,2510
-23363,391,23363,FIB,Rewrite the sentence by using the correct commas. He didn't anger her did he?,,,"He didn't anger her, did he?",,,4,1,1,,Enabled,,,,,,2510
-23364,391,23364,FIB,Rewrite the sentence by using the correct commas. Charles you should start studying for the exam.,,,"Charles, you should start studying for the exam.",,,5,1,1,,Enabled,,,,,,2510
-23365,391,23365,FIB,Rewrite the sentence by using the correct commas. I know everything has been tiring Patrick you should just take the day off.,,,"I know everything has been tiring, Patrick, you should just take the day off.",,,6,1,1,,Enabled,,,,,,2510
-23366,391,23366,FIB,Rewrite the sentence by using the correct commas. No he will not be attending the meeting.,,,"No, he will not be attending the meeting.",,,7,1,1,,Enabled,,,,,,2510
-23367,391,23367,FIB,Rewrite the sentence by using the correct commas. Until he finishes his project Peter will not be allowed to play.,,,"Until he finishes his project, Peter will not be allowed to play.",,,8,1,1,,Enabled,,,,,,2510
-23368,391,23368,FIB,Rewrite the sentence by using the correct commas. If they decide to play ball they can use my backyard.,,,"If they decide to play ball, they can use my backyard.",,,9,1,1,,Enabled,,,,,,2510
-23369,391,23369,FIB,Rewrite the sentence by using the correct commas. He didn't study did he?,,,"He didn't study, did he?",,,10,1,1,,Enabled,,,,,,2510
-23370,391,23370,FIB,Rewrite the sentence by using the correct commas. Don please be careful in crossing the river.,,,"Don, please be careful in crossing the river.",,,11,1,1,,Enabled,,,,,,2510
-23371,391,23371,FIB,Rewrite the sentence by using the correct commas. Richard go to the store and buy some fruits.,,,"Richard, go to the store and buy some fruits.",,,12,1,1,,Enabled,,,,,,2511
-23372,391,23372,FIB,Rewrite the sentence by using the correct commas. He's deaf isn't he?,,,"He's deaf, isn't he?",,,13,1,1,,Enabled,,,,,,2511
-23373,391,23373,FIB,Rewrite the sentence by using the correct commas. Riding in his car Matt was enjoying  the drive.,,,"Riding in his car, Matt was enjoying  the drive.",,,14,1,1,,Enabled,,,,,,2511
-23374,391,23374,FIB,Rewrite the sentence by using the correct commas. No I will not answer any further questions.,,,"No, I will not answer any further questions.",,,15,1,1,,Enabled,,,,,,2511
-23375,391,23375,FIB,Rewrite the sentence by using the correct commas. Since 10 years old John has been an amazing musician.,,,"Since 10 years old, John has been an amazing musician.",,,16,1,1,,Enabled,,,,,,2511
-23376,391,23376,FIB,Rewrite the sentence by using the correct commas. It's over isnt it?,,,"It's over, isnt it?",,,17,1,1,,Enabled,,,,,,2511
-23377,391,23377,FIB,Rewrite the sentence by using the correct commas. I didn't fail did I?,,,"I didn't fail, did I?",,,18,1,1,,Enabled,,,,,,2511
-23378,391,23378,FIB,Rewrite the sentence by using the correct commas. Yes we are going to be in the play.,,,"Yes, we are going to be in the play.",,,1,2,1,,Enabled,,,,,,2511
-23379,391,23379,FIB,Rewrite the sentence by using the correct commas. No we are not allowed to go out,,,"No, we are not allowed to go out",,,2,2,1,,Enabled,,,,,,2511
-23380,391,23380,FIB,Rewrite the sentence by using the correct commas. Look for another door Mia that one is rusty.,,,"Look for another door, Mia, that one is rusty.",,,3,2,1,,Enabled,,,,,,2511
-23381,391,23381,FIB,Rewrite the sentence by using the correct commas. Don't be disappointed at yourself Kurt,,,"Don't be disappointed at yourself, Kurt",,,4,2,1,,Enabled,,,,,,2511
-23382,391,23382,FIB,Rewrite the sentence by using the correct commas. Please behave yourself John,,,"Please behave yourself, John",,,5,2,1,,Enabled,,,,,,2511
-23383,391,23383,FIB,Rewrite the sentence by using the correct commas. On a bright morning day my family went to the park.,,,"On a bright morning day, my family went to the park.",,,6,2,1,,Enabled,,,,,,2511
-23384,391,23384,FIB,Rewrite the sentence by using the correct commas. To become the best painter Luis has to work really hard.,,,"To become the best painter, Luis has to work really hard.",,,7,2,1,,Enabled,,,,,,2511
-23385,391,23385,FIB,Rewrite the sentence by using the correct commas. He was crazy wasn't he?,,,"He was crazy, wasn't he?",,,8,2,1,,Enabled,,,,,,2511
-23386,391,23386,FIB,Rewrite the sentence by using the correct commas. Lina didn't come here did she?,,,"Lina didn't come here, did she?",,,9,2,1,,Enabled,,,,,,2511
-23387,391,23387,FIB,Rewrite the sentence by using the correct commas. He's afraid isn't he.,,,"He's afraid, isn't he?",,,10,2,1,,Enabled,,,,,,2511
-23388,391,23388,FIB,Rewrite the sentence by using the correct commas. No I didn't know school was cancelled.,,,"No, I didn't know school was cancelled.",,,11,2,1,,Enabled,,,,,,2511
-23389,391,23389,FIB,Rewrite the sentence by using the correct commas.  Yes I am glad I was chosen to represent the class,,,"Yes, I am glad I was chosen to represent the class",,,12,2,1,,Enabled,,,,,,2511
-23390,391,23390,FIB,Rewrite the sentence by using the correct commas. No he doesn't want to be bothered.,,,"No, he doesn't want to be bothered.",,,13,2,1,,Enabled,,,,,,2511
-23391,391,23391,FIB,Rewrite the sentence by using the correct commas. Keep up the good work Stephen,,,"Keep up the good work, Stephen",,,14,2,1,,Enabled,,,,,,2511
-23392,391,23392,FIB,Rewrite the sentence by using the correct commas. Make a chart about the report Naomi we might need it.,,,"Make a chart about the report, Naomi, we might need it.",,,15,2,1,,Enabled,,,,,,2511
-23393,391,23393,FIB,Rewrite the sentence by using the correct commas. In the afternoon most of the customers will usually start lining up.,,,"In the afternoon, most of the customers will usually start lining up.",,,16,2,1,,Enabled,,,,,,2511
-23394,391,23394,FIB,Rewrite the sentence by using the correct commas. On the beach we can find several people enjoying the sea.,,,"On the beach, we can find several people enjoying the sea.",,,17,2,1,,Enabled,,,,,,2511
-23395,391,23395,FIB,Rewrite the sentence by using the correct commas. For once in your life go clean your room.,,,"For once in your life, go clean your room.",,,1,3,1,,Enabled,,,,,,2511
-23396,391,23396,FIB,Rewrite the sentence by using the correct commas. He wasn't arrested was he?,,,"He wasn't arrested, was he?",,,2,3,1,,Enabled,,,,,,2511
-23397,391,23397,FIB,Rewrite the sentence by using the correct commas. Lisa didn't go home yet did she?,,,"Lisa didn't go home yet, did she?",,,3,3,1,,Enabled,,,,,,2511
-23398,391,23398,FIB,Rewrite the sentence by using the correct commas.  No he made it out alright.,,,"No, he made it out alright.",,,4,3,1,,Enabled,,,,,,2511
-23399,391,23399,FIB,Rewrite the sentence by using the correct commas.  Yes Marie definitely passed the exam.,,,"Yes, Marie definitely passed the exam.",,,5,3,1,,Enabled,,,,,,2511
-23400,391,23400,FIB,Rewrite the sentence by using the correct commas. Lance look for your sister's watch.,,,"Lance, look for your sister's watch.",,,6,3,1,,Enabled,,,,,,2511
-23401,391,23401,FIB,Rewrite the sentence by using the correct commas. I didn't think you would listen to my advice Misha you were always a stubborn girl.,,,"I didn't think you would listen to my advice, Misha, you were always a stubborn girl.",,,7,3,1,,Enabled,,,,,,2512
-23402,391,23402,FIB,Rewrite the sentence by using the correct commas. I left you a nice little gift back at home Harold.,,,"I left you a nice little gift back at home, Harold.",,,8,3,1,,Enabled,,,,,,2512
-23403,391,23403,FIB,Rewrite the sentence by using the correct commas. One stormy night a boy was knocking on my door.,,,"One stormy night, a boy was knocking on my door.",,,9,3,1,,Enabled,,,,,,2512
-23404,391,23404,FIB,Rewrite the sentence by using the correct commas. It was christmas eve I had no money to buy a present.,,,"It was christmas eve, I had no money to buy a present.",,,10,3,1,,Enabled,,,,,,2512
-23405,391,23405,FIB,Rewrite the sentence by using the correct commas. Yes you can help me pack rations.,,,"Yes, you can help me pack rations.",,,11,3,1,,Enabled,,,,,,2512
-23406,391,23406,FIB,Rewrite the sentence by using the correct commas. No I don't feel comfortable being alone.,,,"No, I don't feel comfortable being alone.",,,12,3,1,,Enabled,,,,,,2512
-23407,391,23407,FIB,Rewrite the sentence by using the correct commas. No we will not stop studying.,,,"No, we will not stop studying.",,,13,3,1,,Enabled,,,,,,2512
-23408,391,23408,FIB,Rewrite the sentence by using the correct commas. He lost his shoe didn't he?,,,"He lost his shoe, didn't he?",,,14,3,1,,Enabled,,,,,,2512
-23409,391,23409,FIB,Rewrite the sentence by using the correct commas. Kenneth ran out of money didn't he?,,,"Kenneth ran out of money, didn't he?",,,15,3,1,,Enabled,,,,,,2512
-23410,391,23410,FIB,Rewrite the sentence by using the correct commas. John don't forget to write me a letter.,,,"John, don't forget to write me a letter.",,,16,3,1,,Enabled,,,,,,2512
-23411,391,23411,FIB,Rewrite the sentence by using the correct commas. You should know better than that Christine that is not a very nice thing to say.,,,"You should know better than that, Christine, that is not a very nice thing to say.",,,17,3,1,,Enabled,,,,,,2512
+23360,391,23360,FIB,Rewrite the sentence by using the correct commas. Yes you are all required to attend the assembly.,,,"Yes,you are all required to attend the assembly.",,,1,1,1,,Enabled,,,,,,2510
+23361,391,23361,FIB,Rewrite the sentence by using the correct commas.After finding out about the results they immediately drove to the office.,,,"After finding out about the results,they immediately drove to the office.",,,2,1,1,,Enabled,,,,,,2510
+23362,391,23362,FIB,Rewrite the sentence by using the correct commas. The show was amazing wasn't it?,,,"The show was amazing,wasn't it?",,,3,1,1,,Enabled,,,,,,2510
+23363,391,23363,FIB,Rewrite the sentence by using the correct commas. He didn't anger her did he?,,,"He didn't anger her,did he?",,,4,1,1,,Enabled,,,,,,2510
+23364,391,23364,FIB,Rewrite the sentence by using the correct commas. Charles you should start studying for the exam.,,,"Charles,you should start studying for the exam.",,,5,1,1,,Enabled,,,,,,2510
+23365,391,23365,FIB,Rewrite the sentence by using the correct commas. I know everything has been tiring Patrick you should just take the day off.,,,"I know everything has been tiring,Patrick,you should just take the day off.",,,6,1,1,,Enabled,,,,,,2510
+23366,391,23366,FIB,Rewrite the sentence by using the correct commas. No he will not be attending the meeting.,,,"No,he will not be attending the meeting.",,,7,1,1,,Enabled,,,,,,2510
+23367,391,23367,FIB,Rewrite the sentence by using the correct commas. Until he finishes his project Peter will not be allowed to play.,,,"Until he finishes his project,Peter will not be allowed to play.",,,8,1,1,,Enabled,,,,,,2510
+23368,391,23368,FIB,Rewrite the sentence by using the correct commas. If they decide to play ball they can use my backyard.,,,"If they decide to play ball,they can use my backyard.",,,9,1,1,,Enabled,,,,,,2510
+23369,391,23369,FIB,Rewrite the sentence by using the correct commas. He didn't study did he?,,,"He didn't study,did he?",,,10,1,1,,Enabled,,,,,,2510
+23370,391,23370,FIB,Rewrite the sentence by using the correct commas. Don please be careful in crossing the river.,,,"Don,please be careful in crossing the river.",,,11,1,1,,Enabled,,,,,,2510
+23371,391,23371,FIB,Rewrite the sentence by using the correct commas. Richard go to the store and buy some fruits.,,,"Richard,go to the store and buy some fruits.",,,12,1,1,,Enabled,,,,,,2511
+23372,391,23372,FIB,Rewrite the sentence by using the correct commas. He's deaf isn't he?,,,"He's deaf,isn't he?",,,13,1,1,,Enabled,,,,,,2511
+23373,391,23373,FIB,Rewrite the sentence by using the correct commas. Riding in his car Matt was enjoying  the drive.,,,"Riding in his car,Matt was enjoying  the drive.",,,14,1,1,,Enabled,,,,,,2511
+23374,391,23374,FIB,Rewrite the sentence by using the correct commas. No I will not answer any further questions.,,,"No,I will not answer any further questions.",,,15,1,1,,Enabled,,,,,,2511
+23375,391,23375,FIB,Rewrite the sentence by using the correct commas. Since 10 years old John has been an amazing musician.,,,"Since 10 years old,John has been an amazing musician.",,,16,1,1,,Enabled,,,,,,2511
+23376,391,23376,FIB,Rewrite the sentence by using the correct commas. It's over isnt it?,,,"It's over,isnt it?",,,17,1,1,,Enabled,,,,,,2511
+23377,391,23377,FIB,Rewrite the sentence by using the correct commas. I didn't fail did I?,,,"I didn't fail,did I?",,,18,1,1,,Enabled,,,,,,2511
+23378,391,23378,FIB,Rewrite the sentence by using the correct commas. Yes we are going to be in the play.,,,"Yes,we are going to be in the play.",,,1,2,1,,Enabled,,,,,,2511
+23379,391,23379,FIB,Rewrite the sentence by using the correct commas. No we are not allowed to go out,,,"No,we are not allowed to go out",,,2,2,1,,Enabled,,,,,,2511
+23380,391,23380,FIB,Rewrite the sentence by using the correct commas. Look for another door Mia that one is rusty.,,,"Look for another door,Mia,that one is rusty.",,,3,2,1,,Enabled,,,,,,2511
+23381,391,23381,FIB,Rewrite the sentence by using the correct commas. Don't be disappointed at yourself Kurt,,,"Don't be disappointed at yourself,Kurt",,,4,2,1,,Enabled,,,,,,2511
+23382,391,23382,FIB,Rewrite the sentence by using the correct commas. Please behave yourself John,,,"Please behave yourself,John",,,5,2,1,,Enabled,,,,,,2511
+23383,391,23383,FIB,Rewrite the sentence by using the correct commas. On a bright morning day my family went to the park.,,,"On a bright morning day,my family went to the park.",,,6,2,1,,Enabled,,,,,,2511
+23384,391,23384,FIB,Rewrite the sentence by using the correct commas. To become the best painter Luis has to work really hard.,,,"To become the best painter,Luis has to work really hard.",,,7,2,1,,Enabled,,,,,,2511
+23385,391,23385,FIB,Rewrite the sentence by using the correct commas. He was crazy wasn't he?,,,"He was crazy,wasn't he?",,,8,2,1,,Enabled,,,,,,2511
+23386,391,23386,FIB,Rewrite the sentence by using the correct commas. Lina didn't come here did she?,,,"Lina didn't come here,did she?",,,9,2,1,,Enabled,,,,,,2511
+23387,391,23387,FIB,Rewrite the sentence by using the correct commas. He's afraid isn't he.,,,"He's afraid,isn't he?",,,10,2,1,,Enabled,,,,,,2511
+23388,391,23388,FIB,Rewrite the sentence by using the correct commas. No I didn't know school was cancelled.,,,"No,I didn't know school was cancelled.",,,11,2,1,,Enabled,,,,,,2511
+23389,391,23389,FIB,Rewrite the sentence by using the correct commas.  Yes I am glad I was chosen to represent the class,,,"Yes,I am glad I was chosen to represent the class",,,12,2,1,,Enabled,,,,,,2511
+23390,391,23390,FIB,Rewrite the sentence by using the correct commas. No he doesn't want to be bothered.,,,"No,he doesn't want to be bothered.",,,13,2,1,,Enabled,,,,,,2511
+23391,391,23391,FIB,Rewrite the sentence by using the correct commas. Keep up the good work Stephen,,,"Keep up the good work,Stephen",,,14,2,1,,Enabled,,,,,,2511
+23392,391,23392,FIB,Rewrite the sentence by using the correct commas. Make a chart about the report Naomi we might need it.,,,"Make a chart about the report,Naomi,we might need it.",,,15,2,1,,Enabled,,,,,,2511
+23393,391,23393,FIB,Rewrite the sentence by using the correct commas. In the afternoon most of the customers will usually start lining up.,,,"In the afternoon,most of the customers will usually start lining up.",,,16,2,1,,Enabled,,,,,,2511
+23394,391,23394,FIB,Rewrite the sentence by using the correct commas. On the beach we can find several people enjoying the sea.,,,"On the beach,we can find several people enjoying the sea.",,,17,2,1,,Enabled,,,,,,2511
+23395,391,23395,FIB,Rewrite the sentence by using the correct commas. For once in your life go clean your room.,,,"For once in your life,go clean your room.",,,1,3,1,,Enabled,,,,,,2511
+23396,391,23396,FIB,Rewrite the sentence by using the correct commas. He wasn't arrested was he?,,,"He wasn't arrested,was he?",,,2,3,1,,Enabled,,,,,,2511
+23397,391,23397,FIB,Rewrite the sentence by using the correct commas. Lisa didn't go home yet did she?,,,"Lisa didn't go home yet,did she?",,,3,3,1,,Enabled,,,,,,2511
+23398,391,23398,FIB,Rewrite the sentence by using the correct commas.  No he made it out alright.,,,"No,he made it out alright.",,,4,3,1,,Enabled,,,,,,2511
+23399,391,23399,FIB,Rewrite the sentence by using the correct commas.  Yes Marie definitely passed the exam.,,,"Yes,Marie definitely passed the exam.",,,5,3,1,,Enabled,,,,,,2511
+23400,391,23400,FIB,Rewrite the sentence by using the correct commas. Lance look for your sister's watch.,,,"Lance,look for your sister's watch.",,,6,3,1,,Enabled,,,,,,2511
+23401,391,23401,FIB,Rewrite the sentence by using the correct commas. I didn't think you would listen to my advice Misha you were always a stubborn girl.,,,"I didn't think you would listen to my advice,Misha,you were always a stubborn girl.",,,7,3,1,,Enabled,,,,,,2512
+23402,391,23402,FIB,Rewrite the sentence by using the correct commas. I left you a nice little gift back at home Harold.,,,"I left you a nice little gift back at home,Harold.",,,8,3,1,,Enabled,,,,,,2512
+23403,391,23403,FIB,Rewrite the sentence by using the correct commas. One stormy night a boy was knocking on my door.,,,"One stormy night,a boy was knocking on my door.",,,9,3,1,,Enabled,,,,,,2512
+23404,391,23404,FIB,Rewrite the sentence by using the correct commas. It was christmas eve I had no money to buy a present.,,,"It was christmas eve,I had no money to buy a present.",,,10,3,1,,Enabled,,,,,,2512
+23405,391,23405,FIB,Rewrite the sentence by using the correct commas. Yes you can help me pack rations.,,,"Yes,you can help me pack rations.",,,11,3,1,,Enabled,,,,,,2512
+23406,391,23406,FIB,Rewrite the sentence by using the correct commas. No I don't feel comfortable being alone.,,,"No,I don't feel comfortable being alone.",,,12,3,1,,Enabled,,,,,,2512
+23407,391,23407,FIB,Rewrite the sentence by using the correct commas. No we will not stop studying.,,,"No,we will not stop studying.",,,13,3,1,,Enabled,,,,,,2512
+23408,391,23408,FIB,Rewrite the sentence by using the correct commas. He lost his shoe didn't he?,,,"He lost his shoe,didn't he?",,,14,3,1,,Enabled,,,,,,2512
+23409,391,23409,FIB,Rewrite the sentence by using the correct commas. Kenneth ran out of money didn't he?,,,"Kenneth ran out of money,didn't he?",,,15,3,1,,Enabled,,,,,,2512
+23410,391,23410,FIB,Rewrite the sentence by using the correct commas. John don't forget to write me a letter.,,,"John,don't forget to write me a letter.",,,16,3,1,,Enabled,,,,,,2512
+23411,391,23411,FIB,Rewrite the sentence by using the correct commas. You should know better than that Christine that is not a very nice thing to say.,,,"You should know better than that,Christine,that is not a very nice thing to say.",,,17,3,1,,Enabled,,,,,,2512
 23412,392,23412,FIB,Rewrite the sentence by using the correct punctuation marks. You should be here by 10 00 am,,,You should be here by 10:00 a.m.,,,1,1,1,,Enabled,,,,,,2509
-23413,392,23413,FIB,Rewrite the sentence by using the correct punctuation marks. Daniel you should visit your grandmother this weekend,,,"Daniel, you should visit your grandmother this weekend.",,,2,1,1,,Enabled,,,,,,2509
+23413,392,23413,FIB,Rewrite the sentence by using the correct punctuation marks. Daniel you should visit your grandmother this weekend,,,"Daniel,you should visit your grandmother this weekend.",,,2,1,1,,Enabled,,,,,,2509
 23414,392,23414,FIB,Rewrite the sentence by using the correct punctuation marks. Is he alright,,,Is he alright?,,,3,1,1,,Enabled,,,,,,2509
-23415,392,23415,FIB,Rewrite the sentence by using the correct punctuation marks. Sean couldn't endure it could he,,,"Sean couldn't endure it, could he?",,,4,1,1,,Enabled,,,,,,2509
-23416,392,23416,FIB,Rewrite the sentence by using the correct punctuation marks. Neil Harold and Trish are going to school together,,,"Neil, Harold and Trish are going to school together.",,,5,1,1,,Enabled,,,,,,2509
-23417,392,23417,FIB,Rewrite the sentence by using the correct punctuation marks. You should buy the following pen notebook ruler sharpener and glue,,,"You should buy the following: pen, notebook, ruler sharpener and glue.",,,6,1,1,,Enabled,,,,,,2509
-23418,392,23418,FIB,Rewrite the sentence by using the correct punctuation marks. A while ago I met a very energetic couple,,,"A while ago, I met a very energetic couple.",,,7,1,1,,Enabled,,,,,,2509
-23419,392,23419,FIB,Rewrite the sentence by using the correct punctuation marks. What have you been doing Peter,,,"What have you been doing, Peter?",,,8,1,1,,Enabled,,,,,,2509
-23420,392,23420,FIB,Rewrite the sentence by using the correct punctuation marks. Richard bought fruits vegetables meat and seasonings,,,"Richard bought fruits, vegetables, meat and seasonings.",,,9,1,1,,Enabled,,,,,,2509
-23421,392,23421,FIB,Rewrite the sentence by using the correct punctuation marks. He is sick isn't he,,,"He is sick, isn't he?",,,10,1,1,,Enabled,,,,,,2509
-23422,392,23422,FIB,Rewrite the sentence by using the correct punctuation marks. In the past people would often get sick,,,"In the past, people would often get sick.",,,11,1,1,,Enabled,,,,,,2509
+23415,392,23415,FIB,Rewrite the sentence by using the correct punctuation marks. Sean couldn't endure it could he,,,"Sean couldn't endure it,could he?",,,4,1,1,,Enabled,,,,,,2509
+23416,392,23416,FIB,Rewrite the sentence by using the correct punctuation marks. Neil Harold and Trish are going to school together,,,"Neil,Harold and Trish are going to school together.",,,5,1,1,,Enabled,,,,,,2509
+23417,392,23417,FIB,Rewrite the sentence by using the correct punctuation marks. You should buy the following pen notebook ruler sharpener and glue,,,"You should buy the following: pen,notebook,ruler sharpener and glue.",,,6,1,1,,Enabled,,,,,,2509
+23418,392,23418,FIB,Rewrite the sentence by using the correct punctuation marks. A while ago I met a very energetic couple,,,"A while ago,I met a very energetic couple.",,,7,1,1,,Enabled,,,,,,2509
+23419,392,23419,FIB,Rewrite the sentence by using the correct punctuation marks. What have you been doing Peter,,,"What have you been doing,Peter?",,,8,1,1,,Enabled,,,,,,2509
+23420,392,23420,FIB,Rewrite the sentence by using the correct punctuation marks. Richard bought fruits vegetables meat and seasonings,,,"Richard bought fruits,vegetables,meat and seasonings.",,,9,1,1,,Enabled,,,,,,2509
+23421,392,23421,FIB,Rewrite the sentence by using the correct punctuation marks. He is sick isn't he,,,"He is sick,isn't he?",,,10,1,1,,Enabled,,,,,,2509
+23422,392,23422,FIB,Rewrite the sentence by using the correct punctuation marks. In the past people would often get sick,,,"In the past,people would often get sick.",,,11,1,1,,Enabled,,,,,,2509
 23423,392,23423,FIB,Rewrite the sentence by using the correct punctuation marks. I should wake up as early as 5 00 am,,,I should wake up as early as 5:00 a.m.,,,12,1,1,,Enabled,,,,,,2509
-23424,392,23424,FIB,Rewrite the sentence by using the correct punctuation marks. You know how to pilot a plane right,,,"You know how to pilot a plane, right?",,,13,1,1,,Enabled,,,,,,2509
-23425,392,23425,FIB,Rewrite the sentence by using the correct punctuation marks. You should clean your room Dennis it is starting to look like a mess,,,"You should clean your room, Dennis, it is starting to look like a mess.",,,14,1,1,,Enabled,,,,,,2509
-23426,392,23426,FIB,Rewrite the sentence by using the correct punctuation marks. Justin Ryan and George are looking for their sister,,,"Justin, Ryan and George are looking for their sister.",,,1,2,1,,Enabled,,,,,,2509
-23427,392,23427,FIB,Rewrite the sentence by using the correct punctuation marks. No I am not interested in buying anything,,,"No, I am not interested in buying anything.",,,2,2,1,,Enabled,,,,,,2509
-23428,392,23428,FIB,Rewrite the sentence by using the correct punctuation marks. You should get the following materials paper glue scissors and pen,,,"You should get the following materials: paper, glue, scissors and pen.",,,3,2,1,,Enabled,,,,,,2509
-23429,392,23429,FIB,Rewrite the sentence by using the correct punctuation marks. Oh my what an amazing song,,,"Oh my, what an amazing song!",,,4,2,1,,Enabled,,,,,,2509
-23430,392,23430,FIB,Rewrite the sentence by using the correct punctuation marks. On the next day we headed to the museum,,,"On the next day, we headed to the museum.",,,5,2,1,,Enabled,,,,,,2509
-23431,392,23431,FIB,Rewrite the sentence by using the correct punctuation marks. Amazing this is very delicious,,,"Amazing, this is very delicious!",,,6,2,1,,Enabled,,,,,,2509
-23432,392,23432,FIB,Rewrite the sentence by using the correct punctuation marks. John can you help me fix the roof,,,"John, can you help me fix the roof?",,,7,2,1,,Enabled,,,,,,2509
-23433,392,23433,FIB,Rewrite the sentence by using the correct punctuation marks. You wanted to talk to me didn't you,,,"You wanted to talk to me, didn't you?",,,8,2,1,,Enabled,,,,,,2509
-23434,392,23434,FIB,Rewrite the sentence by using the correct punctuation marks. Once in awhile we get to have a party,,,"Once in awhile, we get to have a party.",,,9,2,1,,Enabled,,,,,,2509
-23435,392,23435,FIB,Rewrite the sentence by using the correct punctuation marks. What a fire broke out,,,"What, a fire broke out!",,,10,2,1,,Enabled,,,,,,2509
-23436,392,23436,FIB,Rewrite the sentence by using the correct punctuation marks.Anthony go and fetch some water,,,"Anthony, go and fetch some water.",,,11,2,1,,Enabled,,,,,,2509
-23437,392,23437,FIB,Rewrite the sentence by using the correct punctuation marks. I decided to bring a bag tissue paper pencil compass and flashlight,,,"I decided to bring a bag, tissue, paper, pencil, compass and flashlight.",,,12,2,1,,Enabled,,,,,,2510
+23424,392,23424,FIB,Rewrite the sentence by using the correct punctuation marks. You know how to pilot a plane right,,,"You know how to pilot a plane,right?",,,13,1,1,,Enabled,,,,,,2509
+23425,392,23425,FIB,Rewrite the sentence by using the correct punctuation marks. You should clean your room Dennis it is starting to look like a mess,,,"You should clean your room,Dennis,it is starting to look like a mess.",,,14,1,1,,Enabled,,,,,,2509
+23426,392,23426,FIB,Rewrite the sentence by using the correct punctuation marks. Justin Ryan and George are looking for their sister,,,"Justin,Ryan and George are looking for their sister.",,,1,2,1,,Enabled,,,,,,2509
+23427,392,23427,FIB,Rewrite the sentence by using the correct punctuation marks. No I am not interested in buying anything,,,"No,I am not interested in buying anything.",,,2,2,1,,Enabled,,,,,,2509
+23428,392,23428,FIB,Rewrite the sentence by using the correct punctuation marks. You should get the following materials paper glue scissors and pen,,,"You should get the following materials: paper,glue,scissors and pen.",,,3,2,1,,Enabled,,,,,,2509
+23429,392,23429,FIB,Rewrite the sentence by using the correct punctuation marks. Oh my what an amazing song,,,"Oh my,what an amazing song!",,,4,2,1,,Enabled,,,,,,2509
+23430,392,23430,FIB,Rewrite the sentence by using the correct punctuation marks. On the next day we headed to the museum,,,"On the next day,we headed to the museum.",,,5,2,1,,Enabled,,,,,,2509
+23431,392,23431,FIB,Rewrite the sentence by using the correct punctuation marks. Amazing this is very delicious,,,"Amazing,this is very delicious!",,,6,2,1,,Enabled,,,,,,2509
+23432,392,23432,FIB,Rewrite the sentence by using the correct punctuation marks. John can you help me fix the roof,,,"John,can you help me fix the roof?",,,7,2,1,,Enabled,,,,,,2509
+23433,392,23433,FIB,Rewrite the sentence by using the correct punctuation marks. You wanted to talk to me didn't you,,,"You wanted to talk to me,didn't you?",,,8,2,1,,Enabled,,,,,,2509
+23434,392,23434,FIB,Rewrite the sentence by using the correct punctuation marks. Once in awhile we get to have a party,,,"Once in awhile,we get to have a party.",,,9,2,1,,Enabled,,,,,,2509
+23435,392,23435,FIB,Rewrite the sentence by using the correct punctuation marks. What a fire broke out,,,"What,a fire broke out!",,,10,2,1,,Enabled,,,,,,2509
+23436,392,23436,FIB,Rewrite the sentence by using the correct punctuation marks.Anthony go and fetch some water,,,"Anthony,go and fetch some water.",,,11,2,1,,Enabled,,,,,,2509
+23437,392,23437,FIB,Rewrite the sentence by using the correct punctuation marks. I decided to bring a bag tissue paper pencil compass and flashlight,,,"I decided to bring a bag,tissue,paper,pencil,compass and flashlight.",,,12,2,1,,Enabled,,,,,,2510
 23438,392,23438,FIB,Rewrite the sentence by using the correct punctuation marks. Are you willing to stay for the night,,,Are you willing to stay for the night?,,,13,2,1,,Enabled,,,,,,2510
-23439,392,23439,FIB,Rewrite the sentence by using the correct punctuation marks. Clark did you visit your parents yet,,,"Clark, did you visit your parents yet?",,,14,2,1,,Enabled,,,,,,2510
+23439,392,23439,FIB,Rewrite the sentence by using the correct punctuation marks. Clark did you visit your parents yet,,,"Clark,did you visit your parents yet?",,,14,2,1,,Enabled,,,,,,2510
 23440,392,23440,FIB,Rewrite the sentence by using the correct punctuation marks. Gosh what an amazing view,,,"Gosh,what an amazing view!",,,15,2,1,,Enabled,,,,,,2510
-23441,392,23441,FIB,Rewrite the sentence by using the correct punctuation marks. For a moment I thought I got lost,,,"For a moment, I thought I got lost.",,,1,3,1,,Enabled,,,,,,2510
+23441,392,23441,FIB,Rewrite the sentence by using the correct punctuation marks. For a moment I thought I got lost,,,"For a moment,I thought I got lost.",,,1,3,1,,Enabled,,,,,,2510
 23442,392,23442,FIB,Rewrite the sentence by using the correct punctuation marks. Incredible how did you do that,,,Incredible! how did you do that?,,,2,3,1,,Enabled,,,,,,2510
 23443,392,23443,FIB,Rewrite the sentence by using the correct punctuation marks. Darn these mosquitoes are everywhere,,,"Darn,these mosquitoes are everywhere!",,,3,3,1,,Enabled,,,,,,2510
-23444,392,23444,FIB,Rewrite the sentence by using the correct punctuation marks. Marco is tired isn't he,,,"Marco is tired, isn't he?",,,4,3,1,,Enabled,,,,,,2510
+23444,392,23444,FIB,Rewrite the sentence by using the correct punctuation marks. Marco is tired isn't he,,,"Marco is tired,isn't he?",,,4,3,1,,Enabled,,,,,,2510
 23445,392,23445,FIB,Rewrite the sentence by using the correct punctuation marks. When will the books arrive,,,When will the books arrive?,,,5,3,1,,Enabled,,,,,,2510
-23446,392,23446,FIB,Rewrite the sentence by using the correct punctuation marks. Since he began working the number of sales has gone up,,,"Since he began working, the number of sales has gone up.",,,6,3,1,,Enabled,,,,,,2510
-23447,392,23447,FIB,Rewrite the sentence by using the correct punctuation marks. Woah that is awesome,,,"Woah, that is awesome!",,,7,3,1,,Enabled,,,,,,2510
-23448,392,23448,FIB,Rewrite the sentence by using the correct punctuation marks. Peter can you attend the wedding tomorrow,,,"Peter, can you attend the wedding tomorrow?",,,8,3,1,,Enabled,,,,,,2510
-23449,392,23449,FIB,Rewrite the sentence by using the correct punctuation marks. You should have told me Ryan I would have given you the day off,,,"You should have told me, Ryan, I would have given you the day off.",,,9,3,1,,Enabled,,,,,,2510
-23450,392,23450,FIB,Rewrite the sentence by using the correct punctuation marks. Zack gave me list of the following ingredients tomato noodles ground pork ground beef and thyme,,,"Zack gave me list of the following ingredients: tomato, noodles, ground pork, ground beef and thyme.",,,10,3,1,,Enabled,,,,,,2510
+23446,392,23446,FIB,Rewrite the sentence by using the correct punctuation marks. Since he began working the number of sales has gone up,,,"Since he began working,the number of sales has gone up.",,,6,3,1,,Enabled,,,,,,2510
+23447,392,23447,FIB,Rewrite the sentence by using the correct punctuation marks. Woah that is awesome,,,"Woah,that is awesome!",,,7,3,1,,Enabled,,,,,,2510
+23448,392,23448,FIB,Rewrite the sentence by using the correct punctuation marks. Peter can you attend the wedding tomorrow,,,"Peter,can you attend the wedding tomorrow?",,,8,3,1,,Enabled,,,,,,2510
+23449,392,23449,FIB,Rewrite the sentence by using the correct punctuation marks. You should have told me Ryan I would have given you the day off,,,"You should have told me,Ryan,I would have given you the day off.",,,9,3,1,,Enabled,,,,,,2510
+23450,392,23450,FIB,Rewrite the sentence by using the correct punctuation marks. Zack gave me list of the following ingredients tomato noodles ground pork ground beef and thyme,,,"Zack gave me list of the following ingredients: tomato,noodles,ground pork,ground beef and thyme.",,,10,3,1,,Enabled,,,,,,2510
 23451,392,23451,FIB,Rewrite the sentence by using the correct punctuation marks. Should we meet at the park by 5 00 pm,,,Should we meet at the park by 5:00 p.m?,,,11,3,1,,Enabled,,,,,,2510
-23452,392,23452,FIB,Rewrite the sentence by using the correct punctuation marks. Donna lied to me didn't she,,,"Donna lied to me, didn't she?",,,12,3,1,,Enabled,,,,,,2510
-23453,392,23453,FIB,Rewrite the sentence by using the correct punctuation marks. Whenever I feel sad I just try to remember the good times,,,"Whenever I feel sad, I just try to remember the good times.",,,13,3,1,,Enabled,,,,,,2510
-23454,392,23454,FIB,Rewrite the sentence by using the correct punctuation marks. Ha that's what you get for not being careful,,,"Ha, that's what you get for not being careful!",,,14,3,1,,Enabled,,,,,,2510
-23455,392,23455,FIB,Rewrite the sentence by using the correct punctuation marks. Eric Sean and Misha has been waiting for a week,,,"Eric, Sean and Misha has been waiting for a week.",,,15,3,1,,Enabled,,,,,,2510
+23452,392,23452,FIB,Rewrite the sentence by using the correct punctuation marks. Donna lied to me didn't she,,,"Donna lied to me,didn't she?",,,12,3,1,,Enabled,,,,,,2510
+23453,392,23453,FIB,Rewrite the sentence by using the correct punctuation marks. Whenever I feel sad I just try to remember the good times,,,"Whenever I feel sad,I just try to remember the good times.",,,13,3,1,,Enabled,,,,,,2510
+23454,392,23454,FIB,Rewrite the sentence by using the correct punctuation marks. Ha that's what you get for not being careful,,,"Ha,that's what you get for not being careful!",,,14,3,1,,Enabled,,,,,,2510
+23455,392,23455,FIB,Rewrite the sentence by using the correct punctuation marks. Eric Sean and Misha has been waiting for a week,,,"Eric,Sean and Misha has been waiting for a week.",,,15,3,1,,Enabled,,,,,,2510
 23456,393,23456,FIB,Write the comparative form of tall,,,taller,,,1,1,1,,Enabled,,,,,,2507
 23457,393,23457,FIB,Write the comparative form of rich,,,richer,,,2,1,1,,Enabled,,,,,,2507
 23458,393,23458,FIB,Write the comparative form of nice,,,nicer,,,3,1,1,,Enabled,,,,,,2507
@@ -2724,44 +2724,3 @@ Run-on",,,6,1,1,,Enabled,,,,,,2555
 23715,501,23715,FIB,"Identify and write the personal pronoun in the Sentence. Afterwards, write if it is singular or plural.  Who gave him the authority?   <br/> Personal Pronoun :________ <br/> Singular or Plural _______________",,,"him,singular",,,16,3,1,,Enabled,,,,,,2503
 23716,501,23716,FIB,"Identify and write the personal pronoun in the Sentence. Afterwards, write if it is singular or plural.  She always pesters Josh when she has the chance.  <br/> Personal Pronoun :________ <br/> Singular or Plural _______________",,,"she,singular",,,17,3,1,,Enabled,,,,,,2503
 ,,,,,,,,,,, ,,,,,,,,,
-Unused Questions,,,,,,,,,,1,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. to Peter John ball threw the,,,,,,1,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. came falling wall the down,,,,,,1,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. all waited we the train for arrive to,,,,,,2,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. is going to school the event tomorrow host an.,,,,,,2,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. we going are an have exam?,,,,,,2,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. my pen lost I the ocean in.,,,,,,3,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. worried I was exam about the results.,,,,,,3,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations.was mother your worried you about.,,,,,,3,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. I I came home was tired so when.,,,,,,7,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. with he honors graduated.,,,,,,8,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. sun the unusually was hot.,,,,,,9,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. ended I up taking a bath cold.,,,,,,10,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. for birthday my trish sweater gave a me.,,,,,,11,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations.wanted Harold go to buy and ,,,,,,12,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. to decay the book was starting.,,,,,,13,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. New City York to was I riding plane the.,,,,,,14,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. loves mother my watching movies classic.,,,,,,15,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. was Donald sick because was he absent.,,,,,,16,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. silently is the cat sleeping house in the.,,,,,,17,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. playing I love dog my with.,,,,,,18,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. school my decided I write to letter a.,,,,,,19,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. like I listening classical to music.,,,,,,20,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations.teacher angry the was at class the.,,,,,,21,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. the classroom Jim cleaned whole.,,,,,,22,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. fethced I brother my the airport at.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. rescued the dog from the fire his owner.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. did not he on up give his dreams.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. ship sank the of bottom the ocean to the.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. line for the tacos extremely was long the.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. met he his friend best school at.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations.something you of is much Too for  bad.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. He a boy very intelligent is.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. lot and sick. ate of a cake I We feel,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. A dogs couple of running around. are,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. finished. are wants one No we until to home go,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. in was Titanic oe of The the history. biggest ships,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations.Batman of is comic my favorite books. one,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations. black I find cats creepy.,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations.to building. two a moving in I am story,,,,,,,,,,,,,,,,
-,,,,Rearrange the words to form a complete sentence with proper punctuations.panics he finds spider. when Jack a,,,,,,,,,,,,,,,,
