@@ -161,4 +161,15 @@ class StudentReportRestController extends ReportController {
 		return $this->respondReport($this->student_report->getStudentPlatformHours($student_id));
 	}
 
+
+	/**
+	 * Get student spent hours for the last 7 days.
+	 * @param $student_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentPlatformHoursWeek($student_id){
+
+		return $this->respondReport($this->student_report->getStudentPlatformHoursWeek($student_id));
+	}
+
 }

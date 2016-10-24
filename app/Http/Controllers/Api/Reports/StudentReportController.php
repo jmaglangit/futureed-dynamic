@@ -19,6 +19,7 @@ use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\ImageServices;
+use Illuminate\Support\Facades\App;
 
 class StudentReportController extends ReportController {
 
@@ -598,7 +599,59 @@ class StudentReportController extends ReportController {
 		$student_spent_hours['last_month'] = $this->student_module->getStudentSpentHours($criteria);
 
 		return $student_spent_hours;
+	}
 
+	/**
+	 * Get student platform hours by weekly activities.
+	 * @param $student_id
+	 * @return array
+	 */
+	public function getStudentPlatformHoursWeek($student_id){
+		//student_id, country_id, class_id,date_from,date_to
+		$criteria = [];
+
+		//get student detail for curriculum country
+		$student = $this->student->getStudent($student_id);
+
+		$criteria['student_id'] = $student_id;
+		$criteria['country_id'] = $student->user->curriculum_country;
+
+		//get current classes -- class_id in array
+		$this->student_service->getCurrentClass($student_id);
+
+		$current_class = $this->class_student->getStudentCurrentClassCountry(
+			$student_id,
+			$criteria['country_id']
+		);
+
+		$class_ids = [];
+
+		foreach($current_class as $class){
+			array_push($class_ids,$class->class_id);
+		}
+
+		$criteria['class_id'] = $class_ids;
+
+		//get hours for the last 7 days
+
+		$student_spent_hours = [];
+
+		//initialize locale for carbon time.
+		setlocale(LC_TIME,App::getLocale());
+
+		//loop throughout the days of activities
+		for($i=0; $i < config('futureed.last_activity_days'); $i++){
+
+			$criteria['date_from'] =  Carbon::now()->subDay($i+1)->startOfDay()->toDateTimeString();
+			$criteria['date_to'] = Carbon::now()->subDay($i)->startOfDay()->toDateTimeString();
+
+			$student_spent_hours[$i] = [
+				'week_name' => Carbon::now()->subDay($i)->formatLocalized('%A'),
+				'hours_spent' => $this->student_module->getStudentSpentHours($criteria),
+			];
+		}
+
+		return $student_spent_hours;
 	}
 
 }

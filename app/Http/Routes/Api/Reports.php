@@ -50,6 +50,11 @@ Routes::group([
 			'as' => 'api.report.student.progress.platform-hours'
 		]);
 
+		Routes::get('/student-chart/platform-week-hours/{student_id}',[
+			'uses' => 'Api\Reports\StudentReportRestController@getStudentPlatformHoursWeek',
+			'as' => 'api.report.student.progress.platform-week-hours'
+		]);
+
 
 		/**
 		 * Class
