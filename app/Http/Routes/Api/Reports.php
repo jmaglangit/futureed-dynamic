@@ -55,6 +55,16 @@ Routes::group([
 			'as' => 'api.report.student.progress.platform-week-hours'
 		]);
 
+		Routes::get('/student-chart/platform-subject-area-completed/{student_id}/{subject_id}/{grade_id}',[
+			'uses' => 'Api\Reports\StudentReportRestController@getStudentPlatformSubjectArea',
+			'as' => 'api.report.student.progress.platform-subject-area-completed'
+		]);
+
+		Routes::get('/student-chart/platform-subject-area-heatmap/{student_id}/{subject_id}/{grade_id}',[
+			'uses' => 'Api\Reports\StudentReportRestController@getStudentPlatformSubjectAreaHeatMap',
+			'as' => 'api.report.student.progress.platform-subject-area-heatmap'
+		]);
+
 
 		/**
 		 * Class
