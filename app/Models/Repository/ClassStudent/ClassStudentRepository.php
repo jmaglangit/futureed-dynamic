@@ -822,9 +822,10 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * @param $student_id
 	 * @param $subject_id
 	 * @param $class_id
+	 * @param int $grade_id
 	 * @return bool
 	 */
-	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id, $class_id){
+	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id, $class_id,$grade_id=0){
 		//-- Getting every row on every subject area - FINAL
 		//select
 		//s.name as subject_name,sa.id as area_id, sa.name as area_name, m.grade_id, sm.class_id, sm.student_id, sm.module_status, sm.progress, sm.updated_at
@@ -867,9 +868,15 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				->where('sm.class_id','=',$class_id)
 				->groupBy('m.grade_id')
 				->orderBy('sa.name')
-				->orderBy('m.grade_id')
-				->get()
-			;
+				->orderBy('m.grade_id');
+
+			//if grade id is not 0
+			if($grade_id > config('futureed.false')){
+				$response = $response->where('m.grade_id','=',$grade_id);
+			}
+
+			$response = $response->get();
+
 		}catch (\Exception $e){
 
 			DB::rollback();
@@ -881,7 +888,6 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 		DB::commit();
 		return $response;
-
 	}
 
 	/**
@@ -890,7 +896,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * @param $subject_id
 	 * @return bool
 	 */
-	public function getStudentValidClassBySubject($student_id, $subject_id){
+	public function getStudentValidClassBySubject($student_id, $subject_id,$curriculum_country){
 		//		-- Get valid class based on active class students.
 		//select
 		//cs.class_id, cs.student_id
@@ -924,7 +930,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				->where('o.date_start', '<=', Carbon::now())
 				->where('o.date_end', '>=', Carbon::now())
 				->where('o.payment_status','=',config('futureed.paid'))
-				->orderBy('o.updated_at','desc')
+				->orderBy('o.updated_at','desc');
+
+			$response = $response->with('classroom')->subscriptionCountry($curriculum_country)
 				->get();
 
 		}catch (\Exception $e){
