@@ -265,7 +265,7 @@ class StudentReportController extends ReportController {
 		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
 
 		//check valid class subject.
-		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id);
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->country_id);
@@ -373,7 +373,7 @@ class StudentReportController extends ReportController {
 		$subject = $this->subject->getSubject($subject_id);
 
 		//check valid class subject.
-		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id);
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->country_id);
@@ -430,7 +430,7 @@ class StudentReportController extends ReportController {
 		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
 
 		//check valid class subject.
-		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id);
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->country_id);
@@ -653,5 +653,106 @@ class StudentReportController extends ReportController {
 
 		return $student_spent_hours;
 	}
+
+	/**
+	 * Get student chart progress completed
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return array
+	 */
+	public function getStudentPlatformSubjectArea($student_id,$subject_id,$grade_id){
+
+		//Get student details
+		$student = $this->student->getStudent($student_id);
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//Get Subject Areas as curriculum.
+		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
+
+		//initiate array.
+		$row_data = [];
+
+		//loop to get each data per subject areas.
+		foreach ($subject_areas as $areas) {
+
+			if (!empty($class->toArray())) {
+
+				//get student modules by subject areas
+				$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+					$class[0]->student_id, $areas->id, $class[0]->class_id,$grade_id
+				);
+			}
+
+			$area = new \stdClass();
+			//append to every row of areas
+			$curr_data = (!empty($curriculum_data)) ? $curriculum_data : [];
+
+			$area->curriculum_name = $areas->name;
+
+			$area->curriculum_data = $curr_data;
+
+			array_push($row_data, $area);
+
+		}
+
+		return $row_data;
+	}
+
+	/**
+	 * Get student platform chart report heat area.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return array
+	 */
+	public function getStudentPlatformSubjectAreaHeatMap($student_id,$subject_id,$grade_id){
+
+		//Get student details
+		$student = $this->student->getStudent($student_id);
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//Get Subject Areas as curriculum.
+		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
+
+		//initiate array.
+		$row_data = [];
+
+		//loop to get each data per subject areas.
+		foreach ($subject_areas as $areas) {
+
+			if (!empty($class->toArray())) {
+
+				//get student modules by subject areas
+				$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+					$class[0]->student_id, $areas->id, $class[0]->class_id,$grade_id
+				);
+			}
+
+			$area = new \stdClass();
+			//append to every row of areas
+			$curr_data = (!empty($curriculum_data)) ? $curriculum_data : [];
+
+			$area->curriculum_name = $areas->name;
+
+			$area->curriculum_data = $curr_data;
+
+			array_push($row_data, $area);
+
+		}
+
+		return $row_data;
+	}
+
 
 }
