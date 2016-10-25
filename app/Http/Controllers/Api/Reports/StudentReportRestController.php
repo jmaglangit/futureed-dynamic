@@ -172,4 +172,28 @@ class StudentReportRestController extends ReportController {
 		return $this->respondReport($this->student_report->getStudentPlatformHoursWeek($student_id));
 	}
 
+	/**
+	 * Get student platform chart progress.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentPlatformSubjectArea($student_id,$subject_id,$grade_id){
+
+		return $this->respondReport($this->student_report->getStudentPlatformSubjectArea($student_id,$subject_id,$grade_id));
+	}
+
+	/**
+	 * Get student platform for chart heat map.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentPlatformSubjectAreaHeatMap($student_id,$subject_id,$grade_id){
+
+		return $this->respondReport($this->student_report->getStudentPlatformSubjectAreaHeatMap($student_id,$subject_id,$grade_id));
+	}
+
 }
