@@ -20,6 +20,7 @@ use FutureEd\Services\AvatarServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\ImageServices;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Input;
 
 class StudentReportController extends ReportController {
 
@@ -588,15 +589,33 @@ class StudentReportController extends ReportController {
 		$criteria['date_to'] = Carbon::now()->toDateTimeString();
 		$student_spent_hours['seven_days'] = $this->student_module->getStudentSpentHours($criteria);
 
+		if($student_spent_hours['seven_days']){
+			$student_spent_hours['seven_days']->report_name = 'This Week';
+			$student_spent_hours['seven_days']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['seven_days']->total_time)
+				->diffInMinutes(Carbon::createFromTimestamp(0));
+		}
+
 		// Get hours this month
 		$criteria['date_from'] = Carbon::now()->startOfMonth()->toDateTimeString();
 		$criteria['date_to'] = Carbon::now()->toDateTimeString();
 		$student_spent_hours['this_month'] = $this->student_module->getStudentSpentHours($criteria);
 
+		if($student_spent_hours['this_month']){
+			$student_spent_hours['this_month']->report_name = 'This Month';
+			$student_spent_hours['this_month']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['this_month']->total_time)
+				->diffInMinutes(Carbon::createFromTimestamp(0));
+		}
+
 		// Get hours last month
 		$criteria['date_from'] = Carbon::now()->subMonth(1)->startOfMonth()->toDateTimeString();
 		$criteria['date_to'] = Carbon::now()->subMonth(1)->lastOfMonth()->toDateTimeString();
 		$student_spent_hours['last_month'] = $this->student_module->getStudentSpentHours($criteria);
+
+		if($student_spent_hours['last_month']){
+			$student_spent_hours['last_month']->report_name = 'Last Month';
+			$student_spent_hours['last_month']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['last_month']->total_time)
+				->diffInMinutes(Carbon::createFromTimestamp(0));
+		}
 
 		return $student_spent_hours;
 	}
@@ -645,9 +664,16 @@ class StudentReportController extends ReportController {
 			$criteria['date_from'] =  Carbon::now()->subDay($i+1)->startOfDay()->toDateTimeString();
 			$criteria['date_to'] = Carbon::now()->subDay($i)->startOfDay()->toDateTimeString();
 
+			$activity = $this->student_module->getStudentSpentHours($criteria);
+
+			if($activity){
+				$activity->hours_spent = Carbon::createFromTimestamp($activity->total_time)
+					->diffInMinutes(Carbon::createFromTimestamp(0));
+			}
+
 			$student_spent_hours[$i] = [
 				'week_name' => Carbon::now()->subDay($i)->formatLocalized('%A'),
-				'hours_spent' => $this->student_module->getStudentSpentHours($criteria),
+				'activity' => $activity,
 			];
 		}
 
@@ -711,7 +737,10 @@ class StudentReportController extends ReportController {
 	 * @param $grade_id
 	 * @return array
 	 */
-	public function getStudentPlatformSubjectAreaHeatMap($student_id,$subject_id,$grade_id){
+	public function getStudentPlatformSubjectAreaHeatMap($student_id){
+
+		$subject_id = Input::get('subject_id');
+		$grade_id = Input::get('grade_id');
 
 		//Get student details
 		$student = $this->student->getStudent($student_id);
