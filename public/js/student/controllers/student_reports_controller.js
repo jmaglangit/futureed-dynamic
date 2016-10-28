@@ -421,4 +421,118 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
             self.student_question_analysis_export = Constants.FALSE;
         }
     }
+
+    //get student monthly spent hours
+    self.getStudentMonthlySpentHours = function(){
+
+        StudentReportsService.getStudentChartMonthHours($scope.user.id).success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)){
+                if(response.errors){
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if(response.data){
+                    var data = response.data;
+
+                    //transfer variable into object
+                    var chart_data = [];
+
+                    //this week
+                    chart_data.push({
+                        letter: (data.seven_days) ? data.seven_days.report_name : "Last Seven Days",
+                        frequency: (data.seven_days) ? data.seven_days.hours_spent : 0
+                    });
+
+                    //add this month
+                    chart_data.unshift({
+                        letter: (data.this_month) ? data.this_month.report_name : "This Month",
+                        frequency: (data.this_month) ? data.seven_days.hours_spent : 0
+                    });
+
+                    //add last month
+                    chart_data.unshift({
+                        letter: (data.last_month) ? data.last_month.report_name : "Last Month",
+                        frequency: (data.last_month) ? data.seven_days.hours_spent : 0
+                    });
+
+                    //call to generate chart.
+                    platformChartMonthly(chart_data);
+
+                }
+            }
+
+
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
+    //get student weekly spen hours
+    self.getStudentWeeklySpentHours = function(){
+
+        StudentReportsService.getStudentChartWeekHours($scope.user.id).success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if (response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if (response.data) {
+                    var data = response.data;
+
+                    //transfer variable into object
+                    self.weekly_hours = [];
+
+                    angular.forEach(data,function(a){
+                        self.weekly_hours.unshift({
+                            letter: a.week_name,
+                            frequency: (a.activity) ? a.activity.hours_spent : 0
+                        });
+                    });
+
+                    //call to generate chart
+                    platformChartWeekly(self.weekly_hours);
+
+                }
+            }
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
+    //get student subject area
+    self.getStudentChartSubjectArea = function(){
+
+        var data = {
+            student_id  :   $scope.user.id,
+            subject_id  :   1,//self.chart_area_subject_id,
+            grade_id    :   1 //self.chart_area_grade_id
+        };
+
+        StudentReportsService.getStudentChartSubjectArea(data).success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if (response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if (response.data) {
+                    var data = response.data;
+
+                    //transfer variable into object
+                    self.chart_subject_area = [];
+
+                    angular.forEach(data,function(a){
+
+                        self.chart_subject_area.push({
+                            letter : a.curriculum_name,
+                            frequency : (a.curriculum_data.length > Constants.FALSE) ? (a.curriculum_data[0].progress/100) : 0
+                        });
+                    });
+
+                    //call to generate chart
+                    platformSubjectArea(self.chart_subject_area)
+                }
+            }
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
+    //get student subject area heatmap
 }
