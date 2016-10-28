@@ -179,7 +179,10 @@ class StudentReportRestController extends ReportController {
 	 * @param $grade_id
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function getStudentPlatformSubjectArea($student_id,$subject_id,$grade_id){
+	public function getStudentPlatformSubjectArea($student_id){
+
+		$subject_id = Input::get('subject_id');
+		$grade_id = Input::get('grade_id');
 
 		return $this->respondReport($this->student_report->getStudentPlatformSubjectArea($student_id,$subject_id,$grade_id));
 	}
