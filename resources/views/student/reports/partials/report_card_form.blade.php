@@ -22,6 +22,23 @@
 	</div>
 
 	<br/>
+	{{--Charts--}}
+	<div>
+		<div>
+			{{--hours chart--}}
+			<div template-directive template-url="{!! route('reports.partials.charts.platform-chart-monthly') !!}"></div>
+			<div template-directive template-url="{!! route('reports.partials.charts.platform-chart-weekly') !!}"></div>
+		</div>
+		<div>
+			{{--subject area--}}
+			<div template-directive template-url="{!! route('reports.partials.charts.platform-chart-subject-area') !!}"></div>
+			<div template-directive template-url="{!! route('reports.partials.charts.platform-chart-subject-area-heatmap') !!}"></div>
+
+		</div>
+
+	</div>
+
+	<br/>
 
 	<div class="list-container" ng-cloak>
 		<table id="tip-list" class="table table-striped table-bordered">
