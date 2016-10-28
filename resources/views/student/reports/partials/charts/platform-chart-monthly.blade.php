@@ -1,7 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 10/27/16
- * Time: 11:00 AM
- */
+<div>
+    <svg class="chart-spent-monthly" width="450" height="300" ng-init="reports.getStudentMonthlySpentHours()"></svg>
+</div>
