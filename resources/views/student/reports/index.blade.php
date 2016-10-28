@@ -60,4 +60,6 @@
 	{!! Html::script('/js/common/search_service.js') !!}
 
 	{!! Html::script('/js/student/profile.js') !!}
+
+	{!! Html::script('/js/common/platform-charts.js') !!}
 @stop
