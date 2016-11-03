@@ -467,7 +467,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
         });
     }
 
-    //get student weekly spen hours
+    //get student weekly spent hours
     self.getStudentWeeklySpentHours = function(){
 
         StudentReportsService.getStudentChartWeekHours($scope.user.id).success(function(response){

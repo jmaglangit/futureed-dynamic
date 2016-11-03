@@ -37,4 +37,20 @@ class ManageParentReportsController extends Controller{
 		return view('client.parent.dashboard.partials.reports_question_analysis');
 	}
 
+	public function platform_chart_monthly(){
+		return view('client.parent.dashboard.partials.charts.platform-chart-monthly');
+	}
+
+	public function platform_chart_weekly(){
+		return view('client.parent.dashboard.partials.charts.platform-chart-weekly');
+	}
+
+	public function platform_chart_subject_area(){
+		return view('client.parent.dashboard.partials.charts.platform-chart-subject-area');
+	}
+
+	public function platform_chart_subject_area_heatmap(){
+		return view('client.parent.dashboard.partials.charts.platform-chart-subject-area-heatmap');
+	}
+
 }

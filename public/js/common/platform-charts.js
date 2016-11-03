@@ -24,7 +24,7 @@ function platformChartMonthly(data){
 
     g.append("g")
         .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y).ticks(15, ""))
+        .call(d3.axisLeft(y).ticks(15, "s"))
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
@@ -74,7 +74,7 @@ function platformChartWeekly(data){
 
     g.append("g")
         .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y).ticks(10, " "))
+        .call(d3.axisLeft(y).ticks(10, "s"))
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
@@ -99,6 +99,16 @@ function platformChartWeekly(data){
         .style("font-size", "12px")
         .style("text-decoration", "underline")
         .text(Constants.GRAPH_WEEKLY);
+}
+
+//for small area of text
+function platformChartWeeklySmallArea(){
+
+    var svg = d3.select(".chart-spent-weekly");
+
+    //angled x axis values
+    svg.selectAll(".axis--x g text")
+        .style("font-size", "8px");
 }
 
 //student chart subject area
