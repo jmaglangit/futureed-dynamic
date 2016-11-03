@@ -158,6 +158,12 @@ class StudentReportController extends ReportController {
 
 		$avatar = $this->avatar->getAvatar($student->avatar_id);
 
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id,$subject_id,$student->user->curriculum_country);
+
 		//earned_badges
 		$badge = $this->student_badges->getStudentBadges([
 			'student_id' => $student_id
@@ -170,16 +176,16 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentModulesCompleted($student_id, $subject_id, $student->country_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class[0]->class_id);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->country_id);
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->country_id);
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
@@ -204,8 +210,8 @@ class StudentReportController extends ReportController {
 		}
 
 		//check if student country if in the grade countries
-		$student_country = (in_array($student->country_id, $countries)) ?
-			$student->country_id : config('futureed.default_country');
+		$student_country = (in_array($student->user->curriculum_country, $countries)) ?
+			$student->user->curriculum_country : config('futureed.default_country');
 
 		$header = $this->grade->getGradesByCountries($student_country);;
 
@@ -221,7 +227,7 @@ class StudentReportController extends ReportController {
 		//ROWS
 		//get each completed on each grades.
 
-		$row_data = $this->class_student->getStudentModulesProgressByGrade($student_id, $subject_id, $student->country_id);
+		$row_data = $this->class_student->getStudentModulesProgressByGrade($student_id, $subject_id, $student->user->curriculum_country);
 
 
 		foreach ($row_data as $data) {
@@ -269,7 +275,7 @@ class StudentReportController extends ReportController {
 		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
-		$grades = $this->grade->getGradesByCountries($student->country_id);
+		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
 
 		//get student grade
 		$student_grade = $this->grade->getGrade($student->grade_code);
@@ -312,16 +318,16 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentModulesCompleted($student_id, $subject_id, $student->country_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class[0]->class_id);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->country_id);
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->country_id);
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		$additional_information = [
 			'first_name' => $student->first_name,
@@ -377,11 +383,11 @@ class StudentReportController extends ReportController {
 		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
-		$grades = $this->grade->getGradesByCountries($student->country_id);
+		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
 
 
-		$country_id = (empty($this->grade->checkCountry($student->country_id)))
-			? config('futureed.default_country') : $student->country_id;
+		$country_id = (empty($this->grade->checkCountry($student->user->curriculum_country)))
+			? config('futureed.default_country') : $student->user->curriculum_country;
 
 		//Get student current learning
 		$current_learning = $this->class_student->getStudentCurrentLearning($student_id,$subject_id,$country_id);
@@ -434,7 +440,7 @@ class StudentReportController extends ReportController {
 		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
-		$grades = $this->grade->getGradesByCountries($student->country_id);
+		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
 
 		//get student grade
 		$student_grade = $this->grade->getGrade($student->grade_code);
@@ -478,16 +484,16 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentModulesCompleted($student_id, $subject_id, $student->country_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class->class_id);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->country_id);
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->country_id);
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		$additional_information = [
 			'first_name' => $student->first_name,
