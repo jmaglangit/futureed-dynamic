@@ -26,14 +26,13 @@
 	<div>
 		<div>
 			{{--hours chart--}}
-			<div template-directive template-url="{!! route('reports.partials.charts.platform-chart-monthly') !!}"></div>
-			<div template-directive template-url="{!! route('reports.partials.charts.platform-chart-weekly') !!}"></div>
+			<div class="col-xs-6" template-directive template-url="{!! route('reports.partials.charts.platform-chart-monthly') !!}"></div>
+			<div class="col-xs-6" template-directive template-url="{!! route('reports.partials.charts.platform-chart-weekly') !!}"></div>
 		</div>
 		<div>
 			{{--subject area--}}
-			<div template-directive template-url="{!! route('reports.partials.charts.platform-chart-subject-area') !!}"></div>
-			<div template-directive template-url="{!! route('reports.partials.charts.platform-chart-subject-area-heatmap') !!}"></div>
-
+			<div class="col-xs-6" template-directive template-url="{!! route('reports.partials.charts.platform-chart-subject-area') !!}"></div>
+			<div class="col-xs-6" template-directive template-url="{!! route('reports.partials.charts.platform-chart-subject-area-heatmap') !!}"></div>
 		</div>
 
 	</div>
