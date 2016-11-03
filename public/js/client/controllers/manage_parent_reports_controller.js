@@ -36,6 +36,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 
 			case Constants.REPORT_CARD            :
 				self.active_report_card = Constants.TRUE;
+				self.listSubjects();
 				self.reportCard();
 				break;
 
@@ -62,6 +63,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 
 			default                                :
 				self.active_report_card = Constants.TRUE;
+				$scope.getGradeLevel($scope.user.user.curriculum_country);
 				self.listStudents();
 				self.reportCard();
 				break;
@@ -147,6 +149,8 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 							self.subjects[key] = value.classroom.subject;
 						});
 
+						self.getStudentChartSubjectArea(self.subjects[0].id);
+						self.getStudentChartSubjectAreaHeatMap(self.subjects[0].id);
 						self.summaryProgress(self.subjects[0].id);
 					}
 				}
@@ -391,6 +395,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 	self.changeStudentId = function(student){
 		self.student_id = (self.student_id) ? self.student_id : student.id;
 		self.curriculum_country = (self.curriculum_country) ? self.curriculum_country : student.curriculum_country;
+		self.listSubjects();
 		self.setActive(Constants.REPORT_CARD);
 	}
 
@@ -448,5 +453,167 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		} else {
 			self.student_question_analysis_export = Constants.FALSE;
 		}
+	}
+
+	//get student monthly spent hours
+	self.getStudentMonthlySpentHours = function(){
+
+		ManageParentReportsService.getStudentChartMonthHours(self.student_id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					var data = response.data;
+
+					//transfer variable into object
+					var chart_data = [];
+
+					//this week
+					chart_data.push({
+						letter: (data.seven_days) ? data.seven_days.report_name : "Last Seven Days",
+						frequency: (data.seven_days) ? data.seven_days.hours_spent : 0
+					});
+
+					//add this month
+					chart_data.unshift({
+						letter: (data.this_month) ? data.this_month.report_name : "This Month",
+						frequency: (data.this_month) ? data.seven_days.hours_spent : 0
+					});
+
+					//add last month
+					chart_data.unshift({
+						letter: (data.last_month) ? data.last_month.report_name : "Last Month",
+						frequency: (data.last_month) ? data.last_month.hours_spent : 0
+					});
+
+					//call to generate chart.
+					platformChartMonthly(chart_data);
+
+				}
+			}
+
+
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//get student weekly spent hours
+	self.getStudentWeeklySpentHours = function(){
+
+		ManageParentReportsService.getStudentChartWeekHours(self.student_id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data;
+
+					//transfer variable into object
+					self.weekly_hours = [];
+
+					angular.forEach(data,function(a){
+						self.weekly_hours.unshift({
+							letter: a.week_name,
+							frequency: (a.activity) ? a.activity.hours_spent : 0
+						});
+					});
+
+					//call to generate chart
+					platformChartWeekly(self.weekly_hours);
+					platformChartWeeklySmallArea();
+
+				}
+			}
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//get student subject area
+	self.getStudentChartSubjectArea = function(subject_id,grade_id){
+
+		self.subject_area_subject_id = (subject_id == Constants.NULL)
+			? self.search.subject_id : subject_id;
+		self.subject_area_grade_id = grade_id;
+
+		var data = {
+			student_id  :   self.student_id,
+			subject_id  :   self.subject_area_subject_id,
+			grade_id    :   self.subject_area_grade_id
+		};
+
+		ManageParentReportsService.getStudentChartSubjectArea(data).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data;
+
+					//transfer variable into object
+					self.chart_subject_area = [];
+
+					angular.forEach(data,function(a){
+
+						self.chart_subject_area.push({
+							letter : a.curriculum_name,
+							frequency : (a.curriculum_data.length > Constants.FALSE)
+								? (a.curriculum_data[0].progress/100) : 0
+						});
+					});
+
+					platformSubjectArea(self.chart_subject_area);
+				}
+			}
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//get student subject area heatmap
+	self.getStudentChartSubjectAreaHeatMap = function(subject_id,grade_id){
+
+		self.area_heatmap_subject_id = (subject_id == Constants.NULL) ? self.search.subject_id : subject_id;
+		self.area_heatmap_grade_id = grade_id;
+
+		var data = {
+			student_id  :   self.student_id,
+			subject_id  :   self.area_heatmap_subject_id,
+			grade_id    :   self.area_heatmap_grade_id
+		};
+
+		ManageParentReportsService.getStudentChartSubjectAreaHeatMap(data).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data;
+
+					//transfer variable into object
+					self.chart_subject_area_heatmap = [];
+
+					//transfer variable into object
+					self.chart_subject_area_heatmap = [];
+
+					angular.forEach(data,function(a){
+
+						self.chart_subject_area_heatmap.push({
+							letter : a.curriculum_name,
+							frequency : (a.curriculum_data.length > Constants.FALSE)
+								? (a.curriculum_data[0].heat_map/100) : 0
+						});
+					});
+
+					platformSubjectAreaHeatMap(self.chart_subject_area_heatmap);
+
+				}
+			}
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
 	}
 }
