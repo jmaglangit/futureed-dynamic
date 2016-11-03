@@ -737,10 +737,7 @@ class StudentReportController extends ReportController {
 	 * @param $grade_id
 	 * @return array
 	 */
-	public function getStudentPlatformSubjectAreaHeatMap($student_id){
-
-		$subject_id = Input::get('subject_id');
-		$grade_id = Input::get('grade_id');
+	public function getStudentPlatformSubjectAreaHeatMap($student_id,$subject_id,$grade_id){
 
 		//Get student details
 		$student = $this->student->getStudent($student_id);
