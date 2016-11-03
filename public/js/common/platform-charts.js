@@ -101,6 +101,16 @@ function platformChartWeekly(data){
         .text(Constants.GRAPH_WEEKLY);
 }
 
+//for small area of text
+function platformChartWeeklySmallArea(){
+
+    var svg = d3.select(".chart-spent-weekly");
+
+    //angled x axis values
+    svg.selectAll(".axis--x g text")
+        .style("font-size", "8px");
+}
+
 //student chart subject area
 function platformSubjectArea(data){
 
