@@ -102,13 +102,14 @@ function StudentReportsService($http) {
 	}
 
 	//api/report/student-chart/platform-subject-area-heatmap/{student_id}/{subject_id}/{grade_id}
-	//api.getStudentChartSubjectAreaHeatMap = function(data){
-	//	return $http({
-	//		method	:	Constants.METHOD_GET,
-	//		url		:	apiUrl + 'report/student-chart/platform-subject-area-heatmap/'
-	//					+ data.student_id + '?subject_id=' + data.subject_id + '&grade_id=' + data.grade_id
-	//	});
-	//}
+	api.getStudentChartSubjectAreaHeatMap = function(data){
+		return $http({
+			method	:	Constants.METHOD_GET,
+			url		:	apiUrl + 'report/student-chart/platform-subject-area-heatmap/' + data.student_id
+						+ '?subject_id=' + ((data.subject_id) ? data.subject_id : '')
+						+ '&grade_id=' + ((data.grade_id) ? data.grade_id : '')
+		});
+	}
 
 	return api;	
 }
