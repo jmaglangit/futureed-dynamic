@@ -41,6 +41,8 @@ interface ClassStudentRepositoryInterface {
 
 	public function getStudentModulesWeekHours($student_id,$subject_id, $country_id);
 
+	public function getStudentSubjectProgressByCurriculumCompleted($student_id,$subject_id,$class_id);
+
 	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id, $class_id,$grade_id=0);
 
 	public function getStudentValidClassBySubject($student_id, $subject_id,$curriculum_country);
