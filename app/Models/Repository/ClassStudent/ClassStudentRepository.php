@@ -816,16 +816,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		return $response;
 	}
 
-
-	/**
-	 * Student Progress by Subject group by Curriculum by grade.
-	 * @param $student_id
-	 * @param $subject_id
-	 * @param $class_id
-	 * @param int $grade_id
-	 * @return bool
-	 */
-	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id, $class_id,$grade_id=0){
+	protected function getStudentSubjectProgressByCurriculumQuery($student_id,$subject_id,$class_id){
 		//-- Getting every row on every subject area - FINAL
 		//select
 		//s.name as subject_name,sa.id as area_id, sa.name as area_name, m.grade_id, sm.class_id, sm.student_id, sm.module_status, sm.progress, sm.updated_at
@@ -873,6 +864,64 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				->groupBy('mc.grade_id')
 				->orderBy('sa.name')
 				->orderBy('mc.grade_id');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+		return $response;
+
+	}
+
+	/**
+	 * Get completed lessons
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $class_id
+	 * @return bool
+	 */
+	public function getStudentSubjectProgressByCurriculumCompleted($student_id,$subject_id,$class_id){
+
+		DB::beginTransaction();
+		try{
+
+			$response = $this->getStudentSubjectProgressByCurriculumQuery($student_id, $subject_id, $class_id);
+
+			$response = $response->where('sm.module_status','=',DB::raw("'".config('futureed.completed')."'"))->get();
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+		return $response;
+	}
+
+	/**
+	 * Student Progress by Subject group by Curriculum by grade.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $class_id
+	 * @param int $grade_id
+	 * @return bool
+	 */
+	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id, $class_id,$grade_id=0){
+
+		DB::beginTransaction();
+		try{
+
+			$response = $this->getStudentSubjectProgressByCurriculumQuery($student_id, $subject_id, $class_id);
 
 			//if grade id is not 0
 			if($grade_id > config('futureed.false')){
