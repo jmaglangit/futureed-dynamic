@@ -51,4 +51,6 @@
 	{!! Html::script('/js/client/services/manage_parent_reports_service.js')!!}
 
 	{!! Html::script('/js/client/services/profile_service.js')!!}
+
+	{!! Html::script('/js/common/platform-charts.js') !!}
 @stop
