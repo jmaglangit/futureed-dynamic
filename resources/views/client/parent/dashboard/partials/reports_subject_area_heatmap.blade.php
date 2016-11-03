@@ -39,7 +39,7 @@
 				<td>{! data.curriculum_name !}</td>
 
 				<td ng-repeat="(key, value) in reports.summary.columns " ng-if="key > 0">
-					<div ng-repeat="(dataKey, dataValue) in data.curriculum_data" ng-if="dataValue.grade_id == value.id">
+					<div ng-repeat="(dataKey, dataValue) in data.curriculum_data" ng-if="dataValue.grade_id == value.code">
 						<div class="report-progress">
 							<div ng-if="dataValue.heat_map" class="progress-bar progress-bar-striped"
 								 ng-class="{
