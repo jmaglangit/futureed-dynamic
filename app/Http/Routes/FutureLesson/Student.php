@@ -474,6 +474,26 @@
 						'as' => 'reports.partials.question_analysis'
 						, 'uses' => 'FutureLesson\Student\ReportsController@question_analysis'
 					]);
+
+					Routes::get('/platform-chart-monthly',[
+						'as' => 'reports.partials.charts.platform-chart-monthly',
+						'uses' => 'FutureLesson\Student\ReportsController@platform_chart_monthly'
+					]);
+
+					Routes::get('/platform-chart-weekly',[
+						'as' => 'reports.partials.charts.platform-chart-weekly',
+						'uses' => 'FutureLesson\Student\ReportsController@platform_chart_weekly'
+					]);
+
+					Routes::get('/platform-chart-subject-area',[
+						'as' => 'reports.partials.charts.platform-chart-subject-area',
+						'uses' => 'FutureLesson\Student\ReportsController@platform_chart_subject_area'
+					]);
+
+					Routes::get('/platform-chart-subject-area-heatmap',[
+						'as' => 'reports.partials.charts.platform-chart-subject-area-heatmap',
+						'uses' => 'FutureLesson\Student\ReportsController@platform_chart_subject_area_heatmap'
+					]);
 				});
 
 		Routes::group(['prefix' => 'partials'], function() {
