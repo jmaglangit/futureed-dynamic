@@ -843,12 +843,14 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 		DB::beginTransaction();
 		try{
+			//get student curriculum country
+			$student = Student::with('user')->find($student_id);
 
 			$response = Subject::select(
 				DB::raw('subjects.name as subject_name'),
 				DB::raw('sa.id as area_id'),
 				DB::raw('sa.name as area_name'),
-				DB::raw('m.grade_id'),
+				DB::raw('mc.grade_id'),
 				DB::raw('sm.class_id'),
 				DB::raw('sm.student_id'),
 				DB::raw('sm.module_status'),
@@ -858,21 +860,23 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				DB::raw('sm.correct_counter')
 			)->leftJoin('subject_areas as sa','sa.subject_id','=','subjects.id')
 				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
+				->leftJoin('module_countries as mc','mc.module_id','=','m.id')
 				->leftJoin('student_modules as sm', function($left_join) {
-					$left_join->on('sm.module_id','=','m.id')
+					$left_join->on('sm.module_id','=','mc.module_id')
 						->on('sm.module_status', '<>',
 							DB::raw("'" .config('futureed.module_status_failed')."'"))
 					;
 				})->where('sm.student_id','=',$student_id)
 				->where('sa.id','=',$subject_id)
 				->where('sm.class_id','=',$class_id)
-				->groupBy('m.grade_id')
+				->where('mc.country_id','=',$student->user->curriculum_country)
+				->groupBy('mc.grade_id')
 				->orderBy('sa.name')
-				->orderBy('m.grade_id');
+				->orderBy('mc.grade_id');
 
 			//if grade id is not 0
 			if($grade_id > config('futureed.false')){
-				$response = $response->where('m.grade_id','=',$grade_id);
+				$response = $response->where('mc.grade_id','=',$grade_id);
 			}
 
 			$response = $response->get();
