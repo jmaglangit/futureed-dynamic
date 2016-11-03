@@ -35,6 +35,7 @@
 		{!! Html::style('/css/futureed-client.css') !!}
 		{!! Html::style('/css/angucomplete.css') !!}
 		{!! Html::style('/css/datatables.bootstrap.min.css') !!}
+		{!! Html::style('/css/chart/student-progress.css') !!}
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
