@@ -264,6 +264,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			updateModuleStudent(data, function() {
 				$window.location.href = redirect_to + "/" + self.record.student_module.class_id;
 			});
+			$scope.ui_unblock();
 		}
 
 	}
@@ -407,6 +408,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.record.student_module.last_answered_question_id = resp.data.last_answered_question_id;
 			}
 		});
+		$scope.ui_unblock();
 	}
 
 	//ordering parse strings into object
@@ -509,6 +511,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			});
 		});
+		$scope.ui_unblock();
 	}
 
 	self.getSnapQuestionDetails = function(data, callBack) {
@@ -570,6 +573,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 							}
 
 						updateModuleStudent(data);
+						$scope.ui_unblock();
 					}
 				}
 			}
