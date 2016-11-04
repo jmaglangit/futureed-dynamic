@@ -594,7 +594,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			}
 
-			$scope.ui_unblock();
+			//$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -1479,7 +1479,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						callback(response);
 					}
 				}
-				$scope.ui_unblock();
+				//$scope.ui_unblock();
 			}
 		).
 		error(
