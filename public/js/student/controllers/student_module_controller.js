@@ -188,7 +188,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	var loadModuleView = function() {
-		self.getTeachingContents(self.record.id);
+			self.getTeachingContents(self.record.id);
+			self.startQuestions();
 	}
 
 	var getAvatarPose = function(avatar_id) {
@@ -570,8 +571,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 								data.last_viewed_content_id = self.contents.id;
 							}
 
-						self.startQuestions();
 						updateModuleStudent(data);
+						$scope.ui_block();
 					}
 				}
 			}
