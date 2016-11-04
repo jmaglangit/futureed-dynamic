@@ -33,6 +33,7 @@
     {!! Html::style('/css/datetimepicker.css') !!}
     {!! Html::style('/css/futureed.css') !!}
     {!! Html::style('/css/futureed-student.css') !!}
+    {!! Html::style('/css/chart/student-progress.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -67,6 +68,7 @@
     {!! Html::script('/js/ui-block.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/humanize-plus/1.5.0/humanize.js') !!}
+    {!! Html::script('https://d3js.org/d3.v4.min.js') !!}
 
     {!! Html::script('/js/common/tooltip_converter.js') !!}
     {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
@@ -90,7 +92,6 @@
     {!! Html::script('/js/ng-file-upload.min.js')!!}
 
     @yield('scripts')
-
     <!-- END SCRIPTS -->
 
   </body>

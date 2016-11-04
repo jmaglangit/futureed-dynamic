@@ -272,6 +272,12 @@ var Constants = {
 	, CURRENT_LEARNING			: "Current Learning"
 	, SUBJECT_AREA				: "Subject Area"
 	, SUBJECT_AREA_HEATMAP		: "Subject Area Heatmap"
+	, QUESTION_ANALYSIS			: "Question Analysis"
+
+	,GRAPH_MONTHLY				: "Hours on Platform"
+	,GRAPH_WEEKLY				: "Hours spent in last seven days"
+	,GRAPH_SUBJECT_AREA			: "Progress Made - % Completed"
+	,GRAPH_SUBJECT_AREA_HEATMAP	: "Heatmap - % Completed"
 
 	, HTTP_UNAUTHORIZED			: 401
 	, HTTP_NOT_ACCEPTABLE 		: 406

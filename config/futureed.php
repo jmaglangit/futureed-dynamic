@@ -343,4 +343,7 @@ return [
 	//seeder limit per record
 	'seeder_record_limit' => 500,
 
+	//Report Chart settings
+	'last_activity_days' => 7,
+
 ];

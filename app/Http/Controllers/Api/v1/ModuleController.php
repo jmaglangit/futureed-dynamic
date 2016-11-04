@@ -116,12 +116,12 @@ class ModuleController extends ApiController {
 
 			//validate student if it has access.
 
-			$is_valid = $this->student_services->checkStudentValidModule($student_id,$id);
+			//$is_valid = $this->student_services->checkStudentValidModule($student_id,$id);
 
-			if(!$is_valid){
+			//if(!$is_valid){
 
-				return $this->respondErrorMessage(2070);
-			}
+			//	return $this->respondErrorMessage(2070);
+			//}
 
 			$module = $this->module->viewModule($id);
 

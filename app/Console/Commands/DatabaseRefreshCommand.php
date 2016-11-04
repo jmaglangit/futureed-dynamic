@@ -46,6 +46,7 @@ class DatabaseRefreshCommand extends Command {
 		\DB::table('invoices')->truncate();
 		\DB::table('invoice_details')->truncate();
 		\DB::table('orders')->truncate();
+		\DB::table('order_details')->truncate();
 		\DB::table('tips')->truncate();
 		\DB::table('student_modules')->truncate();
 		\DB::table('student_module_answers')->truncate();

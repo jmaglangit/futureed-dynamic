@@ -38,4 +38,24 @@ class ReportsController extends Controller {
 	public function progress_bar(){
 		return view('student.reports.partials.progress_bar');
 	}
+
+	public function question_analysis(){
+		return view('student.reports.partials.question_analysis');
+	}
+
+	public function platform_chart_monthly(){
+		return view('student.reports.partials.charts.platform-chart-monthly');
+	}
+
+	public function platform_chart_weekly(){
+		return view('student.reports.partials.charts.platform-chart-weekly');
+	}
+
+	public function platform_chart_subject_area(){
+		return view('student.reports.partials.charts.platform-chart-subject-area');
+	}
+
+	public function platform_chart_subject_area_heatmap(){
+		return view('student.reports.partials.charts.platform-chart-subject-area-heatmap');
+	}
 }

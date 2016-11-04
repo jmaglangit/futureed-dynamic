@@ -78,10 +78,13 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.getGradeCountry = function(country_id) {
+		futureedAPI.getGradeCountry = function(country_id,module_id,grade_id,subject_id) {
 			return $http({
 				method	:	'GET',
 				url		:	futureedAPIUrl + 'module-country?country_id=' + country_id
+							+ '&module_id=' + module_id
+							+ '&grade_id=' + grade_id
+							+ '&subject_id=' + subject_id
 			});
 		}
 

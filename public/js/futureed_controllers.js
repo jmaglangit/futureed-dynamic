@@ -266,6 +266,22 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
+	$scope.getGradeCountry = function(country_id,module_id,grade_id,subject_id) {
+		$scope.module_countries = Constants.FALSE;
+
+		apiService.getGradeCountry(country_id,module_id,grade_id,subject_id).success(function(response){
+			if(response.status == Constants.STATUS_OK){
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if (response.data){
+					$scope.module_countries = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			$scope.internalError();
+		});
+	}
+
 	$scope.checkAvailability = function(username, user_type) {
 		$scope.u_loading = Constants.TRUE;
 		$scope.u_success = Constants.FALSE;

@@ -22,6 +22,9 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.active_current_learning = Constants.FALSE;
 		self.active_subject_area = Constants.FALSE;
 		self.active_subject_area_heatmap = Constants.FALSE;
+		self.active_question_analysis = Constants.FALSE;
+		self.student_question_analysis_export = Constants.FALSE;
+		self.question_analysis = Constants.FALSE;
 
 		self.searchDefaults();
 
@@ -33,6 +36,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 
 			case Constants.REPORT_CARD            :
 				self.active_report_card = Constants.TRUE;
+				self.listSubjects();
 				self.reportCard();
 				break;
 
@@ -51,8 +55,15 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 				self.listSubjectAreaHeatmapSubject();
 				break;
 
+			case Constants.QUESTION_ANALYSIS	:
+				self.listSubjects();
+				$scope.getGradeLevel(self.curriculum_country);
+				self.active_question_analysis = Constants.TRUE;
+				break;
+
 			default                                :
 				self.active_report_card = Constants.TRUE;
+				$scope.getGradeLevel($scope.user.user.curriculum_country);
 				self.listStudents();
 				self.reportCard();
 				break;
@@ -138,6 +149,8 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 							self.subjects[key] = value.classroom.subject;
 						});
 
+						self.getStudentChartSubjectArea(self.subjects[0].id);
+						self.getStudentChartSubjectAreaHeatMap(self.subjects[0].id);
 						self.summaryProgress(self.subjects[0].id);
 					}
 				}
@@ -361,13 +374,14 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 									{
 										id: self.student_list[i].id,
 										first_name: self.student_list[i].first_name,
-										last_name: self.student_list[i].last_name
+										last_name: self.student_list[i].last_name,
+										curriculum_country: self.student_list[i].user.curriculum_country
 									}
 								);
 							}
 						}
 						self.enabled_lists = list;
-						self.changeStudentId(self.enabled_lists[0].id);
+						self.changeStudentId(self.enabled_lists[0]);
 					}
 				}
 			}
@@ -378,8 +392,228 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		})
 	}
 
-	self.changeStudentId = function(student_id){
-		self.student_id = (self.student_id) ? self.student_id : student_id;
+	self.changeStudentId = function(student){
+		self.student_id = (self.student_id) ? self.student_id : student.id;
+		self.curriculum_country = (self.curriculum_country) ? self.curriculum_country : student.curriculum_country;
+		self.listSubjects();
 		self.setActive(Constants.REPORT_CARD);
+	}
+
+	self.getQuestionAnalysis = function(){
+		self.question_analysis = Constants.FALSE;
+
+		//initialize parameters for report
+		self.question_analysis_param = {
+			student_id  :   self.student_id,
+			subject_id  :   self.search.subject_id,
+			grade_id    :   self.search.grade_id,
+			module_id   :   self.search.module_id
+		};
+
+		//get subject class
+		$scope.ui_block;
+		ManageParentReportsService.questionAnalysis(self.question_analysis_param).success(function (response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					var data = response.data;
+					self.question_analysis = data;
+					self.student_question_analysis_export = Constants.TRUE
+
+					//setup downloadable PDF link
+					self.student_question_analysis_export_link = '/api/report/student-progress/question-analysis'
+						+ '?student_id=' + self.question_analysis_param.student_id
+						+ '&subject_id=' + self.question_analysis_param.subject_id
+						+ '&grade_id='   + self.question_analysis_param.grade_id
+						+ '&module_id='  + self.question_analysis_param.module_id;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//get list of modules by subject and level
+	self.getModuleList = function(){
+
+		//get country
+		//if module and grade is not null get module list
+		if(self.search.subject_id > Constants.FALSE && self.search.grade_id > Constants.FALSE){
+
+			//get module list
+			$scope.getGradeCountry(
+				self.curriculum_country,
+				Constants.EMPTY_STR,
+				self.search.grade_id,
+				self.search.subject_id
+			);
+		} else {
+			self.student_question_analysis_export = Constants.FALSE;
+		}
+	}
+
+	//get student monthly spent hours
+	self.getStudentMonthlySpentHours = function(){
+
+		ManageParentReportsService.getStudentChartMonthHours(self.student_id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					var data = response.data;
+
+					//transfer variable into object
+					var chart_data = [];
+
+					//this week
+					chart_data.push({
+						letter: (data.seven_days) ? data.seven_days.report_name : "Last Seven Days",
+						frequency: (data.seven_days) ? data.seven_days.hours_spent : 0
+					});
+
+					//add this month
+					chart_data.unshift({
+						letter: (data.this_month) ? data.this_month.report_name : "This Month",
+						frequency: (data.this_month) ? data.seven_days.hours_spent : 0
+					});
+
+					//add last month
+					chart_data.unshift({
+						letter: (data.last_month) ? data.last_month.report_name : "Last Month",
+						frequency: (data.last_month) ? data.last_month.hours_spent : 0
+					});
+
+					//call to generate chart.
+					platformChartMonthly(chart_data);
+
+				}
+			}
+
+
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//get student weekly spent hours
+	self.getStudentWeeklySpentHours = function(){
+
+		ManageParentReportsService.getStudentChartWeekHours(self.student_id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data;
+
+					//transfer variable into object
+					self.weekly_hours = [];
+
+					angular.forEach(data,function(a){
+						self.weekly_hours.unshift({
+							letter: a.week_name,
+							frequency: (a.activity) ? a.activity.hours_spent : 0
+						});
+					});
+
+					//call to generate chart
+					platformChartWeekly(self.weekly_hours);
+					platformChartWeeklySmallArea();
+
+				}
+			}
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//get student subject area
+	self.getStudentChartSubjectArea = function(subject_id,grade_id){
+
+		self.subject_area_subject_id = (subject_id == Constants.NULL)
+			? self.search.subject_id : subject_id;
+		self.subject_area_grade_id = grade_id;
+
+		var data = {
+			student_id  :   self.student_id,
+			subject_id  :   self.subject_area_subject_id,
+			grade_id    :   self.subject_area_grade_id
+		};
+
+		ManageParentReportsService.getStudentChartSubjectArea(data).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data;
+
+					//transfer variable into object
+					self.chart_subject_area = [];
+
+					angular.forEach(data,function(a){
+
+						self.chart_subject_area.push({
+							letter : a.curriculum_name,
+							frequency : (a.curriculum_data.length > Constants.FALSE)
+								? (a.curriculum_data[0].progress/100) : 0
+						});
+					});
+
+					platformSubjectArea(self.chart_subject_area);
+				}
+			}
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//get student subject area heatmap
+	self.getStudentChartSubjectAreaHeatMap = function(subject_id,grade_id){
+
+		self.area_heatmap_subject_id = (subject_id == Constants.NULL) ? self.search.subject_id : subject_id;
+		self.area_heatmap_grade_id = grade_id;
+
+		var data = {
+			student_id  :   self.student_id,
+			subject_id  :   self.area_heatmap_subject_id,
+			grade_id    :   self.area_heatmap_grade_id
+		};
+
+		ManageParentReportsService.getStudentChartSubjectAreaHeatMap(data).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data;
+
+					//transfer variable into object
+					self.chart_subject_area_heatmap = [];
+
+					//transfer variable into object
+					self.chart_subject_area_heatmap = [];
+
+					angular.forEach(data,function(a){
+
+						self.chart_subject_area_heatmap.push({
+							letter : a.curriculum_name,
+							frequency : (a.curriculum_data.length > Constants.FALSE)
+								? (a.curriculum_data[0].heat_map/100) : 0
+						});
+					});
+
+					platformSubjectAreaHeatMap(self.chart_subject_area_heatmap);
+
+				}
+			}
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
 	}
 }

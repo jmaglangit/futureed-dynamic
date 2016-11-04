@@ -126,7 +126,8 @@ class StudentModuleController extends ApiController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 * @param StudentModuleRequest $request
 	 * @return Response
 	 */
 	public function update($id,StudentModuleRequest $request)

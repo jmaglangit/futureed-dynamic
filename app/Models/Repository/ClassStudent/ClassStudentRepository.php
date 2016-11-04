@@ -816,15 +816,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		return $response;
 	}
 
-
-	/**
-	 * Student Progress by Subject group by Curriculum by grade.
-	 * @param $student_id
-	 * @param $subject_id
-	 * @param $class_id
-	 * @return bool
-	 */
-	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id, $class_id){
+	protected function getStudentSubjectProgressByCurriculumQuery($student_id,$subject_id,$class_id){
 		//-- Getting every row on every subject area - FINAL
 		//select
 		//s.name as subject_name,sa.id as area_id, sa.name as area_name, m.grade_id, sm.class_id, sm.student_id, sm.module_status, sm.progress, sm.updated_at
@@ -842,12 +834,14 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 		DB::beginTransaction();
 		try{
+			//get student curriculum country
+			$student = Student::with('user')->find($student_id);
 
 			$response = Subject::select(
 				DB::raw('subjects.name as subject_name'),
 				DB::raw('sa.id as area_id'),
 				DB::raw('sa.name as area_name'),
-				DB::raw('m.grade_id'),
+				DB::raw('mc.grade_id'),
 				DB::raw('sm.class_id'),
 				DB::raw('sm.student_id'),
 				DB::raw('sm.module_status'),
@@ -857,19 +851,20 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				DB::raw('sm.correct_counter')
 			)->leftJoin('subject_areas as sa','sa.subject_id','=','subjects.id')
 				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
+				->leftJoin('module_countries as mc','mc.module_id','=','m.id')
 				->leftJoin('student_modules as sm', function($left_join) {
-					$left_join->on('sm.module_id','=','m.id')
+					$left_join->on('sm.module_id','=','mc.module_id')
 						->on('sm.module_status', '<>',
 							DB::raw("'" .config('futureed.module_status_failed')."'"))
 					;
 				})->where('sm.student_id','=',$student_id)
 				->where('sa.id','=',$subject_id)
 				->where('sm.class_id','=',$class_id)
-				->groupBy('m.grade_id')
+				->where('mc.country_id','=',$student->user->curriculum_country)
+				->groupBy('mc.grade_id')
 				->orderBy('sa.name')
-				->orderBy('m.grade_id')
-				->get()
-			;
+				->orderBy('mc.grade_id');
+
 		}catch (\Exception $e){
 
 			DB::rollback();
@@ -885,12 +880,76 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	}
 
 	/**
+	 * Get completed lessons
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $class_id
+	 * @return bool
+	 */
+	public function getStudentSubjectProgressByCurriculumCompleted($student_id,$subject_id,$class_id){
+
+		DB::beginTransaction();
+		try{
+
+			$response = $this->getStudentSubjectProgressByCurriculumQuery($student_id, $subject_id, $class_id);
+
+			$response = $response->where('sm.module_status','=',DB::raw("'".config('futureed.completed')."'"))->get();
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+		return $response;
+	}
+
+	/**
+	 * Student Progress by Subject group by Curriculum by grade.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $class_id
+	 * @param int $grade_id
+	 * @return bool
+	 */
+	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id, $class_id,$grade_id=0){
+
+		DB::beginTransaction();
+		try{
+
+			$response = $this->getStudentSubjectProgressByCurriculumQuery($student_id, $subject_id, $class_id);
+
+			//if grade id is not 0
+			if($grade_id > config('futureed.false')){
+				$response = $response->where('mc.grade_id','=',$grade_id);
+			}
+
+			$response = $response->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+		return $response;
+	}
+
+	/**
 	 * Check class validation by order.
 	 * @param $student_id
 	 * @param $subject_id
 	 * @return bool
 	 */
-	public function getStudentValidClassBySubject($student_id, $subject_id){
+	public function getStudentValidClassBySubject($student_id, $subject_id,$curriculum_country){
 		//		-- Get valid class based on active class students.
 		//select
 		//cs.class_id, cs.student_id
@@ -924,7 +983,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				->where('o.date_start', '<=', Carbon::now())
 				->where('o.date_end', '>=', Carbon::now())
 				->where('o.payment_status','=',config('futureed.paid'))
-				->orderBy('o.updated_at','desc')
+				->orderBy('o.updated_at','desc');
+
+			$response = $response->with('classroom')->subscriptionCountry($curriculum_country)
 				->get();
 
 		}catch (\Exception $e){
@@ -1057,6 +1118,19 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		DB::commit();
 
 		return $response;
+	}
+
+	//get current class by student with current country
+	public function getStudentCurrentClassCountry($student_id,$country_id){
+
+		$class_student = ClassStudent::with('classroom')
+			->isDateRemovedNull()
+			->paidOrder()
+			->active()
+			->studentId($student_id)
+			->subscriptionCountry($country_id);
+
+		return $class_student->get();
 	}
 
 

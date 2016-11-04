@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services\ImageServices;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class StudentReportRestController extends ReportController {
 
@@ -17,6 +18,7 @@ class StudentReportRestController extends ReportController {
 	/**
 	 * StudentReportRestController constructor.
 	 * @param StudentReportController $studentReportController
+	 * @param ImageServices $imageServices
 	 */
 	public function __construct(
 		StudentReportController $studentReportController,
@@ -107,6 +109,97 @@ class StudentReportRestController extends ReportController {
 			$report['column_header'],
 			$report['rows']
 		);
+	}
+
+	/**
+	 * Get student question report.
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentQuestionReport(){
+
+		$criteria = [];
+
+		//isset student
+		if(Input::get('student_id')){
+			$criteria['student_id'] = Input::get('student_id');
+		} else {
+			return $this->respond(
+				[
+					'status' => $this->getStatus(),
+					'errors' => str_replace(':attribute','Student',trans('errors.'. 1003))
+				]
+			);
+		}
+
+		//isset subject
+		if(Input::get('subject_id')){
+			$criteria['subject_id'] = Input::get('subject_id');
+		}
+
+		//isset level
+		if(Input::get('grade_id')){
+			$criteria['grade_id'] = Input::get('grade_id');
+		}
+
+		//isset module
+		if(Input::get('module_id')){
+			$criteria['module_id'] = Input::get('module_id');
+		}
+
+		$report = $this->student_report->getStudentQuestionReport($criteria);
+
+		return $this->respondReport($report);
+	}
+
+	/**
+	 * Get student spent hours for web.
+	 * @param $student_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentPlatformHours($student_id){
+
+		return $this->respondReport($this->student_report->getStudentPlatformHours($student_id));
+	}
+
+
+	/**
+	 * Get student spent hours for the last 7 days.
+	 * @param $student_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentPlatformHoursWeek($student_id){
+
+		return $this->respondReport($this->student_report->getStudentPlatformHoursWeek($student_id));
+	}
+
+	/**
+	 * Get student platform chart progress.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentPlatformSubjectArea($student_id){
+
+		$subject_id = Input::get('subject_id');
+		$grade_id = Input::get('grade_id');
+
+		return $this->respondReport($this->student_report->getStudentPlatformSubjectArea($student_id,$subject_id,$grade_id));
+	}
+
+	/**
+	 * Get student platform for chart heat map.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentPlatformSubjectAreaHeatMap($student_id){
+
+		$subject_id = Input::get('subject_id');
+		$grade_id = Input::get('grade_id');
+
+		return $this->respondReport($this->student_report->getStudentPlatformSubjectAreaHeatMap($student_id,$subject_id,$grade_id));
 	}
 
 }

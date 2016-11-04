@@ -30,6 +30,12 @@
 				 {!! trans('messages.current_learning') !!}
 			</a>
 		</li>
+		<li role="presentation" ng-class="{ 'active' : reports.active_question_analysis }">
+			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.QUESTION_ANALYSIS)">
+				<i class="fa fa-list-alt"></i>
+				{!! trans('messages.question_analysis') !!}
+			</a>
+		</li>
 	</ul>
 
 	<div ng-if="reports.errors || reports.success">
@@ -54,5 +60,7 @@
 	<div template-directive template-url="{!! route('reports.partials.subject_area_heatmap_form') !!}"></div>
 
 	<div template-directive template-url="{!! route('reports.partials.current_learning_form') !!}"></div>
+
+	<div template-directive template-url="{!! route('reports.partials.question_analysis') !!}"></div>
 
 </div>

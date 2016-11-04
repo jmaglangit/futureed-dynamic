@@ -33,6 +33,10 @@ class ModuleCountryController extends ApiController {
 			$category['country_id'] = Input::get('country_id');
 		}
 
+		if(Input::get('subject_id')){
+			$category['subject_id'] = Input::get('subject_id');
+		}
+
 		$limit = (Input::get('limit')) ? Input::get('limit') : 0;
 
 		$offset = (Input::get('offset')) ? Input::get('offset') : 0;

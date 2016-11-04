@@ -182,16 +182,14 @@ class StudentPointController extends ApiController {
 	 */
 	public function getCashPoints()
 	{
-		if(Input::get('student_id')){
-			$student_id = Input::get('student_id');
-		}
+		$student_id = Input::get('student_id');
 
-		$total_points = $this->student->getStudentPoints($student_id);
-		$used_points = $this->student->getStudentPointsUsed($student_id);
-		$points['reward_points'] = $total_points;
-		$points['cash_points'] = $total_points - $used_points;
+		$student = $this->student->getStudent($student_id);
 
-		return $this->respondWithData($points);
+		return $this->respondWithData([
+			'reward_points' => $student->points,
+			'cash_points' => ($student->points - $student->points_used)
+		]);
 	}
 
 }

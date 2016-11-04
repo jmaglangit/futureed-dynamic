@@ -1,0 +1,14 @@
+
+
+/*bar blue chart*/
+.chart-spent-weekly > g .bar, .chart-spent-monthly > g .bar {
+    fill: steelblue;
+}
+
+.chart-subject-area > g .bar, .chart-subject-area-heatmap > g .bar {
+    fill: orange;
+}
+
+/*.axis--x path {*/
+    /*display: none;*/
+/*}*/

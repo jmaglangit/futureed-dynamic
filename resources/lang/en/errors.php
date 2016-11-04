@@ -270,6 +270,7 @@ return [
 		Error::LANGUAGE_NOT_AVAILABLE => 'Language code does not match.',
 		Error::LANGUAGE_FIELD_NOT_AVAILABLE => 'Field not available for translation.',
 
-		Error::STUDENT_DIFF_CURRICULUM => 'Cannot add student because it has a different curriculum.'
+		Error::STUDENT_DIFF_CURRICULUM => 'Cannot add student because it has a different curriculum.',
+		Error::STUDENT_BIRTHDATE_INVALID_FORMAT => 'The birth date is not completely filled out.'
 
 ];

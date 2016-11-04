@@ -1,10 +1,12 @@
 <?php namespace FutureEd\Models\Repository\StudentModule;
 
 use Carbon\Carbon;
+use FutureEd\Models\Core\ModuleCountry;
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\StudentModule;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
+use League\Flysystem\Exception;
 
 class StudentModuleRepository implements StudentModuleRepositoryInterface
 {
@@ -443,5 +445,132 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		}
 
 		return $student_module->get();
+	}
+
+	/**
+	 * Get student question reports.
+	 * @param $criteria
+	 * @return mixed
+	 */
+	public function getStudentQuestionsReport($criteria){
+
+		//select
+		// sm.id,
+		// sm.class_id,
+		// sm.student_id,
+		// sm.subject_id,
+		// sm.module_id,
+		// mc.country_id,
+		// mc.grade_id,
+		// sma.question_id,
+		// MIN(sma.answer_status) as answer_status,
+		// q.questions_text,
+		// ae.answer_explanation
+		//from student_modules as sm
+		//left join module_countries as mc on sm.module_id = mc.module_id
+		//left join student_module_answers as sma on sma.student_module_id = sm.id
+		//left join questions as q on q.id = sma.question_id
+		//left join answer_explanations as ae on ae.question_id = q.id
+		//
+		//where mc.country_id = 702
+		//		and sm.class_id = 4
+		//
+		//		and sm.subject_id = 1
+		//		and mc.grade_id = 13
+		//		and sm.module_id = 1
+		//group by question_id
+		//order by question_id
+		//		;
+
+		DB::beginTransaction();
+		try{
+
+			$student_modules = StudentModule::select(
+				DB::raw('student_modules.id'),
+				DB::raw('student_modules.class_id'),
+				DB::raw('student_modules.student_id'),
+				DB::raw('student_modules.subject_id'),
+				DB::raw('student_modules.module_id'),
+				DB::raw('mc.country_id'),
+				DB::raw('sma.question_id'),
+				DB::raw('MIN(sma.answer_status) as answer_status'),
+				DB::raw('q.questions_text'),
+				DB::raw('ae.answer_explanation')
+			)->leftJoin('module_countries as mc','student_modules.module_id','=','mc.module_id')
+				->leftJoin('student_module_answers as sma','sma.student_module_id','=','student_modules.id')
+				->leftJoin('questions as q','q.id','=','sma.question_id')
+				->leftJoin('answer_explanations as ae','ae.question_id','=','q.id')
+				->where('mc.country_id','=',DB::raw("'". $criteria['country_id'] ."'"))
+				->whereIn('student_modules.class_id',$criteria['class_id'])
+				->where('student_modules.subject_id','=',DB::raw("'". $criteria['subject_id']."'"))
+				->where('mc.grade_id','=',DB::raw("'". $criteria['grade_id']."'"))
+				->where('student_modules.module_id','=',DB::raw("'". $criteria['module_id']."'"))
+				->where('student_modules.student_id','=',DB::raw("'". $criteria['student_id'] ."'"))
+				->groupBy('question_id')
+				->orderBy('question_id');
+		} catch(\Exception $e){
+			DB::rollback();
+
+			dd($e->getMessage());
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+
+		return $student_modules->get();
+	}
+
+	/**
+	 * Get student spent total hours.
+	 * @param array $criteria
+	 * @return mixed
+	 */
+	public function getStudentSpentHours($criteria = []){
+		//-- filter country, class, student,
+		//select
+		//mc.id,
+		//mc.country_id,
+		//mc.grade_id,
+		//mc.module_id,
+		//sm.class_id,
+		//sm.student_id,
+		//sm.subject_id,
+		//sm.module_status,
+		//sum(sma.total_time) as summation,
+		//sma.created_at
+		//from module_countries mc
+		//left join student_modules sm on sm.module_id = mc.module_id
+		//left join student_module_answers sma on sma.student_module_id = sm.id
+		//where mc.country_id = 840 -- students current curriculum country
+		//and sm.student_id = 1 -- student id
+		//and sm.class_id in (2,4) -- gets the current class of the student
+		//and sma.created_at between DATE_SUB(NOW(),INTERVAL 30 DAY) AND NOW() -- differs the date
+		//group by sm.student_id
+		//;
+
+		$student_hours = ModuleCountry::select(
+				DB::raw('module_countries.id'),
+				DB::raw('module_countries.country_id'),
+				DB::raw('module_countries.grade_id'),
+				DB::raw('module_countries.module_id'),
+				DB::raw('sm.class_id'),
+				DB::raw('sm.student_id'),
+				DB::raw('sm.subject_id'),
+				DB::raw('sm.module_status'),
+				DB::raw('sum(sma.total_time) as total_time'),
+				DB::raw('sma.created_at')
+			)->leftJoin('student_modules as sm','sm.module_id','=','module_countries.module_id')
+			->leftJoin('student_module_answers as sma','sma.student_module_id','=','sm.id')
+			->where('module_countries.country_id','=',DB::raw("'".$criteria['country_id']."'"))
+			->where('sm.student_id','=',DB::raw($criteria['student_id']))
+			->whereIn('sm.class_id',$criteria['class_id'])
+			->where('sma.created_at','>=',DB::raw("DATE('". $criteria['date_from'] ."')"))
+			->where('sma.created_at','<=',DB::raw("DATE('". $criteria['date_to'] ."')"))
+			->groupBy('sm.student_id');
+
+		return $student_hours->first();
 	}
 }

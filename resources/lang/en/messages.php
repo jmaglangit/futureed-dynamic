@@ -307,6 +307,7 @@ return [
 	'proceed_to_next_questions' => 'Proceed to next Question',
 	'progress' => 'Progress',
 	'question' => 'Question',
+	'question_analysis' => 'Question Analysis',
 	'quick' => 'Quick',
 	'quick_stats' => 'Quick Stats',
 	'rate' => 'Rate',
@@ -362,6 +363,7 @@ return [
 	'select_help_request_status' => '-- Select Help Request Status --',
 	'select_learning_style' => '-- Select Learning Style --',
 	'select_level' => '-- Select Level --',
+	'select_module' => '-- Select Module --',
 	'select_rate' => '-- Select Rate --',
 	'select_role' => '-- Select Role --',
 	'select_status' => '-- Select Status --',
@@ -489,7 +491,7 @@ return [
 	'with_learning_style' => 'with Learning Style',
 	'total_price_computation' => 'Total Price Computation',
 	'classroom' => 'Classroom',
-	'select_a_country' => 'Select a country',
+	'select_a_country' => 'Select a Curriculum country',
 	'select_a_subject' => 'Select a subject',
 	'select_a_plan' => 'Select a Plan',
 	'select_a_day' => 'Select No. of Days',
@@ -1413,4 +1415,6 @@ return [
 
 	'payment_change_curriculum' => 'To change curriculum country, you need to email helpdesk@futureedgroup.com',
 	'payment_choose_curriculum' => 'Please note that once you select the curriculum country, you will not be able to change it. If you need to change it, please contact helpdesk@futureedgroup.com',
+
+	'graph_link_message' => 'See detailed reporting here'
 ];

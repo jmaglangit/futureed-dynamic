@@ -194,6 +194,31 @@
 			Routes::get('/current_learning', [
 				'as' => 'client.parent.partials.reports_current_learning',
 				'uses' => $reports_controller.'@current_learning'
-			]);			
+			]);
+
+			Routes::get('/student-question-analysis',[
+				'as' => 'client.parent.partials.reports_question_analysis',
+				'uses' => $reports_controller . '@question_analysis'
+			]);
+
+			Routes::get('/platform-chart-monthly',[
+				'as' => 'client.parent.partials.charts.platform-chart-monthly',
+				'uses' =>  $reports_controller . '@platform_chart_monthly'
+			]);
+
+			Routes::get('/platform-chart-weekly',[
+				'as' => 'client.parent.partials.charts.platform-chart-weekly',
+				'uses' =>  $reports_controller . '@platform_chart_weekly'
+			]);
+
+			Routes::get('/platform-chart-subject-area',[
+				'as' => 'client.parent.partials.charts.platform-chart-subject-area',
+				'uses' =>  $reports_controller . '@platform_chart_subject_area'
+			]);
+
+			Routes::get('/platform-chart-subject-area-heatmap',[
+				'as' => 'client.parent.partials.charts.platform-chart-subject-area-heatmap',
+				'uses' =>  $reports_controller . '@platform_chart_subject_area_heatmap'
+			]);
 		});
 	});

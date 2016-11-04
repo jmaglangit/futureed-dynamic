@@ -45,6 +45,7 @@ class StudentRegistrationRequest extends ApiRequest {
 			'birth_date.before'     => trans('errors.2028'),
 			'grade_code.numeric'    => trans('errors.2023'),
 			'country_id.numeric'    => trans('errors.2604'),
+			'birth_date.date_format'=> trans('errors.2079')
 		];
 	}
 }

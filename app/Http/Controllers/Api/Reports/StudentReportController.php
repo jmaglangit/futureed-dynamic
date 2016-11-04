@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\Reports;
 
+use Carbon\Carbon;
 use FutureEd\Http\Requests;
 
 use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
@@ -18,6 +19,8 @@ use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\ImageServices;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Input;
 
 class StudentReportController extends ReportController {
 
@@ -155,6 +158,12 @@ class StudentReportController extends ReportController {
 
 		$avatar = $this->avatar->getAvatar($student->avatar_id);
 
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id,$subject_id,$student->user->curriculum_country);
+
 		//earned_badges
 		$badge = $this->student_badges->getStudentBadges([
 			'student_id' => $student_id
@@ -167,16 +176,16 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentModulesCompleted($student_id, $subject_id, $student->country_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class[0]->class_id);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->country_id);
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->country_id);
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
@@ -201,8 +210,8 @@ class StudentReportController extends ReportController {
 		}
 
 		//check if student country if in the grade countries
-		$student_country = (in_array($student->country_id, $countries)) ?
-			$student->country_id : config('futureed.default_country');
+		$student_country = (in_array($student->user->curriculum_country, $countries)) ?
+			$student->user->curriculum_country : config('futureed.default_country');
 
 		$header = $this->grade->getGradesByCountries($student_country);;
 
@@ -218,7 +227,7 @@ class StudentReportController extends ReportController {
 		//ROWS
 		//get each completed on each grades.
 
-		$row_data = $this->class_student->getStudentModulesProgressByGrade($student_id, $subject_id, $student->country_id);
+		$row_data = $this->class_student->getStudentModulesProgressByGrade($student_id, $subject_id, $student->user->curriculum_country);
 
 
 		foreach ($row_data as $data) {
@@ -263,10 +272,10 @@ class StudentReportController extends ReportController {
 		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
 
 		//check valid class subject.
-		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id);
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
-		$grades = $this->grade->getGradesByCountries($student->country_id);
+		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
 
 		//get student grade
 		$student_grade = $this->grade->getGrade($student->grade_code);
@@ -309,16 +318,16 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentModulesCompleted($student_id, $subject_id, $student->country_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class[0]->class_id);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->country_id);
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->country_id);
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		$additional_information = [
 			'first_name' => $student->first_name,
@@ -371,14 +380,14 @@ class StudentReportController extends ReportController {
 		$subject = $this->subject->getSubject($subject_id);
 
 		//check valid class subject.
-		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id);
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
-		$grades = $this->grade->getGradesByCountries($student->country_id);
+		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
 
 
-		$country_id = (empty($this->grade->checkCountry($student->country_id)))
-			? config('futureed.default_country') : $student->country_id;
+		$country_id = (empty($this->grade->checkCountry($student->user->curriculum_country)))
+			? config('futureed.default_country') : $student->user->curriculum_country;
 
 		//Get student current learning
 		$current_learning = $this->class_student->getStudentCurrentLearning($student_id,$subject_id,$country_id);
@@ -428,10 +437,10 @@ class StudentReportController extends ReportController {
 		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
 
 		//check valid class subject.
-		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id);
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 
 		//get grades collection
-		$grades = $this->grade->getGradesByCountries($student->country_id);
+		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
 
 		//get student grade
 		$student_grade = $this->grade->getGrade($student->grade_code);
@@ -475,16 +484,16 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentModulesCompleted($student_id, $subject_id, $student->country_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class->class_id);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->country_id);
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->country_id);
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
 
 		$additional_information = [
 			'first_name' => $student->first_name,
@@ -511,6 +520,270 @@ class StudentReportController extends ReportController {
 			'column_header' => $column_header,
 			'rows' => $rows
 		];
+	}
+
+
+	/**
+	 * Get student question list report
+	 * @param array $criteria
+	 */
+	public function getStudentQuestionReport($criteria = []){
+
+		//student get country id
+		$student = $this->student->getStudent($criteria['student_id']);
+
+		$criteria['country_id'] = $student->user->curriculum_country;
+
+		$this->student_service->getCurrentClass($criteria['student_id']);
+
+		//get current class id
+		$current_class = $this->class_student->getStudentCurrentClassCountry(
+			$criteria['student_id'],
+			$criteria['country_id']
+		);
+
+		$class_ids = [];
+
+		foreach($current_class as $class){
+			array_push($class_ids,$class->class_id);
+		}
+
+		$criteria['class_id'] = $class_ids;
+
+
+		$question_list = $this->student_module->getStudentQuestionsReport($criteria);
+
+		return $question_list;
+	}
+
+	/**
+	 * Get student spent hours.
+	 * @param $student_id
+	 * @return array
+	 */
+	public function getStudentPlatformHours($student_id){
+		//student_id, country_id, class_id,date_from,date_to
+		$criteria = [];
+
+		//get student detail for curriculum country
+		$student = $this->student->getStudent($student_id);
+
+		$criteria['student_id'] = $student_id;
+		$criteria['country_id'] = $student->user->curriculum_country;
+
+		//get current classes -- class_id in array
+		$this->student_service->getCurrentClass($student_id);
+
+		$current_class = $this->class_student->getStudentCurrentClassCountry(
+			$student_id,
+			$criteria['country_id']
+		);
+
+		$class_ids = [];
+
+		foreach($current_class as $class){
+			array_push($class_ids,$class->class_id);
+		}
+
+		$criteria['class_id'] = $class_ids;
+
+		$student_spent_hours = [];
+
+
+		// Get hours last seven days
+		$criteria['date_from'] = Carbon::now()->addDay(-7)->toDateTimeString();
+		$criteria['date_to'] = Carbon::now()->toDateTimeString();
+		$student_spent_hours['seven_days'] = $this->student_module->getStudentSpentHours($criteria);
+
+		if($student_spent_hours['seven_days']){
+			$student_spent_hours['seven_days']->report_name = 'This Week';
+			$student_spent_hours['seven_days']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['seven_days']->total_time)
+				->diffInMinutes(Carbon::createFromTimestamp(0));
+		}
+
+		// Get hours this month
+		$criteria['date_from'] = Carbon::now()->startOfMonth()->toDateTimeString();
+		$criteria['date_to'] = Carbon::now()->toDateTimeString();
+		$student_spent_hours['this_month'] = $this->student_module->getStudentSpentHours($criteria);
+
+		if($student_spent_hours['this_month']){
+			$student_spent_hours['this_month']->report_name = 'This Month';
+			$student_spent_hours['this_month']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['this_month']->total_time)
+				->diffInMinutes(Carbon::createFromTimestamp(0));
+		}
+
+		// Get hours last month
+		$criteria['date_from'] = Carbon::now()->subMonth(1)->startOfMonth()->toDateTimeString();
+		$criteria['date_to'] = Carbon::now()->subMonth(1)->lastOfMonth()->toDateTimeString();
+		$student_spent_hours['last_month'] = $this->student_module->getStudentSpentHours($criteria);
+
+		if($student_spent_hours['last_month']){
+			$student_spent_hours['last_month']->report_name = 'Last Month';
+			$student_spent_hours['last_month']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['last_month']->total_time)
+				->diffInMinutes(Carbon::createFromTimestamp(0));
+		}
+
+		return $student_spent_hours;
+	}
+
+	/**
+	 * Get student platform hours by weekly activities.
+	 * @param $student_id
+	 * @return array
+	 */
+	public function getStudentPlatformHoursWeek($student_id){
+		//student_id, country_id, class_id,date_from,date_to
+		$criteria = [];
+
+		//get student detail for curriculum country
+		$student = $this->student->getStudent($student_id);
+
+		$criteria['student_id'] = $student_id;
+		$criteria['country_id'] = $student->user->curriculum_country;
+
+		//get current classes -- class_id in array
+		$this->student_service->getCurrentClass($student_id);
+
+		$current_class = $this->class_student->getStudentCurrentClassCountry(
+			$student_id,
+			$criteria['country_id']
+		);
+
+		$class_ids = [];
+
+		foreach($current_class as $class){
+			array_push($class_ids,$class->class_id);
+		}
+
+		$criteria['class_id'] = $class_ids;
+
+		//get hours for the last 7 days
+
+		$student_spent_hours = [];
+
+		//initialize locale for carbon time.
+		setlocale(LC_TIME,App::getLocale());
+
+		//loop throughout the days of activities
+		for($i=0; $i < config('futureed.last_activity_days'); $i++){
+
+			$criteria['date_from'] =  Carbon::now()->subDay($i+1)->startOfDay()->toDateTimeString();
+			$criteria['date_to'] = Carbon::now()->subDay($i)->startOfDay()->toDateTimeString();
+
+			$activity = $this->student_module->getStudentSpentHours($criteria);
+
+			if($activity){
+				$activity->hours_spent = Carbon::createFromTimestamp($activity->total_time)
+					->diffInMinutes(Carbon::createFromTimestamp(0));
+			}
+
+			$student_spent_hours[$i] = [
+				'week_name' => Carbon::now()->subDay($i)->formatLocalized('%A'),
+				'activity' => $activity,
+			];
+		}
+
+		return $student_spent_hours;
+	}
+
+	/**
+	 * Get student chart progress completed
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return array
+	 */
+	public function getStudentPlatformSubjectArea($student_id,$subject_id,$grade_id){
+
+		//Get student details
+		$student = $this->student->getStudent($student_id);
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//Get Subject Areas as curriculum.
+		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
+
+		//initiate array.
+		$row_data = [];
+
+		//loop to get each data per subject areas.
+		foreach ($subject_areas as $areas) {
+
+			if (!empty($class->toArray())) {
+
+				//get student modules by subject areas
+				$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+					$class[0]->student_id, $areas->id, $class[0]->class_id,$grade_id
+				);
+			}
+
+			$area = new \stdClass();
+			//append to every row of areas
+			$curr_data = (!empty($curriculum_data)) ? $curriculum_data : [];
+
+			$area->curriculum_name = $areas->name;
+
+			$area->curriculum_data = $curr_data;
+
+			array_push($row_data, $area);
+
+		}
+
+		return $row_data;
+	}
+
+	/**
+	 * Get student platform chart report heat area.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return array
+	 */
+	public function getStudentPlatformSubjectAreaHeatMap($student_id,$subject_id,$grade_id){
+
+		//Get student details
+		$student = $this->student->getStudent($student_id);
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//Get Subject Areas as curriculum.
+		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
+
+		//initiate array.
+		$row_data = [];
+
+		//loop to get each data per subject areas.
+		foreach ($subject_areas as $areas) {
+
+			if (!empty($class->toArray())) {
+
+				//get student modules by subject areas
+				$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+					$class[0]->student_id, $areas->id, $class[0]->class_id,$grade_id
+				);
+			}
+
+			$area = new \stdClass();
+			//append to every row of areas
+			$curr_data = (!empty($curriculum_data)) ? $curriculum_data : [];
+
+			$area->curriculum_name = $areas->name;
+
+			$area->curriculum_data = $curr_data;
+
+			array_push($row_data, $area);
+
+		}
+
+		return $row_data;
 	}
 
 
