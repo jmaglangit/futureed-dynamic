@@ -511,7 +511,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			});
 		});
-		$scope.ui_unblock();
 	}
 
 	self.getSnapQuestionDetails = function(data, callBack) {
@@ -573,7 +572,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 							}
 
 						updateModuleStudent(data);
-						$scope.ui_unblock();
 					}
 				}
 			}
