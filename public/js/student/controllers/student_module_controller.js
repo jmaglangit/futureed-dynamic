@@ -238,7 +238,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			}
 
-			$scope.ui_unblock();
+			//$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -310,6 +310,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			self.module_message.name = self.record.name;
 			self.module_message.show = Constants.TRUE;
 
+			$scope.ui_unblock();
 			$("#message_modal").modal({
 		        backdrop: 'static',
 		        keyboard: Constants.FALSE,
@@ -573,7 +574,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			}
 
-			$scope.ui_unblock();
+			//$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
