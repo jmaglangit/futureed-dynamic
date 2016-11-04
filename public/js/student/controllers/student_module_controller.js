@@ -50,7 +50,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	* Updates Student Module
 	*/
 	var updateModuleStudent = function(data, successCallback) {
-		$scope.ui_block();
+		//$scope.ui_block();
 		StudentModuleService.updateModuleStudent(data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
@@ -67,7 +67,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			}
 
-			$scope.ui_unblock();
+			//$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
