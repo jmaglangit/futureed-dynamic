@@ -8,7 +8,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class Question extends Model {
 
-	use Translatable;
+	//use Translatable;
 
 	use SoftDeletes;
 
@@ -60,9 +60,9 @@ class Question extends Model {
 	];
 
 	//Translation
-	public $translatedAttributes = ['questions_text','answer'];
+	//public $translatedAttributes = ['questions_text','answer'];
 
-	public $translationModel = 'FutureEd\Models\Core\QuestionTranslation';
+	//public $translationModel = 'FutureEd\Models\Core\QuestionTranslation';
 
 	//Accessor
 	public function getQuestionsImageAttribute($value) {
