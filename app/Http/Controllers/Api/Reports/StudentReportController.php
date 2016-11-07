@@ -163,6 +163,11 @@ class StudentReportController extends ReportController {
 
 		//check valid class subject.
 		$class = $this->class_student->getStudentValidClassBySubject($student_id,$subject_id,$student->user->curriculum_country);
+		$class_ids = [];
+
+		foreach($class as $classes){
+			array_push($class_ids,$classes->class_id);
+		}
 
 		//earned_badges
 		$badge = $this->student_badges->getStudentBadges([
@@ -176,17 +181,13 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class[0]->class_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class_ids);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$class_ids = [];
 
-		foreach($class as $classes){
-			array_push($class_ids,$classes->class_id);
-		}
 		$criteria = [
 			'date_from' => Carbon::now()->addDay(-7)->toDateTimeString(),
 			'date_to' => Carbon::now()->toDateTimeString(),
@@ -294,6 +295,11 @@ class StudentReportController extends ReportController {
 
 		//check valid class subject.
 		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
+		$class_ids = [];
+
+		foreach($class as $classes){
+			array_push($class_ids,$classes->class_id);
+		}
 
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
@@ -339,17 +345,12 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class[0]->class_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class_ids);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$class_ids = [];
-
-		foreach($class as $classes){
-			array_push($class_ids,$classes->class_id);
-		}
 		$criteria = [
 			'date_from' => Carbon::now()->addDay(-7)->toDateTimeString(),
 			'date_to' => Carbon::now()->toDateTimeString(),
@@ -481,6 +482,11 @@ class StudentReportController extends ReportController {
 		//check valid class subject.
 		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
 		$class_list = $class;
+		$class_ids = [];
+
+		foreach($class_list as $classes){
+			array_push($class_ids,$classes->class_id);
+		}
 
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
@@ -527,17 +533,12 @@ class StudentReportController extends ReportController {
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class->class_id);
+		$lessons = $this->class_student->getStudentSubjectProgressByCurriculumCompleted($student_id, $subject_id, $class_ids);
 
 		//written_tips
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$class_ids = [];
-
-		foreach($class_list as $classes){
-			array_push($class_ids,$classes->class_id);
-		}
 		$criteria = [
 			'date_from' => Carbon::now()->addDay(-7)->toDateTimeString(),
 			'date_to' => Carbon::now()->toDateTimeString(),
