@@ -182,10 +182,31 @@ class StudentReportController extends ReportController {
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
+		$class_ids = [];
+
+		foreach($class as $classes){
+			array_push($class_ids,$classes->class_id);
+		}
+		$criteria = [
+			'date_from' => Carbon::now()->addDay(-7)->toDateTimeString(),
+			'date_to' => Carbon::now()->toDateTimeString(),
+			'country_id' => $student->user->curriculum_country,
+			'student_id' => $student_id,
+			'class_id' => $class_ids
+		];
+
+		$week = $this->student_module->getStudentSpentHours($criteria);
+
+		$week_hours = Carbon::createFromTimestamp($week->total_time)
+			->diffInHours(Carbon::createFromTimestamp(0));
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
+		$criteria['date_from'] = Carbon::createFromTimestamp(0)->toDateTimeString();
+
+		$hours_spent = $this->student_module->getStudentSpentHours($criteria);
+
+		$total_hours = Carbon::createFromTimestamp($hours_spent->total_time)
+			->diffInHours(Carbon::createFromTimestamp(0));
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
@@ -195,8 +216,8 @@ class StudentReportController extends ReportController {
 			'earned_medals' => $student_medal,
 			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,
 			'written_tips' => ($tips) ? count($tips->toArray()) : 0,
-			'week_hours' => (empty($week_hours)) ? round((($week_hours[0]->total_time / 60) / 60), 1, PHP_ROUND_HALF_UP) : 0,
-			'total_hours' => (empty($total_hours)) ? round((($total_hours[0]->total_time / 60) / 60), 1, PHP_ROUND_HALF_UP) : 0,
+			'week_hours' => $week_hours,
+			'total_hours' => $total_hours
 		];
 
 		//COLUMN
@@ -324,10 +345,31 @@ class StudentReportController extends ReportController {
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
+		$class_ids = [];
+
+		foreach($class as $classes){
+			array_push($class_ids,$classes->class_id);
+		}
+		$criteria = [
+			'date_from' => Carbon::now()->addDay(-7)->toDateTimeString(),
+			'date_to' => Carbon::now()->toDateTimeString(),
+			'country_id' => $student->user->curriculum_country,
+			'student_id' => $student_id,
+			'class_id' => $class_ids
+		];
+
+		$week = $this->student_module->getStudentSpentHours($criteria);
+
+		$week_hours = Carbon::createFromTimestamp($week->total_time)
+			->diffInHours(Carbon::createFromTimestamp(0));
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
+		$criteria['date_from'] = Carbon::createFromTimestamp(0)->toDateTimeString();
+
+		$hours_spent = $this->student_module->getStudentSpentHours($criteria);
+
+		$total_hours = Carbon::createFromTimestamp($hours_spent->total_time)
+			->diffInHours(Carbon::createFromTimestamp(0));
 
 		$additional_information = [
 			'first_name' => $student->first_name,
@@ -339,8 +381,8 @@ class StudentReportController extends ReportController {
 			'earned_medals' => $student_medal,
 			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,
 			'written_tips' => ($tips) ? count($tips->toArray()) : 0,
-			'week_hours' => (empty($week_hours)) ? round((($week_hours[0]->total_time / 60) / 60), 1, PHP_ROUND_HALF_UP) : 0,
-			'total_hours' => (empty($total_hours)) ? round((($total_hours[0]->total_time / 60) / 60), 1, PHP_ROUND_HALF_UP) : 0,
+			'week_hours' => $week_hours,
+			'total_hours' => $total_hours,
 		];
 
 		$column_header = [['name' => 'Curriculum']];
@@ -438,6 +480,7 @@ class StudentReportController extends ReportController {
 
 		//check valid class subject.
 		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id,$student->user->curriculum_country);
+		$class_list = $class;
 
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->user->curriculum_country);
@@ -490,10 +533,31 @@ class StudentReportController extends ReportController {
 		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->user->curriculum_country);
+		$class_ids = [];
+
+		foreach($class_list as $classes){
+			array_push($class_ids,$classes->class_id);
+		}
+		$criteria = [
+			'date_from' => Carbon::now()->addDay(-7)->toDateTimeString(),
+			'date_to' => Carbon::now()->toDateTimeString(),
+			'country_id' => $student->user->curriculum_country,
+			'student_id' => $student_id,
+			'class_id' => $class_ids
+		];
+
+		$week = $this->student_module->getStudentSpentHours($criteria);
+
+		$week_hours = Carbon::createFromTimestamp($week->total_time)
+			->diffInHours(Carbon::createFromTimestamp(0));
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->user->curriculum_country);
+		$criteria['date_from'] = Carbon::createFromTimestamp(0)->toDateTimeString();
+
+		$hours_spent = $this->student_module->getStudentSpentHours($criteria);
+
+		$total_hours = Carbon::createFromTimestamp($hours_spent->total_time)
+			->diffInHours(Carbon::createFromTimestamp(0));
 
 		$additional_information = [
 			'first_name' => $student->first_name,
@@ -505,8 +569,8 @@ class StudentReportController extends ReportController {
 			'earned_medals' => $student_medal,
 			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,
 			'written_tips' => ($tips) ? count($tips->toArray()) : 0,
-			'week_hours' => (empty($week_hours)) ? round((($week_hours[0]->total_time / 60) / 60), 1, PHP_ROUND_HALF_UP) : 0,
-			'total_hours' => (empty($total_hours)) ? round((($total_hours[0]->total_time / 60) / 60), 1, PHP_ROUND_HALF_UP) : 0,
+			'week_hours' => $week_hours,
+			'total_hours' => $total_hours,
 		];
 
 		$column_header = [['name' => 'Curriculum']];
@@ -598,7 +662,7 @@ class StudentReportController extends ReportController {
 		if($student_spent_hours['seven_days']){
 			$student_spent_hours['seven_days']->report_name = 'This Week';
 			$student_spent_hours['seven_days']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['seven_days']->total_time)
-				->diffInMinutes(Carbon::createFromTimestamp(0));
+				->diffInHours(Carbon::createFromTimestamp(0));
 		}
 
 		// Get hours this month
@@ -609,7 +673,7 @@ class StudentReportController extends ReportController {
 		if($student_spent_hours['this_month']){
 			$student_spent_hours['this_month']->report_name = 'This Month';
 			$student_spent_hours['this_month']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['this_month']->total_time)
-				->diffInMinutes(Carbon::createFromTimestamp(0));
+				->diffInHours(Carbon::createFromTimestamp(0));
 		}
 
 		// Get hours last month
@@ -620,7 +684,7 @@ class StudentReportController extends ReportController {
 		if($student_spent_hours['last_month']){
 			$student_spent_hours['last_month']->report_name = 'Last Month';
 			$student_spent_hours['last_month']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['last_month']->total_time)
-				->diffInMinutes(Carbon::createFromTimestamp(0));
+				->diffInHours(Carbon::createFromTimestamp(0));
 		}
 
 		return $student_spent_hours;
