@@ -416,6 +416,7 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 		try {
 
+			session(['super_access' => 1]);
 			$question = Question::find($id);
 
 			$response = $question->answer;
