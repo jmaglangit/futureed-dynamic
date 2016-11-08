@@ -36,4 +36,7 @@ class ErrorMessageServices
 	const MODULE_TRANSLATION_UPDATE_FAIL = 2075;
 	const LANGUAGE_NOT_AVAILABLE = 2076;
 	const LANGUAGE_FIELD_NOT_AVAILABLE = 2077;
+
+	// Subscription Accepting request
+	const SUBSCRIPTION_ALREADY_SUBSCRIBE = 2080;
 }
