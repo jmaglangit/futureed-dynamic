@@ -9,8 +9,6 @@ use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
-use FutureEd\Services\InvoiceServices;
-
 class InvoiceDetailController extends ApiController {
 
 	/**
@@ -28,13 +26,6 @@ class InvoiceDetailController extends ApiController {
 	 */
 	protected $order;
 
-
-	/**
-	*
-	* @var InvoiceServices
-	*/
-	protected $invoiceService;
-
 	/**
 	 * @param InvoiceDetail $detail
 	 * @param InvoiceRepositoryInterface $invoice
@@ -43,15 +34,13 @@ class InvoiceDetailController extends ApiController {
 	public function __construct(
 		InvoiceDetail $detail,
 		InvoiceRepositoryInterface $invoice,
-		OrderRepositoryInterface $orderRepositoryInterface,
-		InvoiceServices $invoiceService
+		OrderRepositoryInterface $orderRepositoryInterface
 	)
 	{
 
 		$this->detail = $detail;
 		$this->invoice = $invoice;
 		$this->order = $orderRepositoryInterface;
-		$this->invoiceService = $invoiceService;
 	}
 
 
@@ -89,29 +78,14 @@ class InvoiceDetailController extends ApiController {
 	public function editInvoiceDetails(InvoiceDetailRequest $request)
 	{
 
-		$data = $request->only('id', 'payment_status', 'invoice_detail');
+		$data = $request->only('id', 'payment_status');
 
 		$id = $data['id'];
-
 		$return = $this->invoice->getInvoice($id);
 
 		if (!$return) {
 
 			return $this->respondErrorMessage(2120);
-		}
-
-		if ($data['payment_status'] == 'Paid') {
-
-			$criteria =array('student_id' => $return['student_id'], 'payment_status' => 'Paid');
-
-			$subject_id = $data['invoice_detail'][0]['classroom']['subject_id'];
-
-			$result = $this->invoice->getInvoiceDetails($criteria ,0 ,0 );
-
-			if ($this->invoiceService->compareInvoice($result, $subject_id, $id)) {
-
-				return $this->respondErrorMessage(2080);
-			}
 		}
 
 		//update invoice
