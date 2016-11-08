@@ -1,7 +1,7 @@
 angular.module('futureed.controllers')
 	.controller('StudentLoginController', StudentLoginController);
 
-StudentLoginController.$inject = ['$scope', '$filter', '$controller', 'StudentLoginService', 'MediaLoginService', 'ValidationService'];
+StudentLoginController.$inject = ['$scope', '$filter', '$controller', 'StudentLoginService', 'MediaLoginService', 'ValidationService', 'apiService'];
 
 function StudentLoginController($scope, $filter, $controller, StudentLoginService, MediaLoginService, ValidationService) {
 	var self = this;
@@ -214,6 +214,23 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
+		});
+	}
+
+	self.getGradeLevel = function() {
+		self.grades = Constants.FALSE;
+
+		apiService.getGradeLevel(self.record.country_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.grades = (response.data.total > 0) ? response.data.records : Constants.FALSE;
+					self.country = Constants.TRUE;
+				}
+			}
+		}).error(function(response) {
+			$scope.internalError();
 		});
 	}
 
