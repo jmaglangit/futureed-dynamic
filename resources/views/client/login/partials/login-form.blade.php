@@ -61,7 +61,7 @@
 					)
 					, ''
 					, array(
-						'class' => 'form-control'
+						'class' => 'form-control font-size-16'
 						, 'ng-model' => 'login.role'
 					)
 				) !!}
