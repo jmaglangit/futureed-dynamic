@@ -1201,7 +1201,7 @@ td:not(:last-child) {
 	max-width: 150px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	white-space: nowrap;
+	/*white-space: nowrap;*/
 }
 
 ul[dnd-list], ul[dnd-list] > li { 
