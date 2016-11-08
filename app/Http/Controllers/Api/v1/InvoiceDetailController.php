@@ -10,8 +10,6 @@ use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
-use FutureEd\Services\InvoiceServices;
-
 class InvoiceDetailController extends ApiController {
 
 	/**
@@ -29,13 +27,6 @@ class InvoiceDetailController extends ApiController {
 	 */
 	protected $order;
 
-
-	/**
-	*
-	* @var InvoiceServices
-	*/
-	protected $invoiceService;
-
 	/**
 	 * @param InvoiceDetail $detail
 	 * @param InvoiceRepositoryInterface $invoice
@@ -45,15 +36,13 @@ class InvoiceDetailController extends ApiController {
 	public function __construct(
 		InvoiceDetail $detail,
 		InvoiceRepositoryInterface $invoice,
-		OrderRepositoryInterface $orderRepositoryInterface,
-		InvoiceServices $invoiceService
+		OrderRepositoryInterface $orderRepositoryInterface
 	)
 	{
 
 		$this->detail = $detail;
 		$this->invoice = $invoice;
 		$this->order = $orderRepositoryInterface;
-		$this->invoiceService = $invoiceService;
 	}
 
 
@@ -94,7 +83,6 @@ class InvoiceDetailController extends ApiController {
 		$data = $request->only('id', 'payment_status');
 
 		$id = $data['id'];
-
 		$return = $this->invoice->getInvoice($id);
 
 		if (!$return) {
@@ -102,6 +90,7 @@ class InvoiceDetailController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
+<<<<<<< HEAD
 		if ($data['payment_status'] == config('futureed.paid')) {
 
 			$criteria =array('student_id' => $return['student_id'], 'payment_status' => config('futureed.paid'));
@@ -117,6 +106,8 @@ class InvoiceDetailController extends ApiController {
 			}
 		}
 
+=======
+>>>>>>> 3b0240a1c00951d5fb34560c7f204df88a917f01
 		//update invoice
 		$this->invoice->updateInvoice($id, $data);
 

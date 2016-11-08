@@ -31,19 +31,4 @@ class InvoiceServices {
 
         return $invoice_no;
     }
-
-    public function compareInvoice($invoiceList, $subjectId, $invoiceId){
-        $flag = false;
-        foreach ($invoiceList['records'] as $key) {
-            if ($invoiceId != $key['id']) {
-                $invoice_detail  = $key['invoice_detail'][0];
-                if ($invoice_detail['classroom']['subject_id'] == $subjectId) {
-                    $flag = true;
-                    break;
-                }
-            }
-        }
-
-        return $flag;
-    }
 }
