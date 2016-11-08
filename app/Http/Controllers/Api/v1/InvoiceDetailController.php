@@ -90,7 +90,7 @@ class InvoiceDetailController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
-<<<<<<< HEAD
+
 		if ($data['payment_status'] == config('futureed.paid')) {
 
 			$criteria =array('student_id' => $return['student_id'], 'payment_status' => config('futureed.paid'));
@@ -106,8 +106,6 @@ class InvoiceDetailController extends ApiController {
 			}
 		}
 
-=======
->>>>>>> 3b0240a1c00951d5fb34560c7f204df88a917f01
 		//update invoice
 		$this->invoice->updateInvoice($id, $data);
 
