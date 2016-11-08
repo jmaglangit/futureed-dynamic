@@ -4,6 +4,7 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\InvoiceDetailRequest;
 
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface as InvoiceDetail;
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
@@ -39,6 +40,7 @@ class InvoiceDetailController extends ApiController {
 	 * @param InvoiceDetail $detail
 	 * @param InvoiceRepositoryInterface $invoice
 	 * @param OrderRepositoryInterface $orderRepositoryInterface
+	 * @param InvoiceServices $classroom
 	 */
 	public function __construct(
 		InvoiceDetail $detail,
@@ -89,7 +91,7 @@ class InvoiceDetailController extends ApiController {
 	public function editInvoiceDetails(InvoiceDetailRequest $request)
 	{
 
-		$data = $request->only('id', 'payment_status', 'invoice_detail');
+		$data = $request->only('id', 'payment_status');
 
 		$id = $data['id'];
 
@@ -100,17 +102,18 @@ class InvoiceDetailController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
-		if ($data['payment_status'] == 'Paid') {
+		if ($data['payment_status'] == config('futureed.paid')) {
 
-			$criteria =array('student_id' => $return['student_id'], 'payment_status' => 'Paid');
+			$criteria =array('student_id' => $return['student_id'], 'payment_status' => config('futureed.paid'));
 
-			$subject_id = $data['invoice_detail'][0]['classroom']['subject_id'];
+			$subject_id = $return['invoiceDetail'][0]['classroom']['subject_id'];
 
 			$result = $this->invoice->getInvoiceDetails($criteria ,0 ,0 );
 
 			if ($this->invoiceService->compareInvoice($result, $subject_id, $id)) {
 
-				return $this->respondErrorMessage(2080);
+					return $this->respondErrorMessage(2037);
+
 			}
 		}
 
