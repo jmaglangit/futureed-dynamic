@@ -248,7 +248,7 @@
                             <p>{! futureed.BILL_COMPANY !}</p>
                             <p>{! futureed.BILL_STREET !}</p>
                             <p>{! futureed.BILL_ADDRESS !}, {! futureed.BILL_COUNTRY !}</p>
-                            <p>Email: <span>i n f o @ f u t u r e l e s s o n . c o m</span></p>
+                            <p>Email: <span>{! futureed.BILL_EMAIL !}</span></p>
                         </div>
                     </fieldset>
                 {!! Form::close() !!}
