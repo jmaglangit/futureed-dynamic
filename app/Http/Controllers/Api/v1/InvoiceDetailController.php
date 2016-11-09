@@ -108,6 +108,7 @@ class InvoiceDetailController extends ApiController {
 
 		$return = $return->toArray();
 
+		//check if student have existing subscription to a subject
 		$student = $this->student->viewStudent($return['student_id']);
 
 		$student_classroom = $this->classroom->getClassroomBySubjectId($return['invoice_detail'][0]['classroom']['subject_id'],$return['student_id']);
