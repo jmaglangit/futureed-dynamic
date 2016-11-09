@@ -1,7 +1,7 @@
 angular.module('futureed.controllers')
 	.controller('StudentLoginController', StudentLoginController);
 
-StudentLoginController.$inject = ['$scope', '$filter', '$controller', 'StudentLoginService', 'MediaLoginService', 'ValidationService', 'apiService'];
+StudentLoginController.$inject = ['$scope', '$filter', '$controller', 'StudentLoginService', 'MediaLoginService', 'ValidationService'];
 
 function StudentLoginController($scope, $filter, $controller, StudentLoginService, MediaLoginService, ValidationService) {
 	var self = this;
