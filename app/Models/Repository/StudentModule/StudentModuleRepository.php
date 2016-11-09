@@ -511,7 +511,6 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		} catch(\Exception $e){
 			DB::rollback();
 
-			dd($e->getMessage());
 			$this->errorLog($e->getMessage());
 
 			return false;
@@ -551,7 +550,9 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		//group by sm.student_id
 		//;
 
-		$student_hours = ModuleCountry::select(
+		DB::beginTransaction();
+		try{
+			$student_hours = ModuleCountry::select(
 				DB::raw('module_countries.id'),
 				DB::raw('module_countries.country_id'),
 				DB::raw('module_countries.grade_id'),
@@ -563,14 +564,23 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 				DB::raw('sum(sma.total_time) as total_time'),
 				DB::raw('sma.created_at')
 			)->leftJoin('student_modules as sm','sm.module_id','=','module_countries.module_id')
-			->leftJoin('student_module_answers as sma','sma.student_module_id','=','sm.id')
-			->where('module_countries.country_id','=',DB::raw("'".$criteria['country_id']."'"))
-			->where('sm.student_id','=',DB::raw($criteria['student_id']))
-			->whereIn('sm.class_id',$criteria['class_id'])
-			->where('sma.created_at','>=',DB::raw("DATE('". $criteria['date_from'] ."')"))
-			->where('sma.created_at','<=',DB::raw("DATE('". $criteria['date_to'] ."')"))
-			->groupBy('sm.student_id');
+				->leftJoin('student_module_answers as sma','sma.student_module_id','=','sm.id')
+				->where('module_countries.country_id','=',DB::raw("'".$criteria['country_id']."'"))
+				->where('sm.student_id','=',DB::raw($criteria['student_id']))
+				->whereIn('sm.class_id',$criteria['class_id'])
+				->where('sma.created_at','>=',DB::raw("DATE('". $criteria['date_from'] ."')"))
+				->where('sma.created_at','<=',DB::raw("DATE('". $criteria['date_to'] ."')"))
+				->groupBy('sm.student_id');
 
-		return $student_hours->first();
+			$response =  $student_hours->first();
+		} catch(\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			$response = false;
+		}
+
+		return $response;
 	}
 }
