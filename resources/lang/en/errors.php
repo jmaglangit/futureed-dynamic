@@ -272,5 +272,4 @@ return [
 
 		Error::STUDENT_DIFF_CURRICULUM => 'Cannot add student because it has a different curriculum.',
 		Error::STUDENT_BIRTHDATE_INVALID_FORMAT => 'The birth date is not completely filled out.'
-
 ];
