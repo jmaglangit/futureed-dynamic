@@ -859,7 +859,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 					;
 				})->where('sm.student_id','=',$student_id)
 				->where('sa.id','=',$subject_id)
-				->whereIn('sm.class_id',$class_id)
+				->where('sm.class_id',$class_id)
 				->where('mc.country_id','=',$student->user->curriculum_country)
 				->groupBy('mc.grade_id')
 				->orderBy('sa.name')
