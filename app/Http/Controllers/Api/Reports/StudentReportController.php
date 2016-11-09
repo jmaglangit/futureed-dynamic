@@ -198,7 +198,7 @@ class StudentReportController extends ReportController {
 
 		$week = $this->student_module->getStudentSpentHours($criteria);
 
-		$week_hours = Carbon::createFromTimestamp($week->total_time)
+		$week_hours = (empty($week)) ? 0 : Carbon::createFromTimestamp($week->total_time)
 			->diffInHours(Carbon::createFromTimestamp(0));
 
 		//total_hours
@@ -206,7 +206,7 @@ class StudentReportController extends ReportController {
 
 		$hours_spent = $this->student_module->getStudentSpentHours($criteria);
 
-		$total_hours = Carbon::createFromTimestamp($hours_spent->total_time)
+		$total_hours = (empty($hours_spent)) ? 0 : Carbon::createFromTimestamp($hours_spent->total_time)
 			->diffInHours(Carbon::createFromTimestamp(0));
 
 		$additional_information = [
@@ -361,7 +361,7 @@ class StudentReportController extends ReportController {
 
 		$week = $this->student_module->getStudentSpentHours($criteria);
 
-		$week_hours = Carbon::createFromTimestamp($week->total_time)
+		$week_hours = (empty($week))? 0 : Carbon::createFromTimestamp($week->total_time)
 			->diffInHours(Carbon::createFromTimestamp(0));
 
 		//total_hours
@@ -369,7 +369,7 @@ class StudentReportController extends ReportController {
 
 		$hours_spent = $this->student_module->getStudentSpentHours($criteria);
 
-		$total_hours = Carbon::createFromTimestamp($hours_spent->total_time)
+		$total_hours = (empty($hours_spent)) ? 0 : Carbon::createFromTimestamp($hours_spent->total_time)
 			->diffInHours(Carbon::createFromTimestamp(0));
 
 		$additional_information = [
@@ -549,7 +549,7 @@ class StudentReportController extends ReportController {
 
 		$week = $this->student_module->getStudentSpentHours($criteria);
 
-		$week_hours = Carbon::createFromTimestamp($week->total_time)
+		$week_hours = (empty($week)) ? 0 : Carbon::createFromTimestamp($week->total_time)
 			->diffInHours(Carbon::createFromTimestamp(0));
 
 		//total_hours
@@ -557,7 +557,7 @@ class StudentReportController extends ReportController {
 
 		$hours_spent = $this->student_module->getStudentSpentHours($criteria);
 
-		$total_hours = Carbon::createFromTimestamp($hours_spent->total_time)
+		$total_hours = (empty($hours_spent)) ? 0 : Carbon::createFromTimestamp($hours_spent->total_time)
 			->diffInHours(Carbon::createFromTimestamp(0));
 
 		$additional_information = [
@@ -662,7 +662,8 @@ class StudentReportController extends ReportController {
 
 		if($student_spent_hours['seven_days']){
 			$student_spent_hours['seven_days']->report_name = 'This Week';
-			$student_spent_hours['seven_days']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['seven_days']->total_time)
+			$student_spent_hours['seven_days']->hours_spent = (empty($student_spent_hours['seven_days'])) ?
+				0 : Carbon::createFromTimestamp($student_spent_hours['seven_days']->total_time)
 				->diffInHours(Carbon::createFromTimestamp(0));
 		}
 
@@ -673,7 +674,8 @@ class StudentReportController extends ReportController {
 
 		if($student_spent_hours['this_month']){
 			$student_spent_hours['this_month']->report_name = 'This Month';
-			$student_spent_hours['this_month']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['this_month']->total_time)
+			$student_spent_hours['this_month']->hours_spent = (empty($student_spent_hours['this_month'])) ?
+				0 : Carbon::createFromTimestamp($student_spent_hours['this_month']->total_time)
 				->diffInHours(Carbon::createFromTimestamp(0));
 		}
 
@@ -684,7 +686,8 @@ class StudentReportController extends ReportController {
 
 		if($student_spent_hours['last_month']){
 			$student_spent_hours['last_month']->report_name = 'Last Month';
-			$student_spent_hours['last_month']->hours_spent = Carbon::createFromTimestamp($student_spent_hours['last_month']->total_time)
+			$student_spent_hours['last_month']->hours_spent = (empty($student_spent_hours['last_month'])) ?
+				0 : Carbon::createFromTimestamp($student_spent_hours['last_month']->total_time)
 				->diffInHours(Carbon::createFromTimestamp(0));
 		}
 
@@ -738,7 +741,7 @@ class StudentReportController extends ReportController {
 			$activity = $this->student_module->getStudentSpentHours($criteria);
 
 			if($activity){
-				$activity->hours_spent = Carbon::createFromTimestamp($activity->total_time)
+				$activity->hours_spent = (empty($activity)) ? 0 :Carbon::createFromTimestamp($activity->total_time)
 					->diffInMinutes(Carbon::createFromTimestamp(0));
 			}
 
