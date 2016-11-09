@@ -151,9 +151,9 @@
                      <fieldset>
                         <div>
                             <p>Futurelesson.com c/o</p>
-                            <p>Kosh Consulting Group (Asia) Pte Ltd</p>
-                            <p>545 Orchard Road, #03-24</p>
-                            <p>Far East Shopping Centre, Singapore 238882</p>
+                            <p>{! futureed.BILL_COMPANY !}</p>
+                            <p>{! futureed.BILL_STREET !}</p>
+                            <p>{! futureed.BILL_ADDRESS !}, {! futureed.BILL_COUNTRY !}</p>
                             <p>{!! trans('messages.email') !!}: <span>i n f o @ f u t u r e l e s s o n . c o m</span></p>
                         </div>
                     </fieldset>
