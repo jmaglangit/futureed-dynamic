@@ -4,11 +4,9 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\InvoiceDetailRequest;
 
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface as InvoiceDetail;
-use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
-use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
 class InvoiceDetailController extends ApiController {
@@ -28,39 +26,21 @@ class InvoiceDetailController extends ApiController {
 	 */
 	protected $order;
 
-
-	/**
-	* @var ClassroomRepositoryInterface
-	*/
-	protected $classroom;
-
-	/**
-	* @var StudentRepositoryInterface
-	*/
-	protected $student;
-
 	/**
 	 * @param InvoiceDetail $detail
 	 * @param InvoiceRepositoryInterface $invoice
 	 * @param OrderRepositoryInterface $orderRepositoryInterface
-	 * @param ClassroomRepositoryInterface $classroom
-	 * @param StudentRepositoryInterface $student
 	 */
 	public function __construct(
 		InvoiceDetail $detail,
 		InvoiceRepositoryInterface $invoice,
-		OrderRepositoryInterface $orderRepositoryInterface,
-		ClassroomRepositoryInterface $classroom,
-		StudentRepositoryInterface $student
-
+		OrderRepositoryInterface $orderRepositoryInterface
 	)
 	{
 
 		$this->detail = $detail;
 		$this->invoice = $invoice;
 		$this->order = $orderRepositoryInterface;
-		$this->classroom = $classroom;
-		$this->student = $student;
 	}
 
 
@@ -101,22 +81,11 @@ class InvoiceDetailController extends ApiController {
 		$data = $request->only('id', 'payment_status');
 
 		$id = $data['id'];
-
 		$return = $this->invoice->getInvoice($id);
 
 		if (!$return) {
 
 			return $this->respondErrorMessage(2120);
-		}
-
-		$return = $return->toArray();
-
-		$student = $this->student->viewStudent($return['student_id']);
-
-		$student_classroom = $this->classroom->getClassroomBySubjectId($return['invoice_detail'][0]['classroom']['subject_id'],$return['student_id']);
-
-		if ($student_classroom && $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']) {
-			return $this->respondErrorMessage(2037);
 		}
 
 		//update invoice
