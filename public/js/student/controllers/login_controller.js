@@ -217,23 +217,6 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 		});
 	}
 
-	self.getGradeLevel = function() {
-		self.grades = Constants.FALSE;
-
-		apiService.getGradeLevel(self.record.country_id).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.grades = (response.data.total > 0) ? response.data.records : Constants.FALSE;
-					self.country = Constants.TRUE;
-				}
-			}
-		}).error(function(response) {
-			$scope.internalError();
-		});
-	}
-
 	self.cancelLogin = function() {
 		self.errors = Constants.FALSE;
 		self.image_pass = [];
