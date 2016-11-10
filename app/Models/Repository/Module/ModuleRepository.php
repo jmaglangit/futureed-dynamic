@@ -189,7 +189,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 			$module = $module->where('module_countries.country_id','=',$country_id);
 			$module = $module->name($name);
 
-			$response = $module->get();
+			$response = $module->first();
 
 		}catch (\Exception $e){
 

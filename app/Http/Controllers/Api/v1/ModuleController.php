@@ -134,9 +134,7 @@ class ModuleController extends ApiController {
 			//get current student module
 			$student_module = $this->student_module->getStudentModuleCollection($criteria);
 
-			$result = $this->module->viewModule($module_temp->name, $user->curriculum_country);
-
-			$module = $result[0];
+			$module = $this->module->viewModule($module_temp->name, $user->curriculum_country);
 
 			$module['id'] = $module_temp->id;
 
