@@ -10,7 +10,7 @@ interface ModuleRepositoryInterface
 
 	public function getModule($module_id);
 
-	public function viewModule($id);
+	public function viewModule($name, $country_id);
 
 	public function updateModule($id, $data);
 

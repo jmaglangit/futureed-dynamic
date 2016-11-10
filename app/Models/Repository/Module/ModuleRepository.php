@@ -176,14 +176,19 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 * @param $id
 	 * @return Module|\Illuminate\Database\Eloquent\Builder|static
 	 */
-	public function viewModule($id)
+	public function viewModule($name,$country_id)
 	{
 		DB::beginTransaction();
 
 		try{
 			$module = new Module();
+			$module = $module->with('subject', 'subjectarea', 'grade', 'content');
+			$module = $module->leftJoin('module_countries','modules.id','=','module_countries.module_id');
 
-			$response = $module->with('subject', 'subjectarea', 'grade', 'content')->find($id);
+			$module = $module->where('module_countries.country_id','=',$country_id);
+			$module = $module->name($name);
+
+			$response = $module->get();
 
 		}catch (\Exception $e){
 
