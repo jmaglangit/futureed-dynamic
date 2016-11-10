@@ -1,4 +1,3 @@
-id,module_id,code,question_type,question_text,question_image_original,question_image,answer,question_order_text,question_graph_content,seq_no,difficulty,points_earned,translatable,status,created_by,updated_by,created_by,updated_by,deleted_by
 25525,160,218626,MC,Match the right contractions: It's,,,,,,1,1,1,1,Enabled,,,,,
 25526,160,218627,MC,Match the right contractions: It'll,,,,,,2,1,1,1,Enabled,,,,,
 25527,160,218628,MC,Match the right contractions: It'd,,,,,,3,1,1,1,Enabled,,,,,

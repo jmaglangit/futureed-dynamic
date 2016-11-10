@@ -1,4 +1,3 @@
-id,module_id,code,question_type,question_text,question_image_original,question_image,answer,question_order_text,question_graph_content,seq_no,difficulty,points_earned,translatable,status,created_by,updated_by,created_by,updated_by,deleted_by
 24378,43,10000022,FIB,How many digits does one thousand have?,,,4,,,1,1,1,,Enabled,,,,,
 24379,43,10000023,FIB,How many digits does ten thousand have?,,,5,,,2,1,1,,Enabled,,,,,
 24380,43,10000024,FIB,How many digits does fifteen thousand have?,,,5,,,3,1,1,,Enabled,,,,,

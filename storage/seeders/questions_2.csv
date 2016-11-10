@@ -1,4 +1,3 @@
-id,module_id,code,question_type,question_text,question_image_original,question_image,answer,question_order_text,question_graph_content,seq_no,difficulty,points_earned,translatable,status,created_by,updated_by,created_by,updated_by,deleted_by
 20995,284,20995,FIB,"Write imperative if the sentence is imperative and write exclamatory, if the sentence is exclamatory.<br/>  <br/> Please put your shoes on the shoe rack.",,,Imperative,,,16,2,1,,Enabled,,,,,
 20996,284,20996,FIB,"Write imperative if the sentence is imperative and write exclamatory, if the sentence is exclamatory.<br/> <br/> Wow, what an incredible performance!.",,,Exclamatory,,,16,3,1,,Enabled,,,,,
 20997,284,20997,FIB,"Write imperative if the sentence is imperative and write exclamatory, if the sentence is exclamatory.<br/> <br/> Can you fetch the water by the riverside?",,,Imperative,,,17,3,1,,Enabled,,,,,
