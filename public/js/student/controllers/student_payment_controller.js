@@ -648,7 +648,10 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.billing_information.city = $scope.user.city;
 		self.billing_information.state = $scope.user.state;
 
-		self.getCountry($scope.user.country_id);
+		if($scope.user.country_id != Constants.NULL){
+
+			self.getCountry($scope.user.country_id);
+		}
 
 		self.subscription_packages.others = self.billing_information;
 
