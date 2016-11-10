@@ -173,8 +173,9 @@ class ModuleRepository implements ModuleRepositoryInterface
 	}
 
 	/**
-	 * @param $id
-	 * @return Module|\Illuminate\Database\Eloquent\Builder|static
+	 * @param $name
+	 * @param $country_id
+	 * @return mixed
 	 */
 	public function viewModule($name,$country_id)
 	{
