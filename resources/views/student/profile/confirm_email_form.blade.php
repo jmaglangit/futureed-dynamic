@@ -22,8 +22,8 @@
 					</p>
 
 					<div class="form-group">
-						<small>{!! trans('messages.client_check_inbox ') !!}
-						<br />{!! trans('messages.student_email_code_input_below ') !!}</small>
+						<small>{!! trans('messages.client_check_inbox') !!}
+						<br />{!! trans('messages.student_email_code_input_below') !!}</small>
 					</div>
 				</div>
 			</div>
