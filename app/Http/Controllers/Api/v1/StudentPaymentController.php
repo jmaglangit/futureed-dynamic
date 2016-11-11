@@ -90,7 +90,7 @@ class StudentPaymentController extends ApiController {
 
 		if ($student_classroom
 			&& $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id'] 
-				&& $student_classroom[0]['invoice']['subscription_package']['country_id'] != config('futureed.cancelled')) {
+				&& $student_classroom[0]['invoice']['payment_status'] != config('futureed.cancelled')) {
 
 			return $this->respondErrorMessage(2037);
 		}
