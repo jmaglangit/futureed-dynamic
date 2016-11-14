@@ -35,6 +35,17 @@ class ModuleCountryRepository implements ModuleCountryRepositoryInterface {
 			$module_country = $module_country->subjectId($criteria['subject_id']);
 		}
 
+		//student id
+		if(isset($criteria['student_id'])){
+			$module_country = $module_country->with('studentModule');
+
+			$module_country = $module_country->student($criteria['student_id']);
+		}
+
+		//class id
+		//module status
+		//age group id
+
 		$count = $module_country->count();
 
 		if ($limit > 0 && $offset >= 0) {

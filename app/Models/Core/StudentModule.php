@@ -81,7 +81,7 @@ class StudentModule extends Model {
 
 	public function classroom_order(){
 
-		return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id')->with('order');
+		return $this->hasOne('FutureEd\Models\Core\Classroom','id','class_id')->with('order');
 	}
 
 
@@ -111,6 +111,16 @@ class StudentModule extends Model {
 			$query->whereHas('order',function($query){
 				$query->where('date_start','<=',Carbon::now())
 					->where('date_end','>=', Carbon::now());
+			});
+		});
+	}
+
+	public function scopeValidModuleCountryClass($query){
+
+		return $query->whereHas('classroom_order',function($query){
+			$query->whereHas('order',function($query){
+				$query->where('date_start','<=',Carbon::now()->toDateTimeString())
+					->where('date_end','>=', Carbon::now()->toDateTimeString());
 			});
 		});
 	}
