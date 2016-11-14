@@ -204,6 +204,25 @@ class InvoiceController extends ApiController {
     }
 
     /**
+     * Updates payment status of an invoice (with id)
+     *
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function updatePaymentStatus($id, Request $request)
+    {
+        $input = $request->all();
+        $invoice = $this->invoice->getInvoice($id);
+
+        if($invoice && $invoice->subscription->name == 'Trial') {
+            $this->invoice->updateInvoice($id, $input);
+        }
+
+        return $this->respondWithData($invoice);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

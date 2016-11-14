@@ -88,6 +88,14 @@ function StudentPaymentService($http) {
 		});
 	}
 
+	service.updateInvoicePaymentStatus = function(id, data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : data
+			, url  : serviceUrl + 'invoice/' + id + '/update-payment-status'
+		});
+	}
+
 	service.renewSubscription = function(data) {
 		return $http({
 			method	: Constants.METHOD_POST

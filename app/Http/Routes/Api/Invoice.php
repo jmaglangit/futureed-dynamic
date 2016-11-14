@@ -45,6 +45,10 @@ Routes::group([
 		Routes::put('/cancel-invoice/{id}', [
 			'uses' => 'Api\v1\InvoiceController@cancelInvoice',
 			'as' => 'invoice.put.cancel-invoice']);
+
+		Routes::put('/{id}/update-payment-status', [
+			'uses' => 'Api\v1\InvoiceController@updatePaymentStatus',
+			'as' => 'invoice.put.update-payment-status']);
 	});
 });
 

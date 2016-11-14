@@ -269,6 +269,19 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 						date_end : self.subscription_invoice.date_end
 					};
 
+					if(angular.equals(self.invoice.payment_status, Constants.PENDING)) {
+						var order_update = {
+							order_id       : self.invoice.order.id,
+							date_start     : moment(self.invoice.order.date_start).format('YYYYMMDD'),
+							date_end       : moment(self.invoice.order.date_end).format('YYYYMMDD'),
+							payment_status : self.invoice.order.payment_status,
+							total_amount   : self.invoice.order.total_amount
+						};
+
+						self.updateOrderPaymentStatus(order_update);
+						self.updateInvoicePaymentStatus(self.invoice);
+					}
+
 					self.updateOrderDates(order_data);
 					self.getPaymentUri(invoice);
 				}
@@ -879,6 +892,38 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			date_end	:	data.date_end
 		};
 		StudentPaymentService.updateOrder(data.order_id,dates).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.updateOrderPaymentStatus = function(data){
+		var order = {
+			date_start	   : data.date_start,
+			date_end	   : data.date_end,
+			payment_status : data.total_amount == Constants.FALSE ? Constants.PAID : data.payment_status
+		};
+
+		StudentPaymentService.updateOrder(data.order_id,order).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.updateInvoicePaymentStatus = function(invoice){
+		var invoice_update = {
+			payment_status : invoice.total_amount == Constants.FALSE ? Constants.PAID : invoice.payment_status,
+		};
+
+		StudentPaymentService.updateInvoicePaymentStatus(invoice.id,invoice_update).success(function(response){
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			}
