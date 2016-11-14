@@ -207,7 +207,15 @@ class StudentPaymentController extends ApiController {
 		//check if student have existing subscription to a subject
 		$student_classroom = $this->classroom->getClassroomBySubjectId($order['subject_id'],$order['student_id']);
 
-		if ($student_classroom && $order_record['order_no']!= $student_classroom[0]['order_no']) {
+		//get student details
+		$student = $this->student->viewStudent($order['student_id']);
+
+		//check if student have existing subscription to a subject
+		$student_classroom = $this->classroom->getClassroomBySubjectId($order['subject_id'],$order['student_id']);
+
+		if ($student_classroom
+			&& $order_record['order_no']!= $student_classroom[0]['order_no']
+			&& $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']) {
 
 			return $this->respondErrorMessage(2037);
 		}

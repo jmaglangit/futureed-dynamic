@@ -203,15 +203,23 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		self.invoice.discount = Constants.FALSE;
 	}
 
-	self.updateSubscription = function(save) {
+	// invoice_update (optional parameter to update student payment)
+	self.updateSubscription = function(save, invoice_update = Constants.FALSE) {
 		self.fields = [];
 		self.errors = Constants.FALSE;
+		var invoice = self.invoice;
 
-		self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
-		self.invoice.student_id = $scope.user.id;
+		if(!invoice_update) {
+			self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
+			self.invoice.student_id = $scope.user.id;
+		} else {
+			invoice = invoice_update;
+			invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
+			invoice.student_id = $scope.user.id;
+		}
 
 		$scope.ui_block();
-		StudentPaymentService.updateSubscription(self.invoice).success(function(response) {
+		StudentPaymentService.updateSubscription(invoice).success(function(response) {
 			if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
 
@@ -270,16 +278,21 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 					};
 
 					if(angular.equals(self.invoice.payment_status, Constants.PENDING)) {
-						var order_update = {
-							order_id       : self.invoice.order.id,
-							date_start     : moment(self.invoice.order.date_start).format('YYYYMMDD'),
-							date_end       : moment(self.invoice.order.date_end).format('YYYYMMDD'),
-							payment_status : self.invoice.order.payment_status,
-							total_amount   : self.invoice.order.total_amount
+						var invoice_update = {
+							order_id        : self.invoice.order.id,
+							subject_id      : self.invoice.invoice_detail[0].classroom.subject_id,
+							order_date      : self.invoice.order_date,
+							student_id      : self.invoice.student_id,
+							subscription_id : self.invoice.subscription_id,
+							date_start      : moment(self.invoice.date_start).format('YYYYMMDD'),
+							date_end        : moment(self.invoice.date_end).format('YYYYMMDD'),
+							seats_total     : self.invoice.seats_total,
+							seats_taken     : Constants.TRUE,
+							total_amount    : self.invoice.total_amount,
+							payment_status  : self.invoice.payment_status
 						};
 
-						self.updateOrderPaymentStatus(order_update);
-						self.updateInvoicePaymentStatus(self.invoice);
+						self.updateSubscription(Constants.FALSE, invoice_update);
 					}
 
 					self.updateOrderDates(order_data);
@@ -900,39 +913,6 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			$scope.ui_unblock();
 		});
 	}
-
-	self.updateOrderPaymentStatus = function(data){
-		var order = {
-			date_start	   : data.date_start,
-			date_end	   : data.date_end,
-			payment_status : data.total_amount == Constants.FALSE ? Constants.PAID : data.payment_status
-		};
-
-		StudentPaymentService.updateOrder(data.order_id,order).success(function(response){
-			if(response.errors){
-				self.errors = $scope.errorHandler(response.errors);
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
-
-	self.updateInvoicePaymentStatus = function(invoice){
-		var invoice_update = {
-			payment_status : invoice.total_amount == Constants.FALSE ? Constants.PAID : invoice.payment_status,
-		};
-
-		StudentPaymentService.updateInvoicePaymentStatus(invoice.id,invoice_update).success(function(response){
-			if(response.errors){
-				self.errors = $scope.errorHandler(response.errors);
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
-
 
 	//get latest curriculum country
 	self.getCurriculumCountry = function(){
