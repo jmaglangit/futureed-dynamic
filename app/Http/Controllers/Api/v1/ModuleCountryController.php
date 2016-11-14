@@ -53,7 +53,6 @@ class ModuleCountryController extends ApiController {
 			$student = $this->student->getStudent($category['student_id']);
 
 			$category['country_id'] = $student->user->curriculum_country;
-
 		}
 
 		//module class_id

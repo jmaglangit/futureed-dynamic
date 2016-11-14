@@ -397,9 +397,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				}else if(response.data){
 					self.modules = response.data.records;
 
-
-
-					console.log(response.data.records);
 					self.updatePageCount(response.data);
 				}
 			}
