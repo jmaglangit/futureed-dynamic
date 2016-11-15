@@ -112,7 +112,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		if(self.active_list) {
 			self.studentlist();
 		} else if(self.active_view || self.active_edit) {
-			self.moduleCountryList(self.record.id
+			self.moduleCountryList(self.record.id)
  		}
 	}
 
