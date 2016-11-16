@@ -228,9 +228,12 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
 		try {
 
+			//TODO: Refactor remove supper_access.
+			session(['super_access' => 1]);
+
 			$return = QuestionAnswer::whereId($id)->pluck('correct_answer');
 
-			$this->infoLog('ELOQUENT_RESPONSE: getQuestionCorrectAnswer -- ' . $return);
+			Session::forget('super_access');
 
 			$response = $return;
 
@@ -259,8 +262,6 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 		try {
 
 			$response = QuestionAnswer::whereId($id)->pluck('point_equivalent');
-
-			$this->infoLog('ELOQUENT_RESPONSE: getQuestionPointEquivalent -- ' . $response);
 
 		} catch (\Exception $e) {
 
