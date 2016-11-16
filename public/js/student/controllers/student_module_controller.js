@@ -572,7 +572,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 							}
 
 						updateModuleStudent(data);
-						$scope.ui_block();
+						$scope.ui_unblock();
 					}
 				}
 			}
