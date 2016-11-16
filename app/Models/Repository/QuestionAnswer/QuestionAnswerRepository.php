@@ -228,12 +228,7 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
 		try {
 
-			//TODO: Refactor remove supper_access.
-			session(['super_access' => 1]);
-
 			$return = QuestionAnswer::whereId($id)->pluck('correct_answer');
-
-			Session::forget('super_access');
 
 			$this->infoLog('ELOQUENT_RESPONSE: getQuestionCorrectAnswer -- ' . $return);
 
