@@ -654,10 +654,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.errors = Constants.FALSE;
 		var answer = {};
 		answer.student_module_id = self.record.student_module.id;
-		answer.module_id = self.record.id;
+		answer.module_id = Number(self.record.id);
 		answer.seq_no = self.current_question.seq_no;
-		answer.question_id = self.current_question.id;
-		answer.answer_id = self.current_question.answer_id;
+		answer.question_id = Number(self.current_question.id);
+		answer.answer_id = Number(self.current_question.answer_id);
 		answer.student_id = $scope.user.id;
 		answer.date_start = self.date_start;
 		answer.date_end = new Date();
