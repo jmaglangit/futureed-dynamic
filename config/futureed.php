@@ -290,6 +290,9 @@ return [
 	//background images folder
 	'background_images_folder' => 'images/background-images',
 
+	//answer explanation image
+	'answer_explanation_image' => 'images/answer_explanation',
+
 	//games images folder
 	'game_images_folder' => '/uploads/games',
 

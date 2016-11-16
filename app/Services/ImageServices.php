@@ -86,4 +86,15 @@ class ImageServices {
 	}
 
 
+	/**
+	 * Get image url of answer explanation.
+	 * @param $filename
+	 * @return string
+	 */
+	public function getAnswerExplanationImage($filename){
+
+		return url() .'/'. config('futureed.answer_explanation_image') .'/'.$filename;
+	}
+
+
 }

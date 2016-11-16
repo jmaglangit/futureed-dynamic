@@ -553,6 +553,14 @@ class StudentReportController extends ReportController {
 
 		$question_list = $this->student_module->getStudentQuestionsReport($criteria);
 
+		foreach ($question_list as $key ) {
+
+			if (!empty($key->image)) {
+
+				$key->image = $this->image_service->getAnswerExplanationImage($key->image);
+			}
+		}
+
 		return $question_list;
 	}
 
