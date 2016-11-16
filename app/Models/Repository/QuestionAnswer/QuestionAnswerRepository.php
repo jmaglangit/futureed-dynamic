@@ -235,6 +235,8 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
 			Session::forget('super_access');
 
+			$this->infoLog('ELOQUENT_RESPONSE: getQuestionCorrectAnswer -- ' . $return);
+
 			$response = $return;
 
 		} catch (\Exception $e) {
@@ -262,6 +264,8 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 		try {
 
 			$response = QuestionAnswer::whereId($id)->pluck('point_equivalent');
+
+			$this->infoLog('ELOQUENT_RESPONSE: getQuestionPointEquivalent -- ' . $response);
 
 		} catch (\Exception $e) {
 
