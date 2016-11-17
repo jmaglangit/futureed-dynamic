@@ -48,7 +48,7 @@ class AnswerExplanation extends Model {
 
 		} else {
 
-			return '';
+			return 'None';
 		}
 	}
 
