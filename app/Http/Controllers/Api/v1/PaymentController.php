@@ -198,7 +198,7 @@ class PaymentController extends ApiController
                                 $data['school_name'] = $client['school']['name'];
                                 $data['login_link'] = URL::to('/client/login');
 
-                                if(!$is_renewal && $res['client']->client_role == config('futureed.teacher')){
+                                if(!$is_renewal && $res['client']['client_role'] == config('futureed.teacher')){
                                     $this->email->sendTeacherAddClass($data);
                                 }
                             }
