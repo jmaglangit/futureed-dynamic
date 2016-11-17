@@ -12,6 +12,8 @@ interface ModuleRepositoryInterface
 
 	public function viewModule($id);
 
+	public function getModuleByCurriculumCountry($id,$country_id);
+
 	public function updateModule($id, $data);
 
 	public function deleteModule($id);

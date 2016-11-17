@@ -8,7 +8,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class AnswerExplanation extends Model {
 
-	use Translatable;
+	//use Translatable;
 
 	use SoftDeletes;
 
@@ -55,9 +55,9 @@ class AnswerExplanation extends Model {
 
 
 	//Translation
-	public $translatedAttributes = ['answer_explanation'];
+	//public $translatedAttributes = ['answer_explanation'];
 
-	public $translationModel = 'FutureEd\Models\Core\AnswerExplanationTranslation';
+	//public $translationModel = 'FutureEd\Models\Core\AnswerExplanationTranslation';
 
 	//scopes
 

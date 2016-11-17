@@ -54,9 +54,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="question in reports.question_analysis">
-                    <td class="col-md-3  text-left">
-                        {! question.questions_text !}
-                    </td>
+                    <td class="col-md-4  text-left" ng-bind-html="question.questions_text | trustAsHtml"></td>
                     <td class="col-md-3 text-center">
                         {! question.answer_status !}
                     </td>

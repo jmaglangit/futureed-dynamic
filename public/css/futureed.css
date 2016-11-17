@@ -202,6 +202,8 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	text-align: center;
 }
 .form-style .title {padding-top: 10px; text-align: center; font-size: 18px; color: #76437E;}
+.form-style .title-container {overflow: inherit !important; max-width: 445px; margin: 0 0 10px 20px !important; white-space: normal !important;}
+.form-style .title-container p.title-text {margin-left: -25px !important; word-wrap: normal;}
 .login-title {padding-top: 10px; text-align: center; font-weight: 700; font-size: 20px; color: #76437E;}
 .form-style form { margin-top: 30px;}
 
@@ -1199,7 +1201,7 @@ td:not(:last-child) {
 	max-width: 150px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	white-space: nowrap;
+	/*white-space: nowrap;*/
 }
 
 ul[dnd-list], ul[dnd-list] > li { 

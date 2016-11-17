@@ -400,13 +400,13 @@
 
 				<tbody>
 				<tr ng-repeat="module in student.modules">
-					<td>{! module.name !}</td>
-					<td>{! module.grade.country_grade.age_group.age !}</td>
+					<td>{! module.module.name !}</td>
+					<td>{! module.module.grade.country_grade.age_group.age !}</td>
 					<td>{! module.country.name !}</td>
 					<td ng-if="student.records.length">
 						<div class="row">
 							<div class="col-xs-12">
-								<a href="" ng-click="student.resetModule(module.student_module_id, student.record.id)" title="refresh"><span><i class="fa fa-refresh"></i></span></a>
+								<a href="" ng-click="student.resetModule(module.student_module[0].id, student.record.id)" title="refresh"><span><i class="fa fa-refresh"></i></span></a>
 							</div>
 						</div>
 					</td>

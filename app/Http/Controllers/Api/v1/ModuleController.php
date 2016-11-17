@@ -123,9 +123,6 @@ class ModuleController extends ApiController {
 			//	return $this->respondErrorMessage(2070);
 			//}
 
-			$module = $this->module->viewModule($id);
-
-			//get student module
 			$criteria = [
 				'student_id' => $student_id,
 				'country_id' => $user->curriculum_country,
@@ -135,8 +132,12 @@ class ModuleController extends ApiController {
 			//get current student module
 			$student_module = $this->student_module->getStudentModuleCollection($criteria);
 
+			$module = $this->module->getModuleByCurriculumCountry($id, $user->curriculum_country);
+
+			$module['id'] = $id;
+
 			//add valid student module data
-			$module->student_module_valid = (empty($student_module->toArray())) ? [] : $student_module;
+			$module['student_module_valid']= (empty($student_module->toArray())) ? [] : $student_module;
 
 			return $this->respondWithData(
 				$module

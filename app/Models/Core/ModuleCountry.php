@@ -35,7 +35,14 @@ class ModuleCountry extends Model{
 	}
 
 	public function module(){
-		return $this->belongsTo('FutureEd\Models\Core\Module');
+		return $this->belongsTo('FutureEd\Models\Core\Module')->with('grade');
+	}
+
+	public function studentModule() {
+		return $this->hasMany('FutureEd\Models\Core\StudentModule','module_id','module_id')
+			->with('classroom_order')
+			->notFailed()
+			->validModuleCountryClass();
 	}
 
 	public function country(){
@@ -46,6 +53,12 @@ class ModuleCountry extends Model{
 	public function scopeSubjectId($query,$subject_id){
 		return $query->whereHas('module',function($query) use ($subject_id){
 			$query->where('subject_id',$subject_id);
+		});
+	}
+
+	public function scopeStudent($query,$student_id){
+		return $query->whereHas('studentModule', function($query) use ($student_id){
+			$query->where('student_id',$student_id);
 		});
 	}
 

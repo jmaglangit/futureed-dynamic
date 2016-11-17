@@ -3,7 +3,7 @@
     <div class="col-xs-12 class-container">
         <ul class="nav nav-pills module-pills" role="tablist" ng-init="class.listClass()">
             <li role="presentation" class="module-tabs" ng-class="{ 'active' : aClass.class_id == class.current_class }">
-                <a href="#">{{ trans_choice('messages.module', 1) }}</a>
+                <a class="font-size-16" href="#">{{ trans_choice('messages.module', 1) }}</a>
             </li>
         </ul>
         <div class="tab-content">

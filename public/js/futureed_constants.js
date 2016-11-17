@@ -223,6 +223,7 @@ var Constants = {
 	, BILL_STREET				: "20 Maxwell Road #09-17"
 	, BILL_ADDRESS				: "Maxwell House"
 	, BILL_COUNTRY				: "Singapore 069113"
+	, BILL_EMAIL				: "i n f o @ f u t u r e l e s s o n . c o m"
 	, CC_NAME					: "Futureed Pte Ltd"
 	, BANK_NAME					: "OCBC"
 	, BANK_ACCT_NO_SGD			: "582-066825 -001 SGD"

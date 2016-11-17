@@ -192,7 +192,7 @@
                                             <div class="form-group">
                                                 <label class="col-xs-2 control-label h4">{!! trans('messages.country') !!}:</label>
 
-                                                <label class="col-lg-4 h4 form-label" name="user_country">{!
+                                                <label class="col-lg-4 h4 form-label" name="user_country" ng-if="user.country_id != futureed.NULL">{!
                                                     payment.billing_information.country.name !}</label>
                                             </div>
                                         </div>

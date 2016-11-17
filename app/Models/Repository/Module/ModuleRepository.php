@@ -172,6 +172,8 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 	}
 
+
+
 	/**
 	 * @param $id
 	 * @return Module|\Illuminate\Database\Eloquent\Builder|static
@@ -184,6 +186,39 @@ class ModuleRepository implements ModuleRepositoryInterface
 			$module = new Module();
 
 			$response = $module->with('subject', 'subjectarea', 'grade', 'content')->find($id);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $id
+	 * @param $country_id
+	 * @return mixed
+	 */
+	public function getModuleByCurriculumCountry($id,$country_id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$module = new Module();
+			$module = $module->with('subject', 'subjectarea', 'grade', 'content');
+			$module = $module->leftJoin('module_countries','modules.id','=','module_countries.module_id');
+
+			$module = $module->where('module_countries.country_id','=',$country_id);
+			$module = $module->where('module_id','=',$id);
+
+			$response = $module->first();
 
 		}catch (\Exception $e){
 

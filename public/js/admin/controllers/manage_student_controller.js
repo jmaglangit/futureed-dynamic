@@ -111,8 +111,8 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 	self.list = function() {
 		if(self.active_list) {
 			self.studentlist();
-		} else if(self.active_view) {
-			self.moduleList(self.record.id);
+		} else if(self.active_view || self.active_edit) {
+			self.moduleCountryList(self.record.id)
  		}
 	}
 
@@ -264,7 +264,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 					self.record.new_email = data.user.new_email;
 					self.record.id = data.id;
 
-					self.moduleList(id);
+					self.moduleCountryList(id);
 
 					if(data.school) {
 						self.record.school_name = data.school.name;
@@ -387,6 +387,27 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		})
 	}
 
+	self.moduleCountryList = function(student_id) {
+		self.errors = Constants.FALSE;
+
+		manageStudentService.moduleCountry(student_id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.modules = response.data.records;
+
+					self.updatePageCount(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
 	self.resetModule = function(id, student_id) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -400,7 +421,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				}else if(response.data){
 					self.success = Constants.RESET_SUCCESS;
 
-					self.moduleList(student_id);
+					self.moduleCountryList(student_id);
 				}
 			}
 			$scope.ui_unblock();

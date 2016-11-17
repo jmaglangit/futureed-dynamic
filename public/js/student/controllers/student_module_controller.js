@@ -50,7 +50,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	* Updates Student Module
 	*/
 	var updateModuleStudent = function(data, successCallback) {
-		$scope.ui_block();
+		//$scope.ui_block();
 		StudentModuleService.updateModuleStudent(data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
@@ -67,7 +67,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			}
 
-			$scope.ui_unblock();
+			//$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -87,7 +87,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			}
 
-			$scope.ui_unblock();
+			//$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -264,6 +264,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			updateModuleStudent(data, function() {
 				$window.location.href = redirect_to + "/" + self.record.student_module.class_id;
 			});
+			$scope.ui_unblock();
 		}
 
 	}
@@ -407,6 +408,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.record.student_module.last_answered_question_id = resp.data.last_answered_question_id;
 			}
 		});
+		$scope.ui_unblock();
 	}
 
 	//ordering parse strings into object
@@ -570,6 +572,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 							}
 
 						updateModuleStudent(data);
+						$scope.ui_unblock();
 					}
 				}
 			}
@@ -651,10 +654,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.errors = Constants.FALSE;
 		var answer = {};
 		answer.student_module_id = self.record.student_module.id;
-		answer.module_id = self.record.id;
+		answer.module_id = Number(self.record.id);
 		answer.seq_no = self.current_question.seq_no;
-		answer.question_id = self.current_question.id;
-		answer.answer_id = self.current_question.answer_id;
+		answer.question_id = Number(self.current_question.id);
+		answer.answer_id = Number(self.current_question.answer_id);
 		answer.student_id = $scope.user.id;
 		answer.date_start = self.date_start;
 		answer.date_end = new Date();
@@ -1305,6 +1308,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.answer_exp_offset = 0;
 				self.answer_explanation_fully_loaded = Constants.TRUE;
 			}
+			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -1479,7 +1483,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						callback(response);
 					}
 				}
-				$scope.ui_unblock();
+				//$scope.ui_unblock();
 			}
 		).
 		error(
