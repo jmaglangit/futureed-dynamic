@@ -48,16 +48,20 @@
             <tr>
                 <th>{!! trans('messages.question') !!}</th>
                 <th>{!! trans('messages.answer') !!}</th>
+                <th>{!! trans('messages.image') !!}</th>
                 <th><img src="/images/icon-tipbulb.png" alt="Tip Bulb" height="25" width="25"/> {!! trans('messages.tips') !!}</th>
             </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="question in reports.question_analysis">
-                    <td class="col-md-4  text-left">
+                    <td class="col-md-3  text-left">
                         {! question.questions_text !}
                     </td>
                     <td class="col-md-3 text-center">
                         {! question.answer_status !}
+                    </td>
+                    <td class="col-md-3 text-center">
+                        <img ng-if="question.image != futureed.EMPTY_STR" src="{!! config('futureed.answer_explanation_image_public') !!}/{! question.image !}">
                     </td>
                     <td class="col-md-3 text-left" ng-bind-html="question.answer_explanation | trustAsHtml"></td>
                 </tr>
