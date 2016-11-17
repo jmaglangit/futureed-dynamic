@@ -290,9 +290,6 @@ return [
 	//background images folder
 	'background_images_folder' => 'images/background-images',
 
-	//answer explanation image
-	'answer_explanation_image' => 'images/answer_explanation',
-
 	//path for question uploaded images final
 	'answer_explanation_image_final' => base_path() . '/public/images/answer_explanation',
 	'answer_explanation_image_public' => '/images/answer_explanation',
