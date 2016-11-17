@@ -4,6 +4,7 @@ use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Filesystem;
 
 class AnswerExplanation extends Model {
 
@@ -30,8 +31,28 @@ class AnswerExplanation extends Model {
 
 	protected $attributes = [
 		'created_by' => 1,
-		'updated_by' => 1
+		'updated_by' => 1,
+		'image' => 0
 	];
+
+	//accessor
+	public function getImageAttribute($value){
+		$filesystem = new Filesystem();
+
+		//get path
+		$image_path = config('futureed.answer_explanation_image_final') . '/' . $this->attributes['image'];
+
+		//check path
+		if ($filesystem->exists($image_path) && !empty($value)) {
+			return asset(config('futureed.answer_explanation_image_public') . '/' . $this->attributes['image']);
+
+		} else {
+
+			return '';
+		}
+	}
+
+
 
 	//Translation
 	public $translatedAttributes = ['answer_explanation'];
