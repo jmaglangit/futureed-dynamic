@@ -183,7 +183,7 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 	
 	self.clientChangeStatus = function() {
 		$scope.ui_block();
-		manageClientService.clientChangeStatus(self.record.id, self.record.status).success(function(response) {
+		manageClientService.clientChangeStatus(self.record.id, self.record.user.status).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
