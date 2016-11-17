@@ -239,6 +239,7 @@
 				<span>
 					<img src="/images/icon-tipbulb.png">
 				</span>
+				<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
 				<i class="fa fa-caret-left fa-2x"
 				   aria-hidden="true"
 				   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
@@ -293,7 +294,7 @@
 							<span>
 								<img class='result-tip-quoted-image'src="/images/icon-tipbulb.png" >
 							</span>
-
+							<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
 							<i class="fa fa-caret-left"
 							   aria-hidden="true"
 							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
