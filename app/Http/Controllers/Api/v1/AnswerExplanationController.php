@@ -23,9 +23,11 @@ class AnswerExplanationController extends ApiController {
 
 		$input = Input::only('module_id','question_id');
 
-		return $this->respondWithData($this->answer_explanation->getAnswerExplanation(
+		$result = $this->answer_explanation->getAnswerExplanation(
 			$input['module_id'],
 			$input['question_id']
-		));
+		);
+
+		return $this->respondWithData($result);
 	}
 }

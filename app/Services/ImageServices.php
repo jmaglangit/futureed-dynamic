@@ -85,5 +85,4 @@ class ImageServices {
 		return url() .'/'. config('futureed.background_images_folder') .'/'.$filename;
 	}
 
-
 }
