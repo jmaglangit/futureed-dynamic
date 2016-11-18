@@ -1,19 +1,18 @@
 <?php namespace FutureEd\Models\Core;
 
-use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
+use FutureEd\Models\Traits\TranslationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
 
 class Module extends Model
 {
-
-	use Translatable;
-
 	use SoftDeletes;
 
 	use TransactionTrait;
+
+	use TranslationTrait;
 
 	protected $table = 'modules';
 
@@ -53,10 +52,21 @@ class Module extends Model
 		'points_earned' => 0
 	];
 
-	//Translation
-	public $translationModel = 'FutureEd\Models\Core\ModuleTranslation';
 
-	//Accessors
+	//Accessor
+
+	//Translations
+	public function getNameAttribute($value){
+
+		return $this->getModuleTranslation($this->attributes['id'],$value,'name');
+	}
+
+	public function getDescriptionAttribute($value){
+
+		return $this->getModuleTranslation($this->attributes['id'],$value,'description');
+	}
+
+
 	/**
 	 * Modified database data into a URI.
 	 * @param $value
