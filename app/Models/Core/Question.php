@@ -1,18 +1,18 @@
 <?php namespace FutureEd\Models\Core;
 
-use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
+use FutureEd\Models\Traits\TranslationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
 
 class Question extends Model {
 
-	//use Translatable;
-
 	use SoftDeletes;
 
 	use TransactionTrait;
+
+	use TranslationTrait;
 
 	protected $table = 'questions';
 
@@ -59,12 +59,14 @@ class Question extends Model {
 		'answer_text_field'
 	];
 
-	//Translation
-	//public $translatedAttributes = ['questions_text','answer'];
-
-	//public $translationModel = 'FutureEd\Models\Core\QuestionTranslation';
-
 	//Accessor
+
+	//Translation accessor
+	public function getQuestionsTextAttribute($value){
+
+		return $this->getQuestionTranslation($this->attributes['id'],$value,'questions_text');
+	}
+
 	public function getQuestionsImageAttribute($value) {
 
 		$filesystem = new Filesystem();
@@ -94,7 +96,6 @@ class Question extends Model {
 		}
 	}
 
-	//TODO: Remove this function. Remove answers on the controller level.
 	public function getAnswerAttribute($value) {
 
 		if (session('current_user') || session('super_access')) {
@@ -102,12 +103,9 @@ class Question extends Model {
 			$user = User::find(session('current_user'));
 
 			//Check if user is Admin or not.
-			if ($user->user_type == config('futureed.admin')) {
+			if ($user->user_type == config('futureed.admin') || session('super_access') == 1) {
 
-				return $value;
-			} elseif (session('super_access') == 1) {
-
-				return $value;
+				return $this->getQuestionTranslation($this->attributes['id'],$value,'answer');
 			} else {
 
 				return null;
