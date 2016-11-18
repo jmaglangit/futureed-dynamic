@@ -1,18 +1,18 @@
 <?php namespace FutureEd\Models\Core;
 
-use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
+use FutureEd\Models\Traits\TranslationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
 
 class AnswerExplanation extends Model {
 
-	//use Translatable;
-
 	use SoftDeletes;
 
 	use TransactionTrait;
+
+	use TranslationTrait
 
 	protected $table = 'answer_explanations';
 
@@ -36,6 +36,13 @@ class AnswerExplanation extends Model {
 	];
 
 	//accessor
+
+	//Translation
+	public function getAnswerAttribute($value){
+
+		return $this->getAnswerExplanationTranslation($this->attributes['id'],$value,'answer_explanation');
+	}
+
 	public function getImageAttribute($value){
 		$filesystem = new Filesystem();
 
@@ -51,13 +58,6 @@ class AnswerExplanation extends Model {
 			return 'None';
 		}
 	}
-
-
-
-	//Translation
-	//public $translatedAttributes = ['answer_explanation'];
-
-	//public $translationModel = 'FutureEd\Models\Core\AnswerExplanationTranslation';
 
 	//scopes
 
