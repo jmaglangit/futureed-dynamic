@@ -18,6 +18,17 @@ function ManageModuleService($http) {
 		});
 	}
 
+	api.questionList = function(search, table) {
+        return $http({
+            method  : Constants.METHOD_GET
+            , url   : apiUrl + 'question/admin?module_id=' + search.module_id
+                + '&question_type=' + search.question_type
+                + '&questions_text=' + search.questions_text
+                + '&limit=' + table.size
+                + '&offset=' + table.offset
+        });
+    }
+
 	api.getSubject = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
@@ -60,6 +71,13 @@ function ManageModuleService($http) {
 		return $http({
 			method 	: Constants.METHOD_DELETE
 			, url 	: apiUrl + 'module/admin/' + id
+		});
+	}
+
+	api.getGraph = function(question_id) {
+		return $http({
+			method 	: Constants.METHOD_GET,
+			url     : apiUrl + 'student/question/graph/' + question_id
 		});
 	}
 
