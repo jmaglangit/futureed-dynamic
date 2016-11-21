@@ -409,8 +409,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 						value.student_module_id = mod_id;
 					});
 
-					console.log(self.modules);
-
 					self.updatePageCount(response.data);
 				}
 			}
