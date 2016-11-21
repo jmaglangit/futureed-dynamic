@@ -5,9 +5,11 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManageModuleController as module" ng-cloak>
+	<div id="module-cont" class="container dshbrd-con" ng-controller="ManageModuleController as module" ng-cloak>
 
 		<div template-directive template-url="{!! route('admin.partials.base_url') !!}"></div>
+
+		<div template-directive template-url="{!! route('admin.manage.module.partials.module_questions_preview') !!}"></div>
 
 		<div class="wrapr" ng-init="module.setActive()">
 			<div class="client-nav side-nav">
@@ -37,4 +39,7 @@
 	
 	{!! Html::script('/js/admin/controllers/manage_question_ans_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_question_ans_service.js')!!}
+
+	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
+	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}
 @stop

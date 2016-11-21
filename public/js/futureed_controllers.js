@@ -1,6 +1,8 @@
 angular.module('futureed.controllers', ['ngFileUpload', 'as.sortable'])
 	.controller('futureedController', FutureedController)
 	.directive('templateDirective', TemplateDirective)
+	.directive('tooltipDirective', TooltipDirective)
+	.directive('popoverDirective', PopoverDirective)
 	.constant("futureed", Constants);
 
 function TemplateDirective() {
@@ -9,6 +11,30 @@ function TemplateDirective() {
 			return element.templateUrl;
 		}
 	}
+}
+
+function TooltipDirective() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs){
+            $(element).hover(function(){
+                // on mouseenter
+                $(element).tooltip('show');
+            }, function(){
+                // on mouseleave
+                $(element).tooltip('hide');
+            });
+        }
+    };
+}
+
+function PopoverDirective() {
+	return {
+        restrict: 'A',
+        link: function(scope, element, attrs){
+            $(element).popover(attrs);
+        }
+    };
 }
 
 function FutureedController($scope, $window, apiService, futureed) {

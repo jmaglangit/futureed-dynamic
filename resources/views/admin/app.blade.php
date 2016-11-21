@@ -63,6 +63,7 @@
 
     <!-- START SCRIPTS -->
     {!! Html::script('/js/jquery.js') !!}
+    {!! Html::script('//code.jquery.com/ui/1.9.2/jquery-ui.js')!!}
     {!! Html::script('/js/ui-block.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
     

@@ -727,14 +727,30 @@ return [
 	'admin_delete_module_msg' => 'Are you sure you want to delete this module?',
 	'admin_module_management' => 'Module Management',
 	'admin_module_name' => 'Module Name',
-	'admin_module_list' => 'Module List',	
+	'admin_module_list' => 'Module List',
+	'admin_module_preview_questions' => 'Preview Questions',
+	'admin_edit_module' => 'Edit Module',
+
 	
 	//resources/views/admin/manage/module/partials/view_module_form.blade.php
 	'admin_contents' => 'Contents',	
-	'admin_module_content' => 'Module Content',	
+	'admin_module_content' => 'Module Content',
 	'admin_q_and_a' => 'Q & A',
 	'admin_view_image' => 'View Image',
 	'admin_view_module' => 'View Module',
+
+	//resources/views/admin/manage/module/partials/module_questions_preview.blade.php
+	'admin_preview' => 'Preview',
+	'admin_question_id' => 'Question ID',
+	'admin_previous_question' => 'previous question',
+	'admin_next_question' => 'next question',
+	'admin_jump_to_question_no' => 'Jump to question no.',
+	'admin_toggle_graph' => 'Toggle Graph',
+	'admin_return_module_list' => 'Return to Module List',
+	'admin_note_module_last_question' => 'You have reached the last question of this module.',
+	'admin_note_module_preview_cant_load_no_questions_available' => 'NOTE: Preview can\'t be loaded, no questions available for this module.',
+	'admin_note_module_question_preview_only' => 'NOTE: Please note that this is only a PREVIEW. Answers are not checked.',
+
 	
 	//resources/views/admin/manage/price/partials/bulk_discount.blade.php
 	'admin_add_bulk_discount' => 'Add Bulk Discount',
