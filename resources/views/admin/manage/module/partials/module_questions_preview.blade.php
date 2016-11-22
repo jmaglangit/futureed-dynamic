@@ -5,7 +5,7 @@
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
             <h4>
                 {! module.record.name !} {{ trans('messages.admin_preview') }}
-                <small ng-if="module.question_preview_ok">
+                <small ng-if="module.question_preview_ok && module.question_preview_end == futureed.FALSE">
                     <i class="fa fa-angle-right"></i> {{ trans('messages.admin_question_id') }} <i class="fa fa-angle-right"></i> {! module.current_question.id !}
                 </small>
                 
@@ -27,12 +27,15 @@
                     </form>
                 </span>
             </h4>
-
-            <p ng-if="module.question_preview_end" class="alert bg-success futureed-color preview-note">
-                {{ trans('messages.admin_note_module_last_question') }} <a href="" data-dismiss="modal"><i class="fa fa-long-arrow-left"></i> {{ trans('messages.admin_return_module_list') }}</a>
+        </div>
+        <div ng-if="module.question_preview_end" class="modal-body">
+            <p class="alert bg-success futureed-color preview-note">
+                {{ trans('messages.admin_note_end_module_preview') }}
+                <a href="" data-dismiss="modal"><i class="fa fa-long-arrow-left"></i> {{ trans('messages.admin_return_module_list') }}</a>
             </p>
         </div>
-        <div ng-if="module.question_preview_ok" class="modal-body">
+
+        <div ng-if="module.question_preview_ok && module.question_preview_end == futureed.FALSE" class="modal-body">
             <p class="alert bg-info futureed-color pull-left">
                 {{ trans('messages.admin_note_module_question_preview_only') }}
             </p>
@@ -313,7 +316,7 @@
             </div>
         </div>
 
-        <div ng-if="!module.question_preview_ok" class="modal-body">
+        <div ng-if="!module.question_preview_ok && module.question_preview_end == futureed.FALSE" class="modal-body">
             <p class="alert alert-warning">
                 {{ trans('messages.admin_note_module_preview_cant_load_no_questions_available') }}
             </p>
