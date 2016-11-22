@@ -216,41 +216,36 @@
 			<div class="questions-header">
 				<h3> Question #{! mod.question_counter !} </h3>
 			</div>
-			<div class="col-xs-12 col-md-12">
-				<span class="result-message col-xs-3"
-					 ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
-					<h2 ng-if="mod.result.points_earned > 0">
+			<div class="col-xs-12">
+				<span class="result-message tip-result col-xs-3" ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
+					<i class="fa tip-fa-icon text-center" ng-class="{ 'fa-times' : !mod.result.points_earned, 'fa-check' : mod.result.points_earned }"></i>
+					<p class="h3" ng-if="mod.result.points_earned > 0">
 						{{ trans('messages.correct') }}
-					</h2>
+					</p>
+					<p class="h3" ng-if="mod.result.points_earned <= 0" >
+						{{ trans('messages.oops') }}
+					</p>
+				</span>
 
-					<h2 ng-if="mod.result.points_earned <= 0" >
-						{{ trans('messages.wrong') }}
-					</h2>
-				</span>
-				<span class="result-image col-xs-3">
-					<i class="fa fa-5x img-rounded text-center"
-					   ng-class="{ 'fa-times' : !mod.result.points_earned, 'fa-check' : mod.result.points_earned }"></i>
-				</span>
-			</div>
-			<div class="result-tip col-xs-12" ng-if="mod.result.points_earned <= 0"
-				 ng-init="mod.getAnswerExplanation();"
-				 ng-show="mod.answer_explanation.length"
-			>
-				<span>
-					<img src="/images/icon-tipbulb.png">
-				</span>
-				<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
-				<i class="fa fa-caret-left fa-2x"
-				   aria-hidden="true"
-				   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
-				   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
-				</i>
-				<p class="answer-explanation h4" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
-				<i class="fa fa-caret-right fa-2x"
-				   aria-hidden="true"
-				   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
-				   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
-				</i>
+				<div class="result-tip tip-content" ng-if="mod.result.points_earned <= 0" ng-init="mod.getAnswerExplanation();" ng-show="mod.answer_explanation.length">
+					<div class="tip-icon">
+						<img src="/images/icon-tipbulb.png">
+					</div>
+					<div class="tip-message">
+						<img ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE" ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
+						<i class="fa fa-caret-left fa-2x"
+						   aria-hidden="true"
+						   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
+						   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
+						</i>
+						<p class="h4 m-bottom-0" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
+						<i class="fa fa-caret-right fa-2x"
+						   aria-hidden="true"
+						   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
+						   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
+						</i>
+					</div>
+				</div>
 			</div>
 			<div class="proceed-btn-container btn-container">
 				<button type="button" class="btn btn-maroon btn-medium"
@@ -265,54 +260,44 @@
 			<div class="questions-header">
 				<h3> {{ trans('messages.question') }} #{! mod.question_counter !} </h3>
 			</div>
-			<div class="quote-message"
-				ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
-					<p ng-if="mod.result.points_earned > 0">
-						{{ trans('messages.correct') }}
-					</p>
 
-					<p ng-if="mod.result.points_earned <= 0">
-						{{ trans('messages.wrong') }}
-					</p>
-			</div>
-
-			<div class="message-container">
+			<div class="message-container m-top-85">
 				<div class="col-xs-12">
 					<div class="col-xs-2"></div>
 					<div class="quoted-module-icon-holder col-xs-3">
-						<img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
+                        <p ng-show="mod.result.points_earned <= 0" class="quote-message-obtuse">{! mod.avatar_quote_info.quote !}</p>
+						<img class="quoted-avatar" ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
 					</div>
 
 					<div class="col-xs-5">
-						<p class="quoted-module-message">
-							{! mod.avatar_quote_info.quote !}
-						</p>
-						<div class="result-tip" ng-if="mod.result.points_earned <= 0"
-							 ng-init="mod.getAnswerExplanation();"
-							 ng-show="mod.answer_explanation.length"
-						>
-							<span>
-								<img class='result-tip-quoted-image'src="/images/icon-tipbulb.png" >
-							</span>
-							<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
+						<div class="tip-result-message" ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
+							<span ng-if="mod.result.points_earned > 0">{{ trans('messages.correct') }}</span>
+							<span ng-if="mod.result.points_earned <= 0">{{ trans('messages.oops') }}</span>
+						</div>
+
+						<p ng-show="mod.result.points_earned > 0" class="module-message m-top-20">{! mod.avatar_quote_info.quote !}</p>
+
+						<div class="result-tip quoted-tip" ng-if="mod.result.points_earned <= 0" ng-init="mod.getAnswerExplanation();" ng-show="mod.answer_explanation.length">
+							<img ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE" ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
 							<i class="fa fa-caret-left"
 							   aria-hidden="true"
 							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
 							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
 							</i>
-							<p class="answer-explanation h5" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
+							<p class="answer-explanation h4" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
 							<i class="fa fa-caret-right"
 							   aria-hidden="true"
 							   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
 							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
 							</i>
 						</div>
-						<div class="proceed-btn-container btn-container">
-							<button type="button" class="btn btn-maroon btn-large"
-									ng-click="mod.answer_explanation_fully_loaded=futureed.FALSE;mod.answer_exp_offset=0;mod.answer_explanation.count=0;mod.nextQuestion()">
-								{{ trans('messages.proceed_to_next_questions') }}
-							</button>
-						</div>
+					</div>
+
+					<div class="proceed-btn-container btn-container col-xs-12">
+						<button type="button" class="btn btn-maroon btn-medium"
+								ng-click="mod.answer_explanation_fully_loaded=futureed.FALSE;mod.answer_exp_offset=0;mod.answer_explanation.count=0;mod.nextQuestion()">
+							{{ trans('messages.proceed_to_next_questions') }}
+						</button>
 					</div>
 				</div>
 			</div>

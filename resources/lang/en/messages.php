@@ -258,6 +258,7 @@ return [
 	'other_req' => 'Other Requests',
 	'out_of' => 'out of',
 	'overall_school_progress' => 'Overall School Progress',
+	'oops' => 'Oops',
 	'paid' => 'Paid',
 	'parent' => 'Parent',
 	'parent_dashboard_instruction_1' => 'To get started on using Future Lesson, you need to add a student.',
