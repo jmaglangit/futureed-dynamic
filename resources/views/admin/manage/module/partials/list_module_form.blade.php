@@ -115,6 +115,7 @@
 						<th>{!! trans_choice('messages.module', 1) !!}</th>
 						<th>{!! trans('messages.subject') !!}</th>
 						<th>{!! trans('messages.area') !!}</th>
+						<th>{!! trans_choice('messages.grade', 1) !!}</th>
 						<th ng-if="module.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 					</tr>
 				</thead>
@@ -123,6 +124,7 @@
 						<td>{! record.name !}</td>
 						<td>{! record.subject.name !}</td>
 						<td>{! record.subject_area.name !}</td>
+						<td>{! record.grade.name !}</td>
 						<td ng-if="module.records.length">
 							<div class="row">
 								<div class="col-xs-3">
