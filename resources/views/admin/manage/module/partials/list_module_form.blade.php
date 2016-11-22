@@ -131,10 +131,10 @@
 									<a href="" ng-click="module.setActive(futureed.ACTIVE_VIEW, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_view_module') !!}"><span><i class="fa fa-eye"></i></span></a>
 								</div>
 								<div class="col-xs-3">
-									<a href="" ng-click="module.setActive(futureed.ACTIVE_QUESTIONS_PREVIEW, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_module_preview_questions') !!}"><span><i class="fa fa-search-plus"></i></span></a>
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_edit_module') !!}"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 								<div class="col-xs-3">
-									<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_edit_module') !!}"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_QUESTIONS_PREVIEW, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_module_preview_questions') !!}"><span><i class="fa fa-search-plus"></i></span></a>
 								</div>
 								<div class="col-xs-3">
 									<a href="" ng-click="module.confirmDelete(record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_delete_module') !!}"><span><i class="fa fa-trash"></i></span></a>
