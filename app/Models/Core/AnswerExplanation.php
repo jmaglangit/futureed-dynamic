@@ -12,7 +12,7 @@ class AnswerExplanation extends Model {
 
 	use TransactionTrait;
 
-	use TranslationTrait
+	use TranslationTrait;
 
 	protected $table = 'answer_explanations';
 
