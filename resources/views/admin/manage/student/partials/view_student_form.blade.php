@@ -406,7 +406,7 @@
 					<td ng-if="student.records.length">
 						<div class="row">
 							<div class="col-xs-12">
-								<a href="" ng-click="student.resetModule(module.student_module[0].id, student.record.id)" title="refresh"><span><i class="fa fa-refresh"></i></span></a>
+								<a href="" ng-click="student.resetModule(module.student_module_id, student.record.id)" title="refresh"><span><i class="fa fa-refresh"></i></span></a>
 							</div>
 						</div>
 					</td>
