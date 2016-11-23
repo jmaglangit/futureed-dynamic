@@ -429,6 +429,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 
 		self.determineQuestionAnswer();
 
+		self.question_number = parseInt(index) + 1;
 		self.question_preview_end = index == self.question_list.length;
 		$(self.question_preview_id).modal('show');
 	}

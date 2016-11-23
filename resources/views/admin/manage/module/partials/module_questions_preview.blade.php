@@ -131,7 +131,7 @@
                         <div class="col-xs-6"
                              ng-if="module.current_question.question_type != futureed.CODING"
                         >
-                            <div><h3> {{ trans('messages.question') }} #{! module.question_index + 1 | number !} </h3></div>
+                            <div><h3> {{ trans('messages.question') }} #{! module.question_number !} </h3></div>
                         </div>
                     </div>
                     <div ng-class="{'col-xs-6':module.current_question.question_type != futureed.CODING,'col-xs-8':module.current_question.question_type == futureed.CODING}">
