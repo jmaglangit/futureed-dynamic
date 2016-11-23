@@ -2469,7 +2469,7 @@ pre.dropdown-menu {
 	padding: 10px;
 	font-size: 24px;
 	text-align: center;
-	width: 30%;
+	width: 70%;
 	border-radius: .6em;
 	margin: 0 0 0 55px;
 }
@@ -2479,7 +2479,7 @@ pre.dropdown-menu {
 }
 
 .tip-result {
-	margin: 85px 40% 25px 40% !important;
+	margin: 85px 40% 25px 38% !important;
 }
 
 .m-bottom-0 {
