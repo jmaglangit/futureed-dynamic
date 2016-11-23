@@ -47,6 +47,7 @@ class AnswerExplanationTableSeeder extends Seeder
                     'learning_style_id' => $data[4],
                     'seq_no' => $data[5],
                     'answer_explanation' => $data[6],
+                    'image' => $data[7],
                     'translatable' => 1,
                     'created_by' => 1,
                     'updated_by' => 1,
