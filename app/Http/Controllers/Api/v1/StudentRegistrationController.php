@@ -54,6 +54,12 @@ class StudentRegistrationController extends StudentController {
         $check_email = $this->user_service->checkEmail($user['email'],config('futureed.student'));
 
 
+        if (!isset($student['country_id'])) {
+
+            $student['country_id'] = 0;
+        }
+
+
         if($check_username){
 
             return $this->respondErrorMessage(2201);
@@ -75,7 +81,7 @@ class StudentRegistrationController extends StudentController {
         if(isset($user_response['status']))
         {
             $student = array_merge($student,[
-                'user_id' => ''
+                'user_id' => $user_response['id']
             ]);
 
             //add student, resturn status
@@ -99,14 +105,9 @@ class StudentRegistrationController extends StudentController {
                 'id' => $student_id
             ]);
         } else {
+
             //TODO: check if this is have been entered.
-            if (is_array($student_response)) {
-
-                $return = array_merge($user_response,$student_response);
-            } else {
-
-                $return = $user_response;
-            }
+            $return = array_merge($user_response,$student_response);
 
             return $this->respondWithError($return);
 
