@@ -604,19 +604,19 @@
 602,23,11602,N,4<br>1<br>+9,,,14,,,3,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 603,23,11603,N,8<br>3<br>+9,,,20,,,4,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 604,23,11604,N,2<br>6<br>+7,,,15,,,5,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
-605,23,11605,MC,"Tracy baked 1 cake, Zoe baked 6 cakes, and Harry baked 3 cakes. How many cakes were baked altogether?",,,,,,6,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
-606,23,11606,MC,"Michael bought a C.D for $8. He went the movie theatre and spent $7. On the way home, he bought an ice cream cone for $4. How much did he spend total?",,,,,,7,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
-607,23,11607,MC,"Janice ate 3 pieces of candy, Marc ate 5, and Ellie ate 2. How many pieces of candy did they eat?",,,,,,8,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
+605,23,11605,MC,"Tracy baked 1 cake, Zoe baked 6 cakes, and Harry baked 3 cakes. <br/> <br/> How many cakes were baked altogether?",,,,,,6,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
+606,23,11606,MC,"Michael bought a C.D for $8. He went the movie theatre and spent $7. On the way home, he bought an ice cream cone for $4. <br/> <br/> How much did he spend total?",,,,,,7,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
+607,23,11607,MC,"Janice ate 3 pieces of candy, Marc ate 5, and Ellie ate 2. <br/> <br/> How many pieces of candy did they eat?",,,,,,8,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 608,23,11608,N,8+5+2+4=,,,19,,,9,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 609,23,11609,N,5+2+1+7=,,,15,,,10,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 610,23,11610,N,9+4+6+3=,,,22,,,11,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 611,24,11611,N,What is 9-4?,,,5,,,1,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 612,24,11612,N,What is 7-2?,,,5,,,2,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 613,24,11613,N,What is 12-5?,,,7,,,3,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
-614,24,11614,MC,"Mikey had 9 chocolate balls, he then ate 3. How many chocolate balls does Mikey have now?",,,,,,4,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
+614,24,11614,MC,"Mikey had 9 chocolate balls, he then ate 3. <br/> <br/> How many chocolate balls does Mikey have now?",,,,,,4,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 615,24,11615,MC,"William had 18 pieces of gum at the start of class, then 9 kids asked him for a piece of gum. He only gave 8 away.<br/><br/>How many pieces of gum does he have now?",,,,,,1,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 616,24,11616,MC,Mary-Jane baked 32 batches of cookies  and she managed to sell 4 batches of cookies in the bake sale.<br/><br/>How many batches does she have left to sell?,,,,,,2,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
-617,24,11617,MC,Sherry had 25 dollars and she gave away 2 dollars to charity. How much money does Sherry have left?,,,,,,3,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
+617,24,11617,MC,Sherry had 25 dollars and she gave away 2 dollars to charity. <br/> <br/> How much money does Sherry have left?,,,,,,3,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 618,24,11618,N,8<br>4<br>-2,,,2,,,1,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 619,24,11619,N,9<br>3<br>-1,,,5,,,2,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
 620,24,11620,MC,"Find the missing number ""X""<br>X-6= 14",,,,,,3,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:08,10/24/2016 9:25:08
@@ -1424,298 +1424,298 @@
 1413,5,13341,N,Are you more likely to pick a bunch of grapes or pear?,probability-10.png,probability-10.png,grapes,,,22,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
 1414,5,13342,N,Are you more likely to pick a bunch of grapes or cherry?,probability-10.png,probability-10.png,grapes,,,23,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
 1415,5,13343,N,Are you more likely to pick a cherry or pear?,probability-10.png,probability-10.png,pear,,,24,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1416,48,13139,N,What is the missing operator in this equation? 1 + 2 - 3 ? 4 = 4,,,=+,,,1,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1417,48,13140,N,What is the missing operator in this equation? 1 + 2 - 4 ? 6 = 5,,,=+,,,2,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1418,48,13141,N,What is the missing operator in this equation? 1 + 2 - 5 ? 8 = 6,,,=+,,,3,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1419,48,13142,N,What is the missing operator in this equation? 1 + 2 - 6 ? 10 = 7,,,=+,,,4,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1420,48,13143,N,What is the missing operator in this equation? 1 + 2 - 7 ? 12 = 8,,,=+,,,5,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1421,48,13144,N,What is the missing operator in this equation? 1 + 2 - 8 ? 14 = 9,,,=+,,,6,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1422,48,13145,N,What is the missing operator in this equation? 1 + 2 - 9 ? 16 = 10,,,=+,,,7,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1423,48,13146,N,What is the missing operator in this equation? 1 + 2 - 10 ? 18 = 11,,,=+,,,8,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1424,48,13147,N,What is the missing operator in this equation? 1 + 2 - 11 ? 20 = 12,,,=+,,,9,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1425,48,13148,N,What is the missing operator in this equation? 1 + 2 - 12 ? 22 = 13,,,=+,,,10,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1426,48,13149,N,What is the missing operator in this equation? 1 + 2 - 13 ? 24 = 14,,,=+,,,11,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1427,48,13150,N,What is the missing operator in this equation? 1 + 2 - 14 ? 26 = 15,,,=+,,,12,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1428,48,13151,N,What is the missing operator in this equation? 1 + 2 - 15 ? 28 = 16,,,=+,,,13,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1429,48,13152,N,What is the missing operator in this equation? 1 + 2 - 16 ? 30 = 17,,,=+,,,14,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1430,48,13153,N,What is the missing operator in this equation? 1 + 2 - 17 ? 32 = 18,,,=+,,,15,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1431,48,13154,N,What is the missing operator in this equation? 1 + 2 - 18 ? 34 = 19,,,=+,,,16,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1432,48,13155,N,What is the missing operator in this equation? 1 + 2 - 19 ? 36 = 20,,,=+,,,17,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1433,48,13156,N,What is the missing operator in this equation? 1 + 2 - 20 ? 38 = 21,,,=+,,,18,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1434,48,13157,N,What is the missing operator in this equation? 1 + 2 - 21 ? 40 = 22,,,=+,,,19,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1435,48,13158,N,What is the missing operator in this equation? 1 + 2 - 22 ? 42 = 23,,,=+,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1436,48,13159,N,What is the missing operator in this equation? 1 + 2 - 23 ? 44 = 24,,,=+,,,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1437,48,13160,N,What is the missing operator in this equation? 1 + 2 - 24 ? 46 = 25,,,=+,,,22,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1438,48,13161,N,What is the missing operator in this equation? 1 + 2 - 25 ? 48 = 26,,,=+,,,23,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1439,48,13162,N,What is the missing operator in this equation? 1 + 2 - 26 ? 50 = 27,,,=+,,,24,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1440,48,13163,N,What is the missing operator in this equation? 1 + 2 - 27 ? 52 = 28,,,=+,,,25,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1441,48,13164,N,What is the missing operator in this equation? 1 + 2 - 28 ? 54 = 29,,,=+,,,26,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1442,48,13165,N,What is the missing operator in this equation? 1 + 2 - 29 ? 56 = 30,,,=+,,,27,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1443,48,13166,N,What is the missing operator in this equation? 1 + 2 - 30 ? 58 = 31,,,=+,,,28,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1444,48,13167,N,What is the missing operator in this equation? 1 + 2 - 31 ? 60 = 32,,,=+,,,29,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1445,48,13168,N,What is the missing operator in this equation? 1 + 2 - 32 ? 62 = 33,,,=+,,,30,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1446,48,13169,N,What is the missing operator in this equation? 1 + 2 - 33 ? 64 = 34,,,=+,,,31,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1447,48,13170,N,What is the missing operator in this equation? 1 + 2 - 34 ? 66 = 35,,,=+,,,32,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1448,48,13171,N,What is the missing operator in this equation? 1 + 2 - 35 ? 68 = 36,,,=+,,,33,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1449,48,13172,N,What is the missing operator in this equation? 1 + 2 - 36 ? 70 = 37,,,=+,,,34,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1450,48,13173,N,What is the missing operator in this equation? 1 + 2 - 37 ? 72 = 38,,,=+,,,35,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1451,48,13174,N,What is the missing operator in this equation? 1 + 2 - 38 ? 74 = 39,,,=+,,,36,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1452,48,13175,N,What is the missing operator in this equation? 1 + 2 - 39 ? 76 = 40,,,=+,,,37,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1453,48,13176,N,What is the missing operator in this equation? 1 + 2 - 40 ? 78 = 41,,,=+,,,38,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1454,48,13177,N,What is the missing operator in this equation? 1 + 2 - 41 ? 80 = 42,,,=+,,,39,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1455,48,13178,N,What is the missing operator in this equation? 1 + 2 - 42 ? 82 = 43,,,=+,,,40,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1456,48,13179,N,What is the missing operator in this equation? 1 + 2 - 43 ? 84 = 44,,,=+,,,41,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1457,48,13180,N,What is the missing operator in this equation? 1 + 2 - 44 ? 86 = 45,,,=+,,,42,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1458,48,13181,N,What is the missing operator in this equation? 1 + 2 - 45 ? 88 = 46,,,=+,,,43,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1459,48,13182,N,What is the missing operator in this equation? 1 + 2 - 46 ? 90 = 47,,,=+,,,44,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1460,48,13183,N,What is the missing operator in this equation? 1 + 2 - 47 ? 92 = 48,,,=+,,,45,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1461,48,13184,N,What is the missing operator in this equation? 1 + 2 - 48 ? 94 = 49,,,=+,,,46,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1462,48,13185,N,What is the missing operator in this equation? 1 + 2 - 49 ? 96 = 50,,,=+,,,47,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1463,48,13186,N,What is the missing operator in this equation? 1 + 2 - 50 ? 98 = 51,,,=+,,,1,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1464,48,13187,N,What is the missing operator in this equation? 1 + 2 - 51 ? 100 = 52,,,=+,,,2,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1465,48,13188,N,What is the missing operator in this equation? 1 + 2 - 52 ? 102 = 53,,,=+,,,3,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1466,48,13189,N,What is the missing operator in this equation? 1 + 2 - 53 ? 104 = 54,,,=+,,,4,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1467,48,13190,N,What is the missing operator in this equation? 1 + 2 - 54 ? 106 = 55,,,=+,,,5,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1468,48,13191,N,What is the missing operator in this equation? 1 + 2 - 55 ? 108 = 56,,,=+,,,6,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1469,48,13192,N,What is the missing operator in this equation? 1 + 2 - 56 ? 110 = 57,,,=+,,,7,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1470,48,13193,N,What is the missing operator in this equation? 1 + 2 - 57 ? 112 = 58,,,=+,,,8,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1471,48,13194,N,What is the missing operator in this equation? 1 + 2 - 58 ? 114 = 59,,,=+,,,9,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1472,48,13195,N,What is the missing operator in this equation? 1 + 2 - 59 ? 116 = 60,,,=+,,,10,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1473,48,13196,N,What is the missing operator in this equation? 1 + 2 - 60 ? 118 = 61,,,=+,,,11,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1474,48,13197,N,What is the missing operator in this equation? 1 + 2 - 61 ? 120 = 62,,,=+,,,12,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1475,48,13198,N,What is the missing operator in this equation? 1 + 2 - 62 ? 122 = 63,,,=+,,,13,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1476,48,13199,N,What is the missing operator in this equation? 1 + 2 - 63 ? 124 = 64,,,=+,,,14,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1477,48,13200,N,What is the missing operator in this equation? 1 + 2 - 64 ? 126 = 65,,,=+,,,15,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1478,48,13201,N,What is the missing operator in this equation? 1 + 2 - 65 ? 128 = 66,,,=+,,,16,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1479,48,13202,N,What is the missing operator in this equation? 1 + 2 - 66 ? 130 = 67,,,=+,,,17,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1480,48,13203,N,What is the missing operator in this equation? 1 + 2 - 67 ? 132 = 68,,,=+,,,18,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1481,48,13204,N,What is the missing operator in this equation? 1 + 2 - 68 ? 134 = 69,,,=+,,,19,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1482,48,13205,N,What is the missing operator in this equation? 1 + 2 - 69 ? 136 = 70,,,=+,,,20,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1483,48,13206,N,What is the missing operator in this equation? 1 + 2 - 70 ? 138 = 71,,,=+,,,21,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1484,48,13207,N,What is the missing operator in this equation? 1 + 2 - 71 ? 140 = 72,,,=+,,,22,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1485,48,13208,N,What is the missing operator in this equation? 1 + 2 - 72 ? 142 = 73,,,=+,,,23,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1486,48,13209,N,What is the missing operator in this equation? 1 + 2 - 73 ? 144 = 74,,,=+,,,24,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1487,48,13210,N,What is the missing operator in this equation? 1 + 2 - 74 ? 146 = 75,,,=+,,,25,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1488,48,13211,N,What is the missing operator in this equation? 1 + 2 - 75 ? 148 = 76,,,=+,,,26,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1489,48,13212,N,What is the missing operator in this equation? 1 + 2 - 76 ? 150 = 77,,,=+,,,27,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1490,48,13213,N,What is the missing operator in this equation? 1 + 2 - 77 ? 152 = 78,,,=+,,,28,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1491,48,13214,N,What is the missing operator in this equation? 1 + 2 - 78 ? 154 = 79,,,=+,,,29,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1492,48,13215,N,What is the missing operator in this equation? 1 + 2 - 79 ? 156 = 80,,,=+,,,30,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1493,48,13216,N,What is the missing operator in this equation? 1 + 2 - 80 ? 158 = 81,,,=+,,,31,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1494,48,13217,N,What is the missing operator in this equation? 1 + 2 - 81 ? 160 = 82,,,=+,,,32,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1495,48,13218,N,What is the missing operator in this equation? 1 + 2 - 82 ? 162 = 83,,,=+,,,33,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1496,48,13219,N,What is the missing operator in this equation? 1 + 2 - 83 ? 164 = 84,,,=+,,,34,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1497,48,13220,N,What is the missing operator in this equation? 1 + 2 - 84 ? 166 = 85,,,=+,,,35,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1498,48,13221,N,What is the missing operator in this equation? 1 + 2 - 85 ? 168 = 86,,,=+,,,36,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1499,48,13222,N,What is the missing operator in this equation? 1 + 2 - 86 ? 170 = 87,,,=+,,,37,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1500,48,13223,N,What is the missing operator in this equation? 1 + 2 - 87 ? 172 = 88,,,=+,,,38,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1501,48,13224,N,What is the missing operator in this equation? 1 + 2 - 88 ? 174 = 89,,,=+,,,39,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1502,48,13225,N,What is the missing operator in this equation? 1 + 2 - 89 ? 176 = 90,,,=+,,,40,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1503,48,13226,N,What is the missing operator in this equation? 1 + 2 - 90 ? 178 = 91,,,=+,,,41,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1504,48,13227,N,What is the missing operator in this equation? 1 + 2 - 91 ? 180 = 92,,,=+,,,42,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1505,48,13228,N,What is the missing operator in this equation? 1 + 2 - 92 ? 182 = 93,,,=+,,,43,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1506,48,13229,N,What is the missing operator in this equation? 1 + 2 - 93 ? 184 = 94,,,=+,,,44,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1507,48,13230,N,What is the missing operator in this equation? 1 + 2 - 94 ? 186 = 95,,,=+,,,45,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1508,48,13231,N,What is the missing operator in this equation? 1 + 2 - 95 ? 188 = 96,,,=+,,,46,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1509,48,13232,N,What is the missing operator in this equation? 1 + 2 - 96 ? 190 = 97,,,=+,,,47,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1510,48,13233,N,What is the missing operator in this equation? 1 + 2 - 97 ? 192 = 98,,,=+,,,48,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1511,48,13234,N,What is the missing operator in this equation? 1 + 2 - 98 ? 194 = 99,,,=+,,,49,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1512,48,13235,N,What is the missing operator in this equation? 1 + 2 - 99 ? 196 = 100,,,=+,,,50,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1513,48,13236,N,What is the missing operator in this equation? 1 + 2 - 100 ? 198 = 101,,,=+,,,51,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1514,48,13237,N,What is the missing operator in this equation? 1 + 2 - 101 ? 200 = 102,,,=+,,,52,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1515,48,13238,N,What is the missing operator in this equation? 1 + 2 - 102 ? 202 = 103,,,=+,,,53,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1516,48,13239,N,What is the missing operator in this equation? 1 + 2 - 103 ? 204 = 104,,,=+,,,54,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1517,48,13240,N,What is the missing operator in this equation? 1 + 2 - 104 ? 206 = 105,,,=+,,,55,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1518,48,13241,N,What is the missing operator in this equation? 1 + 2 - 105 ? 208 = 106,,,=+,,,56,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1519,48,13242,N,What is the missing operator in this equation? 1 + 2 - 106 ? 210 = 107,,,=+,,,57,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1520,48,13243,N,What is the missing operator in this equation? 1 + 2 - 107 ? 212 = 108,,,=+,,,58,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1521,48,13244,N,What is the missing operator in this equation? 1 + 2 - 108 ? 214 = 109,,,=+,,,59,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1522,48,13245,N,What is the missing operator in this equation? 1 + 2 - 109 ? 216 = 110,,,=+,,,60,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
-1523,48,13246,N,What is the missing operator in this equation? 1 + 2 - 110 ? 218 = 111,,,=+,,,61,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1524,48,13247,N,What is the missing operator in this equation? 1 + 2 - 111 ? 220 = 112,,,=+,,,62,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1525,48,13248,N,What is the missing operator in this equation? 1 + 2 - 112 ? 222 = 113,,,=+,,,63,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1526,48,13249,N,What is the missing operator in this equation? 1 + 2 - 113 ? 224 = 114,,,=+,,,64,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1527,48,13250,N,What is the missing operator in this equation? 1 + 2 - 114 ? 226 = 115,,,=+,,,65,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1528,48,13251,N,What is the missing operator in this equation? 1 + 2 - 115 ? 228 = 116,,,=+,,,66,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1529,48,13252,N,What is the missing operator in this equation? 1 + 2 - 116 ? 230 = 117,,,=+,,,67,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1530,48,13253,N,What is the missing operator in this equation? 1 + 2 - 117 ? 232 = 118,,,=+,,,68,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1531,48,13254,N,What is the missing operator in this equation? 1 + 2 - 118 ? 234 = 119,,,=+,,,69,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1532,48,13255,N,What is the missing operator in this equation? 1 + 2 - 119 ? 236 = 120,,,=+,,,70,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1533,48,13256,N,What is the missing operator in this equation? 1 + 2 - 120 ? 238 = 121,,,=+,,,71,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1534,48,13257,N,What is the missing operator in this equation? 1 + 2 - 121 ? 240 = 122,,,=+,,,72,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1535,48,13258,N,What is the missing operator in this equation? 1 + 2 - 122 ? 242 = 123,,,=+,,,73,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1536,48,13259,N,What is the missing operator in this equation? 1 + 2 - 123 ? 244 = 124,,,=+,,,74,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1537,48,13260,N,What is the missing operator in this equation? 1 + 2 - 124 ? 246 = 125,,,=+,,,75,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1538,48,13261,N,What is the missing operator in this equation? 1 + 2 - 125 ? 248 = 126,,,=+,,,76,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1539,48,13262,N,What is the missing operator in this equation? 1 + 2 - 126 ? 250 = 127,,,=+,,,77,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1540,48,13263,N,What is the missing operator in this equation? 1 + 2 - 127 ? 252 = 128,,,=+,,,78,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1541,48,13264,N,What is the missing operator in this equation? 1 + 2 - 128 ? 254 = 129,,,=+,,,79,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1542,48,13265,N,What is the missing operator in this equation? 1 + 2 - 129 ? 256 = 130,,,=+,,,80,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1543,48,13266,N,What is the missing operator in this equation? 1 + 2 - 130 ? 258 = 131,,,=+,,,81,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1544,48,13267,N,What is the missing operator in this equation? 1 + 2 - 131 ? 260 = 132,,,=+,,,82,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1545,48,13268,N,What is the missing operator in this equation? 1 + 2 - 132 ? 262 = 133,,,=+,,,83,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1546,48,13269,N,What is the missing operator in this equation? 1 + 2 - 133 ? 264 = 134,,,=+,,,84,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1547,48,13270,N,What is the missing operator in this equation? 1 + 2 - 134 ? 266 = 135,,,=+,,,85,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1548,48,13271,N,What is the missing operator in this equation? 1 + 2 - 135 ? 268 = 136,,,=+,,,86,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1549,53,11897,FIB,How much does this equal to?   $4  x 5 =,,,20,,,1,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1550,53,11898,FIB,How much does this equal to?   $6  x 7 =,,,42,,,2,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1551,53,11899,FIB,How much does this equal to?   $8  x 9 =,,,72,,,3,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1552,53,11900,FIB,How much does this equal to?   $10  x 11 =,,,110,,,4,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1553,53,11901,FIB,How much does this equal to?   $12  x 13 =,,,156,,,5,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1554,53,11902,FIB,How much does this equal to?   $14  x 15 =,,,210,,,6,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1555,53,11903,FIB,How much does this equal to?   $16  x 17 =,,,272,,,7,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1556,53,11904,FIB,How much does this equal to?   $18  x 19 =,,,342,,,8,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1557,53,11905,FIB,How much does this equal to?   $20  x 21 =,,,420,,,9,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1558,53,11906,FIB,How much does this equal to?   $22  x 23 =,,,506,,,10,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1559,53,11907,FIB,How much does this equal to?   $24  x 25 =,,,600,,,11,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1560,53,11908,FIB,How much does this equal to?   $26  x 27 =,,,702,,,12,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1561,53,11909,FIB,How much does this equal to?   $28  x 29 =,,,812,,,13,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1562,53,11910,FIB,How much does this equal to?   $30  x 31 =,,,930,,,14,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1563,53,11911,FIB,How much does this equal to?   $32  x 33 =,,,1056,,,15,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1564,53,11912,FIB,How much does this equal to?   $34  x 35 =,,,1190,,,16,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1565,53,11913,FIB,How much does this equal to?   $36  x 37 =,,,1332,,,17,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1566,53,11914,FIB,How much does this equal to?   $38  x 39 =,,,1482,,,18,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1567,53,11915,FIB,How much does this equal to?   $40  x 41 =,,,1640,,,19,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1568,53,11916,FIB,How much does this equal to?   $42  x 43 =,,,1806,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1569,53,11917,FIB,How much does this equal to?   $44  x 45 =,,,1980,,,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1570,53,11918,FIB,How much does this equal to?   $46  x 47 =,,,2162,,,22,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1571,53,11919,FIB,How much does this equal to?   $48  x 49 =,,,2352,,,23,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1572,53,11920,FIB,How much does this equal to?   $50  x 51 =,,,2550,,,1,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1573,53,11921,FIB,How much does this equal to?   $52  x 53 =,,,2756,,,2,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1574,53,11922,FIB,How much does this equal to?   $54  x 55 =,,,2970,,,3,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1575,53,11923,FIB,How much does this equal to?   $56  x 57 =,,,3192,,,4,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1576,53,11924,FIB,How much does this equal to?   $58  x 59 =,,,3422,,,5,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1577,53,11925,FIB,How much does this equal to?   $60  x 61 =,,,3660,,,6,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1578,53,11926,FIB,How much does this equal to?   $62  x 63 =,,,3906,,,7,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1579,53,11927,FIB,How much does this equal to?   $64  x 65 =,,,4160,,,8,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1580,53,11928,FIB,How much does this equal to?   $66  x 67 =,,,4422,,,9,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1581,53,11929,FIB,How much does this equal to?   $68  x 69 =,,,4692,,,10,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1582,53,11930,FIB,How much does this equal to?   $70  x 71 =,,,4970,,,11,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1583,53,11931,FIB,How much does this equal to?   $72  x 73 =,,,5256,,,12,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1584,53,11932,FIB,How much does this equal to?   $74  x 75 =,,,5550,,,13,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1585,53,11933,FIB,How much does this equal to?   $76  x 77 =,,,5852,,,14,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1586,53,11934,FIB,How much does this equal to?   $78  x 79 =,,,6162,,,15,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1587,53,11935,FIB,How much does this equal to?   $80  x 81 =,,,6480,,,16,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1588,53,11936,FIB,How much does this equal to?   $82  x 83 =,,,6806,,,17,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1589,53,11937,FIB,How much does this equal to?   $84  x 85 =,,,7140,,,18,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1590,53,11938,FIB,How much does this equal to?   $86  x 87 =,,,7482,,,19,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1591,53,11939,FIB,How much does this equal to?   $88  x 89 =,,,7832,,,20,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1592,53,11940,FIB,How much does this equal to?   $90  x 91 =,,,8190,,,21,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1593,53,11941,FIB,How much does this equal to?   $92  x 93 =,,,8556,,,22,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1594,53,11942,FIB,How much does this equal to?   $94  x 95 =,,,8930,,,23,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1595,53,11943,FIB,How much does this equal to?   $96  x 97 =,,,9312,,,24,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1596,53,11944,FIB,How much does this equal to?   $98  x 99 =,,,9702,,,25,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1597,53,11945,FIB,How much does this equal to?   $100  x 101 =,,,10100,,,1,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1598,53,11946,FIB,How much does this equal to?   $102  x 103 =,,,10506,,,2,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1599,53,11947,FIB,How much does this equal to?   $104  x 105 =,,,10920,,,3,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1600,53,11948,FIB,How much does this equal to?   $106  x 107 =,,,11342,,,4,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1601,53,11949,FIB,How much does this equal to?   $108  x 109 =,,,11772,,,5,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1602,53,11950,FIB,How much does this equal to?   $110  x 111 =,,,12210,,,6,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1603,53,11951,FIB,How much does this equal to?   $112  x 113 =,,,12656,,,7,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1604,53,11952,FIB,How much does this equal to?   $114  x 115 =,,,13110,,,8,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1605,53,11953,FIB,How much does this equal to?   $116  x 117 =,,,13572,,,9,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1606,53,11954,FIB,How much does this equal to?   $118  x 119 =,,,14042,,,10,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1607,53,11955,FIB,How much does this equal to?   $120  x 121 =,,,14520,,,11,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1608,53,11956,FIB,How much does this equal to?   $122  x 123 =,,,15006,,,12,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1609,53,11957,FIB,How much does this equal to?   $124  x 125 =,,,15500,,,13,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1610,53,11958,FIB,How much does this equal to?   $126  x 127 =,,,16002,,,14,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1611,53,11959,FIB,How much does this equal to?   $128  x 129 =,,,16512,,,15,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1612,53,11960,FIB,How much does this equal to?   $130  x 131 =,,,17030,,,16,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1613,53,11961,FIB,How much does this equal to?   $132  x 133 =,,,17556,,,17,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1614,53,11962,FIB,How much does this equal to?   $134  x 135 =,,,18090,,,18,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1615,53,11963,FIB,How much does this equal to?   $136  x 137 =,,,18632,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1616,53,11964,FIB,How much does this equal to?   $138  x 139 =,,,19182,,,20,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1617,53,11965,FIB,How much does this equal to?   $140  x 141 =,,,19740,,,21,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1618,53,11966,FIB,How much does this equal to?   $142  x 143 =,,,20306,,,22,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1619,53,11967,FIB,How much does this equal to?   $144  x 145 =,,,20880,,,23,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1620,53,11968,FIB,How much does this equal to?   $146  x 147 =,,,21462,,,24,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1621,53,11969,FIB,How much does this equal to?   $148  x 149 =,,,22052,,,25,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1622,53,11970,FIB,How much does this equal to?   $150  x 151 =,,,22650,,,26,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1623,53,11971,FIB,How much does this equal to?   $152  x 153 =,,,23256,,,27,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1624,53,11972,FIB,How much does this equal to?   $154  x 155 =,,,23870,,,28,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1625,53,11973,FIB,How much does this equal to?   $156  x 157 =,,,24492,,,29,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1626,53,11974,FIB,How much does this equal to?   $158  x 159 =,,,25122,,,30,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1627,53,11975,FIB,How much does this equal to?   $160  x 161 =,,,25760,,,31,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1628,53,11976,FIB,How much does this equal to?   $162  x 163 =,,,26406,,,32,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1629,53,11977,FIB,How much does this equal to?   $164  x 165 =,,,27060,,,33,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1630,53,11978,FIB,How much does this equal to?   $166  x 167 =,,,27722,,,34,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1631,53,11979,FIB,How much does this equal to?   $168  x 169 =,,,28392,,,35,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1632,53,11980,FIB,How much does this equal to?   $170  x 171 =,,,29070,,,36,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1633,53,11981,FIB,How much does this equal to?   $172  x 173 =,,,29756,,,37,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1634,53,11982,FIB,How much does this equal to?   $174  x 175 =,,,30450,,,38,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1635,53,11983,FIB,How much does this equal to?   $176  x 177 =,,,31152,,,39,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1636,53,11984,FIB,How much does this equal to?   $178  x 179 =,,,31862,,,40,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1637,53,11985,FIB,How much does this equal to?   $180  x 181 =,,,32580,,,41,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1638,53,11986,FIB,How much does this equal to?   $182  x 183 =,,,33306,,,42,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1639,53,11987,FIB,How much does this equal to?   $184  x 185 =,,,34040,,,43,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1640,53,11988,FIB,How much does this equal to?   $186  x 187 =,,,34782,,,44,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1641,53,11989,FIB,How much does this equal to?   $188  x 189 =,,,35532,,,45,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1642,53,11990,FIB,How much does this equal to?   $190  x 191 =,,,36290,,,46,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1643,53,11991,FIB,How much does this equal to?   $192  x 193 =,,,37056,,,47,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1644,53,11992,FIB,How much does this equal to?   $194  x 195 =,,,37830,,,48,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1645,53,11993,FIB,How much does this equal to?   $196  x 197 =,,,38612,,,49,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1646,53,11994,FIB,How much does this equal to?   $198  x 199 =,,,39402,,,50,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1647,53,11995,FIB,How much does this equal to?   $200  x 201 =,,,40200,,,51,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1648,53,11996,FIB,How much does this equal to?   $202  x 203 =,,,41006,,,52,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1649,53,11997,FIB,How much does this equal to?   $204  x 205 =,,,41820,,,53,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1650,53,11998,FIB,How much does this equal to?   $206  x 207 =,,,42642,,,54,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1651,53,11999,FIB,How much does this equal to?   $208  x 209 =,,,43472,,,55,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1652,53,12000,FIB,How much does this equal to?   $210  x 211 =,,,44310,,,56,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1653,53,12001,FIB,How much does this equal to?   $212  x 213 =,,,45156,,,57,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1654,53,12002,FIB,How much does this equal to?   $214  x 215 =,,,46010,,,58,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1655,53,12003,FIB,How much does this equal to?   $216  x 217 =,,,46872,,,59,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1656,53,12004,FIB,How much does this equal to?   $218  x 219 =,,,47742,,,60,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1657,53,12005,FIB,How much does this equal to?   $220  x 221 =,,,48620,,,61,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1658,53,12006,FIB,How much does this equal to?   $222  x 223 =,,,49506,,,62,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1659,53,12007,FIB,How much does this equal to?   $224  x 225 =,,,50400,,,63,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1660,53,12008,FIB,How much does this equal to?   $226  x 227 =,,,51302,,,64,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1661,53,12009,FIB,How much does this equal to?   $228  x 229 =,,,52212,,,65,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1662,53,12010,FIB,How much does this equal to?   $230  x 231 =,,,53130,,,66,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1663,53,12011,FIB,How much does this equal to?   $232  x 233 =,,,54056,,,67,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1664,53,12012,FIB,How much does this equal to?   $234  x 235 =,,,54990,,,68,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1665,53,12013,FIB,How much does this equal to?   $236  x 237 =,,,55932,,,69,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1666,53,12014,FIB,How much does this equal to?   $238  x 239 =,,,56882,,,70,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1667,53,12015,FIB,How much does this equal to?   $240  x 241 =,,,57840,,,71,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1668,53,12016,FIB,How much does this equal to?   $242  x 243 =,,,58806,,,72,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1669,53,12017,FIB,How much does this equal to?   $244  x 245 =,,,59780,,,73,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1670,53,12018,FIB,How much does this equal to?   $246  x 247 =,,,60762,,,74,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1671,53,12019,FIB,How much does this equal to?   $248  x 249 =,,,61752,,,75,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1672,53,12020,FIB,How much does this equal to?   $250  x 251 =,,,62750,,,76,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1673,53,12021,FIB,How much does this equal to?   $252  x 253 =,,,63756,,,77,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1674,53,12022,FIB,How much does this equal to?   $254  x 255 =,,,64770,,,78,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1675,53,12023,FIB,How much does this equal to?   $256  x 257 =,,,65792,,,79,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1676,53,12024,FIB,How much does this equal to?   $258  x 259 =,,,66822,,,80,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1677,53,12025,FIB,How much does this equal to?   $260  x 261 =,,,67860,,,81,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1678,53,12026,FIB,How much does this equal to?   $262  x 263 =,,,68906,,,82,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1679,53,12027,FIB,How much does this equal to?   $264  x 265 =,,,69960,,,83,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1680,53,12028,FIB,How much does this equal to?   $266  x 267 =,,,71022,,,84,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1681,53,12029,FIB,How much does this equal to?   $268  x 269 =,,,72092,,,85,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1682,53,12030,FIB,How much does this equal to?   $270  x 271 =,,,73170,,,86,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1683,53,12031,FIB,How much does this equal to?   $272  x 273 =,,,74256,,,87,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1684,53,12032,FIB,How much does this equal to?   $274  x 275 =,,,75350,,,88,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1685,53,12033,FIB,How much does this equal to?   $276  x 277 =,,,76452,,,89,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1686,53,12034,FIB,How much does this equal to?   $278  x 279 =,,,77562,,,90,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1687,53,12035,FIB,How much does this equal to?   $280  x 281 =,,,78680,,,91,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1688,53,12036,FIB,How much does this equal to?   $282  x 283 =,,,79806,,,92,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1689,53,12037,FIB,How much does this equal to?   $284  x 285 =,,,80940,,,93,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1690,53,12038,FIB,How much does this equal to?   $286  x 287 =,,,82082,,,94,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1691,53,12039,FIB,How much does this equal to?   $288  x 289 =,,,83232,,,95,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1692,53,12040,FIB,How much does this equal to?   $290  x 291 =,,,84390,,,96,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1693,53,12041,FIB,How much does this equal to?   $292  x 293 =,,,85556,,,97,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
-1694,53,12042,FIB,How much does this equal to?   $294  x 295 =,,,86730,,,98,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1695,53,12043,FIB,How much does this equal to?   $296  x 297 =,,,87912,,,99,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1696,53,12044,FIB,How much does this equal to?   $298  x 299 =,,,89102,,,100,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1697,53,12045,FIB,How much does this equal to?   $300  x 301 =,,,90300,,,101,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1698,53,12046,FIB,How much does this equal to?   $302  x 303 =,,,91506,,,102,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1699,53,12047,FIB,How much does this equal to?   $304  x 305 =,,,92720,,,103,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1700,53,12048,FIB,How much does this equal to?   $306  x 307 =,,,93942,,,104,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1701,53,12049,FIB,How much does this equal to?   $308  x 309 =,,,95172,,,105,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1702,53,12050,FIB,How much does this equal to?   $310  x 311 =,,,96410,,,106,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1703,53,12051,FIB,How much does this equal to?   $312  x 313 =,,,97656,,,107,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1704,53,12052,FIB,How much does this equal to?   $314  x 315 =,,,98910,,,108,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1705,53,12053,FIB,How much does this equal to?   $316  x 317 =,,,100172,,,109,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1706,53,12054,FIB,How much does this equal to?   $318  x 319 =,,,101442,,,110,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
-1707,53,12055,FIB,How much does this equal to?   $320  x 321 =,,,102720,,,111,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1416,48,13139,N,What is the missing operator in this equation? <br/> 1 + 2 - 3 ? 4 = 4,,,=+,,,1,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1417,48,13140,N,What is the missing operator in this equation? <br/> 1 + 2 - 4 ? 6 = 5,,,=+,,,2,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1418,48,13141,N,What is the missing operator in this equation? <br/> 1 + 2 - 5 ? 8 = 6,,,=+,,,3,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1419,48,13142,N,What is the missing operator in this equation? <br/> 1 + 2 - 6 ? 10 = 7,,,=+,,,4,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1420,48,13143,N,What is the missing operator in this equation? <br/> 1 + 2 - 7 ? 12 = 8,,,=+,,,5,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1421,48,13144,N,What is the missing operator in this equation? <br/> 1 + 2 - 8 ? 14 = 9,,,=+,,,6,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1422,48,13145,N,What is the missing operator in this equation? <br/> 1 + 2 - 9 ? 16 = 10,,,=+,,,7,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1423,48,13146,N,What is the missing operator in this equation? <br/> 1 + 2 - 10 ? 18 = 11,,,=+,,,8,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1424,48,13147,N,What is the missing operator in this equation? <br/> 1 + 2 - 11 ? 20 = 12,,,=+,,,9,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1425,48,13148,N,What is the missing operator in this equation? <br/> 1 + 2 - 12 ? 22 = 13,,,=+,,,10,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1426,48,13149,N,What is the missing operator in this equation? <br/> 1 + 2 - 13 ? 24 = 14,,,=+,,,11,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1427,48,13150,N,What is the missing operator in this equation? <br/> 1 + 2 - 14 ? 26 = 15,,,=+,,,12,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1428,48,13151,N,What is the missing operator in this equation? <br/> 1 + 2 - 15 ? 28 = 16,,,=+,,,13,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1429,48,13152,N,What is the missing operator in this equation? <br/> 1 + 2 - 16 ? 30 = 17,,,=+,,,14,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1430,48,13153,N,What is the missing operator in this equation? <br/> 1 + 2 - 17 ? 32 = 18,,,=+,,,15,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1431,48,13154,N,What is the missing operator in this equation? <br/> 1 + 2 - 18 ? 34 = 19,,,=+,,,16,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1432,48,13155,N,What is the missing operator in this equation? <br/> 1 + 2 - 19 ? 36 = 20,,,=+,,,17,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1433,48,13156,N,What is the missing operator in this equation? <br/> 1 + 2 - 20 ? 38 = 21,,,=+,,,18,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1434,48,13157,N,What is the missing operator in this equation? <br/> 1 + 2 - 21 ? 40 = 22,,,=+,,,19,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1435,48,13158,N,What is the missing operator in this equation? <br/> 1 + 2 - 22 ? 42 = 23,,,=+,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1436,48,13159,N,What is the missing operator in this equation? <br/> 1 + 2 - 23 ? 44 = 24,,,=+,,,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1437,48,13160,N,What is the missing operator in this equation? <br/> 1 + 2 - 24 ? 46 = 25,,,=+,,,22,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1438,48,13161,N,What is the missing operator in this equation? <br/> 1 + 2 - 25 ? 48 = 26,,,=+,,,23,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1439,48,13162,N,What is the missing operator in this equation? <br/> 1 + 2 - 26 ? 50 = 27,,,=+,,,24,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1440,48,13163,N,What is the missing operator in this equation? <br/> 1 + 2 - 27 ? 52 = 28,,,=+,,,25,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1441,48,13164,N,What is the missing operator in this equation? <br/> 1 + 2 - 28 ? 54 = 29,,,=+,,,26,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1442,48,13165,N,What is the missing operator in this equation? <br/> 1 + 2 - 29 ? 56 = 30,,,=+,,,27,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1443,48,13166,N,What is the missing operator in this equation? <br/> 1 + 2 - 30 ? 58 = 31,,,=+,,,28,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1444,48,13167,N,What is the missing operator in this equation? <br/> 1 + 2 - 31 ? 60 = 32,,,=+,,,29,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1445,48,13168,N,What is the missing operator in this equation? <br/> 1 + 2 - 32 ? 62 = 33,,,=+,,,30,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1446,48,13169,N,What is the missing operator in this equation? <br/> 1 + 2 - 33 ? 64 = 34,,,=+,,,31,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1447,48,13170,N,What is the missing operator in this equation? <br/> 1 + 2 - 34 ? 66 = 35,,,=+,,,32,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1448,48,13171,N,What is the missing operator in this equation? <br/> 1 + 2 - 35 ? 68 = 36,,,=+,,,33,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1449,48,13172,N,What is the missing operator in this equation? <br/> 1 + 2 - 36 ? 70 = 37,,,=+,,,34,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1450,48,13173,N,What is the missing operator in this equation? <br/> 1 + 2 - 37 ? 72 = 38,,,=+,,,35,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1451,48,13174,N,What is the missing operator in this equation? <br/> 1 + 2 - 38 ? 74 = 39,,,=+,,,36,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1452,48,13175,N,What is the missing operator in this equation? <br/> 1 + 2 - 39 ? 76 = 40,,,=+,,,37,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1453,48,13176,N,What is the missing operator in this equation? <br/> 1 + 2 - 40 ? 78 = 41,,,=+,,,38,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1454,48,13177,N,What is the missing operator in this equation? <br/> 1 + 2 - 41 ? 80 = 42,,,=+,,,39,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1455,48,13178,N,What is the missing operator in this equation? <br/> 1 + 2 - 42 ? 82 = 43,,,=+,,,40,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1456,48,13179,N,What is the missing operator in this equation? <br/> 1 + 2 - 43 ? 84 = 44,,,=+,,,41,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1457,48,13180,N,What is the missing operator in this equation? <br/> 1 + 2 - 44 ? 86 = 45,,,=+,,,42,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1458,48,13181,N,What is the missing operator in this equation? <br/> 1 + 2 - 45 ? 88 = 46,,,=+,,,43,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1459,48,13182,N,What is the missing operator in this equation? <br/> 1 + 2 - 46 ? 90 = 47,,,=+,,,44,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1460,48,13183,N,What is the missing operator in this equation? <br/> 1 + 2 - 47 ? 92 = 48,,,=+,,,45,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1461,48,13184,N,What is the missing operator in this equation? <br/> 1 + 2 - 48 ? 94 = 49,,,=+,,,46,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1462,48,13185,N,What is the missing operator in this equation? <br/> 1 + 2 - 49 ? 96 = 50,,,=+,,,47,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1463,48,13186,N,What is the missing operator in this equation? <br/> 1 + 2 - 50 ? 98 = 51,,,=+,,,1,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1464,48,13187,N,What is the missing operator in this equation? <br/> 1 + 2 - 51 ? 100 = 52,,,=+,,,2,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1465,48,13188,N,What is the missing operator in this equation? <br/> 1 + 2 - 52 ? 102 = 53,,,=+,,,3,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1466,48,13189,N,What is the missing operator in this equation? <br/> 1 + 2 - 53 ? 104 = 54,,,=+,,,4,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1467,48,13190,N,What is the missing operator in this equation? <br/> 1 + 2 - 54 ? 106 = 55,,,=+,,,5,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1468,48,13191,N,What is the missing operator in this equation? <br/> 1 + 2 - 55 ? 108 = 56,,,=+,,,6,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1469,48,13192,N,What is the missing operator in this equation? <br/> 1 + 2 - 56 ? 110 = 57,,,=+,,,7,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1470,48,13193,N,What is the missing operator in this equation? <br/> 1 + 2 - 57 ? 112 = 58,,,=+,,,8,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1471,48,13194,N,What is the missing operator in this equation? <br/> 1 + 2 - 58 ? 114 = 59,,,=+,,,9,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1472,48,13195,N,What is the missing operator in this equation? <br/> 1 + 2 - 59 ? 116 = 60,,,=+,,,10,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1473,48,13196,N,What is the missing operator in this equation? <br/> 1 + 2 - 60 ? 118 = 61,,,=+,,,11,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1474,48,13197,N,What is the missing operator in this equation? <br/> 1 + 2 - 61 ? 120 = 62,,,=+,,,12,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1475,48,13198,N,What is the missing operator in this equation? <br/> 1 + 2 - 62 ? 122 = 63,,,=+,,,13,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1476,48,13199,N,What is the missing operator in this equation? <br/> 1 + 2 - 63 ? 124 = 64,,,=+,,,14,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1477,48,13200,N,What is the missing operator in this equation? <br/> 1 + 2 - 64 ? 126 = 65,,,=+,,,15,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1478,48,13201,N,What is the missing operator in this equation? <br/> 1 + 2 - 65 ? 128 = 66,,,=+,,,16,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1479,48,13202,N,What is the missing operator in this equation? <br/> 1 + 2 - 66 ? 130 = 67,,,=+,,,17,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1480,48,13203,N,What is the missing operator in this equation? <br/> 1 + 2 - 67 ? 132 = 68,,,=+,,,18,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1481,48,13204,N,What is the missing operator in this equation? <br/> 1 + 2 - 68 ? 134 = 69,,,=+,,,19,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1482,48,13205,N,What is the missing operator in this equation? <br/> 1 + 2 - 69 ? 136 = 70,,,=+,,,20,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1483,48,13206,N,What is the missing operator in this equation? <br/> 1 + 2 - 70 ? 138 = 71,,,=+,,,21,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1484,48,13207,N,What is the missing operator in this equation? <br/> 1 + 2 - 71 ? 140 = 72,,,=+,,,22,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1485,48,13208,N,What is the missing operator in this equation? <br/> 1 + 2 - 72 ? 142 = 73,,,=+,,,23,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1486,48,13209,N,What is the missing operator in this equation? <br/> 1 + 2 - 73 ? 144 = 74,,,=+,,,24,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1487,48,13210,N,What is the missing operator in this equation? <br/> 1 + 2 - 74 ? 146 = 75,,,=+,,,25,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1488,48,13211,N,What is the missing operator in this equation? <br/> 1 + 2 - 75 ? 148 = 76,,,=+,,,26,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1489,48,13212,N,What is the missing operator in this equation? <br/> 1 + 2 - 76 ? 150 = 77,,,=+,,,27,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1490,48,13213,N,What is the missing operator in this equation? <br/> 1 + 2 - 77 ? 152 = 78,,,=+,,,28,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1491,48,13214,N,What is the missing operator in this equation? <br/> 1 + 2 - 78 ? 154 = 79,,,=+,,,29,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1492,48,13215,N,What is the missing operator in this equation? <br/> 1 + 2 - 79 ? 156 = 80,,,=+,,,30,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1493,48,13216,N,What is the missing operator in this equation? <br/> 1 + 2 - 80 ? 158 = 81,,,=+,,,31,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1494,48,13217,N,What is the missing operator in this equation? <br/> 1 + 2 - 81 ? 160 = 82,,,=+,,,32,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1495,48,13218,N,What is the missing operator in this equation? <br/> 1 + 2 - 82 ? 162 = 83,,,=+,,,33,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1496,48,13219,N,What is the missing operator in this equation? <br/> 1 + 2 - 83 ? 164 = 84,,,=+,,,34,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1497,48,13220,N,What is the missing operator in this equation? <br/> 1 + 2 - 84 ? 166 = 85,,,=+,,,35,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1498,48,13221,N,What is the missing operator in this equation? <br/> 1 + 2 - 85 ? 168 = 86,,,=+,,,36,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1499,48,13222,N,What is the missing operator in this equation? <br/> 1 + 2 - 86 ? 170 = 87,,,=+,,,37,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1500,48,13223,N,What is the missing operator in this equation? <br/> 1 + 2 - 87 ? 172 = 88,,,=+,,,38,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1501,48,13224,N,What is the missing operator in this equation? <br/> 1 + 2 - 88 ? 174 = 89,,,=+,,,39,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1502,48,13225,N,What is the missing operator in this equation? <br/> 1 + 2 - 89 ? 176 = 90,,,=+,,,40,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1503,48,13226,N,What is the missing operator in this equation? <br/> 1 + 2 - 90 ? 178 = 91,,,=+,,,41,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1504,48,13227,N,What is the missing operator in this equation? <br/> 1 + 2 - 91 ? 180 = 92,,,=+,,,42,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1505,48,13228,N,What is the missing operator in this equation? <br/> 1 + 2 - 92 ? 182 = 93,,,=+,,,43,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1506,48,13229,N,What is the missing operator in this equation? <br/> 1 + 2 - 93 ? 184 = 94,,,=+,,,44,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1507,48,13230,N,What is the missing operator in this equation? <br/> 1 + 2 - 94 ? 186 = 95,,,=+,,,45,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1508,48,13231,N,What is the missing operator in this equation? <br/> 1 + 2 - 95 ? 188 = 96,,,=+,,,46,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1509,48,13232,N,What is the missing operator in this equation? <br/> 1 + 2 - 96 ? 190 = 97,,,=+,,,47,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1510,48,13233,N,What is the missing operator in this equation? <br/> 1 + 2 - 97 ? 192 = 98,,,=+,,,48,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1511,48,13234,N,What is the missing operator in this equation? <br/> 1 + 2 - 98 ? 194 = 99,,,=+,,,49,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1512,48,13235,N,What is the missing operator in this equation? <br/> 1 + 2 - 99 ? 196 = 100,,,=+,,,50,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1513,48,13236,N,What is the missing operator in this equation? <br/> 1 + 2 - 100 ? 198 = 101,,,=+,,,51,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1514,48,13237,N,What is the missing operator in this equation? <br/> 1 + 2 - 101 ? 200 = 102,,,=+,,,52,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1515,48,13238,N,What is the missing operator in this equation? <br/> 1 + 2 - 102 ? 202 = 103,,,=+,,,53,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1516,48,13239,N,What is the missing operator in this equation? <br/> 1 + 2 - 103 ? 204 = 104,,,=+,,,54,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1517,48,13240,N,What is the missing operator in this equation? <br/> 1 + 2 - 104 ? 206 = 105,,,=+,,,55,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1518,48,13241,N,What is the missing operator in this equation? <br/> 1 + 2 - 105 ? 208 = 106,,,=+,,,56,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1519,48,13242,N,What is the missing operator in this equation? <br/> 1 + 2 - 106 ? 210 = 107,,,=+,,,57,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1520,48,13243,N,What is the missing operator in this equation? <br/> 1 + 2 - 107 ? 212 = 108,,,=+,,,58,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1521,48,13244,N,What is the missing operator in this equation? <br/> 1 + 2 - 108 ? 214 = 109,,,=+,,,59,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1522,48,13245,N,What is the missing operator in this equation? <br/> 1 + 2 - 109 ? 216 = 110,,,=+,,,60,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:13,10/24/2016 9:25:13
+1523,48,13246,N,What is the missing operator in this equation? <br/> 1 + 2 - 110 ? 218 = 111,,,=+,,,61,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1524,48,13247,N,What is the missing operator in this equation? <br/> 1 + 2 - 111 ? 220 = 112,,,=+,,,62,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1525,48,13248,N,What is the missing operator in this equation? <br/> 1 + 2 - 112 ? 222 = 113,,,=+,,,63,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1526,48,13249,N,What is the missing operator in this equation? <br/> 1 + 2 - 113 ? 224 = 114,,,=+,,,64,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1527,48,13250,N,What is the missing operator in this equation? <br/> 1 + 2 - 114 ? 226 = 115,,,=+,,,65,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1528,48,13251,N,What is the missing operator in this equation? <br/> 1 + 2 - 115 ? 228 = 116,,,=+,,,66,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1529,48,13252,N,What is the missing operator in this equation? <br/> 1 + 2 - 116 ? 230 = 117,,,=+,,,67,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1530,48,13253,N,What is the missing operator in this equation? <br/> 1 + 2 - 117 ? 232 = 118,,,=+,,,68,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1531,48,13254,N,What is the missing operator in this equation? <br/> 1 + 2 - 118 ? 234 = 119,,,=+,,,69,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1532,48,13255,N,What is the missing operator in this equation? <br/> 1 + 2 - 119 ? 236 = 120,,,=+,,,70,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1533,48,13256,N,What is the missing operator in this equation? <br/> 1 + 2 - 120 ? 238 = 121,,,=+,,,71,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1534,48,13257,N,What is the missing operator in this equation? <br/> 1 + 2 - 121 ? 240 = 122,,,=+,,,72,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1535,48,13258,N,What is the missing operator in this equation? <br/> 1 + 2 - 122 ? 242 = 123,,,=+,,,73,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1536,48,13259,N,What is the missing operator in this equation? <br/> 1 + 2 - 123 ? 244 = 124,,,=+,,,74,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1537,48,13260,N,What is the missing operator in this equation? <br/> 1 + 2 - 124 ? 246 = 125,,,=+,,,75,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1538,48,13261,N,What is the missing operator in this equation? <br/> 1 + 2 - 125 ? 248 = 126,,,=+,,,76,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1539,48,13262,N,What is the missing operator in this equation? <br/> 1 + 2 - 126 ? 250 = 127,,,=+,,,77,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1540,48,13263,N,What is the missing operator in this equation? <br/> 1 + 2 - 127 ? 252 = 128,,,=+,,,78,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1541,48,13264,N,What is the missing operator in this equation? <br/> 1 + 2 - 128 ? 254 = 129,,,=+,,,79,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1542,48,13265,N,What is the missing operator in this equation? <br/> 1 + 2 - 129 ? 256 = 130,,,=+,,,80,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1543,48,13266,N,What is the missing operator in this equation? <br/> 1 + 2 - 130 ? 258 = 131,,,=+,,,81,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1544,48,13267,N,What is the missing operator in this equation? <br/> 1 + 2 - 131 ? 260 = 132,,,=+,,,82,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1545,48,13268,N,What is the missing operator in this equation? <br/> 1 + 2 - 132 ? 262 = 133,,,=+,,,83,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1546,48,13269,N,What is the missing operator in this equation? <br/> 1 + 2 - 133 ? 264 = 134,,,=+,,,84,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1547,48,13270,N,What is the missing operator in this equation? <br/> 1 + 2 - 134 ? 266 = 135,,,=+,,,85,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1548,48,13271,N,What is the missing operator in this equation? <br/> 1 + 2 - 135 ? 268 = 136,,,=+,,,86,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1549,53,11897,FIB,How much does this equal to? <br/>    $4  x 5 =,,,20,,,1,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1550,53,11898,FIB,How much does this equal to? <br/>    $6  x 7 =,,,42,,,2,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1551,53,11899,FIB,How much does this equal to? <br/>    $8  x 9 =,,,72,,,3,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1552,53,11900,FIB,How much does this equal to? <br/>    $10  x 11 =,,,110,,,4,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1553,53,11901,FIB,How much does this equal to? <br/>    $12  x 13 =,,,156,,,5,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1554,53,11902,FIB,How much does this equal to? <br/>    $14  x 15 =,,,210,,,6,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1555,53,11903,FIB,How much does this equal to? <br/>    $16  x 17 =,,,272,,,7,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1556,53,11904,FIB,How much does this equal to? <br/>    $18  x 19 =,,,342,,,8,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1557,53,11905,FIB,How much does this equal to? <br/>    $20  x 21 =,,,420,,,9,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1558,53,11906,FIB,How much does this equal to? <br/>    $22  x 23 =,,,506,,,10,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1559,53,11907,FIB,How much does this equal to? <br/>    $24  x 25 =,,,600,,,11,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1560,53,11908,FIB,How much does this equal to? <br/>    $26  x 27 =,,,702,,,12,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1561,53,11909,FIB,How much does this equal to? <br/>    $28  x 29 =,,,812,,,13,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1562,53,11910,FIB,How much does this equal to? <br/>    $30  x 31 =,,,930,,,14,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1563,53,11911,FIB,How much does this equal to? <br/>    $32  x 33 =,,,1056,,,15,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1564,53,11912,FIB,How much does this equal to? <br/>    $34  x 35 =,,,1190,,,16,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1565,53,11913,FIB,How much does this equal to? <br/>    $36  x 37 =,,,1332,,,17,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1566,53,11914,FIB,How much does this equal to? <br/>    $38  x 39 =,,,1482,,,18,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1567,53,11915,FIB,How much does this equal to? <br/>    $40  x 41 =,,,1640,,,19,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1568,53,11916,FIB,How much does this equal to? <br/>    $42  x 43 =,,,1806,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1569,53,11917,FIB,How much does this equal to? <br/>    $44  x 45 =,,,1980,,,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1570,53,11918,FIB,How much does this equal to? <br/>    $46  x 47 =,,,2162,,,22,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1571,53,11919,FIB,How much does this equal to? <br/>    $48  x 49 =,,,2352,,,23,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1572,53,11920,FIB,How much does this equal to? <br/>    $50  x 51 =,,,2550,,,1,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1573,53,11921,FIB,How much does this equal to? <br/>    $52  x 53 =,,,2756,,,2,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1574,53,11922,FIB,How much does this equal to? <br/>    $54  x 55 =,,,2970,,,3,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1575,53,11923,FIB,How much does this equal to? <br/>    $56  x 57 =,,,3192,,,4,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1576,53,11924,FIB,How much does this equal to? <br/>    $58  x 59 =,,,3422,,,5,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1577,53,11925,FIB,How much does this equal to? <br/>    $60  x 61 =,,,3660,,,6,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1578,53,11926,FIB,How much does this equal to? <br/>    $62  x 63 =,,,3906,,,7,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1579,53,11927,FIB,How much does this equal to? <br/>    $64  x 65 =,,,4160,,,8,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1580,53,11928,FIB,How much does this equal to? <br/>    $66  x 67 =,,,4422,,,9,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1581,53,11929,FIB,How much does this equal to? <br/>    $68  x 69 =,,,4692,,,10,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1582,53,11930,FIB,How much does this equal to? <br/>    $70  x 71 =,,,4970,,,11,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1583,53,11931,FIB,How much does this equal to? <br/>    $72  x 73 =,,,5256,,,12,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1584,53,11932,FIB,How much does this equal to? <br/>    $74  x 75 =,,,5550,,,13,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1585,53,11933,FIB,How much does this equal to? <br/>    $76  x 77 =,,,5852,,,14,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1586,53,11934,FIB,How much does this equal to? <br/>    $78  x 79 =,,,6162,,,15,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1587,53,11935,FIB,How much does this equal to? <br/>    $80  x 81 =,,,6480,,,16,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1588,53,11936,FIB,How much does this equal to? <br/>    $82  x 83 =,,,6806,,,17,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1589,53,11937,FIB,How much does this equal to? <br/>    $84  x 85 =,,,7140,,,18,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1590,53,11938,FIB,How much does this equal to? <br/>    $86  x 87 =,,,7482,,,19,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1591,53,11939,FIB,How much does this equal to? <br/>    $88  x 89 =,,,7832,,,20,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1592,53,11940,FIB,How much does this equal to? <br/>    $90  x 91 =,,,8190,,,21,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1593,53,11941,FIB,How much does this equal to? <br/>    $92  x 93 =,,,8556,,,22,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1594,53,11942,FIB,How much does this equal to? <br/>    $94  x 95 =,,,8930,,,23,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1595,53,11943,FIB,How much does this equal to? <br/>    $96  x 97 =,,,9312,,,24,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1596,53,11944,FIB,How much does this equal to? <br/>    $98  x 99 =,,,9702,,,25,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1597,53,11945,FIB,How much does this equal to? <br/>    $100  x 101 =,,,10100,,,1,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1598,53,11946,FIB,How much does this equal to? <br/>    $102  x 103 =,,,10506,,,2,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1599,53,11947,FIB,How much does this equal to? <br/>    $104  x 105 =,,,10920,,,3,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1600,53,11948,FIB,How much does this equal to? <br/>    $106  x 107 =,,,11342,,,4,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1601,53,11949,FIB,How much does this equal to? <br/>    $108  x 109 =,,,11772,,,5,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1602,53,11950,FIB,How much does this equal to? <br/>    $110  x 111 =,,,12210,,,6,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1603,53,11951,FIB,How much does this equal to? <br/>    $112  x 113 =,,,12656,,,7,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1604,53,11952,FIB,How much does this equal to? <br/>    $114  x 115 =,,,13110,,,8,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1605,53,11953,FIB,How much does this equal to? <br/>    $116  x 117 =,,,13572,,,9,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1606,53,11954,FIB,How much does this equal to? <br/>    $118  x 119 =,,,14042,,,10,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1607,53,11955,FIB,How much does this equal to? <br/>    $120  x 121 =,,,14520,,,11,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1608,53,11956,FIB,How much does this equal to? <br/>    $122  x 123 =,,,15006,,,12,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1609,53,11957,FIB,How much does this equal to? <br/>    $124  x 125 =,,,15500,,,13,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1610,53,11958,FIB,How much does this equal to? <br/>    $126  x 127 =,,,16002,,,14,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1611,53,11959,FIB,How much does this equal to? <br/>    $128  x 129 =,,,16512,,,15,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1612,53,11960,FIB,How much does this equal to? <br/>    $130  x 131 =,,,17030,,,16,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1613,53,11961,FIB,How much does this equal to? <br/>    $132  x 133 =,,,17556,,,17,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1614,53,11962,FIB,How much does this equal to? <br/>    $134  x 135 =,,,18090,,,18,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1615,53,11963,FIB,How much does this equal to? <br/>    $136  x 137 =,,,18632,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1616,53,11964,FIB,How much does this equal to? <br/>    $138  x 139 =,,,19182,,,20,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1617,53,11965,FIB,How much does this equal to? <br/>    $140  x 141 =,,,19740,,,21,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1618,53,11966,FIB,How much does this equal to? <br/>    $142  x 143 =,,,20306,,,22,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1619,53,11967,FIB,How much does this equal to? <br/>    $144  x 145 =,,,20880,,,23,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1620,53,11968,FIB,How much does this equal to? <br/>    $146  x 147 =,,,21462,,,24,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1621,53,11969,FIB,How much does this equal to? <br/>    $148  x 149 =,,,22052,,,25,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1622,53,11970,FIB,How much does this equal to? <br/>    $150  x 151 =,,,22650,,,26,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1623,53,11971,FIB,How much does this equal to? <br/>    $152  x 153 =,,,23256,,,27,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1624,53,11972,FIB,How much does this equal to? <br/>    $154  x 155 =,,,23870,,,28,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1625,53,11973,FIB,How much does this equal to? <br/>    $156  x 157 =,,,24492,,,29,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1626,53,11974,FIB,How much does this equal to? <br/>    $158  x 159 =,,,25122,,,30,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1627,53,11975,FIB,How much does this equal to? <br/>    $160  x 161 =,,,25760,,,31,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1628,53,11976,FIB,How much does this equal to? <br/>    $162  x 163 =,,,26406,,,32,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1629,53,11977,FIB,How much does this equal to? <br/>    $164  x 165 =,,,27060,,,33,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1630,53,11978,FIB,How much does this equal to? <br/>    $166  x 167 =,,,27722,,,34,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1631,53,11979,FIB,How much does this equal to? <br/>    $168  x 169 =,,,28392,,,35,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1632,53,11980,FIB,How much does this equal to? <br/>    $170  x 171 =,,,29070,,,36,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1633,53,11981,FIB,How much does this equal to? <br/>    $172  x 173 =,,,29756,,,37,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1634,53,11982,FIB,How much does this equal to? <br/>    $174  x 175 =,,,30450,,,38,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1635,53,11983,FIB,How much does this equal to? <br/>    $176  x 177 =,,,31152,,,39,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1636,53,11984,FIB,How much does this equal to? <br/>    $178  x 179 =,,,31862,,,40,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1637,53,11985,FIB,How much does this equal to? <br/>    $180  x 181 =,,,32580,,,41,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1638,53,11986,FIB,How much does this equal to? <br/>    $182  x 183 =,,,33306,,,42,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1639,53,11987,FIB,How much does this equal to? <br/>    $184  x 185 =,,,34040,,,43,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1640,53,11988,FIB,How much does this equal to? <br/>    $186  x 187 =,,,34782,,,44,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1641,53,11989,FIB,How much does this equal to? <br/>    $188  x 189 =,,,35532,,,45,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1642,53,11990,FIB,How much does this equal to? <br/>    $190  x 191 =,,,36290,,,46,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1643,53,11991,FIB,How much does this equal to? <br/>    $192  x 193 =,,,37056,,,47,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1644,53,11992,FIB,How much does this equal to? <br/>    $194  x 195 =,,,37830,,,48,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1645,53,11993,FIB,How much does this equal to? <br/>    $196  x 197 =,,,38612,,,49,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1646,53,11994,FIB,How much does this equal to? <br/>    $198  x 199 =,,,39402,,,50,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1647,53,11995,FIB,How much does this equal to? <br/>    $200  x 201 =,,,40200,,,51,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1648,53,11996,FIB,How much does this equal to? <br/>    $202  x 203 =,,,41006,,,52,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1649,53,11997,FIB,How much does this equal to? <br/>    $204  x 205 =,,,41820,,,53,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1650,53,11998,FIB,How much does this equal to? <br/>    $206  x 207 =,,,42642,,,54,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1651,53,11999,FIB,How much does this equal to? <br/>    $208  x 209 =,,,43472,,,55,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1652,53,12000,FIB,How much does this equal to? <br/>    $210  x 211 =,,,44310,,,56,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1653,53,12001,FIB,How much does this equal to? <br/>    $212  x 213 =,,,45156,,,57,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1654,53,12002,FIB,How much does this equal to? <br/>    $214  x 215 =,,,46010,,,58,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1655,53,12003,FIB,How much does this equal to? <br/>    $216  x 217 =,,,46872,,,59,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1656,53,12004,FIB,How much does this equal to? <br/>    $218  x 219 =,,,47742,,,60,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1657,53,12005,FIB,How much does this equal to? <br/>    $220  x 221 =,,,48620,,,61,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1658,53,12006,FIB,How much does this equal to? <br/>    $222  x 223 =,,,49506,,,62,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1659,53,12007,FIB,How much does this equal to? <br/>    $224  x 225 =,,,50400,,,63,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1660,53,12008,FIB,How much does this equal to? <br/>    $226  x 227 =,,,51302,,,64,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1661,53,12009,FIB,How much does this equal to? <br/>    $228  x 229 =,,,52212,,,65,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1662,53,12010,FIB,How much does this equal to? <br/>    $230  x 231 =,,,53130,,,66,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1663,53,12011,FIB,How much does this equal to? <br/>    $232  x 233 =,,,54056,,,67,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1664,53,12012,FIB,How much does this equal to? <br/>    $234  x 235 =,,,54990,,,68,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1665,53,12013,FIB,How much does this equal to? <br/>    $236  x 237 =,,,55932,,,69,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1666,53,12014,FIB,How much does this equal to? <br/>    $238  x 239 =,,,56882,,,70,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1667,53,12015,FIB,How much does this equal to? <br/>    $240  x 241 =,,,57840,,,71,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1668,53,12016,FIB,How much does this equal to? <br/>    $242  x 243 =,,,58806,,,72,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1669,53,12017,FIB,How much does this equal to? <br/>    $244  x 245 =,,,59780,,,73,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1670,53,12018,FIB,How much does this equal to? <br/>    $246  x 247 =,,,60762,,,74,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1671,53,12019,FIB,How much does this equal to? <br/>    $248  x 249 =,,,61752,,,75,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1672,53,12020,FIB,How much does this equal to? <br/>    $250  x 251 =,,,62750,,,76,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1673,53,12021,FIB,How much does this equal to? <br/>    $252  x 253 =,,,63756,,,77,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1674,53,12022,FIB,How much does this equal to? <br/>    $254  x 255 =,,,64770,,,78,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1675,53,12023,FIB,How much does this equal to? <br/>    $256  x 257 =,,,65792,,,79,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1676,53,12024,FIB,How much does this equal to? <br/>    $258  x 259 =,,,66822,,,80,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1677,53,12025,FIB,How much does this equal to? <br/>    $260  x 261 =,,,67860,,,81,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1678,53,12026,FIB,How much does this equal to? <br/>    $262  x 263 =,,,68906,,,82,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1679,53,12027,FIB,How much does this equal to? <br/>    $264  x 265 =,,,69960,,,83,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1680,53,12028,FIB,How much does this equal to? <br/>    $266  x 267 =,,,71022,,,84,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1681,53,12029,FIB,How much does this equal to? <br/>    $268  x 269 =,,,72092,,,85,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1682,53,12030,FIB,How much does this equal to? <br/>    $270  x 271 =,,,73170,,,86,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1683,53,12031,FIB,How much does this equal to? <br/>    $272  x 273 =,,,74256,,,87,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1684,53,12032,FIB,How much does this equal to? <br/>    $274  x 275 =,,,75350,,,88,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1685,53,12033,FIB,How much does this equal to? <br/>    $276  x 277 =,,,76452,,,89,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1686,53,12034,FIB,How much does this equal to? <br/>    $278  x 279 =,,,77562,,,90,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1687,53,12035,FIB,How much does this equal to? <br/>    $280  x 281 =,,,78680,,,91,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1688,53,12036,FIB,How much does this equal to? <br/>    $282  x 283 =,,,79806,,,92,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1689,53,12037,FIB,How much does this equal to? <br/>    $284  x 285 =,,,80940,,,93,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1690,53,12038,FIB,How much does this equal to? <br/>    $286  x 287 =,,,82082,,,94,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1691,53,12039,FIB,How much does this equal to? <br/>    $288  x 289 =,,,83232,,,95,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1692,53,12040,FIB,How much does this equal to? <br/>    $290  x 291 =,,,84390,,,96,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1693,53,12041,FIB,How much does this equal to? <br/>    $292  x 293 =,,,85556,,,97,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:14,10/24/2016 9:25:14
+1694,53,12042,FIB,How much does this equal to? <br/>    $294  x 295 =,,,86730,,,98,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1695,53,12043,FIB,How much does this equal to? <br/>    $296  x 297 =,,,87912,,,99,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1696,53,12044,FIB,How much does this equal to? <br/>    $298  x 299 =,,,89102,,,100,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1697,53,12045,FIB,How much does this equal to? <br/>    $300  x 301 =,,,90300,,,101,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1698,53,12046,FIB,How much does this equal to? <br/>    $302  x 303 =,,,91506,,,102,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1699,53,12047,FIB,How much does this equal to? <br/>    $304  x 305 =,,,92720,,,103,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1700,53,12048,FIB,How much does this equal to? <br/>    $306  x 307 =,,,93942,,,104,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1701,53,12049,FIB,How much does this equal to? <br/>    $308  x 309 =,,,95172,,,105,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1702,53,12050,FIB,How much does this equal to? <br/>    $310  x 311 =,,,96410,,,106,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1703,53,12051,FIB,How much does this equal to? <br/>    $312  x 313 =,,,97656,,,107,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1704,53,12052,FIB,How much does this equal to? <br/>    $314  x 315 =,,,98910,,,108,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1705,53,12053,FIB,How much does this equal to? <br/>    $316  x 317 =,,,100172,,,109,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1706,53,12054,FIB,How much does this equal to? <br/>    $318  x 319 =,,,101442,,,110,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
+1707,53,12055,FIB,How much does this equal to? <br/>    $320  x 321 =,,,102720,,,111,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
 1708,80,12158,N,What is the diameter of this circle? Radius = 2,,,4,,,1,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
 1709,80,12159,N,What is the diameter of this circle? Radius = 4,,,8,,,2,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
 1710,80,12160,N,What is the diameter of this circle? Radius = 6,,,12,,,3,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:15,10/24/2016 9:25:15
@@ -1914,66 +1914,66 @@
 1903,80,12353,N,What is the circumference of this circle? Radius = 194,,,1219,,,146,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
 1904,80,12354,N,What is the circumference of this circle? Radius = 196,,,1232,,,147,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
 1905,80,12355,N,What is the circumference of this circle? Radius = 198,,,1244,,,148,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1906,80,12632,N,"What is the volume of the following?  Cube Height = 2 , Weight = 2, Length = 2 ? ",,,8,,,9,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1907,80,12633,N,"What is the volume of the following?  Cube Height = 3 , Weight = 3, Length = 3 ? ",,,27,,,10,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1908,80,12634,N,"What is the volume of the following?  Cube Height = 4 , Weight = 4, Length = 4 ? ",,,64,,,11,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1909,80,12635,N,"What is the volume of the following?  Cube Height = 5 , Weight = 5, Length = 5 ? ",,,125,,,12,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1910,80,12636,N,"What is the volume of the following?  Cube Height = 6 , Weight = 6, Length = 6 ? ",,,216,,,13,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1911,80,12637,N,"What is the volume of the following?  Cube Height = 7 , Weight = 7, Length = 7 ? ",,,343,,,14,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1912,80,12638,N,"What is the volume of the following?  Cube Height = 8 , Weight = 8, Length = 8 ? ",,,512,,,15,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1913,80,12639,N,"What is the volume of the following?  Cube Height = 9 , Weight = 9, Length = 9 ? ",,,729,,,16,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1914,80,12640,N,"What is the volume of the following?  Cube Height = 10 , Weight = 10, Length = 10 ? ",,,1000,,,43,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1915,80,12641,N,"What is the volume of the following?  Cube Height = 11 , Weight = 11, Length = 11 ? ",,,1331,,,149,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1916,80,12642,N,"What is the volume of the following?  Cube Height = 12 , Weight = 12, Length = 12 ? ",,,1728,,,150,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1917,80,12643,N,"What is the volume of the following?  Cube Height = 13 , Weight = 13, Length = 13 ? ",,,2197,,,151,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1918,80,12644,N,"What is the volume of the following?  Cube Height = 14 , Weight = 14, Length = 14 ? ",,,2744,,,152,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1919,80,12645,N,"What is the volume of the following?  Cube Height = 15 , Weight = 15, Length = 15 ? ",,,3375,,,153,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1920,80,12646,N,"What is the volume of the following?  Cube Height = 16 , Weight = 16, Length = 16 ? ",,,4096,,,154,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1921,80,12647,N,"What is the volume of the following?  Cube Height = 17 , Weight = 17, Length = 17 ? ",,,4913,,,155,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1922,80,12648,N,"What is the volume of the following?  Cube Height = 18 , Weight = 18, Length = 18 ? ",,,5832,,,156,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1923,80,12649,N,"What is the volume of the following?  Cube Height = 19 , Weight = 19, Length = 19 ? ",,,6859,,,157,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1924,80,12650,N,"What is the volume of the following?  Cube Height = 20 , Weight = 20, Length = 20 ? ",,,8000,,,158,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1925,80,12651,N,"What is the volume of the following? Rectangular prism Height = 2 , Weight = 3, Length = 4 ? ",,,24,,,17,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1926,80,12652,N,"What is the volume of the following? Rectangular prism Height = 4 , Weight = 5, Length = 6 ? ",,,120,,,18,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1927,80,12653,N,"What is the volume of the following? Rectangular prism Height = 6 , Weight = 7, Length = 8 ? ",,,336,,,44,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1928,80,12654,N,"What is the volume of the following? Rectangular prism Height = 8 , Weight = 9, Length = 10 ? ",,,720,,,45,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1929,80,12655,N,"What is the volume of the following? Rectangular prism Height = 10 , Weight = 11, Length = 12 ? ",,,1320,,,159,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1930,80,12656,N,"What is the volume of the following? Rectangular prism Height = 12 , Weight = 13, Length = 14 ? ",,,2184,,,160,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1931,80,12657,N,"What is the volume of the following? Rectangular prism Height = 14 , Weight = 15, Length = 16 ? ",,,3360,,,161,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1932,80,12658,N,"What is the volume of the following? Rectangular prism Height = 16 , Weight = 17, Length = 18 ? ",,,4896,,,162,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1933,80,12659,N,"What is the volume of the following? Rectangular prism Height = 18 , Weight = 19, Length = 20 ? ",,,6840,,,163,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1934,80,12660,N,"What is the volume of the following? Rectangular prism Height = 20 , Weight = 21, Length = 22 ? ",,,9240,,,164,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1935,80,12661,N,"What is the volume of the following? Rectangular prism Height = 22 , Weight = 23, Length = 24 ? ",,,12144,,,165,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1936,80,12662,N,"What is the volume of the following? Rectangular prism Height = 24 , Weight = 25, Length = 26 ? ",,,15600,,,166,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1937,80,12663,N,"What is the volume of the following? Rectangular prism Height = 26 , Weight = 27, Length = 28 ? ",,,19656,,,167,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1938,80,12664,N,"What is the volume of the following? Rectangular prism Height = 28 , Weight = 29, Length = 30 ? ",,,24360,,,168,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1939,80,12665,N,"What is the volume of the following? Rectangular prism Height = 30 , Weight = 31, Length = 32 ? ",,,29760,,,169,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1940,80,12666,N,"What is the volume of the following? Rectangular prism Height = 32 , Weight = 33, Length = 34 ? ",,,35904,,,170,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1941,80,12667,N,"What is the volume of the following? Rectangular prism Height = 34 , Weight = 35, Length = 36 ? ",,,42840,,,171,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1942,80,12668,N,"What is the volume of the following? Rectangular prism Height = 36 , Weight = 37, Length = 38 ? ",,,50616,,,172,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1943,80,12669,N,"What is the volume of the following? Rectangular prism Height = 38 , Weight = 39, Length = 40 ? ",,,59280,,,173,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1944,80,12670,N,"What is the volume of the following? Rectangular prism Height = 40 , Weight = 41, Length = 42 ? ",,,68880,,,174,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1945,80,12671,N,"What is the volume of the following? Rectangular prism Height = 42 , Weight = 43, Length = 44 ? ",,,79464,,,175,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1946,80,12672,N,"What is the volume of the following? Rectangular prism Height = 44 , Weight = 45, Length = 46 ? ",,,91080,,,176,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1947,80,12673,N,"What is the volume of the following? Rectangular prism Height = 46 , Weight = 47, Length = 48 ? ",,,103776,,,177,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1948,80,12674,N,"What is the volume of the following? Rectangular prism Height = 48 , Weight = 49, Length = 50 ? ",,,117600,,,178,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1949,80,12675,N,"What is the volume of the following? Rectangular prism Height = 3 , Weight = 4, Length = 5 ? ",,,60,,,19,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1950,80,12676,N,"What is the volume of the following? Rectangular prism Height = 4 , Weight = 5, Length = 6 ? ",,,120,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1951,80,12677,N,"What is the volume of the following? Rectangular prism Height = 5 , Weight = 6, Length = 7 ? ",,,210,,,46,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1952,80,12678,N,"What is the volume of the following? Rectangular prism Height = 6 , Weight = 7, Length = 8 ? ",,,336,,,47,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1953,80,12679,N,"What is the volume of the following? Rectangular prism Height = 7 , Weight = 8, Length = 9 ? ",,,504,,,48,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1954,80,12680,N,"What is the volume of the following? Rectangular prism Height = 8 , Weight = 9, Length = 10 ? ",,,720,,,49,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1955,80,12681,N,"What is the volume of the following? Rectangular prism Height = 9 , Weight = 10, Length = 11 ? ",,,990,,,179,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1956,80,12682,N,"What is the volume of the following? Rectangular prism Height = 10 , Weight = 11, Length = 12 ? ",,,1320,,,180,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1957,80,12683,N,"What is the volume of the following? Rectangular prism Height = 11 , Weight = 12, Length = 13 ? ",,,1716,,,181,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1958,80,12684,N,"What is the volume of the following? Rectangular prism Height = 12 , Weight = 13, Length = 14 ? ",,,2184,,,182,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1959,80,12685,N,"What is the volume of the following? Rectangular prism Height = 13 , Weight = 14, Length = 15 ? ",,,2730,,,183,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1960,80,12686,N,"What is the volume of the following? Rectangular prism Height = 14 , Weight = 15, Length = 16 ? ",,,3360,,,184,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1961,80,12687,N,"What is the volume of the following? Rectangular prism Height = 15 , Weight = 16, Length = 17 ? ",,,4080,,,185,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1962,80,12688,N,"What is the volume of the following? Rectangular prism Height = 16 , Weight = 17, Length = 18 ? ",,,4896,,,186,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1963,80,12689,N,"What is the volume of the following? Rectangular prism Height = 17 , Weight = 18, Length = 19 ? ",,,5814,,,187,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1964,80,12690,N,"What is the volume of the following? Rectangular prism Height = 18 , Weight = 19, Length = 20 ? ",,,6840,,,188,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
-1965,80,12691,N,"What is the volume of the following? Rectangular prism Height = 19 , Weight = 20, Length = 21 ? ",,,7980,,,189,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1906,80,12632,N,"What is the volume of the following? <br/>  Cube Height = 2 , Weight = 2, Length = 2 ? ",,,8,,,9,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1907,80,12633,N,"What is the volume of the following? <br/>  Cube Height = 3 , Weight = 3, Length = 3 ? ",,,27,,,10,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1908,80,12634,N,"What is the volume of the following? <br/>  Cube Height = 4 , Weight = 4, Length = 4 ? ",,,64,,,11,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1909,80,12635,N,"What is the volume of the following? <br/>  Cube Height = 5 , Weight = 5, Length = 5 ? ",,,125,,,12,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1910,80,12636,N,"What is the volume of the following? <br/>  Cube Height = 6 , Weight = 6, Length = 6 ? ",,,216,,,13,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1911,80,12637,N,"What is the volume of the following? <br/>  Cube Height = 7 , Weight = 7, Length = 7 ? ",,,343,,,14,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1912,80,12638,N,"What is the volume of the following? <br/>  Cube Height = 8 , Weight = 8, Length = 8 ? ",,,512,,,15,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1913,80,12639,N,"What is the volume of the following? <br/>  Cube Height = 9 , Weight = 9, Length = 9 ? ",,,729,,,16,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1914,80,12640,N,"What is the volume of the following? <br/>  Cube Height = 10 , Weight = 10, Length = 10 ? ",,,1000,,,43,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1915,80,12641,N,"What is the volume of the following? <br/>  Cube Height = 11 , Weight = 11, Length = 11 ? ",,,1331,,,149,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1916,80,12642,N,"What is the volume of the following? <br/>  Cube Height = 12 , Weight = 12, Length = 12 ? ",,,1728,,,150,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1917,80,12643,N,"What is the volume of the following? <br/>  Cube Height = 13 , Weight = 13, Length = 13 ? ",,,2197,,,151,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1918,80,12644,N,"What is the volume of the following? <br/>  Cube Height = 14 , Weight = 14, Length = 14 ? ",,,2744,,,152,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1919,80,12645,N,"What is the volume of the following? <br/>  Cube Height = 15 , Weight = 15, Length = 15 ? ",,,3375,,,153,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1920,80,12646,N,"What is the volume of the following? <br/>  Cube Height = 16 , Weight = 16, Length = 16 ? ",,,4096,,,154,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1921,80,12647,N,"What is the volume of the following? <br/>  Cube Height = 17 , Weight = 17, Length = 17 ? ",,,4913,,,155,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1922,80,12648,N,"What is the volume of the following? <br/>  Cube Height = 18 , Weight = 18, Length = 18 ? ",,,5832,,,156,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1923,80,12649,N,"What is the volume of the following? <br/>  Cube Height = 19 , Weight = 19, Length = 19 ? ",,,6859,,,157,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1924,80,12650,N,"What is the volume of the following? <br/>  Cube Height = 20 , Weight = 20, Length = 20 ? ",,,8000,,,158,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1925,80,12651,N,"What is the volume of the following? <br/> Rectangular prism Height = 2 , Weight = 3, Length = 4 ? ",,,24,,,17,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1926,80,12652,N,"What is the volume of the following? <br/> Rectangular prism Height = 4 , Weight = 5, Length = 6 ? ",,,120,,,18,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1927,80,12653,N,"What is the volume of the following? <br/> Rectangular prism Height = 6 , Weight = 7, Length = 8 ? ",,,336,,,44,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1928,80,12654,N,"What is the volume of the following? <br/> Rectangular prism Height = 8 , Weight = 9, Length = 10 ? ",,,720,,,45,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1929,80,12655,N,"What is the volume of the following? <br/> Rectangular prism Height = 10 , Weight = 11, Length = 12 ? ",,,1320,,,159,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1930,80,12656,N,"What is the volume of the following? <br/> Rectangular prism Height = 12 , Weight = 13, Length = 14 ? ",,,2184,,,160,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1931,80,12657,N,"What is the volume of the following? <br/> Rectangular prism Height = 14 , Weight = 15, Length = 16 ? ",,,3360,,,161,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1932,80,12658,N,"What is the volume of the following? <br/> Rectangular prism Height = 16 , Weight = 17, Length = 18 ? ",,,4896,,,162,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1933,80,12659,N,"What is the volume of the following? <br/> Rectangular prism Height = 18 , Weight = 19, Length = 20 ? ",,,6840,,,163,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1934,80,12660,N,"What is the volume of the following? <br/> Rectangular prism Height = 20 , Weight = 21, Length = 22 ? ",,,9240,,,164,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1935,80,12661,N,"What is the volume of the following? <br/> Rectangular prism Height = 22 , Weight = 23, Length = 24 ? ",,,12144,,,165,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1936,80,12662,N,"What is the volume of the following? <br/> Rectangular prism Height = 24 , Weight = 25, Length = 26 ? ",,,15600,,,166,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1937,80,12663,N,"What is the volume of the following? <br/> Rectangular prism Height = 26 , Weight = 27, Length = 28 ? ",,,19656,,,167,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1938,80,12664,N,"What is the volume of the following? <br/> Rectangular prism Height = 28 , Weight = 29, Length = 30 ? ",,,24360,,,168,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1939,80,12665,N,"What is the volume of the following? <br/> Rectangular prism Height = 30 , Weight = 31, Length = 32 ? ",,,29760,,,169,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1940,80,12666,N,"What is the volume of the following? <br/> Rectangular prism Height = 32 , Weight = 33, Length = 34 ? ",,,35904,,,170,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1941,80,12667,N,"What is the volume of the following? <br/> Rectangular prism Height = 34 , Weight = 35, Length = 36 ? ",,,42840,,,171,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1942,80,12668,N,"What is the volume of the following? <br/> Rectangular prism Height = 36 , Weight = 37, Length = 38 ? ",,,50616,,,172,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1943,80,12669,N,"What is the volume of the following? <br/> Rectangular prism Height = 38 , Weight = 39, Length = 40 ? ",,,59280,,,173,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1944,80,12670,N,"What is the volume of the following? <br/> Rectangular prism Height = 40 , Weight = 41, Length = 42 ? ",,,68880,,,174,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1945,80,12671,N,"What is the volume of the following? <br/> Rectangular prism Height = 42 , Weight = 43, Length = 44 ? ",,,79464,,,175,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1946,80,12672,N,"What is the volume of the following? <br/> Rectangular prism Height = 44 , Weight = 45, Length = 46 ? ",,,91080,,,176,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1947,80,12673,N,"What is the volume of the following? <br/> Rectangular prism Height = 46 , Weight = 47, Length = 48 ? ",,,103776,,,177,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1948,80,12674,N,"What is the volume of the following? <br/> Rectangular prism Height = 48 , Weight = 49, Length = 50 ? ",,,117600,,,178,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1949,80,12675,N,"What is the volume of the following? <br/> Rectangular prism Height = 3 , Weight = 4, Length = 5 ? ",,,60,,,19,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1950,80,12676,N,"What is the volume of the following? <br/> Rectangular prism Height = 4 , Weight = 5, Length = 6 ? ",,,120,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1951,80,12677,N,"What is the volume of the following? <br/> Rectangular prism Height = 5 , Weight = 6, Length = 7 ? ",,,210,,,46,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1952,80,12678,N,"What is the volume of the following? <br/> Rectangular prism Height = 6 , Weight = 7, Length = 8 ? ",,,336,,,47,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1953,80,12679,N,"What is the volume of the following? <br/> Rectangular prism Height = 7 , Weight = 8, Length = 9 ? ",,,504,,,48,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1954,80,12680,N,"What is the volume of the following? <br/> Rectangular prism Height = 8 , Weight = 9, Length = 10 ? ",,,720,,,49,2,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1955,80,12681,N,"What is the volume of the following? <br/> Rectangular prism Height = 9 , Weight = 10, Length = 11 ? ",,,990,,,179,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1956,80,12682,N,"What is the volume of the following? <br/> Rectangular prism Height = 10 , Weight = 11, Length = 12 ? ",,,1320,,,180,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1957,80,12683,N,"What is the volume of the following? <br/> Rectangular prism Height = 11 , Weight = 12, Length = 13 ? ",,,1716,,,181,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1958,80,12684,N,"What is the volume of the following? <br/> Rectangular prism Height = 12 , Weight = 13, Length = 14 ? ",,,2184,,,182,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1959,80,12685,N,"What is the volume of the following? <br/> Rectangular prism Height = 13 , Weight = 14, Length = 15 ? ",,,2730,,,183,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1960,80,12686,N,"What is the volume of the following? <br/> Rectangular prism Height = 14 , Weight = 15, Length = 16 ? ",,,3360,,,184,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1961,80,12687,N,"What is the volume of the following? <br/> Rectangular prism Height = 15 , Weight = 16, Length = 17 ? ",,,4080,,,185,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1962,80,12688,N,"What is the volume of the following? <br/> Rectangular prism Height = 16 , Weight = 17, Length = 18 ? ",,,4896,,,186,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1963,80,12689,N,"What is the volume of the following? <br/> Rectangular prism Height = 17 , Weight = 18, Length = 19 ? ",,,5814,,,187,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1964,80,12690,N,"What is the volume of the following? <br/> Rectangular prism Height = 18 , Weight = 19, Length = 20 ? ",,,6840,,,188,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
+1965,80,12691,N,"What is the volume of the following? <br/> Rectangular prism Height = 19 , Weight = 20, Length = 21 ? ",,,7980,,,189,3,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
 1966,80,12692,N,Calculate the perimeter of this square where each side measures: 2 cm,,,8,,,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
 1967,80,12693,N,Calculate the perimeter of this square where each side measures: 3 cm,,,12,,,22,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
 1968,80,12694,N,Calculate the perimeter of this square where each side measures: 4 cm,,,16,,,23,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:16,10/24/2016 9:25:16
@@ -3195,7 +3195,7 @@ Distance from Jakarta to:<br/>London  10871 km<br/>New York 15533 km<br/>Buenos 
 3142,400,329,FIB,Find the estimate product<br/>138 x 13 = ___,,,140 x 10 = 1400,,,54,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:23,10/24/2016 9:25:23
 3143,400,330,FIB,Find the estimate product<br/>265 x 19 = ___,,,270 x 20 = 5600,,,55,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:23,10/24/2016 9:25:23
 3144,400,331,FIB,Find the estimate product<br/>408 x 51 = ___,,,410 x 50 = 20500,,,56,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:23,10/24/2016 9:25:23
-3145,70,332,FIB,Miss Alice has 5890 greeting cards. She puts them into packets of 5. How many packets does she have altogether?,,,1178,,,7,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:23,10/24/2016 9:25:23
+3145,70,332,FIB,Miss Alice has 5890 greeting cards. She puts them into packets of 5. <br/>  <br/> How many packets does she have altogether?,,,1178,,,7,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:23,10/24/2016 9:25:23
 3146,70,333,FIB,"Mr John's car can travel 18 km on 2 / of petrol.<br/>A) How far can the car travel on a 1 / of petrol?<br/>B) If Mr John has to drive a distance  of 1027 km, how many litres of petrol will he need?",,,"9,114.11",,,8,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:23,10/24/2016 9:25:23
 3147,70,334,FIB,Mr Mark earns $4160 a month. Mrs Mark earns 4 times as much as Mr Mark.<br/><br/>What is their total earnings in a month?,,,20800,,,9,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:23,10/24/2016 9:25:23
 3148,70,335,FIB,Mr Mike bought 3 baking pans at $48 each and an oven at $397.<br/><br/>How much did he spend altogether?,,,541,,,10,1,1,1,Enabled,1,1,NULL,10/24/2016 9:25:23,10/24/2016 9:25:23
@@ -20503,8 +20503,8 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20337,3,1000343,FIB,55-14=,,,41,,,34,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20338,3,1000344,FIB,subtract 2 tens from 35 ones=,,,15,,,36,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20339,3,1000345,FIB,10 less than 77 is,,,67,,,37,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20340,21,1000346,FIB,Write in words: 13,,,thirteen,,,34,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20341,21,1000347,FIB,Write in words: 93,,,ninety three,,,35,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20340,21,1000346,FIB,"Write in words: 13 <br/>  (Example, Fifty-five)",,,thirteen,,,34,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20341,21,1000347,FIB,"Write in words: 93  <br/>  (Example, Fifty-five)",,,ninety three,,,35,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20342,20,1000348,O,"Arrange from smallest to greatest: 37,29,15,74",,,"15,29,37,74","37,29,15,74",,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20343,3,1000349,FIB,73-3= ... tens,,,7,,,38,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20344,26,1000350,MC,Which equation equals -10?,,,,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
@@ -20532,8 +20532,8 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20366,11,1000372,FIB,Ahmad has 22 marbles. Jane has 16 marbles. How many more marbles does ahmad have than jane?,,,6,,,31,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20367,11,1000373,FIB,Sulin had 19 stickers in album. She gave 8 stickers to her brother. How many stickers does she have now?,,,11,,,27,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20368,11,1000374,FIB,Farrah bought 12 mangoes. Ahmad bought 6 more mangoes than Farrah. How many mangoes did Ahmad buy?,,,18,,,28,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20369,13,1000375,FIB,Daniel wants to buy a pair of school shoes that costs $18. He has $7. how much more money does he need?,,,$11,,,11,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20370,13,1000376,FIB,Devi has 30$ left after paying for bar of chocolate (65$). How much money did she have at first?,,,95$,,,12,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20369,13,1000375,FIB,Daniel wants to buy a pair of school shoes that costs $18. He has $7. how much more money does he need? $,,,$11,,,11,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20370,13,1000376,FIB,Devi has 30$ left after paying for bar of chocolate (65$). How much money did she have at first? $,,,95$,,,12,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20371,21,1000377,FIB,Write in words : 7,,,seven,,,36,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20372,11,1000378,FIB,1 more than 3 is,,,4,,,7,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20373,11,1000379,FIB,1 less than 5 is,,,4,,,8,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
@@ -20549,8 +20549,8 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20383,15,1000389,FIB,34+52=8 tens...ones,,,6,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20384,21,1000390,FIB,Write the number: forty-nine,,,49,,,37,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20385,21,1000391,FIB,Write the number: seventy-five,,,75,,,38,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20386,21,1000392,FIB,Write the number in words: 98,,,ninety eight,,,39,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20387,21,1000393,FIB,Write the number in words: 52,,,fifty two,,,40,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20386,21,1000392,FIB,"Write the number in words: 98  <br/>  (Example, Fifty-five)",,,ninety eight,,,39,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20387,21,1000393,FIB,"Write the number in words: 52 <br/>  (Example, Fifty-five)",,,fifty two,,,40,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20388,11,1000394,FIB,6 more than 82 is,,,88,,,9,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20389,11,1000395,FIB,3 less than 100 is,,,97,,,10,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20390,15,1000396,FIB,31 + 3 tens is,,,61,,,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
@@ -20584,14 +20584,14 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20418,2,1000424,FIB,72+15=...,,,87,,,23,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20419,15,1000425,MC,"Which is the greatest value: 67 ones, 6 tens 9 ones, 5 tens 15 ones",,,,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20420,41,1000426,FIB,Ang has 24 flowers. She places 6 flowers in each vase. How many vases does she need for all the flowers?,purple_flower.jpg,purple_flower.jpg,4,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20421,13,1000427,FIB,Sally had five $5 notes. How much money does she have?,,,$25,,,13,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20422,2,1000428,FIB,...+22=100,,,78,,,24,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20421,13,1000427,FIB,Sally had five $5 notes. How much money does she have? $______,,,$25,,,13,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20422,2,1000428,FIB,_____ + 22 = 100,,,78,,,24,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20423,15,1000429,FIB,38 and 5 make ...ones and...tens,,,"3,4",,,23,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20424,3,1000430,FIB,May have 48 paper clips. Susan has 29 paper clips fewer than May. How many paper clips does Susan have?,,,19,,,43,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20425,11,1000431,FIB,Mary has 9 toy cars. Nick has 16 more toy cars than Mary. How many toy cars does Nick have?,,,25,,,29,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20426,41,1000432,FIB,Tan bought 18 lollipops. She placed them equally into 2 bags. How many lollipops are there in each bag?,,,9,,,20,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20427,2,1000433,FIB,"Tan gave 4 stickers each to Ann, Betty and Cathy. How many stickers did Tan give to the girls altogether?",,,12,,,37,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20428,13,1000434,FIB,A toy plane costs $25. Leo has $17. How much more money does Leo need to buy the toy plane?,,,$8,,,14,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20428,13,1000434,FIB,A toy plane costs $25. Leo has $17. How much more money does Leo need to buy the toy plane? $______________,,,$8,,,14,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20429,11,1000435,MC,"Which is the greatest value: fifty-one, fifty-two, forty-five",,,,,,30,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20430,15,1000436,FIB,8 tens 3 ones has the same value as...,,,83,,,24,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20431,1,1000437,FIB,What number comes after 79?,,,80,,,47,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
@@ -20606,7 +20606,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20440,41,1000446,FIB,There are 21 pencils. Put them in 3 equally groups. There will be…pencils in each group.,coloring_pencils.PNG,coloring_pencils.PNG,7,,,21,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20441,15,1000447,FIB,3 fives=,,,15,,,26,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20442,41,1000448,FIB,Lim bought 6 cakes for her class party. There are 3 candles on each cake. How many candles are there altogether.,cake.jpg,cake.jpg,18,,,22,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20443,21,1000449,FIB,Write 28 in words,,,Twenty eight,,,41,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20443,21,1000449,FIB,"Write 28 in words (Example, Fifty-five)",,,Twenty eight,,,41,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20444,15,1000450,FIB,4 tens 8 ones =...,,,48,,,25,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20445,11,1000451,O,"Arrange the numbers from the greatest to the smallest: 51,93,25,72",,,"93,72,51,25","51,93,25,72",,26,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20446,11,1000452,FIB,...is 10 less than 46,,,36,,,27,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
@@ -20621,8 +20621,8 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20455,2,1000461,FIB,Jack has 37 stamps. Betty has 21 stamps. How many stamps do they have altogether?,,,58,,,38,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20456,3,1000462,FIB,Felix has 74 marbles. He gives 47 marbles to a friend. How many marbles does he have left?,,,27,,,44,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20457,11,1000463,FIB,Yasmine has 45 stickers. Bala has 10 more stickers than Yasmine. How many stickers does Bala have?,,,55,,,33,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20458,13,1000464,FIB,A bag cost $48. A dress cost $32 more than the bag. How much did the dress cost?,dress.jpg,dress.jpg,$80,,,15,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20459,13,1000465,FIB,Ethan had $55. He spent $19 on a pair of shoes. How much money had he left?,,,$36,,,16,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20458,13,1000464,FIB,A bag cost $48. A dress cost $32 more than the bag. How much did the dress cost? $____________,dress.jpg,dress.jpg,$80,,,15,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20459,13,1000465,FIB,Ethan had $55. He spent $19 on a pair of shoes. How much money had he left? $_________,,,$36,,,16,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20460,17,1000466,FIB,3 eights=3x...,,,8,,,66,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20461,17,1000467,FIB,8x3=...,,,24,,,67,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20462,2,1000468,FIB,2+2+2+2+2+2=...x2,,,6,,,29,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
@@ -20637,10 +20637,10 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20471,2,1000477,FIB,"Sui Yin has some balloons. She gives 3 balloons to each of her 7 friends. After giving away the balloons, Sui Yin still has 9 balloons left. How many balloons did she have at first?",,,30,,,40,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20472,2,1000478,FIB,Edward has 15 ice cream cones. He put all the ice cream cones into containers of 3. how many containers were there?,,,5,,,41,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20473,2,1000479,FIB,"Edward has 15 ice cream cones. He put all the ice cream cones into containers of 5. after that, his mother gave him another 6 more ice cream cones. If he put them into 7 containers equally, how many ice cream cones are there in each container now?",,,3,,,42,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20474,13,1000480,FIB,Mrs. Lee went to the supermarket with $60 in her purse. She spent $38. how much money had she left?,,,$22,,,17,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20475,13,1000481,FIB,Pauline saves $67. She saves $15 less than her brother. How much did her brother save?,,,$82,,,18,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20476,13,1000482,FIB,Shafi bought a bag for $42 and a pair of shoes for $17. How much did he spend altogether?,,,$59,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20477,13,1000483,FIB,Shafi bought a bag for $42 and a pair of shoes for $17. After that he has $26. How much did he have at first?,,,$85,,,20,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20474,13,1000480,FIB,Mrs. Lee went to the supermarket with $60 in her purse. She spent $38. how much money had she left?  $____________,,,$22,,,17,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20475,13,1000481,FIB,Pauline saves $67. She saves $15 less than her brother. How much did her brother save?  $______________,,,$82,,,18,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20476,13,1000482,FIB,Shafi bought a bag for $42 and a pair of shoes for $17. How much did he spend altogether? $______________,,,$59,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20477,13,1000483,FIB,Shafi bought a bag for $42 and a pair of shoes for $17. After that he has $26. How much did he have at first? $__________________,,,$85,,,20,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20478,15,1000484,FIB,8 tens and 3 ones is...,,,83,,,28,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20479,2,1000485,FIB,9+8+5+4+1=...,,,27,,,31,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20480,3,1000486,FIB,76-36=...,,,40,,,40,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
@@ -20648,8 +20648,8 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20482,15,1000488,FIB,51 is 4 tens less than...,,,91,,,26,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20483,15,1000489,FIB,"What is the missing number: 80, 65,..., 35, 20",,,50,,,27,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20484,2,1000490,FIB,"Old Mcdonald has a farm. In his farm, he has 4 pigs and some ducks. If the pigs and ducks have 28 feet altogether, how many ducks are there?",,,6,,,44,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20485,21,1000491,FIB,Write the number in words: 32,,,Thirty two,,,42,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
-20486,21,1000492,FIB,Write the number in words: 70,,,Seventy,,,43,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20485,21,1000491,FIB,Write the number in words: 32 (Example Fifty-five),,,Thirty two,,,42,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
+20486,21,1000492,FIB,"Write the number in words: 70 <br/>  (Example, Fifty-five)",,,Seventy,,,43,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20487,2,1000493,FIB,the sum of 6 and 66 is...,,,72,,,32,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20488,11,1000494,FIB,Mother bought 63 apples and 28 oranges. How many more apples than oranges did she buy?,,,35,,,34,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
 20489,11,1000495,FIB,What number comes just before 80?,,,79,,,30,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:11,10/24/2016 9:27:11
@@ -20667,7 +20667,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20501,3,1000507,FIB,Jason buys 20 flowers. He puts 3 flowers in a vase. How many flowers are there outside the vase?,yellow_flower.jpg,yellow_flower.jpg,17,,,46,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20502,2,1000508,FIB,12+...=25,,,13,,,34,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20503,3,1000509,FIB,17-4=...,,,13,,,43,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20504,21,1000510,FIB,Write the number 17 in words,,,seventeen,,,44,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20504,21,1000510,FIB,"Write the number 17 in words <br/>  (Example, Fifty-five)",,,seventeen,,,44,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20505,11,1000511,FIB,... is 1 more than 17,,,18,,,31,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20506,2,1000512,FIB,11+6=...,,,17,,,35,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20507,3,1000513,FIB,18-7=...,,,11,,,44,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
@@ -20676,7 +20676,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20510,11,1000516,O,"Arrange the numbers from the smallest to the greatest: 44, 7, 9, 13",,,"7,9,13,44","44,7,9,13",,33,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20511,3,1000517,FIB,Ali has 24 stickers. He gives 5 stickers to Susan. How many stickers does Ali have left?,,,19,,,47,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20512,11,1000518,O,"Arrange the numbers from the greatest to the smallest:36, 66,68,90",,,"90,68,66,36","36,66,68,90",,34,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20513,21,1000519,FIB,Write the number in word: 95,,,ninety five,,,45,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20513,21,1000519,FIB,Write the number in word: 95.  (Example: Fifty-five),,,ninety five,,,45,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20514,2,1000520,FIB,72+8=...,,,80,,,31,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20515,3,1000521,FIB,66-30=...,,,36,,,41,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20516,3,1000522,FIB,97-17=...,,,80,,,42,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
@@ -20686,7 +20686,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20520,3,1000526,FIB,...-15=26,,,41,,,45,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20521,2,1000527,FIB,19+...=64,,,45,,,37,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20522,11,1000528,FIB,Ben has 58 books. Jack has 17 more than Ben. How many books does Jack have?,,,65,,,38,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20523,21,1000529,FIB,Write the given number in word : 19,,,nineteen,,,46,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20523,21,1000529,FIB,"Write the given number in word : 19  <br/>  (Example, Fifty-five)",,,nineteen,,,46,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20524,2,1000530,FIB,7+8=...,,,15,,,38,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20525,3,1000531,FIB,20-8=...,,,12,,,46,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20526,2,1000532,FIB,13+...=18,,,5,,,39,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
@@ -20696,7 +20696,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20530,11,1000536,O,"Arrange numbers from greatest to smallest: 21,3,37,15,8",,,"37,21,15,8,3","21,3,37,15,8",,36,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20531,2,1000537,FIB,Mandy and Sally have 20 books. Mandy has 7 books. How many books does Sally have?,,,13,,,46,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20532,2,1000538,FIB,9+8+1=...,,,18,,,40,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20533,21,1000539,FIB,Write number in word: 36,,,thirty six,,,16,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20533,21,1000539,FIB,"Write number in word: 36  <br/>  (Example, Fifty-five)",,,thirty six,,,16,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20534,11,1000540,O,"Arrange numbers from greatest to smallest: 73,24,15,52,28",,,"73,52,28,24,15","73,24,15,52,28",,37,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20535,15,1000541,FIB,"Fill in the missing numbers: 50,...,46,44,...,40",,,"48,42",,,31,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20536,2,1000542,FIB,84+13=...,,,97,,,33,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
@@ -20708,11 +20708,11 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20542,11,1000548,FIB,Sophia has 3 bags. How many more bags must she buy so that she has 6 bags altogether?,,,3,,,40,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20543,2,1000549,FIB,There are 7 boys and 4 girls on a bus. How many children are there on the bus altogether?,,,11,,,47,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20544,3,1000550,FIB,Tony has some stones. He gives 4 stones to josh. He has 3 stones left. How many stones does he have at first?,,,7,,,48,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20545,21,1000551,FIB,Write the number in words:6,,,six,,,47,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20546,21,1000552,FIB,Write the number in words:9,,,nine,,,48,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20545,21,1000551,FIB,"Write the number in words:6 <br/>  (Example, Fifty-five)",,,six,,,47,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20546,21,1000552,FIB,"Write the number in words:9 <br/>  (Example, Fifty-five)",,,nine,,,48,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20547,11,1000553,O,"Arrange from smallest: 10,1,4,0,7",,,"0,1,4,7,10","10,1,4,0,7",,12,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20548,3,1000554,FIB,"Use the numbers to make 2 subtraction equations: 6,2,8",,,"8-6=2 , 8-2=6",,,47,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20549,11,1000555,FIB,Alan and Bala have 9 balls. Bala has 3 more balls than Alan. How many do each boy have?,,,"Bala has 6 , Alan has 3",,,41,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20549,11,1000555,FIB,Alan and Bala have 9 balls. Bala has 3 more balls than Alan. How many do each boy have?  Bala ______  Alan _______,,,"Bala has 6 , Alan has 3",,,41,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20550,2,1000556,FIB,There are 10 children in a room. 4 of them are girls. How many boys are there?,,,6,,,48,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20551,3,1000557,FIB,Mary has some stamps. She gives 6 stamps to her brother . She has 3 stamps left. How many stamps does she have at first?,,,9,,,49,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20552,2,1000558,FIB,Juhalia has 7 candles. Kayla has 2 candles. Lucas has 10 candles. How many candles do they have altogether?,,,19,,,49,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
@@ -20725,7 +20725,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20559,11,1000565,O,"Arrange from the smallest: 75, 0, 2, 12, 20",,,"0,2,12,20,75","75,0,2,12,20",,38,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20560,15,1000566,FIB,"What is the missing numbers: 20,...,16,14,...,10",,,"18,12",,,32,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20561,2,1000567,FIB,Mother bought 7 strawberry cupcakes and 7 chocolate cupcakes. How many cupcakes did she buy altogether?,,,14,,,52,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20562,11,1000568,FIB,There are 12 eggs in box A and box B altogether. Box A has 2 more eggs than box B. how many eggs are there in box A and box B?,,,"7 eggs in box A,5 eggs in box B",,,42,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20562,11,1000568,FIB,"There are 12 eggs in box A and box B altogether. Box A has 2 more eggs than box B. how many eggs are there in box A and box B?  _____ box A, _____ box B",,,"7 eggs in box A,5 eggs in box B",,,42,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20563,11,1000569,FIB,Anita has an even number of oranges. The number of oranges she has is more than 16 but less than 20. how many oranges does Anita have?,,,18,,,43,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20564,2,1000570,FIB,Alex has 19 toys. Sara has 8 fewer toys than Alex. How many toys does Sara have?,,,11,,,53,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20565,2,1000571,FIB,"Sue bought some candies to school. After giving away 3 candies to her friend, Sue had 9 candies left. How many candies did Sue bring to school at first?",,,6,,,54,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
@@ -20763,7 +20763,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20597,2,1000603,FIB,"On Friday, Christina picked 6 flowers. On Tuesday, she picked 11 flowers. On Wednesday, she picked 16 flowers. On Thursday, she picked 21 flowers. How many flowers did Christina pick on Sunday?",red_flower.jpg,red_flower.jpg,36,,,59,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20598,2,1000604,FIB,7+...=20,,,13,,,39,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20599,15,1000605,FIB,"Fill in missing number: 14,...10,8,...",,,"12,6",,,28,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20600,21,1000606,FIB,Write in word: 14,,,fourteen,,,53,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20600,21,1000606,FIB,"Write in word: 14 <br/>  (Example, Fifty-five)",,,fourteen,,,53,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20601,21,1000607,FIB,Write in number: nineteen,,,19,,,54,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20602,12,1000608,FIB,"Complete the number pattern:...,15,13,12,10,9,7,...,...,3",,,"16,6,4",,,13,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20603,2,1000609,FIB,"Write addition equation using only 3 of the numbers where the sum is 30: 13,6,11,7",,,7+6=13,,,41,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
@@ -20797,14 +20797,14 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20631,15,1000637,O,"Arrange from smallest: 1,23,21,18",,,"1,18,21,23","1,23,21,18",,30,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20632,12,1000638,FIB,"Complete pattern: ...,27,24,...,18,...,12,9",,,"30,21,15",,,14,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20633,3,1000639,FIB,There are 23 parrots in a cage. 5 parrots are red. How many parrots are not red?,parrot.JPG,parrot.JPG,18,,,55,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20634,13,1000640,FIB,Rita ha $72. She needs another $28 to buy a dress. How much does the dress cost?,dress.jpg,dress.jpg,$100,,,22,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20634,13,1000640,FIB,Rita ha $72. She needs another $28 to buy a dress. How much does the dress cost? $________,dress.jpg,dress.jpg,$100,,,22,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20635,3,1000641,FIB,Ribbon A is shorter than ribbon B. Ribbon C is longer than ribbon B. Ribbon D is shorter than ribbon A. which ribbon is the longest?,,,C,,,56,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20636,17,1000642,FIB,Dorothy has 2 pairs of shoes and 4 pairs of socks. In how many different ways can she wear a pair of socks with a pair of shoes?,,,8,,,24,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20637,3,1000643,FIB,25-11=...,,,14,,,49,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20638,3,1000644,FIB,...-5=22,,,27,,,50,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20639,2,1000645,FIB,Add 8 and 28,,,36,,,42,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20640,12,1000646,FIB,"Complete pattern: ...,21,23,...,27",,,"19,25",,,15,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
-20641,21,1000647,FIB,Write number in word: 29,,,twenty nine,,,55,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
+20641,21,1000647,FIB,"Write number in word: 29 <br/>  (Example, Fifty-five)",,,twenty nine,,,55,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20642,21,1000648,FIB,Write word in number: thirteen,,,30,,,56,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20643,15,1000649,O,"Arrange from greatest: 40,31,28,35",,,"40,35,31,28","40,31,28,35",,40,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
 20644,20,1000650,FIB,"Dolly has 4 pieces of string A,B,C and D. string A is longer than string B. string C is longer than string A but shorter than string D. Which is the shortest string?",,,B,,,12,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:12,10/24/2016 9:27:12
@@ -20832,7 +20832,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20666,11,1000672,O,"Arrange from smallest: 17,25,8",,,"8,17,25","17,25,8",,14,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20667,3,1000673,FIB,Sham has 22 toy trains. He gives 4 of them to his sister. How many toy trains has he left?,,,18,,,58,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20668,11,1000674,FIB,Josh ate 8 jelly beans. Andy ate 4 more jelly beans than Josh. How many jelly beans did Andy eat?,,,12,,,49,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20669,21,1000675,FIB,Write in words:78,,,seventy eight,,,59,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20669,21,1000675,FIB,"Write in words:78 <br/>  (Example, Fifty-five)",,,seventy eight,,,59,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20670,12,1000676,FIB,"Complete pattern: 58,60,...,64,66,68,...",,,"62,70",,,16,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20671,15,1000677,FIB,The number that comes just before 32 is...,,,31,,,44,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20672,15,1000678,FIB,79 is in between 78 and...,,,80,,,45,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
@@ -20846,20 +20846,20 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20680,2,1000686,FIB,Sammy baked 62 cookies on Monday. She baked 35 cookies on Tuesday. How many cookies did she bake ?,cookies.jpg,cookies.jpg,97,,,63,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20681,2,1000687,FIB,Tom has 100 stickers. Sarah has 29 fewer stickers than tom. How many stickers does Sarah have?,,,71,,,64,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20682,15,1000688,FIB,7 fours=...x4,,,7,,,46,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20683,13,1000689,FIB,80$-40$=...$,,,40$,,,27,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20684,13,1000690,FIB,$23+$8=$...,,,$31,,,28,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20683,13,1000689,FIB,$80 - $40 = $__________,,,40$,,,27,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20684,13,1000690,FIB,$23 + $8 = $__________,,,$31,,,28,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20685,41,1000691,FIB,There are 30 lemons. Rashid places all lemons equally into 5 baskets. How many lemons are there in each basket?,,,6,,,34,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20686,41,1000692,FIB,Ram and Ben share 6 biscuits equally between them. How many biscuits will each of them get?,,,3,,,35,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20687,41,1000693,FIB,Martha has 18 watermelons. She puts 2 watermelons into each box. How many boxes does mavis need?,,,9,,,36,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20688,13,1000694,FIB,"After buying a dress that cost $22, Linda had $4 left. How much money did Linda have at first?",,,26,,,23,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20689,13,1000695,FIB,Michelle has $6. She wants to buy a bag that costs $29. How much more money does Michelle need?,,,$23,,,24,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20690,13,1000696,FIB,"If 6 candy canes cost $5, how much will 18 candy canes cost?",,,$15,,,25,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20691,3,1000697,FIB,Rashid had 20 eggs. He ate 4 eggs. How many eggs were left?,,,16,,,59,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20692,41,1000698,FIB,Rashid had 30 eggs. He ate 6 eggs. Then he gave the remaining eggs to jane. Jane packed eggs equally into 2 bags. How many eggs in each bag?,,,12,,,37,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20689,13,1000695,FIB,Michelle has $6. She wants to buy a bag that costs $29. How much more money does Michelle need?  $___________,,,$23,,,24,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20690,13,1000696,FIB,"If 6 candy canes cost $5, how much will 18 candy canes cost?  $__________",,,$15,,,25,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20691,3,1000697,FIB,Rashid had 20 eggs. He ate 4 eggs. How many eggs were left?  _______ eggs,,,16,,,59,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20692,41,1000698,FIB,Rashid had 30 eggs. He ate 6 eggs. Then he gave the remaining eggs to jane. Jane packed eggs equally into 2 bags. How many eggs in each bag?  ______ eggs,,,12,,,37,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20693,3,1000699,FIB,20-7=...,,,13,,,56,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20694,2,1000700,FIB,1+3=...,,,4,,,45,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20695,2,1000701,FIB,3+6=...,,,9,,,46,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20696,21,1000702,FIB,Write in words:11,,,eleven,,,60,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20696,21,1000702,FIB,"Write in words:11  (Example, Fifty-five)",,,eleven,,,60,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20697,12,1000703,FIB,"Complete pattern: ...,12,14,16,...20",,,"10,18",,,14,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20698,2,1000704,FIB,4+...=8,,,4,,,47,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20699,3,1000705,FIB,...-3=5,,,8,,,57,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
@@ -20867,7 +20867,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20701,2,1000707,FIB,Tay baked 13 chocolate cookies and 15 orange cookies. How many cookies did she bake altogether?,cookies.jpg,cookies.jpg,28,,,65,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20702,2,1000708,FIB,15+18=...,,,33,,,51,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20703,3,1000709,FIB,23-4=...,,,19,,,53,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20704,21,1000710,FIB,Write in words:40,,,forty,,,61,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20704,21,1000710,FIB,"Write in words:40   (Example, Fifty-five)",,,forty,,,61,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20705,11,1000711,FIB,4 more than 16=1+...,,,19,,,17,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20706,2,1000712,FIB,Karin makes 15 bracelets. Julie makes 12 bracelets. How many bracelets do they have in all?,,,27,,,66,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20707,3,1000713,FIB,Joy buys 40 blue beads. She buys 27 fewer red beads than blue beads. How many red beads does she buy?,,,13,,,60,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
@@ -20878,14 +20878,14 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20712,15,1000718,FIB,"Fill in missing numbers:...,18,16,...,12",,,"20,14",,,47,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20713,15,1000719,FIB,What is 1 ten and 9 ones?,,,19,,,48,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20714,15,1000720,FIB,"Rearrrange from greatest:25,18,12",,,"25,18,12",,,49,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20715,21,1000721,FIB,Write in words:10,,,ten,,,17,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20715,21,1000721,FIB,"Write in words: 10  (Example, Fifty-five)",,,ten,,,17,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20716,2,1000722,FIB,8+...=99,,,91,,,67,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20717,3,1000723,FIB,...-55=2,,,57,,,62,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20718,2,1000724,FIB,Jane has 4 pencils. Her sister gives her 7 pencils. How many pencils does jane have altogether?,,,11,,,68,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20719,2,1000725,FIB,There are 8 children in room. 6 of them are girls. How many boys are there in room?,,,2,,,69,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20720,11,1000726,FIB,...is 3 less than 32,,,29,,,43,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20721,3,1000727,FIB,Tan throws away 8 rotten apples and has 12 apples left. How many apples does she have at first?,,,20,,,63,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20722,21,1000728,FIB,Write number in words:68,,,sixty eight,,,62,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20722,21,1000728,FIB,"Write number in words:68  <br/>  (Example, Fifty-five)",,,sixty eight,,,62,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20723,11,1000729,FIB,20 more than 29= 1 +...,,,48,,,18,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20724,15,1000730,FIB,"Fill in missing numbers:38,35,...,...,26,23",,,"32,29",,,32,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20725,2,1000731,FIB,18+7=...,,,25,,,48,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
@@ -20900,7 +20900,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20734,15,1000740,FIB,5 fours=...,,,20,,,50,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20735,15,1000741,FIB,1 tens 19 ones=...,,,29,,,51,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20736,3,1000742,FIB,...-7=73,,,80,,,54,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
-20737,21,1000743,FIB,Write 54 in words,,,fifty four,,,63,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
+20737,21,1000743,FIB,"Write 54 in words <br/>  (Example, Fifty-five)",,,fifty four,,,63,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20738,3,1000744,FIB,64-6=...,,,58,,,55,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20739,17,1000745,FIB,A car has four wheels. 6 cars have...wheels.,,,24,,,27,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
 20740,15,1000746,FIB,55 is 3 tens more than,,,25,,,52,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:13,10/24/2016 9:27:13
@@ -21020,11 +21020,11 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20854,11,1000860,FIB,1 more than…is 9,,,8,,,58,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20855,11,1000861,FIB,...more than 4 is 7,,,3,,,59,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20856,11,1000862,FIB,...more than 3 is 7,,,4,,,60,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20857,21,1000863,FIB,Write number in word:9,,,nine,,,18,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20858,21,1000864,FIB,Write number in word:22,,,twenty two,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20859,21,1000865,FIB,Write number in word:10,,,ten,,,20,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20860,21,1000866,FIB,Write number in word:1,,,one,,,21,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20861,21,1000867,FIB,Write number in word:5,,,five,,,22,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20857,21,1000863,FIB,"Write number in word:9  <br/>  (Example, Fifty-five)",,,nine,,,18,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20858,21,1000864,FIB,"Write number in word:22 <br/>  (Example, Fifty-five)",,,twenty two,,,19,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20859,21,1000865,FIB,"Write number in word:10  <br/>  (Example, Fifty-five)",,,ten,,,20,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20860,21,1000866,FIB,"Write number in word:1  <br/>  (Example, Fifty-five)",,,one,,,21,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20861,21,1000867,FIB,"Write number in word:5  <br/>  (Example, Fifty-five)",,,five,,,22,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20862,15,1000868,FIB,"Fill in missing numbers:...,11,13,...,17",,,"9,15",,,20,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20863,15,1000869,FIB,"Fill in missing numbers:...,14,15,...,17,...",,,"13,16,18",,,59,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20864,15,1000870,FIB,"Fill in missing numbers:..,13,12,...,...,9",,,"14,11,10",,,60,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
@@ -21055,15 +21055,15 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20889,2,1000895,FIB,"Grace has 6 goldfish, 4 guppies and 9 angelfish. How many fishes does she have altogether?",,,19,,,85,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20890,3,1000896,FIB,Jack had 19 stamps. He gave some to his brother and he had 15 stamps left. How many stamps did Jack give to his brother?,,,4,,,75,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20891,3,1000897,FIB,10-8=...,,,2,,,70,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20892,21,1000898,FIB,Write 19 in words,,,nineteen,,,64,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20893,21,1000899,FIB,Write 0 in words,,,zero,,,65,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20892,21,1000898,FIB,"Write 19 in words  <br/>  (Example, Fifty-five)",,,nineteen,,,64,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20893,21,1000899,FIB,"Write 0 in words  <br/>  (Example, Fifty-five)",,,zero,,,65,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20894,3,1000900,FIB,59-7=...,,,52,,,71,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20895,2,1000901,FIB,29-4=...,,,25,,,74,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20896,2,1000902,FIB,2+18=...,,,20,,,75,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20897,2,1000903,FIB,3+15=...,,,18,,,76,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20898,3,1000904,FIB,22-12=...,,,10,,,72,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20899,2,1000905,FIB,Wang made 7 teddy bears. He made 19 toy cars. How many toys did he make altogether?,,,26,,,86,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20900,21,1000906,FIB,Write 99 in words,,,ninety nine,,,66,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20900,21,1000906,FIB,"Write 99 in words  <br/>  (Example, Fifty-five)",,,ninety nine,,,66,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20901,15,1000907,FIB,"Fill in missing numbers:...,60,64,68,...,...,80",,,"56,72,76",,,70,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20902,11,1000908,FIB,88 is...less than 90,,,2,,,61,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20903,2,1000909,FIB,3+24=...,,,27,,,77,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
@@ -21078,7 +21078,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20912,11,1000918,FIB,There are 36 flowers. There are 16 more butterflies than flowers. How many butterflies are there?,butterfly.jpg,butterfly.jpg,52,,,64,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20913,11,1000919,FIB,Osman has 49 stamps. He has 12 more stamps than david. How many stamps does david have?,,,37,,,65,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20914,2,1000920,FIB,The sum of 58 and 32 is…,,,90,,,57,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20915,21,1000921,FIB,Write 86 in words,,,eighty six,,,67,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20915,21,1000921,FIB,"Write 86 in words  <br/>  (Example, Fifty-five)",,,eighty six,,,67,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20916,3,1000922,FIB,50-...=44,,,16,,,77,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20917,2,1000923,FIB,55+34=...,,,89,,,81,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20918,3,1000924,FIB,88-51=...,,,37,,,78,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
@@ -21091,21 +21091,21 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20925,17,1000931,FIB,Nora gave 10 boys some sweets. She gave each boy 3 sweets. How many sweets did she give altogether?,,,30,,,33,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20926,17,1000932,FIB,Tork gave 10 lollipops to some pupils. If each pupil received 2 lollipops. How many pupils are there?,,,5,,,34,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20927,17,1000933,FIB,Tork gave 20 lollipops to some pupils. If each pupil received 4 lollipops. How many pupils are there?,,,5,,,35,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20928,21,1000934,FIB,Write 16 in words,,,sixteen,,,68,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20928,21,1000934,FIB,"Write 16 in words <br/>  (Example, Fifty-five)",,,sixteen,,,68,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20929,11,1000935,O,"Arrange from smallest:50,0,90,14",,,"0,14,50,90","50,0,90,14",,28,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20930,12,1000936,FIB,"Complete pattern:...,1,2,3,...,5,...,7",,,"0,4,6",,,17,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20931,2,1000937,FIB,12 and...is 20,,,8,,,83,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20932,2,1000938,FIB,...and 5 is 22,,,17,,,84,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20933,11,1000939,FIB,Meling sold 9 cupcakes on Monday. She sold 10 more cupcakes on Tuesday than on Monday. How many cupcakes did she sell on Tuesday?,,,19,,,68,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20934,21,1000940,FIB,Write 0 in words,,,zero,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20935,21,1000941,FIB,Write 9 in words,,,nine,,,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20934,21,1000940,FIB,"Write 0 in words  <br/>  (Example, Fifty-five)",,,zero,,,20,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20935,21,1000941,FIB,"Write 9 in words  <br/>  (Example, Fifty-five)",,,nine,,,21,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20936,15,1000942,FIB,"Fill in missing numbers: ...,3,...,5,6,7,...",,,"2,4,8",,,71,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20937,15,1000943,FIB,"Fill in missing numbers: ...,9,8,...,6,5,...",,,"10,7,4",,,72,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20938,11,1000944,O,"Arrange from smallest:99,20,15,7",,,"7,15,20,99","99,20,15,7",,29,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20939,2,1000945,FIB,26+13+5=...,,,44,,,58,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20940,15,1000946,FIB,4 tens+5 ones=...,,,45,,,73,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20941,3,1000947,FIB,...-16=41,,,57,,,59,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20942,21,1000948,FIB,Write 75 in words,,,seventy five,,,69,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20942,21,1000948,FIB,"Write 75 in words  <br/>  (Example, Fifty-five)",,,seventy five,,,69,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20943,15,1000949,O,"Arrange from greatest: 77,9,45",,,"77,45,9","77,9,45",,74,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20944,2,1000950,FIB,38+9=...,,,49,,,85,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20945,3,1000951,FIB,79-13=...,,,66,,,80,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
@@ -21114,14 +21114,14 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20948,3,1000954,FIB,Giselle baked 29 cupcakes. She gave away 12 cupcakes to Ashley and Alexi. How many cupcakes did Giselle have left?,,,17,,,76,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20949,3,1000955,FIB,57-5=...,,,52,,,60,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20950,41,1000956,FIB,There are 18 sweets. Alice arranged the sweets into groups of 2. how many groups are there?,,,9,,,44,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20951,21,1000957,FIB,Write 77 in words,,,seventy seven,,,70,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20951,21,1000957,FIB,"Write 74 in words <br/>  (Example, Fifty-five)",,,seventy seven,,,70,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20952,3,1000958,FIB,45-16=...,,,29,,,82,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20953,41,1000959,FIB,"Leonard, Sheldon and Howard shared 30 lollipops equally. How many lollipops did each of them get?",,,10,,,45,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20954,12,1000960,FIB,"Complete pattern:...,21,24,...,30,33,...,...",,,"18,27,36,39",,,18,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20955,17,1000961,FIB,Rose has 6 vases. Each vase contains 4 flowers. How many flowers does she have altogether?,yellow_flower.jpg,yellow_flower.jpg,24,,,36,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20956,41,1000962,FIB,There are 32 oranges. Lily packs them equally into 4 boxes. How many oranges are there in each box?,,,8,,,46,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20957,11,1000963,FIB,Adam bought 20 bars of chocolate from a supermarket. Brad bought 12 bars of chocolate less than adam. How many bars of chocolate did Brad buy?,,,8,,,69,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20958,13,1000964,FIB,Gwen bought a movie ticket for $21. She was left with $5. How much did she have at first?,,,$26,,,26,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20958,13,1000964,FIB,Gwen bought a movie ticket for $21. She was left with $5. How much did she have at first?  $_________,,,$26,,,26,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20959,17,1000965,FIB,Steve has 9 bicycles in his shop. Each bicycle has 2 wheels. How many wheels are there altogether?,,,18,,,37,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20960,15,1000966,O,"Arrange from greatest: 22,39,7,15",,,"39,22,15,7","22,39,7,15",,75,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20961,3,1000967,FIB,...-5=22,,,27,,,83,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
@@ -21129,7 +21129,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20963,3,1000969,FIB,James has 30 balloons. He gives 6 balloons away. How many balloons are left?,,,24,,,78,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20964,41,1000970,FIB,"There are 20 kangaroos in zoo. If there are 4 kangaroos in each enclosure, how many enclosure are there?",,,5,,,47,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20965,15,1000971,FIB,"Fill in missing : 88,83,79,...74,73",,,76,,,37,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20966,21,1000972,FIB,Write 48 in words,,,forty eight,,,71,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20966,21,1000972,FIB,"Write 48 in words  <br/>  (Example, Fifty-five)",,,forty eight,,,71,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20967,21,1000973,FIB,Write sixty-two in numerals,,,62,,,72,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20968,2,1000974,FIB,34+45=...,,,79,,,86,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20969,3,1000975,FIB,82-22=80-...,,,20,,,84,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
@@ -21140,7 +21140,7 @@ My group (N) is going to the Grand Canyon (N).",,,43,1,1,1,Enabled,1,1,NULL,10/2
 20974,11,1000980,FIB,19 less than 28 is...,,,9,,,30,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20975,2,1000981,FIB,28+...=35,,,7,,,59,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20976,2,1000982,FIB,6+19+4=...,,,29,,,87,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
-20977,21,1000983,FIB,Write 37 in words,,,thirty seven,,,73,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
+20977,21,1000983,FIB,"Write 37 in words <br/>  (Example, Fifty-five)",,,thirty seven,,,73,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:14,10/24/2016 9:27:14
 20978,12,1000984,FIB,"Complete pattern:23,26,29,...,35,...,...",,,"32,38,41",,,19,2,1,1,Enabled,1,1,NULL,10/24/2016 9:27:15,10/24/2016 9:27:15
 20979,3,1000985,FIB,29-15=...,,,14,,,85,1,1,1,Enabled,1,1,NULL,10/24/2016 9:27:15,10/24/2016 9:27:15
 20980,2,1000986,FIB,Colleen baked 50 cookies. Aisha baked 7 fewer cookies than Colleen. How many cookies did Aisha bake?,cookies.jpg,cookies.jpg,43,,,89,3,1,1,Enabled,1,1,NULL,10/24/2016 9:27:15,10/24/2016 9:27:15
