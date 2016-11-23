@@ -54,12 +54,6 @@ class StudentRegistrationController extends StudentController {
         $check_email = $this->user_service->checkEmail($user['email'],config('futureed.student'));
 
 
-        if (!isset($student['country_id'])) {
-
-            $student['country_id'] = 0;
-        }
-
-
         if($check_username){
 
             return $this->respondErrorMessage(2201);
