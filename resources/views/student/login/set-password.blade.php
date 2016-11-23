@@ -59,7 +59,7 @@
 				<i class="fa fa-check fa-5x img-rounded text-center"></i>
 			</div>
 
-			{!! trans('messages.your_pic_password_reset') !!} <br /> 
+			{!! trans('messages.your_pic_password_set') !!} <br />
 			{!! trans('messages.you_may_now_use_new_pic_password_to_login') !!} <br />
 
 			<br />
