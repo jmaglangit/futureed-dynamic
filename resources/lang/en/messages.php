@@ -748,7 +748,7 @@ return [
 	'admin_jump_to_question_no' => 'Jump to question no.',
 	'admin_toggle_graph' => 'Toggle Graph',
 	'admin_return_module_list' => 'Return to Module List',
-	'admin_note_module_last_question' => 'You have reached the last question of this module.',
+	'admin_note_end_module_preview' => 'You have reached the end of this module preview.',
 	'admin_note_module_preview_cant_load_no_questions_available' => 'NOTE: Preview can\'t be loaded, no questions available for this module.',
 	'admin_note_module_question_preview_only' => 'NOTE: Please note that this is only a PREVIEW. Answers are not checked.',
 

@@ -407,7 +407,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 	self.getQuestionByIndex = function(option = Constants.FALSE) {
 		switch(option) {
 			case Constants.NEXT:
-				self.question_index = self.question_index < self.question_list.length - 1 ?
+				self.question_index = self.question_index < self.question_list.length ?
 					parseInt(self.question_index) + 1 : self.question_index;
 				break;
 
@@ -429,7 +429,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 
 		self.determineQuestionAnswer();
 
-		self.question_preview_end = (self.current_question != Constants.FALSE && index == self.question_list.length - 1);
+		self.question_preview_end = index == self.question_list.length;
 		$(self.question_preview_id).modal('show');
 	}
 
