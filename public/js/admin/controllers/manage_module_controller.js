@@ -238,6 +238,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.record = response.data;
+					self.module_name = self.record.name;
 					self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
 				}
 			}
