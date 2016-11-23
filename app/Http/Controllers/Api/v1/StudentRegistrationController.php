@@ -101,7 +101,9 @@ class StudentRegistrationController extends StudentController {
         } else {
 
             //TODO: check if this is have been entered.
-            $return = array_merge($user_response,$student_response);
+            if (is_array($student_response)) {
+                $return = array_merge($user_response,$student_response);
+            }
 
             return $this->respondWithError($return);
 
