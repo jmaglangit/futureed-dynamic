@@ -647,7 +647,7 @@ class StudentRepository implements StudentRepositoryInterface
 					}
 					if (isset($criteria['email'])) {
 
-						$student = $student->with('user')->email(str_replace(' ', '+', trim($criteria['email'])));
+						$student = $student->with('user')->email($criteria['email']);
 
 					}
 
