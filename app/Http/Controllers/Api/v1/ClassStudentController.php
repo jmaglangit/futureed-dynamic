@@ -195,7 +195,7 @@ class ClassStudentController extends ApiController {
 
 		//check classroom has not expired.
 		$classroom_status = $this->classroom_services->checkActiveClassroom($data['class_id']);
-		
+
 		if(!$classroom_status){
 
 			return $this->respondErrorMessage(2051);
@@ -214,19 +214,17 @@ class ClassStudentController extends ApiController {
 
         //check if student have a subscription with the same subject_id
 		// and country
-        $check_subscription = $this->classroom->getActiveSubscription(
-			$classroom['subject_id'],
-			$student_id,
-			$classroom->invoice->subscriptionPackage->country_id
-		);
+        $check_subscription = $this->classroom->getClassroomBySubjectId($classroom['subject_id'],$student_id);
 
-        if ($check_subscription) {
+        //check student if on the same curriculum country
+		$student = $this->student->getStudent($student_id);
+
+        if ($check_subscription && $check_subscription[0]['invoice']['payment_status'] == config('futureed.paid') &&
+        		$student->user->curriculum_country == $check_subscription[0]['invoice']['subscription_package']['country_id']) {
 
            return $this->respondErrorMessage(2037);
         }
 
-		//check student if on the same curriculum country
-		$student = $this->student->getStudent($student_id);
 		if($classroom->invoice->subscriptionPackage->country_id <> $student->user->curriculum_country){
 
 			return $this->respondErrorMessage(2078);
