@@ -409,6 +409,11 @@ function FutureedController($scope, $window, apiService, futureed) {
 						} else if(response.data){
 							if(response.data.records.length && $scope.user.class)
 							{
+								var classes = response.data.records.map(function(val,i) {
+									return val.class_id;
+								});
+
+								$scope.user_classes = classes;
 								$scope.user.class = response.data.records[0].class_id;
 								$scope.student_details_updated = Constants.TRUE;
 								$scope.ui_unblock();
