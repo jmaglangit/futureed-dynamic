@@ -10,7 +10,7 @@ function ManageParentStudentService($http){
 			method 	: Constants.METHOD_GET
 			, url 	: studentApiUrl + 'client/manage/student?client_id=' + search.client_id
 				+ '&name=' + search.name
-				+ '&email=' + search.email
+				+ '&email=' + encodeURIComponent(search.email)
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
