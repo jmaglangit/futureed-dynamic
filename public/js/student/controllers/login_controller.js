@@ -338,6 +338,10 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			return;
 		}
 
+		if (self.record.country_id == "" || self.record.country_id == null) {
+			self.record.country_id = 0;
+		}
+
 		$("div.birth-date-wrapper select").removeClass("required-field");
 
 		var birth_date = $("input#birth_date").val();
@@ -346,6 +350,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 
+		console.log(self.record);
 		$scope.ui_block();
 		StudentLoginService.validateRegistration(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
