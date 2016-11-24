@@ -116,13 +116,27 @@ class StudentReportController extends ReportController {
 
 		$avatar = $this->avatar->getAvatar($student->avatar_id);
 
+		if (isset($avatar)) {
+
+			$avatar_image = $avatar->avatar_image;
+		} else {
+
+			if ($student->gender == config('futureed.gender.male')) {
+
+				$avatar_image = config('futureed.default_avatar_male');
+			} else {
+
+				$avatar_image = config('futureed.default_avatar_female');
+			}
+		}
+
 		$student_grade = $this->grade->getGrade($student->grade_code);
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
 			'grade_level' => isset($student_grade->name) ? $student_grade->name : config('futureed.none'),
-			'avatar' => $this->avatar_service->getAvatarUrl($avatar->avatar_image),
-			'avatar_thumbnail' => $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image)
+			'avatar' => $this->avatar_service->getAvatarUrl($avatar_image),
+			'avatar_thumbnail' => $this->avatar_service->getAvatarThumbnailUrl($avatar_image)
 		];
 
 		$column_header = [
