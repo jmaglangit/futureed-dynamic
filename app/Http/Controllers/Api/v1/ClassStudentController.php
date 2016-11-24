@@ -115,7 +115,8 @@ class ClassStudentController extends ApiController {
         $classroom = $this->classroom->getClassroom($class_student['class_id']);
 
         $user = array_merge($user,[
-            'user_type' => config('futureed.student')
+            'user_type' => config('futureed.student'),
+			'curriculum_country' => $client->school->principal->user->curriculum_country,
         ]);
 
         // add user, return status
