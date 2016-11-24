@@ -225,7 +225,18 @@ function platformSubjectAreaHeatMap(data){
     g.selectAll(".bar")
         .data(data)
         .enter().append("rect")
-        .attr("class", "bar")
+        .attr("class", function(d){
+            console.log(d.frequency);
+            if(d.frequency <= 0.50 ){
+                return "bar-red";
+            } else if(d.frequency >= 0.51 && d.frequency <= 0.80){
+                return "bar-yellow";
+            } else if(d.frequency >= .81 && d.frequency <= 1){
+                return "bar-green";
+            } else {
+                return "bar";
+            }
+        })
         .attr("x", function (d) {
             return x(d.letter);
         })

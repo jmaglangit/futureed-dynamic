@@ -52,6 +52,7 @@ class Student extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
+		'country_id' => 0
 	];
 
 	// Accessor

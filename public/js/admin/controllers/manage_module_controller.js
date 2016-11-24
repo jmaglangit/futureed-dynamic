@@ -238,6 +238,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.record = response.data;
+					self.module_name = self.record.name;
 					self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
 				}
 			}
@@ -429,6 +430,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 
 		self.determineQuestionAnswer();
 
+		self.question_number = parseInt(index) + 1;
 		self.question_preview_end = index == self.question_list.length;
 		$(self.question_preview_id).modal('show');
 	}

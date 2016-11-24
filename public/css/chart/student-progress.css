@@ -9,6 +9,20 @@
     fill: orange;
 }
 
+/*below 50% - red 51% - 80% - yellow 81% - 100% - green*/
+.bar-red {
+    fill: red;
+}
+
+.bar-yellow {
+    fill: #DFC100;
+}
+
+.bar-green {
+    fill: green;
+}
+
+
 /*.axis--x path {*/
     /*display: none;*/
 /*}*/

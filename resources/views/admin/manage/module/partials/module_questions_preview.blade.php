@@ -4,11 +4,11 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
             <h4>
-                {! module.record.name !} {{ trans('messages.admin_preview') }}
+                {! module.module_name !} {{ trans('messages.admin_preview') }}
                 <small ng-if="module.question_preview_ok && module.question_preview_end == futureed.FALSE">
                     <i class="fa fa-angle-right"></i> {{ trans('messages.admin_question_id') }} <i class="fa fa-angle-right"></i> {! module.current_question.id !}
                 </small>
-                
+
                 <span class="pull-right" ng-if="module.question_preview_ok">
                     <form class="form-inline preview-tools">
                         <div class="form-group">
@@ -28,7 +28,7 @@
                 </span>
             </h4>
         </div>
-        <div ng-if="module.question_preview_end" class="modal-body">
+        <div ng-if="module.question_preview_end && module.question_preview_ok" class="modal-body">
             <p class="alert bg-success futureed-color preview-note">
                 {{ trans('messages.admin_note_end_module_preview') }}
                 <a href="" data-dismiss="modal"><i class="fa fa-long-arrow-left"></i> {{ trans('messages.admin_return_module_list') }}</a>
@@ -131,7 +131,7 @@
                         <div class="col-xs-6"
                              ng-if="module.current_question.question_type != futureed.CODING"
                         >
-                            <div><h3> {{ trans('messages.question') }} #{! module.question_index + 1 | number !} </h3></div>
+                            <div><h3> {{ trans('messages.question') }} #{! module.question_number !} </h3></div>
                         </div>
                     </div>
                     <div ng-class="{'col-xs-6':module.current_question.question_type != futureed.CODING,'col-xs-8':module.current_question.question_type == futureed.CODING}">
@@ -316,7 +316,7 @@
             </div>
         </div>
 
-        <div ng-if="!module.question_preview_ok && module.question_preview_end == futureed.FALSE" class="modal-body">
+        <div ng-if="!module.question_preview_ok" class="modal-body">
             <p class="alert alert-warning">
                 {{ trans('messages.admin_note_module_preview_cant_load_no_questions_available') }}
             </p>

@@ -478,6 +478,7 @@ return [
 	'yes' => 'Yes',
 	'you_have_successfully_registered' => 'You have successfully registered.',
 	'your_req' => 'Your Requests',
+	'your_pic_password_set' => 'Your picture password has been set.',
 	'your_pic_password_reset' => 'Your picture password has been reset.',
 	'you_may_now_use_new_pic_password_to_login' => 'You may now use your new picture password to login.',
 	'plans' => 'Plans',
