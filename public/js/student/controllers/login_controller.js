@@ -338,7 +338,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			return;
 		}
 
-		if (self.record.country_id == "" || self.record.country_id == null) {
+		if (self.record.country_id == Constants.EMPTY_STR || self.record.country_id == Constants.NULL) {
 			self.record.country_id = 0;
 		}
 
