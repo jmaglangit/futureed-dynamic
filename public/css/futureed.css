@@ -1836,6 +1836,12 @@ span.round-tab:hover {
 	white-space: inherit !important;
 }
 
+.question-tip-image {
+	width: 280px;
+	margin: 0 0 5px 0;
+	display: block;
+}
+
 /*export buttons*/
 .export-buttons button {
 	border-radius:3px !important;
