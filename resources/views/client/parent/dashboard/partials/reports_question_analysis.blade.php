@@ -59,7 +59,10 @@
                     <td class="col-md-3 text-center">
                         {! question.answer_status !}
                     </td>
-                    <td class="col-md-3 text-left" ng-bind-html="question.answer_explanation | trustAsHtml"></td>
+                    <td class="col-md-3 text-left">
+                        <img class="question-tip-image" ng-if="question.image != futureed.EMPTY_STR" src="{!! config('futureed.answer_explanation_image_public') !!}/{! question.image !}">
+                        <span ng-bind-html="question.answer_explanation | trustAsHtml"></span>
+                    </td>
                 </tr>
             </tbody>
 
