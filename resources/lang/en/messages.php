@@ -1095,7 +1095,11 @@ return [
 	'client_parent_dashboard_msg_4' => 'for the your student',
 	'client_parent_dashboard_msg_5' => 'You can also',
 	'client_parent_dashboard_msg_6' => 'review',
-	'client_parent_dashboard_msg_7' => 'the lessons and practice questions.',	
+	'client_parent_dashboard_msg_7' => 'the lessons and practice questions.',
+
+	//resources/views/client/parent/module/partials/list_module_form.blade.php
+	'client_parent_experience_question_module' => 'Experience the questions in this module',
+	'client_parent_read_all_about_module' => 'Read all about the module by clicking here',
 	
 	//resources/views/client/parent/dashboard/partials/reports_progress_bar.blade.php
 	'client_progress_curriculum' => 'Progress in Future Lesson Curriculum',
