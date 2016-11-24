@@ -350,4 +350,8 @@ return [
 	//Report Chart settings
 	'last_activity_days' => 7,
 
+	//default avatar images
+	'default_avatar_male' => 'default/default_male.png',
+	'default_avatar_female' => 'default/default_female.png',
+
 ];
