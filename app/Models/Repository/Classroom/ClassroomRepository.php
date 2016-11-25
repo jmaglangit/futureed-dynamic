@@ -301,7 +301,7 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 			$classroom = $classroom->subject_Id($subject_id);
 			$classroom = $classroom->active();
 			$classroom = $classroom->student_id($student_id);
-			$classroom = $classroom->with('classStudent','invoice')->get();
+			$classroom = $classroom->with('classStudent','invoice')->orderBy('id','DESC')->get();
 
 			$response = !is_null($classroom) ? $classroom->toArray():null;
 
