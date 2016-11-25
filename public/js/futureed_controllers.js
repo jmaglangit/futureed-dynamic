@@ -410,7 +410,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 							if(response.data.records.length && $scope.user.class)
 							{
 								var classes = response.data.records.map(function(val,i) {
-									return val.class_id;
+									return parseInt(val.class_id);
 								});
 
 								$scope.user_classes = classes;
