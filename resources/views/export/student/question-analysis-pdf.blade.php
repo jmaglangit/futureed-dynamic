@@ -34,7 +34,12 @@
                 <tr>
                     <td>{{ strip_tags($question->questions_text) }}</td>
                     <td>{{ $question->answer_status }}</td>
-                    <td><img src="{{ config('futureed.answer_explanation_image_final') . '/' . $question->image }}"></td>
+                    <td>@if(is_null($question->image)||empty($question->image))
+                            {!! '' !!}
+                        @else
+                            <img src="{{ config('futureed.answer_explanation_image_final') . '/' . $question->image }}" height="100" width="100">
+                        @endif
+                    </td>
                     <td>{!!  html_entity_decode($question->answer_explanation)  !!}</td>
                 </tr>
             @endforeach
