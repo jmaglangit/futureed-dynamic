@@ -132,7 +132,7 @@ class UserRepository implements UserRepositoryInterface {
                 'is_account_activated' => (isset($user['is_account_activated'])) ? $user['is_account_activated'] : NULL,
                 'confirmation_code' => (isset($user['confirmation_code'])) ? $user['confirmation_code'] : NULL,
                 'confirmation_code_expiry' => (isset($user['confirmation_code_expiry'])) ? $user['confirmation_code_expiry'] : NULL,
-                'curriculum_country' => (isset($user['curriculum_country'])) ? $user['curriculum_country'] : NULL,
+                'curriculum_country' => (isset($user['curriculum_country'])) ? $user['curriculum_country'] : 0,
                 'created_by' => 1,
                 'updated_by' => 1,
             ]);
