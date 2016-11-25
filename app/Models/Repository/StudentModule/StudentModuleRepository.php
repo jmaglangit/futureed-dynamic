@@ -495,7 +495,8 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 				DB::raw('sma.question_id'),
 				DB::raw('MIN(sma.answer_status) as answer_status'),
 				DB::raw('q.questions_text'),
-				DB::raw('ae.answer_explanation')
+				DB::raw('ae.answer_explanation'),
+				DB::raw('ae.image')
 			)->leftJoin('module_countries as mc','student_modules.module_id','=','mc.module_id')
 				->leftJoin('student_module_answers as sma','sma.student_module_id','=','student_modules.id')
 				->leftJoin('questions as q','q.id','=','sma.question_id')

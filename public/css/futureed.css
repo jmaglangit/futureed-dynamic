@@ -1123,9 +1123,17 @@ div > .btncon > a {
 	width: 900px;
 }
 
+.modal-xl {
+	width: 98%;
+}
+
 .modal-body {
 	max-height: 500px;
   	overflow: auto;
+}
+
+.modal-xl .modal-body {
+	max-height: 600px;
 }
 
 .list-step {
@@ -1828,6 +1836,12 @@ span.round-tab:hover {
 	white-space: inherit !important;
 }
 
+.question-tip-image {
+	width: 280px;
+	margin: 0 0 5px 0;
+	display: block;
+}
+
 /*export buttons*/
 .export-buttons button {
 	border-radius:3px !important;
@@ -1843,4 +1857,8 @@ span.round-tab:hover {
 	text-align: right;
 	width: 14%;
 	color: #fff;
+}
+
+.futureed-color {
+	color: #055A7F;
 }

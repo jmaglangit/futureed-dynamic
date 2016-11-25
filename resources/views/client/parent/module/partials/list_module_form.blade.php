@@ -118,12 +118,12 @@
 		            		<div class="col-xs-6">
 		            			<button class="btn btn-success" ng-click="module.launchModule(moduleInfo.id)"
 										tooltip-class="parent-module-tooltip" tooltip-placement="top"
-										tooltip="Go through the System by Clicking on this button">Launch</button>
+										tooltip="{!! trans('messages.client_parent_experience_question_module') !!}">{!! trans('messages.launch') !!}</button>
 							</div>
 		            		<div class="col-xs-6">
 		            			<a href="" ng-click="module.setActive('view',moduleInfo.id)" title="view"
 								   tooltip-class="parent-module-tooltip" tooltip-placement="top"
-								   tooltip="Read all about the module by clicking here"><span><i class="fa fa-eye"></i></span></a>
+								   tooltip="{!! trans('messages.client_parent_read_all_about_module') !!}"><span><i class="fa fa-eye"></i></span></a>
 		            		</div>
 		            	</div>
 		            </td>

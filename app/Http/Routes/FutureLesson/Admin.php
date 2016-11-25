@@ -553,6 +553,11 @@
 						['as' => 'admin.manage.module.partials.view_module_form'
 						, 'uses' => 'FutureLesson\Admin\ManageModuleController@view_module_form'
 					]);
+
+					Routes::get('/module_questions_preview',
+						['as' => 'admin.manage.module.partials.module_questions_preview'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@module_questions_preview'
+					]);
 				});
 
 				Routes::group(['prefix' => '/content'], function() {

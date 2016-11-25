@@ -37,9 +37,28 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 
 	self.setCurrentClass = function(class_id) {
 		if(parseInt(class_id)) {
-			self.current_class = parseInt(class_id);
-			$scope.user.class = parseInt(class_id);
+			var class_id = parseInt(class_id),
+				is_class_ok = parseInt($scope.user_classes.indexOf(class_id) + 1) > Constants.FALSE, // check if class is valid (paid)
+				user_class = is_class_ok ? parseInt(class_id) : $scope.user_classes[Constants.FALSE] || Constants.FALSE; // if class ok : assign class_id, else : assign first class id, else : 0
+
+			self.current_class = user_class;
+			$scope.user.class = user_class;
 			$scope.updateUserData($scope.user);
+
+			self.handleClassHref(is_class_ok, user_class);
+		}
+	}
+
+	// update href automatically (if class ok) with valid(paid/active) class, else redirect to student dashboard
+	self.handleClassHref = function(is_class_ok, user_class) {
+		if(!is_class_ok) {
+			if(user_class) {
+				$window.history.pushState('', '', '/student/class/' + user_class);
+			} else {
+				if($window.location.pathname !== '/student/dashboard') {
+					$window.location.href = '/student/dashboard';
+				}
+			}
 		}
 	}
 

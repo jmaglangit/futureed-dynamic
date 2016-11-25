@@ -89,7 +89,8 @@ class StudentPaymentController extends ApiController {
 		$student_classroom = $this->classroom->getClassroomBySubjectId($order['subject_id'],$order['student_id']);
 
 		if ($student_classroom
-			&& $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']) {
+			&& $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id'] 
+				&& $student_classroom[0]['invoice']['payment_status'] != config('futureed.cancelled')) {
 
 			return $this->respondErrorMessage(2037);
 		}
@@ -215,7 +216,8 @@ class StudentPaymentController extends ApiController {
 
 		if ($student_classroom
 			&& $order_record['order_no']!= $student_classroom[0]['order_no']
-			&& $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']) {
+			&& $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']
+			&& $student_classroom[0]['invoice']['payment_status'] == config('futureed.paid')) {
 
 			return $this->respondErrorMessage(2037);
 		}

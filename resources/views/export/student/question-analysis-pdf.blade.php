@@ -25,14 +25,16 @@
 
         <table class="report-data">
             <tr>
-                <th>{{ 'Question' }}</th>
-                <th>{{ 'Answer' }}</th>
-                <th>{{ 'Tips' }}</th>
+                <th>{!! trans('messages.question') !!}</th>
+                <th>{!! trans('messages.answer') !!}</th>
+                <th>{!! trans('messages.image') !!}</th>
+                <th><img src="{{ base_path().'/public/images/icon-tipbulb.png' }}" height="25" width="25">{!! trans('messages.tips') !!}</th>
             </tr>
             @foreach($questions as $question)
                 <tr>
-                    <td>{{ $question->questions_text }}</td>
+                    <td>{{ strip_tags($question->questions_text) }}</td>
                     <td>{{ $question->answer_status }}</td>
+                    <td><img src="{{ config('futureed.answer_explanation_image_final') . '/' . $question->image }}"></td>
                     <td>{!!  html_entity_decode($question->answer_explanation)  !!}</td>
                 </tr>
             @endforeach

@@ -834,7 +834,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 						updateModuleStudent(data, function(response)
 						{
-							if(snap.isSnapModuleCompleted && self.snap_exercise_commpleted)
+							if(self.current_question.question_type == Constants.CODING && snap.isSnapModuleCompleted && self.snap_exercise_commpleted)
 							{
 								self.nextQuestion();
 								self.snap_module_completed = Constants.FALSE;

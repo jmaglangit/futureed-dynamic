@@ -338,6 +338,10 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			return;
 		}
 
+		if (self.record.country_id == Constants.EMPTY_STR || self.record.country_id == Constants.NULL) {
+			self.record.country_id = 0;
+		}
+
 		$("div.birth-date-wrapper select").removeClass("required-field");
 
 		var birth_date = $("input#birth_date").val();

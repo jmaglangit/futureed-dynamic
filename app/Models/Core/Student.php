@@ -52,6 +52,7 @@ class Student extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
+		'country_id' => 0
 	];
 
 	// Accessor
@@ -115,8 +116,8 @@ class Student extends Model {
 
     public function scopeName($query, $name) {
 
-        return $query->where(function($query) use ($name) {
-            $query->where('first_name', 'like', '%'.$name.'%')->orWhere('last_name', 'like', '%'.$name.'%');
+        return $query->whereHas('user', function($query) use ($name) {
+            $query->where('name','like','%'.$name.'%');
         });
 
     }

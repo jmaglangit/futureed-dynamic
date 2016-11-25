@@ -397,6 +397,18 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				}else if(response.data){
 					self.modules = response.data.records;
 
+					angular.forEach(self.modules, function(value,key){
+
+						//get student module id of the student_id
+						var mod_id = 0;
+						angular.forEach(value.student_module, function(v){
+							if(v.student_id == student_id){
+								mod_id = v.id;
+							}
+						});
+						value.student_module_id = mod_id;
+					});
+
 					self.updatePageCount(response.data);
 				}
 			}

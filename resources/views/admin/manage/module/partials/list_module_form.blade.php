@@ -115,6 +115,7 @@
 						<th>{!! trans_choice('messages.module', 1) !!}</th>
 						<th>{!! trans('messages.subject') !!}</th>
 						<th>{!! trans('messages.area') !!}</th>
+						<th>{!! trans_choice('messages.grade', 1) !!}</th>
 						<th ng-if="module.records.length">{!! trans_choice('messages.action', 2) !!}</th>
 					</tr>
 				</thead>
@@ -123,16 +124,20 @@
 						<td>{! record.name !}</td>
 						<td>{! record.subject.name !}</td>
 						<td>{! record.subject_area.name !}</td>
+						<td>{! record.grade.name !}</td>
 						<td ng-if="module.records.length">
 							<div class="row">
-								<div class="col-xs-4">
-									<a href="" ng-click="module.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
+								<div class="col-xs-3">
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_VIEW, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_view_module') !!}"><span><i class="fa fa-eye"></i></span></a>
 								</div>
-								<div class="col-xs-4">
-									<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+								<div class="col-xs-3">
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_edit_module') !!}"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
-								<div class="col-xs-4">
-									<a href="" ng-click="module.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
+								<div class="col-xs-3">
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_QUESTIONS_PREVIEW, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_module_preview_questions') !!}"><span><i class="fa fa-search-plus"></i></span></a>
+								</div>
+								<div class="col-xs-3">
+									<a href="" ng-click="module.confirmDelete(record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_delete_module') !!}"><span><i class="fa fa-trash"></i></span></a>
 								</div>
 							</div>
 						</td>

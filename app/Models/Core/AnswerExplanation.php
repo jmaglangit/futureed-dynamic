@@ -1,17 +1,18 @@
 <?php namespace FutureEd\Models\Core;
 
-use Dimsav\Translatable\Translatable;
 use FutureEd\Models\Traits\TransactionTrait;
+use FutureEd\Models\Traits\TranslationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Filesystem;
 
 class AnswerExplanation extends Model {
-
-	//use Translatable;
 
 	use SoftDeletes;
 
 	use TransactionTrait;
+
+	use TranslationTrait;
 
 	protected $table = 'answer_explanations';
 
@@ -30,13 +31,33 @@ class AnswerExplanation extends Model {
 
 	protected $attributes = [
 		'created_by' => 1,
-		'updated_by' => 1
+		'updated_by' => 1,
+		'image' => 0
 	];
 
-	//Translation
-	//public $translatedAttributes = ['answer_explanation'];
+	//accessor
 
-	//public $translationModel = 'FutureEd\Models\Core\AnswerExplanationTranslation';
+	//Translation
+	public function getAnswerAttribute($value){
+
+		return $this->getAnswerExplanationTranslation($this->attributes['id'],$value,'answer_explanation');
+	}
+
+	public function getImageAttribute($value){
+		$filesystem = new Filesystem();
+
+		//get path
+		$image_path = config('futureed.answer_explanation_image_final') . '/' . $this->attributes['image'];
+
+		//check path
+		if ($filesystem->exists($image_path) && !empty($value)) {
+			return asset(config('futureed.answer_explanation_image_public') . '/' . $this->attributes['image']);
+
+		} else {
+
+			return 'None';
+		}
+	}
 
 	//scopes
 

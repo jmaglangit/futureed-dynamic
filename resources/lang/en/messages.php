@@ -258,6 +258,7 @@ return [
 	'other_req' => 'Other Requests',
 	'out_of' => 'out of',
 	'overall_school_progress' => 'Overall School Progress',
+	'oops' => 'Oops',
 	'paid' => 'Paid',
 	'parent' => 'Parent',
 	'parent_dashboard_instruction_1' => 'To get started on using Future Lesson, you need to add a student.',
@@ -477,6 +478,7 @@ return [
 	'yes' => 'Yes',
 	'you_have_successfully_registered' => 'You have successfully registered.',
 	'your_req' => 'Your Requests',
+	'your_pic_password_set' => 'Your picture password has been set.',
 	'your_pic_password_reset' => 'Your picture password has been reset.',
 	'you_may_now_use_new_pic_password_to_login' => 'You may now use your new picture password to login.',
 	'plans' => 'Plans',
@@ -727,14 +729,30 @@ return [
 	'admin_delete_module_msg' => 'Are you sure you want to delete this module?',
 	'admin_module_management' => 'Module Management',
 	'admin_module_name' => 'Module Name',
-	'admin_module_list' => 'Module List',	
+	'admin_module_list' => 'Module List',
+	'admin_module_preview_questions' => 'Preview Questions',
+	'admin_edit_module' => 'Edit Module',
+
 	
 	//resources/views/admin/manage/module/partials/view_module_form.blade.php
 	'admin_contents' => 'Contents',	
-	'admin_module_content' => 'Module Content',	
+	'admin_module_content' => 'Module Content',
 	'admin_q_and_a' => 'Q & A',
 	'admin_view_image' => 'View Image',
 	'admin_view_module' => 'View Module',
+
+	//resources/views/admin/manage/module/partials/module_questions_preview.blade.php
+	'admin_preview' => 'Preview',
+	'admin_question_id' => 'Question ID',
+	'admin_previous_question' => 'previous question',
+	'admin_next_question' => 'next question',
+	'admin_jump_to_question_no' => 'Jump to question no.',
+	'admin_toggle_graph' => 'Toggle Graph',
+	'admin_return_module_list' => 'Return to Module List',
+	'admin_note_end_module_preview' => 'You have reached the end of this module preview.',
+	'admin_note_module_preview_cant_load_no_questions_available' => 'NOTE: Preview can\'t be loaded, no questions available for this module.',
+	'admin_note_module_question_preview_only' => 'NOTE: Please note that this is only a PREVIEW. Answers are not checked.',
+
 	
 	//resources/views/admin/manage/price/partials/bulk_discount.blade.php
 	'admin_add_bulk_discount' => 'Add Bulk Discount',
@@ -1077,7 +1095,11 @@ return [
 	'client_parent_dashboard_msg_4' => 'for the your student',
 	'client_parent_dashboard_msg_5' => 'You can also',
 	'client_parent_dashboard_msg_6' => 'review',
-	'client_parent_dashboard_msg_7' => 'the lessons and practice questions.',	
+	'client_parent_dashboard_msg_7' => 'the lessons and practice questions.',
+
+	//resources/views/client/parent/module/partials/list_module_form.blade.php
+	'client_parent_experience_question_module' => 'Experience the questions in this module',
+	'client_parent_read_all_about_module' => 'Read all about the module by clicking here',
 	
 	//resources/views/client/parent/dashboard/partials/reports_progress_bar.blade.php
 	'client_progress_curriculum' => 'Progress in Future Lesson Curriculum',

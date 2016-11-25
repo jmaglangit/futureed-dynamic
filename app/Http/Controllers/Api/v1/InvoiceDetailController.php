@@ -7,6 +7,8 @@ use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface as
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
 class InvoiceDetailController extends ApiController {
@@ -27,20 +29,36 @@ class InvoiceDetailController extends ApiController {
 	protected $order;
 
 	/**
+	 * @var ClassroomRepositoryInterface
+	 */
+	protected $classroom;
+
+	/**
+	 * @var StudentRepositoryInterface
+	 */
+	protected $student;
+
+	/**
 	 * @param InvoiceDetail $detail
 	 * @param InvoiceRepositoryInterface $invoice
 	 * @param OrderRepositoryInterface $orderRepositoryInterface
+	 * @param ClassroomRepositoryInterface $classroom
+	 * @param StudentRepositoryInterface $student
 	 */
 	public function __construct(
 		InvoiceDetail $detail,
 		InvoiceRepositoryInterface $invoice,
-		OrderRepositoryInterface $orderRepositoryInterface
+		OrderRepositoryInterface $orderRepositoryInterface,
+		ClassroomRepositoryInterface $classroom,
+		StudentRepositoryInterface $student
 	)
 	{
 
 		$this->detail = $detail;
 		$this->invoice = $invoice;
 		$this->order = $orderRepositoryInterface;
+		$this->classroom = $classroom;
+		$this->student = $student;
 	}
 
 
@@ -87,6 +105,18 @@ class InvoiceDetailController extends ApiController {
 
 			return $this->respondErrorMessage(2120);
 		}
+
+		//check if student have existing subscription to a subject
+		$student = $this->student->viewStudent($return ->student_id);
+
+		$student_classroom = $this->classroom->getClassroomBySubjectId($return->invoiceDetail[0]->classroom->subject_id,$return->student_id);
+
+		if ($student_classroom && $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']) {
+
+			return $this->respondErrorMessage(2037);
+		}
+
+
 
 		//update invoice
 		$this->invoice->updateInvoice($id, $data);
