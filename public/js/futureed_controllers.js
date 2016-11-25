@@ -3,6 +3,7 @@ angular.module('futureed.controllers', ['ngFileUpload', 'as.sortable'])
 	.directive('templateDirective', TemplateDirective)
 	.directive('tooltipDirective', TooltipDirective)
 	.directive('popoverDirective', PopoverDirective)
+	.directive('errSrcDirective', ErrSrcDirective)
 	.constant("futureed", Constants);
 
 function TemplateDirective() {
@@ -26,6 +27,16 @@ function TooltipDirective() {
             });
         }
     };
+}
+
+function ErrSrcDirective() {
+	return {
+		link: function(scope, element, attrs) {
+			element.bind('error', function() {
+				element[0].style.display = "none";
+			});
+		}
+	}
 }
 
 function PopoverDirective() {
