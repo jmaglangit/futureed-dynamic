@@ -111,12 +111,9 @@ class InvoiceDetailController extends ApiController {
 
 		$student_classroom = $this->classroom->getClassroomBySubjectId($return->invoiceDetail[0]->classroom->subject_id,$return->student_id);
 
-		if($data['payment_status'] == config('futureed.paid')){
+		if ($student_classroom && $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id'] && $data['payment_status'] == config('futureed.paid')) {
 
-			if ($student_classroom && $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']) {
-
-				return $this->respondErrorMessage(2037);
-			}
+			return $this->respondErrorMessage(2037);
 		}
 
 
