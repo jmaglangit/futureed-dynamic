@@ -174,6 +174,12 @@ Routes::group([
 
 	Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',
 		['except' => ['create', 'edit']]);
+
+	Routes::get('/student/curriculum/export', [
+		'uses' => 'Api\v1\StudentCurriculumController@downloadCurriculumPdf',
+		'as' => 'api.v1.student.curriculum.export'
+	]);
+
 });
 
 /**
