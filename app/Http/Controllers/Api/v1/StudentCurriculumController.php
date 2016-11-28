@@ -42,6 +42,7 @@ class StudentCurriculumController extends ApiController {
 	 * @return file
 	 */
 	public function downloadCurriculumPdf(){
+
 		$filesystem = new Filesystem();
 
 		$country_id = Input::get('curriculum_country');
@@ -84,11 +85,11 @@ class StudentCurriculumController extends ApiController {
          		);
 
 		if ($filesystem->exists($filepath)) {
+
 			return \Response::download($filepath,$filename,$headers);
 		}
 
 		return $this->respondErrorMessage(2053);
-
 	}
 
 }
