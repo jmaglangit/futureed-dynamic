@@ -39,12 +39,10 @@ class StudentCurriculumController extends ApiController {
 	 * @param grade_id
 	 * @param subject_id
 	 * @param locale
-	 * @return mixed
+	 * @return file
 	 */
 	public function downloadCurriculumPdf(){
 		$filesystem = new Filesystem();
-
-		$filename = '';
 
 		$country_id = Input::get('curriculum_country');
 
