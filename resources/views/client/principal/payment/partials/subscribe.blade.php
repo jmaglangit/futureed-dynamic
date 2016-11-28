@@ -224,7 +224,7 @@
                                             <td class="h5">
                                                 <div ng-model="button" class="btn btn-primary"
                                                      ng-disabled="(!payment.new_classroom.seats || !payment.new_classroom.grade_id
-                                                        || !payment.subscription_teacher.name || !payment.new_classroom.class_name)"
+                                                        || !payment.subscription_teacher.client_name || !payment.new_classroom.class_name)"
                                                      ng-click="payment.getClassroomGrade(payment.new_classroom.grade_id)"
                                                         >{!! trans('messages.add_classroom') !!}</div>
                                             </td>
