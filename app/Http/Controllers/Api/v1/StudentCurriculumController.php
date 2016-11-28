@@ -72,11 +72,7 @@ class StudentCurriculumController extends ApiController {
 		}
 
 		// filename curriculum_grade_subject_language;
-		$filename = $filename.'_'.Input::get('locale').'.pdf';
-
-		$filename = str_replace(' ','_',$filename);
-
-		$filename = strtolower($filename);
+		$filename = strtolower(str_replace(' ','_', $filename.'_'.Input::get('locale').'.pdf'));
 
 		$filepath = storage_path().'/curriculum/'.Input::get('locale'). '/'.$filename;
 
