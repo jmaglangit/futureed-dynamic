@@ -1004,10 +1004,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 			self.getCountry($scope.user.country_id);
 
-		} else {
-
-			self.getCountry(self.subscription_option.country_id);
-
 		}
 
 		self.subscription_packages.others = self.billing_information;
