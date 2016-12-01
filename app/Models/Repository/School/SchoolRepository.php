@@ -382,7 +382,8 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 			$response = School::select(
 				DB::raw('sa.name as subject_name'),
-				DB::raw('round(avg(sm.progress)) as percent_progress')
+				DB::raw('round(avg(sm.progress)) as percent_progress'),
+				DB::raw('g.name as grade_name')
 			)->leftJoin('clients as c', function ($left_join) {
 				$left_join->on('schools.code', '=', 'c.school_code')
 					->on('c.client_role', '=', DB::raw("'" . config('futureed.teacher') . "'"));
@@ -391,6 +392,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 				->leftJoin('subjects as sb', 'sb.id', '=', 'cr.subject_id')
 				->leftJoin('subject_areas as sa', 'sa.subject_id', '=', 'sb.id')
 				->leftJoin('modules as m', 'm.subject_area_id', '=', 'sa.id')
+				->leftJoin('grades as g','m.grade_id','=','g.id')
 				->leftJoin('student_modules as sm', function ($left_join) {
 					$left_join->on('sm.module_id', '=', 'm.id')
 						->on('sm.subject_id', '=', 'sb.id')

@@ -290,18 +290,17 @@ class SchoolServices {
 	 */
 	public function getProgressStatusConverter($progress) {
 
-		switch ($progress->progress) {
+		switch ($progress->percent_progress) {
 
 			//Struggling 20 and below
-			case $progress->progress <= 20:
+			case $progress->percent_progress <= 20:
 
 				$this->setStruggling(1);
 				return config('futureed.student_struggling');
 				break;
 
 			//Excelling and Mastering/High Effort
-			case $progress->progress >= 80 && $progress->progress <= 100:
-
+			case $progress->percent_progress >= 80 && $progress->percent_progress <= 100:
 				$this->setHighEffort(1);
 				$this->setExcelling(1);
 				return config('futureed.student_excelling');

@@ -71,17 +71,18 @@
                     <table class="table table-bordered">
                         <tr class="magenta">
                             <th class="col-xs-4">{!! trans('messages.subject') !!}</th>
-                            <th class="col-xs-3">{!! trans('messages.progress') !!}</th>
+                            <th class="col-xs-4">{!! trans_choice('messages.grade',0) !!}</th>
+                            <th class="col-xs-4">{!! trans('messages.progress') !!}</th>
                         </tr>
                         <tr ng-if="dashboard.report_active_skill && dashboard.report.rows.skills_watch.highest_skill">
                             <td>{! dashboard.report.rows.skills_watch.highest_skill.subject_name !}</td>
-                            <td>{! dashboard.report.rows.skills_watch.highest_skill.percent_progress !}%
-                            </td>
+                            <td>{! dashboard.report.rows.skills_watch.highest_skill.grade_name !}</td>
+                            <td>{! dashboard.report.rows.skills_watch.highest_skill.percent_progress !}%</td>
                         </tr>
                         <tr ng-if="dashboard.report_active_skill && dashboard.report.rows.skills_watch.lowest_skill">
                             <td>{! dashboard.report.rows.skills_watch.lowest_skill.subject_name !}</td>
-                            <td>{! dashboard.report.rows.skills_watch.lowest_skill.percent_progress !}%
-                            </td>
+                            <td>{! dashboard.report.rows.skills_watch.lowest_skill.grade_name !}</td>
+                            <td>{! dashboard.report.rows.skills_watch.lowest_skill.percent_progress !}%</td>
                         </tr>
                         <tr ng-if="!dashboard.report_active_skill">
                             <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
@@ -145,19 +146,19 @@
                         <tr class="magenta-row">
                             <th>{!! trans('messages.highest_score') !!}</th>
                             <td>{! dashboard.report.rows.highest_score.student_first_name +' '+
-                                dashboard.report.rows.highest_score.student_first_name !}
+                                dashboard.report.rows.highest_score.student_last_name !}
                             </td>
                             <td>{! dashboard.report.rows.highest_score.teacher_first_name +' '+
-                                dashboard.report.rows.highest_score.teacher_first_name !}
+                                dashboard.report.rows.highest_score.teacher_last_name !}
                             </td>
                         </tr>
                         <tr class="magenta-row">
                             <th>{!! trans('messages.lowest_score') !!}</th>
                             <td>{! dashboard.report.rows.lowest_score.student_first_name +' '+
-                                dashboard.report.rows.lowest_score.student_first_name !}
+                                dashboard.report.rows.lowest_score.student_last_name !}
                             </td>
                             <td>{! dashboard.report.rows.lowest_score.teacher_first_name +' '+
-                                dashboard.report.rows.lowest_score.teacher_first_name !}
+                                dashboard.report.rows.lowest_score.teacher_last_name !}
                             </td>
                         </tr>
                     </table>
