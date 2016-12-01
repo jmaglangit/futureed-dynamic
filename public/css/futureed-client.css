@@ -674,15 +674,9 @@ content legend {
 	background-color: #A92147;
 	color: #fff;
 }
-
-.category-info {
-	margin-left:42px;
+.column-curriculum-category {
+	width: 40%;
 }
-
-.category-info img {
-	width: 30px;
-}
-
 .reports .progress-container {
 	border:1px solid #ddd;
 	padding: 0 5px 20px;
