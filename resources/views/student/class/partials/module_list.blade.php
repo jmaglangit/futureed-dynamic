@@ -99,20 +99,20 @@
 						<div class="col-md-11">
 							<div class="module-item" ng-repeat="record in class.records">
 								<div class="module-image-holder">
-									<img ng-if="record.module_status != 'Completed' && user.points >= record.points_to_unlock" class="module-icon"
+									<img ng-if="record.module_status != futureed.COMPLETED && user.points >= record.points_to_unlock" class="module-icon"
 										 ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}"
 										 ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 
-									<img ng-if="record.module_status !== 'Completed' && user.points < record.points_to_unlock" class="locked-module-icon"
+									<img ng-if="record.module_status !== futureed.COMPLETED && user.points < record.points_to_unlock" class="locked-module-icon"
 										 ng-src="/images/icons/icon-lock.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 
-									<img ng-if="record.module_status == 'Completed'" class="locked-module-icon"
+									<img ng-if="record.module_status == futureed.COMPLETED" class="locked-module-icon"
 										 ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 								</div>
 
 								<p class="module-name">{! record.name +' '+ record.grade.name !}</p>
 
-								<button ng-if="record.module_status == 'On Going' && user.points >= record.points_to_unlock"
+								<button ng-if="record.module_status == futureed.ON_GOING && user.points >= record.points_to_unlock"
 										ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
 										type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> {!! trans('messages.resume') !!} </button>
 
@@ -122,7 +122,7 @@
 								<button ng-if="user.points < record.points_to_unlock"
 										type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> {!! trans('messages.locked') !!}</button>
 
-								<button ng-if="record.module_status == 'Completed'"
+								<button ng-if="record.module_status == futureed.COMPLETED"
 										type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> {!! trans('messages.completed') !!}</button>
 
 								<div class="progress">
