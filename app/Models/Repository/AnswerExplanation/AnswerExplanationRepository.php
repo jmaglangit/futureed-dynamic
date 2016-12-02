@@ -22,6 +22,17 @@ class AnswerExplanationRepository implements  AnswerExplanationRepositoryInterfa
 	}
 
 	/**
+	* Get specific answer explanation
+	* @param $question_id
+	* @return mixed
+	*/
+	public function getAnswerExplanationByQuestionId($question_id){
+
+		return AnswerExplanation::questionId($question_id)
+			->get();
+	}
+
+	/**
 	 * Update answer explanation.
 	 * @param $id
 	 * @param $data

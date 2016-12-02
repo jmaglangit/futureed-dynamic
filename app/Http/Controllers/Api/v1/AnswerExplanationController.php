@@ -28,6 +28,17 @@ class AnswerExplanationController extends ApiController {
 			$input['question_id']
 		);
 
+		if(isset($input['module_id'])){
+			$result = $this->answer_explanation->getAnswerExplanation(
+				$input['module_id'],
+				$input['question_id']
+			);
+		} else {
+			$result = $this->answer_explanation->getAnswerExplanationByQuestionId(
+				$input['question_id']
+			);
+		}
+
 		return $this->respondWithData($result);
 	}
 }
