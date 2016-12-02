@@ -1,6 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use Response;
+use \Response;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
@@ -38,7 +38,6 @@ class StudentCurriculumController extends ApiController {
 	 * @param curriculum_country
 	 * @param grade_id
 	 * @param subject_id
-	 * @param locale
 	 * @return file
 	 */
 	public function downloadCurriculumPdf(){
@@ -72,9 +71,10 @@ class StudentCurriculumController extends ApiController {
 		}
 
 		// filename curriculum_grade_subject_language;
-		$filename = strtolower(str_replace(' ','_', $filename.'_'.Input::get('locale').'.pdf'));
 
-		$filepath = storage_path().'/curriculum/'.Input::get('locale'). '/'.$filename;
+		$filename = strtolower(str_replace(' ','_', $filename.'_'.session('appLanguage','en').'.pdf'));
+
+		$filepath = storage_path().'/curriculum/'.session('appLanguage','en'). '/'.$filename;
 
 		$headers = array(
               		'Content-Type: application/pdf',
@@ -83,6 +83,7 @@ class StudentCurriculumController extends ApiController {
 		if ($filesystem->exists($filepath)) {
 
 			return \Response::download($filepath,$filename,$headers);
+
 		}
 
 		return $this->respondErrorMessage(2053);
