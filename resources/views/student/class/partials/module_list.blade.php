@@ -89,9 +89,9 @@
 
 					<div class="module-list row" ng-if="class.records.length">
 						<div class="col-md-1">
-							<img ng-if="class.grade_name == ''" class="curriculum-button-disabled" ng-src="/images/curriculum-button.png" tooltip="{!! trans('messages.curriculum_pdf_message_disabled') !!}"
+							<img ng-if="class.grade_name == futureed.EMPTY_STR" class="curriculum-button-disabled" ng-src="/images/curriculum-button.png" tooltip="{!! trans('messages.curriculum_pdf_message_disabled') !!}"
 								tooltip-placement="bottom" tooltip-class="module-tooltip"/>
-							<img ng-if="class.grade_name != ''" class="curriculum-button" ng-src="/images/curriculum-button.png" tooltip="{! class.grade_name + '' !} {!! trans('messages.curriculum_pdf') !!}"
+							<img ng-if="class.grade_name != futureed.EMPTY_STR" class="curriculum-button" ng-src="/images/curriculum-button.png" tooltip="{! class.grade_name + '' !} {!! trans('messages.curriculum_pdf') !!}"
 								tooltip-placement="bottom" tooltip-class="module-tooltip" ng-click="class.downloadCurriculumPDF()" />
 
 
