@@ -23,9 +23,15 @@ class AnswerExplanationController extends ApiController {
 
 		$input = Input::only('module_id','question_id','limit','offset');
 
-		$limit = intval($input['limit']);
+		if(isset($input['limit'])){
 
-		$offset = intval($input['offset']);
+			$limit = intval($input['limit']);
+		}
+
+		if(isset($input['offset'])){
+
+			$offset = intval($input['offset']);
+		}
 
 		if (isset($input['module_id'])) {
 
