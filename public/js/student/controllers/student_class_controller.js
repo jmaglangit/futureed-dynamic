@@ -404,14 +404,12 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 					self.errors = $scope.errorHandler(obj.errors);
 				}
 			} catch(e){
-				console.log(e);
 				var content_dispostion = headers('content-disposition');
 				var result = content_dispostion.split(";")[1];
 				result = result.replace('\"','').replace('\"','');
 				result = result.split("=")[1];
 				var file = new Blob([response], { type: 'application/pdf' });
 				saveAs(file, result);
-				console.log(result);
 			}
 
 		});
