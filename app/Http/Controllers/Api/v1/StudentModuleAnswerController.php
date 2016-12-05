@@ -123,10 +123,10 @@ class StudentModuleAnswerController extends ApiController{
 		);
 
 		//check if module has complete setup.
-		if(!$this->module_content_services->checkModuleComplete($data['module_id'])){
-
-			return $this->respondErrorMessage(2058);
-		}
+//		if(!$this->module_content_services->checkModuleComplete($data['module_id'])){
+//
+//			return $this->respondErrorMessage(2058);
+//		}
 
 		//check if module has been completed.
 		if($this->student_module->getStudentModuleStatus($data['student_module_id']) == config('futureed.module_status_completed')){
@@ -231,8 +231,37 @@ class StudentModuleAnswerController extends ApiController{
 			$data['points_earned'] = 0;
 			$data['answer_status'] = config('futureed.answer_status_correct');
 			$data['seq_no'] = $completed_exercise->first()->question_seq_no;
-		}
-		else {
+
+		} else if($question_type == config('futureed.question_type_fill_in_the_blank')){
+
+			//Get answer and point from Question.
+			$question_answer = $this->question->getQuestionAnswer($data['question_id']);
+
+			if(empty($question_answer) || is_null($question_answer)){
+
+				//return error to contact admin
+				return $this->respondErrorMessage(2055);
+
+			} else {
+
+				//decode answer of FIB
+				$question_answer = json_decode($question_answer);
+
+				//check if ordering or interchange
+				if($question_answer->type == 1){
+					//answer in order
+					$result =  $this->student_module_services->fibOrdering($data['answer_text'],$question_answer->answer);
+				} else{
+					//answer can interchange
+					$result = $this->student_module_services->fibInterchange($data['answer_text'],$question_answer->answer);
+				}
+
+				$data['answer_status'] = ($result) ? config('futureed.answer_status_correct') :
+					config('futureed.answer_status_wrong');
+
+			}
+
+		} else {
 			//Get answer and point from Question.
 			$question_answer = $this->question->getQuestionAnswer($data['question_id']);
 
