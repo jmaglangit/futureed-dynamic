@@ -123,10 +123,10 @@ class StudentModuleAnswerController extends ApiController{
 		);
 
 		//check if module has complete setup.
-//		if(!$this->module_content_services->checkModuleComplete($data['module_id'])){
-//
-//			return $this->respondErrorMessage(2058);
-//		}
+		if(!$this->module_content_services->checkModuleComplete($data['module_id'])){
+
+			return $this->respondErrorMessage(2058);
+		}
 
 		//check if module has been completed.
 		if($this->student_module->getStudentModuleStatus($data['student_module_id']) == config('futureed.module_status_completed')){
