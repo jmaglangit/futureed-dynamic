@@ -78,5 +78,15 @@ function StudentClassService($http){
 		});
 	}
 
+	service.downloadCurriculumPDF = function(data){
+		return $http({
+			method 	: 	Constants.METHOD_GET
+			, url   : 	serviceUrl + 'student/curriculum/export?subject_id='+ data.subject_id
+				+ '&grade_id=' + data.grade_id
+				+ '&curriculum_country=' + data.curriculum_country
+			, responseType : 'arraybuffer'
+		});
+	}
+
 	return service;
 }

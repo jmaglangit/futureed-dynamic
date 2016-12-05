@@ -12,7 +12,7 @@
 					{!! Form::text('search_name', ''
 						,array(
 							'placeholder' => trans_choice('messages.module', 1)
-							, 'ng-model' => 'class.search.module_name'
+							, 'ng-model' => 'class.grademodule_name'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
 						)
@@ -87,48 +87,60 @@
 						</div>
 					</div>
 
-					<div class="module-list" ng-if="class.records.length">
-						<div class="module-item" ng-repeat="record in class.records">
-							<div class="module-image-holder">
-								<img ng-if="record.module_status != 'Completed' && user.points >= record.points_to_unlock" class="module-icon"
-									 ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}"
-									 ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
+					<div class="module-list row" ng-if="class.records.length">
+						<div class="col-md-1">
+							<img ng-if="class.grade_name == futureed.EMPTY_STR" class="curriculum-button-disabled" ng-src="/images/curriculum-button.png" tooltip="{!! trans('messages.curriculum_pdf_message_disabled') !!}"
+								tooltip-placement="bottom" tooltip-class="module-tooltip"/>
+							<img ng-if="class.grade_name != futureed.EMPTY_STR" class="curriculum-button" ng-src="/images/curriculum-button.png" tooltip="{! class.grade_name + '' !} {!! trans('messages.curriculum_pdf') !!}"
+								tooltip-placement="bottom" tooltip-class="module-tooltip" ng-click="class.downloadCurriculumPDF()" />
 
-								<img ng-if="record.module_status !== 'Completed' && user.points < record.points_to_unlock" class="locked-module-icon"
-									 ng-src="/images/icons/icon-lock.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 
-								<img ng-if="record.module_status == 'Completed'" class="locked-module-icon"
-									 ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
-							</div>
+						</div>
+						<div class="col-md-11">
+							<div class="module-item" ng-repeat="record in class.records">
+								<div class="module-image-holder">
+									<img ng-if="record.module_status != futureed.COMPLETED && user.points >= record.points_to_unlock" class="module-icon"
+										 ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}"
+										 ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 
-							<p class="module-name">{! record.name +' '+ record.grade.name !}</p>
+									<img ng-if="record.module_status !== futureed.COMPLETED && user.points < record.points_to_unlock" class="locked-module-icon"
+										 ng-src="/images/icons/icon-lock.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 
-							<button ng-if="record.module_status == 'On Going' && user.points >= record.points_to_unlock"
-									ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
-									type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> {!! trans('messages.resume') !!} </button>
-
-							<button ng-if="!record.module_status && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
-									type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> {!! trans('messages.begin') !!} </button>
-
-							<button ng-if="user.points < record.points_to_unlock"
-									type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> {!! trans('messages.locked') !!}</button>
-
-							<button ng-if="record.module_status == 'Completed'"
-									type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> {!! trans('messages.completed') !!}</button>
-
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-									 ng-class="{
-										'progress-bar-success' : record.progress > 75,
-										'progress-bar-info' : record.progress > 50 && record.progress <= 75 ,
-										'progress-bar-warning' : record.progress > 25 && record.progress <= 50 ,
-										'progress-bar-danger' : record.progress <= 25,
-
-									}"
-									 ng-style="{ 'width' : record.progress+'%' }">
+									<img ng-if="record.module_status == futureed.COMPLETED" class="locked-module-icon"
+										 ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name +' '+ record.grade.name !}">
 								</div>
+
+								<p class="module-name">{! record.name +' '+ record.grade.name !}</p>
+
+								<button ng-if="record.module_status == futureed.ON_GOING && user.points >= record.points_to_unlock"
+										ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
+										type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> {!! trans('messages.resume') !!} </button>
+
+								<button ng-if="!record.module_status && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
+										type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> {!! trans('messages.begin') !!} </button>
+
+								<button ng-if="user.points < record.points_to_unlock"
+										type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> {!! trans('messages.locked') !!}</button>
+
+								<button ng-if="record.module_status == futureed.COMPLETED"
+										type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> {!! trans('messages.completed') !!}</button>
+
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+										 ng-class="{
+											'progress-bar-success' : record.progress > 75,
+											'progress-bar-info' : record.progress > 50 && record.progress <= 75 ,
+											'progress-bar-warning' : record.progress > 25 && record.progress <= 50 ,
+											'progress-bar-danger' : record.progress <= 25,
+
+										}"
+										 ng-style="{ 'width' : record.progress+'%' }">
+									</div>
+								</div>
+								<span class="module-progress">{! record.progress !}%</span>
 							</div>
-							<span class="module-progress">{! record.progress !}%</span>
+
+
 						</div>
 					</div>
 

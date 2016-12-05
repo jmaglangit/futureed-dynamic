@@ -313,6 +313,16 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		self.search.class_id = self.current_class;
 		self.search.student_id = $scope.user.id;
 
+		if (self.search.grade_id) {
+			angular.forEach($scope.grades, function(value,key){
+				if(value.id == self.search.grade_id){
+					self.grade_name = value.name;
+				}
+			});
+		} else {
+			self.grade_name = Constants.EMPTY_STR;
+		}
+
 		$scope.ui_block();
 		StudentClassService.listModules(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
@@ -373,6 +383,35 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 			}
 		}).error(function(response){
 			self.error = $scope.internalError();
+		});
+	}
+
+	self.downloadCurriculumPDF = function(){
+		var data = {};
+		data.grade_id = self.search.grade_id;
+		angular.forEach(self.classes, function(value, key){
+			if(value.classroom.id == self.current_class){
+				data.subject_id = value.classroom.subject.id;
+				data.curriculum_country = value.student.user.curriculum_country;
+			}
+		});
+
+		StudentClassService.downloadCurriculumPDF(data).success(function(response,status,headers){
+			try{
+				var decodedString = String.fromCharCode.apply(null, new Uint8Array(response));
+				var obj = JSON.parse(decodedString);
+				if(obj.errors){
+					self.errors = $scope.errorHandler(obj.errors);
+				}
+			} catch(e){
+				var content_dispostion = headers('content-disposition');
+				var result = content_dispostion.split(";")[1];
+				result = result.replace('\"','').replace('\"','');
+				result = result.split("=")[1];
+				var file = new Blob([response], { type: 'application/pdf' });
+				saveAs(file, result);
+			}
+
 		});
 	}
 }

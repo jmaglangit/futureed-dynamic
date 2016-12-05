@@ -301,6 +301,9 @@ var Constants = {
 	, REPORT_PROGRESS_MEDIAN_FLOOR	: 51
 	, REPORT_PROGRESS_FAIL	: 50
 
+	, COMPLETED 				: 'Completed'
+	, ON_GOING 					: 'On Going'
+
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";
 	}

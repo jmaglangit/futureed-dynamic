@@ -2482,3 +2482,18 @@ pre.dropdown-menu {
 .m-top-20 {
 	margin-top: 20px;
 }
+
+.curriculum-button-disabled {
+	margin: 10px auto;
+    padding: 10px;
+    -webkit-filter: grayscale(100%);
+       -moz-filter: grayscale(100%);
+         -o-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+            filter: grayscale(100%);
+}
+
+.curriculum-button {
+	margin: 10px auto;
+    padding: 10px;
+}
