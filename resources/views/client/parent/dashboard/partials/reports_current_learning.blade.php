@@ -5,7 +5,7 @@
 			<tr>
 				<!-- <th ng-repeat="column in reports.summary.columns">{! column !}</th> -->
 				<th>{! reports.summary.columns.grade_level !}</th>
-				<th>{! reports.summary.columns.curriculum_category !}</th>
+				<th class="column-curriculum-category">{! reports.summary.columns.curriculum_category !}</th>
 				<th>{! reports.summary.columns.percent_completed !}</th>
 				<th>
 					<div>
