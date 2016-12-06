@@ -59,6 +59,8 @@ class Question extends Model {
 		'answer_text_field'
 	];
 
+	public $translatedAttributes = ['questions_text','answer'];
+
 	//Accessor
 
 	//Translation accessor
