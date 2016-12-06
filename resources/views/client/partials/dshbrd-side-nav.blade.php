@@ -52,7 +52,12 @@
 		</li>
 		<li class="client-nav" ng-class="{ 'tab-active' : module || content || question}">
 			<a href="{{ route('client.teacher.module.index') }}"><span><i class="fa fa-cubes"></i></span>{!! trans_choice('messages.module', 1) !!}</a>
+
 		</li>
+		<li class="client-nav" ng-class="{ 'tab-active' : reports}">
+			<a href="{{ route('teacher.reports.index') }}"><span><i class="fa fa-bar-chart"></i></span>{!! trans('messages.student_report') !!}</a>
+		</li>
+		
 	</ul>
 	<ul ng-if="!profileActive  && user.role == futureed.PRINCIPAL">
 		<li class="client-nav" ng-class="{ 'tab-active' : teacher.active == 'teacher' }">

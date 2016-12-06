@@ -1441,5 +1441,10 @@ return [
 	'graph_link_message' => 'See detailed reporting here',
 
 	'curriculum_pdf' => 'Curriculum PDF',
-	'curriculum_pdf_message_disabled' => 'Search for a Grade to be able to download Curriculum PDF'
+	'curriculum_pdf_message_disabled' => 'Search for a Grade to be able to download Curriculum PDF',
+
+	'teacher_report_select_class' => 'Select Class',
+	'teacher_report_select_student' => 'Select Student',
+	'class_name', 'Class Name',
+	'student_name', 'Student Name',
 ];

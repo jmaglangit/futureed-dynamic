@@ -640,7 +640,8 @@ content legend {
 /*reporting tabs*/
 
 .reports .nav-student li {
-	width: 126px;
+	/*width: 126px;*/
+	margin-left: 4px;
 }
 
 .reports .nav-student li a {
