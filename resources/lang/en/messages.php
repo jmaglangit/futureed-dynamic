@@ -14,7 +14,7 @@ return [
 	'add_more' => 'Add More',
 	'add_help' => 'Add Help',
 	'add_tips' => 'Add Tips',
-	'add_payment' => 'Add Payment',
+	'add_payment' => 'Pay for Subscription',
 	'address_info' => 'Address Information',
 	'admin' => 'Admin',
 	'admin_client_management' => 'Client Management',
