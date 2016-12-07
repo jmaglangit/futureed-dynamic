@@ -50,6 +50,8 @@ class QuestionAnswer extends Model {
 
 	];
 
+	public $translatedAttributes = ['answer_text'];
+
 	//Accessor
 
 	//translatable

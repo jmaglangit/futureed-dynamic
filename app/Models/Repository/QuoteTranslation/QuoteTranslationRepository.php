@@ -10,6 +10,7 @@ namespace FutureEd\Models\Repository\QuoteTranslation;
 
 
 use FutureEd\Models\Core\Quote;
+use FutureEd\Models\Core\QuoteTranslation;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 
@@ -78,6 +79,14 @@ class QuoteTranslationRepository implements QuoteTranslationRepositoryInterface{
 	 */
 	public function checkLanguageAvailability($locale){
 		return Quote::first()->translate($locale);
+	}
+
+	/**
+	 * Get collection of translations.
+	 * @return mixed
+	 */
+	public function getLanguages(){
+		return QuoteTranslation::select('locale')->groupBy('locale')->get();
 	}
 
 	/**

@@ -80,6 +80,15 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	}
 
 	/**
+	 * Get collection of language available.
+	 * @return mixed
+	 */
+	public function getLanguages(){
+
+		return ModuleTranslation::select('locale')->groupBy('locale')->get();
+	}
+
+	/**
 	 * Add new module translations.
 	 * @param $data
 	 * @param $target_lang

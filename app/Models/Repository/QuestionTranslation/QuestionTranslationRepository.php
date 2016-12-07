@@ -11,6 +11,7 @@ namespace FutureEd\Models\Repository\QuestionTranslation;
 
 use FutureEd\Models\Core\Module;
 use FutureEd\Models\Core\Question;
+use FutureEd\Models\Core\QuestionTranslation;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -84,6 +85,14 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 	public function checkLanguageAvailability($locale){
 
 		return Question::first()->translate($locale);
+	}
+
+	/**
+	 * Get collection of languages.
+	 * @return mixed
+	 */
+	public function getLanguages(){
+		return QuestionTranslation::select('locale')->groupBy('locale')->get();
 	}
 
 	/**

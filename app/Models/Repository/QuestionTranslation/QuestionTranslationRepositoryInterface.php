@@ -15,6 +15,8 @@ interface QuestionTranslationRepositoryInterface {
 
 	public function checkLanguageAvailability($locale);
 
+	public function getLanguages();
+
 	public function updatedTranslation($data,$target_lang,$field);
 
 	public function getTranslatedAttributes();
