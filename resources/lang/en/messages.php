@@ -752,6 +752,12 @@ return [
 	'admin_note_end_module_preview' => 'You have reached the end of this module preview.',
 	'admin_note_module_preview_cant_load_no_questions_available' => 'NOTE: Preview can\'t be loaded, no questions available for this module.',
 	'admin_note_module_question_preview_only' => 'NOTE: Please note that this is only a PREVIEW. Answers are not checked.',
+	'answer_explanations' => 'Answer Explanations',
+	'admin_default' => 'Default',
+	'admin_with_avatar' => 'With Avatar',
+	'admin_show_answer_explanations' => 'Show Answer Explanations',
+	'admin_show_tips' => 'Show Tips',
+	'admin_no_answer_explanations' => 'No answer explanations',
 
 	
 	//resources/views/admin/manage/price/partials/bulk_discount.blade.php

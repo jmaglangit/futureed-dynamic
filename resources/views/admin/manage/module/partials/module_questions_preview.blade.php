@@ -41,9 +41,13 @@
             </p>
 
             {{--Correct Answer--}}
+            <?php
+                $toggleAnswerExplanation = '&middot; <a href="#" data-toggle="collapse" data-target="#answer-explanations"><span  tooltip-directive data-toggle="tooltip" data-placement="left" title="' . trans('messages.admin_show_answer_explanations') . '"><i class="fa fa-question-circle"></i> ' . trans('messages.admin_show_tips') . '</span></a>';
+            ?>
             <div ng-if="module.current_question.question_answer != futureed.FALSE">
                 <h4 ng-show="module.current_question.question_type != futureed.MULTIPLECHOICE && module.current_question.question_type != futureed.GRAPH && module.current_question.question_type != futureed.QUADRANT" class="question-correct-answer">
                     <span class="correct-answer-text">{! module.current_question.question_answer !}</span> <i class="fa fa-angle-left"></i> {{ trans('messages.admin_correct_answer') }}
+                    <?php echo $toggleAnswerExplanation; ?>
                 </h4>
                 <div ng-show="module.current_question.question_type == futureed.MULTIPLECHOICE"> 
                     <h4 class="question-correct-answer">
@@ -54,6 +58,7 @@
                                     data-content="<img src='{! module.current_question.question_answer.answer_image !}' width='200' />">
                                     {{ trans('messages.admin_view_image') }}
                                 </a></small><span ng-if="module.current_question.question_answer.answer_text != futureed.FALSE">{! module.current_question.question_answer.answer_text !}</span></span> <i class="fa fa-angle-left"></i> {{ trans('messages.admin_correct_answer') }} 
+                                <?php echo $toggleAnswerExplanation; ?>
                     </h4>
                 </div>
 
@@ -64,6 +69,7 @@
                             <span class="correct-answer-text">
                                 <a href="" data-toggle="collapse" data-target="#correct_graph">{{ trans('messages.admin_toggle_graph') }}</a>
                             </span> <i class="fa fa-angle-left"></i> {{ trans('messages.admin_correct_answer') }}
+                            <?php echo $toggleAnswerExplanation; ?>
                         </h4>
                         <div id="correct_graph" class="collapse">
                             {{--Horizontal Correct Graph--}}
@@ -111,9 +117,90 @@
                             <span class="correct-answer-text">
                                 <a href="" data-toggle="collapse" data-target="#quadrant">{{ trans('messages.admin_toggle_graph') }}</a>
                             </span> <i class="fa fa-angle-left"></i> {{ trans('messages.admin_correct_answer') }}
+                            <?php echo $toggleAnswerExplanation; ?>
                         </h4>
                         <div id="quadrant" class="collapse">
                             <div id="quadrant-answer" style="width:300px;height:300px;margin:0 auto;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="answer-explanations" class="collapse col-xs-12 m-top-50">
+                    <div class="col-xs-8 col-xs-offset-2">
+                        <ul class="nav nav-tabs">
+                            <li class="disabled">
+                                <a data-toggle="tab" href="#">
+                                    {{ trans('messages.answer_explanations') }}
+                                    <span class="badge">
+                                        {! module.answer_explanation_count !} of {! module.answer_explanations.records.length !}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="active"><a data-toggle="tab" href="#default-ans-exp">{{ trans('messages.admin_default') }}</a></li>
+                            <li><a data-toggle="tab" href="#with-avatar-ans-exp">{{ trans('messages.admin_with_avatar') }}</a></li>
+                            <li class="pull-right">
+                                <a href="#" ng-click="mod.getAnswerExplanationByIndex(futureed.BACK)"><i class="fa fa-angle-right"></i></a>
+                            </li>
+                            <li class="pull-right">
+                                <a href="#" ng-click="mod.getAnswerExplanationByIndex(futureed.NEXT)"><i class="fa fa-angle-left"></i></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" ng-show="module.answer_explanations.records.length > futureed.FALSE">
+                            <div id="default-ans-exp" class="tab-pane fade in active">
+                                <div class="col-xs-12">
+                                    <span class="result-message tip-result result-incorrect col-xs-3">
+                                        <i class="fa fa-times tip-fa-icon text-center"></i>
+                                        <p class="h3">{{ trans('messages.oops') }}</p>
+                                    </span>
+
+                                    <div class="result-tip tip-content">
+                                        <div class="tip-icon">
+                                            <img src="/images/icon-tipbulb.png">
+                                        </div>
+                                        <div class="tip-message">
+                                            <img ng-if="module.answer_explanation.image != futureed.NONE" ng-src="{! module.answer_explanation.image !}">
+                                            <p class="h4 m-bottom-0 m-top-20" ng-bind-html="module.answer_explanation.answer_explanation | trustAsHtml"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="proceed-btn-container btn-container">
+                                    <button type="button" class="btn btn-maroon btn-medium">
+                                        {{ trans('messages.proceed_to_next_questions') }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="with-avatar-ans-exp" class="tab-pane fade">
+                                <div class="message-container m-top-20">
+                                    <div class="col-xs-12">
+                                        <div class="quoted-module-icon-holder col-xs-5">
+                                            <p class="quote-message-obtuse">I want you to stretch beyond your comfort zone and master this material</p>
+                                            <img class="quoted-avatar" ng-src="/images/avatar/doctor-male/doctor_male-7.png" src="/images/avatar/doctor-male/doctor_male-7.png">
+                                        </div>
+
+                                        <div class="col-xs-7">
+                                            <div class="tip-result-message result-incorrect">
+                                                <span>{{ trans('messages.oops') }}</span>
+                                            </div>
+
+                                            <div class="result-tip quoted-tip">
+                                                <img ng-if="module.answer_explanation.image != futureed.NONE" ng-src="{! module.answer_explanation.image !}">
+
+                                                <p class="answer-explanation h4 text-left m-top-20" ng-bind-html="module.answer_explanation.answer_explanation | trustAsHtml"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="proceed-btn-container btn-container col-xs-12">
+                                            <button type="button" class="btn btn-maroon btn-medium">
+                                                {{ trans('messages.proceed_to_next_questions') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-danger m-top-20" ng-show="module.answer_explanations.records.length <= futureed.FALSE">
+                            {{ trans('messages.admin_no_answer_explanations') }}
                         </div>
                     </div>
                 </div>
