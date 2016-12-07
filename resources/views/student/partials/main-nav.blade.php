@@ -44,7 +44,7 @@
 					<li class="nav-label"></li>
 
 					<li><img class="nav-image-holder" ng-src="{! user.thumbnail !}" /></li>
-					<li class="nav-label">{!! trans('messages.welcome') !!}, {! user.first_name !}</li>
+					<li class="nav-label font-size-16">{!! trans('messages.welcome') !!}, {! user.first_name !}</li>
 					<li class="nav-label">@include('common.language-option')</li>
 					<li class="dropdown nav-dropdown">
 						<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-2x fa-bars"></span></a>
