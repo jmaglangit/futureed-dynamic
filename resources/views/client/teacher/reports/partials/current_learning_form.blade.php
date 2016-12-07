@@ -3,7 +3,6 @@
 		<table id="tip-list" class="table table-striped">
 			<thead>
 			<tr>
-				<!-- <th ng-repeat="column in reports.summary.columns">{! column !}</th> -->
 				<th>{! reports.summary.columns.grade_level !}</th>
 				<th>{! reports.summary.columns.curriculum_category !}</th>
 				<th>{! reports.summary.columns.percent_completed !}</th>
@@ -17,7 +16,6 @@
 								]
 						) !!}
 						<div class="form-group">
-							<!-- <div class="col-xs-2"></div> -->
 							<div class="col-xs-12">
 								<select ng-model="reports.search.subject_id"
 										ng-change="reports.currentLearning()"

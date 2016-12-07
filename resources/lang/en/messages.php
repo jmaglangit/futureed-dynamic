@@ -1445,6 +1445,5 @@ return [
 
 	'teacher_report_select_class' => 'Select Class',
 	'teacher_report_select_student' => 'Select Student',
-	'class_name', 'Class Name',
 	'student_name', 'Student Name',
 ];
