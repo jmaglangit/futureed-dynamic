@@ -378,7 +378,7 @@ class StudentModuleAnswerController extends ApiController{
 		);
 
 		//Check if next question is equal to -1
-		if($next_question == -1 ){
+		if($next_question == -1 || is_null($next_question) ){
 
 			//Set student Module to failed.
 			$student_module->module_status = config('futureed.module_status_failed');
