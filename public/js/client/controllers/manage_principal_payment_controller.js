@@ -1447,7 +1447,7 @@ function ManagePrincipalPaymentController(
 	}
 
 	self.validateNumber =  function(){
-		if(self.new_classroom.seats.length <= 5){
+		if(self.new_classroom.seats.length <= 5 && !isNaN(self.new_classroom.seats)){
 
 			var temp = (self.new_classroom.seats.toString()).split('.');
 
@@ -1459,6 +1459,7 @@ function ManagePrincipalPaymentController(
 
 			self.temp_number = self.new_classroom.seats;
 		} else {
+
 			self.new_classroom.seats = self.temp_number;
 		}
 
