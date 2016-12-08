@@ -1446,4 +1446,21 @@ function ManagePrincipalPaymentController(
 		});
 	}
 
+	self.validateNumber =  function(){
+		if(self.new_classroom.seats != Constants.NULL) {
+			if(self.new_classroom.seats.length <= 5){
+				var temp = (self.new_classroom.seats.toString()).split(".");
+				if(temp.length > 1){
+					self.new_classroom.seats = parseInt(temp[0].replace("-",""));
+				} else {
+					self.new_classroom.seats = parseInt(self.new_classroom.seats.toString().replace(".",""));
+				}
+				self.temp_number = self.new_classroom.seats;
+			} else {
+				self.new_classroom.seats = self.temp_number;
+			}
+		}
+
+	}
+
 }

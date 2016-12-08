@@ -179,9 +179,9 @@
                                         </tr>
                                         <tr>
                                             <td class="h5">
-                                                <input type="number" min="0" class='form-control ng-valid ng-dirty ng-valid-parse ng-touched'
+                                                <input class='form-control ng-valid ng-dirty ng-valid-parse ng-touched'
                                                        placeholder="{!! trans_choice('messages.no_of_seats',2) !!}"
-                                                       ng-model="payment.new_classroom.seats" name="seats">
+                                                       ng-model="payment.new_classroom.seats" name="seats" ng-change="payment.validateNumber()">
                                             </td>
                                             <td class="h5">
                                                 <select name="grade_id" ng-disabled="!grades.length" ng-class="{ 'required-field' : payment.fields['grade_id'] }" class="form-control" ng-model="payment.new_classroom.grade_id">
