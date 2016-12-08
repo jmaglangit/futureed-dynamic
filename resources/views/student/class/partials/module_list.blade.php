@@ -12,7 +12,7 @@
 					{!! Form::text('search_name', ''
 						,array(
 							'placeholder' => trans_choice('messages.module', 1)
-							, 'ng-model' => 'class.grademodule_name'
+							, 'ng-model' => 'class.search.module_name'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
 						)
