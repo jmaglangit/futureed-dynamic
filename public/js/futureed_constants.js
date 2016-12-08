@@ -62,6 +62,8 @@ var Constants = {
 	, QUESTION		: "Question"
 	, ANSWER		: "Answer"
 	, DASHBOARD		: "Dashboard"
+	, WRONG			: "Wrong"
+	, CORRECT		: "Correct"
 
 	, TRIAL_QUESTIONS	:10
 
