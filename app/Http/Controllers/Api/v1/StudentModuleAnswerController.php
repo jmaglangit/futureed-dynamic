@@ -232,7 +232,7 @@ class StudentModuleAnswerController extends ApiController{
 			$data['answer_status'] = config('futureed.answer_status_correct');
 			$data['seq_no'] = $completed_exercise->first()->question_seq_no;
 
-		} else if($question_type == config('futureed.question_type_fill_in_the_blank')){
+		} else if(in_array($question_type,[config('futureed.question_type_fill_in_the_blank'),config('futureed.question_type_provide_answer')])){
 
 			//Get answer and point from Question.
 			$question_answer = $this->question->getQuestionAnswer($data['question_id']);
@@ -244,21 +244,24 @@ class StudentModuleAnswerController extends ApiController{
 
 			} else {
 
-				//decode answer of FIB
+				//decode answer of FIB and N
 				$question_answer = json_decode($question_answer);
 
 				//check if ordering or interchange
 				if($question_answer->type == 1){
 					//answer in order
-					$result =  $this->student_module_services->fibOrdering($data['answer_text'],$question_answer->answer);
+					$result =  $this->student_module_services->answerOrdering($data['answer_text'],$question_answer->answer);
 				} else{
 					//answer can interchange
-					$result = $this->student_module_services->fibInterchange($data['answer_text'],$question_answer->answer);
+					$result = $this->student_module_services->answerInterchange($data['answer_text'],$question_answer->answer);
 				}
 
 				$data['answer_status'] = ($result) ? config('futureed.answer_status_correct') :
 					config('futureed.answer_status_wrong');
 
+				$data['points_earned'] = ($result) ?
+					$this->question->getQuestionPointsEarned($data['question_id'])
+					: 0;
 			}
 
 		} else {
