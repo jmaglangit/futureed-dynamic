@@ -1445,4 +1445,6 @@ return [
 
 	'teacher_report_select_class' => 'Select Class',
 	'teacher_report_select_student' => 'Select Student',
+	'teacher_no_class' => 'No Class',
+	'teacher_no_student' => 'No Student',
 ];

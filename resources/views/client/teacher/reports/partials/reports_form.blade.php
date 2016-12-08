@@ -1,4 +1,4 @@
-
+<div ng-if="reports.class_list.length && reports.student_id">
 	<ul class="nav nav-pills pill-gold-report nav-student font-size-smaller">
 		<li role="presentation" ng-class="{ 'active' : reports.active_report_card }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.REPORT_CARD)">
@@ -61,3 +61,13 @@
 	<div template-directive template-url="{!! route('teacher.reports.partials.current_learning_form') !!}"></div>
 
 	<div template-directive template-url="{!! route('teacher.reports.partials.question_analysis') !!}"></div>
+</div>
+
+<div ng-if="!reports.class_id">
+	<h4 class="title-main-content"><p class="text-center">{!! trans('messages.teacher_no_class') !!}</p></h4>
+</div>
+
+<div ng-if="reports.class_id && !reports.student_id">
+	<h4 class="title-main-content"><p class="text-center">{!! trans('messages.teacher_no_student') !!}</p></h4>
+</div>
+
