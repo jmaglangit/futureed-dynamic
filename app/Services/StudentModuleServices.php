@@ -469,12 +469,12 @@ class StudentModuleServices {
 	}
 
 	/**
-	 * fill in the blanks match answers in order, $answer is comma separated, $correct in object
+	 * fill in the blanks or enumerate match answers in order, $answer is comma separated, $correct in object
 	 * @param $answer
 	 * @param $correct
 	 * @return bool
 	 */
-	public function fibOrdering($answer,$correct){
+	public function answerOrdering($answer,$correct){
 
 		//elimination order if matched
 		//match by key value
@@ -505,12 +505,12 @@ class StudentModuleServices {
 	}
 
 	/**
-	 * fill in the blanks match answer in any order, $answer is comma separated, $correct in object
+	 * fill in the blanks or enumerate match answer in any order, $answer is comma separated, $correct in object
 	 * @param $answer
 	 * @param $correct
 	 * @return bool
 	 */
-	public function fibInterchange($answer,$correct){
+	public function answerInterchange($answer,$correct){
 
 		//elimination if matched
 		//use array_intersect
