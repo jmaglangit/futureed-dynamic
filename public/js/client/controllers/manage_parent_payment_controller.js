@@ -1000,9 +1000,9 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.billing_information.state = self.client_details.state;
 
 		//get country
-		if ($scope.user.country_id) {
+		if (self.client_details.country_id) {
 
-			self.getCountry($scope.user.country_id);
+			self.getCountry(self.client_details.country_id);
 
 		}
 
@@ -1054,6 +1054,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
 			}
+			self.getCountry(self.billing_information.country.id);
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
