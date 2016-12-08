@@ -76,7 +76,10 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	public function checkLanguageAvailability($locale){
 
 
-		return $this->module->first()->translate($locale);
+		return ModuleTranslation::select('locale')
+			->where('locale',$locale)
+			->groupBy('locale')
+			->get();;
 	}
 
 	/**
@@ -128,23 +131,18 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 	public function getModuleTranslations($locale){
 
 		$current_locale = App::getLocale();
-
 		App::setLocale(config('translatable.fallback_locale'));
 
-		$module = new Module();
-		$response = $module->with('translations')->get();
+		$translations = Module::with('moduleTranslation')->get()
+			->map(function($value) use ($locale){
 
-		$translations = [];
-		foreach($response as $data){
+				return [
+					'module_id' => $value->id,
+					'en' => $value->name,
+					'translation_' . $locale => $value->moduleTranslation[0]->name
+				];
+			});
 
-			array_push($translations,[
-				'module_id' => $data->id,
-				'en' => $data->name,
-				$locale => $data->translate($locale)->name
-			]);
-		}
-
-		//return to current locale
 		App::setLocale($current_locale);
 
 		return $translations;
