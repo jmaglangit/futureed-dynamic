@@ -5,6 +5,7 @@ use FutureEd\Models\Traits\TranslationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\App;
 
 class Module extends Model
 {
@@ -89,6 +90,10 @@ class Module extends Model
 		}
 	}
 	//-------------relationships
+	public function moduleTranslation(){
+		return $this->hasMany('FutureEd\Models\Core\ModuleTranslation')->where('locale',App::getLocale());
+	}
+
 	public function subject() {
 		return $this->belongsTo('FutureEd\Models\Core\Subject');
 	}
