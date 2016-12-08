@@ -38,8 +38,10 @@ function ManageTeacherReportsController($scope, $timeout, ManageTeacherReportsSe
                 break;
 
             case Constants.REPORT_CARD            :
-                self.active_report_card = Constants.TRUE;
-                self.reportCard();
+                if (self.student_id) {
+                    self.active_report_card = Constants.TRUE;
+                    self.reportCard();
+                }
                 break;
 
             case Constants.CURRENT_LEARNING        :
@@ -81,7 +83,6 @@ function ManageTeacherReportsController($scope, $timeout, ManageTeacherReportsSe
                 } else if (response.data) {
                     self.records = response.data.rows;
                     self.student = response.data.additional_information;
-                    self.getIAssessReportLink();
                 }
             }
 
@@ -596,7 +597,7 @@ function ManageTeacherReportsController($scope, $timeout, ManageTeacherReportsSe
                     var result = response.data;
                     self.class_list = result.record;
 
-                    if (self.class_id == Constants.NULL) {
+                    if(self.class_list){
                         self.class_id = self.class_list[0].id;
                         self.getAllStudentByClass();
                     }
@@ -608,21 +609,23 @@ function ManageTeacherReportsController($scope, $timeout, ManageTeacherReportsSe
     self.getAllStudentByClass = function(){
         self.student_id = Constants.FALSE;
         self.student_list = Constants.FALSE;
-        $scope.ui_block();
-        ManageTeacherReportsService.getAllStudentByClass(self.class_id).success(function(response){
-            if (response.errors) {
-                self.errors = $scope.errorHandler(response.errors);
-            } else if (response.data) {
-                self.student_list = response.data.records;
+        if (self.class_id) {
+            $scope.ui_block();
+            ManageTeacherReportsService.getAllStudentByClass(self.class_id).success(function(response){
+                if (response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if (response.data) {
+                    self.student_list = response.data.records;
 
-                if (self.student_id == Constants.FALSE) {
-                    self.student_id = self.student_list[0].student.id;
-                    self.setActive();
+                    if (self.student_list) {
+                        self.student_id = self.student_list[0].student.id;
+                        self.setActive();
+                    }
+
                 }
 
-            }
-
-            $scope.ui_unblock();
-        });
+                $scope.ui_unblock();
+            });
+        }
     }
 }
