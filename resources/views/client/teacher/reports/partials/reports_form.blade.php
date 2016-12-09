@@ -1,4 +1,4 @@
-<div ng-if="reports.student_id">
+<div ng-if="reports.class_list.length && reports.student_id">
 	<ul class="nav nav-pills pill-gold-report nav-student font-size-smaller">
 		<li role="presentation" ng-class="{ 'active' : reports.active_report_card }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.REPORT_CARD)">
