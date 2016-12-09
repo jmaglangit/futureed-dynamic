@@ -38,7 +38,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 	self.setCurrentClass = function(class_id) {
 		if(parseInt(class_id)) {
 			var class_id = parseInt(class_id),
-				is_class_ok = parseInt($scope.user_classes.indexOf(class_id) + 1) > Constants.FALSE, // check if class is valid (paid)
+				is_class_ok = parseInt($scope.user_classes.indexOf(class_id)) > Constants.NEGATIVE_1, // check if class is valid (paid)
 				user_class = is_class_ok ? parseInt(class_id) : $scope.user_classes[Constants.FALSE] || Constants.FALSE; // if class ok : assign class_id, else : assign first class id, else : 0
 
 			self.current_class = user_class;

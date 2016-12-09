@@ -2,6 +2,7 @@ var Constants = {
 	
 	  FALSE			: 0
 	, TRUE			: 1
+	, NEGATIVE_1         : -1
 
 	, DEFAULT_SIZE	: 10
 	, DEFAULT_PAGE	: 1

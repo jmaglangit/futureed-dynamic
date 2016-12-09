@@ -58,8 +58,8 @@
                         {! question.answer_status !}
                     </td>
                     <td class="col-md-3 text-left">
-                        <img class="question-tip-image" ng-if="question.image != futureed.EMPTY_STR && question.answer_status == futureed.WRONG" src="{!! config('futureed.answer_explanation_image_public') !!}/{! question.image !}">
-                        <span ng-if="question.answer_status == futureed.WRONG" ng-bind-html="question.answer_explanation | trustAsHtml"></span>
+                        <img class="question-tip-image" err-src-directive ng-if="question.image != futureed.EMPTY_STR" src="{!! config('futureed.answer_explanation_image_public') !!}/{! question.image !}">
+                        <span ng-bind-html="question.answer_explanation | trustAsHtml"></span>
                     </td>
                 </tr>
             </tbody>

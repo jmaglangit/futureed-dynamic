@@ -54,6 +54,9 @@ class AdminModuleController extends ApiController {
 			$criteria['subject'] = Input::get('subject');
 		}
 
+		//TODO: Need fix for module_countries. Following code is a band-aid fix.
+		$criteria['country_id'] = 840;
+
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
 		}

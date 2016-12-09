@@ -283,7 +283,7 @@
 				<div class="col-xs-12">
 					<div class="col-xs-2"></div>
 					<div class="quoted-module-icon-holder col-xs-3">
-                        <p ng-show="mod.result.points_earned <= 0 && mod.answer_explanation_fully_loaded == futureed.TRUE" class="quote-message-obtuse">{! mod.avatar_quote_info.quote !}</p>
+                        <p ng-show="mod.answer_explanation.length > futureed.FALSE" class="quote-message-obtuse">{! mod.avatar_quote_info.quote !}</p>
 						<img class="quoted-avatar" ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
 					</div>
 
@@ -293,7 +293,7 @@
 							<span ng-if="mod.result.points_earned <= 0">{{ trans('messages.oops') }}</span>
 						</div>
 
-						<p ng-show="mod.answer_explanation_fully_loaded == futureed.FALSE || mod.result.points_earned > 0" class="module-message m-top-20">{! mod.avatar_quote_info.quote !}</p>
+						<p ng-show="mod.answer_explanation.length <= futureed.FALSE" class="module-message m-top-20">{! mod.avatar_quote_info.quote !}</p>
 
 						<div class="result-tip quoted-tip" ng-if="mod.result.points_earned <= 0" ng-init="mod.getAnswerExplanation();" ng-show="mod.answer_explanation.length">
 							<img ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE" ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
