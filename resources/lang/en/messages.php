@@ -1453,4 +1453,5 @@ return [
 	'teacher_report_select_student' => 'Select Student',
 	'teacher_no_class' => 'No Class',
 	'teacher_no_student' => 'No Student',
+	'curriculum_pdf_not_exist' => 'Curriculum PDF does not exist',
 ];

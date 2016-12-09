@@ -180,6 +180,11 @@ Routes::group([
 		'as' => 'api.v1.student.curriculum.export'
 	]);
 
+	Routes::get('/student/curriculum/export/link', [
+		'uses' => 'Api\v1\StudentCurriculumController@getCurriculumPDFDownloadLink',
+		'as' => 'api.v1.student.curriculum.export.link'
+	]);
+
 });
 
 /**
@@ -191,7 +196,7 @@ Routes::group([
 		'role' => ['admin','super admin']
 ], function(){
 
-	Routes::post('/student/import',[
+	Routes::post('/student/import/link',[
 		'uses' => 'Api\v1\StudentImportController@studentImport',
 		'as' => 'api.v1.student.import.csv'
 	]);
