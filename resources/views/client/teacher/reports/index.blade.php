@@ -23,7 +23,7 @@
 					</div>
 				</div>
 
-				<div class ="content-title " \>
+				<div class ="content-title " >
 					<div class="form-search">
 						<div class="form-group row">
 							<div class="col-md-2 title-main-content">
@@ -36,7 +36,7 @@
 			                    	class="form-control"
 			                    	ng-model="reports.class_id"
 			                    	ng-disabled="!reports.class_list.length"
-			                    	ng-init="reports.class_id = reports.class_list[0].class_id"
+			                    	ng-init="reports.search.subject_id = reports.class_list[0].subject_id"
 			                    	ng-change="reports.getAllStudentByClass()">
 			                        <option value="">{!! trans('messages.teacher_report_select_class') !!}</option>
 			                        <option ng-selected=" reports.class_id == class.id " ng-repeat="class in reports.class_list" ng-value="class.id">{! class.name !}</option>

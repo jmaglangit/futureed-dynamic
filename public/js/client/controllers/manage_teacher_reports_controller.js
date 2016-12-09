@@ -65,6 +65,7 @@ function ManageTeacherReportsController($scope, $timeout, ManageTeacherReportsSe
 
             default                                :
                 self.active_report_card = Constants.TRUE;
+                self.search.subject_id = self.subject_id;
                 $scope.getGradeLevel($scope.user.user.curriculum_country);
                 self.listSubjects();
                 self.reportCard();
@@ -599,6 +600,7 @@ function ManageTeacherReportsController($scope, $timeout, ManageTeacherReportsSe
 
                     if(response.data.total > 0){
                         self.class_id = self.class_list[0].id;
+                        self.subject_id = self.class_list[0].subject_id;
                         self.getAllStudentByClass();
                     }
                 }
