@@ -18,6 +18,7 @@ class ModuleCountryTableSeeder extends Seeder
                 'module_id' => $data[1],
                 'country_id' => $data[2],
                 'grade_id' => $data[3],
+                'seq_no' => $data[4],
                 'updated_by' => 1,
                 'created_by' => 1,
                 'created_at' => Carbon::now(),

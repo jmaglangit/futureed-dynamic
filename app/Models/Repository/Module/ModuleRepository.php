@@ -416,9 +416,8 @@ class ModuleRepository implements ModuleRepositoryInterface
 					$join->on('modules.id','=','module_countries.module_id')
 						->where('module_countries.country_id','=',$criteria['country_id']);
 				})
-				->groupBy('module_countries.id')
 				->whereNotNull('country_id')
-				->orderBy('module_countries.id', 'ASC');
+				->orderBy('module_countries.seq_no');
 
 			//Get module_name
 			if (isset($criteria['module_name'])) {
