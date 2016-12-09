@@ -429,10 +429,56 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 		self.current_question = self.question_list[index] || Constants.FALSE;
 
 		self.determineQuestionAnswer();
-
+		self.getQuestionAnswerExplanations();
 		self.question_number = parseInt(index) + 1;
 		self.question_preview_end = index == self.question_list.length;
+
+		$('#answer-explanations, #correct_graph, #quadrant').addClass('collapse').removeClass('in');
 		$(self.question_preview_id).modal('show');
+	}
+
+	self.getQuestionAnswerExplanations = function() {
+		if(self.current_question) {
+			self.answer_explanations = [];
+
+			var data = {
+				module_id   : self.current_question.module_id,
+				question_id : self.current_question.id,
+				seq_no      : self.current_question.seq_no
+			};
+
+			ManageModuleService.getAnswerExplanation(data).success(function(response) {
+				self.answer_explanations = response.data;
+				self.answer_explanation_index = 0;
+				self.getAnswerExplanation(0);
+			}).error(function(response) {
+				$scope.internalError(response);
+			});
+		}
+	}
+
+	self.getAnswerExplanationByIndex = function(option = Constants.FALSE) {
+		switch(option) {
+			case Constants.NEXT:
+				self.answer_explanation_index = self.answer_explanation_index < self.answer_explanations.length ?
+					parseInt(self.answer_explanation_index) + 1 : self.answer_explanation_index;
+				break;
+
+			case Constants.BACK:
+				self.answer_explanation_index = self.answer_explanation_index > 0 ?
+					parseInt(self.answer_explanation_index) - 1 : self.answer_explanation_index;
+				break;
+
+			default:
+				break;
+		}
+
+		self.getAnswerExplanation(self.answer_explanation_index);
+	}
+
+	self.getAnswerExplanation = function(index) {
+		self.answer_explanation = self.answer_explanations.records[index] || Constants.FALSE;
+		self.answer_explanation_count = self.answer_explanation == Constants.FALSE ? Constants.FALSE : parseInt(index) + 1;
 	}
 
 	// prepares/computes question answer (depends on question_type)

@@ -204,4 +204,73 @@
 				});
 			});
 		});
+
+		Routes::group([
+			'prefix' => 'reports'
+				,'middleware' => 'teacher'], function(){
+			Routes::get('/', [
+				'as' => 'teacher.reports.index'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@index'
+			]);
+
+			Routes::get('/reports_form', [
+				'as' => 'teacher.reports.partials.reports_form'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@reports_form'
+			]);
+
+			Routes::get('/report_card_form', [
+				'as' => 'teacher.reports.partials.report_card_form'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@report_card'
+			]);
+
+			Routes::get('/subject_area_form', [
+				'as' => 'teacher.reports.partials.subject_area_form'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@subject_area'
+			]);
+
+			Routes::get('/subject_area_heatmap_form', [
+				'as' => 'teacher.reports.partials.subject_area_heatmap_form'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@subject_area_heatmap'
+			]);
+
+			Routes::get('/summary_progress_form', [
+				'as' => 'teacher.reports.partials.summary_progress_form'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@summary_progress'
+			]);
+
+			Routes::get('/current_learning_form', [
+				'as' => 'teacher.reports.partials.current_learning_form'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@current_learning'
+			]);
+
+			Routes::get('/progress_bar', [
+				'as' => 'teacher.reports.partials.progress_bar'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@progress_bar'
+			]);
+
+			Routes::get('/question_analysis',[
+				'as' => 'teacher.reports.partials.question_analysis'
+				, 'uses' => 'FutureLesson\Client\ManageTeacherReportsController@question_analysis'
+			]);
+
+			Routes::get('/platform-chart-monthly',[
+				'as' => 'teacher.reports.partials.charts.platform-chart-monthly',
+				'uses' => 'FutureLesson\Client\ManageTeacherReportsController@platform_chart_monthly'
+			]);
+
+			Routes::get('/platform-chart-weekly',[
+				'as' => 'teacher.reports.partials.charts.platform-chart-weekly',
+				'uses' => 'FutureLesson\Client\ManageTeacherReportsController@platform_chart_weekly'
+			]);
+
+			Routes::get('/platform-chart-subject-area',[
+				'as' => 'teacher.reports.partials.charts.platform-chart-subject-area',
+				'uses' => 'FutureLesson\Client\ManageTeacherReportsController@platform_chart_subject_area'
+			]);
+
+			Routes::get('/platform-chart-subject-area-heatmap',[
+				'as' => 'teacher.reports.partials.charts.platform-chart-subject-area-heatmap',
+				'uses' => 'FutureLesson\Client\ManageTeacherReportsController@platform_chart_subject_area_heatmap'
+			]);
+		});
 	});

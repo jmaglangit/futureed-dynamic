@@ -174,6 +174,17 @@ Routes::group([
 
 	Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',
 		['except' => ['create', 'edit']]);
+
+	Routes::get('/student/curriculum/export', [
+		'uses' => 'Api\v1\StudentCurriculumController@downloadCurriculumPdf',
+		'as' => 'api.v1.student.curriculum.export'
+	]);
+
+	Routes::get('/student/curriculum/export/link', [
+		'uses' => 'Api\v1\StudentCurriculumController@getCurriculumPDFDownloadLink',
+		'as' => 'api.v1.student.curriculum.export.link'
+	]);
+
 });
 
 /**
@@ -185,7 +196,7 @@ Routes::group([
 		'role' => ['admin','super admin']
 ], function(){
 
-	Routes::post('/student/import',[
+	Routes::post('/student/import/link',[
 		'uses' => 'Api\v1\StudentImportController@studentImport',
 		'as' => 'api.v1.student.import.csv'
 	]);

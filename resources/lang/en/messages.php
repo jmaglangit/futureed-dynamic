@@ -14,7 +14,7 @@ return [
 	'add_more' => 'Add More',
 	'add_help' => 'Add Help',
 	'add_tips' => 'Add Tips',
-	'add_payment' => 'Add Payment',
+	'add_payment' => 'Pay for Subscription',
 	'address_info' => 'Address Information',
 	'admin' => 'Admin',
 	'admin_client_management' => 'Client Management',
@@ -752,6 +752,12 @@ return [
 	'admin_note_end_module_preview' => 'You have reached the end of this module preview.',
 	'admin_note_module_preview_cant_load_no_questions_available' => 'NOTE: Preview can\'t be loaded, no questions available for this module.',
 	'admin_note_module_question_preview_only' => 'NOTE: Please note that this is only a PREVIEW. Answers are not checked.',
+	'answer_explanations' => 'Answer Explanations',
+	'admin_default' => 'Default',
+	'admin_with_avatar' => 'With Avatar',
+	'admin_show_answer_explanations' => 'Show Answer Explanations',
+	'admin_show_tips' => 'Show Tips',
+	'admin_no_answer_explanations' => 'No answer explanations',
 
 	
 	//resources/views/admin/manage/price/partials/bulk_discount.blade.php
@@ -1438,5 +1444,14 @@ return [
 	'payment_change_curriculum' => 'To change curriculum country, you need to email helpdesk@futureedgroup.com',
 	'payment_choose_curriculum' => 'Please note that once you select the curriculum country, you will not be able to change it. If you need to change it, please contact helpdesk@futureedgroup.com',
 
-	'graph_link_message' => 'See detailed reporting here'
+	'graph_link_message' => 'See detailed reporting here',
+
+	'curriculum_pdf' => 'Curriculum PDF',
+	'curriculum_pdf_message_disabled' => 'Search for a Grade to be able to download Curriculum PDF',
+
+	'teacher_report_select_class' => 'Select Class',
+	'teacher_report_select_student' => 'Select Student',
+	'teacher_no_class' => 'No Class',
+	'teacher_no_student' => 'No Student',
+	'curriculum_pdf_not_exist' => 'Curriculum PDF does not exist',
 ];

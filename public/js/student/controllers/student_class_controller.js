@@ -259,6 +259,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		self.errors = Constants.FALSE;
 		self.tableDefaults();
 		self.list();
+		self.getDownloadCurriculumPdfLink();
 		
 		event = getEvent(event);
 		event.preventDefault();
@@ -312,6 +313,16 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 
 		self.search.class_id = self.current_class;
 		self.search.student_id = $scope.user.id;
+
+		if (self.search.grade_id) {
+			angular.forEach($scope.grades, function(value,key){
+				if(value.id == self.search.grade_id){
+					self.grade_name = value.name;
+				}
+			});
+		} else {
+			self.grade_name = Constants.EMPTY_STR;
+		}
 
 		$scope.ui_block();
 		StudentClassService.listModules(self.search, self.table).success(function(response) {
@@ -374,5 +385,46 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		}).error(function(response){
 			self.error = $scope.internalError();
 		});
+	}
+
+	self.getDownloadCurriculumPdfLink = function(){
+		var data = {};
+		self.download_pdf_link = Constants.FALSE;
+		data.grade_id = self.search.grade_id;
+		angular.forEach(self.classes, function(value, key){
+			if(value.classroom.id == self.current_class){
+				data.subject_id = value.classroom.subject.id;
+				data.curriculum_country = value.student.user.curriculum_country;
+			}
+		});
+
+		StudentClassService.getDownloadCurriculumPDFLink(data).success(function(response,status,headers){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			} else if (response.data){
+				self.download_pdf_link = response.data;
+			}
+
+		});
+	}
+
+
+	self.downloadCurriculumPDF = function(){
+		StudentClassService.downloadCurriculumPDF(self.download_pdf_link.url).success(function(response){
+
+			try{
+				var decodedString = String.fromCharCode.apply(null, new Uint8Array(response));
+				var obj = JSON.parse(decodedString);
+				if(obj.errors){
+					self.errors = $scope.errorHandler(obj.errors);
+				}
+			} catch(e){
+				var blob = new Blob([ response ], { type : 'application/pdf' });
+				saveAs(blob, self.download_pdf_link.filename);
+			}
+			
+
+		});
+
 	}
 }

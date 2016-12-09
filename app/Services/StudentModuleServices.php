@@ -468,4 +468,76 @@ class StudentModuleServices {
 
 	}
 
+	/**
+	 * fill in the blanks or enumerate match answers in order, $answer is comma separated, $correct in object
+	 * @param $answer
+	 * @param $correct
+	 * @return bool
+	 */
+	public function answerOrdering($answer,$correct){
+
+		//elimination order if matched
+		//match by key value
+
+		$answer_values = explode(",",$answer);
+
+		$func = function($item){
+			return $item->value;
+		};
+
+		$correct_values = array_map($func,$correct);
+
+		$match_values = function($item1,$item2){
+			return ($item1 == $item2);
+		};
+
+		if(count($answer_values) == count($correct_values)){
+			for($i=0;$i < count($correct); $i++){
+				if(!$match_values($answer_values[$i],$correct_values[$i])){
+					return false;
+				}
+			}
+		} else {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * fill in the blanks or enumerate match answer in any order, $answer is comma separated, $correct in object
+	 * @param $answer
+	 * @param $correct
+	 * @return bool
+	 */
+	public function answerInterchange($answer,$correct){
+
+		//elimination if matched
+		//use array_intersect
+
+		$answer_values = explode(",",$answer);
+
+		$func = function($item){
+			return $item->value;
+		};
+
+		$correct_values = array_map($func,$correct);
+
+		$match_values = function($item1,$item2){
+			return in_array($item1,$item2);
+		};
+
+		if(count($answer_values) == count($correct)){
+			for($i=0;$i < count($correct); $i++){
+				if(!$match_values($answer_values[$i],$correct_values)){
+					return false;
+				}
+			}
+		} else {
+			return false;
+		}
+
+		return true;
+	}
+
 }

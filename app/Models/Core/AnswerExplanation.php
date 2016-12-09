@@ -35,6 +35,8 @@ class AnswerExplanation extends Model {
 		'image' => 0
 	];
 
+	public $translatedAttributes = ['answer_explanation'];
+
 	//accessor
 
 	//Translation

@@ -417,7 +417,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 						->where('module_countries.country_id','=',$criteria['country_id']);
 				})
 				->whereNotNull('country_id')
-				;
+				->orderBy('module_countries.seq_no');
 
 			//Get module_name
 			if (isset($criteria['module_name'])) {

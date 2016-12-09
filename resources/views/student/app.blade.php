@@ -91,6 +91,8 @@
     {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
     {!! Html::script('/js/ng-file-upload.min.js')!!}
 
+    {!! Html::script('/js/common/FileSaver.min.js') !!}
+
     @yield('scripts')
     <!-- END SCRIPTS -->
 

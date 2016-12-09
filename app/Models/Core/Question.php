@@ -59,6 +59,8 @@ class Question extends Model {
 		'answer_text_field'
 	];
 
+	public $translatedAttributes = ['questions_text','answer'];
+
 	//Accessor
 
 	//Translation accessor
@@ -88,7 +90,10 @@ class Question extends Model {
 
 		if ($this->attributes['question_type'] == config('futureed.question_type_fill_in_the_blank')) {
 
-			return count(preg_split('/,(?!\s)/', $this->attributes['answer'])); // split only by comma (without trailing space)
+			//decode json into format and count answers.
+			$answer = json_decode($this->attributes['answer']);
+
+			return count($answer->answer);
 
 		} else {
 

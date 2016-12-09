@@ -1801,13 +1801,6 @@ hr {
 	color: #fff;
 }
 
-.category-info {
-	margin-left:30px;
-}
-
-.category-info img {
-	width: 30px;
-}
 /*end current learning tab*/
 
 /*subject-area tab*/
@@ -2474,10 +2467,6 @@ pre.dropdown-menu {
 	margin: 0 0 0 55px;
 }
 
-.m-top-85 {
-	margin-top: 85px !important;
-}
-
 .tip-result {
 	margin: 85px 40% 25px 38% !important;
 }
@@ -2486,6 +2475,17 @@ pre.dropdown-menu {
 	margin-bottom: 0px;
 }
 
-.m-top-20 {
-	margin-top: 20px;
+.curriculum-button-disabled {
+	margin: 10px auto;
+    padding: 10px;
+    -webkit-filter: grayscale(100%);
+       -moz-filter: grayscale(100%);
+         -o-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+            filter: grayscale(100%);
+}
+
+.curriculum-button {
+	margin: 10px auto;
+    padding: 10px;
 }

@@ -10,6 +10,7 @@ namespace FutureEd\Models\Repository\AnswerExplanationTranslation;
 
 
 use FutureEd\Models\Core\AnswerExplanation;
+use FutureEd\Models\Core\AnswerExplanationTranslation;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 
@@ -76,6 +77,14 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 	 */
 	public function checkLanguageAvailability($locale){
 		return AnswerExplanation::first()->translate($locale);
+	}
+
+	/**
+	 * Get collection of languages.
+	 * @return mixed
+	 */
+	public function getLanguages(){
+		return AnswerExplanationTranslation::select('locale')->groupBy('locale')->get();
 	}
 
 	/**
