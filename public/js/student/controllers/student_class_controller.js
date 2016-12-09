@@ -259,6 +259,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		self.errors = Constants.FALSE;
 		self.tableDefaults();
 		self.list();
+		self.getDownloadCurriculumPdfLink();
 		
 		event = getEvent(event);
 		event.preventDefault();
@@ -386,8 +387,9 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		});
 	}
 
-	self.downloadCurriculumPDF = function(){
+	self.getDownloadCurriculumPdfLink = function(){
 		var data = {};
+		self.download_pdf_link = Constants.FALSE;
 		data.grade_id = self.search.grade_id;
 		angular.forEach(self.classes, function(value, key){
 			if(value.classroom.id == self.current_class){
@@ -396,7 +398,20 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 			}
 		});
 
-		StudentClassService.downloadCurriculumPDF(data).success(function(response,status,headers){
+		StudentClassService.getDownloadCurriculumPDFLink(data).success(function(response,status,headers){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			} else if (response.data){
+				self.download_pdf_link = response.data;
+			}
+
+		});
+	}
+
+
+	self.downloadCurriculumPDF = function(){
+		StudentClassService.downloadCurriculumPDF(self.download_pdf_link.url).success(function(response){
+
 			try{
 				var decodedString = String.fromCharCode.apply(null, new Uint8Array(response));
 				var obj = JSON.parse(decodedString);
@@ -404,14 +419,12 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 					self.errors = $scope.errorHandler(obj.errors);
 				}
 			} catch(e){
-				var content_dispostion = headers('content-disposition');
-				var result = content_dispostion.split(";")[1];
-				result = result.replace('\"','').replace('\"','');
-				result = result.split("=")[1];
-				var file = new Blob([response], { type: 'application/pdf' });
-				saveAs(file, result);
+				var blob = new Blob([ response ], { type : 'application/pdf' });
+				saveAs(blob, self.download_pdf_link.filename);
 			}
+			
 
 		});
+
 	}
 }

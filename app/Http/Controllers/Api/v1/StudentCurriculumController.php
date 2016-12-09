@@ -40,7 +40,7 @@ class StudentCurriculumController extends ApiController {
 	 * @param subject_id
 	 * @return file
 	 */
-	public function downloadCurriculumPdf(){
+	public function getCurriculumPDFDownloadLink(){
 
 		$filesystem = new Filesystem();
 
@@ -76,14 +76,39 @@ class StudentCurriculumController extends ApiController {
 
 		$filepath = storage_path().'/curriculum/'.session('appLanguage','en'). '/'.$filename;
 
+		$url_path = url().'/api/v1/student/curriculum/export?filename='.$filename.'&locale='.session('appLanguage','en');
+
+		if ($filesystem->exists($filepath)) {
+
+			$data['url'] = $url_path;
+
+			$data['filename'] = $filename;
+
+			return $this->respondWithData($data);
+
+		}
+
+		return $this->respondErrorMessage(2053);
+	}
+
+	public function downloadCurriculumPdf(){
+
+		$filesystem = new Filesystem();
+
+		$filename = Input::get('filename');
+
+		$locale = Input::get('locale');
+
+		$filepath = storage_path().'/curriculum/'.$locale. '/'.$filename;
+
 		$headers = array(
               		'Content-Type: application/pdf',
          		);
 
+
 		if ($filesystem->exists($filepath)) {
 
 			return \Response::download($filepath,$filename,$headers);
-
 		}
 
 		return $this->respondErrorMessage(2053);
