@@ -35,7 +35,7 @@
                     <td>{{ strip_tags($question->questions_text) }}</td>
                     <td>{{ $question->answer_status }}</td>
                     <td>
-                        @if( $question->answer_status == config('futureed.answer_status_correct'))
+                        @if( $question->answer_status == config('futureed.answer_status_wrong') && !is_null($question->answer_status))
                             <img src="{{ config('futureed.answer_explanation_image_final') . '/' . $question->image }}">
                         @else
                             {{ '' }}
