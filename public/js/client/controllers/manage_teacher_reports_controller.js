@@ -597,7 +597,7 @@ function ManageTeacherReportsController($scope, $timeout, ManageTeacherReportsSe
                     var result = response.data;
                     self.class_list = result.record;
 
-                    if(self.class_list){
+                    if(response.data.total > 0){
                         self.class_id = self.class_list[0].id;
                         self.getAllStudentByClass();
                     }
@@ -617,7 +617,7 @@ function ManageTeacherReportsController($scope, $timeout, ManageTeacherReportsSe
                 } else if (response.data) {
                     self.student_list = response.data.records;
 
-                    if (self.student_list) {
+                    if (response.data.total > 0) {
                         self.student_id = self.student_list[0].student.id;
                         self.setActive();
                     }
