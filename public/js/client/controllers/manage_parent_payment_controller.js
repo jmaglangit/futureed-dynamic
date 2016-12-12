@@ -622,6 +622,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.saveSubscription = function(){
 
 		self.paySubscription(Constants.TRUE);
+		self.subscription_invoice.save = Constants.TRUE;
 		self.setActive();
 
 	};

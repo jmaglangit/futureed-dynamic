@@ -233,7 +233,13 @@ class ParentStudentController extends ApiController {
 
         $order['date_start'] = Carbon::now()->toDateTimeString();
         $order['date_end'] = Carbon::now()->addDays($order['date_end'])->toDateTimeString();
-        $order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
+
+
+        if (!isset($order['save'])) {
+
+            $order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
+        }
+
         $order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
 
         $new_order = $this->order->addOrder($order);
