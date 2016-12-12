@@ -1465,4 +1465,16 @@ function ManagePrincipalPaymentController(
 
 	}
 
+	self.addCommaToNumbers = function(value, isAInt){
+		var formatted_string = Constants.EMPTY_STR;
+		if(isAInt == Constants.TRUE) {
+			formatted_string = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		} else {
+			var temp = parseFloat(value).toFixed(2);
+			formatted_string = temp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
+		return formatted_string;
+	}
+
 }
