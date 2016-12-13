@@ -283,7 +283,7 @@
 				<div class="col-xs-12">
 					<div class="col-xs-2"></div>
 					<div class="quoted-module-icon-holder col-xs-3">
-                        <p ng-show="mod.answer_explanation.length > futureed.FALSE" class="quote-message-obtuse">{! mod.avatar_quote_info.quote !}</p>
+                        <p class="quote-message-obtuse">{! mod.avatar_quote_info.quote !}</p>
 						<img class="quoted-avatar" ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
 					</div>
 
