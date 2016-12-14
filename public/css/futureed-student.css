@@ -765,7 +765,7 @@ hr {
 }
 
 .module-item {
-	margin: 10px 25px 0 25px;
+	margin: 10px 20px 0 25px;
 	display: inline-block;
 	text-align: center;
 	width: 15%;
@@ -2476,8 +2476,10 @@ pre.dropdown-menu {
 }
 
 .curriculum-button-disabled {
-	margin: 10px auto;
-    padding: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+	width: 70px;
+	height: 70px;
     -webkit-filter: grayscale(100%);
        -moz-filter: grayscale(100%);
          -o-filter: grayscale(100%);
@@ -2486,6 +2488,30 @@ pre.dropdown-menu {
 }
 
 .curriculum-button {
-	margin: 10px auto;
-    padding: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+	width: 70px;
+	height: 70px;
+}
+
+.curriculum-button-container {
+	min-width: 70px;
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.tooltip.curriculum-tooltip .tooltip-inner {
+	background-color: #04435e;
+	margin: 1px 0px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-family: 'WeblySleek UI Semibold', sans-serif;
+	width: 180px;
+}
+
+.tooltip.curriculum-tooltip .tooltip-arrow {
+	margin:1px;
+	border-bottom-color: #04435e;
+	left: 85px;
 }
