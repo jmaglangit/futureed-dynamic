@@ -1304,8 +1304,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);
 			} else {
-				self.answer_explanation = response.data;
-				self.answer_explanation.count = response.data.length;
+				self.answer_explanation = response.data.records;
+				self.answer_explanation.count = response.data.records.length;
 				self.answer_exp_offset = 0;
 				self.answer_explanation_fully_loaded = Constants.TRUE;
 			}
