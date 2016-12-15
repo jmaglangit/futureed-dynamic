@@ -79,7 +79,10 @@ class QuestionAnswerTranslationRepository implements QuestionAnswerTranslationRe
 	 * @return mixed
 	 */
 	public function checkLanguageAvailability($locale){
-		return QuestionAnswer::first()->translate($locale);
+		return QuestionAnswerTranslation::select('locale')
+			->where('locale',$locale)
+			->groupBy('locale')
+			->get();
 	}
 
 	/**

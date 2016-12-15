@@ -78,7 +78,10 @@ class QuoteTranslationRepository implements QuoteTranslationRepositoryInterface{
 	 * @return mixed
 	 */
 	public function checkLanguageAvailability($locale){
-		return Quote::first()->translate($locale);
+		return QuoteTranslation::select('locale')
+			->where('locale',$locale)
+			->groupBy('locale')
+			->get();
 	}
 
 	/**

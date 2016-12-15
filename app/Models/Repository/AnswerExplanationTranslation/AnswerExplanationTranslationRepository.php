@@ -76,7 +76,10 @@ class AnswerExplanationTranslationRepository implements AnswerExplanationTransla
 	 * @return mixed
 	 */
 	public function checkLanguageAvailability($locale){
-		return AnswerExplanation::first()->translate($locale);
+		return AnswerExplanationTranslation::select('locale')
+			->where('locale',$locale)
+			->groupBy('locale')
+			->get();
 	}
 
 	/**
