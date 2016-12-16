@@ -499,4 +499,15 @@ class StudentServices
 		}
 	}
 
+	/**
+	 * Update student curriculum country
+	 * @param $user_id
+	 * @param $curriculum_country
+	 * @return mixed
+	 */
+	public function updateStudentCurriculum($user_id,$curriculum_country){
+
+		return $this->user->updateUser($user_id,['curriculum_country' => $curriculum_country]);
+	}
+
 }
