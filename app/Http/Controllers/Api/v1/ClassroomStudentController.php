@@ -52,22 +52,12 @@ class ClassroomStudentController extends ApiController {
 			$category['class_id'] = Input::get('class_id');
 		}
 
-        if(Input::get('offset')){
-
-            $category['offset'] = Input::get('offset');
-        }
-
-        if(Input::get('limit')){
-
-            $category['limit'] = Input::get('limit');
-        }
-
         $offset = (Input::get('offset')) ? Input::get('offset') : 0;
 
         $limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
 
 		return $this->respondWithData(
-            $this->class_students->getClassStudents($category,$offset,$limit)
+            $this->class_students->getClassStudents($category,$limit,$offset)
         );
 	}
 
