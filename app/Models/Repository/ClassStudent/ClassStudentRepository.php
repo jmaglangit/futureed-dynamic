@@ -81,13 +81,14 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				$class_student = $class_student->subscriptionCountry($criteria['country_id']);
 			}
 
+			$count = $class_student->get()->count();
+
 			if ($limit > 0 && $offset >= 0) {
 
 				$class_student = $class_student->offset($offset)->limit($limit);
 			}
 
 			$records = $class_student->get();
-			$count = $class_student->get()->count();
 
 			$response = [
 				'total' => $count,
