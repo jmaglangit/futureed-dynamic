@@ -23,6 +23,10 @@ class Subscription extends Model {
 		'updated_by' => 1
 	];
 
+    protected $casts = [
+        'has_lsp' => 'integer',
+    ];
+
     //-------------scopes
 	public function scopeName($query, $name) {
 		
