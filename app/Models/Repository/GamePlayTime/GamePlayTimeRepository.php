@@ -33,9 +33,31 @@ class GamePlayTimeRepository implements GamePlayTimeRepositoryInterface{
 	}
 
 	//get game play
-	public function getGamePlay($student_id, $game_id){
+	public function getGamePlay($student_id){
 
-		return GamePlayTime::where('student_id',$student_id)
-			->where('game_id',$game_id)->get();
+		return GamePlayTime::where('student_id',$student_id)->get();
+	}
+
+	public function updateGamePlay($student_id, $data){
+
+		DB::beginTransaction();
+
+		try{
+
+			 $response = GamePlayTime::where('student_id',$student_id)->update($data);
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
 	}
 }
