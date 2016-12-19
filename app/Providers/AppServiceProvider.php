@@ -382,5 +382,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\ModuleCountry\ModuleCountryRepositoryInterface',
 			'FutureEd\Models\Repository\ModuleCountry\ModuleCountryRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\GamePlayTime\GamePlayTimeRepositoryInterface',
+			'FutureEd\Models\Repository\GamePlayTime\GamePlayTimeRepository'
+		);
 	}
 }
