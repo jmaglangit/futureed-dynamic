@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\StudentGameRequest;
 use FutureEd\Models\Repository\Game\GameRepositoryInterface;
+use FutureEd\Models\Repository\GamePlayTime\GamePlayTimeRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentGame\StudentGameRepositoryInterface;
 use Illuminate\Support\Facades\Input;
@@ -14,15 +15,18 @@ class StudentGameController extends ApiController {
 	protected $student_game;
 	protected $student;
 	protected $game;
+	protected $game_time;
 
 	public function __construct(
 		StudentGameRepositoryInterface $studentGameRepositoryInterface,
 		StudentRepositoryInterface $studentRepositoryInterface,
-		GameRepositoryInterface $gameRepositoryInterface
+		GameRepositoryInterface $gameRepositoryInterface,
+		GamePlayTimeRepositoryInterface $gamePlayTimeRepositoryInterface
 	){
 		$this->student_game = $studentGameRepositoryInterface;
 		$this->student = $studentRepositoryInterface;
 		$this->game = $gameRepositoryInterface;
+		$this->game_time = $gamePlayTimeRepositoryInterface;
 	}
 
 	/**
@@ -105,5 +109,30 @@ class StudentGameController extends ApiController {
 
 		return $this->respondWithData($this->student_game->studentBuyGame($data));
 	}
+
+	//TODO: start play time, student and game needed.
+	// check if exists, update time
+	public function studentPlayTime(StudentGameRequest $request){
+
+		$data = $request->all();
+
+		//student id
+
+		//check if student can play then
+		//check if exist -- then update
+		// if not exist -- then create
+
+		if($this->student->getStudentPlay($data['id'])){
+			//add/update student game time
+
+		} else {
+			// return student can't play
+		}
+
+
+
+
+	}
+
 
 }
