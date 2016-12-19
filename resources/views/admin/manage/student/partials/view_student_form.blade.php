@@ -1,5 +1,5 @@
 <div ng-if="student.active_view || student.active_edit">
-	<div class="content-title">
+	<div id="content-title" class="content-title">
 		<div class="title-main-content">
 			<span>{!! trans('messages.admin_student_details') !!}</span>
 		</div>
