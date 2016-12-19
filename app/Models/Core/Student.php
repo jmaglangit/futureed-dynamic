@@ -43,6 +43,7 @@ class Student extends Model {
 		'points',
 		'point_level_id',
 		'learning_style_id',
+		'can_play',
 		'status',
 		'created_by',
 		'updated_by',
