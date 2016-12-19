@@ -297,6 +297,9 @@ return [
 	//games images folder
 	'game_images_folder' => '/uploads/games',
 
+	//game time in minutes
+	'game_time' => 30,
+
 	'accepted_csv' => [
 		'text/csv',
 		'application/vnd.ms-excel'
