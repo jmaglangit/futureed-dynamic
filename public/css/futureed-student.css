@@ -2515,3 +2515,24 @@ pre.dropdown-menu {
 	border-bottom-color: #04435e;
 	left: 85px;
 }
+
+#review-lesson{
+    font-size: 15px;
+    margin-bottom: 3px;
+}
+#review-lesson-div > a > img{
+    width: 40px;
+    height: 40px;
+}
+#review-lesson-div {
+    position: absolute;
+    bottom: 0;
+    width: auto;
+    left: 50%;
+    margin: 0 0 0 -200px;
+    padding-bottom: 40px;
+}
+
+#review-lesson:hover{
+    text-decoration: none;
+}
