@@ -11,4 +11,7 @@ interface GamePlayTimeRepositoryInterface {
 
 	//update game play
 	public function updateGamePlay($student_id, $data);
+
+	//record game play
+	public function recordGamePlay($condition,$values);
 }
