@@ -20,10 +20,21 @@ class StudentGameRequest extends ApiRequest {
 	public function rules()
 	{
 		if($this->method() == 'POST'){
-			return [
-				'user_id' => 'required|integer|exists:users,id,deleted_at,NULL',
-				'games_id' => 'required|integer|exists:games,id,deleted_at,NULL'
-			];
+
+			switch($this->route()->getName()){
+				case 'api.v1.student.play.time':
+					return [
+						'student_id' => 'required|integer|exists:students,id,deleted_at,NULL',
+						'game_id' => 'required|integer|exists:games,id,deleted_at,NULL'
+					];
+					break;
+				default:
+					return [
+						'user_id' => 'required|integer|exists:users,id,deleted_at,NULL',
+						'games_id' => 'required|integer|exists:games,id,deleted_at,NULL'
+					];
+					break;
+			}
 		}
 	}
 
