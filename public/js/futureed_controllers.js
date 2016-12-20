@@ -770,6 +770,18 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
+	//Display Game Time message modal
+	$scope.displayGameModal = function(){
+
+		$scope.game_messages = Constants.TRUE;
+
+		$("#play_game").modal({
+			backdrop : 'static',
+			keyboard : Constants.FALSE,
+			show	 : Constants.TRUE
+		});
+	}
+
 	$scope.redirectRewards = function(url,tab_name){
 
 		$window.location.href = url + '?tab=' + tab_name;
