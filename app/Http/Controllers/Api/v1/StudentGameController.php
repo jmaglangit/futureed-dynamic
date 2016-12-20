@@ -122,16 +122,21 @@ class StudentGameController extends ApiController {
 		//check if exist -- then update
 		// if not exist -- then create
 
-		if($this->student->getStudentPlay($data['id'])){
+		if($this->student->getStudentPlay($data['student_id'])){
 			//add/update student game time
+
+			return $this->respondWithData($this->game_time->recordGamePlay([
+				'student_id' => $data['student_id'],
+				'game_id' => $data['game_id']
+			],[
+				'countdown_time_played' => 	(empty($data['countdown_time_played'])) ? config('futureed.game_time') : $data['countdown_time_played'],
+				'date_played' => (empty($data['date_played'])) ? Carbon::now()->toDateString() : $data['date_played']
+			]));
 
 		} else {
 			// return student can't play
+			return $this->respondErrorMessage(2078);
 		}
-
-
-
-
 	}
 
 
