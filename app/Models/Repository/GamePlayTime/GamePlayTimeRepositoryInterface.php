@@ -3,15 +3,13 @@
 
 interface GamePlayTimeRepositoryInterface {
 
-	//add
 	public function addGamePlay($data);
 
-	//get by spec
 	public function getGamePlay($student_id);
 
-	//update game play
 	public function updateGamePlay($student_id, $data);
 
-	//record game play
+	public function getStudentGamePlay($condition);
+
 	public function recordGamePlay($condition,$values);
 }

@@ -9,7 +9,10 @@ class GamePlayTimeRepository implements GamePlayTimeRepositoryInterface{
 
 	use LoggerTrait;
 
-	// add
+	/**
+	 * @param $data
+	 * @return bool|static
+	 */
 	public function addGamePlay($data){
 
 		DB::beginTransaction();
@@ -32,13 +35,20 @@ class GamePlayTimeRepository implements GamePlayTimeRepositoryInterface{
 		return $response;
 	}
 
-	//get game play
+	/**
+	 * @param $student_id
+	 * @return mixed
+	 */
 	public function getGamePlay($student_id){
 
 		return GamePlayTime::where('student_id',$student_id)->get();
 	}
 
-	//update game
+	/**
+	 * @param $student_id
+	 * @param $data
+	 * @return bool
+	 */
 	public function updateGamePlay($student_id, $data){
 
 		DB::beginTransaction();
@@ -60,6 +70,17 @@ class GamePlayTimeRepository implements GamePlayTimeRepositoryInterface{
 
 		return $response;
 
+	}
+
+	/**
+	 * Get student game play
+	 * @param $condition
+	 * @return mixed
+	 */
+	public function getStudentGamePlay($condition){
+
+		return GamePlayTime::where('student_id',$condition['student_id'])
+			->where('game_id',$condition['game_id'])->get();
 	}
 
 	/**
