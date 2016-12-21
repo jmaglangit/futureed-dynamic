@@ -298,7 +298,7 @@ return [
 	'game_images_folder' => '/uploads/games',
 
 	//game time in minutes
-	'game_time' => 30,
+	'game_time' => 1800,
 
 	'accepted_csv' => [
 		'text/csv',
