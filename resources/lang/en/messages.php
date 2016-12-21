@@ -1457,4 +1457,5 @@ return [
 
 	'game_time_message' => 'Timer will start once you click on :BUTTON. You have :TIME minutes of play time.',
 	'game_proceed' => 'Proceed to Game ?',
+	'game_lock' => 'Time expired',
 ];
