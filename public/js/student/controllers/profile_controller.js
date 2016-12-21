@@ -6,6 +6,10 @@ ProfileController.$inject = ['$scope', '$sce', '$timeout','apiService', 'Profile
 function ProfileController($scope,$sce, $timeout,apiService, ProfileService, TableService) {
 	var self = this;
 
+	$scope.$on('$locationChangeStart', function (event, next, current) {
+		self.alertGame();
+	});
+
 	TableService(self);
 	self.tableDefaults();
 
@@ -57,8 +61,15 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		if($scope.duration != Constants.NULL){
+			self.updateGameTime();
+		}
+
 		$scope.$parent.u_error = Constants.FALSE;
 		$scope.$parent.u_success = Constants.FALSE;
+		$scope.countdown = Constants.FALSE;
+		$scope.time_up = Constants.FALSE;
+
 
 		self.password_validated = Constants.FALSE;
 		self.password_selected = Constants.FALSE;
@@ -920,6 +931,120 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 			$scope.ui_unblock();
 		});
 
+	}
+
+	//activate timer
+	self.activateGameTimer = function(){
+
+		var data = {
+			student_id : $scope.user.id,
+			game_id : self.selected_game.id
+		};
+		//update api
+		ProfileService.recordStudentGameTime(data).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+
+				$scope.displayGameModal();
+			} else {
+
+				self.student_game_time = response.data;
+
+				// run timer with aloted max time.
+				self.countdownTimer(response.data.countdown_time_played);
+
+				//close modal
+				$("#play_game").modal('hide');
+				$scope.ui_unblock();
+			}
+
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getGameTime = function(){
+
+		ProfileService.getStudentGameTime($scope.user.id).success(function(response){
+			if(response.errors){
+
+				self.errors = $scope.errorHandler(response.errors);
+				$scope.displayGameModal();
+			} else {
+
+				self.student_game_time = response.data;
+
+				// run timer with aloted max time.
+				self.countdownTimer(response.data.countdown_time_played);
+
+				//close modal
+				$("#play_game").modal('hide');
+				$scope.ui_unblock();
+			}
+
+
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//update game time
+	self.updateGameTime = function(){
+
+		var data = {
+			student_id : $scope.user.id,
+			game_id : self.selected_game.id,
+			countdown_time_played : $scope.duration._milliseconds/1000
+		};
+
+		//update api
+		//update student can_play = 0
+		ProfileService.recordStudentGameTime(data).success(function(response){
+			if(self.selected_game != Constants.FALSE && self.selected_game != Constants.NULL
+				&& self.selected_game != Constants.UNDEFINED){
+				if(response.errors){
+
+					self.errors = $scope.errorHandler(response.errors);
+					$scope.displayGameModal();
+					clearInterval(self.timer);
+				} else {
+
+					self.student_game_time = response.data;
+				}
+			}
+
+			clearInterval(self.timer);
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//countdown timer
+	self.countdownTimer = function (max_time){
+		var time = max_time;
+		$scope.duration = moment.duration(time*1000, 'milliseconds');
+		var interval = 1000;
+
+		 self.timer = setInterval(function(){
+			$scope.duration = moment.duration($scope.duration - interval, 'milliseconds');
+
+			 if($scope.duration._milliseconds <= Constants.FALSE){
+				 //pop-up modal
+				 $scope.time_up = Constants.TRUE;
+				 $scope.countdown = $scope.duration._milliseconds / 60;
+				 self.updateGameTime();
+			 } else {
+				 $('#countdown').text($scope.duration.hours() + ":" + $scope.duration.minutes() + ":" + $scope.duration.seconds())
+			 }
+		}, interval);
+	}
+
+	self.alertGame = function(){
+		alert('no....');
 	}
 
 
