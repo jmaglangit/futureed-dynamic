@@ -118,5 +118,24 @@ function ProfileService($http) {
 			, url	:	apiUrl + 'student-point-cash?student_id=' + student_id
 		});
 	}
+
+	//update game time
+	//api/v1/student-game/time
+	api.recordStudentGameTime = function(data){
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: apiUrl + 'student-game/time'
+		});
+	}
+
+	//get played time
+	api.getStudentGameTime = function(student_id){
+		return $http({
+			method	: Constants.METHOD_GET,
+			url		: apiUrl + 'student-game/time-played/' + student_id
+		});
+	}
+
 	return api;
 }
