@@ -110,29 +110,65 @@ class StudentGameController extends ApiController {
 		return $this->respondWithData($this->student_game->studentBuyGame($data));
 	}
 
-	//TODO: start play time, student and game needed.
-	// check if exists, update time
+	/**
+	 * Student Play game record.
+	 * @param StudentGameRequest $request
+	 * @return mixed
+	 */
 	public function studentPlayTime(StudentGameRequest $request){
 
 		$data = $request->all();
 
-		//student id
-
-		//check if student can play then
-		//check if exist -- then update
-		// if not exist -- then create
-
 		if($this->student->getStudentPlay($data['student_id'])){
+
 			//add/update student game time
+			$response =  $this->respondWithData($this->game_time->updateGamePlay($data['student_id'],[
+				'game_id' => $data['game_id'],
+				'countdown_time_played' => $data['countdown_time_played'] ,
+				'date_played' => (empty($data['date_played'])) ? Carbon::now()->toDateString() : $data['date_played']]));
 
-			return $this->respondWithData($this->game_time->recordGamePlay([
-				'student_id' => $data['student_id'],
-				'game_id' => $data['game_id']
-			],[
-				'countdown_time_played' => 	(empty($data['countdown_time_played'])) ? config('futureed.game_time') : $data['countdown_time_played'],
-				'date_played' => (empty($data['date_played'])) ? Carbon::now()->toDateString() : $data['date_played']
-			]));
+			if(!empty($data['countdown_time_played']) && $data['countdown_time_played'] <= config('futureed.false')){
 
+				//update student
+				$this->student->updateStudentDetails($data['student_id'],['can_play' => config('futureed.false')]);
+
+				// return student can't play
+				return $this->respondErrorMessage(2078);
+			} else {
+				return $response;
+			}
+
+		} else {
+			// return student can't play
+			return $this->respondErrorMessage(2078);
+		}
+	}
+
+	/**
+	 * @param $student_id
+	 * @return mixed
+	 */
+	public function getStudentPlayTime($student_id){
+
+		if($this->student->getStudentPlay($student_id)){
+			$response = $this->game_time->getGamePlay($student_id);
+
+			if(empty($response->toArray())){
+				//create
+				return $this->respondWithData($this->game_time->addGamePlay([
+					'student_id' => $student_id,
+					'countdown_time_played' => config('futureed.game_time')
+				]));
+			}elseif($response[0]->countdown_time_played <= config('futureed.false')){
+
+				//update student
+				$this->student->updateStudentDetails($response[0]->student_id,['can_play' => config('futureed.false')]);
+
+				// return student can't play
+				return $this->respondErrorMessage(2078);
+			} else {
+				return $this->respondWithData($response[0]);
+			}
 		} else {
 			// return student can't play
 			return $this->respondErrorMessage(2078);

@@ -356,6 +356,9 @@ class StudentModuleAnswerController extends ApiController{
 			//Nominate for badge.
 			$this->badge_services->checkBadgeCandidate($data['student_id'],$module->subject_id,$module->grade_id);
 
+			//update student can play
+			$this->student->updateStudentDetails($data['student_id'],['can_play' => config('futureed.true')]);
+
 
 		} //when 10 wrong answer set status to Failed.
 		elseif($student_module->wrong_counter >= 10){
