@@ -25,7 +25,8 @@ class StudentGameRequest extends ApiRequest {
 				case 'api.v1.student.play.time':
 					return [
 						'student_id' => 'required|integer|exists:students,id,deleted_at,NULL',
-						'game_id' => 'required|integer|exists:games,id,deleted_at,NULL'
+						'game_id' => 'required|integer|exists:games,id,deleted_at,NULL',
+						'countdown_time_played' => 'required'
 					];
 					break;
 				default:
