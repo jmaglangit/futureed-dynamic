@@ -10,7 +10,7 @@
 
                 <div ng-if="!profile.errors" class="row">
                     <div class="h4">{!! trans('messages.game_time_message',
-                    ['BUTTON' => '<b>' . strtoupper(trans('messages.play')) . '</b>', 'TIME' => config('futureed.game_time')]) !!} </div>
+                    ['BUTTON' => '<b>' . strtoupper(trans('messages.play')) . '</b>']) !!} {! profile.allowedTime(profile.student_game_time.countdown_time_played) !}</div>
                     <div class="h3">{!! trans('messages.game_proceed') !!}</div>
                 </div>
                 <div ng-if="profile.errors" class="row">
@@ -25,7 +25,7 @@
                 {{--TODO: on Play, set timer and inform api --}}
                 <div class="btn btn-maroon btn-medium" aria-label="Play"
                      ng-if="!profile.errors"
-                     ng-click="profile.getGameTime()">{!! trans('messages.play') !!}</div>
+                     ng-click="profile.countdownTimer(profile.student_game_time.countdown_time_played);">{!! trans('messages.play') !!}</div>
                 <div class="btn btn-maroon btn-medium" data-dismiss="modal" aria-label="Back"
                      ng-click="profile.setStudentProfileActive(futureed.GAMES)">{!! trans('messages.back') !!}</div>
             </div>
