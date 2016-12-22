@@ -36,4 +36,7 @@ class ErrorMessageServices
 	const MODULE_TRANSLATION_UPDATE_FAIL = 2075;
 	const LANGUAGE_NOT_AVAILABLE = 2076;
 	const LANGUAGE_FIELD_NOT_AVAILABLE = 2077;
+
+	//game time
+	const GAME_TIME_CANNOT_PLAY = 2078;
 }

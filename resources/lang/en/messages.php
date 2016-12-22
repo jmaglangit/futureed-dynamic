@@ -1455,4 +1455,8 @@ return [
 	'teacher_no_class' => 'No Class',
 	'teacher_no_student' => 'No Student',
 	'curriculum_pdf_not_exist' => 'Curriculum PDF does not exist',
+
+	'game_time_message' => 'Timer will start once you click on :BUTTON. You have :TIME minutes of play time.',
+	'game_proceed' => 'Proceed to Game ?',
+	'game_lock' => 'Time expired',
 ];

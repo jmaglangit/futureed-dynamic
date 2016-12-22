@@ -35,7 +35,7 @@
                         {!! Form::button(trans('messages.play')
                         , array(
                         'class' => 'btn btn-blue btn-medium center-block'
-                        , 'ng-click' => 'profile.playGame(game.id)'
+                        , 'ng-click' => 'profile.playGame(game.id); displayGameModal()'
                         , 'ng-if' => 'game.student_game.length'
                         )
                         ) !!}
