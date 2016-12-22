@@ -974,13 +974,6 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 			} else {
 
 				self.student_game_time = response.data;
-
-				// run timer with aloted max time.
-				self.countdownTimer(response.data.countdown_time_played);
-
-				//close modal
-				$("#play_game").modal('hide');
-				$scope.ui_unblock();
 			}
 
 
@@ -1025,6 +1018,11 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 
 	//countdown timer
 	self.countdownTimer = function (max_time){
+
+		//close modal
+		$("#play_game").modal('hide');
+		$scope.ui_unblock();
+
 		var time = max_time;
 		$scope.duration = moment.duration(time*1000, 'milliseconds');
 		var interval = 1000;
@@ -1043,8 +1041,12 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 		}, interval);
 	}
 
-	self.alertGame = function(){
-		alert('no....');
+	//allowed time converter
+	self.allowedTime = function(time){
+		var time_allowed = moment.duration(time*1000, 'milliseconds');
+		time_allowed = moment.duration(time_allowed - 1000,'milliseconds');
+
+		return time_allowed.minutes() + " minutes and " + time_allowed.seconds() + " seconds";
 	}
 
 
