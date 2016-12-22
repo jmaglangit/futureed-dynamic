@@ -1295,6 +1295,10 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 		self.errors = (error_student.length > Constants.FALSE) ? error_student :Constants.FALSE;
 
+        if((self.enlist_student.length <= 0)){
+            self.enable_student_list = Constants.FALSE;
+        }
+
 		return Constants.TRUE;
 	};
 
