@@ -226,7 +226,8 @@ class ClassStudentController extends ApiController {
            return $this->respondErrorMessage(2037);
         }
 
-		if($classroom->invoice->subscriptionPackage->country_id <> $student->user->curriculum_country){
+		if($classroom->invoice->subscriptionPackage->country_id <> $student->user->curriculum_country
+			&& $student->user->curriculum_country <> config('futureed.false')){
 
 			return $this->respondErrorMessage(2078);
 		}
@@ -236,6 +237,11 @@ class ClassStudentController extends ApiController {
         $data['status'] = 'Enabled';
         $data['date_started'] = Carbon::now();
         $this->class_student->addClassStudent($data);
+
+		//update student curriculum country
+		if($student->user->curriculum_country <> config('futureed.false')){
+			$this->user->updateCurriculumCountry($student->user->id,$classroom->invoice->subscriptionPackage->country_id);
+		}
 
         //increment seats_taken
         $classroom_data['seats_taken'] = $classroom->seats_taken + 1;

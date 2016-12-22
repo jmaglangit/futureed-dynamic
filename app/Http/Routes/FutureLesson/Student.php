@@ -411,6 +411,10 @@
 					'as' => 'student.partials.play-game',
 					'uses' => 'FutureLesson\Student\ProfileController@play_game'
 				]);
+				Routes::get('/play-game-messages',[
+					'as' => 'student.partials.play-game-messages',
+					'uses' => 'FutureLesson\Student\ProfileController@play_game_message'
+				]);
 
 			});
 		});

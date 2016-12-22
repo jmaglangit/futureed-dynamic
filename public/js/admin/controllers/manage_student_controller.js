@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageStudentController', ManageStudentController);
 
-ManageStudentController.$inject = ['$scope', '$filter', 'manageStudentService', 'apiService',  'TableService', 'SearchService', 'ValidationService','Upload'];
+ManageStudentController.$inject = ['$scope', '$filter', '$location', '$anchorScroll', 'manageStudentService', 'apiService',  'TableService', 'SearchService', 'ValidationService','Upload'];
 
-function ManageStudentController($scope, $filter, manageStudentService, apiService, TableService, SearchService, ValidationService, Upload) {
+function ManageStudentController($scope, $filter, $location, $anchorScroll, manageStudentService, apiService, TableService, SearchService, ValidationService, Upload) {
 	var self = this;
 
 	TableService(self);
@@ -441,6 +441,9 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
+
+        $location.hash('content-title');
+        $anchorScroll();
 	}
 
 	self.getPoints = function(id) {

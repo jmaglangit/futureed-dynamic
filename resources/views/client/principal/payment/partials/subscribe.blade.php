@@ -170,11 +170,11 @@
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="(key,classroom) in payment.subscription_classroom" ng-if="classroom">
-                                            <td class="h5">{! classroom.seats !}</td>
+                                            <td class="h5">{! payment.addCommaToNumbers(classroom.seats,futureed.TRUE) !}</td>
                                             <td class="h5">{! classroom.grade.name !}</td>
                                             <td class="h5">{! classroom.teacher.name !}</td>
                                             <td class="h5">{! classroom.class_name !}</td>
-                                            <td class="h5">{! classroom.price !}</td>
+                                            <td class="h5">{! payment.addCommaToNumbers(classroom.price,futureed.FALSE) !}</td>
                                             <td class="h5"><a class="btn btn-primary " ng-click="payment.removeClassroom(key,payment.subscription_classroom)">{!! strtoupper(trans('messages.delete')) !!}</a></td>
                                         </tr>
                                         <tr>
@@ -400,11 +400,11 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="classroom in payment.subscription_invoice.classrooms">
-                                                        <td class="h5">{! classroom.seats !}</td>
+                                                        <td class="h5">{! payment.addCommaToNumbers(classroom.seats,futureed.TRUE) !}</td>
                                                         <td class="h5">{! classroom.grade.name !}</td>
                                                         <td class="h5">{! classroom.teacher.name !}</td>
                                                         <td class="h5">{! classroom.class_name !}</td>
-                                                        <td class="h5">{! classroom.price !}</td>
+                                                        <td class="h5">{! payment.addCommaToNumbers(classroom.price,futureed.FALSE)  !}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -415,7 +415,7 @@
                                         <div class="h4">{!! trans('messages.total_price_computation') !!}</div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">{!! trans('messages.subtotal') !!} : </label>
-                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.sub_total !} USD</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.addCommaToNumbers(payment.subscription_invoice.sub_total,futureed.FALSE) !} USD</label>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">{!! trans('messages.discount') !!} : </label>
@@ -423,7 +423,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label h5">{!! trans('messages.total') !!} : </label>
-                                            <label class="col-lg-4 h5 form-label">{! payment.subscription_invoice.total_amount !} USD</label>
+                                            <label class="col-lg-4 h5 form-label">{! payment.addCommaToNumbers(payment.subscription_invoice.total_amount,futureed.FALSE) !} USD</label>
                                         </div>
                                     </div>
                                     @include('common.invoice_footer')

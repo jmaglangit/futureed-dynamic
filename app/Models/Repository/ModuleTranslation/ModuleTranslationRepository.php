@@ -79,7 +79,7 @@ class ModuleTranslationRepository implements ModuleTranslationRepositoryInterfac
 		return ModuleTranslation::select('locale')
 			->where('locale',$locale)
 			->groupBy('locale')
-			->get();;
+			->get();
 	}
 
 	/**

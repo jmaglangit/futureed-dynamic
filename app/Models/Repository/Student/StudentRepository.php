@@ -1066,5 +1066,15 @@ class StudentRepository implements StudentRepositoryInterface
 		return $response;
 	}
 
+	/**
+	 * Get Student value of can_play
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getStudentPlay($id){
+
+		return Student::whereId($id)->pluck('can_play');
+	}
+
 
 }

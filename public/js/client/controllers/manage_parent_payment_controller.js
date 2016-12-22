@@ -622,6 +622,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.saveSubscription = function(){
 
 		self.paySubscription(Constants.TRUE);
+		self.subscription_invoice.save = Constants.TRUE;
 		self.setActive();
 
 	};
@@ -1293,6 +1294,10 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		});
 
 		self.errors = (error_student.length > Constants.FALSE) ? error_student :Constants.FALSE;
+
+        if((self.enlist_student.length <= 0)){
+            self.enable_student_list = Constants.FALSE;
+        }
 
 		return Constants.TRUE;
 	};

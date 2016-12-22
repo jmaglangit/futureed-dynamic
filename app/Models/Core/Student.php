@@ -43,6 +43,7 @@ class Student extends Model {
 		'points',
 		'point_level_id',
 		'learning_style_id',
+		'can_play',
 		'status',
 		'created_by',
 		'updated_by',
@@ -52,7 +53,8 @@ class Student extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
-		'country_id' => 0
+		'country_id' => 0,
+		'can_play' => 1
 	];
 
 	// Accessor

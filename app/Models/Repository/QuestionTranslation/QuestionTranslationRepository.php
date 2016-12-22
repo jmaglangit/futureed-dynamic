@@ -84,7 +84,10 @@ class QuestionTranslationRepository implements QuestionTranslationRepositoryInte
 	 */
 	public function checkLanguageAvailability($locale){
 
-		return Question::first()->translate($locale);
+		return QuestionTranslation::select('locale')
+			->where('locale',$locale)
+			->groupBy('locale')
+			->get();
 	}
 
 	/**

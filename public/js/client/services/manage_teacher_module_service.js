@@ -10,7 +10,7 @@ function ManageTeacherModuleService($http){
 			method 	: Constants.METHOD_GET
 			, url 	: url + 'module?name=' + search.name
 				+ '&subject=' + search.subject
-				+ '&age_group_id=' + search.grade_id
+				+ '&grade_id=' + search.grade_id
 				+ '&country_id=' + search.country_id
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset

@@ -844,6 +844,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 								setAvatarQuote();
 						});
 					}
+                    self.record.student_module.last_answered_question_id = self.result.next_question;
 				}
 				self.date_start = new Date();
 			}
@@ -1039,7 +1040,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.selectAnswer = function(object) {
 		self.current_question.answer_id = object.id;
-	}
+    }
 
 	self.nextQuestion = function() {
 		self.errors = Constants.FALSE;

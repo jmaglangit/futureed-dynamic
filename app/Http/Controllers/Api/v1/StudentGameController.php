@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\StudentGameRequest;
 use FutureEd\Models\Repository\Game\GameRepositoryInterface;
+use FutureEd\Models\Repository\GamePlayTime\GamePlayTimeRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentGame\StudentGameRepositoryInterface;
 use Illuminate\Support\Facades\Input;
@@ -14,15 +15,18 @@ class StudentGameController extends ApiController {
 	protected $student_game;
 	protected $student;
 	protected $game;
+	protected $game_time;
 
 	public function __construct(
 		StudentGameRepositoryInterface $studentGameRepositoryInterface,
 		StudentRepositoryInterface $studentRepositoryInterface,
-		GameRepositoryInterface $gameRepositoryInterface
+		GameRepositoryInterface $gameRepositoryInterface,
+		GamePlayTimeRepositoryInterface $gamePlayTimeRepositoryInterface
 	){
 		$this->student_game = $studentGameRepositoryInterface;
 		$this->student = $studentRepositoryInterface;
 		$this->game = $gameRepositoryInterface;
+		$this->game_time = $gamePlayTimeRepositoryInterface;
 	}
 
 	/**
@@ -105,5 +109,71 @@ class StudentGameController extends ApiController {
 
 		return $this->respondWithData($this->student_game->studentBuyGame($data));
 	}
+
+	/**
+	 * Student Play game record.
+	 * @param StudentGameRequest $request
+	 * @return mixed
+	 */
+	public function studentPlayTime(StudentGameRequest $request){
+
+		$data = $request->all();
+
+		if($this->student->getStudentPlay($data['student_id'])){
+
+			//add/update student game time
+			$response =  $this->respondWithData($this->game_time->updateGamePlay($data['student_id'],[
+				'game_id' => $data['game_id'],
+				'countdown_time_played' => $data['countdown_time_played'] ,
+				'date_played' => (empty($data['date_played'])) ? Carbon::now()->toDateString() : $data['date_played']]));
+
+			if(!empty($data['countdown_time_played']) && $data['countdown_time_played'] <= config('futureed.false')){
+
+				//update student
+				$this->student->updateStudentDetails($data['student_id'],['can_play' => config('futureed.false')]);
+
+				// return student can't play
+				return $this->respondErrorMessage(2078);
+			} else {
+				return $response;
+			}
+
+		} else {
+			// return student can't play
+			return $this->respondErrorMessage(2078);
+		}
+	}
+
+	/**
+	 * @param $student_id
+	 * @return mixed
+	 */
+	public function getStudentPlayTime($student_id){
+
+		if($this->student->getStudentPlay($student_id)){
+			$response = $this->game_time->getGamePlay($student_id);
+
+			if(empty($response->toArray())){
+				//create
+				return $this->respondWithData($this->game_time->addGamePlay([
+					'student_id' => $student_id,
+					'countdown_time_played' => config('futureed.game_time')
+				]));
+			}elseif($response[0]->countdown_time_played <= config('futureed.false')){
+
+				//update student
+				$this->student->updateStudentDetails($response[0]->student_id,['can_play' => config('futureed.false')]);
+
+				// return student can't play
+				return $this->respondErrorMessage(2078);
+			} else {
+				return $this->respondWithData($response[0]);
+			}
+		} else {
+			// return student can't play
+			return $this->respondErrorMessage(2078);
+		}
+	}
+
 
 }
