@@ -218,8 +218,8 @@
                                                            , 'ng-model' => 'payment.new_classroom.class_name')
                                                    ) !!}
                                             </td>
-                                            <td class="h5">{! (((payment.new_classroom.seats) ?  payment.new_classroom.seats : 0)
-                                                * payment.subscription_invoice.package_price) !}
+                                            <td class="h5">{! payment.addCommaToNumbers((((payment.new_classroom.seats) ?  payment.new_classroom.seats : 0)
+                                                * payment.subscription_invoice.package_price), futureed.FALSE) !}
                                             </td>
                                             <td class="h5">
                                                 <div ng-model="button" class="btn btn-primary"
