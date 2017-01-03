@@ -173,4 +173,16 @@ function ManageInvoiceController($scope, ManageInvoiceService, apiService, Table
 			self.errors = $scope.internalError();
 		});
 	}
+
+    self.getEnrolledStudents = function(invoice){
+
+        var seats = 0;
+        var classrooms = invoice.invoice_detail;
+
+        angular.forEach(classrooms, function(classroom){
+            seats = parseInt(seats, 10) + parseInt(classroom.classroom.seats_total, 10);
+        });
+
+        return seats;
+    }
 }
