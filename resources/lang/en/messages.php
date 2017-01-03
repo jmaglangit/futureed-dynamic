@@ -570,6 +570,7 @@ return [
 	'admin_age_group_list' => 'Age Group List',
 	'admin_delete_age_group' => 'Delete Age Group',
 	'admin_delete_age_group_msg' => 'Are you sure you want to delete this age group?',
+    'admin_grade_level' => 'Grade Level',
 	
 	//resources/views/admin/manage/announcement/index.blade.php
 	'admin_announce_client' => 'Client Announcement',
