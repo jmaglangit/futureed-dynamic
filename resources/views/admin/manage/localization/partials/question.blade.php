@@ -23,7 +23,9 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-2">{!! trans('messages.language') !!}</label>
                                 <div class="col-xs-3" ng-init="localization.getQuestionLanguages()">
-                                    <select name="language_options" class="form-control"
+                                    <select name="language_options"
+                                            class="form-control"
+                                            ng-change="localization.setButton(localization.question_locale_code, localization.question_field, 1)"
                                             ng-model="localization.question_locale_code"
                                             ng-options="lang.code as lang.word for lang in localization.question_languages">
                                         <option value="" ng-selected="selected">{!! trans('messages.select_language') !!}</option>
@@ -32,7 +34,9 @@
 
                                 <label class="control-label col-xs-2">{!! trans('messages.field') !!}</label>
                                 <div class="col-xs-3" ng-init="localization.getTranslatableQuestionField()">
-                                    <select name="module_field_options" class="form-control"
+                                    <select name="module_field_options"
+                                            class="form-control"
+                                            ng-change="localization.setButton(localization.question_locale_code, localization.question_field, 1)"
                                             ng-model="localization.question_field"
                                             ng-options="field.field for field in localization.question_translated_field">
                                         <option value="" ng-selected="selected">{!! trans('messages.select_field') !!}</option>
@@ -43,7 +47,9 @@
                         <fieldset>
                             <div class="from-group">
                                 <div class="btn-container col-xs-12">
-                                    <div class="btn btn-blue btn-medium" ng-click="localization.questionGoogleTranslate()">
+                                    <div class="btn btn-blue btn-medium"
+                                         ng-disabled="localization.question_is_disabled"
+                                         ng-click="localization.questionGoogleTranslate()">
                                         {!! trans('messages.google_translate') !!}
                                     </div>
                                     <div class="btn-group" data-toggle="buttons">
