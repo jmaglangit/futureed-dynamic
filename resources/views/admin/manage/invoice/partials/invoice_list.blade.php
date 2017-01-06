@@ -89,7 +89,6 @@
 					)
 				) !!}
 			</div>
-
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
@@ -107,7 +106,7 @@
 			            <td>{! invoiceInfo.order_no !}</td>
 			            <td>{! invoiceInfo.date_start | ddMMyy !}</td>
 			            <td>{! invoiceInfo.date_end | ddMMyy !}</td>
-			            <td>{! invoiceInfo.seats_total !}</td>
+			            <td>{! invoice.getEnrolledStudents(invoiceInfo) !}</td>
 			            <td>{! invoiceInfo.total_amount | currency : "USD$ " : 2 !}</td>
 			            <td>{! invoiceInfo.payment_status !}</td>
 			            <td ng-if="invoice.records.length">

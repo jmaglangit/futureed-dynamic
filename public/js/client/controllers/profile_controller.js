@@ -133,8 +133,12 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	}
 
 	function saveClientProfile() {
-		self.errors = Constants.FALSE;
+        var data = {
+            'curriculum_country' : $scope.user.curriculum_country,
+            'user' : $scope.user.user
+        };
 
+		self.errors = Constants.FALSE;
 		if(self.validation.u_error) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		} else {
@@ -152,9 +156,12 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 			            });
 					} else if(response.data) {
 						self.prof = {};
-						$scope.$parent.user = response.data;
-						response.data.role = response.data.client_role;
-						
+
+                        $scope.$parent.user = response.data;
+                        $scope.user.curriculum_country = data.curriculum_country;
+                        $scope.user.user = data.user;
+                        response.data.role = response.data.client_role;
+
 						clientProfileApiService.updateUserSession(response.data).success(function(response) {
 							self.setClientProfileActive(Constants.INDEX);
 							self.success = Constants.TRUE;

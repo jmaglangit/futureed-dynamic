@@ -301,7 +301,7 @@
 										{!! Form::button(trans('messages.cancel')
 											, array(
 												'class' => 'btn btn-gold btn-medium'
-												, 'ng-click' => 'module.setActive()'
+												, 'ng-click' => 'module.setActive(futureed.HIDE_MODULE)'
 												, 'ng-if' => 'module.active_view'
 											)
 										) !!}

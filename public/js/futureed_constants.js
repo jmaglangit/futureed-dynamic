@@ -66,6 +66,8 @@ var Constants = {
 	, WRONG			: "Wrong"
 	, CORRECT		: "Correct"
 
+	, HIDE_MODULE	: "Hide Module"
+
 	, TRIAL_QUESTIONS	:10
 
 	/**

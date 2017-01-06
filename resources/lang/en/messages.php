@@ -570,6 +570,7 @@ return [
 	'admin_age_group_list' => 'Age Group List',
 	'admin_delete_age_group' => 'Delete Age Group',
 	'admin_delete_age_group_msg' => 'Are you sure you want to delete this age group?',
+    'admin_grade_level' => 'Grade Level',
 	
 	//resources/views/admin/manage/announcement/index.blade.php
 	'admin_announce_client' => 'Client Announcement',
@@ -1394,7 +1395,7 @@ return [
 	'resend_confirmation' => 'resend confirmation',
 	'youre_almost_done' => 'You\'re almost done',
 	'logged_out' => 'Logged out',
-	'multiple_login_message' => 'You have been logged out because the account is currently logged in.',
+	'multiple_login_message' => 'You have been logged out because you have signed in on another computer or device.',
 	'canvas_not_supported' => 'Your browser does not support canvas',
 	'review_and_retake_test' => 'You need to review and take the test again.',
 	'retake_test' => 'Retake test',

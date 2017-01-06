@@ -21,6 +21,7 @@
                                 <div class="col-xs-3" ng-init="localization.getQuoteLanguages()">
                                     <select name="language_options" class="form-control"
                                             ng-model="localization.quote_locale_code"
+                                            ng-change="localization.setButton(localization.quote_locale_code, localization.quote_field, 4)"
                                             ng-options="lang.code as lang.word for lang in localization.quote_languages">
                                         <option value="" ng-selected="selected">{!! trans('messages.select_language') !!}</option>
                                     </select>
@@ -30,6 +31,7 @@
                                 <div class="col-xs-3" ng-init="localization.getTranslatableQuoteField()">
                                     <select name="module_field_options" class="form-control"
                                             ng-model="localization.quote_field"
+                                            ng-change="localization.setButton(localization.quote_locale_code, localization.quote_field, 4)"
                                             ng-options="field.field for field in localization.quote_translated_field">
                                         <option value="" ng-selected="selected">{!! trans('messages.select_field') !!}</option>
                                     </select>
@@ -39,7 +41,9 @@
                         <fieldset>
                             <div class="from-group">
                                 <div class="btn-container col-xs-12">
-                                    <div class="btn btn-blue btn-medium" ng-click="localization.quoteGoogleTranslate()">
+                                    <div class="btn btn-blue btn-medium"
+                                         ng-disabled="localization.quote_is_disabled"
+                                         ng-click="localization.quoteGoogleTranslate()">
                                         {!! trans('messages.google_translate') !!}
                                     </div>
                                     <div class="btn-group" data-toggle="buttons">

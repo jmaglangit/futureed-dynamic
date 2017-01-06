@@ -54,6 +54,10 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 				self.getQuestions(id);
 				break;
 
+			case Constants.HIDE_MODULE:
+				self.active_list = Constants.TRUE;
+				break;
+
 			default:
 				self.active_list = Constants.TRUE;
 				self.list();
@@ -124,7 +128,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 		self.records = [];
 
 		self.table.loading = Constants.TRUE;
-		
+
 		$scope.ui_block();
 		ManageModuleService.list(self.search, self.table).success(function(response){
 			self.table.loading = Constants.FALSE;
