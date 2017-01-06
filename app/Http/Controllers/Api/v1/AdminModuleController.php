@@ -54,6 +54,11 @@ class AdminModuleController extends ApiController {
 			$criteria['subject'] = Input::get('subject');
 		}
 
+		//for grade
+		if(Input::get('grade_id')){
+			$criteria['grade_id'] = Input::get('grade_id');
+		}
+
 		//TODO: Need fix for module_countries. Following code is a band-aid fix.
 		$criteria['country_id'] = 840;
 

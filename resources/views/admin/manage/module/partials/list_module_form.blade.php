@@ -65,7 +65,12 @@
 							)
 						) !!}
 					</div>
-					<div class="col-xs-5"></div>
+					<div class="col-xs-5" ng-init="getGradeLevel()">
+						<select class="form-control" ng-model="module.search.grade_id">
+							<option value="">{!! trans('messages.select_grade') !!}</option>
+							<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
+						</select>
+					</div>
 					<div class="col-xs-2 admin-search-module">
 						{!! Form::button(trans('messages.clear')
 							,array(
