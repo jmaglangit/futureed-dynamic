@@ -7,6 +7,11 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
 
     var self = this;
 
+    self.question_is_disabled = Constants.TRUE;
+    self.answer_is_disabled = Constants.TRUE;
+    self.answer_explanation_is_disabled = Constants.TRUE;
+    self.quote_is_disabled = Constants.TRUE;
+
     TableService(self);
     self.tableDefaults();
 
@@ -24,13 +29,13 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         self.module_field = Constants.FALSE;
         self.translate_tag = Constants.TRUE;
         self.question_google_translate = Constants.FALSE;
-        self.question_field = Constants.FALSE;
+        self.question_field = Constants.NULL;
         self.question_answer_google_translate = Constants.FALSE;
-        self.question_answer_field = Constants.FALSE;
+        self.question_answer_field = Constants.NULL;
         self.answer_explanation_google_translate = Constants.FALSE;
-        self.answer_explanation_field = Constants.FALSE;
+        self.answer_explanation_field = Constants.NULL;
         self.quote_google_translate = Constants.FALSE;
-        self.quote_field = Constants.FALSE;
+        self.quote_field = Constants.NULL;
 
         switch(active) {
             case Constants.LOCALIZATION_TRANSLATION:
@@ -300,7 +305,7 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
     self.getQuestionLanguages = function(){
         self.errors = Constants.FALSE;
 
-        self.question_locale_code = Constants.NONE;
+        self.question_locale_code = Constants.NULL;
 
         ManageLocalizationService.getQuestionLanguages().success(function(response){
             if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -369,7 +374,7 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
     self.getQuestionAnswerLanguages = function(){
         self.errors = Constants.FALSE;
 
-        self.question_answer_locale_code = Constants.NONE;
+        self.question_answer_locale_code = Constants.NULL;
 
         ManageLocalizationService.getQuestionAnswerLanguages().success(function(response){
             if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -437,7 +442,7 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
     self.getAnswerExplanationLanguages = function(){
         self.errors = Constants.FALSE;
 
-        self.answer_explanation_locale_code = Constants.NONE;
+        self.answer_explanation_locale_code = Constants.NULL;
 
         ManageLocalizationService.getAnswerExplanationLanguages().success(function(response){
             if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -505,8 +510,6 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
     self.getQuoteLanguages = function(){
         self.errors = Constants.FALSE;
 
-        self.quote_locale_code = Constants.NONE;
-
         ManageLocalizationService.getQuoteLanguages().success(function(response){
             if(angular.equals(response.status, Constants.STATUS_OK)) {
                 if(response.errors) {
@@ -523,6 +526,8 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
     }
 
     self.getTranslatableQuoteField = function(){
+        self.quote_locale_code = Constants.NULL;
+
         ManageLocalizationService.getQuoteTranslatableFields().success(function(response){
             if(angular.equals(response.status, Constants.STATUS_OK)) {
                 if(response.errors) {
@@ -588,4 +593,32 @@ function ManageLocalizationController($scope, ManageLocalizationService, apiServ
         });
     }
 
+    self.setButton = function(language, field, seq){
+
+        switch(seq){
+            case 1: self.question_is_disabled = Constants.TRUE;
+                break;
+            case 2: self.answer_is_disabled = Constants.TRUE;
+                break;
+            case 3: self.answer_explanation_is_disabled = Constants.TRUE;
+                break;
+            case 4: self.quote_is_disabled = Constants.TRUE;
+                break;
+            default : break;
+        }
+
+        if(language != Constants.NULL && field != Constants.NULL){
+            switch(seq){
+                case 1: self.question_is_disabled = Constants.FALSE;
+                        break;
+                case 2: self.answer_is_disabled = Constants.FALSE;
+                    break;
+                case 3: self.answer_explanation_is_disabled = Constants.FALSE;
+                    break;
+                case 4: self.quote_is_disabled = Constants.FALSE;
+                    break;
+                default : break;
+            }
+        }
+    }
 }
