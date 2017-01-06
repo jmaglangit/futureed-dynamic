@@ -27,8 +27,8 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 		self.active_questions_preview = Constants.FALSE;
 		self.question_preview_id = "#questions_preview";
 
-		self.tableDefaults();
-		self.searchDefaults();
+		//self.tableDefaults();
+		//self.searchDefaults();
 
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
@@ -38,17 +38,22 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 
 			case Constants.ACTIVE_VIEW :
 				self.active_view = Constants.TRUE;
+				self.module_table = self.table;
 				self.details(id);
 
 				self.detail_hidden = Constants.FALSE;
 				self.content_hidden = Constants.TRUE;
 				break;
 
-			case Constants.ACTIVE_ADD : 
+			case Constants.ACTIVE_ADD :
+				self.tableDefaults();
+				self.searchDefaults();
 				self.active_add = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_QUESTIONS_PREVIEW :
+				self.tableDefaults();
+				self.searchDefaults();
 				self.active_questions_preview = Constants.TRUE;
 				self.details(id);
 				self.getQuestions(id);
@@ -56,10 +61,13 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 
 			case Constants.HIDE_MODULE:
 				self.active_list = Constants.TRUE;
+				self.setPage(self.module_table);
 				break;
 
 			default:
 				self.active_list = Constants.TRUE;
+				self.tableDefaults();
+				self.searchDefaults();
 				self.list();
 				break;
 		}
