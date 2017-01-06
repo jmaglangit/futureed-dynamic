@@ -13,6 +13,7 @@ function ManageModuleService($http) {
 			, url 	: apiUrl + 'module/admin?subject=' + search.subject
 				+ '&name=' + search.name
 				+ '&area=' + search.area
+				+ '&grade_id=' + search.grade_id
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
