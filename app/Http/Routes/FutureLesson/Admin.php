@@ -536,7 +536,12 @@
 						, 'middleware' => 'admin_partial'
 					]);
 
-				Routes::group(['prefix' => '/patials'], function() {
+				Routes::get('/module_question',
+					['as' => 'admin.manage.module.question'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@module_question'
+					]);
+
+				Routes::group(['prefix' => '/partials'], function() {
 
 					Routes::get('/list_module_form', 
 						['as' => 'admin.manage.module.partials.list_module_form'

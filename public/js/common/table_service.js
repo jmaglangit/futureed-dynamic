@@ -20,7 +20,7 @@ function TableService($http) {
 				scope.list();
 				scope.table = {};
 				scope.table = {
-					size : data.size,
+					size : Constants.DEFAULT_SIZE,
 					page : data.page,
 					paging_size : data.paging_size,
 					offset : data.offset
