@@ -27,8 +27,8 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 		self.active_questions_preview = Constants.FALSE;
 		self.question_preview_id = "#questions_preview";
 
-		self.tableDefaults();
-		self.searchDefaults();
+		//self.tableDefaults();
+		//self.searchDefaults();
 
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
@@ -38,28 +38,38 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 
 			case Constants.ACTIVE_VIEW :
 				self.active_view = Constants.TRUE;
+				self.module_table = self.table;
 				self.details(id);
 
 				self.detail_hidden = Constants.FALSE;
 				self.content_hidden = Constants.TRUE;
 				break;
 
-			case Constants.ACTIVE_ADD : 
+			case Constants.ACTIVE_ADD :
+				self.tableDefaults();
+				self.searchDefaults();
 				self.active_add = Constants.TRUE;
 				break;
 
+			//TODO: transfer to a function should be outside setActive()
 			case Constants.ACTIVE_QUESTIONS_PREVIEW :
+				//self.tableDefaults();
+				//self.searchDefaults();
 				self.active_questions_preview = Constants.TRUE;
+				self.module_table = self.table;
 				self.details(id);
 				self.getQuestions(id);
 				break;
 
 			case Constants.HIDE_MODULE:
 				self.active_list = Constants.TRUE;
+				self.setPage(self.module_table);
 				break;
 
 			default:
 				self.active_list = Constants.TRUE;
+				self.tableDefaults();
+				self.searchDefaults();
 				self.list();
 				break;
 		}
@@ -406,6 +416,22 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	//open question preview on modal
+	self.openQuestionPreview = function(id){
+		self.active_questions_preview = Constants.TRUE;
+		self.module_table = self.table;
+		self.details(id);
+		self.getQuestions(id);
+	}
+
+	//close question preview
+	self.closeQuestionPreview = function(){
+		//close modal ang back to module lists
+
+		self.active_questions_preview = Constants.FALSE;
+		self.setActive(Constants.HIDE_MODULE);
 	}
 
 	// navigate question (previous/next) by index
@@ -772,15 +798,16 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 	}
 }
 
+//TODO: cause of restarting module.
 // handle on hide/dismiss question preview (triggered when modal is closed)
-$(document).on('hidden.bs.modal', '#questions_preview', function () {
-	refreshModuleList();
-});
+//$(document).on('hidden.bs.modal', '#questions_preview', function () {
+//	refreshModuleList();
+//});
 
 // call module set active - to default list view
-function refreshModuleList() {
-	var scope = angular.element($('#module-cont')).scope();
-    scope.$apply(function () {
-		scope.module.setActive();
-    });
-}
+//function refreshModuleList() {
+//	var scope = angular.element($('#module-cont')).scope();
+//    scope.$apply(function () {
+//		scope.module.setActive();
+//    });
+//}

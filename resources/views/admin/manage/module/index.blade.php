@@ -9,7 +9,7 @@
 
 		<div template-directive template-url="{!! route('admin.partials.base_url') !!}"></div>
 
-		<div template-directive template-url="{!! route('admin.manage.module.partials.module_questions_preview') !!}"></div>
+{{--		<div template-directive template-url="{!! route('admin.manage.module.partials.module_questions_preview') !!}"></div>--}}
 
 		<div class="wrapr" ng-init="module.setActive()">
 			<div class="client-nav side-nav">
