@@ -44,10 +44,22 @@
                 $toggleAnswerExplanation = '&middot; <a href="#" data-toggle="collapse" data-target="#answer-explanations"><span  tooltip-directive data-toggle="tooltip" data-placement="left" title="' . trans('messages.admin_show_answer_explanations') . '"><i class="fa fa-question-circle"></i> ' . trans('messages.admin_show_tips') . '</span></a>';
             ?>
             <div ng-if="question.current_question.question_answer != futureed.FALSE">
-                <h4 ng-show="question.current_question.question_type != futureed.MULTIPLECHOICE && question.current_question.question_type != futureed.GRAPH && question.current_question.question_type != futureed.QUADRANT" class="question-correct-answer">
+                <h4 ng-show="question.current_question.question_type != futureed.MULTIPLECHOICE
+                && question.current_question.question_type != futureed.GRAPH
+                && question.current_question.question_type != futureed.QUADRANT
+                && question.current_question.question_type != futureed.PROVIDE
+                && question.current_question.question_type != futureed.FILLINBLANK" class="question-correct-answer">
                     <span class="correct-answer-text">{! question.current_question.question_answer !}</span> <i class="fa fa-angle-left"></i> {{ trans('messages.admin_correct_answer') }}
                     <?php echo $toggleAnswerExplanation; ?>
                 </h4>
+
+                {{--provide N--}}  {{--FILL IN BLANK FIB--}}
+                <div class="h4 question-correct-answer" ng-if="question.current_question.question_type == futureed.PROVIDE
+                    || question.current_question.question_type == futureed.FILLINBLANK">
+                    <span class="correct-answer-text">{! question.parseJSONAnswer(question.current_question.question_answer) !}</span> <i class="fa fa-angle-left"></i> {{ trans('messages.admin_correct_answer') }}
+                    <?php echo $toggleAnswerExplanation; ?>
+                </div>
+
                 <div ng-show="question.current_question.question_type == futureed.MULTIPLECHOICE">
                     <h4 class="question-correct-answer">
                         <span class="correct-answer-text">

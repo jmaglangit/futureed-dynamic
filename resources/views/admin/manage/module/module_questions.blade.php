@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div id="module" class="container dshbrd-con" ng-controller="ManageModuleQuestionController as question"
+    <div id="module" class="dshbrd-con" ng-controller="ManageModuleQuestionController as question"
          ng-init="question.setActive('',{!! $module !!})"
          ng-cloak>
 

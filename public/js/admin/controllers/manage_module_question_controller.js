@@ -376,4 +376,21 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
         self.getQuestion(self.question_index || Constants.FALSE);
     }
 
+    self.parseJSONAnswer = function(answer_json){
+
+        var answer_object = JSON.parse(answer_json);
+
+        var answers = '';
+
+        angular.forEach(answer_object.answer,function(value,key){
+            if(key > Constants.FALSE) {
+                answers += ','+ key + '-' + value.value;
+            } else {
+                answers = value.value;
+            }
+
+        });
+
+        return answers;
+    }
 }
