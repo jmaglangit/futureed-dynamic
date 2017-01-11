@@ -147,12 +147,12 @@
 							</div>
 						</td>
 					</tr>
-					<tr class="odd" ng-if="!module.records.length">
+					<tr class="odd" ng-if="!module.records.length && !module.table.loading">
 						<td valign="top" colspan="7">
 							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
-					<tr class="odd" ng-if="module.table.loading">
+					<tr class="odd" ng-if="module.table.loading && !module.records.length">
 						<td valign="top" colspan="7">
 							{!! trans('messages.loading') !!}
 						</td>
