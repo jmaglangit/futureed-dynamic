@@ -51,16 +51,6 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 				self.active_add = Constants.TRUE;
 				break;
 
-			//TODO: transfer to a function should be outside setActive()
-			case Constants.ACTIVE_QUESTIONS_PREVIEW :
-				//self.tableDefaults();
-				//self.searchDefaults();
-				self.active_questions_preview = Constants.TRUE;
-				self.module_table = self.table;
-				self.details(id);
-				self.getQuestions(id);
-				break;
-
 			case Constants.HIDE_MODULE:
 				self.active_list = Constants.TRUE;
 				self.setPage(self.module_table);

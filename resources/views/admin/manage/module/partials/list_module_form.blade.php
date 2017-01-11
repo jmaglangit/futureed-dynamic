@@ -139,7 +139,7 @@
 									<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_edit_module') !!}"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 								<div class="col-xs-3">
-									<a href="{!! route('admin.manage.module.question') . "?module=" !!}{! record.id !}" target="_blank" ng-click="module.openQuestionPreview(record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_module_preview_questions') !!}"><span><i class="fa fa-search-plus"></i></span></a>
+									<a href="{!! route('admin.manage.module.question') . "?module=" !!}{! record.id !}" target="_blank" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_module_preview_questions') !!}"><span><i class="fa fa-search-plus"></i></span></a>
 								</div>
 								<div class="col-xs-3">
 									<a href="" ng-click="module.confirmDelete(record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_delete_module') !!}"><span><i class="fa fa-trash"></i></span></a>

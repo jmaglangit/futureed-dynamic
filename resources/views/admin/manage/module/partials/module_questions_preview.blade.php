@@ -11,8 +11,7 @@
             <form class="form-inline preview-tools">
                 <div class="form-group">
                     <div class="btn-nav-group">
-                        <a href="" ng-click="question.getQuestionByIndex(futureed.BACK)" class="btn-nav" tooltip-directive data-toggle="tooltip" title="{{ trans('messages.admin_previous_question') }}" data-placement="left"><</a>
-                        <a href="" ng-click="question.getQuestionByIndex(futureed.NEXT)" class="btn-nav" tooltip-directive data-toggle="tooltip" title="{{ trans('messages.admin_next_question') }}" data-placement="right">></a>
+                        <a href="" ng-click="question.getQuestionByIndex(futureed.BACK)" class="btn-nav" tooltip-directive data-toggle="tooltip" title="{{ trans('messages.admin_previous_question') }}" data-placement="left"><</a><a href="" ng-click="question.getQuestionByIndex(futureed.NEXT)" class="btn-nav" tooltip-directive data-toggle="tooltip" title="{{ trans('messages.admin_next_question') }}" data-placement="right">></a>
                     </div>
                 </div>
                 <div class="form-group">
