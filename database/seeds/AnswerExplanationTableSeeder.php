@@ -13,13 +13,13 @@ class AnswerExplanationTableSeeder extends Seeder
 
         $this->dataLoader([
             'answer_explanations_1.csv',
-            'answer_explanations_1_1.csv',
             'answer_explanations_2.csv',
             'answer_explanations_3.csv',
             'answer_explanations_4.csv',
             'answer_explanations_5.csv',
             'answer_explanations_6.csv',
             'answer_explanations_7.csv',
+            'answer_explanations_8.csv',
         ]);
 
         //initialize translation
