@@ -20,6 +20,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
         self.record = {};
         self.fields = [];
 
+        self.question_no_preview = Constants.FALSE;
         self.active_questions_preview = Constants.FALSE;
 
         self.tableDefaults();
@@ -54,6 +55,10 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
                     self.question_preview_ok = self.question_list.length > Constants.FALSE;
                     self.question_index = 0;
                     self.getQuestion(0);
+
+                    if(response.data.total == Constants.FALSE){
+                        self.question_no_preview = Constants.TRUE;
+                    }
                 }
             }
             $scope.ui_unblock();
@@ -65,6 +70,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
 
     // get question by index from question_list
     self.getQuestion = function(index) {
+        $scope.ui_block();
         self.current_question = self.question_list[index] || Constants.FALSE;
 
         self.determineQuestionAnswer();
@@ -74,6 +80,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
 
         $('#answer-explanations, #correct_graph, #quadrant').addClass('collapse').removeClass('in');
         $(self.question_preview_id).modal('show');
+        $scope.ui_unblock();
     }
 
     // prepares/computes question answer (depends on question_type)

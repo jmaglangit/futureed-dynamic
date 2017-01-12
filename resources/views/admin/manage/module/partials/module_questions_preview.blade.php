@@ -413,7 +413,7 @@
             </div>
         </div>
 
-        <div ng-if="!question.question_preview_ok" class="modal-body">
+        <div ng-if="question.question_no_preview == futureed.TRUE" class="modal-body">
             <p class="alert alert-warning">
                 {{ trans('messages.admin_note_module_preview_cant_load_no_questions_available') }}
             </p>
