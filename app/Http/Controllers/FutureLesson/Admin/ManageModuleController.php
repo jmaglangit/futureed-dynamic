@@ -42,4 +42,12 @@ class ManageModuleController extends Controller{
 	public function module_questions_preview() {
 		return view('admin.manage.module.partials.module_questions_preview');
 	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function module_question(){
+
+		return view('admin.manage.module.module_questions')->with('module',Input::get('module'));
+	}
 }

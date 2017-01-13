@@ -872,3 +872,8 @@ li.questions-answers > a, li.questions-answers div {
     font-size: 50px;
     border-radius: 9em;
 }
+
+.dshbrd-con-question-view {
+	margin-top: 15px;
+	min-width: 1200px;
+}
