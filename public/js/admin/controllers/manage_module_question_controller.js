@@ -63,7 +63,6 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
                     self.question_no_preview = Constants.TRUE;
                 }
             }
-            $scope.ui_unblock();
         }).error(function(response){
             self.errors = $scope.internalError();
             $scope.ui_unblock();
@@ -76,7 +75,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
         self.current_question = self.question_list[index] || Constants.FALSE;
 
         self.determineQuestionAnswer();
-        self.getQuestionAnswerExplanations();
+
         self.question_number = parseInt(index) + 1;
         self.question_preview_end = index == self.question_list.length;
 
@@ -86,6 +85,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
 
     // prepares/computes question answer (depends on question_type)
     self.determineQuestionAnswer = function() {
+        $scope.ui_block();
         switch(self.current_question.question_type) {
             case Constants.FILLINBLANK:
                 var input_fields = [];
@@ -123,10 +123,12 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
                 self.current_question.question_answer = self.current_question.answer;
                 break;
         }
+        self.getQuestionAnswerExplanations();
     }
 
     // ordering parse strings into object (question type : ORDERING)
     self.answerTextOrderGenerator = function(){
+        $scope.ui_block();
         self.order_items = self.current_question.question_order_text.split(",");
 
         var answer_text = [];
@@ -162,7 +164,6 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
                 }
             }
 
-            $scope.ui_unblock();
         }).error(function(response) {
             self.errors = $scope.internalError();
             $scope.ui_unblock();
@@ -219,6 +220,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
     }
 
     self.getQuestionAnswerExplanations = function() {
+        $scope.ui_block();
         if(self.current_question) {
             self.answer_explanations = [];
 
@@ -232,6 +234,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
                 self.answer_explanations = response.data;
                 self.answer_explanation_index = 0;
                 self.getAnswerExplanation(0);
+                $scope.ui_unblock();
             }).error(function(response) {
                 $scope.internalError(response);
             });
@@ -296,7 +299,6 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
                 }
             }
 
-            $scope.ui_unblock();
         }).error(function(response) {
             self.errors = $scope.internalError();
             $scope.ui_unblock();
@@ -317,7 +319,6 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
                     self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
                 }
             }
-            $scope.ui_unblock();
         }).error(function(response) {
             self.errors = internalError();
             $scope.ui_unblock();
