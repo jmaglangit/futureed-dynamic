@@ -393,7 +393,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
 
         angular.forEach(answer_object.answer,function(value,key){
             if(key > Constants.FALSE) {
-                answers += ','+ key + '-' + value.value;
+                answers += ',' + value.value;
             } else {
                 answers = value.value;
             }
