@@ -42,7 +42,7 @@
             <?php
                 $toggleAnswerExplanation = '&middot; <a href="#" data-toggle="collapse" data-target="#answer-explanations"><span  tooltip-directive data-toggle="tooltip" data-placement="left" title="' . trans('messages.admin_show_answer_explanations') . '"><i class="fa fa-question-circle"></i> ' . trans('messages.admin_show_tips') . '</span></a>';
             ?>
-            <div ng-if="question.current_question.question_answer != futureed.FALSE">
+            <div>
                 <h4 ng-show="question.current_question.question_type != futureed.MULTIPLECHOICE
                 && question.current_question.question_type != futureed.GRAPH
                 && question.current_question.question_type != futureed.QUADRANT
