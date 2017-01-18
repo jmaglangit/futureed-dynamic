@@ -58,9 +58,11 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
 
                     if(response.data.total == Constants.FALSE){
                         self.question_no_preview = Constants.TRUE;
+                        $scope.ui_unblock();
                     }
                 }else {
                     self.question_no_preview = Constants.TRUE;
+                    $scope.ui_unblock();
                 }
             }
         }).error(function(response){
