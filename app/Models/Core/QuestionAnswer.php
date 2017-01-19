@@ -66,11 +66,11 @@ class QuestionAnswer extends Model {
 		$filesystem = new Filesystem();
 
 		//get path
-		$image_path = config('futureed.answer_image_path_final') .'/'. $this->attributes['id'] . '/'. $value;
+		$image_path = config('futureed.answer_image_path_final') .'/'. $value;
 
 		//check path
-		if($filesystem->exists($image_path)){
-			return asset(config('futureed.answer_image_path_final_public') .'/'. $this->attributes['id'] . '/'. $value);
+		if($filesystem->exists($image_path) && $value != ''){
+			return asset(config('futureed.answer_image_path_final_public') .'/'. $value);
 
 		} else {
 

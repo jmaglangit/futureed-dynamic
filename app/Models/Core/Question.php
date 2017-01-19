@@ -74,11 +74,11 @@ class Question extends Model {
 		$filesystem = new Filesystem();
 
 		//get path
-		$image_path = config('futureed.question_image_path_final') . '/' . $this->attributes['id'] . '/' . $value;
+		$image_path = config('futureed.question_image_path_final') . '/' . $value;
 
 		//check path
 		if ($filesystem->exists($image_path) && !empty($value)) {
-			return asset(config('futureed.question_image_path_final_public') . '/' . $this->attributes['id'] . '/' . $value);
+			return asset(config('futureed.question_image_path_final_public') . '/' . $value);
 
 		} else {
 

@@ -131,7 +131,7 @@ class AdminQuestionController extends ApiController {
 			$update = NULL;
 
 			$from = config('futureed.question_image_path');
-			$to = config('futureed.question_image_path_final').'/'.$return['id'];
+			$to = config('futureed.question_image_path_final');
 
 			//check if directory don't exist, it will create new directory
 			if (!$this->file->exists(config('futureed.question_image_path_final'))){
