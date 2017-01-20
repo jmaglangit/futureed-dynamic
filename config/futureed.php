@@ -126,21 +126,21 @@ return [
 	'uploads' => base_path() . '/public/uploads',
 
 	//path for question uploaded images temp
-	'question_image_path' => base_path() . '/public/uploads/temp/question',
+	'question_image_path' => base_path() . '/public/images/que-ans-tip',
 
 	//path for question uploaded images final
-	'question_image_path_final' => base_path() . '/public/uploads/question',
-	'question_image_path_final_public' => '/uploads/question',
+	'question_image_path_final' => base_path() . '/public/images/que-ans-tip',
+	'question_image_path_final_public' => '/images/que-ans-tip',
 
 	//question
 	'question' => 'question',
 
 	//path for answer uploaded images temp
-	'answer_image_path' => base_path() . '/public/uploads/temp/answer',
+	'answer_image_path' => base_path() . '/public/images/temp',
 
 	//path for question uploaded images final
-	'answer_image_path_final' => base_path() . '/public/uploads/answer',
-	'answer_image_path_final_public' => '/uploads/answer',
+	'answer_image_path_final' => base_path() . '/public/images/que-ans-tip',
+	'answer_image_path_final_public' => '/images/que-ans-tip',
 
 	//answer
 	'answer' => 'answer',
@@ -291,8 +291,8 @@ return [
 	'background_images_folder' => 'images/background-images',
 
 	//path for question uploaded images final
-	'answer_explanation_image_final' => base_path() . '/public/images/answer_explanation',
-	'answer_explanation_image_public' => '/images/answer_explanation',
+	'answer_explanation_image_final' => base_path() . '/public/images/que-ans-tip',
+	'answer_explanation_image_public' => '/images/que-ans-tip		',
 
 	//games images folder
 	'game_images_folder' => '/uploads/games',
