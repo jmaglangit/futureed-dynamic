@@ -88,7 +88,8 @@ class Question extends Model {
 
 	public function getAnswerTextFieldAttribute($value) {
 
-		if ($this->attributes['question_type'] == config('futureed.question_type_fill_in_the_blank')) {
+		if ($this->attributes['question_type'] == config('futureed.question_type_fill_in_the_blank')
+			&& $this->attributes['answer'] != '') {
 
 			//decode json into format and count answers.
 			$answer = json_decode($this->attributes['answer']);
