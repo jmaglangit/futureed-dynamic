@@ -19,9 +19,10 @@ body.student{
 	background: url("/images/student_page_bg.jpg");
 	background-attachment: fixed;
 	font-family: 'WeblySleek UI Semibold', sans-serif;
-	background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+	background-size: cover;
+	background-position-y: center;
+	background-position-x: center;
+	background-repeat: no-repeat;
 }
 
 body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), linear-gradient(#d77a6b, #d2c09c 60%, #876d54);*/
