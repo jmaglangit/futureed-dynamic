@@ -81,6 +81,10 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
         self.question_number = parseInt(index) + 1;
         self.question_preview_end = index == self.question_list.length;
 
+        if(self.question_preview_end && self.question_preview_ok){
+            $scope.ui_unblock();
+        }
+
         $('#answer-explanations, #correct_graph, #quadrant').addClass('collapse').removeClass('in');
         $(self.question_preview_id).modal('show');
     }
