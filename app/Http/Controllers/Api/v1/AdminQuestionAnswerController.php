@@ -71,7 +71,7 @@ class AdminQuestionAnswerController extends ApiController {
 			$update = NULL;
 
 			$from = config('futureed.answer_image_path');
-			$to = config('futureed.answer_image_path_final').'/'.$return['id'];
+			$to = config('futureed.answer_image_path_final');
 
 			//check if directory don't exist, it will create new directory
 			if (!$this->file->exists(config('futureed.answer_image_path_final'))){
@@ -142,7 +142,7 @@ class AdminQuestionAnswerController extends ApiController {
 		if(!empty($data['image'])){
 
 			$from = config('futureed.answer_image_path');
-			$to = config('futureed.answer_image_path_final').'/'.$id;
+			$to = config('futureed.answer_image_path_final');
 
 			$image = explode('/',$data['image']);
 			$image_type = explode('.',$image[1]);
