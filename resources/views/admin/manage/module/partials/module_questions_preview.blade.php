@@ -29,7 +29,7 @@
         <div ng-if="question.question_preview_end && question.question_preview_ok">
             <p class="alert bg-success futureed-color preview-note">
                 {{ trans('messages.admin_note_end_module_preview') }}
-                <a href="" data-dismiss="modal"><i class="fa fa-long-arrow-left"></i> {{ trans('messages.admin_return_module_list') }}</a>
+                <a href="" ng-click="" onclick="window.close()">{{ trans('messages.close_this_window') }}</a>
             </p>
         </div>
 

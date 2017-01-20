@@ -82,6 +82,7 @@ return [
 	'client_site' => 'client site',
 	'close' => 'Close',
 	'close_this_req' => 'Close This Request',
+	'close_this_window' => 'Close this window',
 	'close_req' => 'Close Request',
 	'code' => 'Code',
 	'completed' => 'Completed',
