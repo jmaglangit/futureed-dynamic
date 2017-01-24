@@ -1241,7 +1241,7 @@ hr {
 
 .tip-content {
 	text-align: left;
-	width: 550px;
+	width: 750px;
 	margin: auto auto 10px 310px;
 	padding-bottom: 0px;
 }
@@ -1267,7 +1267,8 @@ hr {
 }
 
 .tip-message img {
-	width: 350px;
+	width: auto;
+	max-width: 625px;
 	margin: 0 0 0 50px;
 }
 
@@ -1606,7 +1607,7 @@ hr {
 .failed-module-icon-holder img
 {
 	border-radius: 10px;
-	width: 270px;
+	width: 370px;
 	margin-left: 190px;
 }
 
@@ -2445,7 +2446,7 @@ pre.dropdown-menu {
 }
 
 .quoted-tip img {
-	width: 350px;
+	width: 625px;
 	margin: 0 0 20px 55px;
 }
 
