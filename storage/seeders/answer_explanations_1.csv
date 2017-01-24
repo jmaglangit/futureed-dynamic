@@ -2,7 +2,7 @@
 2,1,8,,,1,"Compare digits according to place value. In this case, the numbers are all tens.  Look for number with largest ten value.  We know 8>6>5.  Hence the answer is 53, 68, 85",,,,,,
 3,1,9,,,1,"The missing number is 89, it comes after 88 and before 90.",,,,,,
 4,1,10,,,1,"The missing number is 7, you need to count backwards from 10 to arrive at the answer.  7 is smaller than 8 and larger than 6",,,,,,
-5,1,13,,,1,Step 1: Use place values determine largest value  <br/> Step 2: Rank by largest place value <br/> Step 3: Move down to next place value until solved,,,,,,
+5,1,13,,,1,Step 1: Use place values determine largest value  <br/> Step 2: Rank by largest place value <br/> Step 3: Move down to next place value until solved,module_1100_13.png,,,,,
 6,1,16,,,1,,6hearts&4stars_answer.png,,,,,
 7,1,18,,,1,,module_1101_97.png,,,,,
 8,1,19,,,1,"Step 1: Check the interval: 100-99=1, 92-91=1, and, 99-98=1 . Step 2: 94-1=93.  The answer is 93",module_11019.png,,,,,
