@@ -31,6 +31,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.active_contents = Constants.FALSE;
 		self.result = Constants.FALSE;
 		self.date_start = new Date();
+		self.load_module_content = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_QUESTIONS 	:
@@ -309,14 +310,19 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			}
 
 			self.module_message.name = self.record.name;
-			self.module_message.show = Constants.TRUE;
+
+			//Check of module has been loaded
+			if(!self.load_module_content){
+				self.module_message.show = Constants.TRUE;
+				$("#message_modal").modal({
+					backdrop: 'static',
+					keyboard: Constants.FALSE,
+					show    : Constants.TRUE
+				});
+			}
 
 			$scope.ui_unblock();
-			$("#message_modal").modal({
-		        backdrop: 'static',
-		        keyboard: Constants.FALSE,
-		        show    : Constants.TRUE
-		    });
+
 		});
 	}
 
@@ -1272,6 +1278,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	{
 		if(self.table.page > 1)
 		{
+			self.load_module_content = Constants.TRUE;
 			self.total_module_items_loaded -= self.table.size;
 			self.table.page--;
 			self.paginateByPage();
@@ -1280,9 +1287,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.nextPage = function()
 	{
-
 		if(self.table.page < self.table.total_items)
 		{
+			self.load_module_content = Constants.TRUE;
 			self.total_module_items_loaded += self.table.size;
 			self.table.page++;
 			self.paginateByPage();
