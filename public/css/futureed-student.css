@@ -2040,7 +2040,7 @@ a.payment-page-text {
 	border: 5px solid #EEEEEE;
 	width: 100%;
 	overflow: auto;
-	height: 49em;
+	height: 60em;
 }
 @-moz-document url-prefix() {
 	.questions-container {

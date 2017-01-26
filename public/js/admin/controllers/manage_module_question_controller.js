@@ -373,6 +373,10 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
 
     // navigate question (previous/next) by index
     self.getQuestionByIndex = function(option = Constants.FALSE) {
+
+        //clear answer explanation
+        self.answer_explanation = Constants.FALSE;
+
         switch(option) {
             case Constants.NEXT:
                 self.question_index = self.question_index < self.question_list.length ?
