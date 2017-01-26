@@ -460,7 +460,7 @@ return [
 	'user' => 'User',
     'user_credentials' => 'User Credentials',
 	'username' => 'Username',
-	'username_is_available' => 'Username address is available.',
+	'username_is_available' => 'Username is available.',
 	'username_or_email' => 'Username or Email',
 	'verify' => 'Verify',
 	'view_client_account_profile' => 'View Client Account Profile',
