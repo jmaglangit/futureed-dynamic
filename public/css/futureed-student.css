@@ -976,8 +976,8 @@ hr {
 }
 
 .questions-image img {
-	width: 325px;
-	max-height: 300px;
+	width: 500px;
+	max-height: 500px;
 	border-radius: 10px;
 }
 
@@ -1241,7 +1241,7 @@ hr {
 
 .tip-content {
 	text-align: left;
-	width: 550px;
+	width: 750px;
 	margin: auto auto 10px 310px;
 	padding-bottom: 0px;
 }
@@ -1267,7 +1267,8 @@ hr {
 }
 
 .tip-message img {
-	width: 250px;
+	width: auto;
+	max-width: 625px;
 	margin: 0 0 0 50px;
 }
 
@@ -1606,7 +1607,7 @@ hr {
 .failed-module-icon-holder img
 {
 	border-radius: 10px;
-	width: 270px;
+	width: 370px;
 	margin-left: 190px;
 }
 
@@ -2039,7 +2040,7 @@ a.payment-page-text {
 	border: 5px solid #EEEEEE;
 	width: 100%;
 	overflow: auto;
-	height: 49em;
+	height: 60em;
 }
 @-moz-document url-prefix() {
 	.questions-container {
@@ -2445,7 +2446,7 @@ pre.dropdown-menu {
 }
 
 .quoted-tip img {
-	width: 300px;
+	width: 625px;
 	margin: 0 0 20px 55px;
 }
 

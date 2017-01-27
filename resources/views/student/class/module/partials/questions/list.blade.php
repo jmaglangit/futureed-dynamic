@@ -226,7 +226,7 @@
 				</div>
 				<div ng-init="mod.set_IDE();" ng-if="mod.current_question.question_type == futureed.CODING"></div>
 			</div>
-            <div id="review-lesson-div" class="col-xs-12 text-center">
+            <div class="col-xs-12 text-center">
                 <a id="review-lesson" href="javascript:void(0);" ng-click="mod.skipModule()"><img ng-src="/images/video-camera-with-play-button.png"/> {{ trans('messages.review_lessons') }}</a>
             </div>
 		</div>
