@@ -43,6 +43,7 @@ function ManageModuleQuestionController($scope, ManageModuleQuestionService, Tab
         self.table.size = Constants.FALSE;
         self.table.offset = Constants.FALSE;
         self.search.module_id = id;
+        self.search.status = Constants.ENABLED;
 
         $scope.ui_block();
         ManageModuleQuestionService.questionList(self.search, self.table).success(function(response){
