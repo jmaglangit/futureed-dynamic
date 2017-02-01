@@ -232,6 +232,11 @@
 						'as' => 'student.class.module.partials.view_question_message'
 						, 'uses' => 'FutureLesson\Student\ClassModuleController@view_question_message'
 						]);
+
+					Routes::get('/notepad',[
+						'as' => 'student.class.module.partials.notepad',
+						'uses' => 'FutureLesson\Student\ClassModuleController@notepad'
+					]);
 				});
 			});
 		});

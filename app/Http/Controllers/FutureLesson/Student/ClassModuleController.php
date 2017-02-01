@@ -40,4 +40,8 @@ class ClassModuleController extends Controller {
 	{
 		return view('student.class.module.partials.questions.trial-question-list');
 	}
+
+	public function notepad(){
+		return view('student.class.module.partials.notepad');
+	}
 }

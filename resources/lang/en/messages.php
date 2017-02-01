@@ -230,6 +230,7 @@ return [
 	'new_student' => 'New Student',
 	'next' => 'Next',
 	'no' => 'No',
+	'notepad' => 'Notepad',
 	'no_available_link' => 'No Available Link',
 	'no_answers_for_now' => 'No Answers for Now',
 	'no_available_points' => 'No Available Points',
@@ -1461,4 +1462,7 @@ return [
 	'game_time_message' => 'Timer will start once you click on :BUTTON. Time left to play is ',
 	'game_proceed' => 'Proceed to Game ?',
 	'game_lock' => 'Time expired',
+
+	'notepad_marker' => 'Marker',
+	'notepad_clear' => 'Clear'
 ];
