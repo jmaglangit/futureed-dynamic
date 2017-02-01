@@ -230,6 +230,7 @@ return [
 	'new_student' => 'New Student',
 	'next' => 'Next',
 	'no' => 'No',
+	'notepad' => 'Notepad',
 	'no_available_link' => 'No Available Link',
 	'no_answers_for_now' => 'No Answers for Now',
 	'no_available_points' => 'No Available Points',

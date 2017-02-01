@@ -2537,3 +2537,31 @@ pre.dropdown-menu {
 #review-lesson:hover{
     text-decoration: none;
 }
+
+#slide-panel {
+	float:right;
+	width:830px;
+	height:500px;
+	padding: 10px 10px 10px 0px;
+	background:#f4d859;
+	margin-right:-830px;
+}
+
+#slide-panel > canvas {
+	background: #ffffee;
+	margin: -5px 10px 0px 5px;
+}
+
+#opener {
+	width: 45px;
+	height: 45px;
+	float: left;
+	margin: -10px 0px 0px -45px;
+	border-radius:0;
+}
+
+.drawer-notepad {
+	bottom: 56px;
+	position: fixed;
+	z-index: 3;
+}
