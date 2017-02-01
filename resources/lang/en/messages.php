@@ -1462,4 +1462,7 @@ return [
 	'game_time_message' => 'Timer will start once you click on :BUTTON. Time left to play is ',
 	'game_proceed' => 'Proceed to Game ?',
 	'game_lock' => 'Time expired',
+
+	'notepad_marker' => 'Marker',
+	'notepad_clear' => 'Clear'
 ];

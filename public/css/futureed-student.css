@@ -2565,3 +2565,19 @@ pre.dropdown-menu {
 	position: fixed;
 	z-index: 3;
 }
+
+.tools > .color_sketch > a , .tools > .size_sketch > a {
+	width: 35px;
+	height: 40px;
+}
+
+.tools > .color_sketch, .tools > .size_sketch , .tools > .marker_ketch, .tools > .erase_sketch{
+	margin-left: -24px;
+}
+
+
+
+.marker_sketch > a , .erase_sketch > a {
+	height: 30px;
+	margin-top: 6px;
+}
