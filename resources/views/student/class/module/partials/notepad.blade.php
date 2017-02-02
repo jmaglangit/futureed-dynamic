@@ -28,6 +28,7 @@
         <div class="col-md-2 erase-sketch"><a href="#notepad_sketch" data-tool="eraser" class="btn btn-blue"
                                               data-toggle="tooltip" data-placement="bottom" title="{!! trans('messages.notepad_clear_tooltip') !!}">
                 {!! trans('messages.notepad_clear') !!}</a></div>
+        <div class="col-md-2 help-sketch"><a href="#notepad_sketch" data-tool="help" class="btn btn-blue"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></div>
     </div>
 </div>
 {!! Html::script('/js/common/notepad.js')!!}

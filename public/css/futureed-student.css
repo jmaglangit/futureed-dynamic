@@ -2571,13 +2571,23 @@ pre.dropdown-menu {
 	height: 40px;
 }
 
-.tools > .color_sketch, .tools > .size_sketch , .tools > .marker-ketch, .tools > .erase-sketch{
+.tools > .color_sketch , .tools > .marker-ketch, .tools > .erase-sketch{
 	margin-left: -24px;
 }
 
+.tools > .size_sketch {
+	margin-left:-70px;
+}
 
 
 .marker-sketch > a , .erase-sketch > a {
 	height: 30px;
 	margin-top: 6px;
+	margin-left: -16px;
+}
+
+.help-sketch {
+	width: 1px;
+	margin-top: 5px;
+	margin-left: -30px;
 }
