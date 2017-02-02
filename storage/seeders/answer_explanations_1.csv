@@ -5,15 +5,15 @@
 5,1,13,,,1,Step 1: Use place values determine largest value  <br/> Step 2: Rank by largest place value <br/> Step 3: Move down to next place value until solved,module_1100_13.png,,,,,
 6,1,16,,,1,,6hearts&4stars_answer.png,,,,,
 7,1,18,,,1,,module_1101_97.png,,,,,
-8,1,19,,,1,"Step 1: Check the interval: 100-99=1, 92-91=1, and, 99-98=1 . Step 2: 94-1=93.  The answer is 93",module_11019.png,,,,,
+8,1,19,,,1,"Step 1: Check the interval: 100-99=1, 92-91=1, and, 99-98=1 .<br/>Step 2: 94-1=93.  The answer is 93",module_11019.png,,,,,
 9,1,20,,,1,,module_1101_64.png,,,,,
-10,2,21,,,1,"There are 4 cherries and 3 lemons. So, 4+3 =7. Hence, the answer is 7",,,,,,
-11,2,23,,,1,"There are 5 circles and 6 squares. So, 5+6 =11. Hence, the answer is 11",,,,,,
-12,2,27,,,1,"There are 4 footballs and 7 soccer balls. So, 4+7 =11. Hence, the answer is 11",,,,,,
-13,2,29,,,1,"There are 6 basketballs and 8 baseballs. So, 6+8 = 14. Hence the answer is 14",,,,,,
+10,2,21,,,1,"There are 4 cherries and 3 lemons. So, 4+3 =7. Hence, the answer is 7.",,,,,,
+11,2,23,,,1,"There are 5 circles and 6 squares. So, 5+6 =11. Hence, the answer is 11.",,,,,,
+12,2,27,,,1,"There are 4 footballs and 7 soccer balls. So, 4+7 =11. Hence, the answer is 11.",,,,,,
+13,2,29,,,1,"There are 6 basketballs and 8 baseballs. So, 6+8 = 14. Hence the answer is 14.",,,,,,
 14,515,30,,,1,"To find the answer you can reverse the equation, 33-25=8.  This means that 25+8=33 as well and the missing number is 8",,,,,,
-15,2,31,,,1,There are 6 telescopes. Hence the answer is 6,,,,,,
-16,2,32,,,1,"9 pizzas on Friday and 9 Pizza on Saturday . So, 9+9 =18. Hence the answer is 18",,,,,,
+15,2,31,,,1,There are 6 telescopes. Hence the answer is 6.,,,,,,
+16,2,32,,,1,"9 pizzas on Friday and 9 Pizza on Saturday . So, 9+9 =18. Hence the answer is 18.",,,,,,
 17,514,33,,,1,"10 robots day 1 and 5 robots on day 2. So, 10 + 5 = 15. Hence, the answer is 15",,,,,,
 18,514,35,,,1,,1102p.png,,,,,
 19,515,36,,,1,,1102q.png,,,,,
@@ -22,45 +22,43 @@
 22,515,39,,,1,,1102t.png,,,,,
 23,515,40,,,1,,1102u.png,,,,,
 24,3,46,,,1,"There are 5 basketballs and 4 baseballs. So, 5-4 = 1.",9_basketballs&baseballsa.png,,,,,
-25,3,47,,,1,"There are 10 circles and 3 squares. So, 10 - 3 = 7",circles&squares_13a.png,,,,,
-26,3,48,,,1,"There are 6 stars and 14 hearts. So, 14 -6 = 8. Hence the answer is 8",,,,,,
+25,3,47,,,1,"There are 10 circles and 3 squares. So, 10-3 = 7.",circles&squares_13a.png,,,,,
+26,3,48,,,1,"There are 6 stars and 14 hearts. So, 14 -6 = 8. Hence the answer is 8.",,,,,,
 27,3,52,,,1,"If there are 33 children total and 14 are boys, we know the remaindr would be girls.  Hence, 33-14=19 girls.  Remember you can always reverse the equation to solve for the missing number.",,,,,,
 28,3,53,,,1,"If Sam has 56 pens and Andrew has 20, Sam has (56-20=36), 36 more pens than Andrew.",,,,,,
-29,3,54,,,1,"If Taylor has 34 cookies, and her friend has 7 less than here that is 27 cookies.  Together they have 34 + 27 = 61 cookies",,,,,,
-30,3,55,,,1,"If a robot weighs 34 pounds and a telescope 20, a robot weight 34-20 = 14 Lbs more than the telescope",,,,,,
-31,3,56,,,1," 60
--45
-____
-15.  
+29,3,54,,,1,"If Taylor has 34 cookies, and her friend has 7 less than here that is 27 cookies.  Together they have 34 + 27 = 61 cookies.",,,,,,
+30,3,55,,,1,"If a robot weighs 34 pounds and a telescope 20, a robot weight 34-20 = 14 Lbs more than the telescope.",,,,,,
+31,3,56,,,1,"&nbsp;60<br/>
+-45<br/>
+------<br/>
+15<br/>
 10-5=5.  <br/> You had to borrow 1 from 6 to make the 10, so you only have 5 left.  5-4 = 1
 <br/> Remember that 60-15=45 and 60-45=15.  It works both ways.",,,,,,
-32,3,57,,,1," 55
--42
-____    
-13.  
-(5-2=3, 5-4=1 and you get 13)
-Remember that 55-42=13 and 55-13=42.  
-",,,,,,
-33,3,58,,,1," 38
--29
-____    
-    9  
+32,3,57,,,1,"&nbsp;55<br/>
+-42<br/>
+------<br/>
+13<br/>
+(5-2=3, 5-4=1 and you get 13)<br/>
+Remember that 55-42=13 and 55-13=42.",,,,,,
+33,3,58,,,1,"&nbsp;38<br/>
+-29</br>
+-----
+&nbsp;9<br/>
 (5-2=3, 5-4=1 and you get 13)
 <br/> You had to borrow 1 from 3 to make the 18, and 18-9=9. 2-2=0
 <br/> Remember that 38-9=29 and 38-29-9 It works both ways.",,,,,,
-34,3,59,,,1," 46
--17
-____
-29
-16-7=9. <br/>  You just borrowed 1 from the 4 so 3 left.  3-1=2.  This gives you 29.
+34,3,59,,,1,"&nbsp;46<br/>
+-17<br/>
+-----<br/>
+29<br/>
+16-7=9. <br/> You just borrowed 1 from the 4 so 3 left.  3-1=2.  This gives you 29.
 <br/> Remember that 46-17=29 and 46-29=17.  ",,,,,,
-35,3,60,,,1," 24
--14
-____
-   10.  
-4-4=0, and 2-1=1.  That gives you 10.
-Remember that 24-14=10 and 24-10 = 14
-",,,,,,
+35,3,60,,,1,"&nbsp;24<br/>
+-14<br/>
+-----
+10
+<br/>4-4=0, and 2-1=1.  That gives you 10.
+<br/>Remember that 24-14=10 and 24-10 = 14.",,,,,,
 36,4,78,,,1,These shapes have 4 sides that are not all the same.  There are two pairs of sides which makes it a rectangle and not a square.,,,,,,
 37,4,79,,,1,"These shapes have 3 sides, 3 sided objects are triangles.",,,,,,
 38,6,114,,,1,"Step 1: Find the digit of interest, in this case the 2nd digit.  
@@ -281,14 +279,13 @@ _____
 2. Do thte tens: 20-0=20
 3. Do the hundreds: 1000-200=800
 4. Add those two up, you get 820.  ",,,,,,
-132,3,345,,,1,"  95
--45
-____
-   10.  
-Step 1: The one: 5-5=0, 
-Step 2: The tens.  9-4=5  
-The answer is 50
-",,,,,,
+132,3,345,,,1,"&nbsp;95
+-45<br/>
+-----<br/>
+10<br/>
+<br>Step 1: The one: 5-5=0, 
+<br/>Step 2: The tens.  9-4=5  
+<br/>The answer is 50.",,,,,,
 133,28,346,,,1,"    708
 -     89
 _______
@@ -414,19 +411,19 @@ _______
 206,13,492,,,1,"Each cent is worth 0.01, and so if you have 25 cents, 0.01*25  = 0.25.",,,,,,
 207,13,493,,,1,"Each cent is worth 0.01, and so if you have 33 cents, 0.01*33  = 0.33.",,,,,,
 208,13,494,,,1,"Each dollar is worth 100 cents, so 50 dollards is 5000 cents. Since each cent is worth 0.01, 0.01 * 5000 = 50.",,,,,,
-209,19,505,,,1,"Step 1: Check the interval:  52- 50 = 2, and, 58 - 56=2 . Step 2: Find the missing number:56 - 2 = 54",,,,,,
-210,19,506,,,1,"Step 1: Check the interval:  82- 77 = 5, and, 97 - 92=5 . Step 2: Find the missing number:92 - 5 = 87",,,,,,
-211,19,507,,,1,"Step 1: Check the interval:  100- 90 = 10, and, 130 - 120=10 . Step 2: Find the missing number:120 - 10 = 110",,,,,,
-212,19,508,,,1,"Step 1: Check the interval:  13- 11 = 2, and, 19 - 17=2 . Step 2: Find the missing number:17 - 2 = 15",,,,,,
-213,19,509,,,1,"Step 1: Check the interval:  105- 100 = 5, and, 120 - 115=5 . Step 2: Find the missing number:115 - 5 = 110",,,,,,
-214,19,515,,,1,"Step 1: Check the interval:  48- 45 = 3, and, 57 - 54=3 . Step 2: Find the missing number:54 - 3 = 51",,,,,,
-215,19,516,,,1,"Step 1: Check the interval:  62- 60 = 2, and, 68 - 66=2 . Step 2: Find the missing number:66 - 2 = 64",,,,,,
-216,19,520,,,1,"Step 1: Check the interval:  30- 25 = 5, and, 45 - 40=5 . Step 2: Find the missing number:40 - 5 = 35",,,,,,
-217,19,521,,,1,"Step 1: Check the interval:  206- 200 = 6, and, 224 - 218=6 . Step 2: Find the missing number:218 - 6 = 212",,,,,,
-218,19,522,,,1,"Step 1: Check the interval:  152- 150 = 2, and, 158 - 156=2 . Step 2: Find the missing number:156 - 2 = 154",,,,,,
-219,19,523,,,1,"Step 1: Check the interval:  224- 222 = 2, and, 230 - 228=2 . Step 2: Find the missing number:228 - 2 = 226",,,,,,
-220,19,524,,,1,"Step 1: Check the interval:  90- 78 = 12, and, 126 - 114=12 . Step 2: Find the missing number:114 - 12 = 102",,,,,,
-221,19,525,,,1,"Step 1: Check the interval:  102- 100 = 2, and, 108 - 106=2 . Step 2: Find the missing number:106 - 2 = 104",,,,,,
+209,19,505,,,1,"Step 1: Check the interval:  52- 50 = 2, and, 58 - 56=2 .<br/>Step 2: Find the missing number: 56 - 2 = 54",,,,,,
+210,19,506,,,1,"Step 1: Check the interval:  82- 77 = 5, and, 97 - 92=5 .<br/>Step 2: Find the missing number: 92 - 5 = 87",,,,,,
+211,19,507,,,1,"Step 1: Check the interval:  100- 90 = 10, and, 130 - 120=10 .<br/>Step 2: Find the missing number: 120 - 10 = 110",,,,,,
+212,19,508,,,1,"Step 1: Check the interval:  13- 11 = 2, and, 19 - 17=2 .<br/>Step 2: Find the missing number: 17 - 2 = 15",,,,,,
+213,19,509,,,1,"Step 1: Check the interval:  105- 100 = 5, and, 120 - 115=5 .<br/>Step 2: Find the missing number: 115 - 5 = 110",,,,,,
+214,19,515,,,1,"Step 1: Check the interval:  48- 45 = 3, and, 57 - 54=3 .<br/>Step 2: Find the missing number: 54 - 3 = 51",,,,,,
+215,19,516,,,1,"Step 1: Check the interval:  62- 60 = 2, and, 68 - 66=2 .<br/>Step 2: Find the missing number: 66 - 2 = 64",,,,,,
+216,19,520,,,1,"Step 1: Check the interval:  30- 25 = 5, and, 45 - 40=5 .<br/>Step 2: Find the missing number: 40 - 5 = 35",,,,,,
+217,19,521,,,1,"Step 1: Check the interval:  206- 200 = 6, and, 224 - 218=6 .<br/>Step 2: Find the missing number: 218 - 6 = 212",,,,,,
+218,19,522,,,1,"Step 1: Check the interval:  152- 150 = 2, and, 158 - 156=2 .<br/>Step 2: Find the missing number: 156 - 2 = 154",,,,,,
+219,19,523,,,1,"Step 1: Check the interval:  224- 222 = 2, and, 230 - 228=2 .<br/>Step 2: Find the missing number: 228 - 2 = 226",,,,,,
+220,19,524,,,1,"Step 1: Check the interval:  90- 78 = 12, and, 126 - 114=12 .<br/>Step 2: Find the missing number: 114 - 12 = 102",,,,,,
+221,19,525,,,1,"Step 1: Check the interval:  102- 100 = 2, and, 108 - 106=2 .<br/>Step 2: Find the missing number: 106 - 2 = 104",,,,,,
 222,20,536,,,1,"To compare these numbers, start from the left, use the place value table.  All numbers are hundreds.  <br/> Since this is the case, now compare the value of the first number.  2<9 hence we know that 283 < 923 and 954. <br/>  Since the other two numbers begin with 9, now compare the Tens, or 2nd number from the left.  Since 2<5 hence 923< 954.  <br/> Hence the asnwer is 283, 923, 954",place_value_table.png,,,,,
 223,20,537,,,1,"To compare these numbers, start from the left, use the place value table.  All numbers are hundreds.  <br/> Since this is the case, now compare the value of the first number.  They are all different, hence we know that 3<7<8<9 so 398, 732, 893, 947",place_value_table.png,,,,,
 224,20,538,,,1,"To compare these numbers, start from the left, use the place value table.  All numbers are hundreds.  <br/> Since this is the case, now compare the value of the first number.  They are all different, hence we know that 2<3<6<7.  Hence 202,332,635,748",place_value_table.png,,,,,
@@ -868,52 +865,52 @@ _______
 651,1,1099,,,1,Step 1: Use place values determine largest value  <br/> Step 2: Rank by largest place value <br/> Step 3: Move down to next place value until solved,module_1aj.png,,,,,
 652,1,1100,,,1,Step 1: Use place values determine largest value  <br/> Step 2: Rank by largest place value <br/> Step 3: Move down to next place value until solved,module_1ak.png,,,,,
 653,1,1101,,,1,Step 1: Use place values determine largest value  <br/> Step 2: Rank by largest place value <br/> Step 3: Move down to next place value until solved,module_1al.png,,,,,
-654,1,1102,,,1,"Step 1: Check the interval:  27- 25 = 2, and, 33 - 31=2 . Step 2: Find the missing number:31 - 2 = 29",,,,,,
-655,1,1103,,,1,"Step 1: Check the interval:  30- 27 = 3, and, 39 - 36=3 . Step 2: Find the missing number:36 - 3 = 33",,,,,,
-656,1,1104,,,1,"Step 1: Check the interval:  12- 10 = 2, and, 18 - 16=2 . Step 2: Find the missing number:16 - 2 = 14",,,,,,
-657,1,1105,,,1,"Step 1: Check the interval:  25- 20 = 5, and, 40 - 35=5 . Step 2: Find the missing number:35 - 5 = 30",,,,,,
-658,1,1106,,,1,"Step 1: Check the interval:  48- 44 = 4, and, 36 - 32=4 . Step 2: Find the missing number:36 + 4 = 40",,,,,,
-659,1,1107,,,1,"Step 1: Check the interval:  36- 34 = 2, and, 30 - 28=2 . Step 2: Find the missing number:30 + 2 = 32",,,,,,
-660,1,1108,,,1,"Step 1: Check the interval:  9- 4 = 5, and, 24 - 19=5 . Step 2: Find the missing number:19 - 5 = 14",,,,,,
-661,1,1109,,,1,"Step 1: Check the interval:  76- 73 = 3, and, 67 - 64=3 . Step 2: Find the missing number:67 + 3 = 70",,,,,,
-662,1,1110,,,1,"Step 1: Check the interval:  24- 18 = 6, and, 42 - 36=6 . Step 2: Find the missing number:36 - 6 = 30",,,,,,
-663,1,1111,,,1,"Step 1: Check the interval:  9- 2 = 7, and, 30 - 23=7 . Step 2: Find the missing number:23 - 7 = 16",,,,,,
-664,1,1112,,,1,"Step 1: Check the interval:  30- 24 = 6, and, 36-30=6 . Step 2: Find the missing number:48 - 6 = 42",,,,,,
-665,1,1113,,,1,"Step 1: Check the interval:  15- 10 = 5, and, 20-15=5 . Step 2: Find the missing number:30 - 5 = 25",,,,,,
-666,1,1114,,,1,"Step 1: Check the interval:  50- 45 = 5, and, 45 - 40=5 . Step 2: Find the missing number:30 + 5 = 35",,,,,,
-667,1,1115,,,1,"Step 1: Check the interval:  33- 22 = 11, and, 66 - 55=11 . Step 2: Find the missing number:66 - 11 = 55",,,,,,
-668,1,1116,,,1,"Step 1: Check the interval:  24-16 = 8, and, 16-8=8 . Step 2: Find the missing number:40 - 8 = 32",,,,,,
-669,1,1117,,,1,"Step 1: Check the interval:  4- 1 = 3, and, 7-4=3 . Step 2: Find the missing number:13 - 3 = 10",,,,,,
-670,1,1118,,,1,"Step 1: Check the interval:  8- 6 = 2, and, 10-8=2 . Step 2: Find the missing number:14 - 2 = 12",,,,,,
-671,1,1119,,,1,"Step 1: Check the interval:  8- 3 = 5, and, 13-8=5 . Step 2: Find the missing number:23 - 5 = 18",,,,,,
-672,1,1120,,,1,"Step 1: Check the interval:  17- 12 = 5, and, 22-17=5 . Step 2: Find the missing number:32 - 5 = 27",,,,,,
-673,1,1121,,,1,"Step 1: Check the interval:  10- 8 = 2, and, 8 - 6=2 . Step 2: Find the missing number:2 + 2 = 4",,,,,,
-674,1,1122,,,1,"Step 1: Check the interval:  14- 12 = 2, and, 10 - 8=2 . Step 2: Find the missing number:8 - 2 = 6",,,,,,
-675,1,1123,,,1,"Step 1: Check the interval:  20- 15 = 5, and, 5 - 0=5 . Step 2: Find the missing number:5 - 5 = 0",,,,,,
-676,1,1124,,,1,"Step 1: Check the interval:  18- 14 = 4, and, 10-14=4 . Step 2: Find the missing number:6 - 4 = 2",,,,,,
-677,1,1125,,,1,"Step 1: Check the interval:  12- 10 = 2, and, 16 - 14 =2 . Step 2: Find the missing number: 16 + 2 = 18",,,,,,
-678,1,1126,,,1,"Step 1: Check the interval:  26- 22 = 4, and, 34-30=4 . Step 2: Find the missing number: 34 + 4 = 38",,,,,,
-679,1,1127,,,1,"Step 1: Check the interval:  33- 31 = 2, and, 35-33=2 . Step 2: Find the missing number: 37 + 2 = 29",,,,,,
-680,1,1128,,,1,"Step 1: Check the interval:  10- 6 = 4, and, 14-10=4 . Step 2: Find the missing number: 18+4=22",,,,,,
-681,1,1129,,,1,"Step 1: Check the interval:  5- 1 = 4, and, 13 - 9 = 4 . Step 2: Find the missing number:13+4=17",,,,,,
-682,1,1130,,,1,"Step 1: Check the interval:  6- 3 = 3, and, 9 - 6 = 3 . Step 2: Find the missing number:12 + 3 = 15",,,,,,
-683,1,1131,,,1,"Step 1: Check the interval:  34- 32 = 2, and, 40 - 38=2 . Step 2: Find the missing number:38 - 2 = 36",,,,,,
-684,1,1132,,,1,"Step 1: Check the interval:  24- 22 = 2, and, 30 - 28=2 . Step 2: Find the missing number:28 - 2 = 26",,,,,,
-685,1,1133,,,1,"Step 1: Check the interval:  8- 6 = 2, and, 14 - 12=2 . Step 2: Find the missing number:12 - 2 = 10",,,,,,
-686,1,1134,,,1,"Step 1: Check the interval:  4- 2 = 2, and, 10 - 8=2 . Step 2: Find the missing number:8 - 2 = 6",,,,,,
-687,1,1135,,,1,"Step 1: Check the interval:  3- 1 = 2, and, 9 - 7=2 . Step 2: Find the missing number:7 - 2 = 5",,,,,,
-688,1,1136,,,1,"Step 1: Check the interval:  6- 4 = 2, and, 12 - 10=2 . Step 2: Find the missing number:10 - 2 = 8",,,,,,
-,1,1137,,,1,"Step 1: Check the interval:  7- 5 = 2, and, 13 - 11=2 . Step 2: Find the missing number:11 - 2 = 9",,,,,,
-,1,1138,,,1,"Step 1: Check the interval:  30- 25 = 5, and, 45 - 40=5 . Step 2: Find the missing number:40 - 5 = 35",,,,,,
-,1,1139,,,1,"Step 1: Check the interval:  42- 36 = 6, and, 60 - 54=6 . Step 2: Find the missing number:54 - 6 = 48",,,,,,
-,1,1140,,,1,"Step 1: Check the interval:  36- 34 = 2, and, 42 - 40=2 . Step 2: Find the missing number:40 - 2 = 38",,,,,,
-,1,1141,,,1,"Step 1: Check the interval:  34- 32 = 2, and, 40 - 38=2 . Step 2: Find the missing number:38 - 2 = 36",,,,,,
-,1,1142,,,1,"Step 1: Check the interval:  19- 17 = 2, and, 25 - 23=2 . Step 2: Find the missing number:23 - 2 = 21",,,,,,
-,1,1143,,,1,"Step 1: Check the interval:  102- 100 = 2, and, 108 - 106=2 . Step 2: Find the missing number:106 - 2 = 104",,,,,,
-,1,1144,,,1,"Step 1: Check the interval:  82- 80 = 2, and, 88 - 86=2 . Step 2: Find the missing number:86 - 2 = 84",,,,,,
-,1,1145,,,1,"Step 1: Check the interval:  75- 65 = 10, and, 105 - 95=10 . Step 2: Find the missing number:95 - 10 = 85",,,,,,
-,1,1146,,,1,"Step 1: Check the interval:  50- 48 = 2, and, 56 - 54=2 . Step 2: Find the missing number:54 - 2 = 52",,,,,,
-,1,1147,,,1,"Step 1: Check the interval:  22- 20 = 2, and, 28 - 26=2 . Step 2: Find the missing number:26 - 2 = 24",,,,,,
+654,1,1102,,,1,"Step 1: Check the interval:  27- 25 = 2, and, 33 - 31=2 .<br/>Step 2: Find the missing number: 31 - 2 = 29",,,,,,
+655,1,1103,,,1,"Step 1: Check the interval:  30- 27 = 3, and, 39 - 36=3 .<br/>Step 2: Find the missing number: 36 - 3 = 33",,,,,,
+656,1,1104,,,1,"Step 1: Check the interval:  12- 10 = 2, and, 18 - 16=2 .<br/>Step 2: Find the missing number: 16 - 2 = 14",,,,,,
+657,1,1105,,,1,"Step 1: Check the interval:  25- 20 = 5, and, 40 - 35=5 .<br/>Step 2: Find the missing number: 35 - 5 = 30",,,,,,
+658,1,1106,,,1,"Step 1: Check the interval:  48- 44 = 4, and, 36 - 32=4 .<br/>Step 2: Find the missing number: 36 + 4 = 40",,,,,,
+659,1,1107,,,1,"Step 1: Check the interval:  36- 34 = 2, and, 30 - 28=2 .<br/>Step 2: Find the missing number: 30 + 2 = 32",,,,,,
+660,1,1108,,,1,"Step 1: Check the interval:  9- 4 = 5, and, 24 - 19=5 .<br/>Step 2: Find the missing number: 19 - 5 = 14",,,,,,
+661,1,1109,,,1,"Step 1: Check the interval:  76- 73 = 3, and, 67 - 64=3 .<br/>Step 2: Find the missing number: 67 + 3 = 70",,,,,,
+662,1,1110,,,1,"Step 1: Check the interval:  24- 18 = 6, and, 42 - 36=6 .<br/>Step 2: Find the missing number: 36 - 6 = 30",,,,,,
+663,1,1111,,,1,"Step 1: Check the interval:  9- 2 = 7, and, 30 - 23=7 .<br/>Step 2: Find the missing number: 23 - 7 = 16",,,,,,
+664,1,1112,,,1,"Step 1: Check the interval:  30- 24 = 6, and, 36-30=6 .<br/>Step 2: Find the missing number: 48 - 6 = 42",,,,,,
+665,1,1113,,,1,"Step 1: Check the interval:  15- 10 = 5, and, 20-15=5 .<br/>Step 2: Find the missing number: 30 - 5 = 25",,,,,,
+666,1,1114,,,1,"Step 1: Check the interval:  50- 45 = 5, and, 45 - 40=5 .<br/>Step 2: Find the missing number: 30 + 5 = 35",,,,,,
+667,1,1115,,,1,"Step 1: Check the interval:  33- 22 = 11, and, 66 - 55=11 .<br/>Step 2: Find the missing number: 66 - 11 = 55",,,,,,
+668,1,1116,,,1,"Step 1: Check the interval:  24-16 = 8, and, 16-8=8 .<br/>Step 2: Find the missing number: 40 - 8 = 32",,,,,,
+669,1,1117,,,1,"Step 1: Check the interval:  4- 1 = 3, and, 7-4=3 .<br/>Step 2: Find the missing number: 13 - 3 = 10",,,,,,
+670,1,1118,,,1,"Step 1: Check the interval:  8- 6 = 2, and, 10-8=2 .<br/>Step 2: Find the missing number: 14 - 2 = 12",,,,,,
+671,1,1119,,,1,"Step 1: Check the interval:  8- 3 = 5, and, 13-8=5 .<br/>Step 2: Find the missing number: 23 - 5 = 18",,,,,,
+672,1,1120,,,1,"Step 1: Check the interval:  17- 12 = 5, and, 22-17=5 .<br/>Step 2: Find the missing number: 32 - 5 = 27",,,,,,
+673,1,1121,,,1,"Step 1: Check the interval:  10- 8 = 2, and, 8 - 6=2 .<br/>Step 2: Find the missing number: 2 + 2 = 4",,,,,,
+674,1,1122,,,1,"Step 1: Check the interval:  14- 12 = 2, and, 10 - 8=2 .<br/>Step 2: Find the missing number: 8 - 2 = 6",,,,,,
+675,1,1123,,,1,"Step 1: Check the interval:  20- 15 = 5, and, 5 - 0=5 .<br/>Step 2: Find the missing number: 5 - 5 = 0",,,,,,
+676,1,1124,,,1,"Step 1: Check the interval:  18- 14 = 4, and, 10-14=4 .<br/>Step 2: Find the missing number: 6 - 4 = 2",,,,,,
+677,1,1125,,,1,"Step 1: Check the interval:  12- 10 = 2, and, 16 - 14 =2 .<br/>Step 2: Find the missing number:  16 + 2 = 18",,,,,,
+678,1,1126,,,1,"Step 1: Check the interval:  26- 22 = 4, and, 34-30=4 .<br/>Step 2: Find the missing number:  34 + 4 = 38",,,,,,
+679,1,1127,,,1,"Step 1: Check the interval:  33- 31 = 2, and, 35-33=2 .<br/>Step 2: Find the missing number:  37 + 2 = 39",,,,,,
+680,1,1128,,,1,"Step 1: Check the interval:  10- 6 = 4, and, 14-10=4 .<br/>Step 2: Find the missing number:  18+4=22",,,,,,
+681,1,1129,,,1,"Step 1: Check the interval:  5- 1 = 4, and, 13 - 9 = 4 .<br/>Step 2: Find the missing number: 13+4=17",,,,,,
+682,1,1130,,,1,"Step 1: Check the interval:  6- 3 = 3, and, 9 - 6 = 3 .<br/>Step 2: Find the missing number: 12 + 3 = 15",,,,,,
+683,1,1131,,,1,"Step 1: Check the interval:  34- 32 = 2, and, 40 - 38=2 .<br/>Step 2: Find the missing number: 38 - 2 = 36",,,,,,
+684,1,1132,,,1,"Step 1: Check the interval:  24- 22 = 2, and, 30 - 28=2 .<br/>Step 2: Find the missing number: 28 - 2 = 26",,,,,,
+685,1,1133,,,1,"Step 1: Check the interval:  8- 6 = 2, and, 14 - 12=2 .<br/>Step 2: Find the missing number: 12 - 2 = 10",,,,,,
+686,1,1134,,,1,"Step 1: Check the interval:  4- 2 = 2, and, 10 - 8=2 .<br/>Step 2: Find the missing number: 8 - 2 = 6",,,,,,
+687,1,1135,,,1,"Step 1: Check the interval:  3- 1 = 2, and, 9 - 7=2 .<br/>Step 2: Find the missing number: 7 - 2 = 5",,,,,,
+688,1,1136,,,1,"Step 1: Check the interval:  6- 4 = 2, and, 12 - 10=2 .<br/>Step 2: Find the missing number: 10 - 2 = 8",,,,,,
+,1,1137,,,1,"Step 1: Check the interval:  7- 5 = 2, and, 13 - 11=2 .<br/>Step 2: Find the missing number: 11 - 2 = 9",,,,,,
+,1,1138,,,1,"Step 1: Check the interval:  30- 25 = 5, and, 45 - 40=5 .<br/>Step 2: Find the missing number: 40 - 5 = 35",,,,,,
+,1,1139,,,1,"Step 1: Check the interval:  42- 36 = 6, and, 60 - 54=6 .<br/>Step 2: Find the missing number: 54 - 6 = 48",,,,,,
+,1,1140,,,1,"Step 1: Check the interval:  36- 34 = 2, and, 42 - 40=2 .<br/>Step 2: Find the missing number: 40 - 2 = 38",,,,,,
+,1,1141,,,1,"Step 1: Check the interval:  34- 32 = 2, and, 40 - 38=2 .<br/>Step 2: Find the missing number: 38 - 2 = 36",,,,,,
+,1,1142,,,1,"Step 1: Check the interval:  19- 17 = 2, and, 25 - 23=2 .<br/>Step 2: Find the missing number: 23 - 2 = 21",,,,,,
+,1,1143,,,1,"Step 1: Check the interval:  102- 100 = 2, and, 108 - 106=2 .<br/>Step 2: Find the missing number: 106 - 2 = 104",,,,,,
+,1,1144,,,1,"Step 1: Check the interval:  82- 80 = 2, and, 88 - 86=2 .<br/>Step 2: Find the missing number: 86 - 2 = 84",,,,,,
+,1,1145,,,1,"Step 1: Check the interval:  75- 65 = 10, and, 105 - 95=10 .<br/>Step 2: Find the missing number: 95 - 10 = 85",,,,,,
+,1,1146,,,1,"Step 1: Check the interval:  50- 48 = 2, and, 56 - 54=2 .<br/>Step 2: Find the missing number: 54 - 2 = 52",,,,,,
+,1,1147,,,1,"Step 1: Check the interval:  22- 20 = 2, and, 28 - 26=2 .<br/>Step 2: Find the missing number: 26 - 2 = 24",,,,,,
 ,1,1148,,,1,To calculate this you need to count backwards,module_1101a.png,,,,,
 ,1,1149,,,1,To calculate this you need to count backwards,module_1101b.png,,,,,
 ,1,1150,,,1,To calculate this you need to count backwards,module_1101c.png,,,,,
@@ -966,7 +963,7 @@ _______
 ,514,1197,,,1,"Count the basketballs in the picture. There are 6 basketballs. Hence, the answer is 6 basketballs.",,,,,,
 ,514,1198,,,1,"Count the bats in the picture. There are 8 bats. Hence, the answer is 8 bats.",,,,,,
 ,2,1199,,,1,"Count the owls in the picture. There are 10 owls. Hence, the answer is 10 owls.",,,,,,
-,2,1200,,,1,"Count the flamingoes in the picture. There are 7 flamingoes. Hence, the answer is 7 flamingoes.",,,,,,
+,2,1200,,,1,"Count the flamingos in the picture. There are 7 flamingos. Hence, the answer is 7 flamingos.",,,,,,
 ,2,1201,,,1,"Count the rings in the picture. There are 6 rings Hence, the answer is 6 rings.",,,,,,
 ,2,1202,,,1,"Count the spots on the horse. There are 7 spots Hence, the answer is 7 spots.",,,,,,
 ,2,1203,,,1,"Count the apples on the porcupine. There are 4 apples. Hence, the answer is 4 apples.",,,,,,
@@ -978,7 +975,7 @@ _______
 ,2,1209,,,1,Count the waffles and ice-cream stacks. There are 6 waffles and ice-cream stacks. Hence the answer is 6 waffles and ice-cream stacks.,,,,,,
 ,2,1210,,,1,Count the bananas in the picture. There are 3 bananas in the picture. Hence the answer is 3 bananas.,,,,,,
 ,2,1211,,,1,Count the apples in the picture. There are 3 apples in the picture. Hence the answer is 3 apples.,,,,,,
-,2,1212,,,1,Count the coconuts in the picture. There are 7 coconuts in the picture. Hence the answer is7 coconuts.,,,,,,
+,2,1212,,,1,Count the coconuts in the picture. There are 7 coconuts in the picture. Hence the answer is 7 coconuts.,,,,,,
 ,25,1213,,,1,,module1102a.png,,,,,
 ,25,1214,,,1,,module1102b.png,,,,,
 ,25,1215,,,1,,module1102c.png,,,,,
