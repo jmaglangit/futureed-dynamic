@@ -22,8 +22,12 @@
             <a class="btn" href="#notepad_sketch" data-size="15" style="background: #fff">
                 <i class="fa fa-pencil fa-4x" aria-hidden="true" style="color:black;font-size:3.25em;margin-top:-5px;margin-left:-11px;"></i></a>
         </div>
-        <div class="col-md-2 marker_sketch"><a href="#notepad_sketch" data-tool="marker" class="btn btn-blue">{!! trans('messages.notepad_marker') !!}</a></div>
-        <div class="col-md-2 erase_sketch"><a href="#notepad_sketch" data-tool="eraser" class="btn btn-blue">{!! trans('messages.notepad_clear') !!}</a></div>
+        <div class="col-md-2 marker-sketch"><a href="#notepad_sketch" data-tool="marker" class="btn btn-blue"
+                                               data-toggle="tooltip" data-placement="bottom" title="{!! trans('messages.notepad_marker_tooltip') !!}">
+                {!! trans('messages.notepad_marker') !!}</a></div>
+        <div class="col-md-2 erase-sketch"><a href="#notepad_sketch" data-tool="eraser" class="btn btn-blue"
+                                              data-toggle="tooltip" data-placement="bottom" title="{!! trans('messages.notepad_clear_tooltip') !!}">
+                {!! trans('messages.notepad_clear') !!}</a></div>
     </div>
 </div>
 {!! Html::script('/js/common/notepad.js')!!}
