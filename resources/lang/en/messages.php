@@ -1467,6 +1467,6 @@ return [
 
 	'notepad_marker' => 'Marker',
 	'notepad_clear' => 'Clear',
-	'notepad_marker_tooltip' => 'To write on the notepad, click on marker, select the color and proceed to writing.',
-	'notepad_clear_tooltip' => 'To clear the writings on notepad, click on Clear button and click on the notepad.',
+	'notepad_marker_tooltip' => 'To write on the notepad, click on MARKER, select the color and proceed to writing.',
+	'notepad_clear_tooltip' => 'To clear the writings on notepad, click on CLEAR button and click on the notepad.',
 ];
