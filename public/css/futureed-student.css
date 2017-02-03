@@ -2571,13 +2571,35 @@ pre.dropdown-menu {
 	height: 40px;
 }
 
-.tools > .color_sketch, .tools > .size_sketch , .tools > .marker-ketch, .tools > .erase-sketch{
+.tools > .color_sketch , .tools > .erase-sketch{
 	margin-left: -24px;
 }
 
+.tools > .marker-ketch {
+	margin-left: -24px;
+}
+
+.tools > .size_sketch {
+	margin-left:-70px;
+}
 
 
-.marker-sketch > a , .erase-sketch > a {
+.marker-sketch > a , .erase-sketch > a{
 	height: 30px;
 	margin-top: 6px;
+	margin-left: -35px;
+}
+
+.help-sketch {
+	width: 111px;
+	height: 30px;
+	margin-top: 5px;
+	margin-left: -59px;
+}
+
+#notepad-info {
+	margin-bottom: 5px;
+	margin-left: 4px;
+	margin-right:-830px;
+	float: right;
 }

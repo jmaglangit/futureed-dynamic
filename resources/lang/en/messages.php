@@ -523,6 +523,8 @@ return [
 	'download_lsp_report' => 'Download LSP Report',
 	'quote' => 'Quote|Quotes',
 	'answer_explanation' => 'Answer Explanation',
+	'help' => 'Help',
+	'note' => 'Note',
 
 
 	//resources/views/admin/dashboard/index.blade.php
