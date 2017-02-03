@@ -2571,7 +2571,11 @@ pre.dropdown-menu {
 	height: 40px;
 }
 
-.tools > .color_sketch , .tools > .marker-ketch, .tools > .erase-sketch{
+.tools > .color_sketch , .tools > .erase-sketch{
+	margin-left: -24px;
+}
+
+.tools > .marker-ketch {
 	margin-left: -24px;
 }
 
@@ -2580,14 +2584,22 @@ pre.dropdown-menu {
 }
 
 
-.marker-sketch > a , .erase-sketch > a {
+.marker-sketch > a , .erase-sketch > a{
 	height: 30px;
 	margin-top: 6px;
-	margin-left: -16px;
+	margin-left: -35px;
 }
 
 .help-sketch {
-	width: 1px;
+	width: 111px;
+	height: 30px;
 	margin-top: 5px;
-	margin-left: -30px;
+	margin-left: -59px;
+}
+
+#notepad-info {
+	margin-bottom: 5px;
+	margin-left: 4px;
+	margin-right:-830px;
+	float: right;
 }

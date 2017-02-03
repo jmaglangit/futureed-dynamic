@@ -1,6 +1,12 @@
 <div id="slide-panel">
     <a href="#" class="btn btn-gold" id="opener"><i class="fa fa-pencil fa-3x" aria-hidden="true" style="color:black;margin-left:-5px;"></i></a>
+    {{--<canvas id="notepad_sketch" width="820" height="450"></canvas>--}}
     <canvas id="notepad_sketch" width="820" height="450"></canvas>
+    <div id="notepad-info" class="alert alert-info">
+        <strong>{!! trans('messages.note') !!}:</strong><br/>
+        <br/>{!! trans('messages.notepad_marker_tooltip') !!}<br/>
+        <br/>{!! trans('messages.notepad_clear_tooltip') !!}
+    </div>
     <div class="col-md-12 tools">
         <div class="col-md-6 color_sketch">
             <a class="btn" href="#notepad_sketch" data-color="#f00" style="background: #f00;"></a>
@@ -28,7 +34,7 @@
         <div class="col-md-2 erase-sketch"><a href="#notepad_sketch" data-tool="eraser" class="btn btn-blue"
                                               data-toggle="tooltip" data-placement="bottom" title="{!! trans('messages.notepad_clear_tooltip') !!}">
                 {!! trans('messages.notepad_clear') !!}</a></div>
-        <div class="col-md-2 help-sketch"><a href="#notepad_sketch" data-tool="help" class="btn btn-blue"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></div>
+        <div class="col-md-2 help-sketch"><a href="#notepad_sketch" data-tool="help" class="btn btn-blue">{!! trans('messages.help') !!}</a></div>
     </div>
 </div>
 {!! Html::script('/js/common/notepad.js')!!}
