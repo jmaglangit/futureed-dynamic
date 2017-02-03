@@ -45,6 +45,9 @@
 
 
 		<div class="row" ng-hide="mod.record.module_done || (mod.active_contents && !mod.contents)">
+			<div class="drawer-notepad right-0">
+				<div template-directive template-url="{!! route('student.class.module.partials.notepad') !!}"></div>
+			</div>
 			<div class="drawer col-xs-6 left-0" ng-controller="TipsController as tips">
 				<div class="drawer-inside" ng-class="{ 'openup' : tips.show_content_tips }">
 					<div class="drawer-header pointer">
@@ -128,7 +131,8 @@
 	{!! Html::script('/js/student/constants/student_help_constant.js')!!}
 
 	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}	
+	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/sketch.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}
 

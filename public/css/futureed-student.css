@@ -2537,3 +2537,69 @@ pre.dropdown-menu {
 #review-lesson:hover{
     text-decoration: none;
 }
+
+#slide-panel {
+	float:right;
+	width:830px;
+	height:500px;
+	padding: 10px 10px 10px 0px;
+	background:#f4d859;
+	margin-right:-830px;
+}
+
+#slide-panel > canvas {
+	background: #ffffee;
+	margin: -5px 10px 0px 5px;
+}
+
+#opener {
+	width: 45px;
+	height: 45px;
+	float: left;
+	margin: -10px 0px 0px -45px;
+	border-radius:0;
+}
+
+.drawer-notepad {
+	bottom: 56px;
+	position: fixed;
+	z-index: 3;
+}
+
+.tools > .color_sketch > a , .tools > .size_sketch > a {
+	width: 35px;
+	height: 40px;
+}
+
+.tools > .color_sketch , .tools > .erase-sketch{
+	margin-left: -24px;
+}
+
+.tools > .marker-ketch {
+	margin-left: -24px;
+}
+
+.tools > .size_sketch {
+	margin-left:-70px;
+}
+
+
+.marker-sketch > a , .erase-sketch > a{
+	height: 30px;
+	margin-top: 6px;
+	margin-left: -35px;
+}
+
+.help-sketch {
+	width: 111px;
+	height: 30px;
+	margin-top: 5px;
+	margin-left: -59px;
+}
+
+#notepad-info {
+	margin-bottom: 5px;
+	margin-left: 4px;
+	margin-right:-830px;
+	float: right;
+}

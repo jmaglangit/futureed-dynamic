@@ -14,6 +14,7 @@ function ManageModuleQuestionService($http) {
             , url   : apiUrl + 'question/admin?module_id=' + search.module_id
             + '&question_type=' + search.question_type
             + '&questions_text=' + search.questions_text
+            + '&status=' + search.status
             + '&limit=' + table.size
             + '&offset=' + table.offset
         });

@@ -32,6 +32,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.result = Constants.FALSE;
 		self.date_start = new Date();
 		self.load_module_content = Constants.FALSE;
+		self.bool_change_class = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_QUESTIONS 	:
@@ -1580,4 +1581,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	/** -------------------------- **/
+
+	self.click = function(){
+		self.bool_change_class = !self.bool_change_class;
+	}
 }

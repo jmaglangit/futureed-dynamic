@@ -60,6 +60,11 @@ class AdminQuestionController extends ApiController {
 			$criteria['questions_text'] = Input::get('questions_text');
 		}
 
+		//get status
+		if(Input::get('status')){
+			$criteria['status'] = Input::get('status');
+		}
+
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
 		}

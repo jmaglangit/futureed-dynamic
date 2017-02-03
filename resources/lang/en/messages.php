@@ -230,6 +230,7 @@ return [
 	'new_student' => 'New Student',
 	'next' => 'Next',
 	'no' => 'No',
+	'notepad' => 'Notepad',
 	'no_available_link' => 'No Available Link',
 	'no_answers_for_now' => 'No Answers for Now',
 	'no_available_points' => 'No Available Points',
@@ -522,6 +523,8 @@ return [
 	'download_lsp_report' => 'Download LSP Report',
 	'quote' => 'Quote|Quotes',
 	'answer_explanation' => 'Answer Explanation',
+	'help' => 'Help',
+	'note' => 'Note',
 
 
 	//resources/views/admin/dashboard/index.blade.php
@@ -1461,4 +1464,9 @@ return [
 	'game_time_message' => 'Timer will start once you click on :BUTTON. Time left to play is ',
 	'game_proceed' => 'Proceed to Game ?',
 	'game_lock' => 'Time expired',
+
+	'notepad_marker' => 'Marker',
+	'notepad_clear' => 'Clear',
+	'notepad_marker_tooltip' => 'To write on the notepad, click on marker, select the color and proceed to writing.',
+	'notepad_clear_tooltip' => 'To clear the writings on notepad, click on Clear button and click on the notepad.',
 ];
