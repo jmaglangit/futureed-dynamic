@@ -155,7 +155,7 @@ return [
 	'export' => 'Export',
 	'excelling' => 'Excelling',
 	'failed_payment' => 'Failed Payment',
-	'failed_payment_msg' => 'You have failed to complete the payment process.',
+	'failed_payment_msg' => 'Sorry. Payment Process has failed. Please try again or contact administrator.',
 	'female' => 'Female',
 	'first_name' => 'First Name',
 	'for_student_site' => 'for Student Site',
