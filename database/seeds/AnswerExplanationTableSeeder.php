@@ -22,6 +22,7 @@ class AnswerExplanationTableSeeder extends Seeder
             'answer_explanations_8.csv',
             'answer_explanations_9.csv',
             'answer_explanations_10.csv',
+            'answer_explanations_11.csv',
         ]);
 
         //initialize translation

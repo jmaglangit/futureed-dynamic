@@ -21,6 +21,7 @@ class QuestionAnswerTableSeeder extends Seeder
 		$this->dataLoader(['question_answers_5.csv']);
 		$this->dataLoader(['question_answers_6.csv']);
 		$this->dataLoader(['question_answers_7.csv']);
+		$this->dataLoader(['question_answers_8.csv']);
 
 		$this->addTranslation();
 	}
