@@ -229,7 +229,7 @@
 ,13,4594,,,1,"Steve has $ 500. There are two items cost less than $500, the monitor and the tablet. Hence, the answer is the monitor or tablet",electronics_pricing.png,,,,,
 ,13,4595,,,1,"Russell has $1000. A stereo costs $ 600 and a laptop costs $ 1500. So, $ 600 - $ 1500 = $ 2100. Hence, the answer is No",electronics_pricing.png,,,,,
 ,13,4596,,,1,"Serina has $200 and a tablet costs $320. Hence, the answer is No",electronics_pricing.png,,,,,
-,13,4597,,,1,"Serina has $200 and a phone costs $550. So, 550 -$200 =  30.  Hence, she needs $ 350",electronics_pricing.png,,,,,
+,13,4597,,,1,"Serina has $200 and a phone costs $550. So, 550 - 200 =  350.  Hence, she needs $ 350",electronics_pricing.png,,,,,
 ,13,4598,,,1,The tablet costs $ 320 and the laptop costs $ 1500. Hence the tablet is cheaper,electronics_pricing.png,,,,,
 ,6,4599,,,1,"Step 1: Find the digit of interest, in this case there is only 1 digit.
 
@@ -2332,11 +2332,11 @@ Write the word ""and"" followed by the tens and the units. Write: Next you only 
 ,1,14,,,1,,9_carsa.png,,,,,
 ,1,15,,,1,,18_circlesa.png,,,,,
 ,1,17,,,1,,squaresa.png,,,,,
-,2,22,,,1,"2+7=9, <br/> <br/> 5+6=11   <br/> <br/>  7+3=10   <br/> <br/>  8+4=12 <br/> <br/>  The answer is 7+3",,,,,,
-,2,24,,,1,11+12=23 <br/> <br/> 15+3=18  <br/> <br/>  10+10=20 <br/> <br/>  16+2=18 <br/> <br/>  The answer is10+10,,,,,,
+,2,22,,,1,"2+7=9,<br/><br/>5+6=11<br/><br/>7+3=10<br/><br/>8+4=12 <br/><br/>The answer is 7+3.",,,,,,
+,2,24,,,1,11+12=23 <br/><br/>15+3=18<br/><br/>10+10=20<br/><br/>16+2=18<br/><br/>The answer is 10+10.,,,,,,
 ,2,25,,,1,,22_triangles&circlesa.png,,,,,
 ,2,26,,,1,,7_rocketshipsa.png,,,,,
-,2,28,,,1,7+8=15 <br/> <br/> 10+4=14 <br/> <br/> 9+7=16 <br/> <br/> 13+6=19,,,,,,
+,2,28,,,1,7+8=15<br/><br/>10+4=14<br/><br/>9+7=16<br/><br/>13+6=19,,,,,,
 ,2,34,,,1,If we add 2 to 25 we have 27. ,,,,,,
 ,3,41,,,1,,stars_10a.png,,,,,
 ,3,42,,,1,,baseball_7a.jpg,,,,,
@@ -2344,8 +2344,8 @@ Write the word ""and"" followed by the tens and the units. Write: Next you only 
 ,3,44,,,1,,module1ba.png,,,,,
 ,3,45,,,1,,module1ca.png,,,,,
 ,3,49,,,1,,strawberries_15a.png,,,,,
-,3,50,,,1,25 minus 7 is 18,,,,,,
-,3,51,,,1,32 minus 10 = 22,,,,,,
+,3,50,,,1,25 minus 7 is 18.,,,,,,
+,3,51,,,1,32 minus 10 = 22.,,,,,,
 ,4,61,,,1,A shape with no edges is a circle or sphere. A 2-dimensional shape made by drawing a curve that is always the same distance from a center.,,,,,,
 ,4,62,,,1,"
 A 4-sided flat shape with straight sides where:• all sides have equal length, and
