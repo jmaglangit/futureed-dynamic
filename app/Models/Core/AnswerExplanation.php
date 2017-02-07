@@ -61,6 +61,13 @@ class AnswerExplanation extends Model {
 		}
 	}
 
+	//Mutator
+	public function setAnswerAttribute($value){
+
+		return $this->setAnswerExplanationTranslation($this->attributes['id'],$value,'answer_explanation');
+	}
+
+
 	//scopes
 
 	public function scopeModuleId($query, $module_id){

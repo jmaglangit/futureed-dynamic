@@ -60,6 +60,13 @@ class QuestionAnswer extends Model {
 		return $this->getQuestionAnswerTranslation($this->attributes['id'],$value,'answer');
 	}
 
+	//Mutator
+
+	//Translatable
+	public function setAnswerAttribute($value){
+
+		return $this->setQuestionTranslation($this->attributes['id'],$value,'answer');
+	}
 
 	public function getAnswerImageAttribute($value){
 

@@ -67,6 +67,19 @@ class Module extends Model
 		return $this->getModuleTranslation($this->attributes['id'],$value,'description');
 	}
 
+	//Mutators
+
+	//Translations
+	public function setNameAttribute($value){
+
+		return $this->setModuleTranslation($this->attributes['id'],$value,'name');
+	}
+
+	public function setDescriptionAttribute($value){
+
+		return $this->setModuleTranslation($this->attributes['id'],$value,'description');
+	}
+
 
 	/**
 	 * Modified database data into a URI.
