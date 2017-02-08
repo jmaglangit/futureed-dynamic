@@ -2603,3 +2603,10 @@ pre.dropdown-menu {
 	margin-right:-830px;
 	float: right;
 }
+
+.notepad-opener {
+	width: 100px;
+	height: 100px;
+	margin-left: -60px;
+	margin-top: -5px;
+}
