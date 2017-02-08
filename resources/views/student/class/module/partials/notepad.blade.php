@@ -1,5 +1,5 @@
 <div id="slide-panel">
-    <a href="#" class="btn btn-gold" id="opener"><i class="fa fa-pencil fa-3x" aria-hidden="true" style="color:black;margin-left:-5px;"></i></a>
+    <a href="#" class="btn" id="opener"><img class="notepad-opener" ng-src="/images/notepad.png"/></a>
     <canvas id="notepad_sketch" width="820" height="450"></canvas>
     <div id="notepad-info" class="alert alert-info">
         <strong>{!! trans('messages.note') !!}:</strong><br/>
