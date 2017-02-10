@@ -95,7 +95,7 @@
 						<div class="margin-top-30">
 							<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.current_question.question_answers"
 								ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">
-								<div ng-if="choices.answer_text != '' ">{! choices.answer_text !}</div>
+								<div ng-if="choices.answer_text != '' ">{! (choices.label)? choices.label + '. ' + choices.answer_text : choices.answer_text !}</div>
 								<img ng-if="choices.answer_image != futureed.NONE " ng-src="{! choices.answer_image !}" />
 							</a>
 						</div>

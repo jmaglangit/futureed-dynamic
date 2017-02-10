@@ -32,6 +32,21 @@ trait TranslationTrait {
 	}
 
 	/**
+	 * Set Question Translation of the column.
+	 * @param $primary_key
+	 * @param $value
+	 * @param $column
+	 * @return mixed
+	 */
+	public function setQuestionTranslation($primary_key,$value,$column){
+
+		$translation = QuestionTranslation::where('question_id',$primary_key)
+			->where('locale',App::getLocale())->update([$column => $value]);
+
+		return (!empty($translation)) ? $translation : $value;
+	}
+
+	/**
 	 * Get Question Answer Translation of the column.
 	 * @param $primary_key
 	 * @param $value
@@ -41,6 +56,21 @@ trait TranslationTrait {
 
 		$translation = QuestionAnswerTranslation::where('question_answer_id',$primary_key)
 			->where('locale',App::getLocale())->pluck($column);
+
+		return (!empty($translation)) ? $translation : $value;
+	}
+
+	/**
+	 * Set Question Answer Translations of the column.
+	 * @param $primary_key
+	 * @param $value
+	 * @param $column
+	 * @return mixed
+	 */
+	public function setQuestionAnswerTranslation($primary_key,$value,$column){
+
+		$translation = QuestionAnswerTranslation::where('question_answer_id',$primary_key)
+			->where('locale',App::getLocale())->update([$column => $value]);
 
 		return (!empty($translation)) ? $translation : $value;
 	}
@@ -60,6 +90,21 @@ trait TranslationTrait {
 		return (!empty($translation)) ? $translation : $value;
 	}
 
+	/**
+	 * Set Answer Explanation Translation of the column.
+	 * @param $primary_key
+	 * @param $value
+	 * @param $column
+	 * @return mixed
+	 */
+	public function setAnswerExplanationTranslation($primary_key,$value,$column){
+
+		$translation = AnswerExplanationTranslation::where('answer_explanation_id',$primary_key)
+			->where('locale',App::getLocale())->update([$column => $value]);
+
+		return (!empty($translation)) ? $translation : $value;
+
+	}
 
 	/**
 	 * Get Module Translation of the column.
@@ -72,6 +117,21 @@ trait TranslationTrait {
 
 		$translation = ModuleTranslation::where('module_id',$primary_key)
 			->where('locale',App::getLocale())->pluck($column);
+
+		return (!empty($translation)) ? $translation : $value;
+	}
+
+	/**
+	 * Update Module Translation of the column.
+	 * @param $primary_key
+	 * @param $value
+	 * @param $column
+	 * @return mixed
+	 */
+	public function setModuleTranslation($primary_key,$value,$column){
+
+		$translation = ModuleTranslation::where('module_id',$primary_key)
+			->where('locale',App::getLocale())->update([$column => $value]);
 
 		return (!empty($translation)) ? $translation : $value;
 	}

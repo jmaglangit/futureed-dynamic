@@ -121,7 +121,19 @@ class Question extends Model {
 
 			return null;
 		}
+	}
 
+	//Mutators
+
+	//Translations
+	public function setQuestionTextAttribute($value){
+
+		return $this->setQuestionTranslation($this->attributes['id'],$value,'questions_text');
+	}
+
+	public function setAnswerAttribute($value){
+
+		return $this->setQuestionTranslation($this->attributes['id'],$value,'answer');
 	}
 
 	//-------------relationships
