@@ -94,7 +94,7 @@ class Module extends Model
 		$image_path = config('futureed.icon_image_path_final') .'/'. $value;
 
 		//check path
-		if($filesystem->exists($image_path)){
+		if($filesystem->exists($image_path) && $value != ''){
 			return asset(config('futureed.icon_image_path_final_public') .'/'. $value);
 
 		} else {
