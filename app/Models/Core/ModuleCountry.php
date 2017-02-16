@@ -35,7 +35,7 @@ class ModuleCountry extends Model{
 	}
 
 	public function module(){
-		return $this->belongsTo('FutureEd\Models\Core\Module')->with('grade');
+		return $this->belongsTo('FutureEd\Models\Core\Module')->with('grade','subject','subjectArea');
 	}
 
 	public function studentModule() {
@@ -53,6 +53,28 @@ class ModuleCountry extends Model{
 	public function scopeSubjectId($query,$subject_id){
 		return $query->whereHas('module',function($query) use ($subject_id){
 			$query->where('subject_id',$subject_id);
+		});
+	}
+
+	public function scopeSubjectName($query,$subject_name){
+		return $query->whereHas('module',function($query) use ($subject_name){
+			$query->whereHas('subject',function($query) use ($subject_name){
+				$query->where('name','like','%'.$subject_name.'%');
+			});
+		});
+	}
+
+	public function scopeSubjectAreaName($query,$subject_area_name){
+		return $query->whereHas('module',function($query) use ($subject_area_name){
+			$query->whereHas('subject_area',function($query) use ($subject_area_name){
+				$query->where('name','like','%'.$subject_area_name.'%');
+			});
+		});
+	}
+
+	public function scopeModuleName($query,$module_name){
+		return $query->whereHas('module',function($query) use ($module_name){
+			$query->where('name','like','%'. $module_name .'%');
 		});
 	}
 

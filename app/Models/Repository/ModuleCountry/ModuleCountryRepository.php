@@ -23,6 +23,10 @@ class ModuleCountryRepository implements ModuleCountryRepositoryInterface {
 			$module_country = $module_country->whereModuleId($criteria['module_id']);
 		}
 
+		if(isset($criteria['module_name'])){
+			$module_country = $module_country->ModuleName($criteria['module_name']);
+		}
+
 		if(isset($criteria['country_id'])){
 			$module_country = $module_country->whereCountryId($criteria['country_id']);
 		}
@@ -35,6 +39,14 @@ class ModuleCountryRepository implements ModuleCountryRepositoryInterface {
 			$module_country = $module_country->subjectId($criteria['subject_id']);
 		}
 
+		if(isset($criteria['subject_name'])){
+			$module_country = $module_country->subjectName($criteria['subject_name']);
+		}
+
+		if(isset($criteria['subject_area_name'])){
+			$module_country = $module_country->subjectAreaName($criteria['subject_area_name']);
+		}
+
 		//student id
 		if(isset($criteria['student_id'])){
 			$module_country = $module_country->with('studentModule');
@@ -42,7 +54,6 @@ class ModuleCountryRepository implements ModuleCountryRepositoryInterface {
 			$module_country = $module_country->student($criteria['student_id']);
 		}
 
-		//class id
 		//module status
 		//age group id
 

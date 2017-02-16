@@ -2,6 +2,7 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\AdminModuleRequest;
+use FutureEd\Models\Repository\ModuleCountry\ModuleCountryRepositoryInterface;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
@@ -11,14 +12,19 @@ class AdminModuleController extends ApiController {
 
 	protected $module;
 
+	protected $module_country;
+
 	protected $file;
 
 	public function __construct(
 		ModuleRepositoryInterface $module,
+		ModuleCountryRepositoryInterface $module_country,
 		Filesystem $filesystem
 	){
 
 		$this->module = $module;
+
+		$this->module_country = $module_country;
 
 		$this->file = $filesystem;
 	}
@@ -39,19 +45,19 @@ class AdminModuleController extends ApiController {
 		//for module name
 		if(Input::get('name')){
 
-			$criteria['name'] = Input::get('name');
+			$criteria['module_name'] = Input::get('name');
 		}
 
 		//for area
 		if(Input::get('area')){
 
-			$criteria['area'] = Input::get('area');
+			$criteria['subject_area_name'] = Input::get('area');
 		}
 
 		//for subject
 		if(Input::get('subject')){
 
-			$criteria['subject'] = Input::get('subject');
+			$criteria['subject_name'] = Input::get('subject');
 		}
 
 		//for grade
@@ -69,9 +75,10 @@ class AdminModuleController extends ApiController {
 		if(Input::get('offset')) {
 			$offset = intval(Input::get('offset'));
 		}
+//		dd($this->module_country->getModuleCountries($criteria,$limit,$offset));
 
 		//get module list with relation to subject,subject_area,grade
-		return $this->respondWithData($this->module->getModules($criteria , $limit, $offset ));
+		return $this->respondWithData($this->module_country->getModuleCountries($criteria , $limit, $offset ));
 	}
 
 	/**

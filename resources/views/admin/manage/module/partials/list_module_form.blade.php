@@ -126,23 +126,23 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="record in module.records">
-						<td>{! record.name !}</td>
-						<td>{! record.subject.name !}</td>
-						<td>{! record.subject_area.name !}</td>
+						<td>{! record.module.name !}</td>
+						<td>{! record.module.subject.name !}</td>
+						<td>{! record.module.subject_area.name !}</td>
 						<td>{! record.grade.name !}</td>
 						<td ng-if="module.records.length">
 							<div class="row">
 								<div class="col-xs-3">
-									<a href="" ng-click="module.setActive(futureed.ACTIVE_VIEW, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_view_module') !!}"><span><i class="fa fa-eye"></i></span></a>
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_VIEW, record.module.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_view_module') !!}"><span><i class="fa fa-eye"></i></span></a>
 								</div>
 								<div class="col-xs-3">
-									<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_edit_module') !!}"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, record.module.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_edit_module') !!}"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 								<div class="col-xs-3">
-									<a href="{!! route('admin.manage.module.question') . "?module=" !!}{! record.id !}" target="_blank" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_module_preview_questions') !!}"><span><i class="fa fa-search-plus"></i></span></a>
+									<a href="{!! route('admin.manage.module.question') . "?module=" !!}{! record.module.id !}" target="_blank" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_module_preview_questions') !!}"><span><i class="fa fa-search-plus"></i></span></a>
 								</div>
 								<div class="col-xs-3">
-									<a href="" ng-click="module.confirmDelete(record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_delete_module') !!}"><span><i class="fa fa-trash"></i></span></a>
+									<a href="" ng-click="module.confirmDelete(record.module.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_delete_module') !!}"><span><i class="fa fa-trash"></i></span></a>
 								</div>
 							</div>
 						</td>
