@@ -281,6 +281,6 @@
     </div>
 
     <div class="side-btn-in" ng-class="{ 'side-btn-out' : class.bool_change_class }">
-        <img ng-click="class.click()" ng-src="/images/icons/info.png" tooltip="Need Help? Want to Help? Click here to browse through Tips and Help Request for Guidance!" tooltip-placement="right" tooltip-class="help-tooltip" src="/images/icons/info.png">
+        <img ng-click="class.click()" ng-src="/images/icons/info.png" tooltip="{!! trans('messages.tips_help_tooltip') !!}"  tooltip-placement="right" tooltip-class="help-tooltip" src="/images/icons/info.png">
     </div>
 </div>

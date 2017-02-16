@@ -441,6 +441,7 @@ return [
 	'tip_list' => 'Tip List',
 	'tip_details' => 'Tip Details',
 	'tips_help' => 'Tips / Help',
+	'tips_help_tooltip' => 'Need Help? Want to Help? Click here to browse through Tips and Help Request for Guidance!',
 	'tips_and_help_request' => 'Tips & Help Requests',
 	'title' => 'Title',
 	'to' => 'To',
