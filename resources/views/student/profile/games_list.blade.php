@@ -27,7 +27,7 @@
                         <p>{! game.points_price !}</p>
                         {!! Form::button(trans('messages.buy')
                         , array(
-                        'class' => 'btn btn-maroon btn-medium center-block'
+                        'class' => 'btn btn-green btn-medium center-block'
                         , 'ng-click' => 'profile.confirmBuyGame(game.id)'
                         , 'ng-if' => '!game.student_game.length'
                         )

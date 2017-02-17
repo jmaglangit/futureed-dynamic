@@ -2,7 +2,7 @@
 	<div class="title-mid">
 		<span>{!! trans('messages.client_teaching_content') !!}</span>
 		<div class="pull-right col-xs-4 btn-right" ng-if="!content.no_content">
-			<a class="btn btn-medium btn-maroon pull-right" href="{!! route('client.parent.question.index') !!}">{!! trans('messages.skip') !!}</a>	
+			<a class="btn btn-medium btn-green pull-right" href="{!! route('client.parent.question.index') !!}">{!! trans('messages.skip') !!}</a>	
 		</div>
 		<div class="pull-right col-xs-4 btn-right" ng-if="content.no_content">
 			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.parent.module.index') !!}">{!! trans('messages.back') !!}</a>
@@ -34,7 +34,7 @@
 			<center><h2 class="title-content">{! content.content.teaching_module !}</h2></center>
 		</div>
 		<div class="col-xs-4">
-			<button class="btn btn-maroon btn-medium pull-right" ng-click="content.navigate(content.detail.key, futureed.NEXT)" ng-if="content.detail.key != content.total">{!! trans('messages.next') !!}</button>
+			<button class="btn btn-green btn-medium pull-right" ng-click="content.navigate(content.detail.key, futureed.NEXT)" ng-if="content.detail.key != content.total">{!! trans('messages.next') !!}</button>
 		</div>
 	</div>
 	<div class="col-xs-12 content-list margin-20-bot">

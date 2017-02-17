@@ -201,14 +201,14 @@
 						) !!}
 						{!! Form::button(trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gray btn-medium'
 								, 'ng-if' => 'student.active_view'
 								, 'ng-click' => "student.setActive(futureed.ACTIVE_LIST)"
 							)
 						) !!}
 						{!! Form::button(trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gray btn-medium'
 								, 'ng-if' => 'student.active_edit'
 								, 'ng-click' => "student.setActive(futureed.ACTIVE_VIEW, student.record.id)"
 							)

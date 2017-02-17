@@ -44,7 +44,7 @@
 
 						{!! Html::link(route('client.login'), trans('messages.cancel')
 								, array(
-									'class' => 'btn btn-gold btn-medium',
+									'class' => 'btn btn-gray btn-medium',
 									'style' => 'margin-right:0;'
 								)
 						) !!}

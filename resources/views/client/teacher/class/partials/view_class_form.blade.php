@@ -91,7 +91,7 @@
 
 			{!! Form::button(trans('messages.cancel')
 				, array(
-					'class' => 'btn btn-gold btn-medium'
+					'class' => 'btn btn-gray btn-medium'
 					, 'ng-click' => "class.setActive('view')"
 				)
 			) !!}
@@ -252,7 +252,7 @@
 
 	                {!! Form::button(trans('messages.cancel')
 	                    , array(
-	                        'class' => 'btn btn-gold btn-medium'
+	                        'class' => 'btn btn-gray btn-medium'
 	                        , 'data-dismiss' => 'modal'
 	                        , 'ng-click' => 'class.cancelDeleteStudent()'
 	                    )

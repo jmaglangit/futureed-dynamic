@@ -80,14 +80,14 @@
 			<div class="btn-container">
 				{!! Form::button(trans('messages.next')
 					, array(
-						'class' => 'btn btn-maroon btn-medium'
+						'class' => 'btn btn-green btn-medium'
 						, 'ng-click' => 'profile.selectPicturePassword()'
 					)
 				) !!}
 
 				{!! Form::button(trans('messages.cancel')
 					, array(
-						'class' => 'btn btn-gold btn-medium'
+						'class' => 'btn btn-gray btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('index')"
 					)
 				) !!}

@@ -188,7 +188,7 @@
 			<div class="col-xs-9 col-xs-offset-2" ng-if="!profile.active_edit">
 				{!! Form::button(trans('messages.student_change_picture_password')
 					, array(
-						'class' => 'btn btn-maroon btn-medium'
+						'class' => 'btn btn-green btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('password')"
 					)
 				) !!}
@@ -204,14 +204,14 @@
 			<div class="col-xs-9 col-xs-offset-2" ng-if="profile.active_edit">
 				{!! Form::button(trans('messages.save_changes')
 					, array(
-						'class' => 'btn btn-maroon btn-medium'
+						'class' => 'btn btn-green btn-medium'
 						, 'ng-click' => 'profile.saveProfile()'
 					)
 				) !!}
 
 				{!! Form::button(trans('messages.cancel')
 					, array(
-						'class' => 'btn btn-gold btn-medium'
+						'class' => 'btn btn-gray btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('index')"
 					)
 				) !!}

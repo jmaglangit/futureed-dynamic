@@ -69,7 +69,7 @@
 
 					{!! Form::button(trans('messages.cancel')
 						, array(
-							'class' => 'btn btn-gold btn-medium pull-right'
+							'class' => 'btn btn-gray btn-medium pull-right'
 							, 'ng-click' => "tips.setActive()"
 						)
 					) !!}

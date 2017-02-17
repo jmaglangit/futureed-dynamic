@@ -202,7 +202,7 @@
             </div>
 
             <div class="proceed-btn-container btn-container">
-                <button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
+                <button type="button" class="btn btn-green btn-medium" ng-click="mod.nextQuestion()">
                     {{ trans('messages.proceed_to_next_questions') }}
                 </button>
             </div>
@@ -230,7 +230,7 @@
                         </p>
 
                         <div class="trial-proceed-btn-container btn-container">
-                            <button type="button" class="btn trial-btn-maroon btn-large" ng-click="mod.exitModule('{!! route('student.payment.index') !!}')">
+                            <button type="button" class="btn trial-btn-green btn-large" ng-click="mod.exitModule('{!! route('student.payment.index') !!}')">
                                 {{ trans('messages.subscribe_now') }}
                             </button>
                         </div>
