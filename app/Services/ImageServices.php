@@ -51,7 +51,7 @@ class ImageServices {
 
 		//get path
 		if($icon_image != null){
-			$image_path = config('futureed.icon_image_path_final') . '/' . $module_id . '/' . $icon_image;
+			$image_path = config('futureed.icon_image_path_final') . '/' . $icon_image;
 		}
 		else{
 			$image_path = null;
@@ -61,11 +61,11 @@ class ImageServices {
 		if($filesystem->exists($image_path)){
 			switch ($type) {
 				case 'url':
-					return asset(url() . config('futureed.icon_image_path_final_public') . '/' . $module_id . '/' . $icon_image);
+					return asset(url() . config('futureed.icon_image_path_final_public') . '/' . $icon_image);
 					break;
 
 				case 'path':
-					return config('futureed.icon_image_path_final').'/'.$module_id.'/'.$icon_image;
+					return config('futureed.icon_image_path_final').'/'.$icon_image;
 					break;
 			}
 		} else {
