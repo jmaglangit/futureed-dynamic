@@ -144,7 +144,7 @@
     transition: 1s ease;
     left: 0px;
     position: fixed;
-    top: 200px;
+    top: 300px;
     cursor: pointer;
     z-index: 10;
 }
