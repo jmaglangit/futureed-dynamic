@@ -357,4 +357,21 @@ return [
 	'default_avatar_male' => 'default/default_male.png',
 	'default_avatar_female' => 'default/default_female.png',
 
+	//FutureEd Business Address
+	'billing_address' => [
+		'company' => env('BILL_COMPANY',"Futureed Pte. Ltd."),
+		'street' => env('BILL_STREET',"20 Maxwell Road #09-17"),
+		'address' => env('BILL_ADDRESS',"Maxwell House"),
+		'country' => env('BILL_COUNTRY',"Singapore 069113"),
+		'email' => env('BILL_EMAIL',"i n f o @ f u t u r e l e s s o n . c o m"),
+		'cc_name' => env('BILL_CC_NAME',"Futureed Pte Ltd"),
+		'bank_name' => env('BILL_BANK_NAME',"OCBC"),
+		'sgd_branch_code' => env('BILL_SGD_BRANCH_CODE',"582"),
+		'sgd_acct_no' => env('BILL_SGD_ACCT_NO',"066825001"),
+		'usd_branch_code' => env('BILL_USD_BRANCH_CODE',"508"),
+		'usd_acct_no' => env('BILL_USD_ACCT_NO',"011715-301"),
+		'bank_code' => env('BILL_BANK_CODE',"7339"),
+		'swift_code' => env('BILL_SWIFT_CODE',"OCBCSGSG")
+	],
+
 ];

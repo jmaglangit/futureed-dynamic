@@ -1,0 +1,76 @@
+<div class="report-card" ng-if="reports.active_report_card">
+    <div class="form-search report-card-container">
+        <?php echo Form::open(
+                [
+                    'id' => 'search_form',
+                    'class' => 'form-horizontal'
+                    , 'ng-submit' => 'reports.searchFnc($event)'
+                ]
+        ); ?>
+
+        <div class="form-group">
+            <div class="col-xs-3">
+                <img ng-src="{! reports.student.avatar_thumbnail !}"/>
+            </div>
+            <div class="col-xs-9">
+                <fieldset>
+                    <legend>{! reports.student.student_name!}</legend>
+                    <p ng-if="reports.student.grade_level != futureed.NONE">{! reports.student.grade_level!}</p>
+                </fieldset>
+            </div>
+        </div>
+        <?php echo Form::close(); ?>
+
+    </div>
+
+    <br/>
+
+    <div class="list-container" ng-cloak>
+        <table id="tip-list" class="table table-striped table-bordered">
+            <thead>
+            <tr class="magenta">
+                <th><?php echo trans('messages.subject'); ?></th>
+                <th><?php echo trans('messages.module_status'); ?></th>
+                <th><?php echo trans('messages.admin_points_earned'); ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data in reports.records">
+                <td>{! data.name !}</td>
+                <td>{! data.module_status !}</td>
+                <td>{! data.points_earned !}</td>
+            </tr>
+            <tr class="odd" ng-if="!reports.records.length && !reports.table.loading">
+                <td valign="top" colspan="7">
+                    <?php echo trans('messages.no_records_found'); ?>
+
+                </td>
+            </tr>
+            <tr class="odd" ng-if="reports.table.loading">
+                <td valign="top" colspan="7">
+                    <?php echo trans('messages.loading'); ?>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br/>
+
+    <?php /*Charts*/ ?>
+    <div>
+        <div>
+            <?php /*hours chart*/ ?>
+            <div class="col-xs-6" template-directive template-url="<?php echo route('reports.partials.charts.platform-chart-monthly'); ?>"></div>
+            <div class="col-xs-6" template-directive template-url="<?php echo route('reports.partials.charts.platform-chart-weekly'); ?>"></div>
+        </div>
+        <div>
+            <?php /*subject area*/ ?>
+            <div class="col-xs-6" template-directive template-url="<?php echo route('reports.partials.charts.platform-chart-subject-area'); ?>"></div>
+            <div class="col-xs-6" template-directive template-url="<?php echo route('reports.partials.charts.platform-chart-subject-area-heatmap'); ?>"></div>
+        </div>
+
+    </div>
+
+</div>

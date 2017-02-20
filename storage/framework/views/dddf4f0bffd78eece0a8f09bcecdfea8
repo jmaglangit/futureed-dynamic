@@ -1,0 +1,8 @@
+<div><br>
+    <?php echo trans('messages.payment_method'); ?> :<br/>
+    <?php echo trans('messages.direct_credit_to'); ?> : {! futureed.CC_NAME !}<br/>
+    <?php echo trans('messages.bank_name'); ?> : {! futureed.BANK_NAME !}<br/>
+    <?php echo trans('messages.sgd_branch_code'); ?> : {! futureed.SGD_BRANCH_CODE !}, <?php echo trans('messages.account'); ?> : {! futureed.SGD_ACCT_NO !}<br/>
+    <?php echo trans('messages.usd_branch_code'); ?> : {! futureed.USD_BRANCH_CODE !}, <?php echo trans('messages.account'); ?> : {! futureed.USD_ACCT_NO !}<br/>
+    <?php echo trans('messages.bank_code'); ?> : {! futureed.BANK_CODE !}, <?php echo trans('messages.swift_code'); ?> : {! futureed.SWIFT_CODE !}
+</div>

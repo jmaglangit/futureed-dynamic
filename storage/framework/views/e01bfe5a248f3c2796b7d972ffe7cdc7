@@ -1,0 +1,11 @@
+<?php echo Form::open(
+	array(
+		'id' => 'base_url_form'
+	)
+); ?>
+
+
+	<?php echo Form::hidden('base_url', url()); ?>
+
+
+<?php echo Form::close(); ?>

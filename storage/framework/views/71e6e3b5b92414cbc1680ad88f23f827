@@ -1,0 +1,35 @@
+<?php $__env->startSection('content'); ?>
+	<div class="container dshbrd-con" ng-cloak>
+
+		<div class="error-response col-md-6 col-md-offset-3">
+		    <h1 class="error-display">404</h1>
+
+		    <h2>
+		    	<strong><?php echo trans('messages.page_not_found'); ?></strong>
+		    </h2>
+		    <p class="error-text">
+			    <?php echo trans('messages.does_not_exist'); ?>
+
+		    </p>
+		    
+		    
+		    <div class="btn-container">
+		    	<a class="btn btn-light-blue btn-medium" href="<?php echo route('student.login'); ?>">
+			        <i class="fa fa-home"></i>
+			        <?php echo trans('messages.take_me_home'); ?>
+
+			    </a>
+			    <!-- <a href="#" class="btn btn-light-blue btn-medium disabled">
+			        <i class="fa fa-envelope-o"></i>
+			        Contact Support
+			    </a> -->
+			</div>
+		</div>
+	</div>
+  
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('client.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

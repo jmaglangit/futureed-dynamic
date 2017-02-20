@@ -1,0 +1,25 @@
+<?php /* Modal for Inactive/Session Time Expired */ ?>
+<div id="session_expire" ng-show="session_expire" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <?php echo e(trans('messages.inactive')); ?>
+
+            </div>
+            <div class="modal-body">
+                <?php echo e(trans('messages.logout_due_to_inactivity')); ?>
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-8 col-md-offset-4 pull-left">
+                    <?php echo Html::link($link, 'Login'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                        )
+                    ); ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
