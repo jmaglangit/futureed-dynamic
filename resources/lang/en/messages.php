@@ -159,7 +159,7 @@ return [
 	'female' => 'Female',
 	'first_name' => 'First Name',
 	'for_student_site' => 'for Student Site',
-	'for_students_13_years' => 'For Students 13 years old and below',
+	'for_students_13_years' => 'If you are 13 years old and below',
 	'for_parent_teacher_school' => 'for Parent / Teacher / School Site',
 	'forgot_check_inbox' => 'Please check your inbox or your spam folder for the email.<br/>The email contains a confirmation code that you need to input below.',
 	'forgot_email_sent' => 'An email to reset your password has been sent to your email account.',
