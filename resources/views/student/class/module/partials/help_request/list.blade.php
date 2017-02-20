@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="col-xs-8" ng-if="mod.show_btn">
-                        <button class="btn btn-maroon" ng-click="mod.tipList('', futureed.CURRENT, 1)">{!! trans('messages.view_more') !!}</button>
+                        <button class="btn btn-green" ng-click="mod.tipList('', futureed.CURRENT, 1)">{!! trans('messages.view_more') !!}</button>
                     </div>
                 </div>
             </div>

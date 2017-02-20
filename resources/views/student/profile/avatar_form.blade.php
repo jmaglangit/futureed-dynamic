@@ -24,7 +24,7 @@
 		<div class="btn-container" ng-if="!profile.success">
 			{!! Form::button(trans('messages.client_proceed')
 				, array(
-					'class' => 'btn btn-maroon btn-medium'
+					'class' => 'btn btn-green btn-medium'
 					, 'ng-if' => 'profile.enable'
 					, 'ng-click' => 'profile.selectAvatar()'
 				)
@@ -32,7 +32,7 @@
 
 			{!! Html::link(route('student.profile.index'), trans('messages.cancel')
 				, array(
-					'class' => 'btn btn-gold btn-medium'
+					'class' => 'btn btn-gray btn-medium'
 				)	
 			) !!}
 		</div>

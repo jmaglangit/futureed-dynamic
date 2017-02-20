@@ -30,7 +30,7 @@
 					<p class="text-gold text-center min-height-50">{! accessory.name !}</p>
 					{!! Form::button(trans('messages.buy')
 						, array(
-							'class' => 'btn btn-maroon btn-medium center-block'
+							'class' => 'btn btn-green btn-medium center-block'
 							, 'ng-click' => 'profile.confrimBuyAvatarAccessory(accessory.id, accessory.points_to_unlock)'
 							, 'ng-if' => '!accessory.is_bought'
 						)

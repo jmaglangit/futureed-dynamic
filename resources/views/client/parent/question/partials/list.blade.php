@@ -20,7 +20,7 @@
 			<center><h2 class="title-content">{! question.details.teaching_module !}</h2></center>
 		</div>
 		<div class="col-xs-4">
-			<button class="btn btn-maroon btn-medium pull-right" ng-click="question.viewQuestion(futureed.NEXT)" ng-if="question.details.seq_no != question.question_total">{!! trans('messages.next') !!}</button>
+			<button class="btn btn-green btn-medium pull-right" ng-click="question.viewQuestion(futureed.NEXT)" ng-if="question.details.seq_no != question.question_total">{!! trans('messages.next') !!}</button>
 		</div>
 	</div>
 </div>

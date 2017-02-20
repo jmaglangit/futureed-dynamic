@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="teacher-module-btn">
-		<button class="btn btn-maroon" ng-click="content.viewQuestions('{!! route('client.teacher.question.index') !!}')">{!! trans('messages.view_questions') !!}</button> 
+		<button class="btn btn-green" ng-click="content.viewQuestions('{!! route('client.teacher.question.index') !!}')">{!! trans('messages.view_questions') !!}</button> 
 	</div>
 
 	<div class="no-content-container col-xs-12" ng-if="!content.content">

@@ -101,7 +101,7 @@
 						) !!}
 					{!! Form::button(trans('messages.cancel')
 						, array(
-							'class' => 'btn btn-gold btn-medium'
+							'class' => 'btn btn-gray btn-medium'
 							, 'ng-click' => "teacher.setActive(futureed.ACTIVE_VIEW, teacher.record.id)"
 						)
 					) !!}

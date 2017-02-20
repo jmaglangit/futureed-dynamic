@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="btmcon">
-                        <button type="button" ng-if="enable" class="btn btn-maroon btn-medium" ng-click="$parent.selectAvatar()">{{ trans('messages.client_proceed') }}</button>
+                        <button type="button" ng-if="enable" class="btn btn-green btn-medium" ng-click="$parent.selectAvatar()">{{ trans('messages.client_proceed') }}</button>
                     </div>
                 </div>
             </div>

@@ -269,7 +269,7 @@
 				</div>
 			</div>
 			<div class="proceed-btn-container btn-container">
-				<button type="button" class="btn btn-maroon btn-medium"
+				<button type="button" class="btn btn-green btn-medium"
 						ng-click="mod.answer_explanation_fully_loaded=futureed.FALSE;mod.answer_exp_offset=0;mod.answer_explanation.count=0;mod.nextQuestion();">
 					{{ trans('messages.proceed_to_next_questions') }}
 				</button>
@@ -315,7 +315,7 @@
 					</div>
 
 					<div class="proceed-btn-container btn-container col-xs-12">
-						<button type="button" class="btn btn-maroon btn-medium"
+						<button type="button" class="btn btn-green btn-medium"
 								ng-click="mod.answer_explanation_fully_loaded=futureed.FALSE;mod.answer_exp_offset=0;mod.answer_explanation.count=0;mod.nextQuestion()">
 							{{ trans('messages.proceed_to_next_questions') }}
 						</button>

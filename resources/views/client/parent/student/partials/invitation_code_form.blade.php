@@ -46,7 +46,7 @@
 
 						{!! Form::button(trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gray btn-medium'
 								, 'ng-if' => 'student.record.id'
 								, 'ng-click' => 'student.setActive(futureed.ACTIVE_VIEW, student.record.id)'
 							)
