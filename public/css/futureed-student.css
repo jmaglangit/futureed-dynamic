@@ -2344,7 +2344,7 @@ pre.dropdown-menu {
     color: #055A7F;
     background-color: #D5D5D5;
     min-height: 55px;
-    padding-top: 10px;
+    padding: 5px 5px;
 }
 
 .modal-rewards-items {

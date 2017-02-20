@@ -106,7 +106,7 @@
 						<div class="btn-container">
 							{!! Form::button(trans('messages.client_proceed')
 									, array(
-											  'class' => 'btn btn-maroon btn-medium'
+											  'class' => 'btn btn-green btn-medium'
 											, 'ng-if' => '!password.password_set'
 											, 'ng-click' => 'password.validateCode($event)'
 									)
