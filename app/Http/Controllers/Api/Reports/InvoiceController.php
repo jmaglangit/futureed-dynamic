@@ -18,7 +18,10 @@ class InvoiceController extends ReportController {
 
 	protected $pdf;
 
-
+	/**
+	 * @param InvoiceRepositoryInterface $invoiceRepositoryInterface
+	 * @param PDF $PDF
+	 */
 	public function __construct(
 		InvoiceRepositoryInterface $invoiceRepositoryInterface,
 		PDF $PDF
@@ -27,23 +30,15 @@ class InvoiceController extends ReportController {
 		$this->pdf = $PDF;
 	}
 
-
-	//PDF download Invoice details
-
+	/**
+	 * PDF download Invoice details
+	 * @param $invoice_id
+	 * @return \Illuminate\Http\Response
+	 */
 	public function getBillingInvoice($invoice_id){
 
 		//get invoice
 		$invoice = $this->invoice->getInvoice($invoice_id);
-
-//		dd($invoice->toArray());
-
-
-		$information = [
-			'header' => [
-
-			],
-			'footer' => ''
-		];
 
 		$billing = [
 			'invoice' => $invoice->toArray(),
@@ -51,13 +46,10 @@ class InvoiceController extends ReportController {
 
 		$file_name = $billing['invoice']['order_no'] . '_FutureEd_Invoice';
 
-//		dd($billing);
-
 		//export invoice into pdf
 		$pdf = $this->pdf->loadView('export.invoice.billing-invoice-pdf', $billing)->setPaper('a4')->setOrientation('portrait');
 
 		return $pdf->download($file_name . '.' . 'pdf');
-
 	}
 
 }
