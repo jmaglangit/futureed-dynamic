@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
+use Carbon\Carbon;
 use FutureEd\Http\Requests\Request;
 
 class StudentRegistrationRequest extends ApiRequest {
@@ -26,7 +27,7 @@ class StudentRegistrationRequest extends ApiRequest {
 			'first_name'    => 'required|min:2|regex:'.config('regex.name').'|max:64',
 			'last_name'     => 'required|min:2|regex:'.config('regex.name').'|max:64',
 			'gender'        => 'required|alpha|in:'.config('futureed.gender.male').','.config('futureed.gender.female'),
-			'birth_date'    => 'required|date_format:Ymd|before:-14 year',
+			'birth_date'    => 'required|date_format:Ymd|before:' . Carbon::now()->subYears(14)->addDay(1)->toDateString(),
 			'username'      => 'required|min:8|max:32|alpha_num',
 			'callback_uri'  => 'required|string|max:128',
 			'email'         => 'required|email',
