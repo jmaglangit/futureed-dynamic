@@ -639,21 +639,27 @@ content legend {
 
 /*reporting tabs*/
 
+.reports .nav-student {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
 .reports .nav-student li {
-	/*width: 126px;*/
-	margin-left: 4px;
+	width: 126.5px;
 }
 
 .reports .nav-student li a {
 	border:1px solid #dcdcdc;
 	border-bottom: none;
-	padding: 10px 8px;
+	padding: 6px 8px;
+	border-radius: 5px;
 }
 
 .reports .nav-pills>li>a{
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 	text-align: center;
+	font-size: 11px;
 }
 
 .pill-gold-report>li.active>a, .pill-gold-report>li.active>a:focus, .pill-gold-report>li.active>a:hover {
