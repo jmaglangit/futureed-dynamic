@@ -1,4 +1,4 @@
-@extends('export.invoices.index')
+@extends('export.invoice.index')
 
 @section('metadata')
 @stop
