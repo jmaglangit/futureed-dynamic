@@ -1,14 +1,7 @@
 @extends('export.invoice.index')
 
-{{--@section('metadata')--}}
-        {{--<!-- Bootstrap core CSS -->--}}
-{{--{!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'); !!}--}}
-        {{--<!-- Fonts -->--}}
-{{--{!! Html::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'); !!}--}}
-{{--{!! Html::style('//fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic'); !!}--}}
-
-{{--{!! Html::style('/css/futureed-student.css'); !!}--}}
-{{--@stop--}}
+@section('metadata')
+@stop
 
 
 @section('content')
@@ -95,7 +88,8 @@
                 <div class="form-search">
                     <div><b>{!! trans('messages.classroom') !!}</b></div><br>
                     <div class="form-group">
-                        <table class="report-data">
+                        <table class="export-table">
+                            <thead>
                             <tr>
                                 <th>{!! trans_choice('messages.no_of_seats',2) !!}</th>
                                 <th>{!! trans_choice('messages.grade',1) !!}</th>
@@ -103,6 +97,7 @@
                                 <th>{!! trans('messages.class') !!}</th>
                                 <th>{!! ucfirst(trans('price')) !!}</th>
                             </tr>
+                            </thead>
                             <tbody>
                             @foreach($invoice['invoice_detail'] as $details)
                                 <tr>
@@ -124,12 +119,14 @@
                 <div class="form-search">
                     <div><b>{!! trans_choice('messages.student',2) !!}</b></div><br>
                     <div class="form-group">
-                        <table class="report-data">
+                        <table class="export-table">
+                            <thead>
                             <tr>
                                 <th colspan="3" align="center">{!! trans('messages.name') !!}</th>
                                 <th colspan="3" align="center">{!! trans('messages.email') !!}</th>
                                 <th colspan="3" align="center">{!! trans('messages.price') !!}</th>
                             </tr>
+                            </thead>
                             <tbody>
                             @foreach($invoice['invoice_detail'][0]['classroom']['class_student'] as $students)
                                 <tr>
