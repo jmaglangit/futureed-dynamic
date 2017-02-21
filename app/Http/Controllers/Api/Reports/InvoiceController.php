@@ -47,7 +47,7 @@ class InvoiceController extends ReportController {
 		$file_name = $billing['invoice']['order_no'] . '_FutureEd_Invoice';
 
 		//export invoice into pdf
-		$pdf = $this->pdf->loadView('export.invoice.billing-invoice-pdf', $billing)->setPaper('a4')->setOrientation('portrait');
+		$pdf = $this->pdf->loadView('export.billing.billing-invoice-pdf', $billing)->setPaper('a4')->setOrientation('portrait');
 
 		return $pdf->download($file_name . '.' . 'pdf');
 	}
