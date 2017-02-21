@@ -118,7 +118,7 @@ class StudentReportController extends ReportController {
 
 		if (isset($avatar)) {
 
-			$avatar_image = $avatar->avatar_image;
+			$avatar_image = (isset($avatar->avatar_image)) ? $avatar->avatar_image : '';
 		} else {
 
 			if ($student->gender == config('futureed.gender.male')) {
@@ -225,8 +225,8 @@ class StudentReportController extends ReportController {
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
-			'avatar' => $this->avatar_service->getAvatarUrl($avatar->avatar_image),
-			'avatar_thumbnail' => $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image),
+			'avatar' => (isset($avatar->avatar_image)) ? $this->avatar_service->getAvatarUrl($avatar->avatar_image) : '',
+			'avatar_thumbnail' => (isset($avatar->avatar_image)) ? $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image) : '',
 			'earned_badges' => $student_badge,
 			'earned_medals' => $student_medal,
 			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,
@@ -296,7 +296,7 @@ class StudentReportController extends ReportController {
 
 		//Get Avatar thumbnail
 		$avatar = $this->avatar->getAvatar($student->avatar_id);
-		$avatar_thumbnail = $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image);
+		$avatar_thumbnail = (isset($avatar->avatar_image)) ? $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image) : '';
 
 		//Get subject information
 		$subject = $this->subject->getSubject($subject_id);
@@ -389,7 +389,7 @@ class StudentReportController extends ReportController {
 		$additional_information = [
 			'first_name' => $student->first_name,
 			'last_name' => $student->last_name,
-			'avatar_thumbnail' => $avatar->avatar_image,
+			'avatar_thumbnail' => (isset($avatar->avatar_image)) ? $avatar->avatar_image : '',
 			'subject_name' => $subject->name,
 			'grade_name' => isset($student_grade->name) ? $student_grade->name : config('futureed.none'),
 			'earned_badges' => $student_badge,
@@ -452,7 +452,7 @@ class StudentReportController extends ReportController {
 		$addition_information = [
 			'first_name' => $student->first_name,
 			'last_name' => $student->last_name,
-			'avatar_thumbnail' => $avatar->avatar_image,
+			'avatar_thumbnail' => (isset($avatar->avatar_image)) ? $avatar->avatar_image : '',
 			'subject_name' => $subject->name,
 		];
 
@@ -577,7 +577,7 @@ class StudentReportController extends ReportController {
 		$additional_information = [
 			'first_name' => $student->first_name,
 			'last_name' => $student->last_name,
-			'avatar_thumbnail' => $avatar->avatar_image,
+			'avatar_thumbnail' => (isset($avatar->avatar_image)) ? $avatar->avatar_image : '',
 			'subject_name' => $subject->name,
 			'grade_name' => isset($student_grade->name) ? $student_grade->name : config('futureed.none'),
 			'earned_badges' => $student_badge,
