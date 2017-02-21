@@ -691,9 +691,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	self.getCountry = function(id){
 
 		StudentPaymentService.getCountry(id).success(function(response){
-			if(response.errors) {
-				self.errors = $scope.errorHandler(response.errors);
-			} else{
+			if(!response.errors) {
 				self.billing_information.country =  response.data[0];
 			}
 		}).error(function(response) {
