@@ -26,7 +26,7 @@
 
 				{!! Form::button(trans('messages.client_proceed')
 					, array(
-						'class' => 'btn btn-maroon btn-medium'
+						'class' => 'btn btn-green btn-medium'
 						, 'ng-click' => 'password.selectNewPassword()'
 						, 'ng-if' => '!password.password_selected'
 					) 
@@ -43,7 +43,7 @@
 
 						{!! Form::button(trans('messages.save')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-green btn-medium'
 								, 'ng-click' => 'password.resetPassword()'
 							) 
 						) !!}
@@ -66,7 +66,7 @@
 
 			{!! Html::link(route('student.login') , trans('messages.click_to_login')
 				, array(
-					'class' => 'btn btn-maroon'
+					'class' => 'btn btn-green'
 				)
 			) !!}
 		</div>

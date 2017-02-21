@@ -66,7 +66,7 @@
 
 			{!! Html::link(route('student.login') , trans('messages.click_to_login')
 				, array(
-					'class' => 'btn btn-maroon'
+					'class' => 'btn btn-green'
 				)
 			) !!}
 		</div>
