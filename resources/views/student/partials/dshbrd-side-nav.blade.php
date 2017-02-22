@@ -1,12 +1,6 @@
 <ul ng-if="!profile.active_play_game" ng-init=" profile.active_games ? futureed.false
 	: profile.setStudentProfileActive('{!! $tab !!}') ">
 
-	<li class="active">
-		<a href="{!! route('student.dashboard.index') !!}">
-			{!! trans('messages.back_to_dashboard') !!}
-		</a>
-	</li>
-
 	<li ng-class="{ 'active' : profile.active_index || profile.active_edit_email || profile.active_confirm_email}">
 		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.INDEX)">{!! trans('messages.my_profile') !!}</a>
 	</li>
@@ -16,7 +10,7 @@
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_rewards }">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.REWARDS)">{!! trans('messages.student_rewards') !!}</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive(futureed.REWARDS)">{!! trans('messages.my_rewards') !!}</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_avatar_accessory }">

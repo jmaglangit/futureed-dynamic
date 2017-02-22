@@ -2661,3 +2661,8 @@ pre.dropdown-menu {
     margin-left: -60px;
     margin-top: -5px;
 }
+
+.hdr{
+    background: #065A7F;
+    min-height: 150px;
+}
