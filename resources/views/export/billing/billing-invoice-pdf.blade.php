@@ -17,7 +17,7 @@
                     <b>{!! trans('messages.date') !!} :</b> {!! $invoice['order']['order_date'] !!}<br><br>
                     {!! config('futureed.billing_address.company') !!}.<br>
                     {!! config('futureed.billing_address.street') !!}<br>
-                    {!! config('futureed.billing_address.adress') !!}<br>
+                    {!! config('futureed.billing_address.address') !!}<br>
                     {!! config('futureed.billing_address.country') !!}<br><br>
                     <b>{!! trans('messages.bill_to') !!} :</b> {!! $invoice['client_name'] !!}<br>
                     {!! $invoice['client']['street_address'] !!}, {!! $invoice['client']['city'] !!}{!! ',' . $invoice['client']['state'] !!}{!! ',' . $invoice['client']['country']['name'] !!}<br>
@@ -30,7 +30,7 @@
                     <b>{!! trans('messages.date') !!} :</b> {!! $invoice['order']['order_date'] !!}<br><br>
                     {!! config('futureed.billing_address.company') !!}.<br>
                     {!! config('futureed.billing_address.street') !!}<br>
-                    {!! config('futureed.billing_address.adress') !!}<br>
+                    {!! config('futureed.billing_address.address') !!}<br>
                     {!! config('futureed.billing_address.country') !!}<br><br>
                     <b>{!! trans('messages.bill_to') !!} :</b> {!! $invoice['student_name'] !!}<br>
                     {!! $invoice['student']['city'] !!}{!! ',' . $invoice['student']['state'] !!}{!! ',' . $invoice['student']['country']['name'] !!}<br>

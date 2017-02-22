@@ -223,6 +223,7 @@ return [
 	'my_profile' => 'My Profile',
 	'my_reports' => 'My Reports',
 	'my_help_requests' => 'My Help Requests',
+	'my_rewards' => 'My Rewards',
 	'name' => 'Name',
 	'new' => 'New',
 	'new_email' => 'New Email Address',
