@@ -595,7 +595,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
     self.showContent = function(content) {
         self.content = content;
-        console.log(content);
     }
 
 	self.getModuleStudent = function(module_id, successCallback) {
