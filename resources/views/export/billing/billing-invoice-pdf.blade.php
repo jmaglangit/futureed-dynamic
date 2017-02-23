@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-xs-4 control-label h5"><b>{!! trans('messages.date_period') !!} :</b> </label>
-                        <label class="col-lg-4 h5 form-label">{!! \Carbon\Carbon::parse($invoice['date_start'])->formatLocalized('%B %d %Y') !!} - {!! \Carbon\Carbon::parse($invoice['date_end'])->formatLocalized('%B %d %Y') !!}</label>
+                        <label class="col-lg-4 h5 form-label">{!! \Carbon\Carbon::parse($invoice['date_start'])->formatLocalized('%B %d, %Y') !!} - {!! \Carbon\Carbon::parse($invoice['date_end'])->formatLocalized('%B %d, %Y') !!}</label>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-4 control-label h5"><b>{!! trans('messages.country') !!} :</b> </label>
