@@ -126,7 +126,7 @@ class Question extends Model {
 	//Mutators
 
 	//Translations
-	public function setQuestionTextAttribute($value){
+	public function setQuestionsTextAttribute($value){
 
 		return $this->setQuestionTranslation($this->attributes['id'],$value,'questions_text');
 	}
