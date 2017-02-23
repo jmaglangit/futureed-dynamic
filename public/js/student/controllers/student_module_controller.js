@@ -567,7 +567,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
-					self.contents = response.data.records[0];
+					self.contents = response.data.records;//[0]
+					self.content = self.contents[0];
 					self.updatePageCount(response.data);
 
 					if(self.contents) {
@@ -591,6 +592,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			$scope.ui_unblock();
 		});
 	}
+
+    self.showContent = function(content) {
+        self.content = content;
+        console.log(content);
+    }
 
 	self.getModuleStudent = function(module_id, successCallback) {
 		$scope.ui_block();
@@ -1585,4 +1591,5 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.click = function(){
 		self.bool_change_class = !self.bool_change_class;
 	}
+
 }

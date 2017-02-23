@@ -66,7 +66,6 @@
             <div class="col-xs-6" template-directive template-url="{!! route('reports.partials.charts.platform-chart-subject-area') !!}"></div>
             <div class="col-xs-6" template-directive template-url="{!! route('reports.partials.charts.platform-chart-subject-area-heatmap') !!}"></div>
         </div>
-
     </div>
 
 </div>

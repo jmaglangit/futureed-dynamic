@@ -26,7 +26,7 @@
 
 				{!! Form::button(trans('messages.client_proceed')
 					, array(
-						'class' => 'btn btn-maroon btn-medium'
+						'class' => 'btn btn-green btn-medium'
 						, 'ng-click' => 'password.selectNewPassword()'
 						, 'ng-if' => '!password.password_selected'
 					) 
