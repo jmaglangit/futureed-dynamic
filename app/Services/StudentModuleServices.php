@@ -323,7 +323,9 @@ class StudentModuleServices {
 	 */
 	public function getNextQuestion($student_module_id, $module_id,$student_answer){
 
-		return $this->checkAnswers($student_module_id,$module_id,$student_answer);
+		//TODO: check module if has difficulty or not
+		return ($this->module->getModuleDifficulty($module_id)) ? ''
+			:$this->checkAnswers($student_module_id,$module_id,$student_answer);
 	}
 
 	/**
@@ -538,6 +540,25 @@ class StudentModuleServices {
 		}
 
 		return true;
+	}
+
+	//TODO: Parse to the next question for the module without Difficulty
+
+	//check module if it has difficulty
+
+	//Module has no difficulty
+
+	//get answer taken by student on the module
+	//check last taken question if not last, return next question
+	// if last then return no question available
+	public function difficultyNextQuestion($student_module_id,$module_id){
+
+		//get student module answer
+		$module_answers = $this->student_module_answer->getStudentModuleAnswer($student_module_id,$module_id);
+
+
+
+
 	}
 
 }

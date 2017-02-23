@@ -504,4 +504,13 @@ class ModuleRepository implements ModuleRepositoryInterface
 		return $response;
 	}
 
+	/**
+	 * @param $module_id
+	 * @return mixed
+	 */
+	public function getModuleDifficulty($module_id){
+
+		return Module::find($module_id)->pluck('has_difficulty');
+	}
+
 }

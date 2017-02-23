@@ -346,7 +346,13 @@ class StudentModuleAnswerController extends ApiController{
 		//$student_module->last_answered_question_id = $data['module_id'];
 
 		//update module_status
-		if($student_module->running_points >= $points_to_finish){
+		//TODO: check if student reaches the end of the questions and set completed, else continue
+		if($student_module->running_points >= $points_to_finish ||
+			$this->module->getModuleDifficulty($data['module_id']) && !$this->student_module_services->getNextQuestion(
+				$data['student_module_id'],
+				$data['module_id'],
+				$student_answer
+			)){
 
 			$student_module->module_status = config('futureed.module_status_completed');
 
@@ -374,6 +380,7 @@ class StudentModuleAnswerController extends ApiController{
 		$progress = ($student_module->running_points /$points_to_finish) * 100 ;
 		$student_module->progress = ($progress < 0 )? 0 : $progress;
 
+		//update student module details
 		$return = $this->student_module->updateStudentModule($student_module->id,$student_module);
 
 		//next question sets
