@@ -89,7 +89,7 @@
 					<div ng-if="mod.module_message.skip_module">
 						{!! Form::button('Proceed'
 							, array(
-								'class' => 'btn btn-maroon btn-semi-medium'
+								'class' => 'btn btn-green btn-semi-medium'
 								, 'data-dismiss' => 'modal'
 								, 'ng-click' => 'mod.skipModule()'
 							)
@@ -99,7 +99,7 @@
 					<div ng-if="mod.module_message.no_questions">
 						{!! Html::link(route('student.dashboard.index'), trans('messages.proceed_to_dashboard')
 							, array(
-								'class' => 'btn btn-maroon btn-medium'
+								'class' => 'btn btn-green btn-medium'
 							)
 						) !!}
 
