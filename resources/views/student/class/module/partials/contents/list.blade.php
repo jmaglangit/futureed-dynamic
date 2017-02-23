@@ -117,7 +117,7 @@
 		</div>
 	</div>
 
-	<div ng-if="!mod.contents.length">
+	<div ng-if="mod.contents.length">
 
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
