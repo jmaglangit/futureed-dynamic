@@ -691,9 +691,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	self.getCountry = function(id){
 
 		StudentPaymentService.getCountry(id).success(function(response){
-			if(response.errors) {
-				self.errors = $scope.errorHandler(response.errors);
-			} else{
+			if(!response.errors) {
 				self.billing_information.country =  response.data[0];
 			}
 		}).error(function(response) {
@@ -836,8 +834,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			order_date_string : moment(data.order.order_date).format('DD/MM/YYYY'),
 			date_start	:	moment(data.date_start).format('YYYYMMDD'),
 			date_end	:	moment(data.date_end).format('YYYYMMDD'),
-			date_start_string	:	moment(data.date_start,'YYYY-MM-DD').format('MMMM DD YYYY'),
-			date_end_string	:	moment(data.date_end,'YYYY-MM-DD').format('MMMM DD YYYY'),
+			date_start_string	:	moment(data.date_start,'YYYY-MM-DD').format('MMMM DD, YYYY'),
+			date_end_string	:	moment(data.date_end,'YYYY-MM-DD').format('MMMM DD, YYYY'),
 
 			student_id	:	$scope.user.id,
 			subscription_id	:	data.subscription_id,

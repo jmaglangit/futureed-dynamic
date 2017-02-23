@@ -134,7 +134,7 @@
                     {!! Form::button(trans('messages.add_tips')
                         , array(
                           'id' => 'validate_code_btn'
-                          , 'class' => 'btn btn-maroon'
+                          , 'class' => 'btn btn-green'
                           , 'ng-click' => 'class.addTips()'
                         )
                     ) !!}
@@ -251,7 +251,7 @@
                     {!! Form::button(trans('messages.add_help')
                         , array(
                           'id' => 'validate_code_btn'
-                          , 'class' => 'btn btn-maroon'
+                          , 'class' => 'btn btn-green'
                           , 'ng-click' => 'class.addHelp()'
                         )
                     ) !!}

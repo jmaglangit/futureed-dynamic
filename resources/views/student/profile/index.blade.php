@@ -16,42 +16,38 @@
 	<div template-directive template-url="{!! route('student.partials.play-game-messages') !!}"></div>
 
 	<div class="wrapr" ng-init="profile.studentDetails();">
-		<div class="side-nav">
-			@include('student.partials.dshbrd-side-nav')
-		</div>
-		<div class="content">
-			<div class="hdr">
-				<div class="avtrcon">
-					<img ng-src="{! user.avatar !}">
-				</div>
-				<div class="detcon">
-					<div class="rwrdscon">
-						<h3>
-							<div class="rbn-left"></div>
-							<div class="rbn-right"></div>
-							{!! trans('messages.quick') !!} <span>{!! trans('messages.rewards') !!}</span>
-						</h3>
-						<div class="points">
-							{!! Html::image('/images/icons/icon-reward.png', ''
-								, array(
-									'class' => 'nav-icon-holder'
-								)
-							) !!}
-							<div class="pcon">
-								<span>{! (user.points - user.points_used) !}</span> {!! trans('messages.points') !!}
-							</div>
-							<a href="javascript:;" ng-click="profile.setStudentProfileActive('rewards')" class="lnk">{!! trans('messages.see_all_points') !!}</a>
+		<div class="hdr">
+			<div class="avtrcon">
+				<img ng-src="{! user.avatar !}">
+			</div>
+			<div class="detcon">
+				<div class="rwrdscon">
+					<h3>
+						<div class="rbn-left"></div>
+						<div class="rbn-right"></div>
+						{!! trans('messages.quick') !!} <span>{!! trans('messages.rewards') !!}</span>
+					</h3>
+					<div class="points">
+						{!! Html::image('/images/icons/icon-reward.png', ''
+                            , array(
+                                'class' => 'nav-icon-holder'
+                            )
+                        ) !!}
+						<div class="pcon">
+							<span>{! (user.points - user.points_used) !}</span> {!! trans('messages.points') !!}
 						</div>
+						<a href="javascript:;" ng-click="profile.setStudentProfileActive('rewards')" class="lnk">{!! trans('messages.see_all_points') !!}</a>
 					</div>
-					<h2 class="student-font">
-							<span class="thin" ng-if="profile.active_index">{!! trans('messages.my_profile') !!}</span>
-							<span class="thin" ng-if="profile.active_edit">{!! trans('messages.edit_profile') !!}</span>
-							<span class="thin" ng-if="profile.active_edit_email">{!! trans('messages.admin_edit_email') !!}</span>
-							<span class="thin" ng-if="profile.active_confirm_email">{!! trans('messages.confirm_email') !!}</span>
-							<span class="thin" ng-if="profile.active_rewards">{!! trans('messages.student_rewards') !!}</span>
-							<span class="thin" ng-if="profile.active_avatar">{!! trans('messages.change_avatar') !!}</span>
-							<span class="thin" ng-if="profile.active_avatar_accessory">{!! trans('messages.avatar_accessories') !!}</span>
-							<div ng-if="profile.active_password">
+				</div>
+				<h2 class="student-font">
+					<span class="thin" ng-if="profile.active_index">{!! trans('messages.my_profile') !!}</span>
+					<span class="thin" ng-if="profile.active_edit">{!! trans('messages.edit_profile') !!}</span>
+					<span class="thin" ng-if="profile.active_edit_email">{!! trans('messages.admin_edit_email') !!}</span>
+					<span class="thin" ng-if="profile.active_confirm_email">{!! trans('messages.confirm_email') !!}</span>
+					<span class="thin" ng-if="profile.active_rewards">{!! trans('messages.my_rewards') !!}</span>
+					<span class="thin" ng-if="profile.active_avatar">{!! trans('messages.change_avatar') !!}</span>
+					<span class="thin" ng-if="profile.active_avatar_accessory">{!! trans('messages.avatar_accessories') !!}</span>
+					<div ng-if="profile.active_password">
 								<span ng-if="!profile.password_validated" class="thin">
 									{!! trans('messages.current') !!}
 								</span>
@@ -60,18 +56,22 @@
 								</span>
 								<span ng-if="profile.password_validated && profile.password_selected && !profile.password_confirmed" class="thin">
 									{!! trans('messages.confirm') !!}
-								</span>   
+								</span>
 
-								{!! trans('messages.picture_password') !!}
+						{!! trans('messages.picture_password') !!}
 
-								<span ng-if="profile.password_validated && profile.password_selected && profile.password_confirmed" class="thin">
+						<span ng-if="profile.password_validated && profile.password_selected && profile.password_confirmed" class="thin">
 									{!! trans('messages.successfully_changed') !!}
 								</span>
-							</div>
-							
-					</h2>
-				</div>
+					</div>
+
+				</h2>
 			</div>
+		</div>
+		<div class="side-nav">
+			@include('student.partials.dshbrd-side-nav')
+		</div>
+		<div class="content">
 			<div class="form-content col-xs-12">
 				<div class="alert alert-error" ng-if="profile.errors">
 		            <p ng-repeat="error in profile.errors" > 

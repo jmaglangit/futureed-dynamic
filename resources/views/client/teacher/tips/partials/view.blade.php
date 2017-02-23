@@ -138,7 +138,7 @@
 						) !!}
 						{!! Form::button(trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gray btn-medium'
 								, 'ng-click' => "tips.setActive(futureed.ACTIVE_LIST)"
 							)
 						) !!}
@@ -155,7 +155,7 @@
 						) !!}
 						{!! Form::button(trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gray btn-medium'
 								, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW, tips.record.id)"
 							)
 						) !!}
@@ -204,7 +204,7 @@
                         ) !!}
                         {!! Form::button(trans('messages.cancel')
                             , array(
-                                'class' => 'btn btn-gold btn-medium'
+                                'class' => 'btn btn-gray btn-medium'
                                 , 'data-dismiss' => 'modal'
                             )
                         ) !!}

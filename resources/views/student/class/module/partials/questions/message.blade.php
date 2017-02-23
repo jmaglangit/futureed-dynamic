@@ -105,7 +105,7 @@
 
 					</div>
 					<div ng-if="mod.module_message.module_done">
-						<button class="btn btn-maroon btn-medium"
+						<button class="btn btn-green btn-medium"
 								ng-click="mod.viewRewards()">
 							{!! trans('messages.continue_to_rewards') !!}
 						</button>

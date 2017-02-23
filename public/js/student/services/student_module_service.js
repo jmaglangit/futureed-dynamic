@@ -55,8 +55,8 @@ function StudentModuleService($http){
 		return $http({
 			method  : Constants.METHOD_GET,
 			url     : serviceUrl + "teaching-module/student?module_id=" + search.module_id
-				+ '&limit=' + table.size
-				+ '&offset=' + table.offset
+				// + '&limit=' + table.size
+				// + '&offset=' + table.offset
 		});
 	}
 

@@ -144,4 +144,12 @@ Routes::group([
 		'as' => 'api.report.classroom.status.export'
 	]);
 
+	/*
+	 * Billing Invoice
+	 */
+	Routes::get('/billing-invoice/{invoice_id}',[
+		'uses' => 'Api\Reports\InvoiceController@getBillingInvoice',
+		'as' => 'api.report.billing.invoice'
+	]);
+
 });

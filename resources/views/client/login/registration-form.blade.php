@@ -308,7 +308,7 @@
 
 			<div class="btn-container col-xs-6 col-xs-offset-3">
 				<a ng-click="login.registerClient()" type="button" class="btn btn-blue btn-medium">{!! trans('messages.register') !!}</a>
-				<a href="{!! route('client.login') !!}" type="button" class="btn btn-gold btn-medium">{!! trans('messages.cancel') !!}</a>
+				<a href="{!! route('client.login') !!}" type="button" class="btn btn-gray btn-medium">{!! trans('messages.cancel') !!}</a>
 			</div>
 		</fieldset>
 	</div>

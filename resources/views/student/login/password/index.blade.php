@@ -35,14 +35,14 @@
 					<div class="btn-container">
 						{!! Form::button(trans('messages.forgot_send')
 							, array(
-								  'class' => 'btn btn-maroon btn-medium'
+								  'class' => 'btn btn-green btn-medium'
 								, 'ng-click' => 'password.sendResetCode($event)'
 							)
 						) !!}
 
 						{!! Html::link(route('student.login'), trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium',
+								'class' => 'btn btn-gray btn-medium',
 								'style' => 'margin-right: 0;'
 							)
 						) !!}
@@ -106,7 +106,7 @@
 						<div class="btn-container">
 							{!! Form::button(trans('messages.client_proceed')
 									, array(
-											  'class' => 'btn btn-maroon btn-medium'
+											  'class' => 'btn btn-green btn-medium'
 											, 'ng-if' => '!password.password_set'
 											, 'ng-click' => 'password.validateCode($event)'
 									)

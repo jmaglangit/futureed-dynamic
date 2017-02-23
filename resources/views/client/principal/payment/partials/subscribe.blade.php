@@ -445,6 +445,11 @@
                                         {!! trans('messages.renew_subscription') !!}
                                     </button>
                                 </li>
+                                <li ng-if="payment.active_view && payment.subscription_invoice.payment_status == futureed.PAID">
+                                    <a href="/api/report/billing-invoice/{! payment.invoice.id !}"  type="button" class="btn btn-primary">
+                                        {!! trans('messages.admin_download') !!}
+                                    </a>
+                                </li>
                                 <li ng-if="payment.active_view">
                                     <button ng-click="payment.setActive(Constants.ACTIVE_LIST)" type="button" class="btn btn-gold">
                                         {!! trans('messages.view_list') !!}

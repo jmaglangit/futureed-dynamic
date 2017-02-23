@@ -20,7 +20,7 @@
 			<div ng-if="!profile.password_validated">
 				{!! Form::button(trans('messages.client_proceed')
 					, array(
-						'class' => 'btn btn-maroon btn-medium'
+						'class' => 'btn btn-green btn-medium'
 						, 'ng-click' => 'profile.validateCurrentPassword()'
 						, 'ng-if' => 'profile.change.password_image_id'
 					)
@@ -28,7 +28,7 @@
 
 				{!! Form::button(trans('messages.cancel')
 					, array(
-						'class' => 'btn btn-gold btn-medium'
+						'class' => 'btn btn-gray btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('index')"
 					)
 				) !!}
@@ -37,7 +37,7 @@
 			<div ng-if="profile.password_validated && !profile.password_selected">
 				{!! Form::button(trans('messages.client_proceed')
 					, array(
-						'class' => 'btn btn-maroon btn-medium'
+						'class' => 'btn btn-green btn-medium'
 						, 'ng-click' => 'profile.selectNewPassword()'
 					)
 				) !!}
@@ -46,7 +46,7 @@
 			<div ng-if="profile.password_validated && profile.password_selected && !profile.password_confirmed">
 				{!! Form::button(trans('messages.student_change_picture_password')
 					, array(
-						'class' => 'btn btn-maroon btn-medium'
+						'class' => 'btn btn-green btn-medium'
 						, 'ng-click' => 'profile.changePassword()'
 					)
 				) !!}

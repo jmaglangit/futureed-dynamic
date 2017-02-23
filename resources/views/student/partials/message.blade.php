@@ -24,7 +24,7 @@
             </div>
 
             <div class="modal-footer modal-reward">
-                <div ng-if="!from_module" class="btn btn-maroon btn-medium" data-dismiss="modal" aria-label="Close">{!! trans('messages.close') !!}</div>
+                <div ng-if="!from_module" class="btn btn-green btn-medium" data-dismiss="modal" aria-label="Close">{!! trans('messages.close') !!}</div>
                 <div ng-if="from_module" class="btn btn-maroon btn-medium"
                         ng-click="redirectRewards('{!! route('student.class.index') !!}')">{!! trans('messages.class_dashboard') !!}</div>
             </div>

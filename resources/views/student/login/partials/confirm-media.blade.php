@@ -212,7 +212,7 @@
 
 						{!! Html::link(route('student.login'), trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gray btn-medium'
 							)
 						)!!}
 					</div>
@@ -234,7 +234,7 @@
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
 						{!! Form::button(trans('messages.cancel')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gray btn-medium'
 								, 'data-dismiss' => 'modal'
 							)
 						) !!}

@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="view-contents-btn">
-		<button class="btn btn-maroon" ng-click="question.viewContents('{!! route('client.teacher.teaching_content.index') !!}')">{!! trans('messages.view_contents') !!}</button> 
+		<button class="btn btn-green" ng-click="question.viewContents('{!! route('client.teacher.teaching_content.index') !!}')">{!! trans('messages.view_contents') !!}</button> 
 	</div>
 
 	<div class="col-xs-12 question-search-container">

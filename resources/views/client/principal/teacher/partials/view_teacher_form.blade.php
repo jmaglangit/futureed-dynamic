@@ -163,7 +163,7 @@
 
 							{!! Form::button(trans('messages.cancel')
 								, array(
-									'class' => 'btn btn-gold btn-medium'
+									'class' => 'btn btn-gray btn-medium'
 									, 'ng-click' => "teacher.setActive('list')"
 								)
 							) !!}
@@ -178,7 +178,7 @@
 
 							{!! Form::button(trans('messages.cancel')
 								, array(
-									'class' => 'btn btn-gold btn-medium'
+									'class' => 'btn btn-gray btn-medium'
 									, 'ng-click' => "teacher.setActive('view', teacher.record.id)"
 								)
 							) !!}
