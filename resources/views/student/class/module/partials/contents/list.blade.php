@@ -117,8 +117,8 @@
 		</div>
 	</div>
 
-	<div ng-if="mod.contents.length">
-
+	<div ng-if="mod.contents[0].teaching_content.media_type.id != futureed.VIDEO && mod.contents.teaching_content.media_type.id != futureed.IMAGE">
+			here --> {! mod.contents.length !}
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
