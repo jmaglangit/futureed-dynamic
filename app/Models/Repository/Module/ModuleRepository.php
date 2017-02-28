@@ -510,7 +510,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 */
 	public function getModuleDifficulty($module_id){
 
-		return Module::find($module_id)->pluck('has_difficulty');
+		return Module::find($module_id);
 	}
 
 }

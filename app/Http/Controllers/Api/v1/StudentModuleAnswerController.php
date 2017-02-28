@@ -348,7 +348,7 @@ class StudentModuleAnswerController extends ApiController{
 		//update module_status
 		//TODO: check if student reaches the end of the questions and set completed, else continue
 		if($student_module->running_points >= $points_to_finish ||
-			$this->module->getModuleDifficulty($data['module_id']) && !$this->student_module_services->getNextQuestion(
+			!$this->module->getModuleDifficulty($data['module_id']) && !$this->student_module_services->getNextQuestion(
 				$data['student_module_id'],
 				$data['module_id'],
 				$student_answer
@@ -367,7 +367,7 @@ class StudentModuleAnswerController extends ApiController{
 
 
 		} //when 10 wrong answer set status to Failed.
-		elseif($student_module->wrong_counter >= 10){
+		elseif($student_module->wrong_counter >= 10 && !$this->module->getModuleDifficulty($data['module_id'])){
 
 			$student_module->module_status = config('futureed.module_status_failed');
 
@@ -391,7 +391,16 @@ class StudentModuleAnswerController extends ApiController{
 		);
 
 		//Check if next question is equal to -1
-		if($next_question == -1 || is_null($next_question) ){
+		if($this->module->getModuleDifficulty($data['module_id']) && $next_question == -1){
+
+			$student_module->module_status = config('futureed.module_status_completed');
+			$this->student_module->updateStudentModule($student_module->id,$student_module);
+			$return->next_question = $next_question;
+			$return->module_status = $student_module->module_status;
+			return $this->respondWithData($return);
+
+
+		} elseif ($next_question == -1 || is_null($next_question) ){
 
 			//Set student Module to failed.
 			$student_module->module_status = config('futureed.module_status_failed');

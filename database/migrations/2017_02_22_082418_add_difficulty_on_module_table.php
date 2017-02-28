@@ -13,7 +13,7 @@ class AddDifficultyOnModuleTable extends Migration {
 	public function up()
 	{
 		Schema::table('modules', function(Blueprint $table){
-			$table->tinyInteger('has_difficulty')->after('common_core_url');
+			$table->tinyInteger('no_difficulty')->after('common_core_url');
 		});
 	}
 
@@ -25,7 +25,7 @@ class AddDifficultyOnModuleTable extends Migration {
 	public function down()
 	{
 		Schema::table('modules', function(Blueprint $table){
-			$table->dropColumn('has_difficulty');
+			$table->dropColumn('no_difficulty');
 		});
 	}
 
