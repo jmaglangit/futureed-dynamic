@@ -323,7 +323,8 @@ class StudentModuleServices {
 	 */
 	public function getNextQuestion($student_module_id, $module_id,$student_answer){
 
-		return $this->checkAnswers($student_module_id,$module_id,$student_answer);
+		return ($this->module->getModuleDifficulty($module_id)) ? $this->difficultyNextQuestion($student_module_id,$module_id)
+			:$this->checkAnswers($student_module_id,$module_id,$student_answer);
 	}
 
 	/**
@@ -538,6 +539,32 @@ class StudentModuleServices {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @param $student_module_id
+	 * @param $module_id
+	 * @return int
+	 */
+	public function difficultyNextQuestion($student_module_id,$module_id){
+
+		//get student module answer
+		$module_answers = $this->student_module_answer->getStudentModuleAnswer($student_module_id,$module_id)->toArray();
+
+		//get list questions under the module
+		$module_questions = $this->question->getQuestionsByModule($module_id);
+
+		//parse data
+		foreach($module_questions as $question){
+
+			$answer_columns = array_column($module_answers,'question_id');
+
+			if(!in_array($question->id,$answer_columns)){
+				return $question->id;
+			}
+		}
+
+		return -1;
 	}
 
 }
