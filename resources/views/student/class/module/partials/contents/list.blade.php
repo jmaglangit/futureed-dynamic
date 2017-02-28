@@ -23,9 +23,9 @@
 			<!-- For Teaching Video Contents -->
 		    <section id="content-video">
 			    <div class="content-video-body">
-				    <div class="col-sm-3">
+				    <div class="content-video col-sm-3">
 		                <ul class="content-video-thumbnail col-xs-12" ng-repeat="content in mod.contents">
-		                    <li class="col-xs-12">
+		                    <li class="col-xs-12" ng-class = "{active : mod.content === content}">
 			                    <iframe ng-if="content.teaching_content.content_url"
 			                            ng-src="{! content.teaching_content.content_url | trustAsResourceUrl !}"
 			                            width="100%"
@@ -117,8 +117,8 @@
 		</div>
 	</div>
 
-	<div ng-if="!mod.contents.length">
-
+	<div ng-if="mod.contents[0].teaching_content.media_type.id != futureed.VIDEO && mod.contents.teaching_content.media_type.id != futureed.IMAGE">
+			here --> {! mod.contents.length !}
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
