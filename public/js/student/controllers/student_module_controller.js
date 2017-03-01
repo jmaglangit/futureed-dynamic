@@ -815,7 +815,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 									self.success = Constants.FALSE;
 
 									self.module_message = {};
-									self.module_message.points_earned = self.record.points_earned;
+									self.module_message.points_earned = (self.record.no_difficulty)
+										? $scope.correct_counter : self.record.points_earned;
 									self.module_message.show = Constants.TRUE;
 									self.module_message.title = avatar_wiki.title;
 									self.module_message.name = self.record.name;
