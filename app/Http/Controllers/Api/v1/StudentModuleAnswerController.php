@@ -300,6 +300,8 @@ class StudentModuleAnswerController extends ApiController{
 		//get necessary data to compare.
 		$student_module  = $this->student_module->getStudentModule($data['student_module_id']);
 		$points_to_finish = $this->module_content->getModulePointsToFinish($data['module_id']);
+		$module = $this->module->getModule($data['module_id']);
+
 
 		//CURRENT UPDATE
 
@@ -309,8 +311,7 @@ class StudentModuleAnswerController extends ApiController{
 		}
 
 		//wrong counter
-		if($student_answer->answer_status == config('futureed.answer_status_wrong')
-			&& !$this->module->getModuleDifficulty($data['module_id'])){
+		if($student_answer->answer_status == config('futureed.answer_status_wrong') && !$module->no_difficulty){
 
 			//increment wrong counter.
 			$student_module->wrong_counter++;
@@ -349,7 +350,7 @@ class StudentModuleAnswerController extends ApiController{
 		//update module_status
 		//TODO: check if student reaches the end of the questions and set completed, else continue
 		if($student_module->running_points >= $points_to_finish ||
-			!$this->module->getModuleDifficulty($data['module_id']) && !$this->student_module_services->getNextQuestion(
+			!$module->no_difficulty && !$this->student_module_services->getNextQuestion(
 				$data['student_module_id'],
 				$data['module_id'],
 				$student_answer
@@ -392,9 +393,11 @@ class StudentModuleAnswerController extends ApiController{
 		);
 
 		//Check if next question is equal to -1
-		if($this->module->getModuleDifficulty($data['module_id']) && $next_question == -1){
+		if($module->no_difficulty && $next_question == -1){
 
 			$student_module->module_status = config('futureed.module_status_completed');
+			//once completed percentage automatically 100%
+			$student_module->progress = 100;
 			$this->student_module->updateStudentModule($student_module->id,$student_module);
 			$return->next_question = $next_question;
 			$return->module_status = $student_module->module_status;
