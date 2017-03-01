@@ -309,7 +309,8 @@ class StudentModuleAnswerController extends ApiController{
 		}
 
 		//wrong counter
-		if($student_answer->answer_status == config('futureed.answer_status_wrong')){
+		if($student_answer->answer_status == config('futureed.answer_status_wrong')
+			&& !$this->module->getModuleDifficulty($data['module_id'])){
 
 			//increment wrong counter.
 			$student_module->wrong_counter++;
