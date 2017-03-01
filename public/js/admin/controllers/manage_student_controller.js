@@ -390,7 +390,7 @@ function ManageStudentController($scope, $filter, $location, $anchorScroll, mana
 	self.moduleCountryList = function(student_id) {
 		self.errors = Constants.FALSE;
 
-		manageStudentService.moduleCountry(student_id).success(function(response){
+		manageStudentService.moduleCountry(student_id,self.table).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
