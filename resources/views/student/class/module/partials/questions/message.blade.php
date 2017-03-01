@@ -50,7 +50,7 @@
 						<div class="col-xs-15 wiki-earn-msg-block">
 							<div class="h3 msg-congrats">{{ trans('messages.module_complete_message') }}</div>
 							<div class="h4 msg-point">
-								{{ trans('messages.you_earned') }} {! mod.module_message.points_earned !} {{ trans('messages.point_s') }}.
+								{{ trans('messages.you_earned') }} {! correct_counter !} {{ trans('messages.point_s') }}.
 							</div>
 						</div>
 

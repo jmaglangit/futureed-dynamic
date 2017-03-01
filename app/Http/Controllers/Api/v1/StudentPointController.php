@@ -82,8 +82,17 @@ class StudentPointController extends ApiController {
 	 */
 	public function store(StudentPointRequest $request)
 	{
-		$data = $request->only('student_id','points_earned','module_id');
+		$data = $request->only('student_id','points_earned','module_id','student_module_id','class_id');
 		$data['event_id'] = 1;
+
+		//check module if has no difficulty
+		if($this->module->getModuleDifficulty($data['module_id'])){
+
+			//get student module correct_counter
+			$student_module = $this->student_module->getStudentModule($data['student_module_id']);
+
+			$data['points_earned'] = $student_module->correct_counter;
+		}
 
 		//get module details
 		$module_detail = $this->module->viewModule($data['module_id']);
