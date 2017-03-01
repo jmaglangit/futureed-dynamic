@@ -120,7 +120,7 @@ class Module extends Model
 	}
 
 	public function content() {
-		return $this->hasMany('FutureEd\Models\Core\ModuleContent');
+		return $this->hasMany('FutureEd\Models\Core\ModuleContent','module_id','module_id');
 	}
 
 	public function question() {

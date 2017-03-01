@@ -772,6 +772,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					self.result = response.data;
 					self.result.failed = Constants.FALSE;
 
+					$scope.correct_counter = self.result.correct_counter;
+
 					if(self.result.snap_module_completed) {
 						self.snap_exercise_commpleted = self.result.snap_module_completed;
 					}
@@ -795,6 +797,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 								data.student_id = $scope.user.id;
 								data.points_earned = self.record.points_earned;
 								data.module_id = self.record.id;
+								data.student_module_id = self.record.student_module.id;
+								data.class_id = self.record.student_module.class_id;
 
 							saveStudentPoints(data, function(response) {
 								var avatar_id = $scope.user.avatar_id;
@@ -811,7 +815,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 									self.success = Constants.FALSE;
 
 									self.module_message = {};
-									self.module_message.points_earned = self.record.points_earned;
+									self.module_message.points_earned = (self.record.no_difficulty)
+										? $scope.correct_counter : self.record.points_earned;
 									self.module_message.show = Constants.TRUE;
 									self.module_message.title = avatar_wiki.title;
 									self.module_message.name = self.record.name;

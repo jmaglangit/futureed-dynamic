@@ -28,4 +28,6 @@ interface ModuleRepositoryInterface
 
 	public function getModuleGradeByStudentCountry($country_id);
 
+	public function getModuleDifficulty($module_id);
+
 }

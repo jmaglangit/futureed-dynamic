@@ -1344,11 +1344,11 @@ hr {
 
 .content-video-body {
     height: 100%;
-    padding-top: 64px;
+    padding-top: 75px;
 }
 
 .content-main-video {
-    height: 410px;
+    height: 330px;
     width: 100%;
 }
 
@@ -1360,13 +1360,12 @@ hr {
 #content-video .content-video-thumbnail,
 #content-video .content-video-thumbnail li {
     float: left;
-    /*margin: 0 3% 3% 0;*/
     width: 100%;
     position: relative;
     z-index: 0;
     margin: auto;
     list-style: none;
-    padding: 1px;
+    margin-bottom: 4px;
 }
 
 #content-video .content-video-thumbnail li iframe {
@@ -1378,6 +1377,27 @@ hr {
     opacity: 0.7;
     transition: ease-out .1s;
     padding: 1px 1px;
+}
+
+.content-video {
+    height: 330px;
+    overflow: auto;
+}
+
+.content-video-thumbnail .active {
+    border: 4px solid #167ac6;
+}
+
+.content-video-thumbnail .active:before {
+    font-size: 15px;
+    color: #167ac6;
+    content: 'Now Playing';
+    background: rgba(0, 0, 0, 0.52);
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 99;
 }
 
 .content-video-thumbnail div.iframe-overlay {

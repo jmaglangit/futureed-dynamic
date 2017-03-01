@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Services;
 
 
+use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 
@@ -14,18 +15,23 @@ class ModuleContentServices
 
 	protected $question;
 
+	protected $module;
+
 	/**
 	 * @param ModuleContentRepositoryInterface $moduleContentRepositoryInterface
 	 * @param QuestionRepositoryInterface $questionRepositoryInterface
+	 * @param ModuleRepositoryInterface $moduleRepositoryInterface
 	 */
 	public function __construct(
 		ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
-		QuestionRepositoryInterface $questionRepositoryInterface
+		QuestionRepositoryInterface $questionRepositoryInterface,
+		ModuleRepositoryInterface $moduleRepositoryInterface
 
 	)
 	{
 		$this->module_content = $moduleContentRepositoryInterface;
 		$this->question = $questionRepositoryInterface;
+		$this->module = $moduleRepositoryInterface;
 	}
 
 	/**
@@ -88,35 +94,41 @@ class ModuleContentServices
 	 */
 	public function checkModuleComplete($module_id){
 
-		//get question modules
-		$questions = $this->question->getQuestionLevelsByModule($module_id);
+		//check if module has difficulty
+		$module = $this->module->getModuleDifficulty($module_id);
+
+		if(!$module->no_difficulty){
+			//get question modules
+			$questions = $this->question->getQuestionLevelsByModule($module_id);
 
 
-		//Check module if it has complete difficulty level.
-		$difficulty_levels = [1,2,3];
+			//Check module if it has complete difficulty level.
+			$difficulty_levels = [1,2,3];
 
-		foreach($questions as $data){
+			foreach($questions as $data){
 
-			if(!in_array($data->difficulty, config('futureed.question_difficulty_levels'))){
-				if(!($data->question_type === config('futureed.question_type_coding'))) {
+				if(!in_array($data->difficulty, config('futureed.question_difficulty_levels'))){
+					if(!($data->question_type === config('futureed.question_type_coding'))) {
+						return false;
+					}
+				}
+			}
+
+			//Check each level has minimum 4 questions.
+			foreach($difficulty_levels as $level){
+
+				$question_count = $this->question->countQuestions($module_id,$level);
+
+				if($question_count < config('futureed.question_minimum_count')){
+
 					return false;
 				}
 			}
+
+			return true;
+		} else {
+			return true;
 		}
-
-		//Check each level has minimum 4 questions.
-		foreach($difficulty_levels as $level){
-
-			$question_count = $this->question->countQuestions($module_id,$level);
-
-			if($question_count < config('futureed.question_minimum_count')){
-
-				return false;
-			}
-		}
-
-		return true;
-
 	}
 
 

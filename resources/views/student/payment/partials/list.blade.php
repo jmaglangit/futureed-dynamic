@@ -87,7 +87,7 @@
 			            <th>{!! trans('messages.admin_order_no') !!}</th>
 			            <th>{!! trans('messages.date_started') !!}</th>
 			            <th>{!! trans('messages.date_end') !!}</th>
-			            <th>{!! trans('messages.total_no_seats') !!}</th>
+			            <th>{!! trans('messages.subscription') !!}</th>
 			            <th>{!! trans('messages.total_price') !!}</th>
 			            <th>{!! trans('messages.payment_status') !!}</th>
 			            <th>{!! trans_choice('messages.action', 1) !!}</th>
@@ -99,9 +99,10 @@
 		            <td>{! record.order_no !}</td>
 		            <td>{! record.date_start | ddMMyy !}</td>
 		            <td>{! record.date_end | ddMMyy !}</td>
-		            <td>{! record.seats_total !}</td>
+		            <td>{! record.subscription.name !}</td>
 		            <td>{! record.total_amount | currency : "USD$ " : 2 !}</td>
 		            <td>{! record.payment_status !}</td>
+
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-6" title="View">

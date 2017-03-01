@@ -165,10 +165,12 @@ function manageStudentService($http) {
 	}
 
 	//module-country?student_id=1 get modules of the students.
-	manageStudentApi.moduleCountry = function(student_id){
+	manageStudentApi.moduleCountry = function(student_id,table){
 		return $http({
 			method	:	Constants.METHOD_GET
 			,url	:	adminApiUrl + 'module-country?student_id=' + student_id
+			+ '&limit=' + table.size
+			+ '&offset=' + table.offset
 		});
 	}
 
