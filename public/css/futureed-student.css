@@ -1384,11 +1384,11 @@ hr {
     overflow: auto;
 }
 
-.active {
+.content-video-thumbnail .active {
     border: 4px solid #167ac6;
 }
 
-.active:before {
+.content-video-thumbnail .active:before {
     font-size: 15px;
     color: #167ac6;
     content: 'Now Playing';
