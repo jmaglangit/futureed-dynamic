@@ -70,4 +70,8 @@ class SubscriptionPackages extends Model{
 	public function scopeStatus($query, $status){
 		return $query->where('status',$status);
 	}
+
+	public function scopeStatusTrial($query){
+		return $query->where('subscription_id', '!=', 3);
+	}
 }
