@@ -2,53 +2,23 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\SubscriptionPackageRequest;
-use FutureEd\Models\Core\SubscriptionPackages;
 use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
 use Illuminate\Support\Facades\Input;
-use FutureEd\Services\UserServices;
-use FutureEd\Services\SessionServices;
-use FutureEd\Services\TokenServices;
 use Illuminate\Support\Facades\Session;
-use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
-use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
-use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
-use FutureEd\Services\InvoiceServices;
-use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface;
+use FutureEd\Models\Core\SubscriptionPackages;
 use FutureEd\Models\Core\Invoice;
-
-
-
 
 class SubscriptionPackageController extends ApiController {
 
 	protected $subscription_package;
-	protected $student;
-	protected $user;
-	protected $user_service;
-	protected $classroom;
-	protected $order;
 	protected $invoice;
-	protected $invoice_detail;
-
 
 	public function __construct(
-		UserServices $userServices,
-		SessionServices $sessionServices,
-		OrderRepositoryInterface $order,
-		studentRepositoryInterface $studentRepositoryInterface,
-		ClassroomRepositoryInterface $classroom,
-		InvoiceServices	$invoice_services,
-		InvoiceDetailRepositoryInterface $invoice_detail,
 		InvoiceRepositoryInterface $invoice,								
 		SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface
 	){
 		$this->subscription_package = $subscriptionPackageRepositoryInterface;
-		$this->student = $studentRepositoryInterface;
-		$this->classroom = $classroom;
-		$this->order = $order;	
-        $this->user_service = $userServices;
-        $this->user = $sessionServices;
 		$this->invoice = $invoice;
 	}
 	/**
@@ -100,7 +70,8 @@ class SubscriptionPackageController extends ApiController {
 
         if($invoices['total']){
             $criteria['trial'] = 1;
-        }else{
+        } 
+        else{
             $criteria['trial'] = 0;
         }
 

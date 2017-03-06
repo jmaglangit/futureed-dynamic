@@ -35,6 +35,7 @@ class SubscriptionPackageRepository implements SubscriptionPackageRepositoryInte
 			if(isset($criteria['subscription_id'])){
 				$subscription_package = $subscription_package->subscriptionId($criteria['subscription_id']);
 			}
+
 			if(isset($criteria['country_id'])){
 				$subscription_package = $subscription_package->countryId($criteria['country_id']);
 			}
