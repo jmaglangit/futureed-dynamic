@@ -68,14 +68,9 @@ class SubscriptionPackageController extends ApiController {
             'payment_status' => config('futureed.paid')
         ]);
 
-        if($invoices['total']){
-            $criteria['trial'] = 1;
-        } 
-        else{
-            $criteria['trial'] = 0;
-        }
+        $criteria['trial'] = ($invoices['total']) ? 1 : 0;
 
-		return $this->respondWithData($this->subscription_package->getSubscriptionPackages($criteria,$limit,$offset));
+        return $this->respondWithData($this->subscription_package->getSubscriptionPackages($criteria,$limit,$offset));
 	}
 
 	/**
