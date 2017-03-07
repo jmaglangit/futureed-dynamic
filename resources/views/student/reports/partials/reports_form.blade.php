@@ -15,13 +15,13 @@
 		<li role="presentation" ng-class="{ 'active' : reports.active_subject_area }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUBJECT_AREA)">
 				<i class="fa fa-book"></i>
-				 {!! trans('messages.subject_area') !!}
+				 {!! trans('messages.progress_percent') !!}
 			</a>
 		</li>
 		<li role="presentation" ng-class="{ 'active' : reports.active_subject_area_heatmap }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUBJECT_AREA_HEATMAP)">
 				<i class="fa fa-bookmark"></i>
-				{{ trans('messages.subject_area_heatmap') }}
+				{{ trans('messages.scores') }}
 			</a>
 		</li>
 		<li role="presentation" ng-class="{ 'active' : reports.active_current_learning }">
