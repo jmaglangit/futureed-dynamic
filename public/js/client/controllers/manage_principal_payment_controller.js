@@ -354,7 +354,10 @@ function ManagePrincipalPaymentController(
 	self.saveSubscription = function(){
 
 		self.paySubscription(Constants.TRUE);
-		self.setActive();
+
+		if(self.isError) {
+			self.setActive();
+		}
 
 	};
 
@@ -395,6 +398,7 @@ function ManagePrincipalPaymentController(
 					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
 					});
+					self.isError = response.errors;
 
 					$scope.ui_unblock();
 				} else if(response.data) {
