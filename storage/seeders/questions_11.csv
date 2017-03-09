@@ -1,4 +1,3 @@
-id,module_id,code,question_type,Text Quesiton,Image Question,questions_image,Answer,question_order_text,question_graph_content,Seq,Difficulty,points_earned,translatable,status,created_by,updated_by,deleted_by
 36428,712,1134001,FIB,How many cars are there in the picture?,module1132a.png,module1132a.png,"{""type"":1,""answer"":[{""value"":3,""type"":""int""}]}",,,1,1,1,1,Enabled,,,
 36429,712,1134002,FIB,How many pizzas do you see in the picture?,module1132b.png,module1132b.png,"{""type"":1,""answer"":[{""value"":3,""type"":""int""}]}",,,2,1,1,1,Enabled,,,
 36430,712,1134003,FIB,How many tigers are there in the picture?,module1132c.png,module1132c.png,"{""type"":1,""answer"":[{""value"":8,""type"":""int""}]}",,,3,1,1,1,Enabled,,,
