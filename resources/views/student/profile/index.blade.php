@@ -34,7 +34,7 @@
                             )
                         ) !!}
 						<div class="pcon">
-							<span>{! (user.points - user.points_used) !}</span> {!! trans('messages.points') !!}
+							<span>{! (user.cash_points - user.points_used) !}</span> {!! trans('messages.points') !!}
 						</div>
 						<a href="javascript:;" ng-click="profile.setStudentProfileActive('rewards')" class="lnk">{!! trans('messages.see_all_points') !!}</a>
 					</div>
