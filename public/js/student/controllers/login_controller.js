@@ -382,7 +382,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 		self.errors = Constants.FALSE;
 
 		if(!self.record.terms) {
-			$scope.errors = ["Please accept the terms and conditions."];
+			self.errors = ["Please accept the terms and conditions."];
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 			return;
 		}
@@ -399,7 +399,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 		StudentLoginService.editRegistration(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					$scope.errorHandler(response.errors);
+					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
