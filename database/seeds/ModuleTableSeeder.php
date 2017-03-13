@@ -34,6 +34,7 @@ class ModuleTableSeeder extends Seeder
 				'common_core_area' => $data[9],
 				'common_core_url' => $data[10],
 				'no_difficulty' => $data[11],
+				'is_dynamic' => 0,
 				'points_earned' => $data[12],
 				'points_to_unlock' => $data[13],
 				'points_to_finish' => $data[14],

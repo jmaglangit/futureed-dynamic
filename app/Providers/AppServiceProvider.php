@@ -1,5 +1,7 @@
 <?php namespace FutureEd\Providers;
 
+use FutureEd\Models\Core\Module;
+use FutureEd\Models\Observers\ModuleObserver;
 use Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,6 +14,11 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		//Observer implementations
+		Module::observe(ModuleObserver::class);
+
+
+
 		#TODO: Find a cleaner way for this
 
 		Validator::extend('custom_password', function ($attribute, $value, $parameters) {

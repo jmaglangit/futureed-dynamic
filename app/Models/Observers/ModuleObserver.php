@@ -1,14 +1,29 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 3/3/17
- * Time: 10:54 AM
- */
+<?php namespace FutureEd\Models\Observers;
 
-namespace FutureEd\Models\Observers;
-
+use FutureEd\Models\Traits\TranslationTrait;
 
 class ModuleObserver {
+
+	use TranslationTrait;
+
+	public function created($model){
+
+		//add new translation
+		$this->addModuleTranslation([
+			'module_id' => $model->id,
+			'name' => $model->name,
+			'description' => $model->description
+		]);
+
+	}
+
+	public function updated($model){
+
+		//name translation
+		$this->setModuleTranslation($model->id,[
+			'name' => $model->name,
+			'description' => $model->description
+		]);
+	}
 
 }

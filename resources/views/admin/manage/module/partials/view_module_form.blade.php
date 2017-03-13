@@ -41,47 +41,14 @@
 										</select>
 									</div>
 
-									<label class="col-xs-2 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
-									<div class="col-xs-4" ng-if="module.active_edit">
-										<div class="col-xs-6 checkbox">
-											<label>
-												{!! Form::radio('status'
-													, 'Enabled'
-													, true
-													, array(
-														'class' => 'field'
-														, 'ng-model' => 'module.record.status'
-													)
-												) !!}
-											<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
-											</label>
-										</div>
-										<div class="col-xs-6 checkbox">
-											<label>
-												{!! Form::radio('status'
-													, 'Disabled'
-													, false
-													, array(
-														'class' => 'field'
-														, 'ng-model' => 'module.record.status'
-													)
-												) !!}
-											<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
-											</label>
-										</div>
-									</div>
-									<div class="col-xs-3" ng-if="module.active_view">
-										<label ng-if="module.record.status == 'Enabled'">
-											<b class="success-icon">
-												<i class="margin-top-8 fa fa-check-circle-o"></i> {! module.record.status !}
-											</b>
-										</label>
-
-										<label ng-if="module.record.status == 'Disabled'">
-											<b class="error-icon">
-												<i class="margin-top-8 fa fa-ban"></i> {! module.record.status !}
-											</b>
-										</label>
+									<label class="control-label col-xs-2">{!! trans('messages.dynamic') !!} <span class="required">*</span></label>
+									<div class="col-xs-4">
+										<select  ng-disabled="module.active_view" name="is_dynamic" class="form-control"
+												 ng-model="module.record.is_dynamic">
+											<option ng-selected="module.record.is_dynamic == ''" value="">{!! trans('messages.select') !!}</option>
+											<option ng-selected="module.record.is_dynamic == futureed.TRUE" value="1">{!! trans('messages.yes') !!}</option>
+											<option ng-selected="module.record.is_dynamic == futureed.FALSE" value="0">{!! trans('messages.no') !!}</option>
+										</select>
 									</div>
 								</div>
 								<div class="form-group">
@@ -110,27 +77,47 @@
 											<span ng-if="module.validation.s_error" class="error-msg-con">{! module.validation.s_error !}</span>
 										</div>
 									</div>
-
-									<div class="form-group" ng-if="module.active_edit">
-										<label class="control-label col-xs-2">{!! trans('messages.image') !!}</label>
-										<div class="col-xs-3">
-											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.choose_image') !!}</div>
+									<label class="col-xs-2 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
+									<div class="col-xs-4" ng-if="module.active_edit">
+										<div class="col-xs-6 checkbox">
+											<label>
+												{!! Form::radio('status'
+													, 'Enabled'
+													, true
+													, array(
+														'class' => 'field'
+														, 'ng-model' => 'module.record.status'
+													)
+												) !!}
+												<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
+											</label>
 										</div>
-
-										<div class="margin-top-8" ng-if="module.record.uploaded">
-											<a href="" ng-click="module.removeImage(module.record)"><i class="fa fa-trash"></i></a>
+										<div class="col-xs-6 checkbox">
+											<label>
+												{!! Form::radio('status'
+													, 'Disabled'
+													, false
+													, array(
+														'class' => 'field'
+														, 'ng-model' => 'module.record.status'
+													)
+												) !!}
+												<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
+											</label>
 										</div>
 									</div>
+									<div class="col-xs-3" ng-if="module.active_view">
+										<label ng-if="module.record.status == 'Enabled'">
+											<b class="success-icon">
+												<i class="margin-top-8 fa fa-check-circle-o"></i> {! module.record.status !}
+											</b>
+										</label>
 
-									<div ng-if="module.active_view">
-										<label class="col-xs-2 control-label">{!! trans('messages.image') !!} </label>
-										<div class="col-xs-3" ng-if="module.record.icon_image != 'None'">
-						                    <a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.record)">{!! trans('messages.view_image') !!}</a>
-										</div>
-
-										<div class="col-xs-3" ng-if="module.record.icon_image == 'None'">
-						                    <span class="upload-label label label-info">{! module.record.icon_image !}</span>
-										</div>
+										<label ng-if="module.record.status == 'Disabled'">
+											<b class="error-icon">
+												<i class="margin-top-8 fa fa-ban"></i> {! module.record.status !}
+											</b>
+										</label>
 									</div>
 								</div>
 
@@ -156,17 +143,26 @@
 											)
 										) !!}
 									</div>
-									<label class="control-label col-xs-3">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
-									<div class="col-xs-3">
-										{!! Form::text('points_to_unlock',''
-											, array(
-												'placeHolder' => trans('messages.admin_points_to_unlock')
-												, 'ng-model' => 'module.record.points_to_unlock'
-												, 'class' => 'form-control'
-												, 'ng-disabled' => 'module.active_view'
-												, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
-											)
-										) !!}
+									<div class="form-group" ng-if="module.active_edit">
+										<label class="control-label col-xs-2">{!! trans('messages.image') !!}</label>
+										<div class="col-xs-3">
+											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.choose_image') !!}</div>
+										</div>
+
+										<div class="margin-top-8" ng-if="module.record.uploaded">
+											<a href="" ng-click="module.removeImage(module.record)"><i class="fa fa-trash"></i></a>
+										</div>
+									</div>
+
+									<div ng-if="module.active_view">
+										<label class="col-xs-2 control-label">{!! trans('messages.image') !!} </label>
+										<div class="col-xs-3" ng-if="module.record.icon_image != 'None'">
+											<a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.record)">{!! trans('messages.view_image') !!}</a>
+										</div>
+
+										<div class="col-xs-3" ng-if="module.record.icon_image == 'None'">
+											<span class="upload-label label label-info">{! module.record.icon_image !}</span>
+										</div>
 									</div>
 								</div>
 								<div class="form-group">
@@ -183,8 +179,20 @@
 											)
 										) !!}
 									</div>
-									<label class="control-label col-xs-3">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
+									<label class="control-label col-xs-3">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
 									<div class="col-xs-3">
+										{!! Form::text('points_to_unlock',''
+											, array(
+												'placeHolder' => trans('messages.admin_points_to_unlock')
+												, 'ng-model' => 'module.record.points_to_unlock'
+												, 'class' => 'form-control'
+												, 'ng-disabled' => 'module.active_view'
+												, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
+											)
+										) !!}
+									</div>
+									<label class="control-label col-xs-3 m-top-20">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
+									<div class="col-xs-3 m-top-20">
 										{!! Form::text('points_to_finish',''
 											, array(
 												'placeHolder' => trans('messages.admin_points_to_finish')
@@ -194,6 +202,15 @@
 												, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
 											)
 										) !!}
+									</div>
+									<label class="control-label col-xs-3 m-top-20">{!! trans('messages.has_difficulty') !!} <span class="required">*</span></label>
+									<div class="col-xs-3 m-top-20">
+										<select ng-disabled="module.active_view" name="has_difficulty" class="form-control"
+												ng-model="module.record.no_difficulty">
+											<option ng-selected="module.record.is_dynamic == ''" value="">{!! trans('messages.select') !!}</option>
+											<option ng-selected="module.record.is_dynamic == futureed.FALSE" value="0">{!! trans('messages.yes') !!}</option>
+											<option ng-selected="module.record.is_dynamic == futureed.TRUE" value="1">{!! trans('messages.no') !!}</option>
+										</select>
 									</div>
 								</div>
 								<div class="form-group">
@@ -275,6 +292,70 @@
 												, 'ng-class' => "{ 'required-field' : module.fields['common_core_url'] }"
 											)
 										) !!}
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">{!! 'Curriculum Country' !!} <span class="required">*</span></label>
+								</div>
+								<div class="form-group" ng-init="module.packageCountries();getGrades()">
+									<div class="col-xs-3"  ng-if="module.active_edit">
+										{{--drop down and seq no text--}}
+										<select  name="curr_country" class="form-control" name="curr_country"
+												 ng-model="module.curr_country"
+												 ng-change="getGradeLevel(module.curr_country)">
+											<option value="">{!! 'select' !!}</option>
+											<option ng-repeat="curr in module.curriculum_country" ng-value="curr.country.id">{! curr.country.name !}</option>
+										</select>
+									</div>
+									<div class="col-xs-2"  ng-if="module.active_edit">
+										{!! Form::text('curr_seq_no',''
+                                            , array(
+                                                'placeHolder' => 'Sequence'
+                                                , 'ng-model' => 'module.curr_seq_no'
+                                                , 'class' => 'form-control'
+                                            )
+                                        ) !!}
+									</div>
+									<div class="col-xs-3"  ng-if="module.active_edit">
+										{{--drop down and seq no text--}}
+										<select  name="curr_grade" class="form-control" name="curr_grade"
+												 ng-model="module.curr_grade">
+											<option value="">{!! 'select' !!}</option>
+											<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
+										</select>
+									</div>
+									<div class="col-xs-3"  ng-if="module.active_edit">
+										<div class="btn btn-blue col-xs-2"
+											 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);"
+												>Add Curriculum</div>
+									</div>
+
+								</div>
+								<div class="form-group">
+									{{--list file with x to remove--}}
+									<div class="col-xs-12">
+										<table>
+											<thead>
+											<th class="col-xs-8 h5">Curriculum Country</th>
+											<th class="col-xs-8 h5">Sequence No.</th>
+											<th class="col-xs-8 h5">Level</th>
+											<th class="col-xs-4 h5" ng-if="!module.active_view">Edit</th>
+											</thead>
+											<tbody>
+											{{--country and sequence selected--}}
+											<tr ng-repeat="curr in module.curr_country_list">
+												{{--curriculum country--}}
+												<td>{! module.getCountryName(curr.country_id) !}</td>
+												{{--sequence no--}}
+												<td>{! curr.seq_no !}</td>
+												{{--Grade Level--}}
+												<td>{! module.getGrade(curr.grade_id) !}</td>
+												{{--remove--}}
+												<td ng-click="module.removeCurriculumCountry(curr.country_id)"  ng-if="module.active_edit"><a>Remove</a></td>
+											</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</fieldset>

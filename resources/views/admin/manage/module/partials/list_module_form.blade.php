@@ -90,6 +90,9 @@
 		<button class="btn btn-blue btn-semi-medium" ng-click="module.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_module') !!}
 		</button>
+		<button class="btn btn-blue btn-semi-medium" ng-click="module.setActive()">
+			{!! trans('messages.dynamic_setup') !!}
+		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">

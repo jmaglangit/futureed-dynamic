@@ -100,4 +100,13 @@ class SubscriptionPackageController extends ApiController {
 		return $this->respondWithData($this->subscription_package->deleteSubscriptionPackage($id));
 	}
 
+	/**
+	 * Get package countries
+	 * @return mixed
+	 */
+	public function getSubscriptionCountries(){
+
+		return $this->respondWithData($this->subscription_package->getSubscriptionCountries());
+	}
+
 }
