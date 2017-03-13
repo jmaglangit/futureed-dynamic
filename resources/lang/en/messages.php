@@ -1476,4 +1476,7 @@ return [
 	'dynamic_setup' => 'Dynamic Setup',
 	'dynamic' => 'Dynamic',
 	'has_difficulty' => 'Has Difficulty',
+	'add_curriculum' => 'Add Curriculum',
+	'level' => 'Level',
+	'remove' => 'Remove',
 ];

@@ -31,7 +31,7 @@
 						<option ng-repeat="subject in module.subjects" ng-value="subject.id">{! subject.name!}</option>
 					</select>
 				</div>
-				<label class="control-label col-xs-2">{!! 'Dynamic' !!} <span class="required">*</span></label>
+				<label class="control-label col-xs-2">{!! trans('messages.dynamic') !!} <span class="required">*</span></label>
 				<div class="col-xs-4">
 					<select  name="subject_id" class="form-control"
 							 ng-model="module.record.is_dynamic">
@@ -174,7 +174,7 @@
 						)
 					) !!}
 				</div>
-				<label class="control-label col-xs-3 m-top-20">{!! 'Has Difficulty' !!} <span class="required">*</span></label>
+				<label class="control-label col-xs-3 m-top-20">{!! trans('messages.has_difficulty') !!} <span class="required">*</span></label>
 				<div class="col-xs-3 m-top-20">
 					<select  name="subject_id" class="form-control"
 							 ng-model="module.record.no_difficulty">
@@ -221,7 +221,7 @@
 
 			{{--Choose country--}}
 			<div class="form-group">
-			<label class="control-label">{!! 'Curriculum Country' !!} <span class="required">*</span></label>
+			<label class="control-label">{!! trans('messages.curriculum_country') !!} <span class="required">*</span></label>
 			</div>
 			<div class="form-group" ng-init="module.packageCountries();getGrades()">
 					<div class="col-xs-3">
@@ -246,14 +246,14 @@
 					{{--drop down and seq no text--}}
 					<select  name="curr_grade" class="form-control" name="curr_grade"
 							 ng-model="module.curr_grade">
-						<option value="">{!! 'select' !!}</option>
+						<option value="">{!! trans('messages.select') !!}</option>
 						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 					</select>
 				</div>
 				<div class="col-xs-3">
 					<div class="btn btn-blue col-xs-2"
 						 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);"
-							>Add Curriculum</div>
+							>{!! trans('messages.add_curriculum') !!}</div>
 				</div>
 
 			</div>
@@ -262,10 +262,10 @@
 				<div class="col-xs-12">
 					<table>
 						<thead>
-						<th class="col-xs-8 h5">Curriculum Country</th>
-						<th class="col-xs-8 h5">Sequence No.</th>
-						<th class="col-xs-8 h5">Level</th>
-						<th class="col-xs-4 h5">Edit</th>
+						<th class="col-xs-8 h5">{!! trans('messages.curriculum_country') !!}</th>
+						<th class="col-xs-8 h5">{!! trans('messages.sequence_no') !!}</th>
+						<th class="col-xs-8 h5">{!! trans('messages.level') !!}</th>
+						<th class="col-xs-4 h5">{!! trans('messages.edit') !!}</th>
 						</thead>
 						<tbody>
 						{{--country and sequence selected--}}
@@ -277,7 +277,7 @@
 							{{--Grade Level--}}
 							<td>{! module.getGrade(curr.grade_id) !}</td>
 							{{--remove--}}
-							<td ng-click="module.removeCurriculumCountry(curr.country)"><a>Remove</a></td>
+							<td ng-click="module.removeCurriculumCountry(curr.country_id)"><a>{!! trans('messages.remove') !!}</a></td>
 						</tr>
 						</tbody>
 					</table>

@@ -200,7 +200,6 @@ class ModuleRepository implements ModuleRepositoryInterface
 		try{
 			$module = new Module();
 
-			//TODO: add module country
 			$response = $module->with('subject', 'subjectarea', 'grade', 'content','modulecountry')->find($id);
 
 		}catch (\Exception $e){
@@ -308,7 +307,6 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 			DB::rollback();
 
-			dd($e->getMessage());
 			$this->errorLog($e->getMessage());
 
 			return false;

@@ -328,7 +328,7 @@
 									<div class="col-xs-3"  ng-if="module.active_edit">
 										<div class="btn btn-blue col-xs-2"
 											 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);"
-												>Add Curriculum</div>
+												>{!! trans('messages.add_curriculum') !!}</div>
 									</div>
 
 								</div>
@@ -337,10 +337,10 @@
 									<div class="col-xs-12">
 										<table>
 											<thead>
-											<th class="col-xs-8 h5">Curriculum Country</th>
-											<th class="col-xs-8 h5">Sequence No.</th>
-											<th class="col-xs-8 h5">Level</th>
-											<th class="col-xs-4 h5" ng-if="!module.active_view">Edit</th>
+											<th class="col-xs-8 h5">{!! trans('messages.curriculum_country') !!}</th>
+											<th class="col-xs-8 h5">{!! trans('messages.sequence_no') !!}</th>
+											<th class="col-xs-8 h5">{!! trans('messages.level') !!}</th>
+											<th class="col-xs-4 h5" ng-if="!module.active_view">{!! trans('messages.level') !!}</th>
 											</thead>
 											<tbody>
 											{{--country and sequence selected--}}
@@ -352,7 +352,7 @@
 												{{--Grade Level--}}
 												<td>{! module.getGrade(curr.grade_id) !}</td>
 												{{--remove--}}
-												<td ng-click="module.removeCurriculumCountry(curr.country_id)"  ng-if="module.active_edit"><a>Remove</a></td>
+												<td ng-click="module.removeCurriculumCountry(curr.country_id)"  ng-if="module.active_edit"><a>{!! trans('messages.remove') !!}</a></td>
 											</tr>
 											</tbody>
 										</table>
