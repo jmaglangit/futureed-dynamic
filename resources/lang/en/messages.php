@@ -310,6 +310,7 @@ return [
 	'proceed_to_questions' => 'Proceed to Questions',
 	'proceed_to_next_questions' => 'Proceed to next Question',
 	'progress' => 'Progress',
+	'progress_percent' => 'Progress %',
 	'question' => 'Question',
 	'question_analysis' => 'Question Analysis',
 	'quick' => 'Quick',
@@ -404,8 +405,8 @@ return [
 	'student_status' => 'Student Status',
 	'student_to_watch' => 'Students to watch',
 	'subject' => 'Subject',
-	'subject_area' => 'Progress %',
-	'subject_area_heatmap' => 'Scores',
+	'subject_area' => 'Subject Area',
+	'subject_area_heatmap' => 'Subject Area Heatmap',
 	'subscription' => 'Subscription',
 	'submit' => 'Submit',
 	'subscribe_now' => 'Subscribe Now!',
@@ -969,7 +970,7 @@ return [
 	
 	//resources/views/client/login/enter-confirmation-code.blade.php
 	'client_new_confirmation_code' => 'A new confirmation code has been sent to your email account.',
-	'client_check_inbox' => 'You\'re almost done! We just need you to confirm you email address. Please check your inbox and click on the link.',
+	'client_check_inbox' => 'You\'re almost done! We just need you to confirm your email address. Please check your inbox and click on the link.',
 	
 	//resources/views/client/login/registration.blade.php
 	'client_register_as' => 'Register Account as',
