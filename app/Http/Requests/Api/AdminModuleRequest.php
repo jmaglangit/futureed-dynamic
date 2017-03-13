@@ -35,7 +35,10 @@ class AdminModuleRequest extends ApiRequest {
 					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
 					'points_to_unlock' => 'required|integer',
-					'points_to_finish' => 'required|integer'
+					'points_to_finish' => 'required|integer',
+					'curriculum_country' => 'required|array',
+					'is_dynamic' => 'required',
+					'no_difficulty' => 'required'
 
 				];
 

@@ -563,6 +563,11 @@
 						['as' => 'admin.manage.module.partials.module_questions_preview'
 						, 'uses' => 'FutureLesson\Admin\ManageModuleController@module_questions_preview'
 					]);
+
+					Routes::get('/dynamic_setup',[
+						'as' => 'admin.manage.module.partials.dynamic_setup',
+						'uses' => 'FutureLesson\Admin\ManageModuleController@dynamic'
+					]);
 				});
 
 				Routes::group(['prefix' => '/content'], function() {

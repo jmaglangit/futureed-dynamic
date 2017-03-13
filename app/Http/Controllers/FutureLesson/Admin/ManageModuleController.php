@@ -50,4 +50,11 @@ class ManageModuleController extends Controller{
 
 		return view('admin.manage.module.module_questions')->with('module',Input::get('module'));
 	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function dynamic_setup(){
+		return view('admin.manage.module.partials.dynamic_setup');
+	}
 }

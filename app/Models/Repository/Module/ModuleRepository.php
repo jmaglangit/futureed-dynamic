@@ -4,6 +4,7 @@ namespace FutureEd\Models\Repository\Module;
 
 use FutureEd\Models\Core\CountryGrade;
 use FutureEd\Models\Core\Module;
+use FutureEd\Models\Core\ModuleCountry;
 use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,20 @@ class ModuleRepository implements ModuleRepositoryInterface
 		try {
 
 			$module = Module::create($data);
+
+			//assigning to module countries/curriculum
+			if(isset($data['curriculum_country'])){
+				foreach($data['curriculum_country'] as $country){
+					ModuleCountry::create([
+						'module_id' => $module->id,
+						'country_id' => $country['country'],
+						'grade_id' => $module->grade_id,
+						'seq_no' => $country['seq_no']
+					]);
+				}
+
+
+			}
 
 		} catch (Exception $e) {
 
@@ -185,7 +200,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 		try{
 			$module = new Module();
 
-			$response = $module->with('subject', 'subjectarea', 'grade', 'content')->find($id);
+			$response = $module->with('subject', 'subjectarea', 'grade', 'content','modulecountry')->find($id);
 
 		}catch (\Exception $e){
 
@@ -247,6 +262,46 @@ class ModuleRepository implements ModuleRepositoryInterface
 		try {
 			$response = Module::find($id)
 				->update($data);
+
+			//assigning to module countries/curriculum
+
+			//get module countries
+			$module_country = ModuleCountry::whereModuleId($id)->get();
+
+			if(isset($data['curriculum_country']) && count($data['curriculum_country']) > count($module_country->toArray())){
+				//additional country
+				foreach($data['curriculum_country'] as $country){
+					if(isset($country['id'])){
+						ModuleCountry::find($country['id'])->update([
+							'module_id' => $country['module_id'],
+							'country_id' => $country['country_id'],
+							'grade_id' => $country['grade_id'],
+							'seq_no' => $country['seq_no']
+						]);
+					} else {
+						ModuleCountry::create([
+							'module_id' => $id,
+							'country_id' => $country['country_id'],
+							'grade_id' => $country['grade_id'],
+							'seq_no' => $country['seq_no']
+						]);
+					}
+				}
+			} elseif(isset($data['curriculum_country']) && count($data['curriculum_country']) < count($module_country->toArray())){
+				//deleted country
+				foreach($module_country->toArray() as $country){
+					$has_country = 0;
+					foreach($data['curriculum_country'] as $curr){
+						if($country['country_id'] == $curr['country_id']){
+							$has_country++;
+						}
+					}
+
+					if($has_country == 0){
+						ModuleCountry::find($country['id'])->delete();
+					}
+				}
+			}
 
 		}catch (\Exception $e){
 
