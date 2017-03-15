@@ -63,6 +63,7 @@ Routes::group([
 	include('Routes/Api/Question.php');
 	include('Routes/Api/QuestionAnswer.php');
 	include('Routes/Api/QuestionAnswerTranslation.php');
+	include('Routes/Api/QuestionTemplate.php');
 	include('Routes/Api/QuestionTranslation.php');
 	include('Routes/Api/Quote.php');
 	include('Routes/Api/QuoteTranslation.php');
