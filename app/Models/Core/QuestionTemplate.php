@@ -32,11 +32,6 @@ class QuestionTemplate extends Model{
 	];
 
 	//scope
-//'equation_type',
-//		'question_template_format',
-//		'question_equation',
-//		'status',
-
 	public function scopeEquationType($query, $equation_type){
 		return $query->where('equation_type','=',$equation_type);
 	}
