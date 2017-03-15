@@ -37,6 +37,7 @@ Routes::group([
 	include('Routes/Api/ClientDiscount.php');
 	include('Routes/Api/ClientStudent.php');
 	include('Routes/Api/Countries.php');
+	include('Routes/Api/DataLibrary.php');
 	include('Routes/Api/Event.php');
 	include('Routes/Api/Facebook.php');
 	include('Routes/Api/Game.php');
