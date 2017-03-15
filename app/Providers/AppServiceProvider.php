@@ -399,5 +399,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\DataLibrary\DataLibraryRepositoryInterface',
 			'FutureEd\Models\Repository\DataLibrary\DataLibraryRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepository'
+		);
 	}
 }
