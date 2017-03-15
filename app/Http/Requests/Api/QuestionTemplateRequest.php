@@ -21,9 +21,23 @@ class QuestionTemplateRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			//
-		];
+		switch($this->method()){
+			case 'PUT':
+				return [
+					'question_type' => 'string',
+					'question_template_format' => 'string',
+					'question_equation' => 'string',
+				];
+				break;
+			case 'POST':
+			default:
+				return [
+					'question_type' => 'required|string',
+					'question_template_format' => 'required|string',
+					'question_equation' => 'required|string',
+				];
+				break;
+		}
 	}
 
 }
