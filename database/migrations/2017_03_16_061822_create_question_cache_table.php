@@ -16,7 +16,7 @@ class CreateQuestionCacheTable extends Migration {
 		Schema::create('question_cache', function(Blueprint $table){
 			$table->bigIncrements('id');
 			$table->integer('module_question_template_id');
-			$table->integer('template_id');
+			$table->integer('question_template_id');
 			$table->text('question_text');
 			$table->enum('status', ['Enabled', 'Disabled']);
 			$table->bigInteger('created_by');
