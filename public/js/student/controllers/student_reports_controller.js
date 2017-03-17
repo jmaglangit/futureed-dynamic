@@ -78,7 +78,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
                     self.records = response.data.rows.map(function(row) {
-                        row.module_status = row.module_status == 'Failed' ? 'Retake' : row.module_status;
+                        row.module_status = row.module_status == Constants.FAILED ? Constants.RETAKE : row.module_status;
                         return row;
                     });
 
