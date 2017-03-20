@@ -30,7 +30,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 				foreach($data['curriculum_country'] as $country){
 					ModuleCountry::create([
 						'module_id' => $module->id,
-						'country_id' => $country['country'],
+						'country_id' => $country['country_id'],
 						'grade_id' => $module->grade_id,
 						'seq_no' => $country['seq_no']
 					]);

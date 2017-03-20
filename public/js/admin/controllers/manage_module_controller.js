@@ -168,8 +168,12 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
+					self.currentId = response.data.id;
 					self.setActive(Constants.ACTIVE_ADD);
 					self.success = Constants.MSG_CREATED("Module");
+
+					self.details(self.currentId);
+					self.setActive(Constants.ACTIVE_VIEW, self.currentId);
 				}
 			}
 			
