@@ -65,6 +65,8 @@ var Constants = {
 	, DASHBOARD		: "Dashboard"
 	, WRONG			: "Wrong"
 	, CORRECT		: "Correct"
+	, FAILED		: "Failed"
+	, RETAKE		: "Retake"
 
 	, HIDE_MODULE	: "Hide Module"
 

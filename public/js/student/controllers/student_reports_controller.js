@@ -77,7 +77,11 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                 if (response.errors) {
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
-                    self.records = response.data.rows;
+                    self.records = response.data.rows.map(function(row) {
+                        row.module_status = row.module_status == Constants.FAILED ? Constants.RETAKE : row.module_status;
+                        return row;
+                    });
+
                     self.student = response.data.additional_information;
                     self.getIAssessReportLink();
                 }
