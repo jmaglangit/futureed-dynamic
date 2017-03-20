@@ -31,12 +31,30 @@ class QuestionCache extends Model{
 	protected $fillable = [
 		'module_question_template_id',
 		'question_template_id',
-		'question_text'
+		'question_text',
+		'status'
 	];
 
 	protected $attibutes = [
 		'created_by' => 1,
 		'updated_by' => 1
 	];
+
+	//scope
+	public function scopeModuleQuestionTemplateId($query,$template_id){
+		return $query->where('module_question_template_id',$template_id);
+	}
+
+	public function scopeQuestionTemplateId($query,$template_id){
+		return $query->where('question_template_id',$template_id);
+	}
+
+	public function scopeQuestionText($query,$text){
+		return $query->where('question_text',$text);
+	}
+
+	public function scopeStatus($query,$status){
+		return $query->where('status',$status);
+	}
 
 }

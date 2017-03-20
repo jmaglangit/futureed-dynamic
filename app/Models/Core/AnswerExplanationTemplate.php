@@ -39,6 +39,19 @@ class AnswerExplanationTemplate extends Model{
 		'updated_by' => 1
 	];
 
+	//scope
+	public function scopeModuleId($query,$module_id){
+		return $query->where('module_id',$module_id);
+	}
+
+	public function scopeQuestionTemplateId($query,$template_id){
+		return $query->where('question_template_id',$template_id);
+	}
+
+	public function scopeStatus($query,$status){
+		return $query->where('status',$status);
+	}
+
 
 
 }

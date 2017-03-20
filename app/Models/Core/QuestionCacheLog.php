@@ -39,4 +39,17 @@ class QuestionCacheLog extends Model{
 		'updated_by' => 1
 	];
 
+
+	public function scopeUserId($query,$user_id){
+		return $query->where('user_id',$user_id);
+	}
+
+	public function scopeDescription($query,$description){
+		return $query->where('description','like','%' . $description . '%');
+	}
+
+	public function scopeStatus($query,$status){
+		return $query->where('status',$status);
+	}
+
 }

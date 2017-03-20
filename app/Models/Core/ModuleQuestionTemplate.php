@@ -39,5 +39,17 @@ class ModuleQuestionTemplate extends Model{
 		'updated_by' => 1
 	];
 
+	//scope
+	public function scopeQuestionTemplateId($query,$template_id){
+		return $query->where('question_template_id',$template_id);
+	}
+
+	public function scopeTemplate($query,$template){
+		return $query->where('template',$template);
+	}
+
+	public function scopeStatus($query,$status){
+		return $query->where('status',$status);
+	}
 
 }
