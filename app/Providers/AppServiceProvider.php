@@ -404,5 +404,27 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepositoryInterface',
 			'FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\AnswerExplanationTemplate\AnswerExplanationTemplateRepositoryInterface',
+			'FutureEd\Models\Repository\AnswerExplanationTemplate\AnswerExplanationTemplateRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\ModuleQuestionTemplate\ModuleQuestionTemplateRepositoryInterface',
+			'FutureEd\Models\Repository\ModuleQuestionTemplate\ModuleQuestionTemplateRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionCache\QuestionCacheRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionCache\QuestionCacheRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionCacheLog\QuestionCacheLogRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionCacheLog\QuestionCacheLogRepository'
+		);
+
+
 	}
 }
