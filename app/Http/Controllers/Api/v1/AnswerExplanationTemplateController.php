@@ -27,8 +27,8 @@ class AnswerExplanationTemplateController extends ApiController {
 		$offset = 0;
 
 		//module_id
-		if(Input::get('module_id')){
-			$criteria['module_id']= Input::get('module_id');
+		if(Input::get('template')){
+			$criteria['template']= Input::get('template');
 		}
 
 		//question_template_id

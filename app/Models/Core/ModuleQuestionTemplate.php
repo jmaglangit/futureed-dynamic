@@ -22,15 +22,15 @@ class ModuleQuestionTemplate extends Model{
 
 	use TranslationTrait;
 
-	protected $table = 'module_question_table';
+	protected $table = 'module_question_template';
 
 	protected $dates = ['created_at','updated_at','deleted_at'];
 
 	protected $hidden = ['created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
 	protected $fillable = [
+		'module_id',
 		'question_template_id',
-		'template',
 		'status'
 	];
 
@@ -44,8 +44,8 @@ class ModuleQuestionTemplate extends Model{
 		return $query->where('question_template_id',$template_id);
 	}
 
-	public function scopeTemplate($query,$template){
-		return $query->where('template',$template);
+	public function scopeModuleId($query,$module_id){
+		return $query->where('module_id',$module_id);
 	}
 
 	public function scopeStatus($query,$status){

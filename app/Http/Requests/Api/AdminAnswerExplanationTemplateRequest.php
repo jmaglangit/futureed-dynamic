@@ -1,8 +1,6 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
-
-class AdminAnswerExplanationTemplateRequest extends Request {
+class AdminAnswerExplanationTemplateRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
