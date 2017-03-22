@@ -19,7 +19,6 @@ function ManageQuestionTempService($http) {
 		});
 	}
 	api.add  = function(data){
-	console.log(data);
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data

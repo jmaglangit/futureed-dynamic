@@ -164,7 +164,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					console.log(response.data);
 					self.setActive();
 					self.success = Constants.MSG_CREATED("Module");
 				}
