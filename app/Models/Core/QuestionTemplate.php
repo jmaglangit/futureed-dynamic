@@ -26,6 +26,8 @@ class QuestionTemplate extends Model{
 
 	protected $fillable = [
 		'equation_type',
+		'operation',
+		'question_form',
 		'question_template_format',
 		'question_equation',
 		'status',
@@ -44,8 +46,15 @@ class QuestionTemplate extends Model{
 		return $query->where('question_equation','=',$question_equation);
 	}
 
+	public function scopeQuestionForm($query,$question_form){
+		return $query->where('question_form','=',$question_form);
+	}
+
 	public function scopeStatus($query,$status){
 		return $query->where('status','=',$status);
 	}
 
+	public function scopeOperation($query,$status){
+		return $query->where('operation','=',$operation);
+	}
 }
