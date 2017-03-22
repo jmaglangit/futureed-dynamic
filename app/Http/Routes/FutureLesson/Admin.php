@@ -597,6 +597,35 @@
 				});
 			});
 
+			Routes::group(['prefix' => '/question-template'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.question_template.index'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionTempController@index'
+						, 'middleware' => 'admin_partial'
+					]);
+
+				Routes::group(['prefix' => '/partials'], function() {
+
+					Routes::get('/list_question_template', 
+						['as' => 'admin.manage.question_template.partials.list_question_template'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionTempController@list_question_template'
+						, 'middleware' => 'admin_partial'
+					]);
+
+					Routes::get('/add_question_template', 
+						['as' => 'admin.manage.question_template.partials.add_question_template'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionTempController@add_question_template'
+					]);
+
+					Routes::get('/view_question_template', 
+						['as' => 'admin.manage.question_template.partials.view_question_template'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionTempController@view_question_template'
+					]);
+				});
+
+			});
+
 		Routes::group(['prefix' => '/age_group'], function() {
 
 			Routes::group(['prefix' => '/patials'], function() {

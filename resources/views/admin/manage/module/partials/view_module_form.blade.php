@@ -214,7 +214,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-xs-2 control-label">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
+									<label class="col-xs-3 control-label">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
 									<div class="col-xs-5" ng-if="module.active_edit">
 										<div class="col-xs-6 checkbox">
 											<label>
@@ -268,8 +268,8 @@
 								</div>
 
 								<div class="form-group">
-									<div class="col-xs-1"></div>
-									<div class="col-xs-5">
+									<!-- <div class="col-xs-1"></div> -->
+									<div class="col-xs-6">
 										{!! Form::text('common_core_area',''
 											, array(
 												'placeHolder' => trans('messages.admin_common_core_area')
@@ -281,8 +281,8 @@
 										) !!}
 									</div>
 
-									<div class="col-xs-1"></div>
-									<div class="col-xs-5">
+									<!-- <div class="col-xs-1"></div> -->
+									<div class="col-xs-6">
 										{!! Form::text('common_core_url',''
 											, array(
 												'placeHolder' => trans('messages.admin_common_core_url')
@@ -296,7 +296,7 @@
 								</div>
 
 								<div class="form-group">
-									<label class="control-label">{!! 'Curriculum Country' !!} <span class="required">*</span></label>
+									<label class="col-xs-3 control-label">{!! 'Curriculum Country' !!} <span class="required">*</span></label>
 								</div>
 								<div class="form-group" ng-init="module.packageCountries();getGrades()">
 									<div class="col-xs-3"  ng-if="module.active_edit">
@@ -308,7 +308,7 @@
 											<option ng-repeat="curr in module.curriculum_country" ng-value="curr.country.id">{! curr.country.name !}</option>
 										</select>
 									</div>
-									<div class="col-xs-2"  ng-if="module.active_edit">
+									<div class="col-xs-3"  ng-if="module.active_edit">
 										{!! Form::text('curr_seq_no',''
                                             , array(
                                                 'placeHolder' => 'Sequence'
@@ -335,11 +335,11 @@
 								<div class="form-group">
 									{{--list file with x to remove--}}
 									<div class="col-xs-12">
-										<table>
+										<table class="table table-striped table-bordered">
 											<thead>
-											<th class="col-xs-8 h5">{!! trans('messages.curriculum_country') !!}</th>
-											<th class="col-xs-8 h5">{!! trans('messages.sequence_no') !!}</th>
-											<th class="col-xs-8 h5">{!! trans('messages.level') !!}</th>
+											<th>{!! trans('messages.curriculum_country') !!}</th>
+											<th>{!! trans('messages.sequence_no') !!}</th>
+											<th>{!! trans('messages.level') !!}</th>
 											<th class="col-xs-4 h5" ng-if="!module.active_view">{!! trans('messages.level') !!}</th>
 											</thead>
 											<tbody>

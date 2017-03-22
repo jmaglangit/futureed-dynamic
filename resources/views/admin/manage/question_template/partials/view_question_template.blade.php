@@ -1,0 +1,223 @@
+<div ng-if="template.active_view || template.active_edit">
+	<div class="content-title">
+		<div class="title-main-content">
+			<span>{!! trans('messages.admin_view_template') !!}</span>
+		</div>
+	</div>
+
+	<div class="col-xs-12 success-container" ng-if="template.errors || template.success">
+		<div class="alert alert-error" ng-if="template.errors">
+			<p ng-repeat="error in template.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+		<div class="alert alert-success" ng-if="template.success">
+			<p>{! template.success !}</p>
+		</div>
+	</div>
+
+	<div class="col-xs-12 search-container">
+		{!! Form::open(array('class' => 'form-horizontal')) !!}
+		<fieldset>
+			<div class="form-group">
+				<label class="control-label col-xs-2">{!! trans('messages.admin_question_type') !!} <span class="required">*</span></label>
+				<div class="col-xs-4">
+					{!! Form::select('search_question_type'
+						, array(
+							  ''=>trans('messages.admin_question_type')
+							, 'Add' => trans('messages.add')
+					 	)
+					 	, null
+					 	, array(
+					 		'ng-disabled' => 'question_template.active_view'
+					 		, 'class' => 'form-control'
+					 		, 'ng-model' => 'question_template.record.question_type'
+					 		, 'ng-class' => "{ 'required-field' : question_template.fields['question_type'] }"
+					 		, 'placeholder' => trans('messages.email')
+					 	)
+					) !!}
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-xs-2">{!! trans('messages.admin_operation') !!} <span class="required">*</span></label>
+				<div class="col-xs-4">
+					{!! Form::select('search_operation'
+						, array(
+							  ''=>trans('messages.admin_operation')
+							, 'Addition' => trans('messages.add')
+					 	)
+					 	, null
+					 	, array(
+					 		'ng-disabled' => 'question_template.active_view'
+					 		, 'class' => 'form-control'
+					 		, 'ng-model' => 'question_template.record.operation'
+					 		, 'ng-class' => "{ 'required-field' : question_template.fields['question_form'] }"
+					 		, 'placeholder' => trans('messages.email')
+					 	)
+					) !!}
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-xs-2">{!! trans('messages.admin_question_form') !!} <span class="required">*</span></label>
+				<div class="col-xs-4">
+					{!! Form::select('search_question_form'
+						, array(
+							  ''=>trans('messages.admin_question_form')
+							, 'Addition' => trans('messages.admin_operation')
+					 	)
+					 	, null
+					 	, array(
+					 		'ng-disabled' => 'question_template.active_view'
+					 		, 'class' => 'form-control'
+					 		, 'ng-model' => 'question_template.record.question_form'
+					 		, 'ng-class' => "{ 'required-field' : question_template.fields['question_form'] }"
+					 		, 'placeholder' => trans('messages.email')
+					 	)
+					) !!}
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-xs-2">{!! trans('messages.admin_template_text') !!} <span class="required">*</span></label>
+			</div>
+
+			<div class="form-group">				
+				<div class="col-xs-8" ng-model = 'template.record.question_type'>
+					<div class="col-xs-2 admin-search-module">
+						{!! Form::button(trans('messages.admin_template_text_num')
+							,array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'template.actionButtons()'
+							)
+						)!!}
+					</div>
+					<div class="col-xs-2 admin-search-module">
+						{!! Form::button(trans('messages.admin_template_text_object')
+							,array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'template.actionButtons()'
+							)
+						)!!}
+					</div>
+					<div class="col-xs-2 admin-search-module">
+						{!! Form::button(trans('messages.admin_template_text_name')
+							,array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'template.actionButtons()'
+							)
+						)!!}
+					</div>
+					<div class="col-xs-2 admin-search-module">
+						{!! Form::button(trans('messages.admin_template_text_alpha')
+							,array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'template.actionButtons()'
+							)
+						)!!}
+					</div>
+					<div class="col-xs-2"></div>
+					
+				</div>
+				<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-6">
+					{!! Form::textarea('admin_template_text',''
+						, array(
+							'ng-model' => 'template.record.question_type'
+							, 'class' => 'form-control disabled-textarea'
+							, 'ng-class' => "{ 'required-field' : template.fields['description'] }"
+							, 'rows' => '10'
+						)
+					) !!}
+				</div>
+				<div class="col-xs-1"></div>
+				<div class="col-xs-4">
+					{!! Form::textarea('admin_template_text',''
+						, array(
+							'ng-model' => 'template.record.question_type'
+							, 'class' => 'form-control disabled-textarea'
+							, 'ng-class' => "{ 'required-field' : template.fields['description'] }"
+							, 'rows' => '10'
+						)
+					) !!}
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-xs-3">{!! trans('messages.admin_question_equation') !!} <span class="required">*</span></label>
+				<div class="col-xs-2">
+					{!! Form::text('question_equation',''
+						, array(
+							 'ng-model' => 'template.record.question_equation'
+							, 'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : template.fields['question_equation'] }"
+						)
+					) !!}
+				</div>
+				<div class="col-xs-2"></div>
+				<div class="col-xs-4">
+					{!! Form::textarea('admin_template_text',''
+						, array(
+							, 'class' => 'form-control disabled-textarea'
+							, 'rows' => '3'
+						)
+					) !!}
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<div class="form-group">
+				<div class="btn-container col-xs-9 col-xs-offset-2">
+					{!! Form::button(trans('messages.add')
+						, array(
+							'class' => 'btn btn-blue btn-small'
+							, 'ng-click' => 'template.add()'
+						)
+					) !!}
+					{!! Form::button(trans('messages.admin_add_template_preview')
+						, array(
+							'class' => 'btn btn-blue btn-small'
+							, 'ng-click' => 'template.preview()'
+						)
+					) !!}
+					{!! Form::button(trans('messages.cancel')
+						, array(
+							'class' => 'btn btn-gold btn-small'
+							, 'ng-click' => 'template.setActive()'
+						)
+					) !!}
+				</div>
+			</div>
+		</fieldset>
+		{!! Form::close() !!}
+	</div>
+
+	<div id="view_image_modal" ng-show="template.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					{! template.view_image.teaching_module !}
+				</div>
+				<div class="modal-body">
+					<div class="modal-image">
+						<img ng-src="{! template.view_image.image_path !}"/>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
+						{!! Form::button(trans('messages.close')
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
