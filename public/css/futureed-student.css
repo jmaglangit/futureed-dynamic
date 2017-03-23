@@ -2730,3 +2730,9 @@ pre.dropdown-menu {
     background: #065A7F;
     min-height: 150px;
 }
+
+/*for snap*/
+canvas#world {
+    max-width: 100%;
+    height: auto;
+}
