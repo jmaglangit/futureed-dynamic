@@ -31,7 +31,7 @@
         {!! Form::button(trans('messages.next')
             , array(
                 'id' => 'validate_user_btn'
-                , 'class' => 'btn btn-maroon'
+                , 'class' => 'btn btn-green'
                 , 'ng-click' => 'login.validateUser($event)'
             )
         ) !!}

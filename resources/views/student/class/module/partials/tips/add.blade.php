@@ -43,7 +43,7 @@
 		{!! Form::button(trans('messages.submit')
 			, array(
 			  'id' => 'validate_code_btn'
-			  , 'class' => 'btn btn-maroon btn-medium'
+			  , 'class' => 'btn btn-green btn-medium'
 			  , 'ng-click' => 'tips.add()'
 			)
 		) !!}

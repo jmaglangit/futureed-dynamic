@@ -560,6 +560,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.getTeachingContents = function(id) {
 		self.search.module_id = id;
 		self.table.size = 1;
+		self.content_index = 0;
 
 		$scope.ui_block();
 		StudentModuleService.getTeachingContents(self.search, self.table).success(function(response) {
@@ -568,13 +569,13 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
 					self.contents = response.data.records;//[0]
-					self.content = self.contents[0];
+					self.content = self.contents[self.content_index];
 					self.updatePageCount(response.data);
 
 					if(self.contents) {
 						var data = {};
 							data.module_id = self.record.student_module.id;
-						
+
 							if(self.active_contents) {
 								data.last_viewed_content_id = self.contents.id;
 							}
@@ -595,6 +596,26 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
     self.showContent = function(content) {
         self.content = content;
+    }
+
+    self.nextPageContent = function(content) {
+        self.content_index++;
+        self.content = self.contents[self.content_index];
+
+    	if (typeof self.content == 'undefined') {
+            self.content_index = 0;
+            self.nextPage(self.content_index);
+    	}
+    }
+
+    self.prevPageContent = function(content) {
+        self.content_index--;
+        self.content = self.contents[self.content_index];
+
+        if (typeof self.content == 'undefined') {
+            self.content_index = 0;
+            self.previousPage(self.content_index);
+        }
     }
 
 	self.getModuleStudent = function(module_id, successCallback) {
