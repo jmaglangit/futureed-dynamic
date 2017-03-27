@@ -48,11 +48,11 @@
 		                            webkitallowfullscreen mozallowfullscreen allowfullscreen ng-cloak></iframe>
 		                </div>
 		                <div ng-if="mod.table.page_count > 1">
-							<div class="previous-btn-position" ng-if="mod.table.page > 0">
+							<div class="previous-btn-position" ng-if="mod.content_index > futureed.DEFAULT_PAGE -1">
 													<span  ng-click="mod.prevPageContent()"
 														   ng-model="mod.table.page">&lt;</span>
 							</div>
-							<div class="next-btn-position" ng-if="mod.table.page != mod.table.total_items">
+							<div class="next-btn-position" ng-if="mod.content_index != mod.table.total_items">
 													<span  ng-click="mod.nextPageContent()"
 														   ng-model="mod.table.page">&gt;</span>
 							</div>
