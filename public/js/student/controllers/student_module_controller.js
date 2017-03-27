@@ -568,13 +568,13 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
 					self.contents = response.data.records;//[0]
-					self.content = self.contents[0];
+					self.content = self.contents[Constants.FALSE];
 					self.updatePageCount(response.data);
 
 					if(self.contents) {
 						var data = {};
 							data.module_id = self.record.student_module.id;
-						
+
 							if(self.active_contents) {
 								data.last_viewed_content_id = self.contents.id;
 							}
@@ -595,6 +595,26 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
     self.showContent = function(content) {
         self.content = content;
+    }
+
+    self.nextPageContent = function() {
+        self.content_index++;
+        self.content = self.contents[self.content_index];
+
+        if (typeof self.content == Constants.UNDEFINED) {
+            self.content_index = 0;
+            self.nextPage();
+    	}
+    }
+
+    self.prevPageContent = function() {
+        self.content_index--;
+        self.content = self.contents[self.content_index];
+
+        if (typeof self.content == Constants.UNDEFINED) {
+            self.content_index = self.contents.length - 1;
+            self.previousPage();
+        }
     }
 
 	self.getModuleStudent = function(module_id, successCallback) {

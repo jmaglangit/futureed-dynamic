@@ -84,14 +84,14 @@
                             {!! Form::button(trans('messages.submit')
                                 , array(
                                   'id' => 'submit'
-                                  , 'class' => 'btn btn-blue side-btn'
+                                  , 'class' => 'btn btn-green side-btn'
                                   , 'ng-click' => 'class.submitTips()'
                                 )
                             ) !!}
                             {!! Form::button(trans('messages.back')
                                 , array(
                                   'id' => 'back'
-                                  , 'class' => 'btn btn-maroon'
+                                  , 'class' => 'btn btn-gold'
                                   , 'ng-click' => 'class.backTips()'
                                 )
                             ) !!}
@@ -114,7 +114,7 @@
                     {!! Form::button(trans('messages.back')
                         , array(
                           'id' => 'validate_code_btn'
-                          , 'class' => 'btn btn-maroon'
+                          , 'class' => 'btn btn-gold'
                           , 'ng-click' => 'class.backTips()'
                         )
                     ) !!}
@@ -221,14 +221,14 @@
                             {!! Form::button(trans('messages.submit')
                                 , array(
                                   'id' => 'validate_code_btn'
-                                  , 'class' => 'btn btn-blue side-btn'
+                                  , 'class' => 'btn btn-green side-btn'
                                   , 'ng-click' => 'class.submitHelp()'
                                 )
                             ) !!}
                             {!! Form::button(trans('messages.back')
                                 , array(
                                   'id' => 'back'
-                                  , 'class' => 'btn btn-maroon'
+                                  , 'class' => 'btn btn-gold'
                                   , 'ng-click' => 'class.backHelp()'
                                 )
                             ) !!}
@@ -271,7 +271,7 @@
                     {!! Form::button(trans('messages.back')
                         , array(
                           'id' => 'validate_code_btn'
-                          , 'class' => 'btn btn-maroon'
+                          , 'class' => 'btn btn-gold'
                           , 'ng-click' => 'class.backHelp()'
                         )
                     ) !!}
