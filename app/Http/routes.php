@@ -86,6 +86,7 @@ Routes::group([
 	include('Routes/Api/TipRating.php');
 	include('Routes/Api/User.php');
 	include('Routes/Api/VolumeDiscount.php');
+	include('Routes/Api/WordProblemDataMapping.php');
 });
 
 /**
@@ -95,6 +96,17 @@ Routes::group(['prefix' => 'api'], function () {
 
 	include('Routes/Api/Reports.php');
 
+});
+
+/**
+ * Uploading files
+ *
+ */
+Routes::group([
+	'middleware' => 'log'
+], function () {
+
+	include('Routes/Api/upload.php');
 });
 
 /**

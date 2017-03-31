@@ -1,6 +1,6 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-class QuestionTemplateRequest extends ApiRequest {
+class 	WordProblemDataMappingRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,19 +22,22 @@ class QuestionTemplateRequest extends ApiRequest {
 		switch($this->method()){
 			case 'PUT':
 				return [
-					'question_type' => 'string',
-					'question_template_format' => 'string',
-					'question_equation' => 'string',
+					'data' => 'required'
 				];
 				break;
 			case 'POST':
 			default:
-				return [
-					'question_type' => 'required|string',
-					'question_template_format' => 'required|string',
-					'question_equation' => 'required|string',
-					'operation' => 'required|string'
-				];
+
+				if($this->route()->getName() == 'api.v1.word-problem-data.import.csv'){
+					return [
+						'file' => 'required'
+					];
+				} else {
+					return [
+						'data' => 'required'
+					];
+				}
+
 				break;
 		}
 	}

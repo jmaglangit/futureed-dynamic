@@ -1,21 +1,23 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
 use FutureEd\Http\Requests\Api\DataLibraryRequest;
 use FutureEd\Models\Repository\DataLibrary\DataLibraryRepositoryInterface;
-use Illuminate\Http\Request;
+use FutureEd\Services\ExcelServices;
 use Illuminate\Support\Facades\Input;
 
 class DataLibraryController extends ApiController {
 
 	protected $data_library;
 
+	protected $excel_services;
+
 	public function __construct(
-		DataLibraryRepositoryInterface $dataLibraryRepositoryInterface
+		DataLibraryRepositoryInterface $dataLibraryRepositoryInterface,
+		ExcelServices $excelServices
 	){
 		$this->data_library = $dataLibraryRepositoryInterface;
+		$this->excel_services = $excelServices;
 	}
 
 
@@ -96,6 +98,35 @@ class DataLibraryController extends ApiController {
 	public function destroy($id)
 	{
 		return $this->respondWithData($this->data_library->deleteDataLibrary($id));
+	}
+
+	/**
+	 * @param DataLibraryRequest $request
+	 * @return mixed
+	 */
+	public function dataLibraryImport(DataLibraryRequest $request){
+
+		$file = $request->file('file');
+
+		//check csv file type
+		if(!in_array($file->getClientMimeType(), config('futureed.accepted_csv'))){
+
+			return $this->respondErrorMessage(2149);
+		}
+
+		$headers = [
+			'object_type',
+			'object_name'
+		];
+
+		//start import
+		$records = $this->excel_services->importCsv($file,$headers);
+
+		//parse and update table
+		//delete all
+		$this->data_library->deleteAllDataLibrary();
+
+		return $this->respondWithData($this->data_library->insertDataLibraryCollection($records->toArray()));
 	}
 
 }

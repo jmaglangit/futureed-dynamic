@@ -833,7 +833,9 @@ return [
 	'admin_question_text' => 'Question Text',
 	'admin_question_type' => 'Question Type',
 	'admin_select_orientation' => '-- Select Orientation --',
-	'admin_select_question_type' => '-- Select Question Type --',	
+	'admin_select_question_type' => '-- Select Question Type --',
+	'admin_select_question_form' => '-- Select Question Form --',
+	'admin_select_operation' => '-- Select Operation --',
 	'admin_vertical' => 'Vertical',
 	
 	//resources/views/admin/manage/question_answer/partials/question_list_form.blade.php
@@ -936,7 +938,6 @@ return [
 	'admin_template_text' => 'Template Text',
 	'admin_add_template' => 'Add Template',
 	'admin_add_template_preview' => 'Preview',
-	'admin_select_question_type' => 'Select Question Type',
 	'admin_template_text_num' => 'num',
 	'admin_template_text_object' => 'object',
 	'admin_template_text_name' => 'name',
@@ -1505,4 +1506,6 @@ return [
 	'add_curriculum' => 'Add Curriculum',
 	'level' => 'Level',
 	'remove' => 'Remove',
+	'upload_data_library' => 'Upload Data Library',
+	'upload_word_problem' => 'Upload Word Problem',
 ];

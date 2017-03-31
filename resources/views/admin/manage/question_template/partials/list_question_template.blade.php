@@ -34,9 +34,9 @@
 					<div class="col-xs-5">
 						{!! Form::select('question_type'
 							, array(
-								'' =>trans('messages.admin_question_type')
-								, 'FIB' => trans('messages.admin_question_type_fib')
-								, 'MC' => trans('messages.admin_question_type_mc')
+								'' =>trans('messages.admin_select_question_type')
+								, 'FIB' => trans('messages.admin_fib')
+								, 'MC' => trans('messages.admin_mc')
 							)
 							, null
 							, array(
@@ -48,7 +48,7 @@
 					<div class="col-xs-5">
 						{!! Form::select('question_form'
 							, array(
-								'' =>trans('messages.admin_question_form')
+								'' =>trans('messages.admin_select_question_form')
 								, 'Word' => trans('messages.admin_question_form_word')
 								, 'Blank' => trans('messages.admin_question_form_blank')
 								, 'Series' => trans('messages.admin_question_form_series')
@@ -73,7 +73,7 @@
 					<div class="col-xs-5">
 						{!! Form::select('operation'
 							, array(
-								'' =>trans('messages.admin_operation')
+								'' =>trans('messages.admin_select_operation')
 								, 'Add' => trans('messages.admin_operation_add')
 							)
 							, null
@@ -108,9 +108,30 @@
 	<div class="clearfix"></div>
 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-semi-medium" ng-click="template.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_template') !!}
-		</button>
+		<div class="form-group">
+			<button class="btn btn-blue btn-semi-medium" ng-click="template.setActive(futureed.ACTIVE_ADD)">
+				<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_template') !!}
+			</button>
+			<span class="dropdown">
+				<button class="btn btn-blue btn-semi-medium dropdown-toggle" type="button" data-toggle="dropdown">
+					{!! trans('messages.upload_data_library') !!} <i class="fa fa-caret-square-o-down"></i>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-medium">
+					<li class="cursor-pointer" ngf-select ngf-change="template.importDataLibraryFile($files)" accept="text/csv"><a><i class="fa fa-cloud-upload"></i> {!! trans('messages.import') !!}</a></li>
+					<li class="cursor-pointer"><a href="/downloads/data_library_template.xls"><i class="fa fa-plus-square"></i> {!! trans('messages.download_template') !!}</a></li>
+				</ul>
+			</span>
+			<span class="dropdown">
+				<button class="btn btn-blue btn-semi-medium dropdown-toggle" type="button" data-toggle="dropdown">
+					{!! trans('messages.upload_word_problem') !!} <i class="fa fa-caret-square-o-down"></i>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-medium">
+					<li class="cursor-pointer" ngf-select ngf-change="template.importWordProblemFile($files)" accept="text/csv"><a><i class="fa fa-cloud-upload"></i> {!! trans('messages.import') !!}</a></li>
+					<li class="cursor-pointer" ><a href="/downloads/word_problems_data_mapping_template.xls"><i class="fa fa-plus-square"></i> {!! trans('messages.download_template') !!}</a></li>
+				</ul>
+			</span>
+		</div>
+
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">

@@ -425,6 +425,11 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\QuestionCacheLog\QuestionCacheLogRepository'
 		);
 
+		$this->app->bind(
+			'FutureEd\Models\Repository\WordProblemDataMapping\WordProblemDataMappingRepositoryInterface',
+			'FutureEd\Models\Repository\WordProblemDataMapping\WordProblemDataMappingRepository'
+		);
+
 
 	}
 }

@@ -44,6 +44,11 @@ class QuestionTemplateController extends ApiController {
 			$criteria['question_equation'] = Input::get('question_equation');
 		}
 
+		//operation
+		if(Input::get('operation')){
+			$criteria['operation'] = Input::get('operation');
+		}
+
 		//status
 		if(Input::get('status')){
 			$criteria['status'] = Input::get('status');
@@ -65,11 +70,17 @@ class QuestionTemplateController extends ApiController {
 	public function store(QuestionTemplateRequest $request)
 	{
 		$question_template = $request->only([
-			'equation_type',
+			'question_type',
 			'question_template_format',
 			'question_equation',
-			'status'
+			'operation',
 		]);
+
+		dd($question_template);
+
+		if($request->only('status')){
+
+		}
 
 		return $this->respondWithData($this->question_template->addQuestionTemplate($question_template));
 	}

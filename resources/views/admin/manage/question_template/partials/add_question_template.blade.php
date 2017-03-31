@@ -25,9 +25,9 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_question_type'
 						, array(
-							  ''=>trans('messages.admin_question_type')
-							, 'FIB' => trans('messages.admin_question_type_fib')
-							, 'MC' => trans('messages.admin_question_type_mc')
+							  ''=>trans('messages.admin_select_question_type')
+							, 'FIB' => trans('messages.admin_fib')
+							, 'MC' => trans('messages.admin_mc')
 					 	)
 					 	, null
 					 	, array(
@@ -46,7 +46,7 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_operation'
 						, array(
-							  ''=>trans('messages.admin_operation')
+							  ''=>trans('messages.admin_select_operation')
 							, 'Add' => trans('messages.admin_operation_add')
 					 	)
 					 	, null
@@ -66,7 +66,7 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_question_form'
 						, array(
-							  ''=>trans('messages.admin_question_form')
+							  ''=>trans('messages.admin_select_question_form')
 							, 'Word' => trans('messages.admin_question_form_word')
 							, 'Blank' => trans('messages.admin_question_form_blank')
 							, 'Series' => trans('messages.admin_question_form_series')
