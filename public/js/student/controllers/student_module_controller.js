@@ -560,6 +560,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.getTeachingContents = function(id) {
 		self.search.module_id = id;
 		self.table.size = 1;
+		self.content_index = Constants.FALSE;
 
 		$scope.ui_block();
 		StudentModuleService.getTeachingContents(self.search, self.table).success(function(response) {
@@ -568,7 +569,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
 					self.contents = response.data.records;//[0]
-					self.content = self.contents[Constants.FALSE];
+					self.content = self.contents[self.content_index];
 					self.updatePageCount(response.data);
 
 					if(self.contents) {
