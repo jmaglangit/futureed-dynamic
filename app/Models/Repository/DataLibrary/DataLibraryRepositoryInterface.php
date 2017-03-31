@@ -20,4 +20,8 @@ interface DataLibraryRepositoryInterface {
 	public function updateDataLibrary($id,$data);
 
 	public function deleteDataLibrary($id);
+
+	public function deleteAllDataLibrary();
+
+	public function insertDataLibraryCollection($data);
 }

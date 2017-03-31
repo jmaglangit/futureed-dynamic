@@ -33,8 +33,8 @@ class ModuleQuestionTemplateRepository implements ModuleQuestionTemplateReposito
 		}
 
 		//template like
-		if(isset($criteria['template'])){
-			$module_question_template = $module_question_template->template($criteria['template']);
+		if(isset($criteria['module_id'])){
+			$module_question_template = $module_question_template->moduleId($criteria['module_id']);
 		}
 
 		//status

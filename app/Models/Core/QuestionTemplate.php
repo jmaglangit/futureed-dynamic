@@ -25,25 +25,25 @@ class QuestionTemplate extends Model{
 	];
 
 	protected $fillable = [
-		'equation_type',
+		'question_type',
+		'question_template_format',
+		'question_format',
 		'operation',
 		'question_form',
-		'question_template_format',
-		'question_equation',
-		'status',
+		'status'
 	];
 
 	//scope
-	public function scopeEquationType($query, $equation_type){
-		return $query->where('equation_type','=',$equation_type);
+	public function scopeQuestionType($query,$question_type){
+		return $query->where('question_type',$question_type);
 	}
 
 	public function scopeQuestionTemplateFormat($query,$question_template_format){
-		return $query->where('question_template_format','=',$question_template_format);
+		return $query->where('question_template_format',$question_template_format);
 	}
 
 	public function scopeQuestionEquation($query,$question_equation){
-		return $query->where('question_equation','=',$question_equation);
+		return $query->where('question_equation',$question_equation);
 	}
 
 	public function scopeQuestionForm($query,$question_form){
@@ -54,7 +54,7 @@ class QuestionTemplate extends Model{
 		return $query->where('status','=',$status);
 	}
 
-	public function scopeOperation($query,$status){
+	public function scopeOperation($query,$operation){
 		return $query->where('operation','=',$operation);
 	}
 }

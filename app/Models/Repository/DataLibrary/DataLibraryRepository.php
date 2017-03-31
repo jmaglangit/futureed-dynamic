@@ -112,6 +112,8 @@ class DataLibraryRepository implements DataLibraryRepositoryInterface {
 	 */
 	public function deleteDataLibrary($id){
 
+		DB::beginTransaction();
+
 		try{
 
 			$response = DataLibrary::find($id)->delete();
@@ -128,5 +130,55 @@ class DataLibraryRepository implements DataLibraryRepositoryInterface {
 		DB::commit();
 
 		return $response;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function deleteAllDataLibrary(){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = DataLibrary::whereNull('deleted_at')->delete();
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $data
+	 * @return bool
+	 */
+	public function insertDataLibraryCollection($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = DataLibrary::insert($data);
+
+		} catch(\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return true;
 	}
 }

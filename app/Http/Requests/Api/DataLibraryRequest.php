@@ -1,16 +1,13 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
-
-class DataLibraryRequest extends Request {
+class 	DataLibraryRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
 	 * @return bool
 	 */
-	public function authorize()
-	{
+	public function authorize() {
 		return true;
 	}
 
@@ -32,11 +29,17 @@ class DataLibraryRequest extends Request {
 				break;
 			case 'POST':
 			default:
-				return [
-					'object_type' => 'required|string',
-					'object_name' => 'required|string',
-					'status' => 'required|string'
-				];
+				if($this->route()->getName() == 'api.v1.data-library.import.csv'){
+					return [
+						'file' => 'required'
+					];
+				} else {
+					return [
+						'object_type' => 'required|string',
+						'object_name' => 'required|string',
+						'status' => 'required|string'
+					];
+				}
 				break;
 		}
 	}

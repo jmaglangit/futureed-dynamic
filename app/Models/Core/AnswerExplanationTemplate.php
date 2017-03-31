@@ -29,8 +29,8 @@ class AnswerExplanationTemplate extends Model{
 	protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
 	protected $fillable = [
-		'module_id',
 		'question_template_id',
+		'template',
 		'status'
 	];
 
@@ -40,8 +40,8 @@ class AnswerExplanationTemplate extends Model{
 	];
 
 	//scope
-	public function scopeModuleId($query,$module_id){
-		return $query->where('module_id',$module_id);
+	public function scopeTemplate($query,$template){
+		return $query->where('template','like','%'.$template.'%');
 	}
 
 	public function scopeQuestionTemplateId($query,$template_id){

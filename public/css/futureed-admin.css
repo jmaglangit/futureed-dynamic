@@ -333,7 +333,7 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 
 .dropdown .dropdown-menu-medium {
 	min-width: 0px; /*Overriding parent */
-	width: 30%;
+	width: 100%;
 }
 
 .import-container {

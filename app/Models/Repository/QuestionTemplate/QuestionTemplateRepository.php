@@ -27,8 +27,8 @@ class QuestionTemplateRepository implements QuestionTemplateRepositoryInterface{
 
 		$template = new QuestionTemplate();
 
-		if(isset($criteria['equation_type'])){
-			$template = $template->equationType($criteria['equation_type']);
+		if(isset($criteria['question_type'])){
+			$template = $template->questionType($criteria['question_type']);
 		}
 
 		if(isset($criteria['question_template_format'])){
@@ -37,6 +37,10 @@ class QuestionTemplateRepository implements QuestionTemplateRepositoryInterface{
 
 		if(isset($criteria['question_equation'])){
 			$template = $template->questionEquation($criteria['question_equation']);
+		}
+
+		if(isset($criteria['operation'])){
+			$template = $template->operation($criteria['operation']);
 		}
 
 		if(isset($criteria['status'])){

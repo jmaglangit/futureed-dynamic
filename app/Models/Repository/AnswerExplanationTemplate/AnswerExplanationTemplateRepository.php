@@ -27,9 +27,9 @@ class AnswerExplanationTemplateRepository implements AnswerExplanationTemplateRe
 
 		$answer_explanation_template  = new AnswerExplanationTemplate();
 
-		//module_Id
-		if(isset($criteria['module_id'])){
-			$answer_explanation_template = $answer_explanation_template->moduleId($criteria['module_id']);
+		//template
+		if(isset($criteria['template'])){
+			$answer_explanation_template = $answer_explanation_template->template($criteria['template']);
 		}
 
 		//question_template_id

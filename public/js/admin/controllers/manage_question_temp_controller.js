@@ -277,4 +277,68 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 	}
 
 
+	//import to api data library
+	self.importDataLibraryFile = function(file){
+
+		var base_url = $("#base_url_form input[name='base_url']").val();
+
+		if(file.length){
+			$scope.ui_block();
+
+			Upload.upload({
+				url:'api/v1/data-library/import'
+				, file: file[0]
+				,headers: {
+					'Content-Type': 'text/csv'
+				}
+			}).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					}else if(response.data){
+						console.log(response);
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+
+	}
+
+	//import to api word problem
+	self.importWordProblemFile = function(file){
+
+		var base_url = $("#base_url_form input[name='base_url']").val();
+
+		if(file.length){
+			$scope.ui_block();
+
+			Upload.upload({
+				url:'api/v1/word-problem-data/import'
+				, file: file[0]
+				,headers: {
+					'Content-Type': 'text/csv'
+				}
+			}).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					}else if(response.data){
+						console.log(response);
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+	}
+
+
 }
