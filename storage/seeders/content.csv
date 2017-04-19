@@ -94,10 +94,10 @@
 94,94,1,16,94,Multiply Decimals,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 95,95,1,7,95,Division,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 96,96,1,7,96,Division With Decimals,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-97,97,1,13,97,Problem Solving,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-98,98,1,17,98,Number Theory,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-99,99,1,10,99,Fractions And Mixed Numbers,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-100,100,1,10,100,Add And Subtract Fractions,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+97,97,1,13,97,Parenthesis,,1,,https://youtu.be/dAgfnK528RA,seed,1,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+98,98,1,17,98,Prime and Composite Numbers,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+99,99,1,10,99,Fractions,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+100,100,1,10,100,Fractions Operations,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 101,101,1,10,101,Multiply Fractions,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 102,102,1,10,102,Divide Fractions,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 103,103,1,18,103,Mixed Operations,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
@@ -557,7 +557,7 @@
 557,514,1,1,523,Addition below 20,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 558,515,1,1,524,Addition below 50,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 559,516,1,1,525,Associative properties of addition,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-560,517,1,3,526,Dealing with the equal sign,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+560,517,1,3,526,Dealing with the equal sign,,1,,https://www.youtube.com/watch?v=gEGKvx1wlFg,seed,1,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 561,518,1,23,527,Subtraction below 20,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 562,519,1,23,528,Subtraction below 50,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 563,520,1,3,529,Math Family Facts,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
@@ -752,9 +752,9 @@
 752,709,1,0,652,Assessment 10,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 753,710,1,0,653,Assessment 11,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 754,711,1,0,711,Assessment 12,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-755,712,1,0,712,Counting with pictures,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-756,713,1,0,713,Adding with pictures,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-757,714,1,49,714,Subtracting with pictues,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+755,712,1,0,712,Counting with pictures,,1,,https://www.youtube.com/watch?time_continue=1&v=y2-uaPiyoxc,seed,1,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+756,713,1,0,713,Adding with pictures,,1,,https://www.youtube.com/watch?time_continue=2&v=ZgzpTx-s9Zo,seed,1,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+757,714,1,49,714,Subtracting with pictues,,1,,https://www.youtube.com/watch?v=9McJ3GobPaY,seed,1,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 758,715,0,0,715,No Module,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 759,716,0,0,716,No Module,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 760,717,0,0,717,No Module,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
