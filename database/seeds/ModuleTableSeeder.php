@@ -37,7 +37,7 @@ class ModuleTableSeeder extends Seeder
 				'points_earned' => $data[12],
 				'points_to_unlock' => $data[13],
 				'points_to_finish' => $data[14],
-				'status' => $data[15],
+				'status' => config('futureed.enabled'),
 				'updated_by' => 1,
 				'created_by' => 1,
 				'created_at' => Carbon::now(),
