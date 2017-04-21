@@ -21,6 +21,7 @@ return [
 	'accepted' => 'Accepted',
 	'rejected' => 'Rejected',
 	'none' => 'None',
+	'limit_attempt' => 3,
 
 	//Request code expiry in seconds
 	'request_code_expiry' => 3600,

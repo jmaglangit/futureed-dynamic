@@ -189,6 +189,13 @@ class StudentLoginController extends StudentController {
         }
 
         if($response['status'] <> 200){
+            //show remaining attempts
+            if($response['status'] == 2072) {
+                return $this->respondWithError([
+                    'error_code' => 2072,
+                    'message' => $response['message']
+                    ]);
+            }
 
             return $this->respondErrorMessage($response['status']);
 
