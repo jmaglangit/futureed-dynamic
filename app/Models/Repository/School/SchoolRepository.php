@@ -648,7 +648,48 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 	}
 
+    /**
+     * Returns a school with all it's teachers, classrooms at a particular level
+     * @param $school_code
+     * @param $grade_level
+     * @return string
+     */
+    public function getSchoolSubjectProgress($school_code, $grade_level) {
 
+        DB::beginTransaction();
 
+        try{
+
+            $response = School::select(['id', 'code', 'name', 'street_address', 'country_id'])
+                ->whereCode($school_code)
+                ->with(['teachers.classroom' => function($query) use ($grade_level){
+
+                    $query->select(
+                        ['id', 'name', 'grade_id', 'client_id', 'subject_id', 'seats_taken'])
+                        ->where('grade_id', $grade_level)
+                        ->with(['studentModule' => function($query) {
+
+                            $query->select(
+                                ['id', 'student_id', 'subject_id', 'progress',
+                                    'question_counter', 'correct_counter']);
+
+                        }]);
+
+                }])->first();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return $e->getMessage();
+        }
+
+        DB::commit();
+
+        return $response;
+
+    }
 
 }
