@@ -35,4 +35,6 @@ interface SchoolRepositoryInterface {
 
     public function getSchoolStudentScores($school_code);
 
+    public function getSchoolSubjectProgress($school_code, $grade_level);
+
 }

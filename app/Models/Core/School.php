@@ -26,7 +26,15 @@ class School extends Model {
 
 	public function principal()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\Client','code','school_code')
+		return $this->belongsTo('FutureEd\Models\Core\Client','school_code','code')
 			->role(config('futureed.principal'))->with('user');
 	}
+
+	public function teachers()
+    {
+        return $this->hasMany('FutureEd\Models\Core\Client', 'school_code', 'code')
+            ->where('client_role', 'Teacher');
+            //->select(['id', 'user_id', 'country_id', 'first_name', 'last_name']);//->get();
+    }
+
 }

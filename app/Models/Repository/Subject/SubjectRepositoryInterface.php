@@ -13,4 +13,6 @@ interface SubjectRepositoryInterface {
     
     public function deleteSubject($id);
 
+    public function getSubjectsWithModules($grade_level);
+
 }
