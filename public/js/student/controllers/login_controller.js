@@ -481,4 +481,15 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			$scope.ui_unblock();
 		});
 	}
+
+	self.validateMaxLength = function(){
+		$('#studentReg .form-control').bind('keyup change input paste',function(e){
+			var val = $(this).val();
+			var maxCount = $(this).attr('ng-maxlength');
+			if(val.length > maxCount){
+				$(this).val($(this).val().substring(0,maxCount));
+			}
+		});
+	}
+
 }

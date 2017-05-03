@@ -1,7 +1,6 @@
 <div ng-if="login.active_registration">
-	<div class="form-style register_student form-wide" ng-cloak> 
+	<div id="studentReg" class="form-style register_student form-wide" ng-cloak>
 		{!! Form::open(array('id' => 'registration_form' , 'class' => 'form-horizontal simple-form')) !!}
-
 			<div class="form-header">
 				<fieldset>
 					<div class="form-group media">
@@ -94,7 +93,7 @@
 								) !!}
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" ng-form name="personalInfo">
 							<label class="col-xs-2 control-label">{!! trans('messages.first_name') !!}<span class="required">*</span></label>
 							<div class="col-xs-4">
 								{!! Form::text('first_name', ''
@@ -103,8 +102,15 @@
 										, 'ng-class' => "{ 'required-field' : login.fields['first_name'] }"
 										, 'placeholder' => trans('messages.first_name')
 										, 'autocomplete' => 'off'
+										, 'ng-maxlength' => '64'
+										, 'ng-minlength' => '3'
+										, 'ng-click' => 'login.validateMaxLength()'
 										, 'ng-model' => 'login.record.first_name')
 								) !!}
+								<div class="reg-info">
+									<span class="error-msg-con" ng-show="personalInfo.first_name.$error.maxlength">{!! trans('messages.register_firstname_may_not_be_greater') !!}</span>
+									<span class="error-msg-con" ng-show="personalInfo.first_name.$error.minlength">{!! trans('messages.register_firstname_must_not_be_at_least') !!}</span>
+								</div>
 							</div>
 							<label class="col-xs-2 control-label">{!! trans('messages.last_name') !!}<span class="required">*</span></label>
 							<div class="col-xs-4">
@@ -114,11 +120,18 @@
 										, 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
 										, 'placeholder' => trans('messages.last_name')
 										, 'autocomplete' => 'off'
+										, 'ng-maxlength' => '64'
+										, 'ng-minlength' => '3'
+										, 'ng-click' => 'login.validateMaxLength()'
 										, 'ng-model' => 'login.record.last_name')
 								) !!}
+								<div class="reg-info">
+									<span class="error-msg-con" ng-show="personalInfo.last_name.$error.maxlength">{!! trans('messages.register_lastname_may_not_be_greater') !!}</span>
+									<span class="error-msg-con" ng-show="personalInfo.last_name.$error.minlength">{!! trans('messages.register_lastname_must_not_be_at_least') !!}</span>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" ng-form name="addressInfo">
 							<label class="col-xs-2 control-label">{!! trans('messages.city') !!}</label>
 							<div class="col-xs-4">
 								{!! Form::text('city', ''
@@ -126,8 +139,13 @@
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['city'] }"
 										, 'placeholder' => trans('messages.city')
+										, 'ng-maxlength' => '128'
+										, 'ng-click' => 'login.validateMaxLength()'
 										, 'ng-model' => 'login.record.city')
 								) !!}
+								<div class="reg-info">
+									<span class="error-msg-con" ng-show="addressInfo.city.$error.maxlength">{!! trans('messages.register_city_may_not_be_greater') !!}</span>
+								</div>
 							</div>
 							<label class="col-xs-2 control-label">{!! trans('messages.state') !!}</label>
 							<div class="col-xs-4">
@@ -136,8 +154,13 @@
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['state'] }"
 										, 'placeholder' => trans('messages.state')
+										, 'ng-maxlength' => '128'
+										, 'ng-click' => 'login.validateMaxLength()'
 										, 'ng-model' => 'login.record.state')
 								) !!}
+								<div class="reg-info">
+									<span class="error-msg-con" ng-show="addressInfo.state.$error.maxlength">{!! trans('messages.register_state_may_not_be_greater') !!}</span>
+								</div>
 							</div>
 						</div>
 						<div class="form-group" ng-init="getCountries()">
