@@ -45,7 +45,7 @@ return [
 		2016 => 'Confirmation code should be number only.',
 		2017 => 'Picture Password is required.',
 		2018 => 'Username does not exist.',
-		2019 => 'Username or Email is invalid or your account has been locked. Please click forgot password to reset your password.',
+		2019 => 'Your Account has been locked.',
 		2020 => 'Account is deleted.',
 		2021 => 'Username is invalid.',
 		2022 => 'The school level field is required.',
@@ -100,6 +100,8 @@ return [
 		Error::MODULE_TRANSLATION_LOCALE => 'Need to initialize new language.',
 		Error::MODULE_TRANSLATION_UPDATE_FAIL => 'Failed translation update.',
 
+		2072 => 'Picture password is incorrect. You have :remaining_attempts remaining attempt(s).',
+		2073 => 'Please click forgot password to reset your password.',
 
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',

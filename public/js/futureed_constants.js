@@ -71,6 +71,7 @@ var Constants = {
 	, HIDE_MODULE	: "Hide Module"
 
 	, TRIAL_QUESTIONS	:10
+	, ERROR_MSG	: 2
 
 	/**
 	 * Subscription filters
