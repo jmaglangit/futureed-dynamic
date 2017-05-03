@@ -294,7 +294,7 @@
 					
 				</div>
 				<div class="modal-body">
-					<h5>{!! trans('messages.student_13_years_old_younger') !!} <a href="{!! route('client.registration') !!}">{!! trans('messages.client_site') !!}</a></h5>
+					<h5>{!! trans('messages.student_13_years_old_younger') !!} <a href="{!! route('client.registration') !!}">{!! trans('messages.client_sign_up') !!}</a> {!! trans('messages.for_you') !!}</h5>
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">

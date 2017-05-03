@@ -6,7 +6,7 @@
 			<div class="row questions-header col-xs-12">
 				<div ng-class="{'col-xs-6':mod.current_question.question_type != futureed.CODING,'col-xs-4':mod.current_question.question_type == futureed.CODING}">
 					<div class="row col-xs-6">
-						<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						<button type="button" class="btn btn-sky-blue next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 							{{ trans('messages.exit_module') }}
 						</button>
 					</div>

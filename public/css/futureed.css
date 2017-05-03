@@ -147,6 +147,19 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
   	box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
 }
 
+.btn-sky-blue {
+	border-top: 1px solid #0cc4fb;
+	box-shadow: 0 0 0 1px #0cb4fb, 0 3px 3px rgba(0, 0, 0, 0.3);
+	background-color: #0cb4fb;
+}
+
+.btn-sky-blue:hover {
+	background-color: #0cb4fb;
+	box-shadow: 0 0 0 1px #0cb4fb, 0 3px 3px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
+	box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
+}
+
 .btn-gold {
 	border-top: 1px solid #F2D84F;
 	background-color: #DFC010;
