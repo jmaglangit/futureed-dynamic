@@ -242,8 +242,8 @@ class SchoolReportController extends ReportController {
         foreach ($progress->teachers as $teacher) {
 
             // initialize teacher progress and total progress
-            $teacher_progress = $this->initializeSubjectProgress(array_keys($column_header));
-            $total_progress = $this->initializeSubjectProgress(array_keys($column_header));
+            $teacher_progress = $this->initializeSubjectBins(array_keys($column_header));
+            $total_progress = $this->initializeSubjectBins(array_keys($column_header));
 
             // collecting actual progress and total progress
             foreach ($teacher->classroom as $classroom) {
@@ -267,6 +267,65 @@ class SchoolReportController extends ReportController {
 
             // sets the array of progress to the corresponding teacher
             $rows[$teacher->first_name . ' ' . $teacher->last_name] = $teacher_progress;
+
+        }
+
+        return [
+            'additional_information' => $additional_information,
+            'column_header' => $column_header,
+            'rows' => $rows
+        ];
+
+    }
+
+    /**
+     * Returns a set of rows, each represents the scores of a teacher's students in multiple subjects.
+     * @param $school_code
+     * @param $grade_level
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getSchoolTeacherSubjectScores($school_code, $grade_level) {
+
+        // query subjects with modules and classroom with student modules from database
+        $subjects = $this->subject->getSubjectsWithModules($grade_level);
+        $scores = $this->school->getSchoolSubjectProgress($school_code, $grade_level);
+
+        $additional_information = $this->getAdditionalInfo($school_code);
+
+        $column_header = $this->mapSubjects($subjects);
+
+        $rows = array();
+
+        // determine the progress of every teacher for each subject
+        foreach ($scores->teachers as $teacher) {
+
+            // initialize teacher scores and score count
+            $teacher_scores = $this->initializeSubjectBins(array_keys($column_header));
+            $score_count = $this->initializeSubjectBins(array_keys($column_header));
+
+            // collecting scores and score count
+            foreach ($teacher->classroom as $classroom) {
+
+                $subject_id = $classroom->subject_id;
+
+                $classroomScores = $this->getClassroomScores($classroom);
+
+                $teacher_scores[$subject_id] += $classroomScores['score'];
+                $score_count[$subject_id] += $classroomScores['count'];
+
+            }
+
+            // calculates scores
+            foreach (array_keys($column_header) as $subject_id) {
+
+                // if score count is 0, no modules were answered, so it results to 0
+                if ($score_count[$subject_id] !== 0)
+                    $teacher_scores[$subject_id] /= (float) $score_count[$subject_id];
+
+            }
+
+            // sets the array of scores to the corresponding teacher
+            $rows[$teacher->first_name . ' ' . $teacher->last_name] = $teacher_scores;
 
         }
 
@@ -319,11 +378,35 @@ class SchoolReportController extends ReportController {
     }
 
     /**
+     * @param $classroom
+     * @return array
+     */
+    private function getClassroomScores($classroom) {
+
+        $response = array(
+            'score' => 0,
+            'count' => 0
+        );
+
+        foreach ($classroom->studentModule as $student_module) {
+
+            $response['score'] += $student_module->correct_counter;
+            $response['count']++;
+
+        }
+
+        return $response;
+
+    }
+
+
+
+    /**
      * Initializes an array of key value pairs of subject id (key) and initial values of 0.
      * @param $column_header
      * @return array
      */
-    private function initializeSubjectProgress($column_header) {
+    private function initializeSubjectBins($column_header) {
 
 	    $arr = array();
 
