@@ -956,3 +956,6 @@ content legend {
 		width: 110px !important;
 	}
 }
+.reg-info {
+    text-align: center;
+}
