@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-cloak>
+<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-init="profile.updateBackground();" ng-cloak>
 
   	<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 

@@ -1049,5 +1049,22 @@ function ProfileController($scope,$sce, $timeout,apiService, ProfileService, Tab
 		return time_allowed.minutes() + " minutes and " + time_allowed.seconds() + " seconds";
 	}
 
+	self.updateBackground = function() {
+		$("footer").css('background-image', 'none');
+
+		ProfileService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
+			if(response.data){
+				angular.element('body.student').css({
+					'background-image' : 'url("' + response.data.url + '")'
+				});
+			}else{
+				angular.element('body.student').css({
+					'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
+				});
+			}
+		}).error(function(response){
+			self.error = $scope.internalError();
+		});
+	}
 
 }

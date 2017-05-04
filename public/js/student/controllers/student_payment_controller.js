@@ -928,6 +928,22 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		});
 	}
 
+	self.updateBackground = function() {
+		$("footer").css('background-image', 'none');
 
+		StudentPaymentService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
+			if(response.data){
+				angular.element('body.student').css({
+					'background-image' : 'url("' + response.data.url + '")'
+				});
+			}else{
+				angular.element('body.student').css({
+					'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
+				});
+			}
+		}).error(function(response){
+			self.error = $scope.internalError();
+		});
+	}
 
 }

@@ -648,6 +648,11 @@ img.drawer-button {
 
 .footer {
     z-index: -1;
+    background: url(/images/student_page_bg.jpg) no-repeat scroll right bottom / cover;
+    background-attachment: fixed;
+    background-position-y: center;
+    background-position-x: center;
+    padding-bottom: 50px;
 }
 
 .pointer {
@@ -2758,4 +2763,24 @@ pre.dropdown-menu {
 canvas#world {
     max-width: 100%;
     height: auto;
+}
+
+.student_background {
+    background: url("/images/student_page_bg.jpg") no-repeat scroll right bottom / cover;
+    background-attachment: fixed;
+    background-position-y: center;
+    background-position-x: center;
+    min-height: 650px;
+}
+
+@media(max-height: 760px){
+    .student_background {
+        min-height: 650px;
+    }
+}
+
+@media only screen and (min-height: 1080px) and (min-width: 1920px) {
+    .student_background {
+        min-height: 1000px;
+    }
 }

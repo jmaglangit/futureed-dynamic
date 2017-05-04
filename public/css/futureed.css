@@ -7,7 +7,7 @@ body {
 	height: 100%;
 	min-width: 900px;
 	overflow-x: hidden;
-	background: url("../images/bg-option-1.jpg") no-repeat scroll right bottom / cover;
+	/*background: url("../images/bg-option-1.jpg") no-repeat scroll right bottom / cover;*/
 	background-attachment: fixed;
 }
 
@@ -16,7 +16,7 @@ body.client{
 	background-attachment: fixed;
 }
 body.student{
-	background: url("/images/student_page_bg.jpg");
+	/*background: url("/images/student_page_bg.jpg");*/
 	background-attachment: fixed;
 	font-family: 'WeblySleek UI Semibold', sans-serif;
 	background-size: cover;

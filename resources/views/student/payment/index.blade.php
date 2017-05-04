@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="StudentPaymentController as payment" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="StudentPaymentController as payment" ng-init="payment.updateBackground();" ng-cloak>
 
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 

@@ -1,32 +1,34 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login student-fnt" ng-controller="StudentLoginController as login"
-	ng-init="login.checkRegistration('{!! $email !!}', '{!! $code !!}', '{!! $id !!}', '{!! $registration_token !!}')">
-	
-	<div ng-init="login.initMediaIds('{!! env('FB_APP_ID') !!}', '{!! env('GL_CLIENT_ID') !!}')"></div>
-	{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
-        {!! Form::hidden('user_data', '') !!}
-    {!! Form::close() !!}
+<div class="student_background">
+	<div class="container login student-fnt" ng-controller="StudentLoginController as login"
+		ng-init="login.checkRegistration('{!! $email !!}', '{!! $code !!}', '{!! $id !!}', '{!! $registration_token !!}')">
 
-	{!! Form::open(array('id' => 'redirect_form', 'route' => 'student.login.set_password', 'method' => 'POST')) !!}
-		{!! Form::hidden('id', '') !!}
-	{!! Form::close() !!}
+		<div ng-init="login.initMediaIds('{!! env('FB_APP_ID') !!}', '{!! env('GL_CLIENT_ID') !!}')"></div>
+		{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
+	        {!! Form::hidden('user_data', '') !!}
+	    {!! Form::close() !!}
 
-	<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
+		{!! Form::open(array('id' => 'redirect_form', 'route' => 'student.login.set_password', 'method' => 'POST')) !!}
+			{!! Form::hidden('id', '') !!}
+		{!! Form::close() !!}
 
-	<div template-directive template-url="{!! route('student.login.registration_form') !!}"></div>
+		<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
 
-	<div template-directive template-url="{!! route('student.login.registration_success') !!}"></div>
+		<div template-directive template-url="{!! route('student.login.registration_form') !!}"></div>
 
-	<div template-directive template-url="{!! route('student.login.confirm_media') !!}"></div>
+		<div template-directive template-url="{!! route('student.login.registration_success') !!}"></div>
 
-	<div template-directive template-url="{!! route('student.login.resend_confirmation') !!}"></div>
+		<div template-directive template-url="{!! route('student.login.confirm_media') !!}"></div>
+
+		<div template-directive template-url="{!! route('student.login.resend_confirmation') !!}"></div>
 
 
-	@include('student.login.terms-and-condition')
-	
-	@include('student.login.privacy-policy')
+		@include('student.login.terms-and-condition')
+
+		@include('student.login.privacy-policy')
+	</div>
 </div>
 @stop
 
