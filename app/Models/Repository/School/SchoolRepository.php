@@ -654,7 +654,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
      * @param $grade_level
      * @return string
      */
-    public function getSchoolSubjectProgress($school_code, $grade_level) {
+    public function getTeacherSubjectProgress($school_code, $grade_level) {
 
         DB::beginTransaction();
 
@@ -672,6 +672,54 @@ class SchoolRepository implements SchoolRepositoryInterface{
                             $query->select(
                                 ['id', 'student_id', 'subject_id', 'progress',
                                     'question_counter', 'correct_counter']);
+
+                        }]);
+
+                }])->first();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return $e->getMessage();
+        }
+
+        DB::commit();
+
+        return $response;
+
+    }
+
+    public function getStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level) {
+
+        DB::beginTransaction();
+
+        try{
+
+            $response = School::select(['id', 'code', 'name', 'street_address', 'country_id'])
+                ->whereCode($school_code)
+                ->with(['teachers' => function($query) use ($subject_id, $teacher_id, $grade_level) {
+
+                    $query->select('id', 'user_id', 'first_name', 'last_name', 'school_code')
+                        ->where('id', $teacher_id) // client_id === teacher_id
+                        ->with(['classroom' => function($query) use ($subject_id, $grade_level) {
+
+                            $query->select('id', 'name', 'grade_id', 'client_id', 'subject_id', 'seats_taken')
+                                ->where('subject_id', $subject_id)
+                                ->where('grade_id', $grade_level)
+                                ->with(['classStudent.student' => function($query) {
+
+                                    $query->select(['id', 'user_id', 'first_name', 'last_name', ])
+                                        ->with(['studentModule' => function($query) {
+
+                                            $query->select(['id', 'class_id', 'student_id',
+                                                'subject_id', 'module_id', 'progress', 'correct_counter']);
+
+                                        }]);
+
+                                }]);
 
                         }]);
 

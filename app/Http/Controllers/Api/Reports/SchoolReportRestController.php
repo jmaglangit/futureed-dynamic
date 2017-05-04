@@ -77,4 +77,26 @@ class SchoolReportRestController extends ReportController {
 
     }
 
+    /**
+     * @param $school_code
+     * @param $teacher_id
+     * @param $subject_id
+     * @param $grade_level
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function schoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level){
+
+        $report = $this->school_report->
+            getSchoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level);
+
+        return $report;
+
+//        return $this->respondReportData(
+//            $report['additional_information'],
+//            $report['column_header'],
+//            $report['rows']
+//        );
+
+    }
+
 }

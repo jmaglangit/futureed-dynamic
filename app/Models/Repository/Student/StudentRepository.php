@@ -114,6 +114,39 @@ class StudentRepository implements StudentRepositoryInterface
 		return $response;
 	}
 
+    /**
+     * Get all students information by school_code
+     * @param $school_code
+     * @return bool
+     */
+    public function getStudentsWithModules($school_code, $subject_id, $grade_level) {
+
+        try {
+
+            $response = Student::select(['id', 'user_id', 'first_name', 'last_name', 'school_code'])
+                ->where('school_code', $school_code)
+                ->with(['studentModule' => function($query) use ($subject_id, $grade_level) {
+
+                    $query->select(['id', 'class_id', 'student_id', 'subject_id', 'grade_id',
+                        'module_id', 'progress', 'question_counter', 'correct_counter'])
+                        ->where('subject_id', $subject_id)
+                        ->with(['classroom' => function($query) use ($grade_level) {
+
+                            $query->select(['']);
+
+                        }]);
+
+                }]);
+
+        } catch (\Exception $e) {
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        return $response;
+    }
 
 	/**
 	 * Get student's user id with the given student id
@@ -433,6 +466,7 @@ class StudentRepository implements StudentRepositoryInterface
 
 		return $response;
 	}
+
 
 
 	/**

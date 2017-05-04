@@ -97,6 +97,11 @@ Routes::group([
             'as' => 'api.report.school.teacher.subjects.scores'
         ]);
 
+        Routes::get('/school/{school_code}/{teacher_id}/students/subject/{subject_id}/progress/{grade_level}', [
+            'uses' => 'Api\Reports\SchoolReportRestController@schoolStudentSubjectProgress',
+            'as' => 'api.report.school.students.subject.progress'
+        ]);
+
 	});
 
 

@@ -8,6 +8,7 @@ use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\Subject\SubjectRepositoryInterface;
 use FutureEd\Services\SchoolServices;
@@ -18,6 +19,11 @@ class SchoolReportController extends ReportController {
 	 * @var SchoolRepositoryInterface
 	 */
 	protected $school;
+
+    /**
+     * @var StudentRepositoryInterface
+     */
+	protected $student;
 
 	/**
 	 * @var StudentModuleRepositoryInterface
@@ -51,6 +57,7 @@ class SchoolReportController extends ReportController {
 
 	/**
 	 * @param SchoolRepositoryInterface $schoolRepositoryInterface
+     * @param StudentRepositoryInterface $studentRepositoryInterface
 	 * @param StudentModuleRepositoryInterface $studentModuleRepositoryInterface
 	 * @param SchoolServices $schoolServices
      * @param ClientRepositoryInterface $clientRepositoryInterface
@@ -59,6 +66,7 @@ class SchoolReportController extends ReportController {
 	 */
 	public function __construct(
 		SchoolRepositoryInterface $schoolRepositoryInterface,
+		StudentRepositoryInterface $studentRepositoryInterface,
 		StudentModuleRepositoryInterface $studentModuleRepositoryInterface,
 		SchoolServices $schoolServices,
 		ClientRepositoryInterface $clientRepositoryInterface,
@@ -66,6 +74,7 @@ class SchoolReportController extends ReportController {
 		CountryRepositoryInterface $countryRepositoryInterface
 	) {
 		$this->school = $schoolRepositoryInterface;
+		$this->student = $studentRepositoryInterface;
 		$this->student_module = $studentModuleRepositoryInterface;
 		$this->school_service = $schoolServices;
 		$this->client = $clientRepositoryInterface;
@@ -230,7 +239,7 @@ class SchoolReportController extends ReportController {
 
 	    // query subjects with modules and classroom with student modules from database
         $subjects = $this->subject->getSubjectsWithModules($grade_level);
-        $progress = $this->school->getSchoolSubjectProgress($school_code, $grade_level);
+        $progress = $this->school->getTeacherSubjectProgress($school_code, $grade_level);
 
         $additional_information = $this->getAdditionalInfo($school_code);
 
@@ -288,7 +297,7 @@ class SchoolReportController extends ReportController {
 
         // query subjects with modules and classroom with student modules from database
         $subjects = $this->subject->getSubjectsWithModules($grade_level);
-        $scores = $this->school->getSchoolSubjectProgress($school_code, $grade_level);
+        $scores = $this->school->getStudentSubjectProgress($school_code, $grade_level);
 
         $additional_information = $this->getAdditionalInfo($school_code);
 
@@ -338,6 +347,55 @@ class SchoolReportController extends ReportController {
     }
 
     /**
+     * @param $school_code
+     * @param $teacher_id
+     * @param $subject_id
+     * @param $grade_level
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getSchoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level) {
+
+        // query subjects with modules and classroom with student modules from database
+        $subject = $this->subject->getASubjectWithModules($subject_id, $grade_level);
+        $progress = $this->school->getStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level);
+        $students = $this->student->getStudentsWithModules($school_code);
+
+        $additional_information = $this->getAdditionalInfo($school_code);
+
+        $column_header = $this->mapModules($subject->modules);
+
+        $rows = [
+            'progress' => $this->initializeStudentBins($students, array_keys($column_header)),
+            'names' => $this->mapStudentNames($students)
+        ];
+
+        foreach ($progress->teachers->classroom as $classroom) {
+
+            // query straight from school to student, avoid classroom
+
+            foreach ($classroom->classStudent->student as $student) {
+
+                foreach ($student->studentModule as $studentModule) {
+
+                    $student_progress[$studentModule->id] = $studentModule->progress;
+
+                }
+
+                $rows[$student['first_name'] . ' ' . $student['last_name']] = $student_progress;
+
+            }
+
+        }
+
+        return [
+            'additional_information' => $additional_information,
+            'column_header' => $column_header,
+            'rows' => $progress
+        ];
+
+    }
+
+    /**
      * Creates an array of key value pairs of subject id (key) and subject name (value)
      * based on the parameter $subjects.
      * @param $subjects
@@ -354,6 +412,34 @@ class SchoolReportController extends ReportController {
         }
 
 	    return $map;
+
+    }
+
+    private function mapModules($modules) {
+
+        $map = array();
+
+        foreach ($modules as $module) {
+
+            $map[$module->id] = $module->name;
+
+        }
+
+        return $map;
+
+    }
+
+    private function mapStudentNames($students) {
+
+        $map = array();
+
+        foreach ($students as $student) {
+
+            $map[$student->id] = $student->first_name . ' ' . $student->last_name;
+
+        }
+
+        return $map;
 
     }
 
@@ -413,6 +499,42 @@ class SchoolReportController extends ReportController {
         foreach ($column_header as $header) {
 
             $arr[$header] = 0;
+
+        }
+
+        return $arr;
+
+    }
+
+    private function initializeModuleBins($modules) {
+
+        $arr = array();
+
+        foreach ($modules as $module) {
+
+            $arr[$module] = 0;
+
+        }
+
+        return $arr;
+
+    }
+
+    private function initializeStudentBins($students, $modules) {
+
+        $arr = array();
+
+        foreach ($students as $student) {
+
+            $subArr = array();
+
+            foreach ($modules as $module) {
+
+                $subArr[$module->id] = $this->initializeModuleBins($modules);
+
+            }
+
+            $arr[$student] = $subArr;
 
         }
 

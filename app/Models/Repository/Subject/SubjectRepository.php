@@ -207,8 +207,35 @@ class SubjectRepository implements SubjectRepositoryInterface {
 		return $response;
 	}
 
+	public function getASubjectWithModules($subject_id, $grade_level) {
+
+        DB::beginTransaction();
+
+        try {
+
+            $response = Subject::select(['id', 'name'])
+                ->with(['modules' => function($query) use ($grade_level) {
+
+                    $query->select('id', 'subject_id', 'grade_id', 'code', 'name')
+                        ->where('grade_id', $grade_level);
+
+                }])->find($subject_id);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+        }
+
+        DB::commit();
+
+        return $response;
+
+    }
+
     /**
-     * Returns all Subjects with there Modules at a particular grade level
+     * Returns all Subjects with their Modules at a particular grade level
      * @param $grade_level
      * @return mixed
      */
