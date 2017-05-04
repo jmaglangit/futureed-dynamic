@@ -37,6 +37,4 @@ interface SchoolRepositoryInterface {
 
     public function getTeacherSubjectProgress($school_code, $grade_level);
 
-    public function getStudentSubjectProgress($school_code, $subject_id, $teacher_id, $grade_level);
-
 }

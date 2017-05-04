@@ -117,6 +117,8 @@ class StudentRepository implements StudentRepositoryInterface
     /**
      * Get all students information by school_code
      * @param $school_code
+     * @param $subject_id
+     * @param $grade_level
      * @return bool
      */
     public function getStudentsWithModules($school_code, $subject_id, $grade_level) {
@@ -127,16 +129,16 @@ class StudentRepository implements StudentRepositoryInterface
                 ->where('school_code', $school_code)
                 ->with(['studentModule' => function($query) use ($subject_id, $grade_level) {
 
-                    $query->select(['id', 'class_id', 'student_id', 'subject_id', 'grade_id',
+                    $query->select(['id', 'class_id', 'student_id', 'subject_id',
                         'module_id', 'progress', 'question_counter', 'correct_counter'])
                         ->where('subject_id', $subject_id)
                         ->with(['classroom' => function($query) use ($grade_level) {
 
-                            $query->select(['']);
+                            $query->select(['id', 'grade_id', 'client_id', 'seats_taken']);
 
                         }]);
 
-                }]);
+                }])->get();
 
         } catch (\Exception $e) {
 

@@ -65,6 +65,11 @@ class SchoolReportRestController extends ReportController {
 
     }
 
+    /**
+     * @param $school_code
+     * @param $grade_level
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function schoolTeacherSubjectScores($school_code, $grade_level) {
 
         $report = $this->school_report->getSchoolTeacherSubjectScores($school_code, $grade_level);
@@ -89,13 +94,11 @@ class SchoolReportRestController extends ReportController {
         $report = $this->school_report->
             getSchoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level);
 
-        return $report;
-
-//        return $this->respondReportData(
-//            $report['additional_information'],
-//            $report['column_header'],
-//            $report['rows']
-//        );
+        return $this->respondReportData(
+            $report['additional_information'],
+            $report['column_header'],
+            $report['rows']
+        );
 
     }
 

@@ -247,7 +247,7 @@ class SchoolReportController extends ReportController {
 
         $rows = array();
 
-        // determine the progress of every teacher for each subject
+        // iterates through each teacher to determine their student's progress in each subject
         foreach ($progress->teachers as $teacher) {
 
             // initialize teacher progress and total progress
@@ -297,7 +297,7 @@ class SchoolReportController extends ReportController {
 
         // query subjects with modules and classroom with student modules from database
         $subjects = $this->subject->getSubjectsWithModules($grade_level);
-        $scores = $this->school->getStudentSubjectProgress($school_code, $grade_level);
+        $scores = $this->school->getTeacherSubjectProgress($school_code, $grade_level);
 
         $additional_information = $this->getAdditionalInfo($school_code);
 
@@ -305,7 +305,7 @@ class SchoolReportController extends ReportController {
 
         $rows = array();
 
-        // determine the progress of every teacher for each subject
+        // iterates through every teacher to determine their student's scores in each subject
         foreach ($scores->teachers as $teacher) {
 
             // initialize teacher scores and score count
@@ -347,6 +347,8 @@ class SchoolReportController extends ReportController {
     }
 
     /**
+     * Returns a set of rows, each represents the scores of a student's progress in multiple modules in a
+     * particular subject and grade level.
      * @param $school_code
      * @param $teacher_id
      * @param $subject_id
@@ -355,42 +357,40 @@ class SchoolReportController extends ReportController {
      */
     public function getSchoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level) {
 
-        // query subjects with modules and classroom with student modules from database
+        // query subjects with modules and students with student modules from database
         $subject = $this->subject->getASubjectWithModules($subject_id, $grade_level);
-        $progress = $this->school->getStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level);
-        $students = $this->student->getStudentsWithModules($school_code);
+        $students = $this->student->getStudentsWithModules($school_code, $subject_id, $grade_level);
 
         $additional_information = $this->getAdditionalInfo($school_code);
 
         $column_header = $this->mapModules($subject->modules);
 
-        $rows = [
-            'progress' => $this->initializeStudentBins($students, array_keys($column_header)),
-            'names' => $this->mapStudentNames($students)
-        ];
+        $rows = array();
 
-        foreach ($progress->teachers->classroom as $classroom) {
+        // iterates through each student to determine their score in each module
+        foreach ($students as $student) {
 
-            // query straight from school to student, avoid classroom
+            $student_progress = $this->initializeModuleBins(array_keys($column_header));
 
-            foreach ($classroom->classStudent->student as $student) {
+            // iterates though each of the student's modules
+            foreach($student->studentModule as $module) {
 
-                foreach ($student->studentModule as $studentModule) {
+                // filters the modules by grade_level and by teacher
+                if ($module->classroom->grade_id == $grade_level &&
+                    $module->classroom->client_id == $teacher_id)
 
-                    $student_progress[$studentModule->id] = $studentModule->progress;
-
-                }
-
-                $rows[$student['first_name'] . ' ' . $student['last_name']] = $student_progress;
+                    $student_progress[$module->id] = $module->progress;
 
             }
+
+            $rows[$student->first_name . ' ' . $student->last_name] = $student_progress;
 
         }
 
         return [
             'additional_information' => $additional_information,
             'column_header' => $column_header,
-            'rows' => $progress
+            'rows' => $rows
         ];
 
     }
@@ -415,6 +415,11 @@ class SchoolReportController extends ReportController {
 
     }
 
+    /**
+     * Creates and array of key value pairs of module id (key) and module name (value)
+     * @param $modules
+     * @return array
+     */
     private function mapModules($modules) {
 
         $map = array();
@@ -422,20 +427,6 @@ class SchoolReportController extends ReportController {
         foreach ($modules as $module) {
 
             $map[$module->id] = $module->name;
-
-        }
-
-        return $map;
-
-    }
-
-    private function mapStudentNames($students) {
-
-        $map = array();
-
-        foreach ($students as $student) {
-
-            $map[$student->id] = $student->first_name . ' ' . $student->last_name;
 
         }
 
@@ -464,6 +455,7 @@ class SchoolReportController extends ReportController {
     }
 
     /**
+     * Gets the summation of all scores in a classroom along with the number of scores
      * @param $classroom
      * @return array
      */
@@ -506,6 +498,11 @@ class SchoolReportController extends ReportController {
 
     }
 
+    /**
+     * Initializes an array of key value pairs of module id (key) and initial values of 0.
+     * @param $modules
+     * @return array
+     */
     private function initializeModuleBins($modules) {
 
         $arr = array();
@@ -513,28 +510,6 @@ class SchoolReportController extends ReportController {
         foreach ($modules as $module) {
 
             $arr[$module] = 0;
-
-        }
-
-        return $arr;
-
-    }
-
-    private function initializeStudentBins($students, $modules) {
-
-        $arr = array();
-
-        foreach ($students as $student) {
-
-            $subArr = array();
-
-            foreach ($modules as $module) {
-
-                $subArr[$module->id] = $this->initializeModuleBins($modules);
-
-            }
-
-            $arr[$student] = $subArr;
 
         }
 
