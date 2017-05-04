@@ -347,7 +347,7 @@ class SchoolReportController extends ReportController {
     }
 
     /**
-     * Returns a set of rows, each represents the scores of a student's progress in multiple modules in a
+     * Returns a set of rows, each represents the student's progress in multiple modules in a
      * particular subject and grade level.
      * @param $school_code
      * @param $teacher_id
@@ -356,6 +356,55 @@ class SchoolReportController extends ReportController {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getSchoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level) {
+
+        // query subjects with modules and students with student modules from database
+        $subject = $this->subject->getASubjectWithModules($subject_id, $grade_level);
+        $students = $this->student->getStudentsWithModules($school_code, $subject_id, $grade_level);
+
+        $additional_information = $this->getAdditionalInfo($school_code);
+
+        $column_header = $this->mapModules($subject->modules);
+
+        $rows = array();
+
+        // iterates through each student to determine their progress in each module
+        foreach ($students as $student) {
+
+            $student_progress = $this->initializeModuleBins(array_keys($column_header));
+
+            // iterates though each of the student's modules
+            foreach($student->studentModule as $module) {
+
+                // filters the modules by grade_level and by teacher
+                if ($module->classroom->grade_id == $grade_level &&
+                    $module->classroom->client_id == $teacher_id)
+
+                    $student_progress[$module->id] = $module->progress;
+
+            }
+
+            $rows[$student->first_name . ' ' . $student->last_name] = $student_progress;
+
+        }
+
+        return [
+            'additional_information' => $additional_information,
+            'column_header' => $column_header,
+            'rows' => $rows
+        ];
+
+    }
+
+    /**
+     * Returns a set of rows, each represents the student's scores in multiple modules in a
+     * particular subject and grade level.
+     * @param $school_code
+     * @param $teacher_id
+     * @param $subject_id
+     * @param $grade_level
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getSchoolStudentSubjectScores($school_code, $teacher_id, $subject_id, $grade_level) {
 
         // query subjects with modules and students with student modules from database
         $subject = $this->subject->getASubjectWithModules($subject_id, $grade_level);
@@ -379,7 +428,7 @@ class SchoolReportController extends ReportController {
                 if ($module->classroom->grade_id == $grade_level &&
                     $module->classroom->client_id == $teacher_id)
 
-                    $student_progress[$module->id] = $module->progress;
+                    $student_progress[$module->id] = $module->correct_counter;
 
             }
 
