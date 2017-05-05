@@ -371,6 +371,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 	}
 
 	self.updateBackground = function() {
+		$("footer").css('background-image', 'none');
 
 		StudentClassService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
 			if(response.data){

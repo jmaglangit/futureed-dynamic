@@ -1,6 +1,7 @@
 @extends('student.app')
 
 @section('content')
+<div class="student_background">
     <div class="container login student-fnt" ng-controller="StudentLoginController as login" 
         ng-init="login.initMediaIds('{!! env('FB_APP_ID') !!}', '{!! env('GL_CLIENT_ID') !!}')" ng-cloak>
 
@@ -17,6 +18,7 @@
             <div template-directive template-url="{!! route('student.login.index_form') !!}"></div>
         </div>
     </div>
+</div>
 @stop
 
 @section('scripts')

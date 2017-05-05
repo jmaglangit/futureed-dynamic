@@ -1116,6 +1116,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.updateBackground = function() {
+		$("footer").css('background-image', 'none');
+
 		angular.element('body.student').css({
 			'background-image' : 'url('+ $scope.user.background +')'
 		});
