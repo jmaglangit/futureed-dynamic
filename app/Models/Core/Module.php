@@ -160,6 +160,11 @@ class Module extends Model
 
 	}
 
+	public function scopeDynamic($query){
+
+		return $query->where('is_dynamic',1);
+	}
+
 	public function scopeLocale($query,$locale){
 
 		return $query->whereHas('translations',function($query) use ($locale){

@@ -20,4 +20,6 @@ interface ModuleQuestionTemplateRepositoryInterface {
 	public function updateModuleQuestionTemplate($id,$data);
 
 	public function deleteModuleQuestionTemplate($id);
+
+	public function getTemplateByModule($module_id);
 }

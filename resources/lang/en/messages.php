@@ -1510,6 +1510,7 @@ return [
 	'remove' => 'Remove',
 	'upload_data_library' => 'Upload Data Library',
 	'upload_word_problem' => 'Upload Word Problem',
+	'question_steps' => 'Step :number :',
 
 	//resources/views/student/login/register/registration-form.blade.php
 	'register_city_may_not_be_greater' => 'The city may not be greater than 128 characters.',

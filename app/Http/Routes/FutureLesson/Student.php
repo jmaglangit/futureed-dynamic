@@ -223,6 +223,16 @@
 						, 'uses' => 'FutureLesson\Student\ClassModuleController@questions'
 						]);
 
+					Routes::get('/questions/dynamic/fib',[
+						'as' => 'student.class.module.partials.questions.dynamic.fib'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fib'
+					]);
+
+					Routes::get('/questions/dynamic/steps',[
+						'as' => 'student.class.module.partials.questions.dynamic.steps'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@steps'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'

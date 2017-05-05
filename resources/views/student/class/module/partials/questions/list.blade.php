@@ -73,7 +73,9 @@
 					{{--Message--}}
 					<div class="col-xs-12">
 						<div class="questions-message">
-							<p ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+							<p  ng-if="!mod.record.is_dynamic" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+							{{--TODO dynamic question text here--}}
+							<p  ng-if="mod.record.is_dynamic" ng-bind-html="mod.current_question.question_text | trustAsHtml"></p>
 						</div>
 					</div>
 					{{--Tips--}}
@@ -87,10 +89,16 @@
 
 				</div>
 				{{--Answers--}}
+				{{--TODO add module if dynamic--}}
 				<div class="col-xs-6"
 					 ng-if="mod.current_question.question_type != futureed.CODING"
 				>
 					<div class="questions-answers">
+
+						{{-- TODO insert dynamic qu	estions --}}
+						{{--student.class.module.partials.questions.dynamic.fib--}}
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.steps') !!}"></div>
+
 						{{--mod.current_question.question_type == futureed.MULTIPLECHOICE--}}
 						<div class="margin-top-30">
 							<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.current_question.question_answers"
@@ -102,6 +110,7 @@
 						{{--mod.current_question.question_type == futureed.FILLINBLANK--}}
 						<div class="margin-top-30">
 							<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK" class="form-group">
+
 								<div ng-class="{ 'fib-text-fields' : mod.current_question.answer_text_field_count.length > 1 }">
 									<input ng-repeat="n in mod.current_question.answer_text_field_count track by $index"
 										   ng-model="mod.current_question.answer_text[n]"
@@ -189,6 +198,8 @@
 						</div>
 					</div>
 				</div>
+				{{--TODO Dynamic Questions--}}
+				{{--TODO find module if it's dynamic or not--}}
 				{{--Snap--}}
 				<div class="col-xs-12"
 					 id="snap_container"

@@ -568,4 +568,9 @@ class ModuleRepository implements ModuleRepositoryInterface
 		return Module::find($module_id);
 	}
 
+	public function getDynamicModules(){
+
+		return Module::dynamic()->get();
+	}
+
 }

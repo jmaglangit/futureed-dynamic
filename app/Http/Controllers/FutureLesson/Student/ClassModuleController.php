@@ -44,4 +44,13 @@ class ClassModuleController extends Controller {
 	public function notepad(){
 		return view('student.class.module.partials.notepad');
 	}
+
+	public function fib(){
+		return view('student.class.module.partials.questions.dynamic.fill-in-blanks');
+	}
+
+	public function steps($steps = 0){
+		$steps = 3;
+		return view('student.class.module.partials.questions.dynamic.answer-steps')->with('steps',$steps);
+	}
 }

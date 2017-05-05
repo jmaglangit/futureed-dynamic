@@ -20,6 +20,7 @@ Routes::group([
 	'middleware' => 'log'
 ], function () {
 	Routes::get('/', 'Api\v1\ApiController@index');
+	Routes::get('/test-function', 'Api\v1\ApiController@textFunction');
 
 	include('Routes/Api/Admin.php');
 	include('Routes/Api/AgeGroup.php');
