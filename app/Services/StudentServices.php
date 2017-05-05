@@ -174,7 +174,17 @@ class StudentServices
 					return [
 						'status' => $this->user_service->checkUserDisabled($user_id['user_id'])
 					];
+				} else {
+					//check remaining attempts
+					$attempts = $this->user->getLoginAttempts($user_id['user_id']);
+					$err_message = trans('errors.2072', ['remaining_attempts' => (config('futureed.limit_attempt') - $attempts)]);
+
+					return [
+						'status' => 2072, 
+						'message' => $err_message
+						];
 				}
+
 				return [
 					'status' => 2012
 				];

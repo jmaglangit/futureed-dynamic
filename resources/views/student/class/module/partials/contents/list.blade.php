@@ -5,7 +5,7 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+					<button type="button" class="btn btn-sky-blue next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
@@ -67,7 +67,7 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+					<button type="button" class="btn btn-sky-blue next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
@@ -94,7 +94,7 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+					<button type="button" class="btn btn-sky-blue next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
@@ -123,7 +123,7 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+					<button type="button" class="btn btn-sky-blue next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						{{ trans('messages.exit_module') }}
 					</button>
 				</div>

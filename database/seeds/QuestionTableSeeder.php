@@ -56,6 +56,9 @@ class QuestionTableSeeder extends Seeder
 		$this->command->info('Loading Question data...');
 		$this->dataLoader('questions_12.csv');
 
+		$this->command->info('Loading Question data...');
+		$this->dataLoader('questions_13.csv');
+
 		$this->addTranslation();
     }
 

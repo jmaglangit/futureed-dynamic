@@ -71,8 +71,6 @@ class StudentLoginController extends StudentController {
 			//check if username exist, return id else nothing
 			$response = $this->user_service->checkLoginName($input['username'], config('futureed.student'));
 
-
-           
 			if($response['status'] == 200) {
 
                 //check if facebook_app_id and google_app_id is empty
@@ -89,7 +87,11 @@ class StudentLoginController extends StudentController {
 
                 if($response['data'] == 2014 ){
 
-                    return $this->respondErrorMessage(2019);
+                    // return $this->respondErrorMessage(2019);
+                    return $this->respondWithError([[
+                            'error_code' => 2019,
+                            'message' => $response['message']]
+                    ]);
                 }
 			
             	return $this->respondErrorMessage(2001);
@@ -189,6 +191,13 @@ class StudentLoginController extends StudentController {
         }
 
         if($response['status'] <> 200){
+            //show remaining attempts
+            if($response['status'] == 2072) {
+                return $this->respondWithError([
+                    'error_code' => 2072,
+                    'message' => $response['message']
+                    ]);
+            }
 
             return $this->respondErrorMessage($response['status']);
 

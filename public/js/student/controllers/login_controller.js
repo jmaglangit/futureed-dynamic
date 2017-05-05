@@ -177,12 +177,20 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 		event.preventDefault();
 		
 		self.errors = Constants.FALSE;
+		self.error_msg = Constants.FALSE;
 
 		$scope.ui_block();
 		StudentLoginService.validateUser(self.manual.username).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
+					// self.errors = $scope.errorHandler(response.errors);
+					var error_msg = response.errors[0].message.length;
+
+					if(error_msg == Constants.ERROR_MSG){
+						self.error_msg = response.errors[0];
+					}else{
+						self.errors = $scope.errorHandler(response.errors);
+					}
 				} else if(response.data){
 					self.manual.id = response.data.id;
 					self.getLoginPassword();
@@ -238,7 +246,6 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
-					
 					self.image_pass = shuffle(self.image_pass);
 				} else if(response.data){
 					response.data.role = Constants.STUDENT;
@@ -355,7 +362,6 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
-
 					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
 					});
@@ -475,4 +481,15 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			$scope.ui_unblock();
 		});
 	}
+
+	self.validateMaxLength = function(){
+		$('#studentReg .form-control').bind('keyup change input paste',function(e){
+			var val = $(this).val();
+			var maxCount = $(this).attr('ng-maxlength');
+			if(val.length > maxCount){
+				$(this).val($(this).val().substring(0,maxCount));
+			}
+		});
+	}
+
 }

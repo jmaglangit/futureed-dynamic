@@ -6,7 +6,7 @@
 			<div class="row questions-header col-xs-12">
 				<div ng-class="{'col-xs-6':mod.current_question.question_type != futureed.CODING,'col-xs-4':mod.current_question.question_type == futureed.CODING}">
 					<div class="row col-xs-6">
-						<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						<button type="button" class="btn btn-sky-blue next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 							{{ trans('messages.exit_module') }}
 						</button>
 					</div>
@@ -242,22 +242,59 @@
 				</span>
 
 				<div class="result-tip tip-content" ng-if="mod.result.points_earned <= 0" ng-init="mod.getAnswerExplanation();" ng-show="mod.answer_explanation.length">
-					<div class="tip-icon">
-						<img src="/images/icon-tipbulb.png">
+					<div class="col-xs-12 tip-message" ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE && !mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+						<div class="col-xs-12 tip-icon">
+							<img src="/images/icon-tipbulb.png">
+							<span class="tips-text">{{ trans('messages.tips') }}</span>
+						</div>
+						<div class="col-xs-12">
+							<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset] | json !}">
+							<i class="fa fa-caret-left fa-2x"
+							   aria-hidden="true"
+							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
+							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
+							</i>
+						</div>
 					</div>
-					<div class="tip-message">
-						<img ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE" ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
-						<i class="fa fa-caret-left fa-2x"
-						   aria-hidden="true"
-						   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
-						   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
-						</i>
-						<p class="h4 m-bottom-0" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
-						<i class="fa fa-caret-right fa-2x"
-						   aria-hidden="true"
-						   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
-						   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
-						</i>
+
+					<div class="col-xs-12 tip-message" ng-if="mod.answer_explanation[mod.answer_exp_offset].image == futureed.NONE && mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+						<div class="col-xs-12 tip-icon">
+							<img src="/images/icon-tipbulb.png">
+							<span class="tips-text">{{ trans('messages.tips') }}</span>
+						</div>
+						<div class="col-xs-12">
+							<p class="h4 m-bottom-0" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
+							<i class="fa fa-caret-right fa-2x"
+							   aria-hidden="true"
+							   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
+							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
+							</i>
+						</div>
+					</div>
+
+					<div class="col-xs-12 tip-message-side" ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE && mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+						<div class="col-xs-3">
+							<div class="tip-icon">
+								<img src="/images/icon-tipbulb.png">
+								<span class="tips-text">{{ trans('messages.tips') }}</span>
+							</div>
+							<div>
+								<p class="h4 m-bottom-0" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
+								<i class="fa fa-caret-right fa-2x"
+								   aria-hidden="true"
+								   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
+								   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
+								</i>
+							</div>
+						</div>
+						<div class="col-xs-9">
+							<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
+							<i class="fa fa-caret-left fa-2x"
+							   aria-hidden="true"
+							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
+							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
+							</i>
+						</div>
 					</div>
 				</div>
 			</div>

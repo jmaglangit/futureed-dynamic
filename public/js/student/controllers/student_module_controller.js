@@ -1561,6 +1561,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			self.snap_done_answering = !self.snap_done_answering;
 			$('.btn-code-run').text('Run');
 			FutureEd_IDE.stage.fireGreenFlagEvent();
+			self.loading = Constants.TRUE;
+			self.set_IDE();
 		}
 	}
 
