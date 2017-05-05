@@ -39,6 +39,11 @@ class ModuleQuestionTemplate extends Model{
 		'updated_by' => 1
 	];
 
+	//relationship
+	public function questionCache(){
+		return $this->hasOne('FutureEd\Models\Core\QuestionCache');
+	}
+
 	//scope
 	public function scopeQuestionTemplateId($query,$template_id){
 		return $query->where('question_template_id',$template_id);

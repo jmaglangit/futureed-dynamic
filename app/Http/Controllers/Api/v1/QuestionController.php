@@ -3,6 +3,9 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
+use FutureEd\Models\Repository\ModuleQuestionTemplate\ModuleQuestionTemplateRepositoryInterface;
+use FutureEd\Models\Repository\QuestionCache\QuestionCacheRepositoryInterface;
 use Illuminate\Http\Request;
 use FutureEd\Http\Requests\Api\QuestionRequest;
 use Illuminate\Support\Facades\Input;
@@ -13,9 +16,23 @@ class QuestionController extends ApiController {
 
 	protected $question;
 
-	public function __construct(QuestionRepositoryInterface $question) {
+	protected $question_cache;
+
+	protected $module_question_template;
+
+	protected $module;
+
+	public function __construct(
+		QuestionRepositoryInterface $question,
+		QuestionCacheRepositoryInterface $questionCacheRepositoryInterface,
+		ModuleRepositoryInterface $moduleRepositoryInterface,
+		ModuleQuestionTemplateRepositoryInterface $moduleQuestionTemplateRepositoryInterface
+	) {
 
 		$this->question = $question;
+		$this->question_cache = $questionCacheRepositoryInterface;
+		$this->module = $moduleRepositoryInterface;
+		$this->module_question_template = $moduleQuestionTemplateRepositoryInterface;
 	}
 
 	/**
@@ -31,6 +48,9 @@ class QuestionController extends ApiController {
 		if (Input::get('module_id')) {
 
 			$criteria['module_id'] = Input::get('module_id');
+
+			//TODO get module
+			$module = $this->module->getModule(Input::get('module_id'));
 		}
 
 		//for question_type
@@ -67,7 +87,15 @@ class QuestionController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		return $this->respondWithData($this->question->getQuestions($criteria, $limit, $offset));
+		//TODO if dynamic module output dynamic questions
+
+		if(Input::get('module_id') && $module->is_dynamic){
+			//get dynamic module
+			return $this->respondWithData($this->question_cache->getQuestionCaches($criteria, $limit, $offset));
+		} else {
+			return $this->respondWithData($this->question->getQuestions($criteria, $limit, $offset));
+
+		}
 	}
 
 	/**

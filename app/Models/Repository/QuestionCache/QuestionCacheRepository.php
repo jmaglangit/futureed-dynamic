@@ -27,6 +27,10 @@ class QuestionCacheRepository implements QuestionCacheRepositoryInterface{
 
 		$question_cache = new QuestionCache();
 
+		$question_cache = $question_cache->with('questionTemplate','moduleQuestionTemplate');
+
+
+
 		if(isset($criteria['module_question_template_id'])){
 			$question_cache = $question_cache->moduleQuestionTemplateId($criteria['module_question_template_id']);
 		}
@@ -58,7 +62,20 @@ class QuestionCacheRepository implements QuestionCacheRepositoryInterface{
 	 */
 	public function getQuestionCache($id){
 
-		return QuestionCache::find($id);
+		return QuestionCache::with('questionTemplate')->find($id);
+	}
+
+	/**
+	 * @param $module_question_id
+	 * @param $question_template_id
+	 * @return mixed
+	 */
+	public function getModuleTemplate($module_question_id,$question_template_id){
+
+		//get module_question_id, and question_template_id
+
+		return QuestionCache::moduleQuestionTemplateId($module_question_id)
+			->questionTemplateId($question_template_id)->first();
 	}
 
 	/**

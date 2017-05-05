@@ -702,77 +702,90 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			seq_no	:	self.current_question.seq_no
 		};
 
+		//insert logic for dynamic questions
+		//TODO set variables into dynamic
+		//TODO set self.current_question.question_type
+		if(self.record.is_dynamic){
+			self.setDynamicModuleAnswer();
+			answer.answer_text = self.parseQuestionValues(self.current_question.answer_text);
+			answer.is_dynamic = self.record.is_dynamic;
+		}
+
 		//form answer text ordering into array of objects.
-		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
-			var order_answer = self.current_question.answer_text;
+		switch(self.current_question.question_type){
+			case Constants.ORDERING:
+				var order_answer = self.current_question.answer_text;
 
-			self.order_answer_text = '';
-			angular.forEach(order_answer,function(v,i){
-				if(i > Constants.FALSE){
-					self.order_answer_text += (',' + v.value);
-				}else {
-					self.order_answer_text += v.value;
+				self.order_answer_text = '';
+				angular.forEach(order_answer,function(v,i){
+					if(i > Constants.FALSE){
+						self.order_answer_text += (',' + v.value);
+					}else {
+						self.order_answer_text += v.value;
+					}
+				});
+				answer.answer_text = self.order_answer_text;
+				break;
+			case Constants.FILLINBLANK:
+
+				if(!self.record.is_dynamic){
+
+					var answer_text_array = [];
+
+					angular.forEach(self.current_question.answer_text, function(value, key) {
+						answer_text_array.push(value);
+					});
+
+					answer.answer_text = answer_text_array.join(",");
 				}
-			});
-			answer.answer_text = self.order_answer_text;
-		}
 
-		else if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
-			var answer_text_array = [];
+				break;
+			case Constants.GRAPH:
+				var answer_graph_array = [];
 
-			angular.forEach(self.current_question.answer_text, function(value, key) {
-				answer_text_array.push(value);
-			});
+				//Get horizontal
+				if(self.question_graph_content.orientation == Constants.HORIZONTAL){
 
-			answer.answer_text = answer_text_array.join(",");
-		}
-		else if(angular.equals(self.current_question.question_type, Constants.GRAPH)) {
+					//get table data
+					//parse each value for horizontal values.
+					var horizontalTable = document.getElementById('horizontalTable');
 
-			var answer_graph_array = [];
-
-			//Get horizontal
-			if(self.question_graph_content.orientation == Constants.HORIZONTAL){
-
-				//get table data
-				//parse each value for horizontal values.
-				var horizontalTable = document.getElementById('horizontalTable');
-
-				answer_graph_array = self.horizontalGraph(horizontalTable);
+					answer_graph_array = self.horizontalGraph(horizontalTable);
 
 
-				//Get Vertical
-			}else if(self.question_graph_content.orientation == Constants.VERTICAL){
+					//Get Vertical
+				}else if(self.question_graph_content.orientation == Constants.VERTICAL){
 
-				//parse each value for vertical values
-				var verticalTable = document.getElementById('verticalTable');
+					//parse each value for vertical values
+					var verticalTable = document.getElementById('verticalTable');
 
-				answer_graph_array = self.verticalGraph(verticalTable);
-			}
-
-			obj = {"answer" : answer_graph_array};
-			answer.answer_text = JSON.stringify(obj);
-		}
-		else if(angular.equals(self.current_question.question_type, Constants.QUADRANT)) {
-
-			quadData = self.quad.getData();
-			answer_quad_array = [];
-
-			$.each(quadData[0].data, function(i,item){
-				if(i > 0){
-					obj = {'x' : quadData[0].data[i][0], 'y' : quadData[0].data[i][1]}
-					answer_quad_array.push(obj);
+					answer_graph_array = self.verticalGraph(verticalTable);
 				}
-			});
 
-			obj = {"answer" : answer_quad_array};
-			answer.answer_text = JSON.stringify(obj);
+				obj = {"answer" : answer_graph_array};
+				answer.answer_text = JSON.stringify(obj);
+				break;
+			case Constants.QUADRANT:
+				quadData = self.quad.getData();
+				answer_quad_array = [];
 
-		}
-		else if(angular.equals(self.current_question.question_type, Constants.CODING)) {
-			answer.answer_text = Constants.TRUE.toString();
-		}
-		else {
-			answer.answer_text = self.current_question.answer_text;
+				$.each(quadData[0].data, function(i,item){
+					if(i > 0){
+						obj = {'x' : quadData[0].data[i][0], 'y' : quadData[0].data[i][1]}
+						answer_quad_array.push(obj);
+					}
+				});
+
+				obj = {"answer" : answer_quad_array};
+				answer.answer_text = JSON.stringify(obj);
+				break;
+			case Constants.CODING:
+				answer.answer_text = Constants.TRUE.toString();
+
+				break;
+			default:
+				answer.answer_text = self.current_question.answer_text;
+				break;
 		}
 
 		$scope.ui_block();
@@ -1616,5 +1629,26 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.click = function(){
 		self.bool_change_class = !self.bool_change_class;
 	}
+
+	//Dynamic questions
+	self.parseQuestionValues = function(question_values){
+
+		return JSON.stringify(question_values);
+	}
+
+	self.stepsRepeat = function(iterations){
+
+		return new Array(iterations);
+
+		//if(iterations > Constants.TRUE){
+		//	return new Array(iterations);
+		//} else {
+		//	return Constants.FALSE;
+		//}
+	}
+
+	self.setDynamicModuleAnswer = function(){
+		self.current_question.question_type = self.current_question.question_template.question_type;
+	};
 
 }

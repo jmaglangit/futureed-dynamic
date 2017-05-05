@@ -11,9 +11,11 @@ use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Services\ClientServices;
 use FutureEd\Services\CodeGeneratorServices;
+use FutureEd\Services\EquationCompilerServices;
 use FutureEd\Services\GradeServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\PasswordImageServices;
+use FutureEd\Services\QuestionCacheServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\SchoolServices;
 use FutureEd\Services\UserServices;
@@ -23,6 +25,7 @@ use FutureEd\Services\AdminServices;
 use FutureEd\Services\PasswordServices;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Matching\ValidatorInterface;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use FutureEd\Http\Controllers\Api\Traits\ErrorMessageTrait;
@@ -57,7 +60,9 @@ class ApiController extends Controller {
 		ValidatorRepositoryInterface $validatorRepositoryInterface,
 		SchoolRepositoryInterface $schoolRepositoryInterface,
 		CountryRepositoryInterface $countryRepositoryInterface,
-		ClientDiscountRepositoryInterface $clientDiscountRepositoryInterface)
+		ClientDiscountRepositoryInterface $clientDiscountRepositoryInterface,
+        EquationCompilerServices $equationCompilerServices,
+        QuestionCacheServices $questionCacheServices)
 	{
 		$this->user = $user;
 		$this->student = $student;
@@ -75,6 +80,8 @@ class ApiController extends Controller {
 		$this->school = $schoolRepositoryInterface;
 		$this->country = $countryRepositoryInterface;
 		$this->client_discount = $clientDiscountRepositoryInterface;
+        $this->equation = $equationCompilerServices;
+        $this->question_cache = $questionCacheServices;
 	}
     
     public function index(){
@@ -172,6 +179,21 @@ class ApiController extends Controller {
             return $this->respondWithError($this->getMessageBag());
         }
 
+    }
+
+    public function textFunction(){
+
+//        $answer = [1,2,3,4,5];
+        $answer = [8,120,900,15000,90000];
+//        array:5 [
+//            0 => 8
+//  1 => 120
+//  2 => 900
+//  3 => 15000
+//  4 => 90000
+//]
+//        return $this->equation->solve($answer,Input::get('question_cache'));
+        return $this->question_cache->generateQuestions(Input::get('module_id'));
     }
 
 

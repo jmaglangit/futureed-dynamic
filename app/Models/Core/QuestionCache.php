@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class QuestionCache extends Model{
 
-	use SoftDeletes;
+//	use SoftDeletes;
 
 	use TranslationTrait;
 
@@ -32,6 +32,8 @@ class QuestionCache extends Model{
 		'module_question_template_id',
 		'question_template_id',
 		'question_text',
+		'question_values',
+		'answer',
 		'status'
 	];
 
@@ -39,6 +41,17 @@ class QuestionCache extends Model{
 		'created_by' => 1,
 		'updated_by' => 1
 	];
+
+	//relationship
+	public function questionTemplate(){
+
+		return $this->hasOne('FutureEd\Models\Core\QuestionTemplate','id','question_template_id');
+	}
+
+	public function moduleQuestionTemplate(){
+
+		return $this->hasMany('FutureEd\Models\Core\ModuleQuestionTemplate','id','module_question_template');
+	}
 
 	//scope
 	public function scopeModuleQuestionTemplateId($query,$template_id){

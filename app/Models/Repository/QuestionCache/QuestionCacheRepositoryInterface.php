@@ -15,6 +15,8 @@ interface QuestionCacheRepositoryInterface {
 
 	public function getQuestionCache($id);
 
+	public function getModuleTemplate($module_question_id,$question_template_id);
+
 	public function addQuestionCache($data);
 
 	public function updateQuestionCache($id,$data);

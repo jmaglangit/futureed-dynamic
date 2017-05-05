@@ -1508,4 +1508,5 @@ return [
 	'remove' => 'Remove',
 	'upload_data_library' => 'Upload Data Library',
 	'upload_word_problem' => 'Upload Word Problem',
+	'question_steps' => 'Step :number :'
 ];

@@ -28,7 +28,7 @@ class StudentModuleAnswerRequest extends ApiRequest
         $return = [
 			'student_module_id' => 'required|integer|exists:student_modules,id,deleted_at,NULL',
             'module_id' => 'required|integer',
-            'seq_no' => 'required|integer',
+            'seq_no' => 'integer',
             'question_id' => 'required|integer',
             'answer_text' => 'string',
             'student_id' => 'required|integer',
@@ -36,9 +36,11 @@ class StudentModuleAnswerRequest extends ApiRequest
 			'date_end' => 'required|date'
 		];
 
-		if(!is_null($this->__get('question_id'))){
 
-			$module = Module::find($this->__get('module_id'));
+		if(!is_null($this->__get('question_id')) && is_null($this->__get('is_dynamic'))){
+
+
+            $module = Module::find($this->__get('module_id'));
 			$return['question_id'] = 'required|integer|exists:questions,id,deleted_at,NULL,module_id,'. $module->id;
 
             //If question_id has value.

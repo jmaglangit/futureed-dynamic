@@ -430,6 +430,16 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\WordProblemDataMapping\WordProblemDataMappingRepository'
 		);
 
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionGradeCondition\QuestionGradeConditionRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionGradeCondition\QuestionGradeConditionRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepository'
+		);
+
 
 	}
 }

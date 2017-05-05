@@ -140,4 +140,15 @@ class ModuleQuestionTemplateRepository implements ModuleQuestionTemplateReposito
 
 		return $response;
 	}
+
+	/**
+	 * @param $module_id
+	 * @return mixed
+	 */
+	public function getTemplateByModule($module_id){
+
+		return ModuleQuestionTemplate::whereModuleId($module_id)->with('questionCache')->get();
+
+	}
+
 }

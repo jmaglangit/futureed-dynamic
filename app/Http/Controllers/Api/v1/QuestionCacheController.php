@@ -4,7 +4,9 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Http\Requests\Api\QuestionCacheRequest;
+use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\QuestionCache\QuestionCacheRepositoryInterface;
+use FutureEd\Services\QuestionCacheServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -12,10 +14,18 @@ class QuestionCacheController extends ApiController {
 
 	protected $question_cache;
 
+	protected $question_cache_service;
+
+	protected $module;
+
 	public function __construct(
-		QuestionCacheRepositoryInterface $questionCacheRepositoryInterface
+		QuestionCacheRepositoryInterface $questionCacheRepositoryInterface,
+		QuestionCacheServices $questionCacheServices,
+		ModuleRepositoryInterface $moduleRepositoryInterface
 	){
 		$this->question_cache = $questionCacheRepositoryInterface;
+		$this->question_cache_service = $questionCacheServices;
+		$this->module = $moduleRepositoryInterface;
 	}
 
 	/**
@@ -99,4 +109,25 @@ class QuestionCacheController extends ApiController {
 		return $this->respondWithData($this->question_cache->deleteQuestionCache($id));
 	}
 
+	public function generationQuestions(){
+
+		if(Input::get('module_id')){
+			//generate individual module
+			$this->question_cache_service->generateQuestions(Input::get('module_id'));
+
+		} else {
+			//generate all modules
+
+			//get all dynamic modules and parse
+			$dynamic_modules = $this->module->getDynamicModules();
+
+			//generate questions on every module
+			foreach($dynamic_modules as $module){
+
+				$this->question_cache_service->generateQuestions($module->id);
+			}
+		}
+
+		return $this->respondWithData(true);
+	}
 }

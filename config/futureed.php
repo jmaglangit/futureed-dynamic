@@ -374,4 +374,9 @@ return [
 		'swift_code' => env('BILL_SWIFT_CODE',"OCBCSGSG")
 	],
 
+	//Automated question features
+	'question_form_word' => 'Word',
+	'question_form_blank' => 'Blank',
+	'question_form_series' => 'Series',
+
 ];
