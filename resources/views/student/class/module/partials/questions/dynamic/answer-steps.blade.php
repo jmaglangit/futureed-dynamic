@@ -5,7 +5,7 @@
          ng-init="mod.parseQuestionValues(mod.current_question.question_values)">
         {{--itirate steps here--}}
 
-            <div ng-repeat="n in mod.stepsRepeat(mod.question_values.steps) track by $index" class="form-group">
+            <div ng-if="mod.question_values.steps > futureed.TRUE" ng-repeat="n in mod.stepsRepeat(mod.question_values.steps) track by $index" class="form-group">
                 <label class="col-xs-2">Step {! $index+1 !}:</label>
                 <input ng-model="mod.current_question.answer_text['steps_answer']"
                        name="steps_answer"

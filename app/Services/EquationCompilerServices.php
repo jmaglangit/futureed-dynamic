@@ -149,8 +149,8 @@ class EquationCompilerServices {
 
 		//answer
 		$answer = json_decode($answer);
-		$steps = count($answer->steps_answer);
-		$steps_answer = ($correct_steps > 1) ? $answer->steps_answer : [$answer->steps_answer];
+		$steps = ($correct_steps > 1) ? count($answer->steps_answer) : 1 ;
+		$steps_answer = ($correct_steps > 1) ? $answer->steps_answer : [$answer->total];
 
 		if($steps == $correct_steps){
 
