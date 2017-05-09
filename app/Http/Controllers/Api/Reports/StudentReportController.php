@@ -390,7 +390,7 @@ class StudentReportController extends ReportController {
 			'first_name' => $student->first_name,
 			'last_name' => $student->last_name,
 			'avatar_thumbnail' => (isset($avatar->avatar_image)) ? $avatar->avatar_image : '',
-			'subject_name' => $subject->name,
+			'subject_name' => isset($subject->name) ? $subject->name : config('futureed.none'),
 			'grade_name' => isset($student_grade->name) ? $student_grade->name : config('futureed.none'),
 			'earned_badges' => $student_badge,
 			'earned_medals' => $student_medal,
@@ -453,7 +453,7 @@ class StudentReportController extends ReportController {
 			'first_name' => $student->first_name,
 			'last_name' => $student->last_name,
 			'avatar_thumbnail' => (isset($avatar->avatar_image)) ? $avatar->avatar_image : '',
-			'subject_name' => $subject->name,
+			'subject_name' => isset($subject->name) ? $subject->name : config('futureed.none'),
 		];
 
 		$column_header = [
@@ -510,7 +510,7 @@ class StudentReportController extends ReportController {
 
 		//initiate array.
 		$row_data = [];
-		$class = $class[0];
+		// $class = $class[0];
 
 		//loop to get each data per subject areas.
 		foreach ($subject_areas as $areas) {
@@ -519,7 +519,7 @@ class StudentReportController extends ReportController {
 
 				//get student modules by subject areas
 				$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
-					$class->student_id, $areas->id, $class->class_id
+					$class[0]->student_id, $areas->id, $class[0]->class_id
 				);
 			}
 
@@ -578,7 +578,7 @@ class StudentReportController extends ReportController {
 			'first_name' => $student->first_name,
 			'last_name' => $student->last_name,
 			'avatar_thumbnail' => (isset($avatar->avatar_image)) ? $avatar->avatar_image : '',
-			'subject_name' => $subject->name,
+			'subject_name' => isset($subject->name) ? $subject->name : config('futureed.none'),
 			'grade_name' => isset($student_grade->name) ? $student_grade->name : config('futureed.none'),
 			'earned_badges' => $student_badge,
 			'earned_medals' => $student_medal,
