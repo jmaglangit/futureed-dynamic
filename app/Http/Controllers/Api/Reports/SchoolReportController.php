@@ -379,7 +379,7 @@ class SchoolReportController extends ReportController {
                 if ($module->classroom->grade_id == $grade_level &&
                     $module->classroom->client_id == $teacher_id)
 
-                    $student_progress[$module->id] = $module->progress;
+                    $student_progress[$module->module_id] = $module->progress;
 
             }
 
@@ -428,7 +428,7 @@ class SchoolReportController extends ReportController {
                 if ($module->classroom->grade_id == $grade_level &&
                     $module->classroom->client_id == $teacher_id)
 
-                    $student_progress[$module->id] = $module->correct_counter;
+                    $student_progress[$module->module_id] = $module->correct_counter / $module->question_counter;
 
             }
 
@@ -517,7 +517,7 @@ class SchoolReportController extends ReportController {
 
         foreach ($classroom->studentModule as $student_module) {
 
-            $response['score'] += $student_module->correct_counter;
+            $response['score'] += $student_module->correct_counter / $student_module->question_counter;
             $response['count']++;
 
         }
