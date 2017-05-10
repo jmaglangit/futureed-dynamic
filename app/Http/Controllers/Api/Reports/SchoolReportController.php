@@ -269,8 +269,12 @@ class SchoolReportController extends ReportController {
             foreach (array_keys($column_header) as $subject_id) {
 
                 // if total progress is 0, no actual progress was made, so it results to 0
-                if ($total_progress[$subject_id] !== 0)
-                    $teacher_progress[$subject_id] /= (float) $total_progress[$subject_id];
+                if ($total_progress[$subject_id] !== 0) {
+
+                    $teacher_progress[$subject_id] /= (float)$total_progress[$subject_id];
+                    $teacher_progress[$subject_id] = floor($teacher_progress[$subject_id] * 100);
+
+                }
 
             }
 
