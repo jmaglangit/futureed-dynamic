@@ -15,10 +15,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.selected.subject_id = -1;
     self.selected.grade_id = -1;
 
-    // table header map
-    self.map = {};
-    self.map.subjects = {};
-
     //set active controller
     self.setActive = function (active) {
 
@@ -214,10 +210,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         }
     }
 
-    self.teacherSubjectReport = function () {
-
-    }
-
     ////export school report
     self.exportReport = function (file_type) {
 
@@ -284,10 +276,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
                     self.subjects = response.data;
-
-                    for (var i = 0; i < self.subjects.records.length; i++) {
-                        self.map.subjects.push(self.subjects.record[i].id);
-                    }
                 }
             }
             $scope.ui_unblock();
@@ -297,6 +285,10 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         });
     }
 
+    self.subjectColumnWidth = function (remaining) {
+        return remaining / self.subjects.records.length;
+    }
+    
     // returns true if currently selected grade is valid
     self.isValidGrade = function () {
         var valid = false;
