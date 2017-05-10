@@ -209,15 +209,15 @@
                         <div class="form-group">
                             <div class="col-xs-3"></div>
                             <div class="col-xs-6">
-                                <select ng-model="dashboard.selected.subject_id"
-                                        ng-change="dashboard.logObject()"
-                                        ng-disabled="!dashboard.subjects.total"
+                                <select ng-model="dashboard.selected.grade_id"
+                                        ng-change="dashboard.teacherSubjectProgressReport()"
+                                        ng-disabled="!dashboard.grades.total"
                                         class="form-control ng-pristine ng-valid ng-touched">
                                     <option value="">
                                         {!! trans('messages.select_subject') !!}
                                     </option>
-                                    <option ng-repeat="subject in dashboard.subjects.records" ng-value="subject.id">
-                                        {! subject.name !}
+                                    <option ng-repeat="grade in dashboard.grades.records" ng-value="grade.id">
+                                        {! grade.name !}
                                     </option>
                                 </select>
                             </div>
@@ -227,15 +227,36 @@
                     <h3><i class="fa fa-file-text"></i> {!! trans('messages.teacher_subject_progress_report') !!}</h3>
 
                     <div>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" ng-if="dashboard.teacher_subject_progress_report">
                             <tr class="magenta">
-                                <th width="30%"></th>
-                                <th ng-repeat="subject in dashboard.subjects.records"
+                                <th width="20%"></th>
+                                <th ng-repeat="header in dashboard.teacher_subject_progress_report.column_header"
                                     class="ng-binding ng-scope">
-                                    {! subject.name !}
+                                    {! header !}
                                 </th>
                             </tr>
-
+                            <tr ng-if="dashboard.teacher_subject_progress_report.rows"
+                                ng-repeat="(name, row) in dashboard.teacher_subject_progress_report.rows">
+                                <td>
+                                    Teacher {! name !}
+                                </td>
+                                <td ng-repeat="progress in row">
+                                    {{--{! progress !}--}}
+                                    <div class="progress-bar progress-bar-striped"
+                                         ng-class="{
+										'progress-bar-success' : (progress * 100) > futureed.REPORT_PROGRESS_PASS,
+										'progress-bar-warning' : (progress * 100) > futureed.REPORT_PROGRESS_MEDIAN_FLOOR
+										    && (progress * 100) <= futureed.REPORT_PROGRESS_MEDIAN_CEILING ,
+										'progress-bar-danger' : (progress * 100) <= futureed.REPORT_PROGRESS_FAIL ,
+									}"
+                                         ng-style="{ 'width' : Math.floor(progress * 100) + '%' }">
+                                        {! progress + '%' !}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="!dashboard.teacher_subject_progress_report.rows">
+                                <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
+                            </tr>
                         </table>
                     </div>
                 </div>

@@ -25,10 +25,10 @@ function ManagePrincipalContentService($http) {
         });
     }
 
-    managePrincipalApi.schoolTeacherSubjectProgressReport = function (school_code, subject_id) {
+    managePrincipalApi.schoolTeacherSubjectProgressReport = function (school_code, grade_id) {
         return $http({
             method  :   Constants.METHOD_GET
-            , url   :   reportUrl + 'school/' + school_code + + '/teachers/subjects/progress/' + subject_id
+            , url   :   reportUrl + 'school/' + school_code + '/teachers/subjects/progress/' + grade_id
         });
     }
 
@@ -40,6 +40,13 @@ function ManagePrincipalContentService($http) {
     //download school teacher progress
     managePrincipalApi.schoolTeacherReportDownload = function(school_code, file_type){
         return reportUrl + 'school/' + school_code + '/teachers/' + file_type
+    }
+
+    managePrincipalApi.getGrades = function() {
+        return $http({
+            method  :   Constants.METHOD_GET
+            ,url    :   apiUrl + 'grade'
+        });
     }
 
     managePrincipalApi.getSubjects = function() {
