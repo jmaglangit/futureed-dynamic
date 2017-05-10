@@ -332,9 +332,12 @@ class SchoolReportController extends ReportController {
             foreach (array_keys($column_header) as $subject_id) {
 
                 // if score count is 0, no modules were answered, so it results to 0
-                if ($score_count[$subject_id] !== 0)
-                    $teacher_scores[$subject_id] /= (float) $score_count[$subject_id];
+                if ($score_count[$subject_id] !== 0) {
 
+                    $teacher_scores[$subject_id] /= (float) $score_count[$subject_id];
+                    $teacher_scores[$subject_id] = floor($teacher_scores[$subject_id] * 100);
+
+                }
             }
 
             // sets the array of scores to the corresponding teacher
