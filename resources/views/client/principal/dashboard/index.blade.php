@@ -209,13 +209,12 @@
             {{--School Teacher Subject Progress--}}
             <div class="" ng-if="dashboard.active_school_teacher_progress">
                 <div>
-                    <div class="form-search magenta">
+                    <div style="margin: 20px auto;">
                         <div class="form-group">
                             <div class="col-xs-3"></div>
                             <div class="col-xs-6" ng-init="dashboard.initSelection()">
                                 <select ng-model="dashboard.selected.grade_id"
                                         ng-change="dashboard.teacherSubjectProgressReport()"
-                                        ng-disabled="!dashboard.grades.total"
                                         class="form-control ng-pristine ng-valid ng-touched">
                                     <option value="">
                                         {!! trans('messages.select_grade') !!}
@@ -228,7 +227,9 @@
                         </div>
                     </div>
 
-                    <h3><i class="fa fa-file-text"></i>{!! trans('messages.teacher_subject_progress_report') !!}</h3>
+                    <div style="float: left; margin: 0 auto;">
+                        <h3><i class="fa fa-file-text"></i>{!! trans('messages.teacher_subject_progress_report') !!}</h3>
+                    </div>
 
                     <div>
                         <table class="table table-bordered"
@@ -270,13 +271,12 @@
             {{--School Teacher Subject Scores--}}
             <div class="" ng-if="dashboard.active_school_teacher_scores">
                 <div>
-                    <div class="form-search magenta">
+                    <div style="margin: 20px auto;">
                         <div class="form-group">
                             <div class="col-xs-3"></div>
                             <div class="col-xs-6" ng-init="dashboard.initSelection()">
                                 <select ng-model="dashboard.selected.grade_id"
                                         ng-change="dashboard.teacherSubjectScoresReport()"
-                                        ng-disabled="!dashboard.grades.total"
                                         class="form-control ng-pristine ng-valid ng-touched">
                                     <option value="">
                                         {!! trans('messages.select_grade') !!}
@@ -289,8 +289,9 @@
                         </div>
                     </div>
 
-                    <h3><i class="fa fa-file-text"></i>{!! trans('messages.teacher_subject_scores_report') !!}</h3>
-
+                    <div style="float: left; margin: 0 auto;">
+                        <h3><i class="fa fa-file-text"></i>{!! trans('messages.teacher_subject_scores_report') !!}</h3>
+                    </div>
                     <div>
                         <table class="table table-bordered"
                                {{--ng-if="dashboard.teacher_subject_progress_report"--}}
