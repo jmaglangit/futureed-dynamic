@@ -32,6 +32,13 @@ function ManagePrincipalContentService($http) {
         });
     }
 
+    managePrincipalApi.schoolTeacherSubjectScoresReport = function (school_code, grade_id) {
+        return $http({
+            method  :   Constants.METHOD_GET
+            , url   :   reportUrl + 'school/' + school_code + '/teachers/subjects/scores/' + grade_id
+        });
+    }
+
     //download school progress
     managePrincipalApi.schoolReportDownload = function(school_code,file_type){
         return reportUrl + 'school/' + school_code + '/' + file_type;
