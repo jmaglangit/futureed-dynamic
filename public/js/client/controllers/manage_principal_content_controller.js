@@ -6,6 +6,8 @@ ManagePrincipalContentController.$inject = ['$scope', '$filter', 'ManagePrincipa
 function ManagePrincipalContentController($scope, $filter, ManagePrincipalContentService, clientProfileApiService, apiService) {
     var self = this;
 
+    self.selected = {};
+    self.selected.subject_id = -1;
 
     //set active controller
     self.setActive = function (active) {
@@ -14,21 +16,26 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.active_report_teacher = Constants.FALSE;
         self.active_school = Constants.FALSE;
         self.active_school_teacher = Constants.FALSE;
+        self.active_school_teacher_progress = Constants.FALSE;
         self.export = Constants.FALSE;
         self.active_purchase = Constants.FALSE;
 
         switch (active) {
             case Constants.ACTIVE_SCHOOL_TEACHER:
-                self.active_school = Constants.FALSE;
                 self.active_report_teacher = Constants.TRUE;
                 self.active_school_teacher = Constants.TRUE;
                 self.export = Constants.TRUE;
                 break;
 
             case Constants.ACTIVE_SCHOOL:
-                self.active_school_teacher = Constants.FALSE;
                 self.active_report_teacher = Constants.TRUE;
                 self.active_school = Constants.TRUE;
+                self.export = Constants.TRUE;
+                break;
+
+            case Constants.ACTIVE_SCHOOL_TEACHER_PROGRESS:
+                self.active_report_teacher = Constants.TRUE;
+                self.active_school_teacher_progress = Constants.TRUE;
                 self.export = Constants.TRUE;
                 break;
 
@@ -51,6 +58,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 } else if (response.data) {
                     self.principal = response.data;
 
+                    self.getSubjects();
                     self.checkReport();
                     self.teacherReport();
                 }
@@ -157,6 +165,39 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         });
     }
 
+    //get report details
+    self.teacherSubjectProgressReport = function () {
+        self.errors = Constants.FALSE;
+        self.teacher_report = {};
+
+        $scope.ui_block();
+        ManagePrincipalContentService.schoolTeacherReport(self.principal.school_code).success(function(response){
+            if (angular.equals(response.status, Constants.STATUS_OK)) {
+                if (response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if (response.data) {
+                    self.teacher_report = response.data;
+
+                    //check if has data
+                    if(self.teacher_report.rows.length > 0){
+                        self.active_report_teacher = Constants.TRUE;
+                        self.active_school = Constants.TRUE;
+                        self.export = Constants.TRUE;
+                        self.active_purchase = Constants.FALSE;
+                    }
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
+    self.teacherSubjectReport = function () {
+
+    }
+
     ////export school report
     self.exportReport = function(file_type){
 
@@ -189,5 +230,47 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         $scope.ui_unblock();
     }
 
+    self.getSubjects = function () {
+        self.errors = Constants.FALSE;
+        self.subjects = {};
 
+        $scope.ui_block();
+        ManagePrincipalContentService.getSubjects().success(function(response){
+
+            if (angular.equals(response.status, Constants.STATUS_OK)) {
+                if (response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if (response.data) {
+                    self.subjects = response.data;
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
+    // returns true if currently selected subject is valid
+    self.isValidSubject = function () {
+        var valid = false;
+
+        for (var subject in self.subjects.records) {
+            if (subject === self.selected.subject_id) {
+                valid = true;
+                break;
+            }
+        }
+
+        return valid;
+    }
+
+    self.hasSubjects = function () {
+        return self.subjects.total > 0;
+    }
+
+    // temporary helper function for testing
+    self.logObject = function () {
+        console.log(self.hasSubjects());
+    }
 }

@@ -434,6 +434,8 @@ return [
 	'teacher_dashboard_student_list' => 'Student List',
 	'teacher_dashboard_module' => 'Module',
 	'teacher_comparison_progress' => 'Teacher Comparison Progress',
+    'teacher_subject_progress' => 'Teacher Subject Progress',
+    'teacher_subject_progress_report' => 'Teacher Subject Progress Report',
 	'teaching_content' => 'Teaching Module Content',
 	'teacher_management' => 'Teacher Management',
 	'teacher_invitation' => 'Teacher Invitation',

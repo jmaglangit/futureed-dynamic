@@ -12,7 +12,7 @@
             </div>
             <div class="col-xs-4">
                 <a class="dashboard-content-btn" href="{!! route('client.principal.teacher.index') !!}">
-                    <button  type="button">
+                    <button type="button">
                         {{ trans('messages.principal_dashboard_add_teacher') }}
                     </button>
                 </a>
@@ -39,14 +39,16 @@
     {{--Reports--}}
     <div ng-if="dashboard.active_report_teacher" ng-cloak>
         <div class="row client-export-button-container">
-            <div ng-if="dashboard.export" class="col-xs-12">
+            <div ng-if="dashbo  ard.export" class="col-xs-12">
                 <div class="btn-group export-buttons pull-right">
                     <button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-file-text-o"></i> {!! trans('messages.export') !!}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('pdf')">PDF</a></li>
-                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('xls')">Excel</a></li>
+                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('pdf')">PDF</a>
+                        </li>
+                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('xls')">Excel</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -54,12 +56,16 @@
 
         <div class="report-container">
             <ul class="nav nav-tabs report-nav" role="tablist">
-                <li class="col-xs-6 active"><a ng-click="dashboard.setActive('school')" aria-controls="home" role="tab"
+                <li class="col-xs-4 active"><a ng-click="dashboard.setActive('school')" aria-controls="home" role="tab"
                                                data-toggle="tab"><i
                                 class="fa fa-line-chart"></i> {!! trans('messages.overall_school_progress') !!}</a></li>
-                <li class="col-xs-6"><a ng-click="dashboard.setActive('school_teacher')" aria-controls="home" role="tab"
+                <li class="col-xs-4"><a ng-click="dashboard.setActive('school_teacher')" aria-controls="home" role="tab"
                                         data-toggle="tab"><i
                                 class="fa fa-tasks"></i> {!! trans('messages.teacher_comparison_progress') !!}</a></li>
+                <li class="col-xs-4"><a ng-click="dashboard.setActive('school_teacher_progress')" aria-controls="home"
+                                        role="tab"
+                                        data-toggle="tab"><i
+                                class="fa fa-tasks"></i> {!! trans('messages.teacher_subject_progress') !!}</a></li>
             </ul>
 
 
@@ -195,7 +201,44 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+            {{--School Teacher Subject Progress--}}
+            <div class="" ng-if="dashboard.active_school_teacher_progress">
+                <div>
+                    <div class="form-search">
+                        <div class="form-group">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-6">
+                                <select ng-model="dashboard.selected.subject_id"
+                                        ng-change="dashboard.logObject()"
+                                        ng-disabled="!dashboard.subjects.total"
+                                        class="form-control ng-pristine ng-valid ng-touched">
+                                    <option value="">
+                                        {!! trans('messages.select_subject') !!}
+                                    </option>
+                                    <option ng-repeat="subject in dashboard.subjects.records" ng-value="subject.id">
+                                        {! subject.name !}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
+                    <h3><i class="fa fa-file-text"></i> {!! trans('messages.teacher_subject_progress_report') !!}</h3>
+
+                    <div>
+                        <table class="table table-bordered">
+                            <tr class="magenta">
+                                <th width="30%"></th>
+                                <th ng-repeat="subject in dashboard.subjects.records"
+                                    class="ng-binding ng-scope">
+                                    {! subject.name !}
+                                </th>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
