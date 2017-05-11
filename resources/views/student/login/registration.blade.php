@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-<div class="student_background">
+<div id="studentBackground">
 	<div class="container login student-fnt" ng-controller="StudentLoginController as login"
 		ng-init="login.checkRegistration('{!! $email !!}', '{!! $code !!}', '{!! $id !!}', '{!! $registration_token !!}')">
 
