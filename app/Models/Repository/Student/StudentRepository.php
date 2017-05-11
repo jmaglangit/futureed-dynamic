@@ -136,6 +136,10 @@ class StudentRepository implements StudentRepositoryInterface
 
                             $query->select(['id', 'grade_id', 'client_id', 'seats_taken']);
 
+                        }])->with(['module' => function($query) {
+
+                            $query->select(['id', 'subject_area_id']);
+
                         }]);
 
                 }])->get();
