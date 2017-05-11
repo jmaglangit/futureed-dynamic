@@ -365,28 +365,60 @@ class SchoolReportController extends ReportController {
     public function getSchoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level) {
 
         // query subjects with modules and students with student modules from database
-        $subject = $this->subject->getASubjectWithModules($subject_id, $grade_level);
+        $subject = $this->subject->getASubjectWithAreas($subject_id, $grade_level);
         $students = $this->student->getStudentsWithModules($school_code, $subject_id, $grade_level);
 
         $additional_information = $this->getAdditionalInfo($school_code);
 
-        $column_header = $this->mapModules($subject->modules);
+        $numPages = $this->getNumPages(count($subject->subjectAreas));
+        $column_header = $this->mapAreas($subject->subjectAreas, $numPages);
 
         $rows = array();
+
+        $subject_area_count = $this->mapSubjectAreaCount($subject->subjectAreas);
 
         // iterates through each student to determine their progress in each module
         foreach ($students as $student) {
 
-            $student_progress = $this->initializeModuleBins(array_keys($column_header));
+            $student_progress = $this->initializeAreaBins($column_header);
 
             // iterates though each of the student's modules
-            foreach($student->studentModule as $module) {
+            foreach($student->studentModule as $student_module) {
 
                 // filters the modules by grade_level and by teacher
-                if ($module->classroom->grade_id == $grade_level &&
-                    $module->classroom->client_id == $teacher_id)
+                if ($student_module->classroom->grade_id == $grade_level &&
+                    $student_module->classroom->client_id == $teacher_id) {
 
-                    $student_progress[$module->module_id] = $module->progress;
+                    // iterates every page
+                    foreach (array_keys($student_progress) as $page_num) {
+
+                        // if the subject_area_id exists as a key, then adds the progress to student_progress
+                        if (array_key_exists($student_module->module->subject_area_id, $student_progress[$page_num])) {
+
+                            $student_progress[$page_num][$student_module->module->subject_area_id]
+                                += $student_module->progress;
+
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            // iterates through each page via page_num
+            foreach (array_keys($student_progress) as $page_num) {
+
+                // iterates through the page's progress/records via subject_area_id
+                foreach (array_keys($student_progress[$page_num]) as $subject_area_id) {
+
+                    $student_progress[$page_num][$subject_area_id] /= $subject_area_count[$subject_area_id];
+                    // drops the decimal value and converts to integer
+                    $student_progress[$page_num][$subject_area_id] = (int)$student_progress[$page_num][$subject_area_id];
+
+                }
 
             }
 
@@ -414,32 +446,72 @@ class SchoolReportController extends ReportController {
     public function getSchoolStudentSubjectScores($school_code, $teacher_id, $subject_id, $grade_level) {
 
         // query subjects with modules and students with student modules from database
-        $subject = $this->subject->getASubjectWithModules($subject_id, $grade_level);
+        $subject = $this->subject->getASubjectWithAreas($subject_id, $grade_level);
         $students = $this->student->getStudentsWithModules($school_code, $subject_id, $grade_level);
 
         $additional_information = $this->getAdditionalInfo($school_code);
 
-        $column_header = $this->mapModules($subject->modules);
+        $numPages = $this->getNumPages(count($subject->subjectAreas));
+        $column_header = $this->mapAreas($subject->subjectAreas, $numPages);
 
         $rows = array();
 
         // iterates through each student to determine their score in each module
         foreach ($students as $student) {
 
-            $student_progress = $this->initializeModuleBins(array_keys($column_header));
+            $student_scores = $this->initializeAreaBins($column_header);
+            $subject_area_count = $this->initializeAreaCountBins($subject->subjectAreas);
 
             // iterates though each of the student's modules
-            foreach($student->studentModule as $module) {
+            foreach ($student->studentModule as $student_module) {
 
                 // filters the modules by grade_level and by teacher
-                if ($module->classroom->grade_id == $grade_level &&
-                    $module->classroom->client_id == $teacher_id)
+                if ($student_module->classroom->grade_id == $grade_level &&
+                    $student_module->classroom->client_id == $teacher_id) {
 
-                    $student_progress[$module->module_id] = $module->correct_counter / $module->question_counter;
+                    // iterates every page
+                    foreach (array_keys($student_scores) as $page_num) {
+
+                        // if the subject_area_id exists as a key, then adds the progress to student_progress
+                        if (array_key_exists($student_module->module->subject_area_id, $student_scores[$page_num])) {
+
+                            $student_scores[$page_num][$student_module->module->subject_area_id]
+                                += $student_module->correct_counter / $student_module->question_counter;
+
+                            $subject_area_count[$student_module->module->subject_area_id]++;
+
+                            break;
+
+                        }
+
+                    }
+
+                }
 
             }
 
-            $rows[$student->first_name . ' ' . $student->last_name] = $student_progress;
+//            dd($subject_area_count);
+
+            // iterates through each page via page_num
+            foreach (array_keys($student_scores) as $page_num) {
+
+                // iterates through the page's progress/records via subject_area_id
+                foreach (array_keys($student_scores[$page_num]) as $subject_area_id) {
+
+                    if ($subject_area_count[$subject_area_id] > 0) {
+
+                        $student_scores[$page_num][$subject_area_id] /= $subject_area_count[$subject_area_id];
+                        $student_scores[$page_num][$subject_area_id] *= 100;
+                        // drops the decimal value and converts to integer
+                        $student_scores[$page_num][$subject_area_id] = (int)$student_scores[$page_num][$subject_area_id];
+
+                    }
+
+                }
+
+            }
+
+            $rows[$student->first_name . ' ' . $student->last_name] = $student_scores;
 
         }
 
@@ -473,16 +545,56 @@ class SchoolReportController extends ReportController {
 
     /**
      * Creates and array of key value pairs of module id (key) and module name (value)
-     * @param $modules
+     * @param $subject_areas
+     * @param $num_pages
      * @return array
      */
-    private function mapModules($modules) {
+    private function mapAreas($subject_areas, $num_pages) {
+
+        $map = array();
+        $sub_map = array();
+
+        $max_per_page = $this->getMaxPerPage(count($subject_areas), $num_pages);
+
+        $page_num = 1;
+
+        $entry_count = 0;
+
+        foreach ($subject_areas as $subject_area) {
+
+            if ($entry_count >= $max_per_page) {
+
+                $entry_count = 0;
+                $map[$page_num++] = $sub_map;
+                $sub_map = array();
+
+            }
+
+            $sub_map[$subject_area->id] = $subject_area->name;
+
+            $entry_count++;
+
+        }
+
+        if (count($sub_map) > 0)
+            $map[$page_num] = $sub_map;
+
+        return $map;
+
+    }
+
+    /**
+     *
+     * @param $subject_areas
+     * @return array
+     */
+    private function mapSubjectAreaCount($subject_areas) {
 
         $map = array();
 
-        foreach ($modules as $module) {
+        foreach ($subject_areas as $subject_area) {
 
-            $map[$module->id] = $module->name;
+            $map[$subject_area->id] = $subject_area->moduleCount->count;
 
         }
 
@@ -533,7 +645,30 @@ class SchoolReportController extends ReportController {
 
     }
 
+    /**
+     * Gets the maximum number of pages based on a MAX value.
+     * @param $count
+     * @return int
+     */
+    private function getNumPages($count) {
 
+        $MAX = 10;
+
+        return (int) ceil($count / $MAX);
+
+    }
+
+    /**
+     * Gets the maximum number of pages given the number/count of items and maximum number of pages.
+     * @param $count
+     * @param $num_pages
+     * @return int
+     */
+    private function getMaxPerPage($count, $num_pages) {
+
+        return (int) ceil($count / $num_pages);
+
+    }
 
     /**
      * Initializes an array of key value pairs of subject id (key) and initial values of 0.
@@ -556,20 +691,51 @@ class SchoolReportController extends ReportController {
 
     /**
      * Initializes an array of key value pairs of module id (key) and initial values of 0.
-     * @param $modules
+     * Elements are paginated based on the column header.
+     * @param $column_header
      * @return array
+     * @internal param $modules
      */
-    private function initializeModuleBins($modules) {
+    private function initializeAreaBins($column_header) {
 
         $arr = array();
 
-        foreach ($modules as $module) {
+        $pageNum = 1;
 
-            $arr[$module] = 0;
+        foreach ($column_header as $page) {
+
+            $sub_arr = array();
+
+            foreach (array_keys($page) as $subject_area_id) {
+
+                $sub_arr[$subject_area_id] = 0;
+
+            }
+
+            $arr[$pageNum++] = $sub_arr;
 
         }
 
         return $arr;
+
+    }
+
+    /**
+     *
+     * @param $subject_areas
+     * @return array
+     */
+    private function initializeAreaCountBins($subject_areas) {
+
+        $map = array();
+
+        foreach ($subject_areas as $subject_area) {
+
+            $map[$subject_area->id] = 0;
+
+        }
+
+        return $map;
 
     }
 
