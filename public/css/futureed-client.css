@@ -803,6 +803,20 @@ content legend {
 	border-radius: 50%;
 }
 
+.report-teacher-title {
+	float: left; margin: 0 auto;
+}
+
+.report-selector-container {
+	margin: 20px auto;
+}
+
+.report-student-selectors {
+	width: 33%;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
 /*subject-area tab*/
 .subject-area .table {border-top:none;}
 

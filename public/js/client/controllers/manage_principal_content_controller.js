@@ -9,16 +9,30 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     // collection of options used in the drop down list
     self.subjects = {};
     self.grades = {};
+    self.teachers = {};
 
     // selected values from drop down list
     self.selected = {};
-    self.selected.subject_id = -1;
-    self.selected.grade_id = -1;
 
-    self.initSelection = function () {
-        self.selected.subject_id = -1;
-        self.selected.grade_id = -1;
-    }
+    self.selected.teacher_progress = {};
+    self.selected.teacher_progress.grade_id = "";
+
+    self.selected.teacher_scores = {};
+    self.selected.teacher_scores.grade_id = "";
+
+    self.selected.student_progress = {};
+    self.selected.student_progress.subject_id = "";
+    self.selected.student_progress.grade_id = "";
+    self.selected.student_progress.teacher_id = "";
+
+    self.number_of_pages = {};
+    self.number_of_pages.student_progress = {};
+
+    self.current_page = {};
+    self.current_page.student_progress = {};
+
+    self.number_of_pages = {};
+    self.number_of_pages.student_progress = {};
 
     //set active controller
     self.setActive = function (active) {
@@ -28,6 +42,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.active_school_teacher = Constants.FALSE;
         self.active_school_teacher_progress = Constants.FALSE;
         self.active_school_teacher_scores = Constants.FALSE;
+        self.active_school_student_progress = Constants.FALSE;
         self.export = Constants.FALSE;
         self.active_purchase = Constants.FALSE;
 
@@ -56,6 +71,12 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 self.export = Constants.TRUE;
                 break;
 
+            case Constants.ACTIVE_SCHOOL_STUDENT_PROGRESS:
+                self.active_report_teacher = Constants.TRUE;
+                self.active_school_student_progress = Constants.TRUE;
+                self.export = Constants.TRUE;
+                break;
+
             default:
                 self.getPrincipal();
                 break;
@@ -75,10 +96,9 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 } else if (response.data) {
                     self.principal = response.data;
 
-                    console.dir(self.principal);
-
                     self.getGrades();
                     self.getSubjects();
+                    self.getTeachers();
 
                     self.checkReport();
                     self.teacherReport();
@@ -191,10 +211,10 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.errors = Constants.FALSE;
         self.teacher_subject_progress_report = {};
 
-        if (self.isValidGrade()) {
+        if (self.isValidGrade(self.selected.teacher_progress.grade_id)) {
             $scope.ui_block();
             ManagePrincipalContentService.schoolTeacherSubjectProgressReport
-                (self.principal.school_code, self.selected.grade_id)
+                (self.principal.school_code, self.selected.teacher_progress.grade_id)
                 .success(function (response) {
                 if (angular.equals(response.status, Constants.STATUS_OK)) {
                     if (response.errors) {
@@ -222,49 +242,14 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         }
     }
 
-    self.teacherSubjectProgressReport = function () {
-        self.errors = Constants.FALSE;
-        self.teacher_subject_progress_report = {};
-
-        if (self.isValidGrade()) {
-            $scope.ui_block();
-            ManagePrincipalContentService.schoolTeacherSubjectProgressReport
-            (self.principal.school_code, self.selected.grade_id)
-                .success(function (response) {
-                    if (angular.equals(response.status, Constants.STATUS_OK)) {
-                        if (response.errors) {
-                            self.errors = $scope.errorHandler(response.errors);
-                        } else if (response.data) {
-                            self.teacher_subject_progress_report = response.data;
-
-                            //check if has data
-                            if (self.teacher_subject_progress_report.rows.length > 0) {
-                                self.active_report_teacher = Constants.TRUE;
-                                self.active_school_teacher_progress = Constants.TRUE;
-                                self.export = Constants.TRUE;
-                                self.active_purchase = Constants.FALSE;
-                            }
-                        }
-                    }
-                    $scope.ui_unblock();
-                }).error(function (response) {
-                self.errors = $scope.internalError();
-                $scope.ui_unblock();
-            });
-            self.teacher_subject_progress_table = Constants.TRUE;
-        } else {
-            self.teacher_subject_progress_table = Constants.FALSE;
-        }
-    }
-
     self.teacherSubjectScoresReport = function () {
         self.errors = Constants.FALSE;
         self.teacher_subject_scores_report = {};
 
-        if (self.isValidGrade()) {
+        if (self.isValidGrade(self.selected.teacher_scores.grade_id)) {
             $scope.ui_block();
             ManagePrincipalContentService.schoolTeacherSubjectScoresReport
-            (self.principal.school_code, self.selected.grade_id)
+            (self.principal.school_code, self.selected.teacher_scores.grade_id)
                 .success(function (response) {
                     if (angular.equals(response.status, Constants.STATUS_OK)) {
                         if (response.errors) {
@@ -286,9 +271,48 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 self.errors = $scope.internalError();
                 $scope.ui_unblock();
             });
-            self.teacher_subject_progress_table = Constants.TRUE;
         } else {
-            self.teacher_subject_progress_table = Constants.FALSE;
+        }
+    }
+    
+    self.studentSubjectProgressReport = function () {
+        self.errors = Constants.FALSE;
+        self.student_subject_progress_report = {};
+
+        if (self.isValidSubject(self.selected.student_progress.subject_id)
+            && self.isValidGrade(self.selected.student_progress.grade_id)
+            && self.isValidTeacher(self.selected.student_progress.teacher_id)) {
+
+            $scope.ui_block();
+            ManagePrincipalContentService.schoolStudentSubjectProgressReport
+            (self.principal.school_code, self.selected.student_progress.teacher_id,
+                self.selected.student_progress.subject_id, self.selected.student_progress.grade_id)
+                .success(function (response) {
+                    if (angular.equals(response.status, Constants.STATUS_OK)) {
+                        if (response.errors) {
+                            self.errors = $scope.errorHandler(response.errors);
+                        } else if (response.data) {
+                            self.student_subject_progress_report = response.data;
+
+                            self.number_of_pages.student_progress = Object.keys(self.student_subject_progress_report.column_header).length;
+
+                            self.current_page.student_progress = 1;
+
+                            //check if has data
+                            if (self.student_subject_progress_report.rows.length > 0) {
+                                self.active_report_teacher = Constants.TRUE;
+                                self.active_school_student_progress = Constants.TRUE;
+                                self.export = Constants.TRUE;
+                                self.active_purchase = Constants.FALSE;
+                            }
+                        }
+                    }
+                    $scope.ui_unblock();
+                }).error(function (response) {
+                self.errors = $scope.internalError();
+                $scope.ui_unblock();
+            });
+        } else {
         }
     }
 
@@ -336,7 +360,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
                     self.grades = response.data;
-                    console.dir(self.grades);
                 }
             }
             $scope.ui_unblock();
@@ -367,16 +390,54 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         });
     }
 
+    self.getTeachers = function () {
+        self.errors = Constants.FALSE;
+        self.teachers = {};
+
+        $scope.ui_block();
+        ManagePrincipalContentService.getTeachers(self.principal.school_code).success(function (response) {
+
+            if (angular.equals(response.status, Constants.STATUS_OK)) {
+                if (response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if (response.data) {
+                    self.teachers = response.data;
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function (response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
     self.subjectColumnWidth = function (remaining) {
         return remaining / self.subjects.records.length;
     }
+
+    self.subjectAreaColumnWidth = function (key, remaining) {
+        var num_pages = -1;
+
+        switch (key) {
+            case 'progress':
+                // set 1 to current page number instead
+                num_pages = Object.keys(
+                    self.student_subject_progress_report.column_header[
+                        self.current_page.student_progress]).length;
+                break;
+        }
+
+        return remaining / num_pages;
+    }
     
     // returns true if currently selected grade is valid
-    self.isValidGrade = function () {
+    self.isValidGrade = function (selected_id) {
         var valid = false;
 
+        var id = parseInt(selected_id);
+
         for (var i = 0; i < self.grades.records.length; i++) {
-            if (self.grades.records[i].id === parseInt(self.selected.grade_id)) {
+            if (self.grades.records[i].id === id) {
                 valid = true;
                 break;
             }
@@ -386,11 +447,29 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     }
 
     // returns true if currently selected subject is valid
-    self.isValidSubject = function () {
+    self.isValidSubject = function (selected_id) {
         var valid = false;
 
+        var id = parseInt(selected_id);
+
         for (var i = 0; i < self.subjects.records.length; i++) {
-            if (self.subjects.records[i].id === parseInt(self.selected.subject_id)) {
+            if (self.subjects.records[i].id === id) {
+                valid = true;
+                break;
+            }
+        }
+
+        return valid;
+    }
+
+    // returns true if currently selected subject is valid
+    self.isValidTeacher = function (selected_id) {
+        var valid = false;
+
+        var id = parseInt(selected_id);
+
+        for (var i = 0; i < self.teachers.records.length; i++) {
+            if (self.teachers.records[i].id === id) {
                 valid = true;
                 break;
             }
@@ -406,9 +485,24 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.hasSubjects = function () {
         return self.subjects.total > 0;
     }
+    
+    self.hasTeachers = function () {
+        return self.teachers.total > 0;
+    }
+
+    self.teacherName = function (teacher) {
+        return teacher.first_name + ' ' + teacher.last_name;
+    }
+
+
+
     // temporary helper function for testing
-    self.logObject = function () {
-        //console.log(self.hasGrades());
-        console.log('hewo');
+    self.logObject = function (obj) {
+        console.dir(obj);
+    }
+
+    self.switch = function () {
+        self.number_of_pages.student_progress = 2;
+        console.dir(self.number_of_pages.student_progress);
     }
 }
