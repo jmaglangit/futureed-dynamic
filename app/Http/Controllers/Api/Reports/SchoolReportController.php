@@ -652,7 +652,7 @@ class SchoolReportController extends ReportController {
      */
     private function getNumPages($count) {
 
-        $MAX = 10;
+        $MAX = 6;
 
         return (int) ceil($count / $MAX);
 
