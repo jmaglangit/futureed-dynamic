@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-<div class="student_background">
+<div id="studentBackground">
 	<div class="container login student-fnt" ng-controller="StudentPasswordController as password" 
 		ng-init="password.checkForgotPasswordLink('{!! $email !!}')" ng-cloak>
 

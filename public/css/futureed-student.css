@@ -2765,22 +2765,22 @@ canvas#world {
     height: auto;
 }
 
-.student_background {
+#studentBackground {
     background: url("/images/student_page_bg.jpg") no-repeat scroll right bottom / cover;
     background-attachment: fixed;
     background-position-y: center;
     background-position-x: center;
-    min-height: 650px;
+    min-height: 100vh;
 }
 
-@media(max-height: 760px){
-    .student_background {
-        min-height: 650px;
+@media only screen and (min-width: 600px){
+    #studentBackground {
+        min-height: 100vh;
     }
 }
 
-@media only screen and (min-height: 1080px) and (min-width: 1920px) {
-    .student_background {
-        min-height: 1000px;
+@media only screen and (min-width: 1400px){
+    #studentBackground {
+        min-height: 100vh;
     }
 }
