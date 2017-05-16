@@ -114,13 +114,11 @@ class SchoolReportRestController extends ReportController {
         $report = $this->school_report
             ->getSchoolStudentSubjectScores($school_code, $teacher_id, $subject_id, $grade_level);
 
-        return $report;
-
-//        return $this->respondReportData(
-//            $report['additional_information'],
-//            $report['column_header'],
-//            $report['rows']
-//        );
+        return $this->respondReportData(
+            $report['additional_information'],
+            $report['column_header'],
+            $report['rows']
+        );
 
     }
 
