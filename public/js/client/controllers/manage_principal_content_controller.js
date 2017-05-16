@@ -298,8 +298,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
             && self.isValidGrade(self.selected.student_progress.grade_id)
             && self.isValidTeacher(self.selected.student_progress.teacher_id)) {
 
-            console.dir('wtf0');
-
             $scope.ui_block();
             ManagePrincipalContentService.schoolStudentSubjectProgressReport
             (self.principal.school_code, self.selected.student_progress.teacher_id,
@@ -308,12 +306,9 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                     console.dir(response);
                     if (angular.equals(response.status, Constants.STATUS_OK)) {
                         if (response.errors) {
-                            console.dir('wtf0.5');
                             self.errors = $scope.errorHandler(response.errors);
                         } else if (response.data) {
                             self.student_subject_progress_report = response.data;
-
-                            console.dir('wtf1');
 
                             self.number_of_pages.student_progress = Object.keys(self.student_subject_progress_report.column_header).length;
 
@@ -330,44 +325,31 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                     }
                     $scope.ui_unblock();
                 }).error(function (response) {
-                console.dir('wtf2');
                 self.errors = $scope.internalError();
                 $scope.ui_unblock();
             });
         } else {
         }
-        console.dir('wtf3');
     }
 
     self.studentSubjectScoresReport = function () {
         self.errors = Constants.FALSE;
         self.student_subject_scores_report = {};
 
-        console.dir(self.isValidSubject(self.selected.student_scores.subject_id));
-        console.dir(self.isValidGrade(self.selected.student_scores.grade_id));
-        console.dir(self.isValidTeacher(self.selected.student_scores.teacher_id));
-
         if (self.isValidSubject(self.selected.student_scores.subject_id)
             && self.isValidGrade(self.selected.student_scores.grade_id)
             && self.isValidTeacher(self.selected.student_scores.teacher_id)) {
-
-            console.dir('wtf0');
 
             $scope.ui_block();
             ManagePrincipalContentService.schoolStudentSubjectScoresReport
             (self.principal.school_code, self.selected.student_scores.teacher_id,
                 self.selected.student_scores.subject_id, self.selected.student_scores.grade_id)
                 .success(function (response) {
-                    console.dir(response);
                     if (angular.equals(response.status, Constants.STATUS_OK)) {
                         if (response.errors) {
-                            console.dir('wtf0.5');
                             self.errors = $scope.errorHandler(response.errors);
                         } else if (response.data) {
                             self.student_subject_scores_report = response.data;
-
-                            console.dir('wtf1');
-                            console.dir(self.student_subject_scores_report);
 
                             self.number_of_pages.student_scores = Object.keys(self.student_subject_scores_report.column_header).length;
 
@@ -381,17 +363,14 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                                 self.active_purchase = Constants.FALSE;
                             }
                         }
-                        console.dir('wtf1.5');
                     }
                     $scope.ui_unblock();
                 }).error(function (response) {
                 self.errors = $scope.internalError();
-                console.dir('wtf2');
                 $scope.ui_unblock();
             });
         } else {
         }
-        console.dir('wtf3');
     }
 
     ////export school report
@@ -498,13 +477,11 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
         switch (key) {
             case 'progress':
-                // set 1 to current page number instead
                 num_pages = Object.keys(
                     self.student_subject_progress_report.column_header[
                         self.current_page.student_progress]).length;
                 break;
             case 'scores':
-                // set 1 to current page number instead
                 num_pages = Object.keys(
                     self.student_subject_scores_report.column_header[
                         self.current_page.student_scores]).length;
@@ -578,14 +555,4 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         return teacher.first_name + ' ' + teacher.last_name;
     }
 
-
-    // temporary helper function for testing
-    self.logObject = function (obj) {
-        console.dir(obj);
-    }
-
-    self.switch = function () {
-        self.number_of_pages.student_progress = 2;
-        console.dir(self.number_of_pages.student_progress);
-    }
 }
