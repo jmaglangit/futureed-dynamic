@@ -38,7 +38,7 @@ class ClassStudent extends Model {
 	public function student()
 	{
 
-		return $this->belongsTo('FutureEd\Models\Core\Student', 'id')->with('user');
+		return $this->belongsTo('FutureEd\Models\Core\Student')->with('user');
 	}
 
 	public function classroom()
