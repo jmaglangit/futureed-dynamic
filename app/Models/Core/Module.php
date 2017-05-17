@@ -39,6 +39,8 @@ class Module extends Model
 		'description',
 		'common_core_area',
 		'common_core_url',
+		'no_difficulty',
+		'is_dynamic',
 		'points_to_unlock',
 		'points_to_finish',
 		'translatable',
@@ -69,16 +71,7 @@ class Module extends Model
 
 	//Mutators
 
-	//Translations
-	public function setNameAttribute($value){
-
-		return $this->setModuleTranslation($this->attributes['id'],$value,'name');
-	}
-
-	public function setDescriptionAttribute($value){
-
-		return $this->setModuleTranslation($this->attributes['id'],$value,'description');
-	}
+	//Translations -- transfered to observers
 
 
 	/**
@@ -136,7 +129,7 @@ class Module extends Model
 	}
 
 	public function moduleCountry(){
-		return $this->hasMany('FutureEd\Models\Core\ModuleCountry');
+		return $this->hasMany('FutureEd\Models\Core\ModuleCountry','module_id','id');
 	}
 
 	public function country(){
@@ -165,6 +158,11 @@ class Module extends Model
 
 		return $query->where('grade_id', '=',  $grade_id );
 
+	}
+
+	public function scopeDynamic($query){
+
+		return $query->where('is_dynamic',1);
 	}
 
 	public function scopeLocale($query,$locale){

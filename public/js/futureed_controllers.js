@@ -303,6 +303,34 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
+	$scope.getGrade = function(grade_id){
+		apiService.getGrade(grade_id).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$scope.grade = response.data;
+				}
+			}
+		}).error(function(response) {
+		$scope.internalError();
+	});
+	}
+
+	$scope.getGrades = function(){
+		apiService.getGrades().success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$scope.grade_lists = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			$scope.internalError();
+		});
+	}
+
 	$scope.getGradeCountry = function(country_id,module_id,grade_id,subject_id) {
 		$scope.module_countries = Constants.FALSE;
 

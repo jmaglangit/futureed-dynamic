@@ -130,6 +130,21 @@ function ManageInvoiceController($scope, ManageInvoiceService, apiService, Table
 		});
 	}
 
+	self.updateOrderDates = function(data){
+		var dates = {
+			date_start	: 	data.date_start,
+			date_end	:	data.date_end
+		};
+		ManageInvoiceService.updateOrder(data.order_id,dates).success(function(response){
+			if(response.errors){
+				self.errors = $scope.errorHandler(response.errors);
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	self.updateStatus = function() {
 		self.fields = [];
 		self.errors = Constants.FALSE;
@@ -141,10 +156,21 @@ function ManageInvoiceController($scope, ManageInvoiceService, apiService, Table
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 
+
 					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
+					self.order = response.data;
+
+					//update order date_start and date_end if renewed
+					var order_update = {
+						order_id        : self.order.order.id,
+						date_start      : moment(self.order.date_start).format('YYYYMMDD'),
+						date_end        : moment(self.order.date_end).format('YYYYMMDD')
+					};
+
+					self.updateOrderDates(order_update);
 					self.success = Constants.UPDATE_PAYMENT_STATUS_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW);
 				}

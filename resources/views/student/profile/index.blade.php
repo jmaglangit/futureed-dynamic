@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-cloak>
+<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-init="profile.updateBackground();" ng-cloak>
 
   	<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
@@ -34,7 +34,7 @@
                             )
                         ) !!}
 						<div class="pcon">
-							<span>{! (user.points - user.points_used) !}</span> {!! trans('messages.points') !!}
+							<span>{! (user.cash_points) !}</span> {!! trans('messages.points') !!}
 						</div>
 						<a href="javascript:;" ng-click="profile.setStudentProfileActive('rewards')" class="lnk">{!! trans('messages.see_all_points') !!}</a>
 					</div>

@@ -65,10 +65,13 @@ var Constants = {
 	, DASHBOARD		: "Dashboard"
 	, WRONG			: "Wrong"
 	, CORRECT		: "Correct"
+	, FAILED		: "Failed"
+	, RETAKE		: "Retake"
 
 	, HIDE_MODULE	: "Hide Module"
 
 	, TRIAL_QUESTIONS	:10
+	, ERROR_MSG	: 2
 
 	/**
 	 * Subscription filters

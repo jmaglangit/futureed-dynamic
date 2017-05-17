@@ -579,11 +579,11 @@
 579,536,1,0,545,Assessment 2,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 580,537,1,0,546,Assessment 3,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 581,538,1,0,547,Assessment 4,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-582,539,1,0,548,,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-583,540,1,0,549,,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-584,541,1,0,550,,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-585,542,1,0,551,,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-586,543,1,0,552,,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+582,539,1,0,548,Two variable equation,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+583,540,1,0,549,Expression basic,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+584,541,1,0,550,Inequalities,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+585,542,1,0,551,Expressions using tables,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+586,543,1,0,552,Expressions using math terms,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 587,544,1,0,553,Math signs,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 588,545,0,0,554,Assessment 1,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 589,546,0,0,555,Assessment 2,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
@@ -669,10 +669,10 @@
 669,626,2,0,635,Parenthesis,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 670,627,2,0,636,Perfect Continuous Tense,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 671,628,2,0,637,words with different meanings,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-672,629,2,0,638,Similes,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-673,630,2,0,639,Double Negatives,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-674,631,2,0,640,Double Negatives,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
-675,632,2,0,641,Abbreviations,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+672,629,1,0,638,Expressions and operations,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+673,630,1,0,639,Symmetric changes,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+674,631,1,0,640,Expressions with decimals,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
+675,632,1,0,641,Expressions with fractions,,1,,,seed,2,Enabled,1,1,NULL,1/13/2017 5:53:00,1/13/2017 5:53:00
 676,633,0,0,,No module,,1,,,,,Enabled,1,1,NULL,,
 677,634,0,0,,No module,,1,,,,,Enabled,1,1,NULL,,
 678,635,0,0,,No module,,1,,,,,Enabled,1,1,NULL,,

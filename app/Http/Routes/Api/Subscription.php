@@ -28,6 +28,11 @@ Routes::group([
     Routes::post('/pay-subscription', [
         'uses' => 'Api\v1\PaymentSubscriptionController@paySubscription',
         'as' => 'subscription.pay']);
+
+    Routes::get('/subscription-package/countries',[
+        'uses' => 'Api\v1\SubscriptionPackageController@getSubscriptionCountries',
+        'as' => 'subscription-package.countries'
+    ]);
 });
 
 

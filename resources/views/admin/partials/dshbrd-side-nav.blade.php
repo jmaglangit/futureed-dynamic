@@ -39,6 +39,11 @@
             <li>
                 <a href="{!! route('admin.manage.grades.index') !!}" ng-init="grade.setActive()"><span><i class="fa fa-book"></i>{{ trans_choice('messages.grade', 1) }}</span></a>
             </li>
+
+            <li>
+                <a href="{!! route('admin.manage.question_template.index') !!}" ng-init="template.setActive()"><span><i class="fa fa-book"></i>{{ trans_choice('messages.template', 1) }}</span></a>
+            </li>
+
             <li>
                 <a href="{!! route('admin.manage.module.index') !!}" ng-init="module.setManageModuleActive()"><span><i class="fa fa-cubes"></i>{{ trans_choice('messages.module', 1) }}</span></a>
             </li>

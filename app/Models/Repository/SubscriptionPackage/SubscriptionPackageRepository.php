@@ -44,6 +44,10 @@ class SubscriptionPackageRepository implements SubscriptionPackageRepositoryInte
 				$subscription_package = $subscription_package->status($criteria['status']);
 			}
 
+			if(isset($criteria['trial']) && $criteria['trial'] == 1){
+				$subscription_package = $subscription_package->statusTrial();
+			}
+
 			$subscription_package = $subscription_package->with('subject','subscription_day','country','subscription');
 
 			$count = $subscription_package->count();

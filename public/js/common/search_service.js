@@ -65,6 +65,10 @@ function SearchService() {
 					, created				: 	Constants.EMPTY_STR
 					, question_type			: 	Constants.EMPTY_STR
 					, questions_text		: 	Constants.EMPTY_STR
+					, question_form			: 	Constants.EMPTY_STR
+					, operation				: 	Constants.EMPTY_STR
+					, question_template_format		: 	Constants.EMPTY_STR
+					, question_equation		: 	Constants.EMPTY_STR
 				}
 			}
 		})

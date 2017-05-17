@@ -107,6 +107,20 @@ trait TranslationTrait {
 	}
 
 	/**
+	 * When new record is added.
+	 * @param $values
+	 * @return static
+	 */
+	public function addModuleTranslation($values){
+
+		$values['locale'] = App::getLocale();
+
+		$translation = ModuleTranslation::create($values);
+
+		return (!empty($translation)) ? $translation : $values;
+	}
+
+	/**
 	 * Get Module Translation of the column.
 	 * @param $primary_key
 	 * @param $value
@@ -128,10 +142,10 @@ trait TranslationTrait {
 	 * @param $column
 	 * @return mixed
 	 */
-	public function setModuleTranslation($primary_key,$value,$column){
+	public function setModuleTranslation($primary_key,$value){
 
 		$translation = ModuleTranslation::where('module_id',$primary_key)
-			->where('locale',App::getLocale())->update([$column => $value]);
+			->where('locale',App::getLocale())->update($value);
 
 		return (!empty($translation)) ? $translation : $value;
 	}

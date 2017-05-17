@@ -543,7 +543,7 @@ content legend {
 }
 
 .report-empty-column{
-	background-color: #FFFFff;
+	background-color: #AC2A4E;
 	border-top: 0px;
 	border-left: 0px;
 }
@@ -955,4 +955,7 @@ content legend {
 	.reports .nav-student li {
 		width: 110px !important;
 	}
+}
+.reg-info {
+    text-align: center;
 }

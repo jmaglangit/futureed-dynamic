@@ -1,6 +1,7 @@
 @extends('student.app')
 
 @section('content')
+<div id="studentBackground">
 	<div class="container login" ng-controller="StudentPasswordController as password" 
 		ng-init="password.setPasswordStatus('{!! $id !!}', '{!! $reset_code !!}')" ng-cloak>
 
@@ -71,6 +72,7 @@
 			) !!}
 		</div>
 	</div>
+</div>
 @endsection
 
 @section('scripts')

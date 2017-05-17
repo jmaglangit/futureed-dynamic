@@ -5,7 +5,7 @@
             <div class="row questions-header col-xs-12">
                 <div class="row col-xs-3">
                     <button type="button"
-                            class="btn btn-gold next-btn left-0 top-6"
+                            class="btn btn-sky-blue next-btn left-0 top-6"
                             ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')"> {{ trans('messages.exit_module') }} </button>
                 </div>
 

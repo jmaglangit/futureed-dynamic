@@ -88,6 +88,21 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getGrade = function(id){
+				return $http({
+					method	:	Constants.METHOD_GET,
+					url		:	futureedAPIUrl + 'grade/' + id
+				});
+		}
+
+		futureedAPI.getGrades = function(){
+			return $http({
+				method	:	Constants.METHOD_GET,
+				url		:	futureedAPIUrl + 'grade?country_id=all'
+			});
+		}
+
+
 		// Student Please
 		futureedAPI.validateUsername = function(username, user_type) {
 			return $http({
