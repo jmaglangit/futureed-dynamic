@@ -261,7 +261,7 @@ class SchoolReportController extends ReportController {
 
                 $teacher_progress[$subject_id] += $this->getClassroomProgress($classroom);
                 $total_progress[$subject_id] +=
-                    $subjects[$column_header[$subject_id]]->moduleCount->count * 100;
+                    $subjects[$column_header[$subject_id]]->moduleCount->count * $classroom->seats_taken *100;
 
             }
 
@@ -636,8 +636,12 @@ class SchoolReportController extends ReportController {
 
         foreach ($classroom->studentModule as $student_module) {
 
-            $response['score'] += $student_module->correct_counter / $student_module->question_counter;
-            $response['count']++;
+            if ($student_module->question_counter !== 0) {
+
+                $response['score'] += $student_module->correct_counter / $student_module->question_counter;
+                $response['count']++;
+
+            }
 
         }
 
