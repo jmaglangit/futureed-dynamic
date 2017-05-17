@@ -386,7 +386,7 @@ class SchoolReportController extends ReportController {
             foreach($student->studentModule as $student_module) {
 
                 // filters the modules by grade_level and by teacher
-                if ($student_module->classroom->grade_id == $grade_level &&
+                if ($student_module->module->grade_id == $grade_level &&
                     $student_module->classroom->client_id == $teacher_id) {
 
                     // iterates every page
@@ -466,7 +466,7 @@ class SchoolReportController extends ReportController {
             foreach ($student->studentModule as $student_module) {
 
                 // filters the modules by grade_level and by teacher
-                if ($student_module->classroom->grade_id == $grade_level &&
+                if ($student_module->module->grade_id == $grade_level &&
                     $student_module->classroom->client_id == $teacher_id) {
 
                     // iterates every page
@@ -475,10 +475,14 @@ class SchoolReportController extends ReportController {
                         // if the subject_area_id exists as a key, then adds the progress to student_progress
                         if (array_key_exists($student_module->module->subject_area_id, $student_scores[$page_num])) {
 
-                            $student_scores[$page_num][$student_module->module->subject_area_id]
-                                += $student_module->correct_counter / $student_module->question_counter;
+                            if ($student_module->question_counter !== 0) {
 
-                            $subject_area_count[$student_module->module->subject_area_id]++;
+                                $student_scores[$page_num][$student_module->module->subject_area_id]
+                                    += $student_module->correct_counter / $student_module->question_counter;
+
+                                $subject_area_count[$student_module->module->subject_area_id]++;
+
+                            }
 
                             break;
 
