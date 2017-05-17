@@ -151,7 +151,16 @@ class SchoolReportExportController extends ReportController {
 
             case 'pdf':
 
-                $export_pdf = $this->pdf->loadView('export.client.principal.school-teacher-report-pdf', $report)
+                $additional_data = [
+
+                    'width' => $this->pdfColumnWidth($report['column_header']),
+                    'key' => 'teacher_progress'
+
+                ];
+
+                $export_pdf =   $this->pdf->
+                    loadView('export.client.principal.school-teacher-subject-report-pdf',
+                    $report, $additional_data)
                     ->setPaper('a4')
                     ->setOrientation('portrait');
                 return $export_pdf->download($file_name . '.' . $file_type);
@@ -177,8 +186,8 @@ class SchoolReportExportController extends ReportController {
                         $sheet->mergeCells('A5:' . $last_letter . '5');
                         $sheet->mergeCells('A7:' . $last_letter . '7');
 
-                        $sheet->setWidth('A', $this->teacherNameMaxWidth($report['rows']));
-                        $sheet->setWidth($this->columnWidth($this->teacherHeaderMaxWidth($report['column_header']), count($report['column_header'])));
+                        $sheet->setWidth('A', $this->nameMaxWidth($report['rows']));
+                        $sheet->setWidth($this->excelColumnWidth($this->teacherMaxWidth($report['column_header']), count($report['column_header'])));
 
 
                         $sheet->setOrientation('landscape');
@@ -214,7 +223,16 @@ class SchoolReportExportController extends ReportController {
 
             case 'pdf':
 
-                $export_pdf = $this->pdf->loadView('export.client.principal.school-teacher-report-pdf', $report)
+                $additional_data = [
+
+                    'width' => $this->pdfColumnWidth($report['column_header']),
+                    'key' => 'teacher_scores'
+
+                ];
+
+                $export_pdf = $this->pdf->
+                    loadView('export.client.principal.school-teacher-subject-report-pdf',
+                    $report, $additional_data)
                     ->setPaper('a4')
                     ->setOrientation('portrait');
                 return $export_pdf->download($file_name . '.' . $file_type);
@@ -239,9 +257,8 @@ class SchoolReportExportController extends ReportController {
                         $sheet->mergeCells('A4:' . $last_letter . '4');
                         $sheet->mergeCells('A5:' . $last_letter . '5');
                         $sheet->mergeCells('A7:' . $last_letter . '7');
-
-                        $sheet->setWidth('A', $this->teacherNameMaxWidth($report['rows']));
-                        $sheet->setWidth($this->columnWidth($this->teacherHeaderMaxWidth($report['column_header']), count($report['column_header'])));
+                        $sheet->setWidth('A', $this->nameMaxWidth($report['rows']));
+                        $sheet->setWidth($this->excelColumnWidth($this->teacherMaxWidth($report['column_header']), count($report['column_header'])));
 
                         $sheet->setOrientation('landscape');
                         $sheet->loadView('export.client.principal.school-teacher-subject-report-excel', $report, ['title' => $title]);
@@ -391,7 +408,7 @@ class SchoolReportExportController extends ReportController {
      * @param $count
      * @return array
      */
-    private function columnWidth($width, $count) {
+    private function excelColumnWidth($width, $count) {
 
         $column_width = array();
 
@@ -404,6 +421,20 @@ class SchoolReportExportController extends ReportController {
         }
 
         return $column_width;
+
+    }
+
+    /**
+     * @param $column_header
+     * @return float|int
+     */
+    private function pdfColumnWidth($column_header) {
+
+        $remainder = 85; // in percent
+
+        $num_col = count($column_header);
+
+        return $num_col > 0 ? $remainder / $num_col : 0;
 
     }
 
