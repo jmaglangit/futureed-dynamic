@@ -19,7 +19,7 @@
         </tr>
     </table>
     <tr>
-        <td style="text-align: left;"><b> Teacher Subject Progress Report </b></td>
+        <td style="text-align: left;"><b> {{ $title }} </b></td>
     </tr>
     <tr style="background-color: #AC2A4E;">
         <th style="color:#fff;padding: 0 5px 0 5px; text-align: center; border: 1px solid black;">Teacher's Name</th>
