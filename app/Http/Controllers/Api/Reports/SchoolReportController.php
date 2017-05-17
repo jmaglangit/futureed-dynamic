@@ -264,9 +264,6 @@ class SchoolReportController extends ReportController {
                     $subjects[$column_header[$subject_id]]->moduleCount->count * $classroom->seats_taken *100;
 
             }
-//
-//            print_r('math: ' . $subjects[$column_header[1]] . '<br/>');
-//            print_r('english vocab: ' . $subjects[$column_header[3]] . '<br/>');
 
             // calculates progress
             foreach (array_keys($column_header) as $subject_id) {
@@ -333,8 +330,6 @@ class SchoolReportController extends ReportController {
 
             // calculates scores
             foreach (array_keys($column_header) as $subject_id) {
-
-                print_r($subject_id . ' ' . $score_count[$subject_id] . '<br/>');
 
                 // if score count is 0, no modules were answered, so it results to 0
                 if ($score_count[$subject_id] !== 0) {
