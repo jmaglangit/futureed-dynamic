@@ -17,6 +17,12 @@
         </p>
     </div>
 
+    <div class="alert alert-danger" ng-if="login.error_msg">
+        <p ng-repeat="error_msg in login.error_msg.message">
+            {! error_msg !}
+        </p>
+    </div>
+
     <div class="form-group">
         {!! Form::text('username', ''
             , array(
@@ -31,7 +37,7 @@
         {!! Form::button(trans('messages.next')
             , array(
                 'id' => 'validate_user_btn'
-                , 'class' => 'btn btn-maroon'
+                , 'class' => 'btn btn-green'
                 , 'ng-click' => 'login.validateUser($event)'
             )
         ) !!}

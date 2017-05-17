@@ -133,7 +133,6 @@ class UserServices {
                     $is_disabled = $this->checkUserDisabled($return);
                 }
 
-
                 if(!$is_disabled){
 
                     return [
@@ -181,7 +180,11 @@ class UserServices {
                } else {
                    return [
                        'status' => 202,
-                       'data' => $is_disabled
+                       'data' => $is_disabled,
+                       'message' => [
+                            trans('errors.2019'),
+                            trans('errors.2073')
+                        ]
                    ];
                }
            } else {

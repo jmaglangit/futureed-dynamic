@@ -124,7 +124,7 @@
 			<p>
 				{!! Html::link(route('client.registration'), trans('messages.sign_up')
 					, array(
-						'class' => 'btn btn-gold fb'
+						'class' => 'btn btn-gold'
 					)
 				) !!}
 			</p>

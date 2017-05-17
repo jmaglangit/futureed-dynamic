@@ -92,5 +92,19 @@ function ManageModuleService($http) {
 		});
 	}
 
+	api.getPackageCountries = function(){
+		return $http({
+			method	:	Constants.METHOD_GET,
+			url		:	apiUrl + 'subscription-package/countries'
+		});
+	}
+
+	api.getGrade = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET,
+			url		:	apiUrl + 'grade/' + id
+		});
+	}
+
 	return api
 }

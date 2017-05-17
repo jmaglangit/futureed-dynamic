@@ -30,4 +30,6 @@ interface ModuleRepositoryInterface
 
 	public function getModuleDifficulty($module_id);
 
+	public function getDynamicModules();
+
 }

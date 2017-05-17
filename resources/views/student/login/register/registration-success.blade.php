@@ -14,10 +14,6 @@
 					<i class="fa fa-check fa-5x img-rounded text-center"></i>
 				</div>
 
-				<p class="text" >
-					{!! trans('messages.client_confirm_code_sent') !!}
-				</p>
-
 				<small>{!! trans('messages.client_check_inbox') !!}</small>
 			</div>
 			

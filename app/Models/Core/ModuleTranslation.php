@@ -19,6 +19,7 @@ class ModuleTranslation extends Model {
 	protected $fillable = [
 		'module_id',
 		'name',
+		'description',
 		'locale'
 	];
 

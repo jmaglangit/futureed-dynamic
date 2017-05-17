@@ -5,7 +5,7 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+					<button type="button" class="btn btn-sky-blue next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
@@ -48,12 +48,12 @@
 		                            webkitallowfullscreen mozallowfullscreen allowfullscreen ng-cloak></iframe>
 		                </div>
 		                <div ng-if="mod.table.page_count > 1">
-							<div class="previous-btn-position" ng-if="mod.table.page > futureed.DEFAULT_PAGE">
-													<span  ng-click="mod.previousPage()"
+							<div class="previous-btn-position" ng-if="mod.content_index > futureed.DEFAULT_PAGE -1">
+													<span  ng-click="mod.prevPageContent()"
 														   ng-model="mod.table.page">&lt;</span>
 							</div>
-							<div class="next-btn-position" ng-if="mod.table.page != mod.table.total_items">
-													<span  ng-click="mod.nextPage()"
+							<div class="next-btn-position" ng-if="mod.content_index != mod.table.total_items">
+													<span  ng-click="mod.nextPageContent()"
 														   ng-model="mod.table.page">&gt;</span>
 							</div>
 						</div>
@@ -67,7 +67,7 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+					<button type="button" class="btn btn-sky-blue next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
@@ -94,7 +94,7 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+					<button type="button" class="btn btn-sky-blue next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						{{ trans('messages.exit_module') }}
 					</button>
 				</div>
@@ -123,7 +123,7 @@
 		<div class="questions-container col-xs-12 col-md-12">
 			<div class="row questions-header">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+					<button type="button" class="btn btn-sky-blue next-btn left-15 top-7" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						{{ trans('messages.exit_module') }}
 					</button>
 				</div>

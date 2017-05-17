@@ -20,11 +20,13 @@ Routes::group([
 	'middleware' => 'log'
 ], function () {
 	Routes::get('/', 'Api\v1\ApiController@index');
+	Routes::get('/test-function', 'Api\v1\ApiController@textFunction');
 
 	include('Routes/Api/Admin.php');
 	include('Routes/Api/AgeGroup.php');
 	include('Routes/Api/Announcement.php');
 	include('Routes/Api/AnswerExplanation.php');
+	include('Routes/Api/AnswerExplanationTemplate.php');
 	include('Routes/Api/AnswerExplanationTranslation.php');
 	include('Routes/Api/Assess.php');
 	include('Routes/Api/AvatarAccessory.php');
@@ -37,6 +39,7 @@ Routes::group([
 	include('Routes/Api/ClientDiscount.php');
 	include('Routes/Api/ClientStudent.php');
 	include('Routes/Api/Countries.php');
+	include('Routes/Api/DataLibrary.php');
 	include('Routes/Api/Event.php');
 	include('Routes/Api/Facebook.php');
 	include('Routes/Api/Game.php');
@@ -63,6 +66,9 @@ Routes::group([
 	include('Routes/Api/Question.php');
 	include('Routes/Api/QuestionAnswer.php');
 	include('Routes/Api/QuestionAnswerTranslation.php');
+	include('Routes/Api/QuestionCache.php');
+	include('Routes/Api/QuestionCacheLog.php');
+	include('Routes/Api/QuestionTemplate.php');
 	include('Routes/Api/QuestionTranslation.php');
 	include('Routes/Api/Quote.php');
 	include('Routes/Api/QuoteTranslation.php');
@@ -81,6 +87,7 @@ Routes::group([
 	include('Routes/Api/TipRating.php');
 	include('Routes/Api/User.php');
 	include('Routes/Api/VolumeDiscount.php');
+	include('Routes/Api/WordProblemDataMapping.php');
 });
 
 /**
@@ -90,6 +97,17 @@ Routes::group(['prefix' => 'api'], function () {
 
 	include('Routes/Api/Reports.php');
 
+});
+
+/**
+ * Uploading files
+ *
+ */
+Routes::group([
+	'middleware' => 'log'
+], function () {
+
+	include('Routes/Api/upload.php');
 });
 
 /**

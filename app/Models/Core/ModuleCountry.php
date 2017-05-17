@@ -17,7 +17,8 @@ class ModuleCountry extends Model{
 	protected $fillable = [
 		'module_id',
 		'country_id',
-		'grade_id'
+		'grade_id',
+		'seq_no'
 	];
 
 	protected $hidden = [
