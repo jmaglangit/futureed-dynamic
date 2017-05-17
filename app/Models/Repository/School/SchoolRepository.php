@@ -676,7 +676,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
                         }]);
 
                 }])->first();
-            
+
         } catch (\Exception $e) {
 
             DB::rollback();

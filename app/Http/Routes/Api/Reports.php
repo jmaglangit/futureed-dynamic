@@ -157,6 +157,11 @@ Routes::group([
 			'as' => 'api.report.school.teacher.progress.export'
 	]);
 
+    Routes::get('/school/{school_code}/teachers/subjects/progress/{grade_level}/{file_type}',[
+        'uses' => 'Api\Reports\SchoolReportExportController@schoolTeacherSubjectProgress',
+        'as' => 'api.report.school.teacher.subjects.progress.export'
+    ]);
+
 	/*
 	 * Teacher/Class export
 	 */
