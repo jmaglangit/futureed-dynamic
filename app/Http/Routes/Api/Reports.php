@@ -163,7 +163,7 @@ Routes::group([
     ]);
 
     Routes::get('/school/{school_code}/teachers/subjects/scores/{grade_level}/{file_type}',[
-        'uses' => 'Api\Reports\SchoolReportExportController@schoolTeacherScoresProgress',
+        'uses' => 'Api\Reports\SchoolReportExportController@schoolTeacherSubjectScores',
         'as' => 'api.report.school.teacher.subjects.scores.export'
     ]);
 
