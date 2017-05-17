@@ -261,9 +261,12 @@ class SchoolReportController extends ReportController {
 
                 $teacher_progress[$subject_id] += $this->getClassroomProgress($classroom);
                 $total_progress[$subject_id] +=
-                    $subjects[$column_header[$subject_id]]->moduleCount->count * 100;
+                    $subjects[$column_header[$subject_id]]->moduleCount->count * $classroom->seats_taken *100;
 
             }
+//
+//            print_r('math: ' . $subjects[$column_header[1]] . '<br/>');
+//            print_r('english vocab: ' . $subjects[$column_header[3]] . '<br/>');
 
             // calculates progress
             foreach (array_keys($column_header) as $subject_id) {
@@ -330,6 +333,8 @@ class SchoolReportController extends ReportController {
 
             // calculates scores
             foreach (array_keys($column_header) as $subject_id) {
+
+                print_r($subject_id . ' ' . $score_count[$subject_id] . '<br/>');
 
                 // if score count is 0, no modules were answered, so it results to 0
                 if ($score_count[$subject_id] !== 0) {
@@ -524,8 +529,12 @@ class SchoolReportController extends ReportController {
 
         foreach ($classroom->studentModule as $student_module) {
 
-            $response['score'] += $student_module->correct_counter / $student_module->question_counter;
-            $response['count']++;
+            if ($student_module->question_counter !== 0) {
+
+                $response['score'] += $student_module->correct_counter / $student_module->question_counter;
+                $response['count']++;
+
+            }
 
         }
 
