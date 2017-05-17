@@ -836,6 +836,11 @@ content legend {
 	width: 200px;
 }
 
+.table-space {
+	margin-top: 20px;
+
+}
+
 /*dashboard export button area*/
 .client-export-button-container {
 	margin-bottom:20px;

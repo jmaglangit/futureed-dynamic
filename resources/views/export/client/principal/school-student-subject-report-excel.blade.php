@@ -46,12 +46,9 @@
     <tr style="background-color: #AC2A4E;">
         <th style="color:#fff;padding: 0 5px 0 5px; text-align: center; border: 1px solid black;">Student's Name</th>
         @foreach (array_keys($column_header) as $page_num)
-
-
             @foreach ($column_header[$page_num] as $header)
                 <th style="color:#fff;padding: 0 5px 0 5px; text-align: center; border: 1px solid black;">{{ $header }}</th>
             @endforeach
-
         @endforeach
     </tr>
 

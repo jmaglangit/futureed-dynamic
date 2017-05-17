@@ -405,6 +405,8 @@ return [
 	'student_rewards' => 'Student Rewards',
 	'student_registration' => 'Student Registration',
 	'student_status' => 'Student Status',
+    'student_progress' => 'Student Progress',
+    'student_scores' => 'Student Scores',
 	'student_to_watch' => 'Students to watch',
 	'subject' => 'Subject',
 	'subject_area' => 'Subject Area',

@@ -186,8 +186,8 @@ class SchoolReportExportController extends ReportController {
                         $sheet->mergeCells('A5:' . $last_letter . '5');
                         $sheet->mergeCells('A7:' . $last_letter . '7');
 
-                        $sheet->setWidth('A', $this->nameMaxWidth($report['rows']));
-                        $sheet->setWidth($this->excelColumnWidth($this->teacherMaxWidth($report['column_header']), count($report['column_header'])));
+                        $sheet->setWidth('A', $this->teacherNameMaxWidth($report['rows']));
+                        $sheet->setWidth($this->excelColumnWidth($this->teacherHeaderMaxWidth($report['column_header']), count($report['column_header'])));
 
 
                         $sheet->setOrientation('landscape');
@@ -257,8 +257,8 @@ class SchoolReportExportController extends ReportController {
                         $sheet->mergeCells('A4:' . $last_letter . '4');
                         $sheet->mergeCells('A5:' . $last_letter . '5');
                         $sheet->mergeCells('A7:' . $last_letter . '7');
-                        $sheet->setWidth('A', $this->nameMaxWidth($report['rows']));
-                        $sheet->setWidth($this->excelColumnWidth($this->teacherMaxWidth($report['column_header']), count($report['column_header'])));
+                        $sheet->setWidth('A', $this->teacherNameMaxWidth($report['rows']));
+                        $sheet->setWidth($this->excelColumnWidth($this->teacherHeaderMaxWidth($report['column_header']), count($report['column_header'])));
 
                         $sheet->setOrientation('landscape');
                         $sheet->loadView('export.client.principal.school-teacher-subject-report-excel', $report, ['title' => $title]);
@@ -295,7 +295,14 @@ class SchoolReportExportController extends ReportController {
 
             case 'pdf':
 
-                $export_pdf = $this->pdf->loadView('export.client.principal.school-teacher-report-pdf', $report)
+                $additional_data = [
+
+                    'width' => 0,
+                    'key' => 'student_progress'
+
+                ];
+
+                $export_pdf = $this->pdf->loadView('export.client.principal.school-student-subject-report-pdf', $report, $additional_data)
                     ->setPaper('a4')
                     ->setOrientation('portrait');
                 return $export_pdf->download($file_name . '.' . $file_type);
@@ -322,7 +329,7 @@ class SchoolReportExportController extends ReportController {
                         $sheet->mergeCells('A7:' . $last_letter . '7');
 
                         $sheet->setWidth('A', $this->studentNameMaxWidth($report['rows']));
-                        $sheet->setWidth($this->columnWidth($this->studentHeaderMaxWidth($report['column_header']), $this->countStudentColumns($report['column_header'])));
+                        $sheet->setWidth($this->excelColumnWidth($this->studentHeaderMaxWidth($report['column_header']), $this->countStudentColumns($report['column_header'])));
 
                         $sheet->setOrientation('landscape');
                         $sheet->loadView('export.client.principal.school-student-subject-report-excel', $report, ['title' => $title]);
@@ -360,7 +367,14 @@ class SchoolReportExportController extends ReportController {
 
             case 'pdf':
 
-                $export_pdf = $this->pdf->loadView('export.client.principal.school-teacher-report-pdf', $report)
+                $additional_data = [
+
+                    'width' => 0,
+                    'key' => 'student_scores'
+
+                ];
+
+                $export_pdf = $this->pdf->loadView('export.client.principal.school-student-subject-report-pdf', $report, $additional_data)
                     ->setPaper('a4')
                     ->setOrientation('portrait');
                 return $export_pdf->download($file_name . '.' . $file_type);
@@ -387,7 +401,7 @@ class SchoolReportExportController extends ReportController {
                         $sheet->mergeCells('A7:' . $last_letter . '7');
 
                         $sheet->setWidth('A', $this->studentNameMaxWidth($report['rows']));
-                        $sheet->setWidth($this->columnWidth($this->studentHeaderMaxWidth($report['column_header']), $this->countStudentColumns($report['column_header'])));
+                        $sheet->setWidth($this->excelColumnWidth($this->studentHeaderMaxWidth($report['column_header']), $this->countStudentColumns($report['column_header'])));
 
                         $sheet->setOrientation('landscape');
                         $sheet->loadView('export.client.principal.school-student-subject-report-excel', $report, ['title' => $title]);
