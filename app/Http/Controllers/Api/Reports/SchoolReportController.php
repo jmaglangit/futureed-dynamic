@@ -449,6 +449,8 @@ class SchoolReportController extends ReportController {
         $subject = $this->subject->getASubjectWithAreas($subject_id, $grade_level);
         $students = $this->student->getStudentsWithModules($school_code, $subject_id, $grade_level);
 
+        return $students;
+
         $additional_information = $this->getAdditionalInfo($school_code);
 
         $numPages = $this->getNumPages(count($subject->subjectAreas));
@@ -481,7 +483,7 @@ class SchoolReportController extends ReportController {
                                     += $student_module->correct_counter / $student_module->question_counter;
 
                                 $subject_area_count[$student_module->module->subject_area_id]++;
-
+                                
                             }
 
                             break;
