@@ -177,8 +177,8 @@ class SchoolReportExportController extends ReportController {
                         $sheet->mergeCells('A5:' . $last_letter . '5');
                         $sheet->mergeCells('A7:' . $last_letter . '7');
 
-                        $sheet->setWidth('A', $this->nameMaxWidth($report['rows']));
-                        $sheet->setWidth($this->columnWidth($this->teacherMaxWidth($report['column_header']), count($report['column_header'])));
+                        $sheet->setWidth('A', $this->teacherNameMaxWidth($report['rows']));
+                        $sheet->setWidth($this->columnWidth($this->teacherHeaderMaxWidth($report['column_header']), count($report['column_header'])));
 
 
                         $sheet->setOrientation('landscape');
@@ -200,7 +200,7 @@ class SchoolReportExportController extends ReportController {
      * @param $file_type
      * @return mixed
      */
-    public function schoolTeacherScoresProgress($school_code, $grade_level, $file_type){
+    public function schoolTeacherSubjectScores($school_code, $grade_level, $file_type){
 
         $report = $this->school_report->getSchoolTeacherSubjectScores($school_code, $grade_level);
 
@@ -240,12 +240,141 @@ class SchoolReportExportController extends ReportController {
                         $sheet->mergeCells('A5:' . $last_letter . '5');
                         $sheet->mergeCells('A7:' . $last_letter . '7');
 
-                        $sheet->setWidth('A', $this->nameMaxWidth($report['rows']));
-                        $sheet->setWidth($this->columnWidth($this->teacherMaxWidth($report['column_header']), count($report['column_header'])));
-
+                        $sheet->setWidth('A', $this->teacherNameMaxWidth($report['rows']));
+                        $sheet->setWidth($this->columnWidth($this->teacherHeaderMaxWidth($report['column_header']), count($report['column_header'])));
 
                         $sheet->setOrientation('landscape');
                         $sheet->loadView('export.client.principal.school-teacher-subject-report-excel', $report, ['title' => $title]);
+                    });
+
+                })->download($file_type);
+                break;
+
+            default:
+                return $this->respondErrorMessage(2063);
+                break;
+        }
+    }
+
+    /**
+     * @param $school_code
+     * @param $teacher_id
+     * @param $subject_id
+     * @param $grade_level
+     * @param $file_type
+     * @return mixed
+     */
+    public function schoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level, $file_type){
+
+        $report = $this->school_report->getSchoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level);
+
+        //File name format  --> first_name _ last_name _ tab_name _ date
+        $school_info = $report['additional_information'];
+        $file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_Teacher_Scores_'. Carbon::now()->toDateString();
+        $file_name = str_replace(' ','_',$file_name);
+
+        //Export file
+        switch ($file_type) {
+
+            case 'pdf':
+
+                $export_pdf = $this->pdf->loadView('export.client.principal.school-teacher-report-pdf', $report)
+                    ->setPaper('a4')
+                    ->setOrientation('portrait');
+                return $export_pdf->download($file_name . '.' . $file_type);
+                break;
+
+            case 'xls' || 'xlsx':
+                //Initiate format
+                ob_end_clean();
+                ob_start();
+
+                $title = 'Student Progress Report';
+
+                Excel::create($file_name,function($excel) use ($report, $title){
+
+                    $excel->sheet('NewSheet', function($sheet) use ($report, $title){
+
+                        $last_letter = $this->getColumnLetter(count($report['column_header'][1]));
+
+                        $sheet->mergeCells('A1:' . $last_letter . '1');
+                        $sheet->mergeCells('A2:' . $last_letter . '2');
+                        $sheet->mergeCells('A3:' . $last_letter . '3');
+                        $sheet->mergeCells('A4:' . $last_letter . '4');
+                        $sheet->mergeCells('A5:' . $last_letter . '5');
+                        $sheet->mergeCells('A7:' . $last_letter . '7');
+
+                        $sheet->setWidth('A', $this->studentNameMaxWidth($report['rows']));
+                        $sheet->setWidth($this->columnWidth($this->studentHeaderMaxWidth($report['column_header']), $this->countStudentColumns($report['column_header'])));
+
+                        $sheet->setOrientation('landscape');
+                        $sheet->loadView('export.client.principal.school-student-subject-report-excel', $report, ['title' => $title]);
+                        
+                    });
+
+                })->download($file_type);
+                break;
+
+            default:
+                return $this->respondErrorMessage(2063);
+                break;
+        }
+    }
+
+    /**
+     * @param $school_code
+     * @param $teacher_id
+     * @param $subject_id
+     * @param $grade_level
+     * @param $file_type
+     * @return mixed
+     */
+    public function schoolStudentSubjectScores($school_code, $teacher_id, $subject_id, $grade_level, $file_type){
+
+        $report = $this->school_report->getSchoolStudentSubjectScores($school_code, $teacher_id, $subject_id, $grade_level);
+
+        //File name format  --> first_name _ last_name _ tab_name _ date
+        $school_info = $report['additional_information'];
+        $file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_Teacher_Scores_'. Carbon::now()->toDateString();
+        $file_name = str_replace(' ','_',$file_name);
+
+        //Export file
+        switch ($file_type) {
+
+            case 'pdf':
+
+                $export_pdf = $this->pdf->loadView('export.client.principal.school-teacher-report-pdf', $report)
+                    ->setPaper('a4')
+                    ->setOrientation('portrait');
+                return $export_pdf->download($file_name . '.' . $file_type);
+                break;
+
+            case 'xls' || 'xlsx':
+                //Initiate format
+                ob_end_clean();
+                ob_start();
+
+                $title = 'Student Scores Report';
+
+                Excel::create($file_name,function($excel) use ($report, $title){
+
+                    $excel->sheet('NewSheet', function($sheet) use ($report, $title){
+
+                        $last_letter = $this->getColumnLetter(count($report['column_header'][1]));
+
+                        $sheet->mergeCells('A1:' . $last_letter . '1');
+                        $sheet->mergeCells('A2:' . $last_letter . '2');
+                        $sheet->mergeCells('A3:' . $last_letter . '3');
+                        $sheet->mergeCells('A4:' . $last_letter . '4');
+                        $sheet->mergeCells('A5:' . $last_letter . '5');
+                        $sheet->mergeCells('A7:' . $last_letter . '7');
+
+                        $sheet->setWidth('A', $this->studentNameMaxWidth($report['rows']));
+                        $sheet->setWidth($this->columnWidth($this->studentHeaderMaxWidth($report['column_header']), $this->countStudentColumns($report['column_header'])));
+
+                        $sheet->setOrientation('landscape');
+                        $sheet->loadView('export.client.principal.school-student-subject-report-excel', $report, ['title' => $title]);
+
                     });
 
                 })->download($file_type);
@@ -282,7 +411,7 @@ class SchoolReportExportController extends ReportController {
      * @param $column_header
      * @return int
      */
-    private function teacherMaxWidth($column_header) {
+    private function teacherHeaderMaxWidth($column_header) {
 
         $max = 0;
 
@@ -300,13 +429,69 @@ class SchoolReportExportController extends ReportController {
 
     }
 
-    private function nameMaxWidth($rows) {
+    private function studentHeaderMaxWidth($column_header) {
+
+        $max = 0;
+
+        $largest_page = 0;
+
+        if (count($column_header) > 0) {
+
+            foreach ($column_header as $page) {
+
+                $page_count = count($page);
+
+                if ($largest_page <= $page_count) {
+
+                    $largest_page = $page_count;
+
+                    foreach ($page as $header) {
+
+                        $header_length = strlen($header);
+
+                        if ($max < $header_length) {
+
+                            $max = $header_length;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return $max * 1.1;
+
+    }
+
+    private function teacherNameMaxWidth($rows) {
 
         $max = 0;
 
         foreach (array_keys($rows) as $name) {
 
             $name_length = strlen('Teacher ' . $name);
+
+            if ($max < $name_length)
+
+                $max = $name_length;
+
+        }
+
+        return $max;
+
+    }
+
+    private function studentNameMaxWidth($rows) {
+
+        $max = 0;
+
+        foreach (array_keys($rows) as $name) {
+
+            $name_length = strlen('Student ' . $name);
 
             if ($max < $name_length)
 
@@ -333,6 +518,24 @@ class SchoolReportExportController extends ReportController {
             return $letter;
 
         }
+
+    }
+
+    /**
+     * @param $column_header
+     * @return int
+     */
+    private function countStudentColumns($column_header) {
+
+        $value = 0;
+
+        foreach ($column_header as $page) {
+
+            $value += count($page);
+
+        }
+
+        return $value;
 
     }
 
