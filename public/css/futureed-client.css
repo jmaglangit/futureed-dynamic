@@ -848,7 +848,7 @@ content legend {
 }
 
 .export-body > tbody > tr > td, .export-body th{
-	padding: 6px;
+	padding: 8px;
 }
 
 .export-row {
