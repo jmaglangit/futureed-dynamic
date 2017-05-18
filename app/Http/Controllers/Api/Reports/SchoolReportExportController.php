@@ -302,7 +302,7 @@ class SchoolReportExportController extends ReportController {
      */
     private function pdfColumnWidth($column_header) {
 
-        $remainder = 85; // in percent
+        $remainder = 80; // in percent
 
         $num_col = count($column_header);
 

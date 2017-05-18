@@ -4,7 +4,7 @@
     {{--Header--}}
     <table>
         <tr>
-            <td style="text-align: left; float: left;">{{--<img src="{{ base_path().'/public/images/logo-md.png' }}">--}}</td>
+            <td style="text-align: left; float: left;"><img src="{{ base_path().'/public/images/logo-md.png' }}"></td>
         </tr>
         <tr>
             <td></td>
@@ -30,25 +30,25 @@
     <div>
         <div class="export-header"><h3>{!! trans( 'messages.' . $key) !!}</h3></div>
         <div>
-            <table class="export-table export-table-bordered">
-                <tr class="magenta">
-                    <th width="15%">Teacher's Name</th>
+            <table class="export-body export-table-bordered">
+                <tr class="magenta export-row">
+                    <th class="export-cell" width="20%">Teacher's Name</th>
                     @foreach($column_header as $header)
-                        <th width="{{ $width . '%'}}">{{ $header }}</th>
+                        <th class="export-cell" width="{{ $width . '%'}}">{{ $header }}</th>
                     @endforeach
                 </tr>
                 @if(!is_null($rows))
                     @foreach($rows as $name => $records)
-                        <tr>
-                            <td>{!! trans('messages.teacher') !!} {{ $name }}</td>
+                        <tr class="export-row">
+                            <td class="export-cell" >{!! trans('messages.teacher') !!} {{ $name }}</td>
                             @foreach($records as $record)
-                                <td>{{ $record . '%' }}</td>
+                                <td class="export-cell" >{{ $record . '%' }}</td>
                             @endforeach
                         </tr>
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="2"><p>{!! trans('messages.no_results') !!}</p></td>
+                        <td colspan="{{ count($column_header) + 1 }}"><p>{!! trans('messages.no_results') !!}</p></td>
                     </tr>
                 @endif
 
