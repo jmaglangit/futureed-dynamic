@@ -838,7 +838,21 @@ content legend {
 
 .table-space {
 	margin-top: 20px;
+}
 
+.export-body {
+	width: 100%;
+	margin: 0;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+.export-body > tbody > tr > td, .export-body th{
+	padding: 6px;
+}
+
+.export-row {
+	line-height: 16px;
 }
 
 /*dashboard export button area*/
