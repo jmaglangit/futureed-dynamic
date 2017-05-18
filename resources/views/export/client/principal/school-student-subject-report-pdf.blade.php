@@ -12,7 +12,7 @@
         <tr>
             {{--temporary: for example only--}}
             {{--<td style="text-align: left">Contact Person: John Doe</td>--}}
-            <td style="text-align: left">Contact Person: {{ $additional_information['principal_name'] }}</td>
+                        <td style="text-align: left">Contact Person: {{ $additional_information['principal_name'] }}</td>
         </tr>
         <tr>
             {{--temporary: for example only--}}
@@ -52,9 +52,7 @@
                             <td colspan="2"><p>{!! trans('messages.no_results') !!}</p></td>
                         </tr>
                     @endif
-
                 </table>
-                <div class="table-space"></div>
             @endforeach
         </div>
 

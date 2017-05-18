@@ -837,17 +837,18 @@ content legend {
 }
 
 .table-space {
+	clear: both;
 	margin-top: 20px;
 }
 
 .export-body {
 	width: 100%;
-	margin: 0;
+	margin: 0 0 20px 0;
 	border-collapse: collapse;
 	font-size: 12px;
 }
 
-.export-body > tbody > tr > td, .export-body th{
+.export-body td th {
 	padding: 8px;
 }
 
