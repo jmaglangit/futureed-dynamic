@@ -287,7 +287,7 @@ class SchoolReportExportController extends ReportController {
 
         //File name format  --> first_name _ last_name _ tab_name _ date
         $school_info = $report['additional_information'];
-        $file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_Teacher_Scores_'. Carbon::now()->toDateString();
+        $file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_Student_Progress_'. Carbon::now()->toDateString();
         $file_name = str_replace(' ','_',$file_name);
 
         //Export file
@@ -297,7 +297,7 @@ class SchoolReportExportController extends ReportController {
 
                 $additional_data = [
 
-                    'width' => 0,
+                    'width' => $this->mapPdfColumnWidth($report['column_header']),
                     'key' => 'student_progress'
 
                 ];
@@ -359,7 +359,7 @@ class SchoolReportExportController extends ReportController {
 
         //File name format  --> first_name _ last_name _ tab_name _ date
         $school_info = $report['additional_information'];
-        $file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_Teacher_Scores_'. Carbon::now()->toDateString();
+        $file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_Student_Scores_'. Carbon::now()->toDateString();
         $file_name = str_replace(' ','_',$file_name);
 
         //Export file
@@ -369,7 +369,7 @@ class SchoolReportExportController extends ReportController {
 
                 $additional_data = [
 
-                    'width' => 0,
+                    'width' => $this->mapPdfColumnWidth($report['column_header']),
                     'key' => 'student_scores'
 
                 ];
@@ -449,6 +449,24 @@ class SchoolReportExportController extends ReportController {
         $num_col = count($column_header);
 
         return $num_col > 0 ? $remainder / $num_col : 0;
+
+    }
+
+    /**
+     * @param $column_header
+     * @return array
+     */
+    private function mapPdfColumnWidth($column_header) {
+
+        $map = array();
+
+        foreach ($column_header as $page_num => $page) {
+
+            $map[$page_num] = $this->pdfColumnWidth($page);
+
+        }
+
+        return $map;
 
     }
 

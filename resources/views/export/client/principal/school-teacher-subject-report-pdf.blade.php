@@ -32,17 +32,17 @@
         <div>
             <table class="export-body export-table-bordered">
                 <tr class="magenta export-row">
-                    <th class="export-cell" width="20%">Teacher's Name</th>
+                    <th width="20%">Teacher's Name</th>
                     @foreach($column_header as $header)
-                        <th class="export-cell" width="{{ $width . '%'}}">{{ $header }}</th>
+                        <th width="{{ $width . '%'}}">{{ $header }}</th>
                     @endforeach
                 </tr>
                 @if(!is_null($rows))
                     @foreach($rows as $name => $records)
                         <tr class="export-row">
-                            <td class="export-cell" >{!! trans('messages.teacher') !!} {{ $name }}</td>
+                            <td>{!! trans('messages.teacher') !!} {{ $name }}</td>
                             @foreach($records as $record)
-                                <td class="export-cell" >{{ $record . '%' }}</td>
+                                <td>{{ $record . '%' }}</td>
                             @endforeach
                         </tr>
                     @endforeach
