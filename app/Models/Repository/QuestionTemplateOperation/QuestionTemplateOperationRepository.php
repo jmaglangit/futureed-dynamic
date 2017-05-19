@@ -103,4 +103,13 @@ class QuestionTemplateOperationRepository implements QuestionTemplateOperationRe
 
 		return $response;
 	}
+
+	/**
+	 * @param $data
+	 * @return mixed
+	 */
+	public function getOperationByData($data){
+
+		return QuestionTemplateOperation::where('operation_data',$data)->get()->first();
+	}
 }

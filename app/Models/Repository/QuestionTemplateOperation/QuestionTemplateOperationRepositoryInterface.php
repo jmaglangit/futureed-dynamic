@@ -18,4 +18,6 @@ interface QuestionTemplateOperationRepositoryInterface {
 	public function editQuestionTemplateOperation($id,$data);
 
 	public function deleteQuestionTemplateOperation($id);
+
+	public function getOperationByData($data);
 }

@@ -312,6 +312,16 @@ var Constants = {
 	, COMPLETED 				: 'Completed'
 	, ON_GOING 					: 'On Going'
 
+	/* question dynamic template */
+	, NUMBER					: 'NUMBER'
+	, OBJECT					: 'OBJECT'
+	, NAME						: 'NAME'
+	, ALPHA						: 'ALPHA'
+	, ADDITION					: 'ADDITION'
+	, SUBTRACTION				: 'SUBTRACTION'
+	, DIVISION					: 'DIVISION'
+	, MULTIPLICATION			: 'MULTIPLICATION'
+
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";
 	}

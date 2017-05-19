@@ -951,7 +951,10 @@ return [
 	'admin_delete_template' => 'View Template',
 	'admin_question_type_fib' => 'FIB',
 	'admin_question_type_mc' => 'MC',
-	'admin_operation_add' => 'ADD',
+	'admin_operation_add' => 'ADDITION',
+	'admin_operation_subtract' => 'SUBTRACTION',
+	'admin_operation_divide' => 'DIVISION',
+	'admin_operation_multiply' => 'MULTIPLICATION',
 	'admin_question_form_word' => 'WORD',
 	'admin_question_form_blank' => 'BLANK',
 	'admin_question_form_series' => 'SERIES',
@@ -1511,6 +1514,10 @@ return [
 	'upload_data_library' => 'Upload Data Library',
 	'upload_word_problem' => 'Upload Word Problem',
 	'question_steps' => 'Step :number :',
+	'addition_symbol' => '+',
+	'subtraction_symbol' => '-',
+	'division_symbol' => '/',
+	'multiply_symbol' => '*',
 
 	//resources/views/student/login/register/registration-form.blade.php
 	'register_city_may_not_be_greater' => 'The city may not be greater than 128 characters.',
