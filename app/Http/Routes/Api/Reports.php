@@ -86,6 +86,27 @@ Routes::group([
 			'uses' => 'Api\Reports\SchoolReportRestController@schoolTeacherProgress',
 			'as' => 'api.report.school.teacher.progress'
 		]);
+
+        Routes::get('/school/{school_code}/teachers/subjects/progress/{grade_level}', [
+            'uses' => 'Api\Reports\SchoolReportRestController@schoolTeacherSubjectProgress',
+            'as' => 'api.report.school.teacher.subjects.progress'
+        ]);
+
+        Routes::get('/school/{school_code}/teachers/subjects/scores/{grade_level}', [
+            'uses' => 'Api\Reports\SchoolReportRestController@schoolTeacherSubjectScores',
+            'as' => 'api.report.school.teacher.subjects.scores'
+        ]);
+
+        Routes::get('/school/{school_code}/{teacher_id}/students/subject/{subject_id}/progress/{grade_level}', [
+            'uses' => 'Api\Reports\SchoolReportRestController@schoolStudentSubjectProgress',
+            'as' => 'api.report.school.students.subject.progress'
+        ]);
+
+        Routes::get('/school/{school_code}/{teacher_id}/students/subject/{subject_id}/scores/{grade_level}', [
+            'uses' => 'Api\Reports\SchoolReportRestController@schoolStudentSubjectScores',
+            'as' => 'api.report.school.students.subject.scores'
+        ]);
+
 	});
 
 
@@ -135,6 +156,16 @@ Routes::group([
 			'uses' => 'Api\Reports\SchoolReportExportController@schoolTeacherProgress',
 			'as' => 'api.report.school.teacher.progress.export'
 	]);
+
+    Routes::get('/school/{school_code}/teachers/subjects/progress/{grade_level}/{file_type}',[
+        'uses' => 'Api\Reports\SchoolReportExportController@schoolTeacherSubjectProgress',
+        'as' => 'api.report.school.teacher.subjects.progress.export'
+    ]);
+
+    Routes::get('/school/{school_code}/teachers/subjects/scores/{grade_level}/{file_type}',[
+        'uses' => 'Api\Reports\SchoolReportExportController@schoolTeacherSubjectScores',
+        'as' => 'api.report.school.teacher.subjects.scores.export'
+    ]);
 
 	/*
 	 * Teacher/Class export

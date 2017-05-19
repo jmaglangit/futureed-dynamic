@@ -35,7 +35,6 @@ class SchoolReportRestController extends ReportController {
 
 	/**
 	 * @param $school_code
-	 * @param $file_type
 	 * @return mixed
 	 */
 	public function schoolTeacherProgress($school_code){
@@ -48,5 +47,79 @@ class SchoolReportRestController extends ReportController {
 			$report['rows']
 		);
 	}
+
+    /**
+     * @param $school_code
+     * @param $grade_level
+     * @return mixed
+     */
+    public function schoolTeacherSubjectProgress($school_code, $grade_level){
+
+        $report = $this->school_report->getSchoolTeacherSubjectProgress($school_code, $grade_level);
+
+        return $this->respondReportData(
+            $report['additional_information'],
+            $report['column_header'],
+            $report['rows']
+        );
+
+    }
+
+    /**
+     * @param $school_code
+     * @param $grade_level
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function schoolTeacherSubjectScores($school_code, $grade_level) {
+
+        $report = $this->school_report->getSchoolTeacherSubjectScores($school_code, $grade_level);
+
+        return $this->respondReportData(
+            $report['additional_information'],
+            $report['column_header'],
+            $report['rows']
+        );
+
+    }
+
+    /**
+     * @param $school_code
+     * @param $teacher_id
+     * @param $subject_id
+     * @param $grade_level
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function schoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level){
+
+        $report = $this->school_report
+            ->getSchoolStudentSubjectProgress($school_code, $teacher_id, $subject_id, $grade_level);
+
+        return $this->respondReportData(
+            $report['additional_information'],
+            $report['column_header'],
+            $report['rows']
+        );
+
+    }
+
+    /**
+     * @param $school_code
+     * @param $teacher_id
+     * @param $subject_id
+     * @param $grade_level
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function schoolStudentSubjectScores($school_code, $teacher_id, $subject_id, $grade_level){
+
+        $report = $this->school_report
+            ->getSchoolStudentSubjectScores($school_code, $teacher_id, $subject_id, $grade_level);
+
+        return $this->respondReportData(
+            $report['additional_information'],
+            $report['column_header'],
+            $report['rows']
+        );
+
+    }
 
 }

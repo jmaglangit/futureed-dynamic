@@ -854,4 +854,24 @@ class ClientRepository implements ClientRepositoryInterface
 
 		return $response;
 	}
+
+//	public function getSchoolTeachers($school_code) {
+//        DB::beginTransaction();
+//
+//        try{
+//            $response = Client::where('school_code', $school_code)->get();
+//
+//        }catch (\Exception $e){
+//
+//            DB::rollback();
+//
+//            $this->errorLog($e->getMessage());
+//
+//            return false;
+//        }
+//
+//        DB::commit();
+//
+//        return $response;
+//    }
 }
