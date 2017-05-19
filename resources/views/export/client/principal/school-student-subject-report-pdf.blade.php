@@ -4,6 +4,7 @@
     {{--Header--}}
     <table>
         <tr>
+            {{--<td style="text-align: left; float: left;"><img src="{{ 'C:/Users/King/Projects/FutureEdLaravel/public/images/logo-md.png' }}"></td>--}}
             <td style="text-align: left; float: left;"><img src="{{ base_path().'/public/images/logo-md.png' }}"></td>
         </tr>
         <tr>
@@ -12,7 +13,7 @@
         <tr>
             {{--temporary: for example only--}}
             {{--<td style="text-align: left">Contact Person: John Doe</td>--}}
-                        <td style="text-align: left">Contact Person: {{ $additional_information['principal_name'] }}</td>
+            <td style="text-align: left">Contact Person: {{ $additional_information['principal_name'] }}</td>
         </tr>
         <tr>
             {{--temporary: for example only--}}
@@ -33,7 +34,7 @@
             @foreach (array_keys($column_header) as $page_num)
                 <table class="export-body export-table-bordered" width="100%">
                     <tr class="magenta export-row">
-                        <th width="20%">Teacher's Name</th>
+                        <th width="20%">Student's Name</th>
                         @foreach ($column_header[$page_num] as $header)
                             <th width="{{ $width[$page_num] . '%'}}">{{ $header }}</th>
                         @endforeach
@@ -41,7 +42,7 @@
                     @if(!is_null($rows))
                         @foreach($rows as $name => $records)
                             <tr class="export-row">
-                                <td>{!! trans('messages.teacher') !!} {{ $name }}</td>
+                                <td>{!! trans('messages.student') !!} {{ $name }}</td>
                                 @foreach ($records[$page_num] as $record)
                                     <td>{{ $record . '%' }}</td>
                                 @endforeach

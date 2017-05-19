@@ -816,7 +816,7 @@ content legend {
 }
 
 .export-table > tbody > tr > td {
-	padding: 15px;
+	padding: 30px;
 }
 
 .export-table-bordered td, .export-table-bordered th {
@@ -836,11 +836,6 @@ content legend {
 	width: 200px;
 }
 
-.table-space {
-	clear: both;
-	margin-top: 20px;
-}
-
 .export-body {
 	width: 100%;
 	margin: 0 0 20px 0;
@@ -848,12 +843,12 @@ content legend {
 	font-size: 12px;
 }
 
-.export-body td th {
-	padding: 8px;
+.export-body td, .export-body th {
+	padding: 8px; !important;
 }
 
 .export-row {
-	line-height: 16px;
+	line-height: 16px; !important;
 }
 
 /*dashboard export button area*/
