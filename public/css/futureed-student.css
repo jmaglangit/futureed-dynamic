@@ -2779,8 +2779,3 @@ canvas#world {
     }
 }
 
-@media only screen and (min-width: 1400px){
-    #studentBackground {
-        min-height: 100vh;
-    }
-}
