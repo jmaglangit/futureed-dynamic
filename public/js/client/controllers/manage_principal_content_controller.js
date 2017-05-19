@@ -389,6 +389,8 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
             self.schoolTeacherSubjectScoresReportExport(file_type);
         } else if (self.active_school_student_progress == Constants.TRUE) {
             self.schoolStudentSubjectProgressReportExport(file_type);
+        } else if (self.active_school_student_scores == Constants.TRUE) {
+            self.schoolStudentSubjectScoresReportExport(file_type);
         }
     }
 
@@ -439,6 +441,17 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
             .schoolStudentSubjectProgressReportDownload(
                 self.principal.school_code, self.selected.student_progress.teacher_id,
                 self.selected.student_progress.subject_id, self.selected.student_progress.grade_id, file_type);
+        $scope.ui_unblock();
+    }
+
+    self.schoolStudentSubjectScoresReportExport = function (file_type) {
+        self.errors = Constants.FALSE;
+
+        $scope.ui_block;
+        self.schoolDownload = ManagePrincipalContentService
+            .schoolStudentSubjectScoresReportDownload(
+                self.principal.school_code, self.selected.student_scores.teacher_id,
+                self.selected.student_scores.subject_id, self.selected.student_scores.grade_id, file_type);
         $scope.ui_unblock();
     }
 
