@@ -57,7 +57,11 @@
 
 	<div class="col-xs-12 teacher-content-list" ng-if="content.content">
 		<div class="teacher-module-btn" ng-init="content.selectAllContents()">
-			<button ng-repeat="record in content.records track by $index" class="btn btn-blue" ng-click="content.getContent(record.id, $index)">{! record.teaching_module !}</button>
+			<button ng-repeat="record in content.records track by $index" class="btn btn-blue"
+					ng-click="content.getContent(record.id, $index)"
+					tooltip="{! content.evaluateTooltip(record.teaching_module, 30) !}" tooltip-class="parent-module-tooltip">
+				{! content.shortenString(record.teaching_module, 30) !}
+			</button>
 		</div>
 	</div>
 </div>

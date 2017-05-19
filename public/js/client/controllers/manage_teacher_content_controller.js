@@ -145,4 +145,17 @@ function ManageTeacherContentController($scope, $window, ManageTeacherContentSer
 			$scope.ui_unblock();
 		});
 	}
+
+	self.evaluateTooltip = function (string, max_length) {
+		console.dir(string.length > max_length ? string : null);
+		return string.length > max_length ? string : null;
+	}
+
+    self.shortenString = function (string, max_length) {
+        if (string.length <= max_length) {
+            return string;
+        } else {
+            return (string.slice(0, max_length - 3) + '...');
+        }
+    }
 }
