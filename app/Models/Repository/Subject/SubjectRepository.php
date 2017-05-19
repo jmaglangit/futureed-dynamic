@@ -1,6 +1,7 @@
 <?php
 namespace FutureEd\Models\Repository\Subject;
 
+use function foo\func;
 use FutureEd\Models\Core\Subject;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
@@ -218,6 +219,41 @@ class SubjectRepository implements SubjectRepositoryInterface {
 
                     $query->select('id', 'subject_id', 'grade_id', 'code', 'name')
                         ->where('grade_id', $grade_level);
+
+                }])->find($subject_id);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+        }
+
+        DB::commit();
+
+        return $response;
+
+    }
+
+    public function getASubjectWithAreas($subject_id, $grade_level) {
+
+        DB::beginTransaction();
+
+        try {
+
+            $response = Subject::select(['id', 'name'])
+                ->with(['subjectAreas' => function($query) use ($grade_level) {
+
+                    $query->select('id', 'subject_id', 'code', 'name')
+                        ->whereHas('modules', function($query) use ($grade_level) {
+
+                            $query->where('grade_id', $grade_level);
+
+                        })->with(['moduleCount' => function($query) use ($grade_level) {
+
+                            $query->where('grade_id', $grade_level);
+
+                        }]);
 
                 }])->find($subject_id);
 

@@ -5,7 +5,7 @@
     {{--Header--}}
     <table class="school-excel-header">
         <tr>
-            <th style="text-align: left"><img src="{{ base_path().'/public/images/logo-md.png' }}"></th>
+            <th style="text-align: left">{{--<img src="{{ base_path().'/public/images/logo-md.png' }}">--}}</th>
         </tr>
         <tr>
             <td></td>
