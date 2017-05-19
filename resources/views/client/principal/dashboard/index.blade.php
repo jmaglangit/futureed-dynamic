@@ -12,7 +12,7 @@
             </div>
             <div class="col-xs-4">
                 <a class="dashboard-content-btn" href="{!! route('client.principal.teacher.index') !!}">
-                    <button  type="button">
+                    <button type="button">
                         {{ trans('messages.principal_dashboard_add_teacher') }}
                     </button>
                 </a>
@@ -39,14 +39,16 @@
     {{--Reports--}}
     <div ng-if="dashboard.active_report_teacher" ng-cloak>
         <div class="row client-export-button-container">
-            <div ng-if="dashboard.export" class="col-xs-12">
+            <div ng-if="dashbo  ard.export" class="col-xs-12">
                 <div class="btn-group export-buttons pull-right">
                     <button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-file-text-o"></i> {!! trans('messages.export') !!}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('pdf')">PDF</a></li>
-                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('xls')">Excel</a></li>
+                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('pdf')">PDF</a>
+                        </li>
+                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('xls')">Excel</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -54,12 +56,20 @@
 
         <div class="report-container">
             <ul class="nav nav-tabs report-nav" role="tablist">
-                <li class="col-xs-6 active"><a ng-click="dashboard.setActive('school')" aria-controls="home" role="tab"
+                <li class="col-xs-3 active"><a ng-click="dashboard.setActive('school')" aria-controls="home" role="tab"
                                                data-toggle="tab"><i
                                 class="fa fa-line-chart"></i> {!! trans('messages.overall_school_progress') !!}</a></li>
-                <li class="col-xs-6"><a ng-click="dashboard.setActive('school_teacher')" aria-controls="home" role="tab"
+                <li class="col-xs-3"><a ng-click="dashboard.setActive('school_teacher')" aria-controls="home" role="tab"
                                         data-toggle="tab"><i
                                 class="fa fa-tasks"></i> {!! trans('messages.teacher_comparison_progress') !!}</a></li>
+                <li class="col-xs-3"><a ng-click="dashboard.setActive('school_teacher_progress')" aria-controls="home"
+                                        role="tab"
+                                        data-toggle="tab"><i
+                                class="fa fa-tasks"></i> {!! trans('messages.teacher_subject_progress') !!}</a></li>
+                <li class="col-xs-3"><a ng-click="dashboard.setActive('school_teacher_scores')" aria-controls="home"
+                                        role="tab"
+                                        data-toggle="tab"><i
+                                class="fa fa-tasks"></i> {!! trans('messages.teacher_subject_scores') !!}</a></li>
             </ul>
 
 
@@ -195,7 +205,128 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+            {{--School Teacher Subject Progress--}}
+            <div class="" ng-if="dashboard.active_school_teacher_progress">
+                <div>
+                    <div style="margin: 20px auto;">
+                        <div class="form-group">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-6" ng-init="dashboard.initSelection()">
+                                <select ng-model="dashboard.selected.grade_id"
+                                        ng-change="dashboard.teacherSubjectProgressReport()"
+                                        class="form-control ng-pristine ng-valid ng-touched">
+                                    <option value="">
+                                        {!! trans('messages.select_grade') !!}
+                                    </option>
+                                    <option ng-repeat="grade in dashboard.grades.records" ng-value="grade.id">
+                                        {! grade.name !}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div style="float: left; margin: 0 auto;">
+                        <h3><i class="fa fa-file-text"></i>{!! trans('messages.teacher_subject_progress_report') !!}</h3>
+                    </div>
+
+                    <div>
+                        <table class="table table-bordered"
+                               {{--ng-if="dashboard.teacher_subject_progress_report"--}}
+                               width="100%">
+                            <tr class="magenta">
+                                <th width="20%"></th>
+                                <th ng-repeat="header in dashboard.teacher_subject_progress_report.column_header"
+                                    class="ng-binding ng-scope">
+                                    {! header !}
+                                </th>
+                            </tr>
+                            <tr ng-if="dashboard.teacher_subject_progress_report.rows"
+                                ng-repeat="(name, row) in dashboard.teacher_subject_progress_report.rows">
+                                <td width="20%">
+                                    Teacher {! name !}
+                                </td>
+                                <td ng-repeat="progress in row" width="{! dashboard.subjectColumnWidth(80) !}%">
+                                    <div class="progress-bar progress-bar-striped"
+                                         ng-class="{
+										'progress-bar-success' : progress > futureed.REPORT_PROGRESS_PASS,
+										'progress-bar-warning' : progress > futureed.REPORT_PROGRESS_MEDIAN_FLOOR
+										    && progress <= futureed.REPORT_PROGRESS_MEDIAN_CEILING ,
+										'progress-bar-danger' : progress <= futureed.REPORT_PROGRESS_FAIL ,
+									}"
+                                         ng-style="{ 'width' : progress + '%' }">
+                                        {! progress + '%' !}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="!dashboard.teacher_subject_progress_report.rows">
+                                <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {{--School Teacher Subject Scores--}}
+            <div class="" ng-if="dashboard.active_school_teacher_scores">
+                <div>
+                    <div style="margin: 20px auto;">
+                        <div class="form-group">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-6" ng-init="dashboard.initSelection()">
+                                <select ng-model="dashboard.selected.grade_id"
+                                        ng-change="dashboard.teacherSubjectScoresReport()"
+                                        class="form-control ng-pristine ng-valid ng-touched">
+                                    <option value="">
+                                        {!! trans('messages.select_grade') !!}
+                                    </option>
+                                    <option ng-repeat="grade in dashboard.grades.records" ng-value="grade.id">
+                                        {! grade.name !}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="float: left; margin: 0 auto;">
+                        <h3><i class="fa fa-file-text"></i>{!! trans('messages.teacher_subject_scores_report') !!}</h3>
+                    </div>
+                    <div>
+                        <table class="table table-bordered"
+                               {{--ng-if="dashboard.teacher_subject_progress_report"--}}
+                               width="100%">
+                            <tr class="magenta">
+                                <th width="20%"></th>
+                                <th ng-repeat="header in dashboard.teacher_subject_scores_report.column_header"
+                                    class="ng-binding ng-scope">
+                                    {! header !}
+                                </th>
+                            </tr>
+                            <tr ng-if="dashboard.teacher_subject_scores_report.rows"
+                                ng-repeat="(name, row) in dashboard.teacher_subject_scores_report.rows">
+                                <td width="20%">
+                                    Teacher {! name !}
+                                </td>
+                                <td ng-repeat="scores in row" width="{! dashboard.subjectColumnWidth(80) !}%">
+                                    <div class="progress-bar progress-bar-striped"
+                                         ng-class="{
+										'progress-bar-success' : scores > futureed.REPORT_PROGRESS_PASS,
+										'progress-bar-warning' : scores > futureed.REPORT_PROGRESS_MEDIAN_FLOOR
+										    && progress <= futureed.REPORT_PROGRESS_MEDIAN_CEILING ,
+										'progress-bar-danger' : scores <= futureed.REPORT_PROGRESS_FAIL ,
+									}"
+                                         ng-style="{ 'width' : scores + '%' }">
+                                        {! scores + '%' !}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="!dashboard.teacher_subject_scores_report.rows">
+                                <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -123,6 +123,8 @@ var Constants = {
 	, ACTIVE_CONTENTS 	: "contents"
 	, ACTIVE_SCHOOL		: "school"
 	, ACTIVE_SCHOOL_TEACHER	: "school_teacher"
+	, ACTIVE_SCHOOL_TEACHER_PROGRESS : "school_teacher_progress"
+    , ACTIVE_SCHOOL_TEACHER_SCORES : "school_teacher_scores"
 	, ACTIVE_QUESTIONS_PREVIEW : "questions_preview"
 
 	, ADD_CLIENT 	: "add_client"
