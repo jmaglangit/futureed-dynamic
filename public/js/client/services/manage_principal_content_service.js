@@ -63,6 +63,18 @@ function ManagePrincipalContentService($http) {
         return reportUrl + 'school/' + school_code + '/teachers/' + file_type
     }
 
+    managePrincipalApi.schoolTeacherSubjectProgressReportDownload = function (school_code, grade_id, file_type) {
+        return reportUrl + 'school/' + school_code + '/teachers/subjects/progress/' + grade_id + '/' + file_type;
+    }
+
+    managePrincipalApi.schoolTeacherSubjectScoresReportDownload = function (school_code, grade_id, file_type) {
+        return reportUrl + 'school/' + school_code + '/teachers/subjects/scores/' + grade_id + '/' + file_type;
+    }
+
+    managePrincipalApi.schoolStudentSubjectProgressReportDownload = function (school_code, teacher_id, subject_id, grade_id, file_type) {
+        return reportUrl + 'school/' + school_code + '/' + teacher_id + '/students/subject/' + subject_id + '/progress/' + grade_id + '/' + file_type;
+    }
+
     managePrincipalApi.getGrades = function() {
         return $http({
             method  :   Constants.METHOD_GET

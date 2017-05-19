@@ -383,6 +383,12 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         } else if (self.active_school_teacher == Constants.TRUE) {
             //download school teacher report
             self.schoolTeacherReportExport(file_type);
+        } else if (self.active_school_teacher_progress == Constants.TRUE) {
+            self.schoolTeacherSubjectProgressReportExport(file_type);
+        } else if (self.active_school_teacher_scores == Constants.TRUE) {
+            self.schoolTeacherSubjectScoresReportExport(file_type);
+        } else if (self.active_school_student_progress == Constants.TRUE) {
+            self.schoolStudentSubjectProgressReportExport(file_type);
         }
     }
 
@@ -402,6 +408,37 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService.schoolTeacherReportDownload(self.principal.school_code, file_type);
+        $scope.ui_unblock();
+    }
+    
+    self.schoolTeacherSubjectProgressReportExport = function (file_type) {
+        self.errors = Constants.FALSE;
+
+        $scope.ui_block;
+        self.schoolDownload = ManagePrincipalContentService
+            .schoolTeacherSubjectProgressReportDownload(
+                self.principal.school_code, self.selected.teacher_progress.grade_id, file_type);
+        $scope.ui_unblock();
+    }
+    
+    self.schoolTeacherSubjectScoresReportExport = function (file_type) {
+        self.errors = Constants.FALSE;
+
+        $scope.ui_block;
+        self.schoolDownload = ManagePrincipalContentService
+            .schoolTeacherSubjectScoresReportDownload(
+                self.principal.school_code, self.selected.teacher_scores.grade_id, file_type);
+        $scope.ui_unblock();
+    }
+
+    self.schoolStudentSubjectProgressReportExport = function (file_type) {
+        self.errors = Constants.FALSE;
+
+        $scope.ui_block;
+        self.schoolDownload = ManagePrincipalContentService
+            .schoolStudentSubjectProgressReportDownload(
+                self.principal.school_code, self.selected.student_progress.teacher_id,
+                self.selected.student_progress.subject_id, self.selected.student_progress.grade_id, file_type);
         $scope.ui_unblock();
     }
 

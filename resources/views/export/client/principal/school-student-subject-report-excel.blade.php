@@ -3,6 +3,7 @@
 @section('content')
     <table class="school-excel-header">
         <tr>
+{{--            <td style="text-align: left; float: left;"><img src="{{ 'C:/Users/King/Projects/FutureEdLaravel/public/images/logo-md.png' }}"></td>--}}
             <th style="text-align: left"><img src="{{ base_path().'/public/images/logo-md.png' }}"></th>
         </tr>
         <tr>
