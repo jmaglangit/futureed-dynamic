@@ -4,7 +4,7 @@
     {{--Header--}}
     <table>
         <tr>
-            {{--<td style="text-align: left; float: left;"><img src="{{ 'C:/Users/King/Projects/FutureEdLaravel/public/images/logo-md.png' }}"></td>--}}
+{{--            <td style="text-align: left; float: left;"><img src="{{ 'C:/Users/King/Projects/FutureEdLaravel/public/images/logo-md.png' }}"></td>--}}
             <td style="text-align: left; float: left;"><img src="{{ base_path().'/public/images/logo-md.png' }}"></td>
         </tr>
         <tr>
