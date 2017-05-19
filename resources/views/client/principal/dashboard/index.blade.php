@@ -74,6 +74,10 @@
                                         role="tab"
                                         data-toggle="tab"><i
                                 class="fa fa-tasks"></i> {!! trans('messages.student_subject_progress') !!}</a></li>
+                <li class="col-xs-2"><a ng-click="dashboard.setActive('school_student_scores')" aria-controls="home"
+                                        role="tab"
+                                        data-toggle="tab"><i
+                                class="fa fa-tasks"></i> {!! trans('messages.student_subject_scores') !!}</a></li>
             </ul>
 
 
@@ -231,7 +235,7 @@
                     </div>
 
                     <div class="report-teacher-title">
-                        <h3><i class="fa fa-file-text"></i>{!! trans('messages.teacher_subject_progress_report') !!}
+                        <h3><i class="fa fa-file-text"></i> {!! trans('messages.teacher_subject_progress_report') !!}
                         </h3>
                     </div>
 
@@ -290,7 +294,7 @@
                     </div>
 
                     <div class="report-teacher-title">
-                        <h3><i class="fa fa-file-text"></i>{!! trans('messages.teacher_subject_scores_report') !!}</h3>
+                        <h3><i class="fa fa-file-text"></i> {!! trans('messages.teacher_subject_scores_report') !!}</h3>
                     </div>
                     <div>
                         <table class="table table-bordered"
@@ -372,7 +376,7 @@
                     </div>
 
                     <div>
-                        <h3><i class="fa fa-file-text"></i>{!! trans('messages.student_subject_progress_report') !!}
+                        <h3><i class="fa fa-file-text"></i> {!! trans('messages.student_subject_progress_report') !!}
                         </h3>
                     </div>
 
@@ -417,6 +421,105 @@
                         <pagination
                                 ng-model="dashboard.current_page.student_progress"
                                 total-items="dashboard.number_of_pages.student_progress"
+                                items-per-page="1"
+                                previous-text="&lt;"
+                                next-text="&gt;"
+                                class="pagination">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+
+            {{--School Student Subject Scores--}}
+            <div class="" ng-if="dashboard.active_school_student_scores">
+                <div>
+
+                    <div class="report-selector-container">
+                        <div class="form-group">
+                            <table margin="20px" style="margin: 0px auto;">
+                                <tr>
+                                    <th class="report-student-selectors">
+                                        <select ng-model="dashboard.selected.student_scores.subject_id"
+                                                ng-options="subject.id as subject.name for subject in dashboard.subjects.records"
+                                                ng-change="dashboard.studentSubjectScoresReport()"
+                                                class="form-control ng-pristine ng-valid ng-touched">
+                                            <option value="">
+                                                {!! trans('messages.select_subject') !!}
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th class="report-student-selectors">
+                                        <select ng-model="dashboard.selected.student_scores.grade_id"
+                                                ng-options="grade.id as grade.name for grade in dashboard.grades.records"
+                                                ng-change="dashboard.studentSubjectScoresReport()"
+                                                class="form-control ng-pristine ng-valid ng-touched">
+                                            <option value="">
+                                                {!! trans('messages.select_grade') !!}
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th class="report-student-selectors">
+                                        <select ng-model="dashboard.selected.student_scores.teacher_id"
+                                                ng-options="teacher.id as dashboard.teacherName(teacher)
+                                                for teacher in dashboard.teachers.records"
+                                                ng-change="dashboard.studentSubjectScoresReport()"
+                                                class="form-control ng-pristine ng-valid ng-touched">
+                                            <option value="">
+                                                {!! trans('messages.select_teacher') !!}
+                                            </option>
+                                        </select>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3><i class="fa fa-file-text"></i> {!! trans('messages.student_subject_scores_report') !!}
+                        </h3>
+                    </div>
+
+                    <div>
+                        <table class="table table-bordered"
+                               width="100%">
+                            <tr class="magenta">
+                                <th width="20%"></th>
+                                <th ng-repeat="header in
+                                    dashboard.student_subject_scores_report.column_header[
+                                    dashboard.current_page.student_scores]"
+                                    width="{! dashboard.subjectAreaColumnWidth('scores', 80) !}%">
+                                    {! header !}
+                                </th>
+                            </tr>
+                            <tr ng-if="dashboard.student_subject_scores_report.rows"
+                                ng-repeat="(name, row) in
+                                    dashboard.student_subject_scores_report.rows">
+                                <td width="20%">
+                                    Student {! name !}
+                                </td>
+                                <td ng-repeat="score in row[dashboard.current_page.student_scores]">
+                                    <div class="progress-bar progress-bar-striped"
+                                         ng-class="{
+										'progress-bar-success' : score > futureed.REPORT_PROGRESS_PASS,
+										'progress-bar-warning' : score > futureed.REPORT_PROGRESS_MEDIAN_FLOOR
+										    && score <= futureed.REPORT_PROGRESS_MEDIAN_CEILING ,
+										'progress-bar-danger' : score <= futureed.REPORT_PROGRESS_FAIL ,
+									}"
+                                         ng-style="{ 'width' : score + '%' }">
+                                        {! score + '%' !}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="!dashboard.student_subject_scores_report.rows">
+                                <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="pull-right" ng-if="dashboard.student_subject_scores_report.rows">
+                        <pagination
+                                ng-model="dashboard.current_page.student_scores"
+                                total-items="dashboard.number_of_pages.student_scores"
                                 items-per-page="1"
                                 previous-text="&lt;"
                                 next-text="&gt;"
