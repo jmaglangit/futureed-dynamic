@@ -298,7 +298,7 @@
 			</div> 
 
 			<legend>{!! trans('messages.school_contact_info') !!}</legend>
-			<div class="form-group">
+			<div class="form-group" ng-form name="contactName">
 				<label class="col-xs-2 control-label">{!! trans('messages.contact_person') !!}<span class="required">*</span></label>
 				<div class="col-xs-6">
 					{!! Form::text('contact_name', ''
@@ -306,9 +306,14 @@
 							'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : login.fields['contact_name'] }"
 							, 'placeholder' => trans('messages.contact_person')
+							, 'ng-maxlength' => '128'
+							, 'ng-click' => 'login.validateMaxLength()'
 							, 'ng-model' => 'login.record.contact_name'
 						)
 					) !!}
+					<div class="reg-info">
+						<span class="error-msg-con" ng-show="contactName.contact_name.$error.maxlength">{!! trans('messages.register_contact_name_may_not_be_greater') !!}</span>
+					</div>
 				</div>
 			</div>
 
