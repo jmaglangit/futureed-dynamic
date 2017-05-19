@@ -138,7 +138,7 @@ class StudentRepository implements StudentRepositoryInterface
 
                         }])->with(['module' => function($query) {
 
-                            $query->select(['id', 'subject_area_id']);
+                            $query->select(['id', 'subject_area_id', 'grade_id']);
 
                         }]);
 
