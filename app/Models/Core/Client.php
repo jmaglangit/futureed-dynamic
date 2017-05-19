@@ -50,7 +50,7 @@ class Client extends Model
 	//-------------relationships classroom
 	public function classroom()
 	{
-		return $this->hasMany('FutureEd\Models\Core\Classroom', 'client_id', 'id');
+		return $this->hasMany('FutureEd\Models\Core\Classroom');
 	}
 
 	public function school()

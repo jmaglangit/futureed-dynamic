@@ -15,6 +15,8 @@ interface SubjectRepositoryInterface {
 
     public function getASubjectWithModules($subject_id, $grade_level);
 
+    public function getASubjectWithAreas($subject_id, $grade_level);
+
     public function getSubjectsWithModules($grade_level);
 
 }
