@@ -670,7 +670,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
                         ->with(['studentModule' => function($query) {
 
                             $query->select(
-                                ['id', 'student_id', 'subject_id', 'progress',
+                                ['id', 'student_id', 'subject_id', 'progress', 'class_id',
                                     'question_counter', 'correct_counter']);
 
                         }]);
