@@ -303,7 +303,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
             (self.principal.school_code, self.selected.student_progress.teacher_id,
                 self.selected.student_progress.subject_id, self.selected.student_progress.grade_id)
                 .success(function (response) {
-                    console.dir(response);
                     if (angular.equals(response.status, Constants.STATUS_OK)) {
                         if (response.errors) {
                             self.errors = $scope.errorHandler(response.errors);
