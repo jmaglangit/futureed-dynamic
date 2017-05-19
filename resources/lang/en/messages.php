@@ -1519,9 +1519,10 @@ return [
 	'register_lastname_may_not_be_greater' => 'The last name may not be greater than 64 characters.',
 	'register_lastname_must_not_be_at_least' => 'The last name must be at least 2 characters.',
 	'register_state_may_not_be_greater' => 'The state may not be greater than 128 characters.',
-	'register_street_address_may_not_be_greater' => 'The state may not be greater than 128 characters.',
+	'register_street_address_may_not_be_greater' => 'The street address may not be greater than 128 characters.',
 	'register_school_name_may_not_be_greater' => 'The school name may not be greater than 128 characters.',
-	'register_school_address_may_not_be_greater' => 'The school state may not be greater than 128 characters.',
+	'register_school_address_may_not_be_greater' => 'The school address may not be greater than 128 characters.',
 	'register_school_city_may_not_be_greater' => 'The school city may not be greater than 128 characters.',
 	'register_school_state_may_not_be_greater' => 'The school state may not be greater than 128 characters.',
+	'register_contact_name_may_not_be_greater' => 'The contact name may not be greater than 128 characters.',
 ];
