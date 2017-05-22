@@ -147,7 +147,6 @@ function ManageTeacherContentController($scope, $window, ManageTeacherContentSer
 	}
 
 	self.evaluateTooltip = function (string, max_length) {
-		console.dir(string.length > max_length ? string : null);
 		return string.length > max_length ? string : null;
 	}
 
