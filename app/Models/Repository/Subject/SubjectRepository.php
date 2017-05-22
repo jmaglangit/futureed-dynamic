@@ -1,7 +1,6 @@
 <?php
 namespace FutureEd\Models\Repository\Subject;
 
-use function foo\func;
 use FutureEd\Models\Core\Subject;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
