@@ -1101,7 +1101,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			if(angular.equals(parseInt(value.id), parseInt(self.result.next_question))) {
 				self.current_question = value;
 				self.current_question.answer_text = Constants.EMPTY_STR;
-				self.current_question.answer_id = Constants.EMPTY_STR;
+				self.current_question.answer_id = undefined;
 				self.answer_explanation = Constants.EMPTY_STR;
 
 				if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
