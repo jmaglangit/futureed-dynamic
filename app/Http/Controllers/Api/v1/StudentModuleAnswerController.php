@@ -442,7 +442,7 @@ class StudentModuleAnswerController extends ApiController{
 			return $this->respondWithData($return);
 
 
-		} elseif ($next_question == -1 || is_null($next_question) ){
+		} elseif ($next_question == -1 && $question_type != config('futureed.question_type_coding') || is_null($next_question) ){
 
 			//Set student Module to failed.
 			$student_module->module_status = config('futureed.module_status_failed');
