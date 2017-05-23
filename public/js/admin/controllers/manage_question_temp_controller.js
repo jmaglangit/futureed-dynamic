@@ -158,8 +158,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		self.areas = Constants.FALSE;
 		self.fields = [];
 
-		console.log(self.record);
-
 		$scope.ui_block();
 		ManageQuestionTempService.add(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -185,7 +183,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 	//operation type
 	self.operationType = function(){
 
-		console.log(self.record.operation);
 		 switch(self.record.operation){
 			 // operations
 			 default:
@@ -254,7 +251,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					 self.record = response.data;
-					console.log(self.record);
 					 self.module_name = self.record.name;
 					 self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
 					 self.record.curriculum_country = self.curr_country_list = self.record.modulecountry;
