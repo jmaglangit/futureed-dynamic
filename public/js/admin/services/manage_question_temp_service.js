@@ -30,7 +30,7 @@ function ManageQuestionTempService($http) {
 	api.details  = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: apiUrl + 'question-template' + id
+			, url 	: apiUrl + 'question-template/' + id
 		});
 	}
 
@@ -38,14 +38,14 @@ function ManageQuestionTempService($http) {
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data 	: data
-			, url 	: apiUrl + 'question-template' + data.id
+			, url 	: apiUrl + 'question-template/' + data.id
 		});
 	}
 
 	api.deleteTemplate  = function(id) {
 		return $http({
 			method 	: Constants.METHOD_DELETE
-			, url 	: apiUrl + 'question-template' + id
+			, url 	: apiUrl + 'question-template/' + id
 		});
 	}
 

@@ -949,6 +949,7 @@ return [
 	'admin_edit_template' => 'Edit Template',
 	'admin_view_template' => 'View Template',
 	'admin_delete_template' => 'View Template',
+	'admin_delete_template_msg' => 'Are you sure you want to delete this template?',
 	'admin_question_type_fib' => 'FIB',
 	'admin_question_type_mc' => 'MC',
 	'admin_operation_add' => 'ADDITION',
