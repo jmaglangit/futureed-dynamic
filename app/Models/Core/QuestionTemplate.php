@@ -29,10 +29,15 @@ class QuestionTemplate extends Model{
 	protected $fillable = [
 		'question_type',
 		'question_template_format',
-		'question_format',
+		'question_equation',
 		'operation',
 		'question_form',
 		'status'
+	];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
 	];
 
 	//scope
