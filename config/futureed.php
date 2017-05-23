@@ -21,6 +21,7 @@ return [
 	'accepted' => 'Accepted',
 	'rejected' => 'Rejected',
 	'none' => 'None',
+	'limit_attempt' => 3,
 
 	//Request code expiry in seconds
 	'request_code_expiry' => 3600,
@@ -222,6 +223,7 @@ return [
 	'student_point_description_code' => 1,
 	'student_point_description_code_tip' => 3,
 	'student_point_description_code_help' => 4,
+	'student_points_earned_coding' => 10,
 
 	//student points description
 	'student_point_description' => 'Completion of Module',
@@ -373,5 +375,10 @@ return [
 		'bank_code' => env('BILL_BANK_CODE',"7339"),
 		'swift_code' => env('BILL_SWIFT_CODE',"OCBCSGSG")
 	],
+
+	//Automated question features
+	'question_form_word' => 'Word',
+	'question_form_blank' => 'Blank',
+	'question_form_series' => 'Series',
 
 ];

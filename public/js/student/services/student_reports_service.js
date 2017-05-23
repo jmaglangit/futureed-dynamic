@@ -111,5 +111,12 @@ function StudentReportsService($http) {
 		});
 	}
 
+	api.getStudentBackgroundImage = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	: 	apiUrl + 'student/background-image/' + id
+		});
+	}
+
 	return api;	
 }

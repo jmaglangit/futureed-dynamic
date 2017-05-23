@@ -26,6 +26,8 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 		self.active_edit = Constants.FALSE;
 		self.active_questions_preview = Constants.FALSE;
 		self.question_preview_id = "#questions_preview";
+		self.curriculum_country = Constants.FALSE;
+		self.curr_country_list = [];
 
 		//self.tableDefaults();
 		//self.searchDefaults();
@@ -166,8 +168,12 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
+					self.currentId = response.data.id;
 					self.setActive(Constants.ACTIVE_ADD);
 					self.success = Constants.MSG_CREATED("Module");
+
+					self.details(self.currentId);
+					self.setActive(Constants.ACTIVE_VIEW, self.currentId);
 				}
 			}
 			
@@ -244,6 +250,9 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 					self.record = response.data;
 					self.module_name = self.record.name;
 					self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
+
+					self.packageCountries();
+					self.record.curriculum_country = self.curr_country_list = self.record.modulecountry;
 				}
 			}
 		$scope.ui_unblock();
@@ -786,6 +795,81 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 			self.quad = $.plot($("#placeholder"), data, options);
 		}
 	}
+
+	self.packageCountries = function(){
+
+		ManageModuleService.getPackageCountries().success(function(response){
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				self.curriculum_country = response.data;
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//add curriculum country available
+	self.addCurriculumCountry = function(country_id,seq_no,grade_id){
+
+		var listed = Constants.FALSE;
+		angular.forEach(self.curr_country_list, function(v,k){
+			if(v.country_id == country_id){
+				v.seq_no = seq_no;
+				v.grade_id = grade_id;
+				listed++;
+			}
+		});
+
+		if(listed == Constants.FALSE && country_id != ''){
+			self.curr_country_list.push({
+				'country_id' : country_id,
+				'seq_no' : seq_no,
+				'grade_id' : grade_id});
+		}
+
+		self.record.curriculum_country = self.curr_country_list;
+	}
+
+	//get country names
+	self.getCountryName = function(country_id){
+
+		var country_name = '';
+		angular.forEach(self.curriculum_country, function(v,k){
+			if(v.country_id == country_id){
+				country_name = v.country.name;
+			}
+		});
+
+		return country_name;
+	}
+
+	//get grade level
+	self.getGrade = function(grade_id){
+
+		var grade_name = '';
+		angular.forEach($scope.grade_lists, function(v,k){
+			if(v.id == grade_id){
+				grade_name = v.name;
+			}
+		});
+
+		return grade_name;
+	}
+
+	//remove curriculum country
+	self.removeCurriculumCountry = function(country_id){
+
+		angular.forEach(self.curr_country_list, function(v,k){
+
+			if(v.country_id == country_id){
+				self.curr_country_list.splice(k,1);
+				self.record.curriculum_country = self.curr_country_list;
+			}
+		});
+	}
+
+
 }
 
 //TODO: cause of restarting module.

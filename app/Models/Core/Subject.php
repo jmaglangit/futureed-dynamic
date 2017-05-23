@@ -42,11 +42,23 @@ class Subject extends Model {
 		
 	}
 
+	public function modules() {
+
+	    return $this->hasMany('FutureEd\Models\Core\Module');
+
+    }
+
 	// Student Modules
 	public function studentModules(){
 
 		return $this->hasMany('FutureEd\Models\Core\Module');
 	}
+
+	public function subjectAreas() {
+
+	    return $this->hasMany('FutureEd\Models\Core\SubjectArea');
+
+    }
     
     //-------------scopes
 	public function scopeName($query, $name) {
@@ -60,5 +72,13 @@ class Subject extends Model {
 		return $query->where('status',$status);
 
 	}
+
+	public function moduleCount() {
+
+	    return $this->hasOne('FutureEd\Models\Core\Module')
+            ->selectRaw('subject_id, count(*) as count')
+            ->groupBy('subject_id');
+
+    }
 
 }

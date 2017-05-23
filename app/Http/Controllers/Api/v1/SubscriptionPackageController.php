@@ -4,15 +4,22 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\SubscriptionPackageRequest;
 use FutureEd\Models\Repository\SubscriptionPackage\SubscriptionPackageRepositoryInterface;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+use FutureEd\Models\Core\SubscriptionPackages;
+use FutureEd\Models\Core\Invoice;
 
 class SubscriptionPackageController extends ApiController {
 
 	protected $subscription_package;
+	protected $invoice;
 
 	public function __construct(
+		InvoiceRepositoryInterface $invoice,								
 		SubscriptionPackageRepositoryInterface $subscriptionPackageRepositoryInterface
 	){
 		$this->subscription_package = $subscriptionPackageRepositoryInterface;
+		$this->invoice = $invoice;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -53,7 +60,17 @@ class SubscriptionPackageController extends ApiController {
 			$offset = Input::get('offset');
 		}
 
-		return $this->respondWithData($this->subscription_package->getSubscriptionPackages($criteria,$limit,$offset));
+        $sess_name = Session::has('student') ? 'student' : 'client';
+        $data = Session::get($sess_name);
+        $user = json_decode($data, true);
+        $invoices = $this->invoice->getInvoiceDetails([
+            $sess_name.'_id' => $user['id'],
+            'payment_status' => config('futureed.paid')
+        ]);
+
+        $criteria['trial'] = ($invoices['total']) ? 1 : 0;
+
+        return $this->respondWithData($this->subscription_package->getSubscriptionPackages($criteria,$limit,$offset));
 	}
 
 	/**
@@ -98,6 +115,15 @@ class SubscriptionPackageController extends ApiController {
 	public function destroy($id){
 
 		return $this->respondWithData($this->subscription_package->deleteSubscriptionPackage($id));
+	}
+
+	/**
+	 * Get package countries
+	 * @return mixed
+	 */
+	public function getSubscriptionCountries(){
+
+		return $this->respondWithData($this->subscription_package->getSubscriptionCountries());
 	}
 
 }

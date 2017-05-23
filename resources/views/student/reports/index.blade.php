@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con reports" ng-controller="ProfileController as profile" ng-cloak>
+	<div class="container dshbrd-con reports" ng-controller="ProfileController as profile" ng-init="profile.updateBackground();" ng-cloak>
 		<div ng-controller="StudentReportsController as reports" class="wrapr">
 			<div class="row">
 				<div class="col-xs-3">

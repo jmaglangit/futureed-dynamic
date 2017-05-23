@@ -77,7 +77,11 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                 if (response.errors) {
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
-                    self.records = response.data.rows;
+                    self.records = response.data.rows.map(function(row) {
+                        row.module_status = row.module_status == Constants.FAILED ? Constants.RETAKE : row.module_status;
+                        return row;
+                    });
+
                     self.student = response.data.additional_information;
                     self.getIAssessReportLink();
                 }
@@ -583,4 +587,23 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
         });
 
     }
+
+    self.updateBackground = function() {
+        $("footer").css('background-image', 'none');
+
+        StudentReportsService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
+            if(response.data){
+                angular.element('body.student').css({
+                    'background-image' : 'url("' + response.data.url + '")'
+                });
+            }else{
+                angular.element('body.student').css({
+                    'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
+                });
+            }
+        }).error(function(response){
+            self.error = $scope.internalError();
+        });
+    }
+
 }

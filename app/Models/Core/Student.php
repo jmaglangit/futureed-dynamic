@@ -109,6 +109,12 @@ class Student extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','student_id')->with('classroom');
 	}
 
+	public function studentModule() {
+
+	    return $this->hasMany('FutureEd\Models\Core\StudentModule', 'student_id', 'id');
+
+    }
+
 
     //-------------scopes
 	public function scopeUserId($query, $user_id){

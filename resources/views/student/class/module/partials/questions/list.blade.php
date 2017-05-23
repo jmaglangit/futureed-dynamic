@@ -6,7 +6,7 @@
 			<div class="row questions-header col-xs-12">
 				<div ng-class="{'col-xs-6':mod.current_question.question_type != futureed.CODING,'col-xs-4':mod.current_question.question_type == futureed.CODING}">
 					<div class="row col-xs-6">
-						<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						<button type="button" class="btn btn-sky-blue next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 							{{ trans('messages.exit_module') }}
 						</button>
 					</div>
@@ -73,7 +73,9 @@
 					{{--Message--}}
 					<div class="col-xs-12">
 						<div class="questions-message">
-							<p ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+							<p  ng-if="!mod.record.is_dynamic" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+							{{--TODO dynamic question text here--}}
+							<p  ng-if="mod.record.is_dynamic" ng-bind-html="mod.current_question.question_text | trustAsHtml"></p>
 						</div>
 					</div>
 					{{--Tips--}}
@@ -87,10 +89,16 @@
 
 				</div>
 				{{--Answers--}}
+				{{--TODO add module if dynamic--}}
 				<div class="col-xs-6"
 					 ng-if="mod.current_question.question_type != futureed.CODING"
 				>
 					<div class="questions-answers">
+
+						{{-- TODO insert dynamic qu	estions --}}
+						{{--student.class.module.partials.questions.dynamic.fib--}}
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.steps') !!}"></div>
+
 						{{--mod.current_question.question_type == futureed.MULTIPLECHOICE--}}
 						<div class="margin-top-30">
 							<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.current_question.question_answers"
@@ -102,6 +110,7 @@
 						{{--mod.current_question.question_type == futureed.FILLINBLANK--}}
 						<div class="margin-top-30">
 							<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK" class="form-group">
+
 								<div ng-class="{ 'fib-text-fields' : mod.current_question.answer_text_field_count.length > 1 }">
 									<input ng-repeat="n in mod.current_question.answer_text_field_count track by $index"
 										   ng-model="mod.current_question.answer_text[n]"
@@ -189,28 +198,12 @@
 						</div>
 					</div>
 				</div>
+				{{--TODO Dynamic Questions--}}
+				{{--TODO find module if it's dynamic or not--}}
 				{{--Snap--}}
 				<div class="col-xs-12"
 					 id="snap_container"
-					 ng-if="mod.current_question.question_type == futureed.CODING"
-				>
-					{!! Html::script('js/snap/morphic.js')  !!}
-					{!! Html::script('js/snap/widgets.js')  !!}
-					{!! Html::script('js/snap/blocks.js')   !!}
-					{!! Html::script('js/snap/threads.js')  !!}
-					{!! Html::script('js/snap/objects.js')  !!}
-					{!! Html::script('js/snap/lists.js')    !!}
-					{!! Html::script('js/snap/byob.js')     !!}
-					{!! Html::script('js/snap/tables.js')   !!}
-					{!! Html::script('js/snap/gui.js')      !!}
-					{!! Html::script('js/snap/paint.js')    !!}
-					{!! Html::script('js/snap/xml.js')      !!}
-					{!! Html::script('js/snap/store.js')    !!}
-					{!! Html::script('js/snap/locale.js')   !!}
-					{!! Html::script('js/snap/cloud.js')    !!}
-					{!! Html::script('js/snap/sha512.js')   !!}
-					{!! Html::script('js/snap/FileSaver.min.js') !!}
-					{!! Html::script('js/snap/snap_variables.js') !!}
+					 ng-if="mod.current_question.question_type == futureed.CODING">
 
 					<center>
 						<div class="content" id="world_container">
@@ -249,22 +242,59 @@
 				</span>
 
 				<div class="result-tip tip-content" ng-if="mod.result.points_earned <= 0" ng-init="mod.getAnswerExplanation();" ng-show="mod.answer_explanation.length">
-					<div class="tip-icon">
-						<img src="/images/icon-tipbulb.png">
+					<div class="col-xs-12 tip-message" ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE && !mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+						<div class="col-xs-12 tip-icon">
+							<img src="/images/icon-tipbulb.png">
+							<span class="tips-text">{{ trans('messages.tips') }}</span>
+						</div>
+						<div class="col-xs-12">
+							<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset] | json !}">
+							<i class="fa fa-caret-left fa-2x"
+							   aria-hidden="true"
+							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
+							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
+							</i>
+						</div>
 					</div>
-					<div class="tip-message">
-						<img ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE" ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
-						<i class="fa fa-caret-left fa-2x"
-						   aria-hidden="true"
-						   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
-						   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
-						</i>
-						<p class="h4 m-bottom-0" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
-						<i class="fa fa-caret-right fa-2x"
-						   aria-hidden="true"
-						   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
-						   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
-						</i>
+
+					<div class="col-xs-12 tip-message" ng-if="mod.answer_explanation[mod.answer_exp_offset].image == futureed.NONE && mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+						<div class="col-xs-12 tip-icon">
+							<img src="/images/icon-tipbulb.png">
+							<span class="tips-text">{{ trans('messages.tips') }}</span>
+						</div>
+						<div class="col-xs-12">
+							<p class="h4 m-bottom-0" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
+							<i class="fa fa-caret-right fa-2x"
+							   aria-hidden="true"
+							   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
+							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
+							</i>
+						</div>
+					</div>
+
+					<div class="col-xs-12 tip-message-side" ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE && mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+						<div class="col-xs-3">
+							<div class="tip-icon">
+								<img src="/images/icon-tipbulb.png">
+								<span class="tips-text">{{ trans('messages.tips') }}</span>
+							</div>
+							<div>
+								<p class="h4 m-bottom-0" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].answer_explanation | trustAsHtml"></p>
+								<i class="fa fa-caret-right fa-2x"
+								   aria-hidden="true"
+								   ng-show="mod.answer_exp_offset != (mod.answer_explanation.count - 1) && mod.answer_explanation_fully_loaded == futureed.TRUE"
+								   ng-click="mod.answer_exp_offset = mod.answer_exp_offset + 1;">
+								</i>
+							</div>
+						</div>
+						<div class="col-xs-9">
+							<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
+							<i class="fa fa-caret-left fa-2x"
+							   aria-hidden="true"
+							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
+							   ng-click="mod.answer_exp_offset = mod.answer_exp_offset - 1;">
+							</i>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubscriptionPackages extends Model{
 
+	const SUBSCRIPTION_ID_TRIAL = 3;
+
 	use SoftDeletes;
 
 	use TransactionTrait;
@@ -69,5 +71,9 @@ class SubscriptionPackages extends Model{
 
 	public function scopeStatus($query, $status){
 		return $query->where('status',$status);
+	}
+
+	public function scopeStatusTrial($query){
+		return $query->where('subscription_id', '!=', self::SUBSCRIPTION_ID_TRIAL);
 	}
 }

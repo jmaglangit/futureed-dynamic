@@ -648,6 +648,11 @@ img.drawer-button {
 
 .footer {
     z-index: -1;
+    background: url(/images/student_page_bg.jpg) no-repeat scroll right bottom / cover;
+    background-attachment: fixed;
+    background-position-y: center;
+    background-position-x: center;
+    padding-bottom: 50px;
 }
 
 .pointer {
@@ -1253,15 +1258,16 @@ hr {
 }
 
 .tip-content {
-    text-align: left;
-    width: 750px;
-    margin: auto auto 10px 310px;
+    /*width: 750px;*/
+    /*margin: auto auto 10px 310px;*/
+    text-align: center;
+    width: 100%;
     padding-bottom: 0px;
 }
 
 .tip-icon, .tip-message {
     padding-left: 5px;
-    display: table-cell;
+    /*display: table-cell;*/
     vertical-align: middle;
 }
 
@@ -1277,12 +1283,27 @@ hr {
 
 .tip-message {
     padding-left: 20px;
+    padding: 10px;
+    text-align: center;
 }
 
 .tip-message img {
     width: auto;
     max-width: 625px;
-    margin: 0 0 0 50px;
+    /*margin: 0 0 0 50px;*/
+}
+
+.tip-message-side img {
+    width: auto;
+    max-width: 100%;
+    margin: 10px 0 10px 20px;
+    height: auto;
+}
+
+.tip-message-side{
+    text-align: center;
+    background-color: #eeeeee;
+    border-radius: 10px;
 }
 
 .tip-fa-icon {
@@ -1294,6 +1315,11 @@ hr {
     left: -15px;
     font-size: 50px;
     border-radius: 9em;
+}
+
+.tips-text {
+    font-size: 20px;
+    color: #065a7f;
 }
 
 .result-message {
@@ -1685,7 +1711,7 @@ hr {
 {
     border-radius: 10px;
     width: 370px;
-    margin-left: 190px;
+    /*margin-left: 190px;*/
 }
 
 .disabled-tips-bar, .disabled-help-bar {
@@ -2549,6 +2575,7 @@ pre.dropdown-menu {
 .quoted-tip img {
     width: 625px;
     margin: 0 0 20px 55px;
+    float: left;
 }
 
 .quoted-tip p {
@@ -2557,7 +2584,8 @@ pre.dropdown-menu {
 }
 
 .quoted-avatar {
-    margin-left: 70px !important;
+    /*margin-left: 70px !important;*/
+    float: left;
 }
 
 .tip-result-message {
@@ -2730,3 +2758,24 @@ pre.dropdown-menu {
     background: #065A7F;
     min-height: 150px;
 }
+
+/*for snap*/
+canvas#world {
+    max-width: 100%;
+    height: auto;
+}
+
+#studentBackground {
+    background: url("/images/student_page_bg.jpg") no-repeat scroll right bottom / cover;
+    background-attachment: fixed;
+    background-position-y: center;
+    background-position-x: center;
+    min-height: 93.9vh;
+}
+
+@media only screen and (min-width: 600px){
+    #studentBackground {
+        min-height: 93.9vh;
+    }
+}
+

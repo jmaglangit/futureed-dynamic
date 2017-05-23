@@ -11,6 +11,8 @@ function StudentTrialClassController($scope,$window,StudentClassService) {
     }
 
     self.updateBackground = function() {
+        $("footer").css('background-image', 'none');
+
         StudentClassService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
             if(response.data){
                 angular.element('body.student').css({

@@ -543,7 +543,7 @@ content legend {
 }
 
 .report-empty-column{
-	background-color: #FFFFff;
+	background-color: #AC2A4E;
 	border-top: 0px;
 	border-left: 0px;
 }
@@ -803,6 +803,20 @@ content legend {
 	border-radius: 50%;
 }
 
+.report-teacher-title {
+	float: left; margin: 0 auto;
+}
+
+.report-selector-container {
+	margin: 20px auto;
+}
+
+.report-student-selectors {
+	width: 33%;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
 /*subject-area tab*/
 .subject-area .table {border-top:none;}
 
@@ -816,7 +830,7 @@ content legend {
 }
 
 .export-table > tbody > tr > td {
-	padding: 15px;
+	padding: 30px;
 }
 
 .export-table-bordered td, .export-table-bordered th {
@@ -834,6 +848,21 @@ content legend {
 }
 .export-table .class-report th{
 	width: 200px;
+}
+
+.export-body {
+	width: 100%;
+	margin: 0 0 20px 0;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+.export-body td, .export-body th {
+	padding: 8px; !important;
+}
+
+.export-row {
+	line-height: 16px; !important;
 }
 
 /*dashboard export button area*/
@@ -955,4 +984,7 @@ content legend {
 	.reports .nav-student li {
 		width: 110px !important;
 	}
+}
+.reg-info {
+    text-align: center;
 }

@@ -89,7 +89,7 @@ class AdminModuleController extends ApiController {
 	public function store(AdminModuleRequest $request)
 	{
 		$data = $request->only('subject_id','subject_area_id','name','code','description','common_core_area',
-                                      'common_core_url','status','points_to_unlock','points_to_finish','image');
+			'curriculum_country','common_core_url','status','points_to_unlock','points_to_finish','image','is_dynamic','no_difficulty');
 
 		$return = $this->module->addModule($data);
 
@@ -142,6 +142,7 @@ class AdminModuleController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
+//		dd($module->toArray());
 		return $this->respondWithData($module);
 	}
 
@@ -154,7 +155,7 @@ class AdminModuleController extends ApiController {
 	public function update($id, AdminModuleRequest $request)
 	{
 		$data = $request->only('subject_id','subject_area_id','name','description','common_core_area',
-					'common_core_url','status','points_to_unlock','points_to_finish','image','translatable');
+			'curriculum_country','common_core_url','status','points_to_unlock','points_to_finish','image','translatable','is_dynamic','no_difficulty');
 
 		$module = $this->module->viewModule($id);
 

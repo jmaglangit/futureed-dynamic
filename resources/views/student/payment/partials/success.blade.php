@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-<div class="container dshbrd-con" ng-cloak>
+<div class="container dshbrd-con" ng-controller="StudentPaymentController as payment" ng-init="payment.updateBackground();" ng-cloak>
 	<div class="form-narrow form-style">
 		<div class="content-title">
 			<div class="pull-left title-main-content">
@@ -33,4 +33,12 @@
 	</div>
 </div>
 
+@stop
+
+@section('scripts')
+	{!! Html::script('/js/student/controllers/student_payment_controller.js')!!}
+	{!! Html::script('/js/student/services/student_payment_service.js')!!}
+
+	{!! Html::script('/js/common/search_service.js')!!}
+	{!! Html::script('/js/common/table_service.js')!!}
 @stop

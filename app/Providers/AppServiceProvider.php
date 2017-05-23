@@ -1,5 +1,7 @@
 <?php namespace FutureEd\Providers;
 
+use FutureEd\Models\Core\Module;
+use FutureEd\Models\Observers\ModuleObserver;
 use Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,6 +14,11 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		//Observer implementations
+		Module::observe(ModuleObserver::class);
+
+
+
 		#TODO: Find a cleaner way for this
 
 		Validator::extend('custom_password', function ($attribute, $value, $parameters) {
@@ -387,5 +394,52 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\GamePlayTime\GamePlayTimeRepositoryInterface',
 			'FutureEd\Models\Repository\GamePlayTime\GamePlayTimeRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\DataLibrary\DataLibraryRepositoryInterface',
+			'FutureEd\Models\Repository\DataLibrary\DataLibraryRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\AnswerExplanationTemplate\AnswerExplanationTemplateRepositoryInterface',
+			'FutureEd\Models\Repository\AnswerExplanationTemplate\AnswerExplanationTemplateRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\ModuleQuestionTemplate\ModuleQuestionTemplateRepositoryInterface',
+			'FutureEd\Models\Repository\ModuleQuestionTemplate\ModuleQuestionTemplateRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionCache\QuestionCacheRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionCache\QuestionCacheRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionCacheLog\QuestionCacheLogRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionCacheLog\QuestionCacheLogRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\WordProblemDataMapping\WordProblemDataMappingRepositoryInterface',
+			'FutureEd\Models\Repository\WordProblemDataMapping\WordProblemDataMappingRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionGradeCondition\QuestionGradeConditionRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionGradeCondition\QuestionGradeConditionRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepository'
+		);
+
+
 	}
 }

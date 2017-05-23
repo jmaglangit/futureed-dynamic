@@ -30,7 +30,12 @@ class SubjectArea extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Subject');
 		
 	}
-	
+
+    public function modules() {
+
+        return $this->hasMany('FutureEd\Models\Core\Module');
+    }
+
 	//-------------scopes
 	public function scopeSubjectId($query, $subject_id) {
 		
@@ -43,5 +48,13 @@ class SubjectArea extends Model {
 		return $query->where('name', 'like', '%'.$name.'%');
 				
 	}
+
+    public function moduleCount() {
+
+        return $this->hasOne('FutureEd\Models\Core\Module')
+            ->selectRaw('subject_area_id, count(*) as count')
+            ->groupBy('subject_area_id');
+
+    }
 
 }

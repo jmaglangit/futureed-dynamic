@@ -17,7 +17,9 @@ use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
 use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
 use FutureEd\Services\BadgeServices;
+use FutureEd\Services\EquationCompilerServices;
 use FutureEd\Services\ModuleContentServices;
+use FutureEd\Services\QuestionCacheServices;
 use FutureEd\Services\QuestionServices;
 use FutureEd\Services\StudentModuleServices;
 
@@ -40,6 +42,8 @@ class StudentModuleAnswerController extends ApiController{
 	protected $module_content_services;
 	protected $badge_services;
 	protected $snap_exercise_details;
+	protected $equation_compiler;
+	protected $question_cache_service;
 
 	public function __construct(
 		AvatarPoseRepositoryInterface $avatar_pose,
@@ -58,7 +62,9 @@ class StudentModuleAnswerController extends ApiController{
 		QuestionServices $questionServices,
 		BadgeServices $badgeServices,
 		ModuleRepositoryInterface $moduleRepositoryInterface,
-		SnapExerciseDetailsRepositoryInterface $snapExerciseDetailsRepositoryInterface
+		SnapExerciseDetailsRepositoryInterface $snapExerciseDetailsRepositoryInterface,
+		EquationCompilerServices $equationCompilerServices,
+		QuestionCacheServices $questionCacheServices
 	)
 	{
 
@@ -79,6 +85,8 @@ class StudentModuleAnswerController extends ApiController{
 		$this->badge_services = $badgeServices;
 		$this->module = $moduleRepositoryInterface;
 		$this->snap_exercise_details = $snapExerciseDetailsRepositoryInterface;
+		$this->equation_compiler = $equationCompilerServices;
+		$this->question_cache_service = $questionCacheServices;
 	}
 
 //+-------------------+-------------------------+------+-----+---------------------+----------------+
@@ -119,14 +127,20 @@ class StudentModuleAnswerController extends ApiController{
 			'answer_text',
 			'student_id',
 			'date_start',
-			'date_end'
+			'date_end',
+			'is_dynamic'
 		);
+		//check type of question
+		$question_type = $this->question->getQuestionType($data['question_id']);
 
 		//check if module has complete setup.
-		if(!$this->module_content_services->checkModuleComplete($data['module_id'])){
+		if(!$this->module_content_services->checkModuleComplete($data['module_id']) && is_null($data['is_dynamic']) && $question_type != config('futureed.question_type_coding')){
 
 			return $this->respondErrorMessage(2058);
 		}
+
+		//TODO check if dynamic module has complete required no of questions.
+
 
 		//check if module has been completed.
 		if($this->student_module->getStudentModuleStatus($data['student_module_id']) == config('futureed.module_status_completed')){
@@ -145,11 +159,22 @@ class StudentModuleAnswerController extends ApiController{
 
 		//ADD ANSWER
 
-		//check type of question
-		$question_type = $this->question->getQuestionType($data['question_id']);
+		//check module
+		$module = $this->module->getModule($data['module_id']);
 
 		//check answer and points
-		if($question_type == config('futureed.question_type_multiple_choice')){
+		//check if module is dynamic or not
+		if($module->is_dynamic){
+			//output answer if correct or not
+			$dynamic_response = $this->equation_compiler->additionCheckAnswer($data['question_id'],$data['answer_text']);
+
+			$data['seq_no'] = 0	;
+			$data['points_earned'] = 1;
+			$data['answer_status'] = ($dynamic_response)
+				? config('futureed.answer_status_correct') :
+				config('futureed.answer_status_wrong');
+			//output correct or wrong based on boolean output of dynamic.
+		} elseif($question_type == config('futureed.question_type_multiple_choice')){
 
 			//Get answer and point from question_answers.
 			$answer = $this->question_answer->getQuestionCorrectAnswer($data['answer_id']);
@@ -228,7 +253,7 @@ class StudentModuleAnswerController extends ApiController{
 				$data['total_time'] += $exercise->date_start->diffInSeconds($exercise->date_end);
 			}
 
-			$data['points_earned'] = 0;
+			$data['points_earned'] = config('futureed.student_points_earned_coding');
 			$data['answer_status'] = config('futureed.answer_status_correct');
 			$data['seq_no'] = $completed_exercise->first()->question_seq_no;
 
@@ -348,7 +373,7 @@ class StudentModuleAnswerController extends ApiController{
 		//$student_module->last_answered_question_id = $data['module_id'];
 
 		//update module_status
-		//TODO: check if student reaches the end of the questions and set completed, else continue
+		//check if student reaches the end of the questions and set completed, else continue
 		if($student_module->running_points >= $points_to_finish ||
 			!$module->no_difficulty && !$this->student_module_services->getNextQuestion(
 				$data['student_module_id'],
@@ -386,11 +411,24 @@ class StudentModuleAnswerController extends ApiController{
 		$return = $this->student_module->updateStudentModule($student_module->id,$student_module);
 
 		//next question sets
-		$next_question = $this->student_module_services->getNextQuestion(
-			$data['student_module_id'],
-			$data['module_id'],
-			$student_answer
-		);
+		if(is_null($data['is_dynamic'])){
+			$next_question = $this->student_module_services->getNextQuestion(
+				$data['student_module_id'],
+				$data['module_id'],
+				$student_answer
+			);
+		} else {
+
+			//TODO set dynamic next questions
+			$next_question = $this->question_cache_service->dynamicNextQuestion(
+				$data['student_module_id'],
+				$data['module_id'],
+				$student_answer
+			);
+			// question is question_cache table
+//			dd($next_question);
+		}
+
 
 		//Check if next question is equal to -1
 		if($module->no_difficulty && $next_question == -1){
@@ -416,6 +454,11 @@ class StudentModuleAnswerController extends ApiController{
 
 			$return->next_question = $next_question;
 			if($question_type === config('futureed.question_type_coding')) {
+				//once completed percentage automatically 100%
+				$student_module->progress = 100;
+				$student_module->module_status = config('futureed.module_status_completed');
+				$this->student_module->updateStudentModule($student_module->id,$student_module);
+				$return->module_status = $student_module->module_status;
 				$return->snap_module_completed = config('futureed.true');
 			}
 			return $this->respondWithData($return);

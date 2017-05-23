@@ -495,4 +495,15 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 				show    : Constants.TRUE
 		});
 	}
+
+	self.validateMaxLength = function(){
+		$('#clientReg .form-control').bind('keyup change input paste',function(e){
+			var val = $(this).val();
+			var maxCount = $(this).attr('ng-maxlength');
+			if(val.length > maxCount){
+				$(this).val($(this).val().substring(0,maxCount));
+			}
+		});
+	}
+
 }	

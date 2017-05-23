@@ -65,10 +65,13 @@ var Constants = {
 	, DASHBOARD		: "Dashboard"
 	, WRONG			: "Wrong"
 	, CORRECT		: "Correct"
+	, FAILED		: "Failed"
+	, RETAKE		: "Retake"
 
 	, HIDE_MODULE	: "Hide Module"
 
 	, TRIAL_QUESTIONS	:10
+	, ERROR_MSG	: 2
 
 	/**
 	 * Subscription filters
@@ -120,6 +123,10 @@ var Constants = {
 	, ACTIVE_CONTENTS 	: "contents"
 	, ACTIVE_SCHOOL		: "school"
 	, ACTIVE_SCHOOL_TEACHER	: "school_teacher"
+	, ACTIVE_SCHOOL_TEACHER_PROGRESS : "school_teacher_progress"
+    , ACTIVE_SCHOOL_TEACHER_SCORES : "school_teacher_scores"
+    , ACTIVE_SCHOOL_STUDENT_PROGRESS : "school_student_progress"
+    , ACTIVE_SCHOOL_STUDENT_SCORES : "school_student_scores"
 	, ACTIVE_QUESTIONS_PREVIEW : "questions_preview"
 
 	, ADD_CLIENT 	: "add_client"
