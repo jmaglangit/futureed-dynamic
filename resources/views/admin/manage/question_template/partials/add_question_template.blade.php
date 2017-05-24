@@ -137,7 +137,7 @@
 					<div class="col-xs-2"></div>
 					
 				</div>
-				<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>
+				{{--<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
 			<div class="form-group">
 				<div class="col-xs-6">
@@ -152,12 +152,12 @@
 				</div>
 				<div class="col-xs-1"></div>
 				<div class="col-xs-4">
-					{!! Form::textarea('admin_template_text',''
-						, array(
-							'class' => 'form-control disabled-textarea'
-							, 'rows' => '10'
-						)
-					) !!}
+					{{--{!! Form::textarea('admin_template_text',''--}}
+						{{--, array(--}}
+							{{--'class' => 'form-control disabled-textarea'--}}
+							{{--, 'rows' => '10'--}}
+						{{--)--}}
+					{{--) !!}--}}
 				</div>
 			</div>
 
@@ -174,12 +174,12 @@
 				</div>
 				<div class="col-xs-1"></div>
 				<div class="col-xs-4">
-					{!! Form::textarea('admin_template_text',''
-						, array(
-							'class' => 'form-control disabled-textarea'
-							, 'rows' => '3'
-						)
-					) !!}
+					{{--{!! Form::textarea('admin_template_text',''--}}
+						{{--, array(--}}
+							{{--'class' => 'form-control disabled-textarea'--}}
+							{{--, 'rows' => '3'--}}
+						{{--)--}}
+					{{--) !!}--}}
 				</div>
 			</div>
 		</fieldset>
