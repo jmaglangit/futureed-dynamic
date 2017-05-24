@@ -26,6 +26,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		self.active_view = Constants.FALSE;
 		self.active_add = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
+		self.active_update = Constants.FALSE;
 		self.active_questions_preview = Constants.FALSE;
 		self.question_preview_id = "#questions_preview";
 		self.curriculum_country = Constants.FALSE;
@@ -33,6 +34,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
 				self.active_edit = Constants.TRUE;
+				self.active_update = Constants.TRUE;
 				self.details(id);
 				break;
 
@@ -156,8 +158,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		self.areas = Constants.FALSE;
 		self.fields = [];
 
-		console.log(self.record);
-
 		$scope.ui_block();
 		ManageQuestionTempService.add(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -183,7 +183,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 	//operation type
 	self.operationType = function(){
 
-		console.log(self.record.operation);
 		 switch(self.record.operation){
 			 // operations
 			 default:
@@ -251,10 +250,10 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					// self.record = response.data;
-					// self.module_name = self.record.name;
-					// self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
-					// self.record.curriculum_country = self.curr_country_list = self.record.modulecountry;
+					 self.record = response.data;
+					 self.module_name = self.record.name;
+					 self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
+					 self.record.curriculum_country = self.curr_country_list = self.record.modulecountry;
 				}
 			}
 		$scope.ui_unblock();
@@ -303,7 +302,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		self.record.id = id;
 		self.record.confirm = Constants.TRUE;
 
-		$("#delete_module_modal").modal({
+		$("#delete_template_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE

@@ -40,6 +40,11 @@ class QuestionTemplate extends Model{
 		'updated_by' => 1
 	];
 
+	//accessor
+	public function getOperationAttribute(){
+		return QuestionTemplateOperation::where('id',$this->attributes['operation'])->pluck('operation_data');
+	}
+
 	//scope
 	public function scopeQuestionType($query,$question_type){
 		return $query->where('question_type',$question_type);
