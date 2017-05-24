@@ -18,7 +18,7 @@
 			
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.question_template.partials.add_question_template') !!}"></div>
 			
-			{{--<div class="client-content" template-directive template-url="{!! route('admin.manage.question_template.partials.view_question_template') !!}"></div>--}}
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.question_template.partials.view_question_template') !!}"></div>
 		
 		</div>
 	</div>

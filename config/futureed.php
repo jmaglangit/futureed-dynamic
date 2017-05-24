@@ -223,6 +223,7 @@ return [
 	'student_point_description_code' => 1,
 	'student_point_description_code_tip' => 3,
 	'student_point_description_code_help' => 4,
+	'student_points_earned_coding' => 10,
 
 	//student points description
 	'student_point_description' => 'Completion of Module',

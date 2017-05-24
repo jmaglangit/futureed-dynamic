@@ -1,4 +1,4 @@
-<div ng-if="template.active_view || template.active_edit">
+<div ng-if="template.active_view||template.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>{!! trans('messages.admin_view_template') !!}</span>
@@ -25,15 +25,17 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_question_type'
 						, array(
-							  ''=>trans('messages.admin_question_type')
-							, 'Add' => trans('messages.add')
+							 ''=>trans('messages.admin_select_question_type')
+							, 'FIB' => trans('messages.admin_fib')
+							//, 'MC' => trans('messages.admin_mc')
 					 	)
 					 	, null
 					 	, array(
-					 		'ng-disabled' => 'question_template.active_view'
+					 		'ng-disabled' => 'template.active_view',
+					 		'ng-selected' => 'template.record.question_type'
 					 		, 'class' => 'form-control'
-					 		, 'ng-model' => 'question_template.record.question_type'
-					 		, 'ng-class' => "{ 'required-field' : question_template.fields['question_type'] }"
+					 		, 'ng-model' => 'template.record.question_type'
+					 		, 'ng-class' => "{ 'required-field' : template.fields['question_type'] }"
 					 		, 'placeholder' => trans('messages.email')
 					 	)
 					) !!}
@@ -45,15 +47,18 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_operation'
 						, array(
-							  ''=>trans('messages.admin_operation')
-							, 'Addition' => trans('messages.add')
+							  ''=>trans('messages.admin_select_operation')
+							, '{! futureed.ADDITION !}' => trans('messages.admin_operation_add')
+							//, '{! futureed.SUBTRACTION !} ' => trans('messages.admin_operation_subtract')
+							//, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
+							//, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
 					 	)
 					 	, null
 					 	, array(
-					 		'ng-disabled' => 'question_template.active_view'
+					 		'ng-disabled' => 'template.active_view'
 					 		, 'class' => 'form-control'
-					 		, 'ng-model' => 'question_template.record.operation'
-					 		, 'ng-class' => "{ 'required-field' : question_template.fields['question_form'] }"
+					 		, 'ng-model' => 'template.record.operation'
+					 		, 'ng-class' => "{ 'required-field' : template.fields['question_form'] }"
 					 		, 'placeholder' => trans('messages.email')
 					 	)
 					) !!}
@@ -65,15 +70,17 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_question_form'
 						, array(
-							  ''=>trans('messages.admin_question_form')
-							, 'Addition' => trans('messages.admin_operation')
+							  ''=>trans('messages.admin_select_question_form')
+							//, 'Word' => trans('messages.admin_question_form_word')
+							//, 'Blank' => trans('messages.admin_question_form_blank')
+							, 'Series' => trans('messages.admin_question_form_series')
 					 	)
 					 	, null
 					 	, array(
-					 		'ng-disabled' => 'question_template.active_view'
+					 		'ng-disabled' => 'template.active_view'
 					 		, 'class' => 'form-control'
-					 		, 'ng-model' => 'question_template.record.question_form'
-					 		, 'ng-class' => "{ 'required-field' : question_template.fields['question_form'] }"
+					 		, 'ng-model' => 'template.record.question_form'
+					 		, 'ng-class' => "{ 'required-field' : template.fields['question_form'] }"
 					 		, 'placeholder' => trans('messages.email')
 					 	)
 					) !!}
@@ -84,9 +91,9 @@
 				<label class="control-label col-xs-2">{!! trans('messages.admin_template_text') !!} <span class="required">*</span></label>
 			</div>
 
-			<div class="form-group">				
-				<div class="col-xs-8" ng-model = 'template.record.question_type'>
-					<div class="col-xs-2 admin-search-module">
+			<div class="form-group">
+				<div class="col-xs-8" ng-model = 'template.record.question_type' ng-if="!template.active_view">
+					<div class="col-xs-2 admin-search-module" >
 						{!! Form::button(trans('messages.admin_template_text_num')
 							,array(
 								'class' => 'btn btn-blue'
@@ -119,7 +126,7 @@
 						)!!}
 					</div>
 					<div class="col-xs-2"></div>
-					
+
 				</div>
 				<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>
 			</div>
@@ -127,7 +134,8 @@
 				<div class="col-xs-6">
 					{!! Form::textarea('admin_template_text',''
 						, array(
-							'ng-model' => 'template.record.question_type'
+							'ng-model' => 'template.record.question_template_format'
+							, 'ng-disabled' => 'template.active_view'
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : template.fields['description'] }"
 							, 'rows' => '10'
@@ -138,7 +146,8 @@
 				<div class="col-xs-4">
 					{!! Form::textarea('admin_template_text',''
 						, array(
-							'ng-model' => 'template.record.question_type'
+							'ng-model' => 'template.record.question_types'
+							, 'ng-disabled' => 'template.active_view'
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : template.fields['description'] }"
 							, 'rows' => '10'
@@ -153,6 +162,7 @@
 					{!! Form::text('question_equation',''
 						, array(
 							 'ng-model' => 'template.record.question_equation'
+							 , 'ng-disabled' => 'template.active_view'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : template.fields['question_equation'] }"
 						)
@@ -162,7 +172,7 @@
 				<div class="col-xs-4">
 					{!! Form::textarea('admin_template_text',''
 						, array(
-							, 'class' => 'form-control disabled-textarea'
+							'class' => 'form-control disabled-textarea'
 							, 'rows' => '3'
 						)
 					) !!}
@@ -172,10 +182,18 @@
 		<fieldset>
 			<div class="form-group">
 				<div class="btn-container col-xs-9 col-xs-offset-2">
-					{!! Form::button(trans('messages.add')
+					{!! Form::button(trans('messages.edit')
 						, array(
 							'class' => 'btn btn-blue btn-small'
-							, 'ng-click' => 'template.add()'
+							, 'ng-if' => 'futureed.ACTIVE_EDIT && !template.active_update'
+							, 'ng-click' => 'template.setActive(futureed.ACTIVE_EDIT,template.record.id)'
+						)
+					) !!}
+					{!! Form::button(trans('messages.update')
+						, array(
+							'class' => 'btn btn-blue btn-small'
+							, 'ng-if' => 'template.active_update'
+							, 'ng-click' => 'template.update()'
 						)
 					) !!}
 					{!! Form::button(trans('messages.admin_add_template_preview')

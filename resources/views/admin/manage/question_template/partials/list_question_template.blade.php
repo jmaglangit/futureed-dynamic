@@ -175,10 +175,10 @@
 						<td ng-if="template.records.length">
 							<div class="row">
 								<div class="col-xs-3">
-									<a href="" ng-click="template.setActive(futureed.ACTIVE_VIEW, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_view_template') !!}"><span><i class="fa fa-eye"></i></span></a>
+									<a href="" ng-click="template.setActive(futureed.ACTIVE_VIEW,record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_view_template') !!}"><span><i class="fa fa-eye"></i></span></a>
 								</div>
 								<div class="col-xs-3">
-									<a href="" ng-click="template.setActive(futureed.ACTIVE_EDIT, record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_edit_template') !!}"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="template.setActive(futureed.ACTIVE_EDIT,record.id)" tooltip-directive data-toggle="tooltip" title="{!! trans('messages.admin_edit_template') !!}"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 
 								<div class="col-xs-3">
@@ -230,7 +230,7 @@
 						{!! Form::button(trans('messages.yes')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => 'template.deletetemplate()'
+								, 'ng-click' => 'template.deleteTemplate()'
 								, 'data-dismiss' => 'modal'
 							)
 						) !!}

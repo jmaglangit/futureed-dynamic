@@ -1,4 +1,4 @@
-<div ng-if="module.active_list">
+	<div ng-if="module.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>{!! trans('messages.admin_module_mgmt') !!}</span>
