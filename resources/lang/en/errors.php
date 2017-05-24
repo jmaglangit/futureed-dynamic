@@ -103,6 +103,8 @@ return [
 		2072 => 'Picture password is incorrect. You have :remaining_attempts remaining attempt(s).',
 		2073 => 'Please click forgot password to reset your password.',
 
+        2074 => 'Unable to add Student. Country curriculum is not the same.',
+
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',
 		2102 => 'Access token expired.',

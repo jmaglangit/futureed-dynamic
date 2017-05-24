@@ -855,6 +855,12 @@ class ClientRepository implements ClientRepositoryInterface
 		return $response;
 	}
 
+	public function getClientCountry($id) {
+
+	    return Client::whereId($id)->pluck('country_id');
+
+    }
+
 //	public function getSchoolTeachers($school_code) {
 //        DB::beginTransaction();
 //

@@ -127,6 +127,16 @@ class ParentStudentController extends ApiController {
             return $this->respondErrorMessage(2131);
         }
 
+        $student_county = $this->student->getStudentCountry($student_id);
+
+        $parent_country = $this->client->getClientCountry($data['client_id']);
+
+        if ($student_county !== $parent_country) {
+
+            return $this->respondErrorMessage(2074);
+
+        }
+
         //generate invitation_code
         $invitation_code = $this->code->getCode();
 
@@ -140,9 +150,9 @@ class ParentStudentController extends ApiController {
         $return = $this->parent_student->addParentStudent($details);
 
         //send email to student
-        $this->mail->sendParentAddStudent($user_detail,$client_detail,$invitation_code);
+        $this->mail->sendParentAddStudent($user_detail, $client_detail, $invitation_code);
+        return $this->respondWithData(['id' => $return['id']]);
 
-        return $this->respondWithData(['id'=>$return['id']]);
     }
 
     public function parentConfirmStudent(ParentStudentRequest $request){
