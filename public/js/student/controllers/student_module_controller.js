@@ -1649,8 +1649,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 		self.question_values_answer = new Array(iterations.values);
 
-		console.log(self.question_values_answer);
-
 		// return val;
 		//if(iterations > Constants.TRUE){
 		//	return new Array(iterations);
