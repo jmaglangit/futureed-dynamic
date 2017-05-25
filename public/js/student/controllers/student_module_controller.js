@@ -707,7 +707,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		//TODO set self.current_question.question_type
 		if(self.record.is_dynamic){
 			self.setDynamicModuleAnswer();
-			answer.answer_text = self.parseQuestionValues(self.current_question.answer_text);
+			answer.answer_text = JSON.stringify(self.current_question.answer_text);
 			answer.is_dynamic = self.record.is_dynamic;
 		}
 
@@ -1637,13 +1637,21 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	//Dynamic questions
 	self.parseQuestionValues = function(question_values){
 
-		return JSON.stringify(question_values);
+		self.question_values = JSON.parse(question_values);
+
+		// return v;
 	}
 
 	self.stepsRepeat = function(iterations){
 
-		return new Array(iterations);
+		var answer = [];
 
+
+		self.question_values_answer = new Array(iterations.values);
+
+		console.log(self.question_values_answer);
+
+		// return val;
 		//if(iterations > Constants.TRUE){
 		//	return new Array(iterations);
 		//} else {
