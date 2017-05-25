@@ -127,10 +127,13 @@ class ParentStudentController extends ApiController {
             return $this->respondErrorMessage(2131);
         }
 
+        // get student's country id
         $student_county = $this->student->getStudentCountry($student_id);
 
+        // get parent's country id
         $parent_country = $this->client->getClientCountry($data['client_id']);
 
+        // if their countries are different then parent cannot add student
         if ($student_county !== $parent_country) {
 
             return $this->respondErrorMessage(2074);
