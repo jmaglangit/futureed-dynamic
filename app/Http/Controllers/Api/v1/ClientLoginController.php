@@ -28,28 +28,30 @@ class ClientLoginController extends ClientController {
 	public function login(){
         $input = Input::only('username','password','role');
 
-        if(!$this->email($input,'username')){
-            
-            $this->addMessageBag($this->email($input,'username'));
-             
-        }else{
+        if(!$this->email($input,'username')) {
 
-             $this->addMessageBag($this->username($input,'username'));
+            $this->addMessageBag($this->email($input, 'username'));
+
         }
-        
 
         $this->addMessageBag($this->checkPassword($input,'password'));
         $this->addMessageBag($this->clientRole($input,'role'));
 
         $msg_bag = $this->getMessageBag();
 
-            if(!empty($msg_bag)){
-                return $this->respondWithError($msg_bag);
-            } 
+        if(!empty($msg_bag)){
+            return $this->respondWithError($msg_bag);
+        }
 
-        
         //check username and password
         $response =$this->user_service->checkLoginName($input['username'], 'Client');
+
+        if($response['data'] == 2034 ){
+            return $this->respondWithError([[
+                    'error_code' => 2034,
+                    'message' => $response['message']]
+            ]);
+        }
 
         if($response['status'] <> 200){
 
@@ -80,8 +82,7 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2118);
         }
 
-
-         //match username and password
+        //match username and password
         $input['password'] = sha1($input['password']);
         $return  = $this->user_service->checkPassword($response['data'],$input['password']);
 
@@ -97,8 +98,16 @@ class ClientLoginController extends ClientController {
 
                 return $this->respondErrorMessage(2014);
 
-            }
+            } else {
+                //check remaining attempts
+                $err_message = trans('errors.2074', ['remaining_attempts' => (config('futureed.limit_attempt') - $user['login_attempt'])]);
 
+                return $this->respondWithError([[
+                    'error_code' => 2074,
+                    'message' => $err_message
+                ]]);
+
+            }
 
             return $this->respondErrorMessage(2033);
         }

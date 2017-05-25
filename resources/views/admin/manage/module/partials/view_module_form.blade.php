@@ -480,6 +480,12 @@
 
 								<div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_view_form') !!}"></div>
 							</div>
+							{{-- insert adding dynamic question--}}
+							{{--<div>--}}
+								{{--<div template-directive template-url="{!! route('admin.manage.module.partials.dynamic_setup') !!}"></div>--}}
+
+
+							{{--</div>--}}
 						</div>
 					</div>
 				</div>

@@ -3,19 +3,25 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\QuestionTemplateRequest;
 use FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepositoryInterface;
+use FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
 class QuestionTemplateController extends ApiController {
 
 	protected $question_template;
 
+	protected $question_template_operation;
+
 	/**
 	 * @param QuestionTemplateRepositoryInterface $questionTemplateRepositoryInterface
+	 * @param QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface
 	 */
 	public function __construct(
-		QuestionTemplateRepositoryInterface $questionTemplateRepositoryInterface
+		QuestionTemplateRepositoryInterface $questionTemplateRepositoryInterface,
+		QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface
 	){
 		$this->question_template = $questionTemplateRepositoryInterface;
+		$this->question_template_operation = $questionTemplateOperationRepositoryInterface;
 	}
 
 	/**
@@ -74,13 +80,14 @@ class QuestionTemplateController extends ApiController {
 			'question_template_format',
 			'question_equation',
 			'operation',
+			'question_form'
 		]);
 
-		dd($question_template);
 
-		if($request->only('status')){
+		//change filter of operation into id
+		$operations = $this->question_template_operation->getOperationByData($request->only('operation'));
 
-		}
+		$question_template['operation'] = $operations->id;
 
 		return $this->respondWithData($this->question_template->addQuestionTemplate($question_template));
 	}

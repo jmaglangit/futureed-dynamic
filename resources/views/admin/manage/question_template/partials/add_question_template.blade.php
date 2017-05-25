@@ -1,4 +1,4 @@
-<div ng-if="template.active_add">
+<div ng-if="template.active_add == futureed.TRUE">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>{!! trans('messages.admin_add_template') !!}</span>
@@ -27,7 +27,7 @@
 						, array(
 							  ''=>trans('messages.admin_select_question_type')
 							, 'FIB' => trans('messages.admin_fib')
-							, 'MC' => trans('messages.admin_mc')
+							//, 'MC' => trans('messages.admin_mc')
 					 	)
 					 	, null
 					 	, array(
@@ -47,13 +47,17 @@
 					{!! Form::select('search_operation'
 						, array(
 							  ''=>trans('messages.admin_select_operation')
-							, 'Add' => trans('messages.admin_operation_add')
+							, '{! futureed.ADDITION !}' => trans('messages.admin_operation_add')
+							//, '{! futureed.SUBTRACTION !} ' => trans('messages.admin_operation_subtract')
+							//, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
+							//, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
 					 	)
 					 	, null
 					 	, array(
 					 		'ng-disabled' => 'template.active_view'
 					 		, 'class' => 'form-control'
 					 		, 'ng-model' => 'template.record.operation'
+					 		, 'ng-change' => 'template.operationType()'
 					 		, 'ng-class' => "{ 'required-field' : template.fields['operation'] }"
 					 		, 'placeholder' => trans('messages.email')
 					 	)
@@ -67,8 +71,8 @@
 					{!! Form::select('search_question_form'
 						, array(
 							  ''=>trans('messages.admin_select_question_form')
-							, 'Word' => trans('messages.admin_question_form_word')
-							, 'Blank' => trans('messages.admin_question_form_blank')
+							//, 'Word' => trans('messages.admin_question_form_word')
+							//, 'Blank' => trans('messages.admin_question_form_blank')
 							, 'Series' => trans('messages.admin_question_form_series')
 					 	)
 					 	, null
@@ -94,7 +98,7 @@
 						{!! Form::button(trans('messages.admin_template_text_num')
 							,array(
 								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons()'
+								, 'ng-click' => 'template.actionButtons(futureed.NUMBER)'
 							)
 						)!!}
 					</div>
@@ -102,7 +106,7 @@
 						{!! Form::button(trans('messages.admin_template_text_object')
 							,array(
 								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons()'
+								, 'ng-click' => 'template.actionButtons(futureed.OBJECT)'
 							)
 						)!!}
 					</div>
@@ -110,22 +114,30 @@
 						{!! Form::button(trans('messages.admin_template_text_name')
 							,array(
 								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons()'
+								, 'ng-click' => 'template.actionButtons(futureed.NAME)'
 							)
 						)!!}
 					</div>
 					<div class="col-xs-2 admin-search-module">
-						{!! Form::button(trans('messages.admin_template_text_alpha')
+						{!! Form::button(trans('messages.addition_symbol')
 							,array(
 								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons()'
+								, 'ng-click' => 'template.actionButtons(futureed.ADDITION)'
+							)
+						)!!}
+					</div>
+					<div class="col-xs-2 admin-search-module">
+						{!! Form::button(trans('messages.subtraction_symbol')
+							,array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'template.actionButtons(futureed.SUBTRACTION)'
 							)
 						)!!}
 					</div>
 					<div class="col-xs-2"></div>
 					
 				</div>
-				<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>
+				{{--<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
 			<div class="form-group">
 				<div class="col-xs-6">
@@ -140,12 +152,12 @@
 				</div>
 				<div class="col-xs-1"></div>
 				<div class="col-xs-4">
-					{!! Form::textarea('admin_template_text',''
-						, array(
-							'class' => 'form-control disabled-textarea'
-							, 'rows' => '10'
-						)
-					) !!}
+					{{--{!! Form::textarea('admin_template_text',''--}}
+						{{--, array(--}}
+							{{--'class' => 'form-control disabled-textarea'--}}
+							{{--, 'rows' => '10'--}}
+						{{--)--}}
+					{{--) !!}--}}
 				</div>
 			</div>
 
@@ -162,12 +174,12 @@
 				</div>
 				<div class="col-xs-1"></div>
 				<div class="col-xs-4">
-					{!! Form::textarea('admin_template_text',''
-						, array(
-							'class' => 'form-control disabled-textarea'
-							, 'rows' => '3'
-						)
-					) !!}
+					{{--{!! Form::textarea('admin_template_text',''--}}
+						{{--, array(--}}
+							{{--'class' => 'form-control disabled-textarea'--}}
+							{{--, 'rows' => '3'--}}
+						{{--)--}}
+					{{--) !!}--}}
 				</div>
 			</div>
 		</fieldset>

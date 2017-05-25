@@ -54,4 +54,5 @@ interface ClientRepositoryInterface
 
 	public function getClientByGoogleId($google_id);
 
+    public function getClientCountry($id);
 }

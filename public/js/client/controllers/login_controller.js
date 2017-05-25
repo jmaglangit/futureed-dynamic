@@ -164,8 +164,16 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 		ClientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {
 		  if(angular.equals(response.status, Constants.STATUS_OK)) {
 			if(response.errors) {
-			  self.errors = $scope.errorHandler(response.errors);
+			  // self.errors = $scope.errorHandler(response.errors);
 			  self.password = Constants.EMPTY_STR;
+				var error_msg = response.errors[0].message.length;
+
+				if(error_msg == Constants.ERROR_MSG){
+					self.error_msg = response.errors[0];
+				}else{
+					self.errors = $scope.errorHandler(response.errors);
+				}
+
 			} else if(response.data) {
 				var data = response.data;
 					data.role = self.role;

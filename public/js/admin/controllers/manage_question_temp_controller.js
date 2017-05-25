@@ -18,12 +18,15 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 
 		self.validation = {};
 		self.record = {};
+		self.record.question_template_format = '';
+		self.record.question_equation = '';
 		self.fields = [];
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 		self.active_add = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
+		self.active_update = Constants.FALSE;
 		self.active_questions_preview = Constants.FALSE;
 		self.question_preview_id = "#questions_preview";
 		self.curriculum_country = Constants.FALSE;
@@ -31,6 +34,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
 				self.active_edit = Constants.TRUE;
+				self.active_update = Constants.TRUE;
 				self.details(id);
 				break;
 
@@ -176,14 +180,65 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		})
 	}
 
-	self.actionButtons = function(){
-		$('button').on('click', function(e) {
-		e.preventDefault();
-			var value = '{'+$(this).text().toLowerCase()+'}';
-			$('textarea[name=search_question_template_format]').val(function(i, text) {
-				return text+value;
-			});
-		})
+	//operation type
+	self.operationType = function(){
+
+		 switch(self.record.operation){
+			 // operations
+			 default:
+				 break;
+		 }
+	}
+
+	self.actionButtons = function(variable){
+
+		// scan whole text if there is an existing variable.
+		// php scan strings with text combination.
+		//
+
+		//add case switch
+		switch(variable){
+			case Constants.NUMBER :
+				//search on the text if {num[1-9]} exist
+				//append to the next
+				//add counter for number variable naming
+				var variableName = self.actionVariableNames('num');
+				self.record.question_template_format += variableName;
+				self.record.question_equation += variableName;
+				break;
+			case Constants.OBJECT :
+				// add counter object variable naming
+				self.record.question_template_format += self.actionVariableNames('object');
+				break;
+			case Constants.NAME :
+				//add counter for name variable naming
+				self.record.question_template_format += self.actionVariableNames('name');
+				break;
+			case Constants.ADDITION :
+				self.record.question_template_format += ' +';
+				break;
+			case Constants.SUBTRACTION :
+				self.record.question_template_format += ' -';
+				break;
+			case Constants.DIVISION :
+				self.record.question_template_format += ' /';
+				break;
+			case Constants.MULTIPLICATION :
+				self.record.question_template_format += ' *';
+				break;
+			default:
+				self.record.question_template_format += ' ';
+				break;
+		}
+	}
+
+	self.actionVariableNames = function(variableName){
+		var i = 1;
+		while(self.record.question_template_format.search('{' + variableName + i + '}') != -1){
+			i++;
+		}
+
+		return ' {' + variableName + i + '}';
 	}
 
 	self.details = function(id) {
@@ -195,10 +250,10 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					// self.record = response.data;
-					// self.module_name = self.record.name;
-					// self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
-					// self.record.curriculum_country = self.curr_country_list = self.record.modulecountry;
+					 self.record = response.data;
+					 self.module_name = self.record.name;
+					 self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
+					 self.record.curriculum_country = self.curr_country_list = self.record.modulecountry;
 				}
 			}
 		$scope.ui_unblock();
@@ -247,7 +302,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		self.record.id = id;
 		self.record.confirm = Constants.TRUE;
 
-		$("#delete_module_modal").modal({
+		$("#delete_template_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE

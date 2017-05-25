@@ -19,7 +19,7 @@ class ValidatorRepository implements ValidatorRepositoryInterface{
 
         $validator = Validator::make(
             ['value' => $username ],
-            ['value' => 'required|min:8|max:32|alpha_num']
+            ['value' => 'required|max:32|alpha_num']
         );
 
         if($validator->fails()){
