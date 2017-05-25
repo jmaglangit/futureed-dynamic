@@ -1116,5 +1116,15 @@ class StudentRepository implements StudentRepositoryInterface
 		return Student::whereId($id)->pluck('can_play');
 	}
 
+    /**
+     * Get Student's country id
+     * @param $id
+     * @return mixed
+     */
+    public function getStudentCountry($id) {
+
+	    return Student::whereId($id)->pluck('country_id');
+
+    }
 
 }
