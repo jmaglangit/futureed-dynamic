@@ -6,11 +6,17 @@
 			</div>
 			<div class="title">{!! trans('messages.login_to_your_account') !!}</div>
 			
-			<div class="alert alert-danger" style="text-align:left;" ng-if="login.errors">
+			<div class="alert alert-danger" style="text-align:center;" ng-if="login.errors">
 				<p ng-repeat="error in login.errors"> 
 					{! error !}
 				</p>
 			</div>
+
+		    <div class="alert alert-danger" ng-if="login.error_msg">
+		        <p ng-repeat="error_msg in login.error_msg.message">
+		            {! error_msg !}
+		        </p>
+		    </div>
 
 			{!! Form::open(
 				array(

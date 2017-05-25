@@ -46,6 +46,13 @@ class ClientLoginController extends ClientController {
         //check username and password
         $response =$this->user_service->checkLoginName($input['username'], 'Client');
 
+        if($response['data'] == 2034 ){
+            return $this->respondWithError([[
+                    'error_code' => 2034,
+                    'message' => $response['message']]
+            ]);
+        }
+
         if($response['status'] <> 200){
 
             return $this->respondErrorMessage($response['data']);
@@ -91,8 +98,16 @@ class ClientLoginController extends ClientController {
 
                 return $this->respondErrorMessage(2014);
 
-            }
+            } else {
+                //check remaining attempts
+                $err_message = trans('errors.2074', ['remaining_attempts' => (config('futureed.limit_attempt') - $user['login_attempt'])]);
 
+                return $this->respondWithError([[
+                    'error_code' => 2074,
+                    'message' => $err_message
+                ]]);
+
+            }
 
             return $this->respondErrorMessage(2033);
         }
