@@ -1,4 +1,4 @@
-<div ng-if="payment.active_list">
+<div ng-if="payment.active_list" ng-show="payment.show">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>{!! trans('messages.payment_management') !!}</span>

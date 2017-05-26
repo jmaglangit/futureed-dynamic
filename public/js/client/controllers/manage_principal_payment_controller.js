@@ -31,9 +31,13 @@ function ManagePrincipalPaymentController(
 	self.classroom = {};
 	self.invoice = {};
 
-	self.setActive = function(active, id) {
+    self.show = Constants.FALSE;
+
+    self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+
+		self.hide = Constants.FALSE;
 
 		self.fields = [];
 
@@ -101,11 +105,14 @@ function ManagePrincipalPaymentController(
 
 			case Constants.ACTIVE_LIST:
 			default:
+				self.show = Constants.FALSE;
 				self.success = Constants.FALSE;
 				self.active_list = Constants.TRUE;
 				break;
 		}
-		
+
+        self.hide = Constants.TRUE;
+
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
@@ -180,7 +187,9 @@ function ManagePrincipalPaymentController(
 					self.subscriptions = response.data.records;
 				}
 			}
+			self.show = Constants.TRUE;
 		}).error(function(response) {
+            self.show = Constants.TRUE;
 			self.errors = $scope.internalError();
 		});
 	}

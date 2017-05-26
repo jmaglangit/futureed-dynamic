@@ -1,4 +1,4 @@
-<div ng-if="payment.active_add || payment.active_view">
+<div ng-if="(payment.active_add || payment.active_view) && payment.show" ng-show="payment.show">
     {{--Headers progress breadcrumb arrow Start > SUBJECT > SUBSCRIPTION > DAYS > DETAILS > PAY --}}
     {!! Html::script('/js/common/subscription_service.js')!!}
     {!! Html::script('/js/common/form_service.js')!!}
@@ -8,7 +8,7 @@
         </div>
 
     </div>
-    <div class="wizard-row">
+    <div class="wizard-row" ng-show="payment.show">
         <div class="alert alert-error" ng-if="payment.errors">
             <p ng-repeat="error in payment.errors track by $index" >
                 {! error !}
