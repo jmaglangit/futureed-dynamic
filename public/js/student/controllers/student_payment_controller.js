@@ -16,6 +16,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	self.user_id = $scope.user.id;
 	self.student_billing_address_not_found = Constants.FALSE;
 
+    self.show = Constants.FALSE;
+
 	self.checkStudentBillingAddress = function() {
 		$scope.ui_block();
 		StudentPaymentService.checkBillingAddress(self.user_id).success(function(response){
@@ -204,7 +206,9 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	}
 
 	// invoice_update (optional parameter to update student payment)
-	self.updateSubscription = function(save, invoice_update = Constants.FALSE) {
+	self.updateSubscription = function(parameters) {
+        var save = parameters.save;
+        var invoice_update = parameters.invoice_update;
 		self.fields = [];
 		self.errors = Constants.FALSE;
 		var invoice = self.invoice;
@@ -219,7 +223,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		}
 
 		$scope.ui_block();
-		StudentPaymentService.updateSubscription(invoice).success(function(response) {
+		StudentPaymentService.updateSubscription({save: invoice}).success(function(response) {
 			if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
 
@@ -292,7 +296,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 							payment_status  : self.invoice.payment_status
 						};
 
-						self.updateSubscription(Constants.FALSE, invoice_update);
+						self.updateSubscription({save: Constants.FALSE, invoice_update: invoice_update});
 					}
 
 					self.updateOrderDates(order_data);
@@ -931,6 +935,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	self.updateBackground = function() {
 		$("footer").css('background-image', 'none');
 
+		self.show = Constants.FALSE;
+
 		StudentPaymentService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
 			if(response.data){
 				angular.element('body.student').css({
@@ -941,7 +947,9 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 					'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
 				});
 			}
+			self.show = Constants.TRUE;
 		}).error(function(response){
+            self.show = Constants.TRUE;
 			self.error = $scope.internalError();
 		});
 	}
