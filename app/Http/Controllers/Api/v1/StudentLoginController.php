@@ -56,10 +56,6 @@ class StudentLoginController extends StudentController {
             
             $this->addMessageBag($this->email($input,'username'));
             
-        }else{
-            
-            $this->addMessageBag($this->username($input,'username'));
-            
         }
 		
 		if($this->getMessageBag()){

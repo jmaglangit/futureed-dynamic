@@ -566,7 +566,7 @@
 
 					Routes::get('/dynamic_setup',[
 						'as' => 'admin.manage.module.partials.dynamic_setup',
-						'uses' => 'FutureLesson\Admin\ManageModuleController@dynamic'
+						'uses' => 'FutureLesson\Admin\ManageModuleController@dynamic_setup'
 					]);
 				});
 

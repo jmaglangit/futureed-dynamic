@@ -69,4 +69,6 @@ interface StudentRepositoryInterface {
     public function updateStudentPointsUsed($id,$points);
 
     public function getStudentPlay($id);
+
+    public function getStudentCountry($id);
 }
