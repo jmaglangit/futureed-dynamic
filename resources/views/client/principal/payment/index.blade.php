@@ -15,7 +15,7 @@
 			<div class="client-content">
 				<div template-directive template-url="{!! route('client.principal.payment.partials.payment_form') !!}"></div>
 
-				<div template-directive template-url="{!! route('client.principal.payment.partials.subscribe') !!}"></div>
+				<div ng-if="payment.show" template-directive template-url="{!! route('client.principal.payment.partials.subscribe') !!}"></div>
 
 			</div>
 			
