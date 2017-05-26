@@ -61,6 +61,8 @@ function ManagePrincipalPaymentController(
 		self.classroom_grade = Constants.FALSE;
 		self.user_curr_country = Constants.FALSE;
 
+		self.step1_ready = Constants.FALSE;
+
 		//get curriculum country
 		self.getCurriculumCountry();
 
@@ -89,10 +91,12 @@ function ManagePrincipalPaymentController(
 				self.invoice.total_amount = Constants.FALSE;
 
 				self.active_add = Constants.TRUE;
-				self.getSubject();
 
+				self.getSubject();
 				self.subscriptionOption();
 				self.subscriptionPackage(Constants.SUBSCRIPTION_COUNTRY);
+
+                self.step1_ready = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_LIST:
@@ -864,6 +868,7 @@ function ManagePrincipalPaymentController(
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		$scope.ui_block();
 		managePrincipalPaymentService.getSubject().success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
