@@ -76,31 +76,33 @@
                 {!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="step1">
-                            <h3>{!! trans('messages.select_a_country') !!}</h3>
-                            <h5 ng-show="payment.has_curr_country">{!! trans('messages.payment_change_curriculum') !!}</h5>
-                            <h5 ng-show="!payment.has_curr_country">{!! trans('messages.payment_choose_curriculum') !!}</h5>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <p>
-                                        <a ng-repeat="country in payment.subscription_country" href="#"
-                                                ng-class="payment.subscription_option.country_id == country.id ? 'btn-primary-selected' : 'btn-primary'"
-                                                class="wizard-box btn btn-sq-lg "
-                                                ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_COUNTRY,country.id)">
-                                            <span><i class="fa fa-5x fa-flag " aria-hidden="true"></i></span>
-                                            <br>
-                                            <span class="wizard-box-text">{! country.name !}</span>
-                                        </a>
-                                    </p>
+                            <div ng-if="payment.step1_ready">
+                                <h3>{!! trans('messages.select_a_country') !!}</h3>
+                                <h5 ng-show="payment.has_curr_country">{!! trans('messages.payment_change_curriculum') !!}</h5>
+                                <h5 ng-show="!payment.has_curr_country">{!! trans('messages.payment_choose_curriculum') !!}</h5>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <p>
+                                            <a ng-repeat="country in payment.subscription_country" href="#"
+                                               ng-class="payment.subscription_option.country_id == country.id ? 'btn-primary-selected' : 'btn-primary'"
+                                               class="wizard-box btn btn-sq-lg "
+                                               ng-click="payment.subscriptionOption(futureed.SUBSCRIPTION_COUNTRY,country.id)">
+                                                <span><i class="fa fa-5x fa-flag " aria-hidden="true"></i></span>
+                                                <br>
+                                                <span class="wizard-box-text">{! country.name !}</span>
+                                            </a>
+                                        </p>
+                                    </div>
                                 </div>
+                                <ul class="list-inline pull-right">
+                                    <li>
+                                        <button ng-model="button" ng-show="payment.has_curr_country"
+                                                type="button" class="btn btn-primary btn-info-full next-step"
+                                                ng-click="payment.subscriptionPackage(futureed.SUBSCRIPTION_SUBJECT)"
+                                        >{!! trans('messages.continue') !!}</button>
+                                    </li>
+                                </ul>
                             </div>
-                            <ul class="list-inline pull-right">
-                                <li>
-                                    <button ng-model="button" ng-show="payment.has_curr_country"
-                                            type="button" class="btn btn-primary btn-info-full next-step"
-                                            ng-click="payment.subscriptionPackage(futureed.SUBSCRIPTION_SUBJECT)"
-                                            >{!! trans('messages.continue') !!}</button>
-                                </li>
-                            </ul>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
                             <h3>{!! trans('messages.select_a_subject') !!}</h3>
