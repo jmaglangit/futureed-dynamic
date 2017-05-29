@@ -640,7 +640,7 @@ class SchoolReportController extends ReportController {
 
         foreach ($classroom->studentModule as $student_module) {
 
-            if ($student_module->question_counter !== 0) {
+            if ($student_module->question_counter != 0) {
 
                 $response['score'] += $student_module->correct_counter / $student_module->question_counter;
                 $response['count']++;
