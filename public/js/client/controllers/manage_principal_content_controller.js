@@ -226,8 +226,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.errors = Constants.FALSE;
         self.teacher_subject_progress_report = {};
 
-        console.log('`teacherSubjectProgressReport` was called: ' + self.selected.teacher_progress.grade_id);
-
         if (self.selected.teacher_progress.grade_id) {
             $scope.ui_block();
             ManagePrincipalContentService.schoolTeacherSubjectProgressReport
@@ -263,8 +261,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.errors = Constants.FALSE;
         self.teacher_subject_scores_report = {};
 
-        console.log('`teacherSubjectScoresReport` was called: ' + self.selected.teacher_scores.grade_id);
-
         if (self.selected.teacher_scores.grade_id) {
             $scope.ui_block();
             ManagePrincipalContentService.schoolTeacherSubjectScoresReport
@@ -297,11 +293,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.studentSubjectProgressReport = function () {
         self.errors = Constants.FALSE;
         self.student_subject_progress_report = {};
-
-        console.log('`studentSubjectProgressReport` was called: '
-            + self.selected.student_progress.subject_id
-            + ', ' + self.selected.student_progress.grade_id
-            + ', ' + self.selected.student_progress.teacher_id);
 
         if (self.selected.student_progress.subject_id
             && self.selected.student_progress.grade_id
@@ -343,11 +334,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.studentSubjectScoresReport = function () {
         self.errors = Constants.FALSE;
         self.student_subject_scores_report = {};
-
-        console.log('`studentSubjectScoresReport` was called: '
-            + self.selected.student_scores.subject_id
-            + ', ' + self.selected.student_scores.grade_id
-            + ', ' + self.selected.student_scores.teacher_id);
 
         if (self.selected.student_scores.subject_id
             && self.selected.student_scores.grade_id
