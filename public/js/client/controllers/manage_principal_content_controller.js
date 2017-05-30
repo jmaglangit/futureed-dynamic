@@ -226,6 +226,10 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.errors = Constants.FALSE;
         self.teacher_subject_progress_report = {};
 
+        console.log('`teacherSubjectProgressReport` was called!');
+
+        console.log('teacher progress valid: ' + self.isValidGrade(self.selected.teacher_progress.grade_id));
+
         if (self.isValidGrade(self.selected.teacher_progress.grade_id)) {
             $scope.ui_block();
             ManagePrincipalContentService.schoolTeacherSubjectProgressReport
@@ -261,6 +265,10 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.errors = Constants.FALSE;
         self.teacher_subject_scores_report = {};
 
+        console.log('`teacherSubjectScoresReport` was called!');
+
+        console.log('teacher scores valid: ' + self.isValidGrade(self.selected.teacher_scores.grade_id));
+
         if (self.isValidGrade(self.selected.teacher_scores.grade_id)) {
             $scope.ui_block();
             ManagePrincipalContentService.schoolTeacherSubjectScoresReport
@@ -293,6 +301,12 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.studentSubjectProgressReport = function () {
         self.errors = Constants.FALSE;
         self.student_subject_progress_report = {};
+
+        console.log('`studentSubjectProgressReport` was called!');
+
+        console.log('student progress valid: ' + self.isValidSubject(self.selected.student_progress.subject_id)
+            && self.isValidGrade(self.selected.student_progress.grade_id)
+            && self.isValidTeacher(self.selected.student_progress.teacher_id));
 
         if (self.isValidSubject(self.selected.student_progress.subject_id)
             && self.isValidGrade(self.selected.student_progress.grade_id)
@@ -334,6 +348,12 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.studentSubjectScoresReport = function () {
         self.errors = Constants.FALSE;
         self.student_subject_scores_report = {};
+
+        console.log('`studentSubjectScoresReport` was called!');
+
+        console.log('student scores valid: ' + self.isValidSubject(self.selected.student_scores.subject_id)
+            && self.isValidGrade(self.selected.student_scores.grade_id)
+            && self.isValidTeacher(self.selected.student_scores.teacher_id));
 
         if (self.isValidSubject(self.selected.student_scores.subject_id)
             && self.isValidGrade(self.selected.student_scores.grade_id)
@@ -411,9 +431,11 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.schoolDownload = ManagePrincipalContentService.schoolTeacherReportDownload(self.principal.school_code, file_type);
         $scope.ui_unblock();
     }
-    
+
     self.schoolTeacherSubjectProgressReportExport = function (file_type) {
         self.errors = Constants.FALSE;
+
+        console.log('`schoolTeacherSubjectProgressReportExport` was called!');
 
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService
@@ -421,9 +443,11 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 self.principal.school_code, self.selected.teacher_progress.grade_id, file_type);
         $scope.ui_unblock();
     }
-    
+
     self.schoolTeacherSubjectScoresReportExport = function (file_type) {
         self.errors = Constants.FALSE;
+
+        console.log('`schoolTeacherSubjectScoresReportExport` was called!');
 
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService
@@ -435,6 +459,8 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.schoolStudentSubjectProgressReportExport = function (file_type) {
         self.errors = Constants.FALSE;
 
+        console.log('`schoolStudentSubjectProgressReportExport` was called!');
+
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService
             .schoolStudentSubjectProgressReportDownload(
@@ -445,6 +471,8 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
     self.schoolStudentSubjectScoresReportExport = function (file_type) {
         self.errors = Constants.FALSE;
+
+        console.log('`schoolStudentSubjectScoresReportExport` was called!');
 
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService
@@ -546,12 +574,16 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
         var id = parseInt(selected_id);
 
+        console.log('grade parsed id: ' + id);
+
         for (var i = 0; i < self.grades.records.length; i++) {
             if (self.grades.records[i].id === id) {
                 valid = true;
                 break;
             }
         }
+
+        console.log('grade after loop: ' + valid);
 
         return valid;
     }
@@ -562,12 +594,16 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
         var id = parseInt(selected_id);
 
+        console.log('subject parsed id: ' + id);
+
         for (var i = 0; i < self.subjects.records.length; i++) {
             if (self.subjects.records[i].id === id) {
                 valid = true;
                 break;
             }
         }
+
+        console.log('subject after loop: ' + valid);
 
         return valid;
     }
@@ -578,12 +614,16 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
         var id = parseInt(selected_id);
 
+        console.log('teacher parsed id: ' + id);
+
         for (var i = 0; i < self.teachers.records.length; i++) {
             if (self.teachers.records[i].id === id) {
                 valid = true;
                 break;
             }
         }
+
+        console.log('teacher after loop: ' + valid);
 
         return valid;
     }
