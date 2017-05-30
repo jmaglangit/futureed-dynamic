@@ -31,9 +31,13 @@ function ManagePrincipalPaymentController(
 	self.classroom = {};
 	self.invoice = {};
 
-	self.setActive = function(active, id) {
+    self.show = Constants.FALSE;
+
+    self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+
+		self.hide = Constants.FALSE;
 
 		self.fields = [];
 
@@ -60,6 +64,8 @@ function ManagePrincipalPaymentController(
 		self.new_classroom = {};
 		self.classroom_grade = Constants.FALSE;
 		self.user_curr_country = Constants.FALSE;
+
+		self.step1_ready = Constants.FALSE;
 
 		//get curriculum country
 		self.getCurriculumCountry();
@@ -89,19 +95,25 @@ function ManagePrincipalPaymentController(
 				self.invoice.total_amount = Constants.FALSE;
 
 				self.active_add = Constants.TRUE;
-				self.getSubject();
 
+				self.unreadyStep1();
+
+				self.getSubject();
 				self.subscriptionOption();
 				self.subscriptionPackage(Constants.SUBSCRIPTION_COUNTRY);
+
 				break;
 
 			case Constants.ACTIVE_LIST:
 			default:
+				self.show = Constants.FALSE;
 				self.success = Constants.FALSE;
 				self.active_list = Constants.TRUE;
 				break;
 		}
-		
+
+        self.hide = Constants.TRUE;
+
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
@@ -176,7 +188,9 @@ function ManagePrincipalPaymentController(
 					self.subscriptions = response.data.records;
 				}
 			}
+			self.show = Constants.TRUE;
 		}).error(function(response) {
+            self.show = Constants.TRUE;
 			self.errors = $scope.internalError();
 		});
 	}
@@ -864,6 +878,7 @@ function ManagePrincipalPaymentController(
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		$scope.ui_block();
 		managePrincipalPaymentService.getSubject().success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
@@ -872,8 +887,10 @@ function ManagePrincipalPaymentController(
 					self.subjects = response.data.records;			
 				}
 			}
+			self.readyStep1('subject');
 			$scope.ui_unblock();
 		}).error(function(response) {
+            self.readyStep1('subject');
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
@@ -974,8 +991,9 @@ function ManagePrincipalPaymentController(
 			}else{
 				self.errors = $scope.errorHandler(response.errors);
 			}
-
+            self.readyStep1('package_' + category);
 		}).error(function(response) {
+            self.readyStep1('package_' + category);
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
@@ -1276,7 +1294,7 @@ function ManagePrincipalPaymentController(
 
 			//order_no,parent_id,subject_id,order_date,subscription_id,date_start,date_end,total_amount,
 			//discount_type,discount_id,discount,total_amount,subscription_id,
-
+            self.readyStep1('invoice');
 		}
 	};
 
@@ -1479,6 +1497,37 @@ function ManagePrincipalPaymentController(
 		}
 
 		return formatted_string;
+	}
+
+	self.readyStep1 = function(key) {
+
+		switch (key) {
+
+            case 'subject': self.subject_ready = Constants.TRUE;
+                break;
+
+            case 'package_country': self.package_country_ready = Constants.TRUE;
+                break;
+
+            case 'package_undefined': self.package_undefined_ready = Constants.TRUE;
+                break;
+
+			default:
+				break;
+				
+		}
+		self.step1_ready = self.subject_ready && self.package_undefined_ready && self.package_country_ready;
+
+	}
+
+	self.unreadyStep1 = function() {
+
+		self.subject_ready = Constants.FALSE;
+		self.package_country_ready = Constants.FALSE;
+        self.package_undefined_ready = Constants.FALSE;
+
+		self.step1_ready = Constants.FALSE;
+
 	}
 
 }
