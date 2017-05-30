@@ -233,6 +233,13 @@ class ParentStudentController extends ApiController {
 
         $order = $request->all();
 
+        // check if student have current subscription of a subject
+        $class_student_subject = $this->classroom->getClassroomBySubjectId($order['subject_id'], $order['students'][0]['id'],config('futureed.true'));
+
+        if($class_student_subject){
+            return $this->respondErrorMessage(2037);
+        }
+
         //create order
         $prev_order = $this->order->getLastOrderNo();
 

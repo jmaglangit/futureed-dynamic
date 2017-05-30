@@ -86,7 +86,7 @@ class StudentPaymentController extends ApiController {
 		$student = $this->student->viewStudent($order['student_id']);
 
 		//check if student have existing subscription to a subject
-		$student_classroom = $this->classroom->getClassroomBySubjectId($order['subject_id'],$order['student_id']);
+		$student_classroom = $this->classroom->getClassroomBySubjectId($order['subject_id'],$order['student_id'],config('futureed.true'));
 
 		if ($student_classroom
 			&& $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']

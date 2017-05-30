@@ -269,7 +269,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		//'date_end', 'seats_total', 'seats_taken', 'total_amount', 'payment_status','discount_id'
 		//subscription_package_id
 
-		if(self.active_view && self.invoice.renew || self.active_view){
+		if((self.active_view && self.invoice.renew || self.active_view) && Constants.FALSE){
 			StudentPaymentService.getOrder(self.invoice.order.id).success(function(response){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
