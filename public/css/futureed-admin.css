@@ -877,3 +877,11 @@ li.questions-answers > a, li.questions-answers div {
 	margin-top: 15px;
 	min-width: 1200px;
 }
+
+.template_checkbox > input[type="checkbox"] {
+	opacity: 4;
+	position: absolute;
+	z-index: 11;
+	width: 20px;
+	height: 20px;
+}

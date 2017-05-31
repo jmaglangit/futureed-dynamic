@@ -30,6 +30,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		self.active_questions_preview = Constants.FALSE;
 		self.question_preview_id = "#questions_preview";
 		self.curriculum_country = Constants.FALSE;
+		self.checkbox_all = Constants.FALSE;
 
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
@@ -393,6 +394,60 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 				$scope.ui_unblock();
 			});
 		}
+	}
+
+	//clear selected templates
+	self.unSelectQuestionTemplate = function(){
+		self.checkbox_value = false;
+		self.checkbox_all = false;
+	}
+
+	self.addSelectedTemplates = function(module){
+		var temp = [];
+		angular.forEach(self.checkbox_value,function(value,key){
+			temp.push(key);
+		});
+
+        ManageQuestionTempService.addModuleTemplates({ module_id : module.id, template : temp}).success(function(response){
+            if(angular.equals(response.status,Constants.STATUS_OK)){
+                if(response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if(response.data) {
+                    self.getModuleTemplates(module);
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function(response){
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+	}
+
+	self.getModuleTemplates = function(module){
+		ManageQuestionTempService.getModuleTemplates(module.id).success(function(response){
+            if(angular.equals(response.status,Constants.STATUS_OK)){
+                if(response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else if(response.data) {
+                	self.module_templates = response.data;
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function(response){
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+	}
+
+	self.checkedTemplates = function(question_template_id,records){
+		var is_checked = false;
+		angular.forEach(records,function(value,key){
+			if(question_template_id == value.question_template_id){
+				is_checked = true;
+			}
+		});
+
+		return is_checked;
 	}
 
 

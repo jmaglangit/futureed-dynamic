@@ -26,7 +26,6 @@ function ManageQuestionTempService($http) {
 		});
 	}
 
-
 	api.details  = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
@@ -49,5 +48,21 @@ function ManageQuestionTempService($http) {
 		});
 	}
 
-	return api
+    // api/v1/module-question-template
+	api.addModuleTemplates = function(data){
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: apiUrl + 'module/question-template'
+		});
+	}
+
+    api.getModuleTemplates = function(module_id){
+        return $http({
+            method	: Constants.METHOD_GET
+            , url	: apiUrl + 'module/question-template/' + module_id
+        });
+    }
+
+    return api
 }

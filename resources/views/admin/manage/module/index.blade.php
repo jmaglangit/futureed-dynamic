@@ -42,6 +42,9 @@
 	{!! Html::script('/js/admin/controllers/manage_question_ans_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_question_ans_service.js')!!}
 
+	{!! Html::script('/js/admin/controllers/manage_question_temp_controller.js')!!}
+	{!! Html::script('/js/admin/services/manage_question_temp_service.js')!!}
+
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}
 @stop
