@@ -471,8 +471,8 @@
 							</div>
 						</div>
 
-						<div ng-if="module.record.current_view == futureed.QANDA" ng-controller="ManageQuestionAnsController as qa" class="tab-pane fade" ng-init="qa.setModule(module.record)" id="q_and_a">
-							<div ng-init="qa.setActive()">
+						<div ng-if="module.record.current_view == futureed.QANDA" class="tab-pane fade" id="q_and_a">
+							<div ng-if="!module.record.is_dynamic" ng-controller="ManageQuestionAnsController as qa" ng-init="qa.setModule(module.record);qa.setActive()">
 
 								<div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_list_form') !!}"></div>
 
@@ -481,11 +481,9 @@
 								<div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_view_form') !!}"></div>
 							</div>
 							{{-- insert adding dynamic question--}}
-							{{--<div>--}}
-								{{--<div template-directive template-url="{!! route('admin.manage.module.partials.dynamic_setup') !!}"></div>--}}
-
-
-							{{--</div>--}}
+							<div ng-if="module.record.is_dynamic" ng-controller="ManageQuestionTempController as template" ng-init="template.setActive()">
+								<div template-directive template-url="{!! route('admin.manage.module.partials.dynamic_setup') !!}"></div>
+							</div>
 						</div>
 					</div>
 				</div>
