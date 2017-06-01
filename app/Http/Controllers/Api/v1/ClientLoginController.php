@@ -100,10 +100,10 @@ class ClientLoginController extends ClientController {
 
             } else {
                 //check remaining attempts
-                $err_message = trans('errors.2074', ['remaining_attempts' => (config('futureed.limit_attempt') - $user['login_attempt'])]);
+                $err_message = trans('errors.2075', ['remaining_attempts' => (config('futureed.limit_attempt') - $user['login_attempt'])]);
 
                 return $this->respondWithError([[
-                    'error_code' => 2074,
+                    'error_code' => 2075,
                     'message' => $err_message
                 ]]);
 

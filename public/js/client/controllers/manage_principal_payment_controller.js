@@ -978,8 +978,6 @@ function ManagePrincipalPaymentController(
 
 		self.errors = Constants.FALSE;
 
-		console.log('package: ' + category);
-
 		managePrincipalPaymentService.subscriptionPackages(self.subscription_option).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 
@@ -1503,8 +1501,6 @@ function ManagePrincipalPaymentController(
 
 	self.readyStep1 = function(key) {
 
-		console.log('called from ' + key);
-
 		switch (key) {
 
             case 'subject': self.subject_ready = Constants.TRUE;
@@ -1520,32 +1516,17 @@ function ManagePrincipalPaymentController(
 				break;
 				
 		}
-
-        // console.log('invoice: ' + self.invoice_ready);
-        console.log('subject: ' + self.subject_ready);
-        console.log('package country: ' + self.package_country_ready);
-        console.log('package undefined: ' + self.package_undefined_ready);
-
 		self.step1_ready = self.subject_ready && self.package_undefined_ready && self.package_country_ready;
-
-        console.log('step 1: ' + self.step1_ready);
 
 	}
 
 	self.unreadyStep1 = function() {
 
-		// self.invoice_ready = Constants.FALSE;
 		self.subject_ready = Constants.FALSE;
 		self.package_country_ready = Constants.FALSE;
         self.package_undefined_ready = Constants.FALSE;
 
 		self.step1_ready = Constants.FALSE;
-
-		// console.log('invoice: ' + self.invoice_ready);
-        console.log('subject: ' + self.subject_ready);
-        console.log('package country: ' + self.package_country_ready);
-        console.log('package undefined: ' + self.package_undefined_ready);
-        console.log('step 1: ' + self.step1_ready);
 
 	}
 
