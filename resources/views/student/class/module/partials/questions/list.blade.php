@@ -73,9 +73,9 @@
 					{{--Message--}}
 					<div class="col-xs-12">
 						<div class="questions-message">
-							<p  ng-if="!mod.record.is_dynamic" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+							<p  ng-if="mod.record.is_dynamic == futureed.FALSE" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
 							{{--TODO dynamic question text here--}}
-							<p  ng-if="mod.record.is_dynamic" ng-bind-html="mod.current_question.question_text | trustAsHtml"></p>
+							<p  ng-if="mod.record.is_dynamic == futureed.TRUE" ng-bind-html="mod.current_question.question_text | trustAsHtml"></p>
 						</div>
 					</div>
 					{{--Tips--}}
