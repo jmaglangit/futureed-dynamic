@@ -494,8 +494,6 @@ class SchoolReportController extends ReportController {
 
             }
 
-//            dd($subject_area_count);
-
             // iterates through each page via page_num
             foreach (array_keys($student_scores) as $page_num) {
 
