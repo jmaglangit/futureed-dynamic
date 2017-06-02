@@ -6,7 +6,7 @@ interface StudentRepositoryInterface {
 
     public function getStudent($id);
 
-    public function getStudentsWithModules($school_code, $subject_id, $grade_level);
+    public function getStudentsWithModules($school_code, $subject_id, $grade_level, $teacher_id);
 
     public function getStudentByUserId($user_id);
 
