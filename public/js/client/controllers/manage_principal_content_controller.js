@@ -415,8 +415,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.schoolTeacherSubjectProgressReportExport = function (file_type) {
         self.errors = Constants.FALSE;
 
-        console.log('`schoolTeacherSubjectProgressReportExport` was called!');
-
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService
             .schoolTeacherSubjectProgressReportDownload(
@@ -426,8 +424,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
     self.schoolTeacherSubjectScoresReportExport = function (file_type) {
         self.errors = Constants.FALSE;
-
-        console.log('`schoolTeacherSubjectScoresReportExport` was called!');
 
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService
@@ -439,8 +435,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.schoolStudentSubjectProgressReportExport = function (file_type) {
         self.errors = Constants.FALSE;
 
-        console.log('`schoolStudentSubjectProgressReportExport` was called!');
-
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService
             .schoolStudentSubjectProgressReportDownload(
@@ -451,8 +445,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
     self.schoolStudentSubjectScoresReportExport = function (file_type) {
         self.errors = Constants.FALSE;
-
-        console.log('`schoolStudentSubjectScoresReportExport` was called!');
 
         $scope.ui_block;
         self.schoolDownload = ManagePrincipalContentService
