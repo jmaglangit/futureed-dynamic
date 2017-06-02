@@ -41,7 +41,7 @@
         <div class="row client-export-button-container">
             <div ng-if="dashboard.export" class="col-xs-12">
                 <div class="btn-group export-buttons pull-right">
-                    <button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="!dashboard.validExportButton()">
                         <i class="fa fa-file-text-o"></i> {!! trans('messages.export') !!}
                     </button>
                     <ul class="dropdown-menu">
