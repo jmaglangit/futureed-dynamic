@@ -552,4 +552,33 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         return teacher.first_name + ' ' + teacher.last_name;
     }
 
+    self.validExportButton = function () {
+
+        if (self.active_school_teacher_progress) {
+
+            return (self.selected.teacher_progress.grade_id);
+
+        } else if (self.active_school_teacher_scores) {
+
+            return (self.selected.teacher_scores.grade_id);
+
+        } else if (self.active_school_student_progress) {
+
+            return (self.selected.student_progress.subject_id
+                && self.selected.student_progress.grade_id
+                && self.selected.student_progress.teacher_id);
+
+        }else if (self.active_school_student_scores) {
+
+            return (self.selected.student_scores.subject_id
+                && self.selected.student_scores.grade_id
+                && self.selected.student_scores.teacher_id);
+
+        } else {
+
+            return true;
+
+        }
+    }
+
 }
