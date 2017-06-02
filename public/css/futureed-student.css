@@ -2779,3 +2779,9 @@ canvas#world {
     }
 }
 
+@media only screen and (min-width: 1900px){
+    #snap_main_div_container {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
