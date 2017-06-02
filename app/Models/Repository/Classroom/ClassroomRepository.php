@@ -291,7 +291,7 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 	 *  @return boolean
 	 */
 
-	public function getClassroomBySubjectId($subject_id,$student_id){
+	public function getClassroomBySubjectId($subject_id,$student_id,$is_paid=false){
 
 		DB::beginTransaction();
 
@@ -301,7 +301,16 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 			$classroom = $classroom->subject_Id($subject_id);
 			$classroom = $classroom->active();
 			$classroom = $classroom->student_id($student_id);
-			$classroom = $classroom->with('classStudent','invoice')->orderBy('id','DESC')->get();
+			// $classroom = $classroom->with('classStudent','invoice')->orderBy('id','DESC')->get();
+			$classroom = $classroom->with('classStudent','invoice');
+
+			if($is_paid){
+				$classroom = $classroom->whereHas('invoice', function($query) {
+					$query->payment(config('futureed.paid'));
+				});
+			}
+
+			$classroom = $classroom->orderBy('id','DESC')->get();
 
 			$response = !is_null($classroom) ? $classroom->toArray():null;
 

@@ -705,7 +705,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		//insert logic for dynamic questions
 		//TODO set variables into dynamic
 		//TODO set self.current_question.question_type
-		if(self.record.is_dynamic){
+		if(self.record.is_dynamic == Constants.TRUE){
 			self.setDynamicModuleAnswer();
 			answer.answer_text = JSON.stringify(self.current_question.answer_text);
 			answer.is_dynamic = self.record.is_dynamic;

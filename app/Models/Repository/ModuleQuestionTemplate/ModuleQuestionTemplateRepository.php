@@ -151,4 +151,27 @@ class ModuleQuestionTemplateRepository implements ModuleQuestionTemplateReposito
 
 	}
 
+	// add templates to module
+	public function addModuleTemplates($module_id,$templates=[]){
+
+		//parse templates whitelisting
+		//check if template and module exists
+		 // if exists set enable
+		// else add
+		//parse throughout existing list, if table not on added disable.
+
+		$module_question_template = new ModuleQuestionTemplate();
+
+		$module_question_template->where('module_id',$module_id)->delete();
+
+		foreach($templates as $template){
+			$this->addModuleQuestionTemplate([
+				'module_id' => $module_id,
+				'question_template_id' => $template
+			]);
+		}
+
+		return $module_question_template->where('module_id',$module_id)->get();
+	}
+
 }

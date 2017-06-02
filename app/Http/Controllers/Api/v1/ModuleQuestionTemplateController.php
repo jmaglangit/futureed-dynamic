@@ -5,7 +5,7 @@ use FutureEd\Http\Requests\Api\ModuleQuestionTemplateRequest;
 use FutureEd\Models\Repository\ModuleQuestionTemplate\ModuleQuestionTemplateRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
-class ModuleQuestionController extends ApiController {
+class ModuleQuestionTemplateController extends ApiController {
 
 	protected $module_question_template;
 
@@ -78,6 +78,27 @@ class ModuleQuestionController extends ApiController {
 	public function destroy($id)
 	{
 		return $this->respondWithData($this->module_question_template->deleteModuleQuestionTemplate($id));
+	}
+
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function addModuleTemplates(){
+
+		return $this->respondWithData($this->module_question_template->addModuleTemplates(
+			Input::get('module_id'),Input::get('template')));
+	}
+
+	/**
+	 * @param $module_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getModuleTemplates($module_id){
+
+		return $this->respondWithData(
+			$this->module_question_template->getModuleQuestionTemplates(['module_id' => $module_id],0,0)
+		);
+
 	}
 
 }

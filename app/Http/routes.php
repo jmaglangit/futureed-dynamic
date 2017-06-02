@@ -58,6 +58,7 @@ Routes::group([
 	include('Routes/Api/Module.php');
 	include('Routes/Api/ModuleCountry.php');
 	include('Routes/Api/ModuleGroup.php');
+	include('Routes/Api/ModuleQuestionTemplate.php');
 	include('Routes/Api/ModuleTranslation.php');
 	include('Routes/Api/Order.php');
 	include('Routes/Api/OrderDetail.php');

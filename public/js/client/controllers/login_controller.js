@@ -159,6 +159,7 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 
 	self.clientLogin = function() {
 		self.errors = Constants.FALSE;
+		self.error_msg = Constants.FALSE;
 
 		$scope.ui_block();
 		ClientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {

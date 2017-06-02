@@ -169,10 +169,14 @@ class StudentModuleAnswerController extends ApiController{
 			$dynamic_response = $this->equation_compiler->additionCheckAnswer($data['question_id'],$data['answer_text']);
 
 			$data['seq_no'] = 0	;
-			$data['points_earned'] = 1;
-			$data['answer_status'] = ($dynamic_response)
-				? config('futureed.answer_status_correct') :
-				config('futureed.answer_status_wrong');
+
+			if($dynamic_response){
+				$data['points_earned'] = 1;
+				$data['answer_status'] = config('futureed.answer_status_correct');
+			}else{
+				$data['points_earned'] = 0;
+				$data['answer_status'] = config('futureed.answer_status_wrong');
+			}
 			//output correct or wrong based on boolean output of dynamic.
 		} elseif($question_type == config('futureed.question_type_multiple_choice')){
 

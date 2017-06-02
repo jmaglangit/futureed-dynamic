@@ -226,11 +226,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.errors = Constants.FALSE;
         self.teacher_subject_progress_report = {};
 
-        console.log('`teacherSubjectProgressReport` was called!');
-
-        console.log('teacher progress valid: ' + self.isValidGrade(self.selected.teacher_progress.grade_id));
-
-        if (self.isValidGrade(self.selected.teacher_progress.grade_id)) {
+        if (self.selected.teacher_progress.grade_id) {
             $scope.ui_block();
             ManagePrincipalContentService.schoolTeacherSubjectProgressReport
             (self.principal.school_code, self.selected.teacher_progress.grade_id)
@@ -265,11 +261,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.errors = Constants.FALSE;
         self.teacher_subject_scores_report = {};
 
-        console.log('`teacherSubjectScoresReport` was called!');
-
-        console.log('teacher scores valid: ' + self.isValidGrade(self.selected.teacher_scores.grade_id));
-
-        if (self.isValidGrade(self.selected.teacher_scores.grade_id)) {
+        if (self.selected.teacher_scores.grade_id) {
             $scope.ui_block();
             ManagePrincipalContentService.schoolTeacherSubjectScoresReport
             (self.principal.school_code, self.selected.teacher_scores.grade_id)
@@ -302,15 +294,9 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.errors = Constants.FALSE;
         self.student_subject_progress_report = {};
 
-        console.log('`studentSubjectProgressReport` was called!');
-
-        console.log('student progress valid: ' + self.isValidSubject(self.selected.student_progress.subject_id)
-            && self.isValidGrade(self.selected.student_progress.grade_id)
-            && self.isValidTeacher(self.selected.student_progress.teacher_id));
-
-        if (self.isValidSubject(self.selected.student_progress.subject_id)
-            && self.isValidGrade(self.selected.student_progress.grade_id)
-            && self.isValidTeacher(self.selected.student_progress.teacher_id)) {
+        if (self.selected.student_progress.subject_id
+            && self.selected.student_progress.grade_id
+            && self.selected.student_progress.teacher_id) {
 
             $scope.ui_block();
             ManagePrincipalContentService.schoolStudentSubjectProgressReport
@@ -347,17 +333,11 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
     self.studentSubjectScoresReport = function () {
         self.errors = Constants.FALSE;
-        self.student_subject_scores_report = {};
+        self.student_subject_scores_report ={};
 
-        console.log('`studentSubjectScoresReport` was called!');
-
-        console.log('student scores valid: ' + self.isValidSubject(self.selected.student_scores.subject_id)
-            && self.isValidGrade(self.selected.student_scores.grade_id)
-            && self.isValidTeacher(self.selected.student_scores.teacher_id));
-
-        if (self.isValidSubject(self.selected.student_scores.subject_id)
-            && self.isValidGrade(self.selected.student_scores.grade_id)
-            && self.isValidTeacher(self.selected.student_scores.teacher_id)) {
+        if (self.selected.student_scores.subject_id
+            && self.selected.student_scores.grade_id
+            && self.selected.student_scores.teacher_id) {
 
             $scope.ui_block();
             ManagePrincipalContentService.schoolStudentSubjectScoresReport
@@ -431,7 +411,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.schoolDownload = ManagePrincipalContentService.schoolTeacherReportDownload(self.principal.school_code, file_type);
         $scope.ui_unblock();
     }
-    
+
     self.schoolTeacherSubjectProgressReportExport = function (file_type) {
         self.errors = Constants.FALSE;
 
@@ -443,7 +423,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 self.principal.school_code, self.selected.teacher_progress.grade_id, file_type);
         $scope.ui_unblock();
     }
-    
+
     self.schoolTeacherSubjectScoresReportExport = function (file_type) {
         self.errors = Constants.FALSE;
 
@@ -566,78 +546,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         }
 
         return remaining / num_pages;
-    }
-
-    // returns true if currently selected grade is valid
-    self.isValidGrade = function (selected_id) {
-        var valid = false;
-
-        var id = parseInt(selected_id);
-
-        console.log('grade parsed id: ' + id);
-
-        for (var i = 0; i < self.grades.records.length; i++) {
-            if (self.grades.records[i].id === id) {
-                valid = true;
-                break;
-            }
-        }
-
-        console.log('grade after loop: ' + valid);
-
-        return valid;
-    }
-
-    // returns true if currently selected subject is valid
-    self.isValidSubject = function (selected_id) {
-        var valid = false;
-
-        var id = parseInt(selected_id);
-
-        console.log('subject parsed id: ' + id);
-
-        for (var i = 0; i < self.subjects.records.length; i++) {
-            if (self.subjects.records[i].id === id) {
-                valid = true;
-                break;
-            }
-        }
-
-        console.log('subject after loop: ' + valid);
-
-        return valid;
-    }
-
-    // returns true if currently selected subject is valid
-    self.isValidTeacher = function (selected_id) {
-        var valid = false;
-
-        var id = parseInt(selected_id);
-
-        console.log('teacher parsed id: ' + id);
-
-        for (var i = 0; i < self.teachers.records.length; i++) {
-            if (self.teachers.records[i].id === id) {
-                valid = true;
-                break;
-            }
-        }
-
-        console.log('teacher after loop: ' + valid);
-
-        return valid;
-    }
-
-    self.hasGrades = function () {
-        return self.grades.total > 0
-    }
-
-    self.hasSubjects = function () {
-        return self.subjects.total > 0;
-    }
-
-    self.hasTeachers = function () {
-        return self.teachers.total > 0;
     }
 
     self.teacherName = function (teacher) {

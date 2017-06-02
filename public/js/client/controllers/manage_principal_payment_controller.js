@@ -96,11 +96,12 @@ function ManagePrincipalPaymentController(
 
 				self.active_add = Constants.TRUE;
 
+				self.unreadyStep1();
+
 				self.getSubject();
 				self.subscriptionOption();
 				self.subscriptionPackage(Constants.SUBSCRIPTION_COUNTRY);
 
-                self.step1_ready = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_LIST:
@@ -886,8 +887,10 @@ function ManagePrincipalPaymentController(
 					self.subjects = response.data.records;			
 				}
 			}
+			self.readyStep1('subject');
 			$scope.ui_unblock();
 		}).error(function(response) {
+            self.readyStep1('subject');
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
@@ -988,8 +991,9 @@ function ManagePrincipalPaymentController(
 			}else{
 				self.errors = $scope.errorHandler(response.errors);
 			}
-
+            self.readyStep1('package_' + category);
 		}).error(function(response) {
+            self.readyStep1('package_' + category);
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
@@ -1290,7 +1294,7 @@ function ManagePrincipalPaymentController(
 
 			//order_no,parent_id,subject_id,order_date,subscription_id,date_start,date_end,total_amount,
 			//discount_type,discount_id,discount,total_amount,subscription_id,
-
+            self.readyStep1('invoice');
 		}
 	};
 
@@ -1493,6 +1497,37 @@ function ManagePrincipalPaymentController(
 		}
 
 		return formatted_string;
+	}
+
+	self.readyStep1 = function(key) {
+
+		switch (key) {
+
+            case 'subject': self.subject_ready = Constants.TRUE;
+                break;
+
+            case 'package_country': self.package_country_ready = Constants.TRUE;
+                break;
+
+            case 'package_undefined': self.package_undefined_ready = Constants.TRUE;
+                break;
+
+			default:
+				break;
+				
+		}
+		self.step1_ready = self.subject_ready && self.package_undefined_ready && self.package_country_ready;
+
+	}
+
+	self.unreadyStep1 = function() {
+
+		self.subject_ready = Constants.FALSE;
+		self.package_country_ready = Constants.FALSE;
+        self.package_undefined_ready = Constants.FALSE;
+
+		self.step1_ready = Constants.FALSE;
+
 	}
 
 }

@@ -22,4 +22,6 @@ interface ModuleQuestionTemplateRepositoryInterface {
 	public function deleteModuleQuestionTemplate($id);
 
 	public function getTemplateByModule($module_id);
+
+	public function addModuleTemplates($module_id,$templates=[]);
 }
