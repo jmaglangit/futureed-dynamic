@@ -447,7 +447,7 @@ class SchoolReportController extends ReportController {
 
         // query subjects with modules and students with student modules from database
         $subject = $this->subject->getASubjectWithAreas($subject_id, $grade_level);
-        $students = $this->student->getStudentsWithModules($school_code, $subject_id, $grade_level);
+        $students = $this->student->getStudentsWithModules($school_code, $subject_id, $grade_level, $teacher_id);
 
         $additional_information = $this->getAdditionalInfo($school_code);
 
