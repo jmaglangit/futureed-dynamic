@@ -1,6 +1,5 @@
 <?php namespace FutureEd\Models\Repository\Student;
 
-use function foo\func;
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\User;
 use FutureEd\Models\Traits\LoggerTrait;
