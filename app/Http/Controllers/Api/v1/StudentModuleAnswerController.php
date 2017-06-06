@@ -346,7 +346,7 @@ class StudentModuleAnswerController extends ApiController{
 			$student_module->wrong_counter++;
 
 			//starting 3 consecutive wrongs to minus 1 to correct points.
-			if($student_module->wrong_counter >= 3){
+			if($student_module->wrong_counter >= 3 && $student_module->running_points != 0){
 				$student_module->running_points--;;
 			}
 
