@@ -136,11 +136,6 @@
 					<button type="button" class="btn btn-gold next-btn top-7" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> {{ trans('messages.skip') }} </button>
 				</div>
 			</div>
-			<div class="content-body">
-				<div class="content-message">
-					<h3 class="alert alert-info">{!! trans('messages.content_not_available') !!} </h3>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
