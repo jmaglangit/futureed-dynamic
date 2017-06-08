@@ -1650,18 +1650,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.stepsRepeat = function(iterations){
-
-		var answer = [];
-
-
-		self.question_values_answer = new Array(iterations.values);
-
-		// return val;
-		//if(iterations > Constants.TRUE){
-		//	return new Array(iterations);
-		//} else {
-		//	return Constants.FALSE;
-		//}
+		self.question_values_answer = new Array(iterations);
 	}
 
 	self.setDynamicModuleAnswer = function(){

@@ -178,14 +178,38 @@ class QuestionCacheServices {
 
 		//parse through equation and count how many variables
 
+//		dd($question_template->toArray());
 		$matches = $this->countEquationVariables($question_template->question_equation);
 
+		//TODO separate random numbers dependent on Operations
 		$values = [];
-		foreach($matches as $match){
 
-			$values[$match] = rand(1,$question_template->max_value);
+		switch ($question_template->operation){
+			case config('futureed.addition'):
+				foreach($matches as $match){
+					$values[$match] = rand(1,$question_template->max_value);
+				}
+				break;
+			case config('futureed.subtraction'):
+				//get 50% of max
+				$minuend = rand(round($question_template->max_value * 0.4),$question_template->max_value);
+				$subtrahend = rand($minuend - 1,round($question_template->max_value * 0.4));
+				$values[$matches[0]] = $minuend;
+				$values[$matches[1]] = $subtrahend;
+
+
+				break;
+			case config('futureed.multiplication'):
+				break;
+			case config('futureed.division'):
+				break;
+			default:
+				break;
 		}
 
+//		dd($values);
+
+		//TODO for subtraction minuend must be greater than subtrahend.
 
 		//replace question template into
 		$final_question = $question_template->question_template_format;

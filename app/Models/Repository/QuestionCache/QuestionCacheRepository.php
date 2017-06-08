@@ -25,11 +25,15 @@ class QuestionCacheRepository implements QuestionCacheRepositoryInterface{
 	 */
 	public function getQuestionCaches($criteria=[],$limit=0,$offset=0){
 
+//		dd($criteria);
+		//TODO specify module_id search
 		$question_cache = new QuestionCache();
 
 		$question_cache = $question_cache->with('questionTemplate','moduleQuestionTemplate');
 
-
+		if(isset($criteria['module_id'])){
+			$question_cache = $question_cache->moduleId($criteria['module_id']);
+		}
 
 		if(isset($criteria['module_question_template_id'])){
 			$question_cache = $question_cache->moduleQuestionTemplateId($criteria['module_question_template_id']);

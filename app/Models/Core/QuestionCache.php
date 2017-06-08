@@ -50,7 +50,7 @@ class QuestionCache extends Model{
 
 	public function moduleQuestionTemplate(){
 
-		return $this->hasMany('FutureEd\Models\Core\ModuleQuestionTemplate','id','module_question_template');
+		return $this->hasMany('FutureEd\Models\Core\ModuleQuestionTemplate','id','module_question_template_id');
 	}
 
 	//scope
@@ -68,6 +68,14 @@ class QuestionCache extends Model{
 
 	public function scopeStatus($query,$status){
 		return $query->where('status',$status);
+	}
+
+	//get by module_id
+	public function scopeModuleId($query,$module_id){
+		return $query->whereHas('moduleQuestionTemplate',function ($query) use ($module_id){
+			$query->where('module_id',$module_id);
+		});
+
 	}
 
 }
