@@ -381,4 +381,10 @@ return [
 	'question_form_blank' => 'Blank',
 	'question_form_series' => 'Series',
 
+	//question template operation
+	'addition' => 'ADDITION',
+	'subtraction' => 'SUBTRACTION',
+	'multiplication' => 'MULTIPLICATION',
+	'division' => 'DIVISION',
+
 ];
