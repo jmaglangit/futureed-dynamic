@@ -325,14 +325,7 @@ class EquationCompilerServices {
 	public function parseStepsValuesMultiplication($number){
 
 		//parse each digit into array
-		$container = [];
-		$number_length = strlen($number);
-
-		for($i = $number_length-1; $i >= 0 ;$i--){
-			array_push($container,(int)substr(substr($number,$i),0,1));
-		}
-
-		return $container;
+		return str_split($number);
 	}
 
 	public function multiplicationCheckAnswer($question_cache,$answer){
