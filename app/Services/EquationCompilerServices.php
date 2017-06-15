@@ -69,13 +69,12 @@ class EquationCompilerServices {
 		//values and steps
 		//
 
-		$question_values = json_decode($question_cache->question_values);
-
+		$question_values = json_decode($question_cache->question_values,1);
 
 
 		//Get steps computation variables.
 		$equation = [];
-		$steps = $question_values->steps;
+		$steps = $question_values['steps'];
 
 //		//return false if steps is not equal
 //		if(count($answer) <> $steps){
@@ -92,6 +91,7 @@ class EquationCompilerServices {
 				$answer = $this->solveSubtraction($question_values,$steps);
 				break;
 			case config('futureed.multiplication'):
+				$answer = $this->solveMultiplication($question_values,$steps);
 				break;
 			case config('futureed.division'):
 				break;
@@ -117,6 +117,7 @@ class EquationCompilerServices {
 				$result = $this->subtractionCheckAnswer($question_cache,$answer);
 				break;
 			case config('futureed.multiplication'):
+				$result = $this->multiplicationCheckAnswer($question_cache,$answer);
 				break;
 			case config('futureed.division'):
 				break;
@@ -132,7 +133,8 @@ class EquationCompilerServices {
 	public function solveAddition($question_values,$steps){
 
 		$total = 0;
-		foreach($question_values->values as $v => $k){
+		$equation = [];
+		foreach($question_values['values'] as $v => $k){
 
 			$equation[$v] = $this->parseStepsValuesAddition($k,$steps);
 		}
@@ -156,7 +158,6 @@ class EquationCompilerServices {
 		];
 	}
 
-
 	//parse number
 	public function parseStepsValuesAddition($number,$steps){
 
@@ -165,13 +166,10 @@ class EquationCompilerServices {
 		for($i=($steps-1),$v=0;$i>=0;$i--,$v++){
 
 			array_push($container,(int)substr(substr($number,$i),0,1)*(int)str_pad('1',($v+1),0));
-
 		}
 
 		return $container;
-
 	}
-
 
 	public function additionCheckAnswer($question_cache,$answer){
 
@@ -213,7 +211,7 @@ class EquationCompilerServices {
 		//parse to the value
 		$total = 0;
 		$equation = [];
-		foreach($question_values->values as $v => $k){
+		foreach($question_values['values'] as $v => $k){
 
 			$total = ($total > 0 ) ? $total - $k : $k;
 
@@ -272,6 +270,72 @@ class EquationCompilerServices {
 	}
 
 	public function subtractionCheckAnswer($question_cache,$answer){
+
+		$correct_answer = json_decode($question_cache->answer);
+		$correct_steps = json_decode($question_cache->question_values)->steps;
+
+		//answer
+		$answer = json_decode($answer,true);
+		$steps = ($correct_steps > 1) ? count($answer['steps_answer']) : 1 ;
+		$steps_answer = ($correct_steps > 1) ? $answer['steps_answer'] : [$answer['total']];
+
+		if($steps == $correct_steps){
+
+			for($i=0;$i< $correct_steps;$i++){
+				if($correct_answer->steps_answer[$i] <> $steps_answer[$i]){
+					return 0;
+				}
+			}
+
+			if($correct_answer->total <> $answer['total']){
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+
+		return 1;
+	}
+
+	//MULTIPLICATION
+	public function solveMultiplication($question_values,$steps){
+
+		//parse to the value
+
+		//get first factor
+		$factor1 = array_shift($question_values['values']);
+		$factor2 = array_shift($question_values['values']);
+		$factor_steps = $this->parseStepsValuesMultiplication($factor2);
+		//get second factor and separate by array
+
+
+		$steps_answer = [];
+		foreach($factor_steps as $second_factor){
+			array_push($steps_answer,$factor1 * $second_factor);
+		}
+
+		$total = $factor1 * $factor2;
+
+		return [
+			'steps_answer' => $steps_answer,
+			'total' => $total
+		];
+	}
+
+	public function parseStepsValuesMultiplication($number){
+
+		//parse each digit into array
+		$container = [];
+		$number_length = strlen($number);
+
+		for($i = $number_length-1; $i >= 0 ;$i--){
+			array_push($container,(int)substr(substr($number,$i),0,1));
+		}
+
+		return $container;
+	}
+
+	public function multiplicationCheckAnswer($question_cache,$answer){
 
 		$correct_answer = json_decode($question_cache->answer);
 		$correct_steps = json_decode($question_cache->question_values)->steps;
