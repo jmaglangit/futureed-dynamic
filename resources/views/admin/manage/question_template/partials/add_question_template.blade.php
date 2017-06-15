@@ -50,7 +50,7 @@
 							, '{! futureed.ADDITION !}' => trans('messages.admin_operation_add')
 							, '{! futureed.SUBTRACTION !} ' => trans('messages.admin_operation_subtract')
 							//, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
-							//, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
+							, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
 					 	)
 					 	, null
 					 	, array(
@@ -118,7 +118,7 @@
 							)
 						)!!}
 					</div>
-					<div class="col-xs-2 admin-search-module">
+					<div class="col-xs-2 admin-search-module" ng-if="template.record.operation == futureed.ADDITION">
 						{!! Form::button(trans('messages.addition_symbol')
 							,array(
 								'class' => 'btn btn-blue'
@@ -126,11 +126,19 @@
 							)
 						)!!}
 					</div>
-					<div class="col-xs-2 admin-search-module">
+					<div class="col-xs-2 admin-search-module" ng-if="template.record.operation == futureed.SUBTRACTION">
 						{!! Form::button(trans('messages.subtraction_symbol')
 							,array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'template.actionButtons(futureed.SUBTRACTION)'
+							)
+						)!!}
+					</div>
+					<div class="col-xs-2 admin-search-module" ng-if="template.record.operation == futureed.MULTIPLICATION">
+						{!! Form::button(trans('messages.multiply_symbol')
+							,array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'template.actionButtons(futureed.MULTIPLICATION)'
 							)
 						)!!}
 					</div>
