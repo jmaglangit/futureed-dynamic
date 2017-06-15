@@ -128,8 +128,8 @@ class UserController extends ApiController{
 
         if( strtolower($client) == strtolower($input['user_type'])) {
 
-            //update is activate and is lock for client
-            $this->user_service->updateInactiveLock($user_check['user_id']);
+            // //update is activate and is lock for client
+            // $this->user_service->updateInactiveLock($user_check['user_id']);
 
             //Remove session_token
             $this->user_service->emptySession($user_check['user_id']);

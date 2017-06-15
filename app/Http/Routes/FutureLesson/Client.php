@@ -63,6 +63,10 @@
 					'as' => 'client.login.reset_password'
 					, 'uses' => 'FutureLesson\Client\LoginController@reset_password'
 				]);
+			Routes::post('/set-password', [ 
+					'as' => 'client.login.set_password'
+					, 'uses' => 'FutureLesson\Client\LoginController@set_password'
+				]);
 			Routes::post('/process', [ 
 					'as' => 'client.login.process'
 					, 'uses' => 'FutureLesson\Client\LoginController@process'

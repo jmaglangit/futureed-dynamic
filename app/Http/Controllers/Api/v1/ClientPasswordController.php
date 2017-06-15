@@ -153,7 +153,8 @@ class ClientPasswordController extends ApiController{
             if($return){
 
                 $userDetails = $this->user->getUserDetail($return['user_id'],$client);
-
+                    //update is activate and is lock for client
+                    $this->user->updateInactiveLock($return['user_id']);
                     $this->user->updatePassword($return['user_id'],$password);
                     return $this->respondWithData(['id'=>$return['id']]);
 

@@ -159,6 +159,17 @@ class LoginController extends Controller {
 		return view('client.login.set-password', array('email' => $input['email'], 'code' => $input['code']));
 	}
 
+	public function set_password() {
+		$input = Input::only('id');
+		$id = $input['id'];
+
+		if($id == null) {
+			return redirect()->route('student.registration');
+		}
+
+		return view('client.login.set-new-password', ['id' => $id]);
+	}
+
 	public function resendConfirmation(){
 		return view('client.login.registration-resend-confirmation');
 	}

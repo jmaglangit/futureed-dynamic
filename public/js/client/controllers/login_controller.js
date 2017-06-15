@@ -32,14 +32,17 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 						}
 					});
 				} else if(response.data) {
-
+					$("#redirect_form input[name='id']").val(response.data.id);
+					$("#redirect_form input[name='email']").val(self.record.email);
+					$("#redirect_form input[name='confirmation_code']").val(self.record.email_code);
+					$("#redirect_form").submit();
 					self.record.id = response.data.id;
 					self.confirmed = Constants.TRUE;
 
 					var data = response.data;
 					data.role = data.client_role;
-					$("#process_form input[name='user_data']").val(angular.toJson(response.data));
-					$("#process_form").trigger(Constants.ATTR_SUBMIT);
+					// $("#process_form input[name='user_data']").val(angular.toJson(response.data));
+					// $("#process_form").trigger(Constants.ATTR_SUBMIT);
 				}
 			}
 
