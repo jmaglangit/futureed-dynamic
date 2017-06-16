@@ -51,14 +51,9 @@
 							<i class="fa fa-check fa-5x img-rounded text-center"></i>
 						</div>
 
-						<p>{!! trans('messages.password_set') !!}</p>
-						<p>{!! trans('messages.password_new_use') !!}</p>
+						<p>{!! trans('messages.client_registration_success_msg') !!}</p>
 
 						<br />
-
-						<div class="btn-container">
-							<a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">{!! trans('messages.click_to_login') !!}</a>
-						</div>
 				</div>
 		</div>
 	</div>

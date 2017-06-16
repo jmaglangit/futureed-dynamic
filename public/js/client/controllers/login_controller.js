@@ -14,6 +14,8 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 	self.setSetUserType(Constants.CLIENT);
 
 	self.setRegistrationStatus = function(email,code) {
+
+		self.confirmed = Constants.TRUE;
 		self.record = {};
 		self.record.email = email;
 		self.record.email_code = code;
