@@ -4,8 +4,9 @@
 	<div class="container login" ng-cloak>
 			<div class="client-container form-style" ng-controller="LoginController as confirm"
 				ng-init="confirm.setRegistrationStatus('{!! $email !!}', '{{ $code }}')">
+				<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
-				{!! Form::open(array('id' => 'redirect_form', 'route' => 'client.login.set_password', 'method' => 'POST')) !!}
+				{!! Form::open(array('id' => 'redirect_form', 'route' => 'client.login.set_password', 'method' => 'GET')) !!}
 					{!! Form::hidden('id', '') !!}
 				{!! Form::close() !!}
 
@@ -46,6 +47,12 @@
 
 				<div ng-if="confirm.confirmed">
 						<div class="title">{!! trans('messages.success') !!}</div>
+
+						<div class="alert alert-danger" ng-if="confirm.errors">
+							<p ng-repeat="error in confirm.errors" >
+								{! error !}
+							</p>
+						</div>
 
 						<div class="roundcon">
 							<i class="fa fa-check fa-5x img-rounded text-center"></i>
