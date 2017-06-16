@@ -115,6 +115,12 @@
 
     <fieldset>
         <div class="col-xs-12 table-container" ng-init="template.list()">
+            {!! Form::button(trans('messages.generate_question_cache')
+                   ,array(
+                       'class' => 'btn btn-blue btn-medium'
+                       , 'ng-click' => 'template.generateDynamicQuestions(module.record.id)'
+                   )
+               )!!}
             <div class="list-container"  ng-init="template.getModuleTemplates(module.record)" ng-cloak>
                 <div class="col-xs-6 title-mid">
                     {!! trans('messages.admin_question_details') !!}

@@ -450,5 +450,20 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		return is_checked;
 	}
 
+    self.generateDynamicQuestions = function(module_id){
+
+        ManageQuestionTempService.generateDynamicQuestions(module_id).success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+
+                    self.errors = $scope.errorHandler(response.errors);
+                }
+            }
+        }).error(function(response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+    }
+
 
 }
