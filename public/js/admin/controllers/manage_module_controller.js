@@ -869,6 +869,21 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 		});
 	}
 
+	self.generateDynamicQuestions = function(){
+
+		ManageModuleService.generateDynamicQuestions().success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                }
+            }
+            $scope.ui_unblock();
+        }).error(function(response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+	}
+
 
 }
 

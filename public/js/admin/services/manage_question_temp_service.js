@@ -64,5 +64,12 @@ function ManageQuestionTempService($http) {
         });
     }
 
+    api.generateDynamicQuestions = function(module_id){
+        return $http({
+            method	:	Constants.METHOD_GET,
+            url		:	apiUrl + 'generate-question?module_id=' + module_id
+        });
+    }
+
     return api
 }

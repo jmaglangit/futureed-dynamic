@@ -105,6 +105,13 @@ function ManageModuleService($http) {
 			url		:	apiUrl + 'grade/' + id
 		});
 	}
+    // api/v1/generate-question
+    api.generateDynamicQuestions = function(){
+        return $http({
+            method	:	Constants.METHOD_GET,
+            url		:	apiUrl + 'generate-question'
+        });
+	}
 
 	return api
 }
