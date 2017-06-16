@@ -23,7 +23,7 @@
 				</div>
 
 				<p class="text" >
-					{!! trans('messages.student_confirm_code_verify') !!}
+					{!! trans('messages.client_registration_success_msg') !!}
 				</p>
 			</div>
 
