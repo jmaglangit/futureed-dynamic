@@ -33,10 +33,17 @@ class QuestionTemplateRequest extends ApiRequest {
 					'question_type' => 'required|string',
 					'question_template_format' => 'required|string',
 					'question_equation' => 'required|string',
+					'question_form' => 'required|string',
 					'operation' => 'required|string'
 				];
 				break;
 		}
+	}
+
+	public function messages(){
+		return [
+			'question_template_format.required' => 'The Template text field is required'
+		];
 	}
 
 }

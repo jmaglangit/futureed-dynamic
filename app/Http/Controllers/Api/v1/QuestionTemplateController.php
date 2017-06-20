@@ -72,6 +72,7 @@ class QuestionTemplateController extends ApiController {
 	 * Store a newly created resource in storage.
 	 *
 	 * @param QuestionTemplateRequest $request
+	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function store(QuestionTemplateRequest $request)
 	{
