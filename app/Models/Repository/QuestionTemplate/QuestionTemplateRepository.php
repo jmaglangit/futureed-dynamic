@@ -39,6 +39,10 @@ class QuestionTemplateRepository implements QuestionTemplateRepositoryInterface{
 			$template = $template->questionEquation($criteria['question_equation']);
 		}
 
+		if(isset($criteria['question_form'])){
+			$template = $template->questionForm($criteria['question_form']);
+		}
+
 		if(isset($criteria['operation'])){
 			$template = $template->operation($criteria['operation']);
 		}
