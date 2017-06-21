@@ -110,7 +110,19 @@
 
     {!! Form::close() !!}
 </div>
+<div class="col-xs-12 success-container" ng-if="template.errors || template.success">
+    <div class="alert alert-error module-question-alert" ng-if="template.errors">
+        <p ng-repeat="error in template.errors track by $index">
+            {! error !}
+        </p>
+    </div>
+
+    <div class="alert alert-success module-question-alert" ng-if="template.success">
+        <p>{! template.success !}</p>
+    </div>
+</div>
 <div class="col-xs-12">
+
     {!! Form::open(['class' => 'form-horizontal']) !!}
 
     <fieldset>

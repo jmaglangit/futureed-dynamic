@@ -170,7 +170,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 					});
 				} else if(response.data) {
 					self.setActive();
-					self.success = Constants.MSG_CREATED("Module");
+					self.success = Constants.MSG_CREATED("Question template");
 				}
 			}
 			
@@ -414,6 +414,8 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                     self.errors = $scope.errorHandler(response.errors);
                 } else if(response.data) {
                     self.getModuleTemplates(module);
+                    self.success = Constants.MSG_UPDATED("Template list");
+
                 }
             }
             $scope.ui_unblock();
@@ -457,7 +459,9 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 if(response.errors) {
 
                     self.errors = $scope.errorHandler(response.errors);
-                }
+                } else {
+                    self.success = Constants.MSG_CREATED("Questions");
+				}
             }
         }).error(function(response) {
             self.errors = $scope.internalError();
