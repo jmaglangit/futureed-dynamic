@@ -891,3 +891,7 @@ li.questions-answers > a, li.questions-answers div {
 	/*margin-top: 1px \9;*/
 	line-height: normal;
 }
+
+.module-question-alert {
+	margin-left: initial;
+}
