@@ -132,7 +132,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 
 		self.table.loading = Constants.TRUE;
 
-		console.log(self.search);
 		$scope.ui_block();
 		ManageQuestionTempService.list(self.search, self.table).success(function(response){
 			self.table.loading = Constants.FALSE;
