@@ -170,8 +170,11 @@
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-xs-3">{!! trans('messages.admin_question_equation') !!} <span class="required">*</span></label>
-				<div class="col-xs-3">
+				<label class="col-xs-4">{!! trans('messages.admin_question_equation') !!} <span class="required">*</span></label>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-6">
 					{!! Form::text('search_question_equation',''
 						, array(
 							'ng-model' => 'template.record.question_equation'
