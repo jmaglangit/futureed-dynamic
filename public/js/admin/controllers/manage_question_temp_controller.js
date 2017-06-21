@@ -170,7 +170,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 					});
 				} else if(response.data) {
 					self.setActive();
-					self.success = Constants.MSG_CREATED("Question Template");
+					self.success = Constants.MSG_CREATED("Question template");
 				}
 			}
 			
