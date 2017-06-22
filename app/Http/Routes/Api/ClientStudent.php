@@ -40,6 +40,11 @@ Routes::group([
     Routes::put('/pay-subscription', [
         'uses' => 'Api\v1\ParentStudentController@paySubscription',
         'as' => 'parent-student.pay.subscription']);
+
+    Routes::post('/save-subscription', [
+        'uses' => 'Api\v1\ParentStudentController@saveSubscription',
+        'as' => 'parent-student.save.subscription']);
+
     Routes::delete('/delete-student-by-parent-id/{id}', [
         'uses' => 'Api\v1\ParentStudentController@deleteStudentByParentId',
         'as' => 'parent-student.delete.student.by.parent.id']);

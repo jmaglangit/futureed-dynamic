@@ -92,7 +92,7 @@ class StudentPaymentController extends ApiController {
 			&& $student->user->curriculum_country == $student_classroom[0]['invoice']['subscription_package']['country_id']
 				&& $student_classroom[0]['invoice']['payment_status'] == config('futureed.paid')) {
 
-			return $this->respondErrorMessage(2037);
+			return $this->respondErrorMessage(2225);
 		}
 		//get the last inputted order
 		$prev_order = $this->order->getLastOrderNo();

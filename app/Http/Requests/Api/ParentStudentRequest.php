@@ -63,6 +63,20 @@ class ParentStudentRequest extends ApiRequest {
 							'subject_id' => 'required|integer'
 							];
 						break;
+
+					case 'parent-student.save.subscription':
+						return [
+							'parent_id' => 'required|integer',
+							'order_date' => 'required|date_format:Ymd',
+							'subscription_id' => 'required|integer',
+							'date_end' => 'required|numeric',
+							'total_amount' => 'required|numeric',
+							'discount_type' => 'in:Client,Volume,',
+							'discount_id' => 'integer',
+							'discount' => 'numeric',
+							'subject_id' => 'required|integer'
+							];
+						break;
 				}
 
 			case 'PUT':
