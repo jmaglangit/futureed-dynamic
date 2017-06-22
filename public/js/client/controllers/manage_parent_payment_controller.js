@@ -571,12 +571,13 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		//subscription_package_id
 		self.fields = [];
 
-		if(self.active_view && self.invoice.renew || self.active_view){
+		if((self.active_view && self.invoice.renew || self.active_view) && Constants.FALSE){
 			ManageParentPaymentService.getOrder(self.invoice.order.id).success(function(response){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
 					var invoice = response.data;
+
 					var order_data = {
 						order_id : self.invoice.order.id,
 						date_start : self.subscription_invoice.date_start,
@@ -607,7 +608,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					$scope.ui_unblock();
 				} else if(response.data) {
 					var invoice = response.data;
-
 					if(!isSave){
 						self.getPaymentUri(invoice);
 					}
@@ -622,9 +622,24 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 	self.saveSubscription = function(){
 
-		self.paySubscription(Constants.TRUE);
-		self.subscription_invoice.save = Constants.TRUE;
-		self.setActive();
+		// self.paySubscription(Constants.TRUE);
+		// self.subscription_invoice.save = Constants.TRUE;
+		// self.setActive();
+		$scope.ui_block();
+
+		ManageParentPaymentService.saveSubscription(self.subscription_invoice).success(function(response) {
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data) {
+				self.setActive();
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
 
 	};
 
@@ -1091,7 +1106,10 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			discount	:	data.discount,
 			discount_id	:	data.discount_id,
 			total_amount	:	data.total_amount,
-			subscription_package_id	:	data.subscription_package_id
+			subscription_package_id	:	data.subscription_package_id,
+			parent_id 		: $scope.user.id,
+			invoice_id 		: data.id,
+			is_save			: Constants.TRUE
 
 		};
 

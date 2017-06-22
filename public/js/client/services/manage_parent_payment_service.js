@@ -242,5 +242,13 @@ function ManageParentPaymentService($http){
 		});
 	}
 
+	service.saveSubscription = function(data){
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: serviceUrl + 'parent-student/save-subscription'
+		});
+	}
+
 	return service;
 }

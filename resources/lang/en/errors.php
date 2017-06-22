@@ -105,6 +105,7 @@ return [
 		2074 => 'Unable to add Student. Country curriculum is not the same.',
 		2075 => 'Username/Email or password is invalid. You have :remaining_attempts remaining attempt(s).',
 
+
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',
 		2102 => 'Access token expired.',
@@ -230,6 +231,10 @@ return [
 		2222 => 'Minimum Seats already exists.',
 		2223 => 'Title',
 		2224 => 'Birth date',
+
+		//already exist subscription messages
+		2225 => 'Sorry, you already have an existing subscription.',
+		2226 => 'Sorry, student/s may already have an existing subscription.',
 
 		//  Parent Client Error Messages
 		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',

@@ -237,8 +237,145 @@ class ParentStudentController extends ApiController {
         $class_student_subject = $this->classroom->getClassroomBySubjectId($order['subject_id'], $order['students'][0]['id'],config('futureed.true'));
 
         if($class_student_subject){
-            return $this->respondErrorMessage(2037);
+            return $this->respondErrorMessage(2226);
         }
+
+        if(!isset($order['is_save'])){
+            //create order
+            $prev_order = $this->order->getLastOrderNo();
+
+            if(!$prev_order){
+
+                $next_order_id = 1;
+            }else{
+
+                $next_order_id = ++$prev_order['id'];
+            }
+
+            $order['date_start'] = Carbon::now()->toDateTimeString();
+            $order['date_end'] = Carbon::now()->addDays($order['date_end'])->toDateTimeString();
+
+
+            if (!isset($order['save'])) {
+
+                $order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
+            }
+
+            $order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
+
+            $new_order = $this->order->addOrder($order);
+
+            //create order details
+            foreach($order['students'] as $student){
+
+                //insert data to order_details table
+                $this->order_details->addOrderDetail([
+                    'order_id' => $new_order['id'],
+                    'student_id' => $student['id'],
+                    'price' => $student['price']
+                ]);
+
+            }
+
+            $client = $this->client->getClientDetails($order['client_id']);
+
+            //create invoice
+            $invoice = [
+                'order_no' => $order['order_no'],
+                'invoice_date' => $order['order_date'],
+                'client_id' => $order['client_id'],
+                'client_name' => $client->user->name,
+                'date_start' => $order['date_start'],
+                'date_end' => $order['date_end'],
+                'seats_total' => $order['seats_total'],
+                'total_amount' => $order['total_amount'],
+                'subscription_id' => $order['subscription_id'],
+                'payment_status' => $order['payment_status'],
+                'subscription_package_id' => $order['subscription_package_id'],
+                'discount_id' => isset($order['discount_id']) ? $order['discount_id'] : 0,
+                'discount' => isset($order['discount']) ? $order['discount'] : 0
+            ];
+
+            //insert data to invoices table
+            $inserted_invoice = $this->invoice->addInvoice($invoice);
+
+            //insert new classroom
+            $classroom = [
+                'order_no' => $order['order_no'],
+                'name' => config('futureed.STU').Carbon::now()->timestamp,
+                'grade_id' => config('futureed.true'),
+                'client_id' => $order['client_id'],
+                'subject_id' => $order['subject_id'],
+                'seats_taken' => $order['seats_taken'],
+                'seats_total' => $order['seats_total']
+            ];
+
+            //insert data to classrooms table
+            $inserted_classroom = $this->classroom->addClassroom($classroom);
+
+            //form data for class_students
+            foreach($order['students'] as $student){
+
+                $this->class_student->addClassStudent([
+                    'student_id' => $student['id'],
+                    'class_id' => $inserted_classroom['id'],
+                    'date_started' => $order['order_date'],
+                    'subscription_status' => config('futureed.active')
+                ]);
+
+                //check students for null curriculum country
+                $this->student_service->checkStudentCurriculum($student['id'],$order['country_id']);
+
+            }
+
+            //insert invoice details
+            //form data for invoice detail
+            $invoice_detail = [
+                'invoice_id' => $inserted_invoice['id'],
+                'class_id' => $inserted_classroom['id'],
+                'grade_id' => config('futureed.true'),
+                'price' => $order['total_amount']
+            ];
+
+            //insert data to invoice_detail
+            $this->invoice_detail->addInvoiceDetail($invoice_detail);
+
+            //get country on subscription package
+            $subscription = $this->subscription_package->getSubscriptionPackage($order['subscription_package_id']);
+
+            //updated user curr id
+            $this->user_service->updateCurriculumCountry($client->user_id,$subscription->country_id);
+
+            return $this->respondWithData($inserted_invoice);
+
+        }elseif($order['is_save'] == config('futureed.true')){
+            $inserted_invoice = $this->invoice->getInvoice($order['invoice_id']);
+
+            return $this->respondWithData($inserted_invoice);
+
+        }
+
+    }
+
+    /**
+     * Save payment by parent.
+     *
+     * @param ParentStudentRequest $request
+     * @return mixed
+     * @internal param $id
+     */
+    public function saveSubscription(ParentStudentRequest $request)
+    {
+        /**
+         * 1. create order
+         * 2. create order details
+         * 3. create invoice
+         * 4. create invoice details
+         * 5. classroom
+         * 6. class_student
+         */
+
+        $order = $request->all();
 
         //create order
         $prev_order = $this->order->getLastOrderNo();
@@ -253,13 +390,7 @@ class ParentStudentController extends ApiController {
 
         $order['date_start'] = Carbon::now()->toDateTimeString();
         $order['date_end'] = Carbon::now()->addDays($order['date_end'])->toDateTimeString();
-
-
-        if (!isset($order['save'])) {
-
-            $order['payment_status'] = $this->subscription_service->checkPriceValue($order['total_amount']);
-        }
-
+        $order['payment_status'] = config('futureed.pending');
         $order['order_no'] = $this->invoice_service->createOrderNo($order['client_id'],$next_order_id);
 
         $new_order = $this->order->addOrder($order);
