@@ -30,7 +30,7 @@ class QuestionTemplateRequest extends ApiRequest {
 
 	public function messages(){
 		return [
-			'question_template_format.required' => 'The Template text field is required'
+			'question_template_format.required' => 'The template text field is required'
 		];
 	}
 
