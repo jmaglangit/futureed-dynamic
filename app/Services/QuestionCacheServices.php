@@ -64,7 +64,7 @@ class QuestionCacheServices {
 
 	//get all dynamic modules then per questions
 	//generate question per type of questions
-	public function generateQuestions($module_id){
+	public function generateQuestions($module_id,$sample_view=0){
 
 		//get dynamic modules
 		$module = $this->module->getModule($module_id);
@@ -303,5 +303,12 @@ class QuestionCacheServices {
 		//output >1 next question; 0=< completed
 	}
 
+
+	public function generatePreviewQuestion($question_strings){
+
+		//replace questions variables with object
+		//set min and max values
+
+	}
 
 }
