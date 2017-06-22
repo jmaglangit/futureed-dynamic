@@ -19,24 +19,19 @@ class QuestionTemplateRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		switch($this->method()){
-			case 'PUT':
-				return [
-					'question_type' => 'string',
-					'question_template_format' => 'string',
-					'question_equation' => 'string',
-				];
-				break;
-			case 'POST':
-			default:
-				return [
-					'question_type' => 'required|string',
-					'question_template_format' => 'required|string',
-					'question_equation' => 'required|string',
-					'operation' => 'required|string'
-				];
-				break;
-		}
+		return [
+			'question_type' => 'required|string',
+			'question_template_format' => 'required|string',
+			'question_equation' => 'required|string',
+			'question_form' => 'required|string',
+			'operation' => 'required|string'
+		];
+	}
+
+	public function messages(){
+		return [
+			'question_template_format.required' => 'The Template text field is required'
+		];
 	}
 
 }

@@ -119,19 +119,31 @@ class StudentRepository implements StudentRepositoryInterface
      * @param $school_code
      * @param $subject_id
      * @param $grade_level
+     * @param $teacher_id
      * @return bool
      */
-    public function getStudentsWithModules($school_code, $subject_id, $grade_level) {
+    public function getStudentsWithModules($school_code, $subject_id, $grade_level, $teacher_id) {
 
         try {
 
             $response = Student::select(['id', 'user_id', 'first_name', 'last_name', 'school_code'])
                 ->where('school_code', $school_code)
-                ->with(['studentModule' => function($query) use ($subject_id, $grade_level) {
+                ->whereHas('classroom', function($query) use ($subject_id, $teacher_id, $grade_level) {
+
+                    $query->whereHas('classroom', function($query) use ($subject_id, $teacher_id, $grade_level) {
+
+                        $query->where('client_id', $teacher_id)
+                            ->where('grade_id', $grade_level)
+                            ->where('subject_id', $subject_id);
+
+                    });
+
+                })->with(['studentModule' => function($query) use ($subject_id, $grade_level, $teacher_id) {
 
                     $query->select(['id', 'class_id', 'student_id', 'subject_id',
                         'module_id', 'progress', 'question_counter', 'correct_counter'])
                         ->where('subject_id', $subject_id)
+
                         ->with(['classroom' => function($query) use ($grade_level) {
 
                             $query->select(['id', 'grade_id', 'client_id', 'seats_taken']);

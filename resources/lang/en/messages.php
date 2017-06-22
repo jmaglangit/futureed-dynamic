@@ -544,6 +544,7 @@ return [
 	'answer_explanation' => 'Answer Explanation',
 	'help' => 'Help',
 	'note' => 'Note',
+	'generate_question_cache' => 'Generate Question',
 
 
 	//resources/views/admin/dashboard/index.blade.php

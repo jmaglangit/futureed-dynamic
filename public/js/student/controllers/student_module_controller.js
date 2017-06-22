@@ -1390,6 +1390,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	var canvas_offset;
 	var x_offset;
 	var cur_code;
+	var xOffset = 690;
+	var yOffset = 250;
 
 	// self methods and variables
 	self.loading = Constants.TRUE;
@@ -1399,8 +1401,13 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		canvas = document.getElementById('world');
 		canvas_parent_div = document.getElementById('snap_container');
 
-		canvas.setAttribute('width', ($('#snap_container').width() - 10).toString());
-		canvas.setAttribute('height', ($('#snap_main_div_container').height() - 80).toString());
+		if(window.innerWidth >= Constants.MAX_CODING_SIZE){
+			canvas.setAttribute('height',($('#snap_main_div_container').height() - yOffset));
+			canvas.setAttribute('width', window.innerWidth - xOffset);
+		}else{
+			canvas.setAttribute('width', ($('#snap_container').width() - 10).toString());
+			canvas.setAttribute('height', ($('#snap_main_div_container').height() - 80).toString());
+		}
 
 		self.snap_done_answering = Constants.FALSE;
 		$('.btn-code-run').text('Run');
@@ -1460,7 +1467,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					new Rectangle(
 						getActualWidthByPercent(0.18807),
 						getActualHeightByPercent(0.009),
-						getActualWidthByPercent(0.55504),
+						getActualWidthByPercent(0.51004),
 						getActualHeightByPercent(0.99107)
 					);
 
@@ -1491,7 +1498,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				// Stage location x-axis
 				FutureEd_IDE.children[1].bounds.origin.y = getActualHeightByPercent(0.00901);
-				FutureEd_IDE.children[1].bounds.origin.x = getActualWidthByPercent(0.55963);
+				FutureEd_IDE.children[1].bounds.origin.x = getActualWidthByPercent(0.51463);
 
 				var gap = Math.abs(FutureEd_IDE.children[3].bounds.corner.x - FutureEd_IDE.children[1].bounds.origin.x);
 				var new_stage_width_x = FutureEd_IDE.children[1].bounds.origin.x;
@@ -1643,18 +1650,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.stepsRepeat = function(iterations){
-
-		var answer = [];
-
-
-		self.question_values_answer = new Array(iterations.values);
-
-		// return val;
-		//if(iterations > Constants.TRUE){
-		//	return new Array(iterations);
-		//} else {
-		//	return Constants.FALSE;
-		//}
+		self.question_values_answer = new Array(iterations);
 	}
 
 	self.setDynamicModuleAnswer = function(){

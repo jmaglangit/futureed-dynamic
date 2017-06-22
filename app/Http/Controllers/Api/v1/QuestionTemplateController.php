@@ -50,9 +50,17 @@ class QuestionTemplateController extends ApiController {
 			$criteria['question_equation'] = Input::get('question_equation');
 		}
 
+		//question_form
+		if(Input::get('question_form')){
+			$criteria['question_form'] = Input::get('question_form');
+		}
+
 		//operation
 		if(Input::get('operation')){
-			$criteria['operation'] = Input::get('operation');
+			//filter operation
+			$operations = $this->question_template_operation->getOperationByData(Input::get('operation'));
+
+			$criteria['operation'] = $operations->id;
 		}
 
 		//status
@@ -72,6 +80,7 @@ class QuestionTemplateController extends ApiController {
 	 * Store a newly created resource in storage.
 	 *
 	 * @param QuestionTemplateRequest $request
+	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function store(QuestionTemplateRequest $request)
 	{

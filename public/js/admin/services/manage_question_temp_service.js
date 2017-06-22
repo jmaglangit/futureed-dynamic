@@ -13,6 +13,8 @@ function ManageQuestionTempService($http) {
 			, url 	: apiUrl + 'question-template?question_type=' + search.question_type
 				+ '&question_template_format=' + search.question_template_format
 				+ '&question_equation=' + search.question_equation
+				+ '&question_form=' + search.question_form
+				+ '&operation=' + search.operation
 				+ '&status=' + search.status
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
@@ -61,6 +63,13 @@ function ManageQuestionTempService($http) {
         return $http({
             method	: Constants.METHOD_GET
             , url	: apiUrl + 'module/question-template/' + module_id
+        });
+    }
+
+    api.generateDynamicQuestions = function(module_id){
+        return $http({
+            method	:	Constants.METHOD_GET,
+            url		:	apiUrl + 'generate-question?module_id=' + module_id
         });
     }
 

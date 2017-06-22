@@ -178,25 +178,57 @@ class QuestionCacheServices {
 
 		//parse through equation and count how many variables
 
+//		dd($question_template->toArray());
 		$matches = $this->countEquationVariables($question_template->question_equation);
 
+		//TODO separate random numbers dependent on Operations
 		$values = [];
-		foreach($matches as $match){
 
-			$values[$match] = rand(1,$question_template->max_value);
+		switch ($question_template->operation){
+			case config('futureed.addition'):
+				foreach($matches as $match){
+					$values[$match] = rand(1,$question_template->max_value);
+				}
+				break;
+			case config('futureed.subtraction'):
+				//get 40% of minimum for minuend
+				$minuend = rand(round($question_template->max_value * 0.4),$question_template->max_value);
+				//get minuend-1 maximum value
+				$subtrahend = rand($minuend - 1,round($question_template->max_value * 0.4));
+				$values[$matches[0]] = $minuend;
+				$values[$matches[1]] = $subtrahend;
+				break;
+			case config('futureed.multiplication'):
+				foreach($matches as $match){
+					$values[$match] = rand(1,$question_template->max_value);
+				}
+				break;
+			case config('futureed.division'):
+				break;
+			default:
+				break;
 		}
-
 
 		//replace question template into
 		$final_question = $question_template->question_template_format;
 
-		$steps = 0;
-		foreach($values as $k => $value){
+		//generate steps
+		if($question_template->operation == config('futureed.addition')
+			|| $question_template->operation == config('futureed.subtraction')){
 
-			$final_question = str_replace($k,$value,$final_question);
+			$steps = 0;
+			foreach($values as $k => $value){
 
-				$steps = (strlen($value) > $steps) ? strlen($value) : $steps;
+				$final_question = str_replace($k,$value,$final_question);
+				$steps = $this->countStepStrLen($value,$steps);
+			}
+		}elseif($question_template->operation == config('futureed.multiplication')){
 
+			$steps = $this->countStepMultiply($values);
+
+		}else {
+
+			$steps = 1;
 		}
 
 		//determine how many step need to solve the questions.
@@ -211,6 +243,16 @@ class QuestionCacheServices {
 				'steps' => $steps
 			])
 		];
+	}
+
+	public function countStepStrLen($value,$steps){
+
+		return (strlen($value) > $steps) ? strlen($value) : $steps;
+	}
+
+	public function countStepMultiply($value){
+
+		return ($value["{num2}"] > 0 ) ? strlen($value["{num2}"]) : 1;
 	}
 
 	public function questionFormBlank($question_template){
@@ -229,28 +271,19 @@ class QuestionCacheServices {
 
 	public function dynamicNextQuestion($student_module_id,$module_id,$student_answer){
 
-//		$data['student_module_id'],
-//				$data['module_id'],
-//				$student_answer
-
 		//check student module
 		$student_module = $this->student_module->getStudentModule($student_module_id);
-//		dd($student_module->toArray());
 
 		//get list of questions from cache.
 		$module_question_template = $this->module_question_template->getTemplateByModule($module_id);
 
-//		dd($module_question_template->toArray());
-
 		//check last student module answer
 		$student_module_answer = $this->student_module_answer->getStudentModuleAnswer($student_module_id,$module_id);
-//		dd($student_module_answer->toArray());
 			//get last question answers
 				// get next question from the last answered question
 
 		$next_question = 0;
 		$flag = 0;
-		$collection = [];
 		foreach($module_question_template as $template){
 
 			foreach($student_module_answer as $answer){

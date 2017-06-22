@@ -166,7 +166,7 @@ class StudentModuleAnswerController extends ApiController{
 		//check if module is dynamic or not
 		if($module->is_dynamic){
 			//output answer if correct or not
-			$dynamic_response = $this->equation_compiler->additionCheckAnswer($data['question_id'],$data['answer_text']);
+			$dynamic_response = $this->equation_compiler->answerChecker($data['question_id'],$data['answer_text']);
 
 			$data['seq_no'] = 0	;
 
@@ -346,7 +346,7 @@ class StudentModuleAnswerController extends ApiController{
 			$student_module->wrong_counter++;
 
 			//starting 3 consecutive wrongs to minus 1 to correct points.
-			if($student_module->wrong_counter >= 3){
+			if($student_module->wrong_counter >= 3 && $student_module->running_points != 0){
 				$student_module->running_points--;;
 			}
 

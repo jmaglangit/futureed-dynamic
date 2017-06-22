@@ -140,4 +140,29 @@ function ClientPasswordController($scope, ClientPasswordService) {
 		  	$("html, body").animate({ scrollTop: 0 }, "slow");
 		}
 	}
+
+		self.setNewClientPassword = function() {
+		self.errors = Constants.FALSE;
+
+		if(self.record.new_password == self.record.confirm_password) {
+			$scope.ui_block();
+			ClientPasswordService.setClientPassword(self.client_id, self.record.new_password).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.success = Constants.TRUE;
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			self.errors = [Constants.MSG_PW_NOT_MATCH];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
+	}
 }

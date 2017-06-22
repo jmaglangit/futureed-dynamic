@@ -110,11 +110,29 @@
 
     {!! Form::close() !!}
 </div>
+<div class="col-xs-12 success-container" ng-if="template.errors || template.success">
+    <div class="alert alert-error module-question-alert" ng-if="template.errors">
+        <p ng-repeat="error in template.errors track by $index">
+            {! error !}
+        </p>
+    </div>
+
+    <div class="alert alert-success module-question-alert" ng-if="template.success">
+        <p>{! template.success !}</p>
+    </div>
+</div>
 <div class="col-xs-12">
+
     {!! Form::open(['class' => 'form-horizontal']) !!}
 
     <fieldset>
         <div class="col-xs-12 table-container" ng-init="template.list()">
+            {!! Form::button(trans('messages.generate_question_cache')
+                   ,array(
+                       'class' => 'btn btn-blue btn-medium'
+                       , 'ng-click' => 'template.generateDynamicQuestions(module.record.id)'
+                   )
+               )!!}
             <div class="list-container"  ng-init="template.getModuleTemplates(module.record)" ng-cloak>
                 <div class="col-xs-6 title-mid">
                     {!! trans('messages.admin_question_details') !!}
@@ -149,8 +167,11 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="record in template.records track by $index">
-                        <td class="template_checkbox"><input type="checkbox" ng-checked="template.checkbox_all || template.checkedTemplates(record.id,template.module_templates.records)" ng-model="template.checkbox_value[record.id]" ></td>
-                        <td class="wide-column">{! record.question_template_format !}</td>
+                        <td ><label class="dynamic_question_checkbox template_checkbox"><input type="checkbox"
+                                                             ng-checked="template.checkbox_all || template.checkedTemplates(record.id,template.module_templates.records)"
+                                                             ng-model="template.checkbox_value[record.id]" ></label>
+                        </td>
+                        <td class="wide-column"><div class="pull-left">{! record.question_template_format !}</div></td>
                     </tr>
                     <tr class="odd" ng-if="!template.records.length && !template.table.loading">
                         <td valign="top" colspan="7">

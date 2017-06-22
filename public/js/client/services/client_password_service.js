@@ -39,5 +39,12 @@ function ClientPasswordService($http){
 		});
 	}
 
+	api.setClientPassword = function(id, password) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: {password : password}
+			, url	: apiUrl + 'client/new-password/' + id
+		});
+	}
 	return api;
 }
