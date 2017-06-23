@@ -73,6 +73,8 @@ var Constants = {
 	, TRIAL_QUESTIONS	:10
 	, ERROR_MSG	: 2
 	, MAX_CODING_SIZE	: 1920
+	, REQ_CURR_FIELDS	: "These fields are required"
+	, UNDEFINE		: undefined
 
 	/**
 	 * Subscription filters
