@@ -21,7 +21,8 @@ return [
 		1014 => 'The :attribute does not exist.',
 		1015 => 'Total :attribute is required',
 		1016 => 'Total :attribute must be a number',
-
+		1017 => 'The :attribute field is required.',
+		1018 => 'The :attribute field is invalid.',
 
 		//Rules messages
 		2001 => 'User does not exist.',
@@ -235,6 +236,9 @@ return [
 		//already exist subscription messages
 		2225 => 'Sorry, you already have an existing subscription.',
 		2226 => 'Sorry, student/s may already have an existing subscription.',
+
+		2227 => 'dynamic',
+		2228 => 'has difficulty',
 
 		//  Parent Client Error Messages
 		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',
