@@ -193,6 +193,23 @@
 					{{--) !!}--}}
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-xs-4">{!! trans('messages.tips') !!} <span class="required">*</span></label>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-6">
+					{!! Form::text('search_question_equation',''
+						, array(
+							'ng-model' => 'template.record.question_template_tips'
+							, 'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : template.fields['question_template_tips'] }"
+							, 'rows' => '10'
+						)
+					) !!}
+				</div>
+			</div>
 		</fieldset>
 		<fieldset>
 			<div class="form-group">
