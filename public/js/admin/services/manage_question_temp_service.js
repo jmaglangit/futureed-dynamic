@@ -73,5 +73,14 @@ function ManageQuestionTempService($http) {
         });
     }
 
+    api.questionPreview = function(data){
+    	return $http({
+			method	:	Constants.METHOD_GET
+			, url	:	apiUrl + 'preview-question?question_template_format=' + data.question_template_format
+					+ '&operation=' + data.operation
+					+ '&question_form=' + data.question_form
+		});
+	}
+
     return api
 }

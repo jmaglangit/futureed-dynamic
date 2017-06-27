@@ -223,7 +223,10 @@
 			<div class="form-group">
 			<label class="col-xs-3 control-label">{!! trans('messages.curriculum_country') !!} <span class="required">*</span></label>
 			</div>
-			<div class="form-group" ng-init="module.packageCountries();getGrades()">
+			<div class="form-group" ng-if="module.curr_country_fields">
+				<span style="margin-left:40px;" class="control-label alert alert-error">{! module.curr_country_fields !}</span>
+			</div>
+			<div id="curr_country_fields" class="form-group" ng-init="module.packageCountries();getGrades()">
 					<div class="col-xs-3">
 						{{--drop down and seq no text--}}
 						<select  name="curr_country" class="form-control" name="curr_country"
@@ -278,6 +281,11 @@
 							<td>{! module.getGrade(curr.grade_id) !}</td>
 							{{--remove--}}
 							<td ng-click="module.removeCurriculumCountry(curr.country_id)"><a>{!! trans('messages.remove') !!}</a></td>
+						</tr>
+						<tr class="odd" ng-if="!module.curr_country_list.length && !module.table.loading">
+							<td valign="top" colspan="7">
+								{!! trans('messages.no_records_found') !!}
+							</td>
 						</tr>
 						</tbody>
 					</table>

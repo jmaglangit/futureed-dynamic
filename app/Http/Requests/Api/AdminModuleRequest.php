@@ -67,13 +67,15 @@ class AdminModuleRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'subject_id.required' => trans('errors.1003',['attribute' => trans('errors.2155')]),
-			'subject_id.integer' => trans('errors.1004',['attribute' => trans('errors.2155')]),
-			'subject_area_id.required' => trans('errors.1003',['attribute' => trans('errors.2156')]),
-			'subject_area_id.integer' => trans('errors.1004',['attribute' => trans('errors.2156')]),
+			'subject_id.required' => trans('errors.1017',['attribute' => strtolower(trans('errors.2155'))]),
+			'subject_id.integer' => trans('errors.1018',['attribute' => strtolower(trans('errors.2155'))]),
+			'subject_area_id.required' => trans('errors.1017',['attribute' => strtolower(trans('errors.2156'))]),
+			'subject_area_id.integer' => trans('errors.1018',['attribute' => strtolower(trans('errors.2156'))]),
 			'points_to_unlock.integer' => trans('errors.1005',['attribute' => trans('errors.2158')]),
 			'points_to_finish.integer' => trans('errors.1005',['attribute' => trans('errors.2159')]),
 			'name.required' => trans('validation.required',['attribute' => trans('errors.2160')]),
+			'is_dynamic.required' => trans('errors.1017',['attribute' => trans('errors.2227')]),
+			'no_difficulty.required' => trans('errors.1017',['attribute' => trans('errors.2228')]),
 
 		];
 	}
