@@ -206,7 +206,7 @@
 					{!! Form::button(trans('messages.admin_add_template_preview')
 						, array(
 							'class' => 'btn btn-blue btn-small'
-							, 'ng-click' => 'template.add()'
+							, 'ng-click' => 'template.questionPreview()'
 						)
 					) !!}
 					{!! Form::button(trans('messages.cancel')
@@ -244,5 +244,23 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+{{--modal--}}
+<div id="preview_question" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">{!! trans('messages.admin_module_preview_questions') !!}</h4>
+			</div>
+			<div class="modal-body">
+				<p>{! template.question_preview !}</p>
+			</div>
+		</div>
+
 	</div>
 </div>

@@ -304,11 +304,48 @@ class QuestionCacheServices {
 	}
 
 
-	public function generatePreviewQuestion($question_strings){
+	/**
+	 * @param $question_strings
+	 * @param array $attributes
+	 * @internal param $form
+	 */
+	public function 	generatePreviewQuestion($question_strings, $attributes = []){
 
 		//replace questions variables with object
 		//set min and max values
+		//max value 1-999
 
+		//check what type of question
+
+		//initialize attributes
+		$question_template = new \stdClass();
+		$question_template->question_equation = $question_strings;
+		$question_template->operation = $attributes['operation'];
+		$question_template->max_value = 999;
+		$question_template->question_template_format = $question_strings;
+
+
+
+		//blank,series,word
+		switch($attributes['question_form']){
+
+			case config('futureed.question_form_word'):
+				//generate word question form
+				$question = '';
+				dd('word');
+				break;
+			case config('futureed.question_form_series'):
+				//generate word question series
+				$question = $this->questionFormSeries($question_template);
+				break;
+			default :
+				//generate word question blank
+				dd('blank');
+				$question = '';
+				break;
+		}
+
+		return $question[0];
 	}
 
 }

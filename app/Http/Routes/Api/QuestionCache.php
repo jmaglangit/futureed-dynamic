@@ -12,4 +12,9 @@ Routes::group([
 		'uses' => 'Api\v1\QuestionCacheController@generationQuestions',
 		'as' => 'api.v1.generate-question'
 	]);
+
+	Routes::get('/preview-question',[
+		'uses' => 'Api\v1\QuestionCacheController@previewQuestion',
+		'as' => 'api.v1.preview-question'
+	]);
 });

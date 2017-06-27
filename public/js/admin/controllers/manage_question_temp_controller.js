@@ -469,5 +469,34 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
         });
     }
 
+    self.questionPreview = function(){
+
+    	//get preview constants
+		var data = {
+			'question_template_format' : encodeURIComponent(self.record.question_template_format),
+			'operation' : self.record.operation,
+			'question_form' : self.record.question_form
+		};
+
+    	ManageQuestionTempService.questionPreview(data).success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else {
+                    self.question_preview = response.data;
+                    //pop-up modal and display questions
+
+                    $("#preview_question").modal({
+                        backdrop: 'static',
+                        keyboard: Constants.FALSE,
+                        show    : Constants.TRUE
+                    });
+                }
+            }
+        }).error(function(response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+	}
 
 }
