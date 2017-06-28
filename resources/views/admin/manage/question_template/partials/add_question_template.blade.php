@@ -148,24 +148,15 @@
 				{{--<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
 			<div class="form-group">
-				<div class="col-xs-6">
+				<div class="col-xs-12">
 					{!! Form::textarea('search_question_template_format',''
 						, array(
 							'ng-model' => 'template.record.question_template_format'
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : template.fields['question_template_format'] }"
-							, 'rows' => '10'
+							, 'rows' => '5'
 						)
 					) !!}
-				</div>
-				<div class="col-xs-1"></div>
-				<div class="col-xs-4">
-					{{--{!! Form::textarea('admin_template_text',''--}}
-						{{--, array(--}}
-							{{--'class' => 'form-control disabled-textarea'--}}
-							{{--, 'rows' => '10'--}}
-						{{--)--}}
-					{{--) !!}--}}
 				</div>
 			</div>
 
@@ -174,7 +165,7 @@
 			</div>
 
 			<div class="form-group">
-				<div class="col-xs-6">
+				<div class="col-xs-12">
 					{!! Form::text('search_question_equation',''
 						, array(
 							'ng-model' => 'template.record.question_equation'
@@ -183,14 +174,22 @@
 						)
 					) !!}
 				</div>
-				<div class="col-xs-1"></div>
-				<div class="col-xs-4">
-					{{--{!! Form::textarea('admin_template_text',''--}}
-						{{--, array(--}}
-							{{--'class' => 'form-control disabled-textarea'--}}
-							{{--, 'rows' => '3'--}}
-						{{--)--}}
-					{{--) !!}--}}
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-4">{!! trans('messages.tips') !!} <span class="required">*</span></label>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-12">
+					{!! Form::textarea('search_question_equation',''
+						, array(
+							'ng-model' => 'template.record.question_template_tips'
+							, 'class' => 'form-control disabled-textarea'
+							, 'ng-class' => "{ 'required-field' : template.fields['question_template_tips'] }"
+							, 'rows' => '5'
+						)
+					) !!}
 				</div>
 			</div>
 		</fieldset>
