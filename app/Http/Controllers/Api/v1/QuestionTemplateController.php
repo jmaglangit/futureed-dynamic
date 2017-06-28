@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\QuestionTemplateRequest;
 use FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepositoryInterface;
+use FutureEd\Models\Repository\QuestionTemplateExplanation\QuestionTemplateExplanationRepositoryInterface;
 use FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
@@ -12,16 +13,21 @@ class QuestionTemplateController extends ApiController {
 
 	protected $question_template_operation;
 
+	protected $question_template_explanation;
+
 	/**
 	 * @param QuestionTemplateRepositoryInterface $questionTemplateRepositoryInterface
 	 * @param QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface
+	 * @param QuestionTemplateExplanationRepositoryInterface $questionTemplateExplanationRepositoryInterface
 	 */
 	public function __construct(
 		QuestionTemplateRepositoryInterface $questionTemplateRepositoryInterface,
-		QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface
+		QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface,
+		QuestionTemplateExplanationRepositoryInterface $questionTemplateExplanationRepositoryInterface
 	){
 		$this->question_template = $questionTemplateRepositoryInterface;
 		$this->question_template_operation = $questionTemplateOperationRepositoryInterface;
+		$this->question_template_explanation = $questionTemplateExplanationRepositoryInterface;
 	}
 
 	/**
@@ -98,7 +104,17 @@ class QuestionTemplateController extends ApiController {
 
 		$question_template['operation'] = $operations->id;
 
-		return $this->respondWithData($this->question_template->addQuestionTemplate($question_template));
+		$template = $this->question_template->addQuestionTemplate($question_template);
+
+		//add question_template_explanation
+		$explanation = $this->question_template_explanation->addQuestionTemplateExplanation([
+			'question_template_id' => $template->id,
+			'explanation' => $request->get('question_template_tips')
+		]);
+
+		$template->question_template_tips = $explanation->explanation;
+
+		return $this->respondWithData($template);
 	}
 
 	/**
@@ -117,6 +133,7 @@ class QuestionTemplateController extends ApiController {
 	 *
 	 * @param  int $id
 	 * @param QuestionTemplateRequest $request
+	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function update($id, QuestionTemplateRequest $request)
 	{
@@ -127,7 +144,19 @@ class QuestionTemplateController extends ApiController {
 			'status'
 		]);
 
-		return $this->respondWithData($this->question_template->updateQuestionTemplate($id,$question_template));
+		$this->question_template->updateQuestionTemplate($id,$question_template);
+
+
+		//update question template by question_template_id
+		$explanation_request = $request->get('question_template_explanation');
+
+		$explanation = $this->question_template_explanation->updateQuestionTemplateExplanationByTemplateId($id,[
+			'explanation' => $explanation_request['explanation']
+		]);
+
+		$template = $this->question_template->getQuestionTemplate($id);
+
+		return $this->respondWithData($template);
 	}
 
 	/**

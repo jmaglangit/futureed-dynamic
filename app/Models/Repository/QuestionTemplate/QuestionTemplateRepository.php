@@ -27,6 +27,8 @@ class QuestionTemplateRepository implements QuestionTemplateRepositoryInterface{
 
 		$template = new QuestionTemplate();
 
+		$template = $template->with('questionTemplateExplanation');
+
 		if(isset($criteria['question_type'])){
 			$template = $template->questionType($criteria['question_type']);
 		}
@@ -68,7 +70,7 @@ class QuestionTemplateRepository implements QuestionTemplateRepositoryInterface{
 	 */
 	public function getQuestionTemplate($id){
 
-		return QuestionTemplate::find($id);
+		return QuestionTemplate::with('questionTemplateExplanation')->find($id);
 	}
 
 	/**

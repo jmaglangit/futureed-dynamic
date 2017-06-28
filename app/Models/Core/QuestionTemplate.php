@@ -45,6 +45,11 @@ class QuestionTemplate extends Model{
 		return QuestionTemplateOperation::where('id',$this->attributes['operation'])->pluck('operation_data');
 	}
 
+	//relationship
+	public function questionTemplateExplanation(){
+		return $this->hasOne('FutureEd\Models\Core\QuestionTemplateExplanation');
+	}
+
 	//scope
 	public function scopeQuestionType($query,$question_type){
 		return $query->where('question_type',$question_type);
