@@ -148,37 +148,24 @@
 {{--				<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
 			<div class="form-group">
-				<div class="col-xs-6">
+				<div class="col-xs-12">
 					{!! Form::textarea('admin_template_text',''
 						, array(
 							'ng-model' => 'template.record.question_template_format'
 							, 'ng-disabled' => 'template.active_view'
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : template.fields['description'] }"
-							, 'rows' => '10'
+							, 'rows' => '5'
 						)
 					) !!}
 				</div>
-				<div class="col-xs-1"></div>
-				<div class="col-xs-4">
-					{{--{!! Form::textarea('admin_template_text',''--}}
-						{{--, array(--}}
-							{{--'ng-model' => 'template.record.question_types'--}}
-							{{--, 'ng-disabled' => 'template.active_view'--}}
-							{{--, 'class' => 'form-control disabled-textarea'--}}
-							{{--, 'ng-class' => "{ 'required-field' : template.fields['description'] }"--}}
-							{{--, 'rows' => '10'--}}
-						{{--)--}}
-					{{--) !!}--}}
-				</div>
 			</div>
-
 			<div class="form-group">
 				<label class="col-xs-4">{!! trans('messages.admin_question_equation') !!} <span class="required">*</span></label>
 			</div>
 
 			<div class="form-group">
-				<div class="col-xs-6">
+				<div class="col-xs-12">
 					{!! Form::text('question_equation',''
 						, array(
 							 'ng-model' => 'template.record.question_equation'
@@ -188,14 +175,23 @@
 						)
 					) !!}
 				</div>
-				<div class="col-xs-2"></div>
-				<div class="col-xs-4">
-					{{--{!! Form::textarea('admin_template_text',''--}}
-						{{--, array(--}}
-							{{--'class' => 'form-control disabled-textarea'--}}
-							{{--, 'rows' => '3'--}}
-						{{--)--}}
-					{{--) !!}--}}
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-4">{!! trans('messages.tips') !!} <span class="required">*</span></label>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-12">
+					{!! Form::textarea('search_question_equation',''
+						, array(
+							'ng-model' => 'template.record.question_template_explanation.explanation'
+							, 'ng-disabled' => 'template.active_view'
+							, 'class' => 'form-control disabled-textarea'
+							, 'ng-class' => "{ 'required-field' : template.fields['question_template_explanation.explanation'] }"
+							, 'rows' => '5'
+						)
+					) !!}
 				</div>
 			</div>
 		</fieldset>
@@ -219,7 +215,7 @@
 					{!! Form::button(trans('messages.admin_add_template_preview')
 						, array(
 							'class' => 'btn btn-blue btn-small'
-							, 'ng-click' => 'template.preview()'
+							, 'ng-click' => 'template.questionPreview()'
 						)
 					) !!}
 					{!! Form::button(trans('messages.cancel')

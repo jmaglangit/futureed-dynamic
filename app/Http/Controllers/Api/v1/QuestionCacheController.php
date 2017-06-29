@@ -6,6 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\QuestionCacheRequest;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\QuestionCache\QuestionCacheRepositoryInterface;
+use FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepositoryInterface;
 use FutureEd\Services\QuestionCacheServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -16,16 +17,28 @@ class QuestionCacheController extends ApiController {
 
 	protected $question_cache_service;
 
+	protected $question_template_operation;
+
 	protected $module;
 
+	/**
+	 * QuestionCacheController constructor.
+	 * @param QuestionCacheRepositoryInterface $questionCacheRepositoryInterface
+	 * @param QuestionCacheServices $questionCacheServices
+	 * @param ModuleRepositoryInterface $moduleRepositoryInterface
+	 * @param QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepository
+	 * @internal param $QuestionTemplateOperationRepositoryInterface $
+	 */
 	public function __construct(
 		QuestionCacheRepositoryInterface $questionCacheRepositoryInterface,
 		QuestionCacheServices $questionCacheServices,
-		ModuleRepositoryInterface $moduleRepositoryInterface
+		ModuleRepositoryInterface $moduleRepositoryInterface,
+		QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepository
 	){
 		$this->question_cache = $questionCacheRepositoryInterface;
 		$this->question_cache_service = $questionCacheServices;
 		$this->module = $moduleRepositoryInterface;
+		$this->question_template_operation = $questionTemplateOperationRepository;
 	}
 
 	/**
@@ -129,5 +142,21 @@ class QuestionCacheController extends ApiController {
 		}
 
 		return $this->respondWithData(true);
+	}
+
+
+	public function previewQuestion(){
+
+		//operation
+			//filter operation
+
+		//question template and attributes
+		$question = $this->question_cache_service->generatePreviewQuestion(Input::get('question_template_format'),
+			[
+				'operation' => Input::get('operation'),
+				'question_form' => Input::get('question_form')
+			]);
+
+		return $this->respondWithData($question);
 	}
 }

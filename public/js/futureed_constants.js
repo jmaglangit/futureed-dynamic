@@ -73,6 +73,8 @@ var Constants = {
 	, TRIAL_QUESTIONS	:10
 	, ERROR_MSG	: 2
 	, MAX_CODING_SIZE	: 1920
+	, REQ_CURR_FIELDS	: "These fields are required"
+	, UNDEFINE		: undefined
 
 	/**
 	 * Subscription filters
@@ -326,6 +328,10 @@ var Constants = {
 	, SUBTRACTION				: 'SUBTRACTION'
 	, DIVISION					: 'DIVISION'
 	, MULTIPLICATION			: 'MULTIPLICATION'
+
+	/* steps label dynamic template*/
+	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']
+	, NTH_INDEX					: 'nth'
 
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";

@@ -7,7 +7,13 @@
 
         <div ng-if="mod.question_values.steps > futureed.TRUE" ng-repeat="n in mod.question_values_answer track by $index" class="form-group">
             <label class="col-xs-2">Step {! $index+1 !}:</label>
-            <input ng-model="mod.current_question.answer_text['steps_answer'][$index]"
+            <div ng-if = "mod.current_question.question_template.operation == futureed.ADDITION" class="form-group">
+              <label class="steps_label col-xs-4">Add the {! n.step_index !}</label>
+            </div>
+            <div ng-if = "mod.current_question.question_template.operation == futureed.SUBTRACTION" class="form-group">
+              <label class="steps_label col-xs-4">Subtract the {! n.step_index !}</label>
+            </div>
+            <input ng-model="mod.current_question.answer_text['steps_answer'] [$index]"
                    name="steps_answer"
                    type="text" class="form-control question-text-answer"
                    placeholder="answer"
@@ -23,5 +29,4 @@
                     />
         </div>
     </div>
-
 </div>

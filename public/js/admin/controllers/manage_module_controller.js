@@ -813,6 +813,9 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 	self.addCurriculumCountry = function(country_id,seq_no,grade_id){
 
 		var listed = Constants.FALSE;
+		self.curr_country_fields = Constants.FALSE;
+		self.curr_country_list = [];
+
 		angular.forEach(self.curr_country_list, function(v,k){
 			if(v.country_id == country_id){
 				v.seq_no = seq_no;
@@ -821,11 +824,19 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 			}
 		});
 
-		if(listed == Constants.FALSE && country_id != ''){
+		if((country_id == Constants.UNDEFINED || seq_no == Constants.UNDEFINED || grade_id == Constants.UNDEFINED) || self.curr_country_list){
+			self.curr_country_fields = Constants.REQ_CURR_FIELDS;
+			$("#curr_country_fields .form-control").addClass("required-field");
+		}
+
+		if(listed == Constants.FALSE && country_id != '' && country_id != Constants.UNDEFINE && seq_no != Constants.UNDEFINE  
+			&& seq_no != '' && grade_id != Constants.UNDEFINE && grade_id != ''){
 			self.curr_country_list.push({
 				'country_id' : country_id,
 				'seq_no' : seq_no,
 				'grade_id' : grade_id});
+			self.curr_country_fields = Constants.FALSE;
+			$("#curr_country_fields .form-control").removeClass("required-field");
 		}
 
 		self.record.curriculum_country = self.curr_country_list;

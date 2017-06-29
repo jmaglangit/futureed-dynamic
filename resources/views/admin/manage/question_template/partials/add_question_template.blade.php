@@ -148,24 +148,15 @@
 				{{--<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
 			<div class="form-group">
-				<div class="col-xs-6">
+				<div class="col-xs-12">
 					{!! Form::textarea('search_question_template_format',''
 						, array(
 							'ng-model' => 'template.record.question_template_format'
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : template.fields['question_template_format'] }"
-							, 'rows' => '10'
+							, 'rows' => '5'
 						)
 					) !!}
-				</div>
-				<div class="col-xs-1"></div>
-				<div class="col-xs-4">
-					{{--{!! Form::textarea('admin_template_text',''--}}
-						{{--, array(--}}
-							{{--'class' => 'form-control disabled-textarea'--}}
-							{{--, 'rows' => '10'--}}
-						{{--)--}}
-					{{--) !!}--}}
 				</div>
 			</div>
 
@@ -174,7 +165,7 @@
 			</div>
 
 			<div class="form-group">
-				<div class="col-xs-6">
+				<div class="col-xs-12">
 					{!! Form::text('search_question_equation',''
 						, array(
 							'ng-model' => 'template.record.question_equation'
@@ -183,14 +174,22 @@
 						)
 					) !!}
 				</div>
-				<div class="col-xs-1"></div>
-				<div class="col-xs-4">
-					{{--{!! Form::textarea('admin_template_text',''--}}
-						{{--, array(--}}
-							{{--'class' => 'form-control disabled-textarea'--}}
-							{{--, 'rows' => '3'--}}
-						{{--)--}}
-					{{--) !!}--}}
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-4">{!! trans('messages.tips') !!} <span class="required">*</span></label>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-12">
+					{!! Form::textarea('search_question_equation',''
+						, array(
+							'ng-model' => 'template.record.question_template_explanation'
+							, 'class' => 'form-control disabled-textarea'
+							, 'ng-class' => "{ 'required-field' : template.fields['question_template_explanation'] }"
+							, 'rows' => '5'
+						)
+					) !!}
 				</div>
 			</div>
 		</fieldset>
@@ -206,7 +205,7 @@
 					{!! Form::button(trans('messages.admin_add_template_preview')
 						, array(
 							'class' => 'btn btn-blue btn-small'
-							, 'ng-click' => 'template.add()'
+							, 'ng-click' => 'template.questionPreview()'
 						)
 					) !!}
 					{!! Form::button(trans('messages.cancel')
@@ -244,5 +243,23 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+{{--modal--}}
+<div id="preview_question" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">{!! trans('messages.admin_module_preview_questions') !!}</h4>
+			</div>
+			<div class="modal-body">
+				<p>{! template.question_preview !}</p>
+			</div>
+		</div>
+
 	</div>
 </div>

@@ -21,7 +21,8 @@ return [
 		1014 => 'The :attribute does not exist.',
 		1015 => 'Total :attribute is required',
 		1016 => 'Total :attribute must be a number',
-
+		1017 => 'The :attribute field is required.',
+		1018 => 'The :attribute field is invalid.',
 
 		//Rules messages
 		2001 => 'User does not exist.',
@@ -104,6 +105,7 @@ return [
 		2073 => 'Please click forgot password to reset your password.',
 		2074 => 'Unable to add Student. Country curriculum is not the same.',
 		2075 => 'Username/Email or password is invalid. You have :remaining_attempts remaining attempt(s).',
+
 
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',
@@ -230,6 +232,13 @@ return [
 		2222 => 'Minimum Seats already exists.',
 		2223 => 'Title',
 		2224 => 'Birth date',
+
+		//already exist subscription messages
+		2225 => 'Sorry, you already have an existing subscription.',
+		2226 => 'Sorry, student/s may already have an existing subscription.',
+
+		2227 => 'dynamic',
+		2228 => 'has difficulty',
 
 		//  Parent Client Error Messages
 		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',

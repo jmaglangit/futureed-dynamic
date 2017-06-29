@@ -64,7 +64,7 @@ class QuestionCacheServices {
 
 	//get all dynamic modules then per questions
 	//generate question per type of questions
-	public function generateQuestions($module_id){
+	public function generateQuestions($module_id,$sample_view=0){
 
 		//get dynamic modules
 		$module = $this->module->getModule($module_id);
@@ -225,6 +225,9 @@ class QuestionCacheServices {
 		}elseif($question_template->operation == config('futureed.multiplication')){
 
 			$steps = $this->countStepMultiply($values);
+			foreach($values as $k => $value){
+				$final_question = str_replace($k,$value,$final_question);
+			}
 
 		}else {
 
@@ -303,5 +306,49 @@ class QuestionCacheServices {
 		//output >1 next question; 0=< completed
 	}
 
+
+	/**
+	 * @param $question_strings
+	 * @param array $attributes
+	 * @internal param $form
+	 */
+	public function generatePreviewQuestion($question_strings, $attributes = []){
+
+		//replace questions variables with object
+		//set min and max values
+		//max value 1-999
+
+		//check what type of question
+
+		//initialize attributes
+		$question_template = new \stdClass();
+		$question_template->question_equation = $question_strings;
+		$question_template->operation = $attributes['operation'];
+		$question_template->max_value = 999;
+		$question_template->question_template_format = $question_strings;
+
+
+
+		//blank,series,word
+		switch($attributes['question_form']){
+
+			case config('futureed.question_form_word'):
+				//generate word question form
+				$question = '';
+				dd('word');
+				break;
+			case config('futureed.question_form_series'):
+				//generate word question series
+				$question = $this->questionFormSeries($question_template);
+				break;
+			default :
+				//generate word question blank
+				dd('blank');
+				$question = '';
+				break;
+		}
+
+		return $question[0];
+	}
 
 }
