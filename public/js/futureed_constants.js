@@ -329,6 +329,10 @@ var Constants = {
 	, DIVISION					: 'DIVISION'
 	, MULTIPLICATION			: 'MULTIPLICATION'
 
+	/* steps label dynamic template*/
+	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']
+	, NTH_INDEX					: 'nth'
+
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";
 	}
