@@ -225,6 +225,9 @@ class QuestionCacheServices {
 		}elseif($question_template->operation == config('futureed.multiplication')){
 
 			$steps = $this->countStepMultiply($values);
+			foreach($values as $k => $value){
+				$final_question = str_replace($k,$value,$final_question);
+			}
 
 		}else {
 
@@ -309,7 +312,7 @@ class QuestionCacheServices {
 	 * @param array $attributes
 	 * @internal param $form
 	 */
-	public function 	generatePreviewQuestion($question_strings, $attributes = []){
+	public function generatePreviewQuestion($question_strings, $attributes = []){
 
 		//replace questions variables with object
 		//set min and max values

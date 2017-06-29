@@ -184,9 +184,9 @@
 				<div class="col-xs-12">
 					{!! Form::textarea('search_question_equation',''
 						, array(
-							'ng-model' => 'template.record.question_template_tips'
+							'ng-model' => 'template.record.question_template_explanation'
 							, 'class' => 'form-control disabled-textarea'
-							, 'ng-class' => "{ 'required-field' : template.fields['question_template_tips'] }"
+							, 'ng-class' => "{ 'required-field' : template.fields['question_template_explanation'] }"
 							, 'rows' => '5'
 						)
 					) !!}

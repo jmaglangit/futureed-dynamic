@@ -109,7 +109,7 @@ class QuestionTemplateController extends ApiController {
 		//add question_template_explanation
 		$explanation = $this->question_template_explanation->addQuestionTemplateExplanation([
 			'question_template_id' => $template->id,
-			'explanation' => $request->get('question_template_tips')
+			'explanation' => $request->get('question_template_explanation')
 		]);
 
 		$template->question_template_tips = $explanation->explanation;

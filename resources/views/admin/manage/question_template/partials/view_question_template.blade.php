@@ -187,7 +187,7 @@
 							'ng-model' => 'template.record.question_template_explanation.explanation'
 							, 'ng-disabled' => 'template.active_view'
 							, 'class' => 'form-control disabled-textarea'
-							, 'ng-class' => "{ 'required-field' : template.fields['question_template_explanation'] }"
+							, 'ng-class' => "{ 'required-field' : template.fields['question_template_explanation.explanation'] }"
 							, 'rows' => '5'
 						)
 					) !!}
@@ -214,7 +214,7 @@
 					{!! Form::button(trans('messages.admin_add_template_preview')
 						, array(
 							'class' => 'btn btn-blue btn-small'
-							, 'ng-click' => 'template.preview()'
+							, 'ng-click' => 'template.questionPreview()'
 						)
 					) !!}
 					{!! Form::button(trans('messages.cancel')
