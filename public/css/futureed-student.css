@@ -2785,3 +2785,9 @@ canvas#world {
         max-width: 100%;
     }
 }
+
+.steps_label {
+    position: relative;
+    right: 20px;
+    text-align: left;
+}
