@@ -886,6 +886,8 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
             if(angular.equals(response.status, Constants.STATUS_OK)) {
                 if(response.errors) {
                     self.errors = $scope.errorHandler(response.errors);
+                } else {
+                    self.success = Constants.MSG_CREATED("Questions");
                 }
             }
             $scope.ui_unblock();

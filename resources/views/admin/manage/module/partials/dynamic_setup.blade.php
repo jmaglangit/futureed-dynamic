@@ -56,17 +56,49 @@
         <div class="form-search">
             <div class="form-group">
                 <div class="col-xs-4" ng-init="">
-                    <select  name="question_type" class="form-control" ng-model="template.search.type">
-                        <option value="">{!! trans('messages.admin_select_question_type') !!}</option>
+                    {{--<select  name="question_type" class="form-control" ng-model="template.search.type">--}}
+                        {{--<option value="">{!! trans('messages.admin_select_question_type') !!}</option>--}}
                         {{--<option ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>--}}
-                    </select>
+                    {{--</select>--}}
+                    {!! Form::select('search_question_type'
+						, array(
+							 ''=>trans('messages.admin_select_question_type')
+							, 'FIB' => trans('messages.admin_fib')
+							//, 'MC' => trans('messages.admin_mc')
+					 	)
+					 	, null
+					 	, array(
+					 		'ng-disabled' => 'template.active_view',
+					 		'ng-selected' => 'template.search.question_type'
+					 		, 'class' => 'form-control'
+					 		, 'ng-model' => 'template.search.question_type'
+					 		, 'ng-class' => "{ 'required-field' : template.fields['question_type'] }"
+					 		, 'placeholder' => trans('messages.email')
+					 	)
+					) !!}
                 </div>
 
                 <div class="col-xs-4" ng-init="">
-                    <select  name="question_form" class="form-control" ng-model="template.search.question_form">
-                        <option value="">{!! trans('messages.admin_select_question_form') !!}</option>
+                    {{--<select  name="question_form" class="form-control" ng-model="template.search.question_form">--}}
+                        {{--<option value="">{!! trans('messages.admin_select_question_form') !!}</option>--}}
                         {{--<option ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>--}}
-                    </select>
+                    {{--</select>--}}
+                    {!! Form::select('search_question_form'
+						, array(
+							  ''=>trans('messages.admin_select_question_form')
+							//, 'Word' => trans('messages.admin_question_form_word')
+							//, 'Blank' => trans('messages.admin_question_form_blank')
+							, 'Series' => trans('messages.admin_question_form_series')
+					 	)
+					 	, null
+					 	, array(
+					 		'ng-disabled' => 'template.active_view'
+					 		, 'class' => 'form-control'
+					 		, 'ng-model' => 'template.search.question_form'
+					 		, 'ng-class' => "{ 'required-field' : template.fields['question_form'] }"
+					 		, 'placeholder' => trans('messages.email')
+					 	)
+					) !!}
                 </div>
 
                 <div class="col-xs-4">
@@ -80,10 +112,27 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-4" ng-init="">
-                    <select  name="question_operation" class="form-control" ng-model="template.search.operation">
-                        <option value="">{!! trans('messages.admin_select_operation') !!}</option>
+                    {{--<select  name="question_operation" class="form-control" ng-model="template.search.operation">--}}
+                        {{--<option value="">{!! trans('messages.admin_select_operation') !!}</option>--}}
                         {{--<option ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>--}}
-                    </select>
+                    {{--</select>--}}
+                    {!! Form::select('search_operation'
+						, array(
+							  ''=>trans('messages.admin_select_operation')
+							, '{! futureed.ADDITION !}' => trans('messages.admin_operation_add')
+							, '{! futureed.SUBTRACTION !} ' => trans('messages.admin_operation_subtract')
+							//, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
+							, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
+					 	)
+					 	, null
+					 	, array(
+					 		'ng-disabled' => 'template.active_view'
+					 		, 'class' => 'form-control'
+					 		, 'ng-model' => 'template.search.operation'
+					 		, 'ng-class' => "{ 'required-field' : template.fields['operation'] }"
+					 		, 'placeholder' => trans('messages.email')
+					 	)
+					) !!}
                 </div>
                 <div class="col-xs-4">
                     {!! Form::text('search_question_text', ''

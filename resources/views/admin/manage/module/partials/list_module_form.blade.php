@@ -6,13 +6,13 @@
 	</div>
 
 	<div class="col-xs-12 success-container" ng-if="module.errors || module.success">
-		<div class="alert alert-error" ng-if="module.errors">
+		<div class="alert alert-error module-question-alert" ng-if="module.errors">
 			<p ng-repeat="error in module.errors track by $index">
 				{! error !}
 			</p>
 		</div>
 
-		<div class="alert alert-success" ng-if="module.success">
+		<div class="alert alert-success module-question-alert" ng-if="module.success">
 			<p>{! module.success !}</p>
 		</div>
 	</div>

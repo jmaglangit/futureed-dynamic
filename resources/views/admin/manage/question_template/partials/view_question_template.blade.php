@@ -1,7 +1,8 @@
 <div ng-if="template.active_view||template.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>{!! trans('messages.admin_view_template') !!}</span>
+			<span ng-if="template.active_view == futureed.true">{!! trans('messages.admin_view_template') !!}</span>
+			<span ng-if="template.active_view == futureed.false">{!! trans('messages.admin_view_template') !!}</span>
 		</div>
 	</div>
 
