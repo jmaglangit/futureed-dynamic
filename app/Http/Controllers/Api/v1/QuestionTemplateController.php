@@ -148,7 +148,7 @@ class QuestionTemplateController extends ApiController {
 
 
 		//update question template by question_template_id
-		$explanation_request = $request->get('question_template_explanation');
+		$explanation_request = $request->get('question_template_tips');
 
 		$explanation = $this->question_template_explanation->updateQuestionTemplateExplanationByTemplateId($id,[
 			'explanation' => $explanation_request['explanation']
