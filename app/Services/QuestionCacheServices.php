@@ -86,36 +86,38 @@ class QuestionCacheServices {
 			//get question_template_id
 			$question_template = $this->question_template->getQuestionTemplate($template->question_template_id);
 
+			if(!empty($question_template)){
 
-			//random number from max_value
-			$question_template->max_value = $max_value->max_number;
+				//random number from max_value
+				$question_template->max_value = $max_value->max_number;
 
-			//TODO:: filter between kind of question template
+				//TODO:: filter between kind of question template
 
-			//blank,series,word
-			switch($question_template->question_form){
+				//blank,series,word
+				switch($question_template->question_form){
 
-				case config('futureed.question_form_word'):
-					//generate word question form
-					$question = '';
-					dd('word');
-					break;
-				case config('futureed.question_form_series'):
-					//generate word question series
-					$question=$this->questionFormSeries($question_template);
-					break;
-				default :
-					//generate word question blank
-					dd('blank');
-					$question = '';
-					break;
+					case config('futureed.question_form_word'):
+						//generate word question form
+						$question = '';
+						dd('word');
+						break;
+					case config('futureed.question_form_series'):
+						//generate word question series
+						$question=$this->questionFormSeries($question_template);
+						break;
+					default :
+						//generate word question blank
+						dd('blank');
+						$question = '';
+						break;
+				}
+
+
+				array_push($question_list,[
+					'question' => $question,
+					'template' => $template
+				]);
 			}
-
-
-			array_push($question_list,[
-				'question' => $question,
-				'template' => $template
-			]);
 
 		}
 
