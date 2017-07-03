@@ -887,7 +887,7 @@ li.questions-answers > a, li.questions-answers div {
 }
 
 .dynamic_question_checkbox > input[type=checkbox], input[type=radio] {
-	margin: -5px 0px 0px -8px;
+	margin: -8px 0px 0px -9px;
 	/*margin-top: 1px \9;*/
 	line-height: normal;
 }
