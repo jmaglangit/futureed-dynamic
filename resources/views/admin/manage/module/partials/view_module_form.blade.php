@@ -304,7 +304,7 @@
 										<select  name="curr_country" class="form-control" name="curr_country"
 												 ng-model="module.curr_country"
 												 ng-change="getGradeLevel(module.curr_country)">
-											<option value="">{!! 'select' !!}</option>
+											<option value="">{!! trans('messages.select') !!}</option>
 											<option ng-repeat="curr in module.curriculum_country" ng-value="curr.country.id">{! curr.country.name !}</option>
 										</select>
 									</div>
@@ -321,13 +321,13 @@
 										{{--drop down and seq no text--}}
 										<select  name="curr_grade" class="form-control" name="curr_grade"
 												 ng-model="module.curr_grade">
-											<option value="">{!! 'select' !!}</option>
+											<option value="">{!! trans('messages.select') !!}</option>
 											<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 										</select>
 									</div>
 									<div class="col-xs-3"  ng-if="module.active_edit">
 										<div class="btn btn-blue col-xs-2"
-											 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);"
+											 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);module.curr_country='';module.curr_seq_no='';module.curr_grade='';"
 												>{!! trans('messages.add_curriculum') !!}</div>
 									</div>
 
