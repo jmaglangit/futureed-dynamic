@@ -839,7 +839,6 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 		}
 
 		self.record.curriculum_country = self.curr_country_list;
-		console.log(self.record.c)
 	}
 
 	//get country names
