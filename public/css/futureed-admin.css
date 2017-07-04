@@ -887,11 +887,20 @@ li.questions-answers > a, li.questions-answers div {
 }
 
 .dynamic_question_checkbox > input[type=checkbox], input[type=radio] {
-	margin: -8px 0px 0px -9px;
+	margin: -8px 0px 0px -19px;
 	/*margin-top: 1px \9;*/
 	line-height: normal;
 }
 
 .module-question-alert {
 	margin-left: initial;
+}
+
+.checkbox > .template_checkbox > input[type=checkbox] {
+	margin: -2px 0px 0px -22px;
+	line-height: normal;
+}
+
+.template_col_size{
+	width: 70px;
 }
