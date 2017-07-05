@@ -84,6 +84,7 @@ class AdminModuleController extends ApiController {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param AdminModuleRequest $request
 	 * @return Response
 	 */
 	public function store(AdminModuleRequest $request)
