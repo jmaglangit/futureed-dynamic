@@ -896,6 +896,7 @@ li.questions-answers > a, li.questions-answers div {
 	margin-left: initial;
 }
 
+
 .checkbox > .template_checkbox > input[type=checkbox] {
 	margin: -2px 0px 0px -22px;
 	line-height: normal;
@@ -903,4 +904,17 @@ li.questions-answers > a, li.questions-answers div {
 
 .template_col_size{
 	width: 70px;
+}
+
+.translation_req {
+    position: relative;
+    top: -20px;
+}
+
+.mod_radio_fields, .mod_radio_fields > label{
+    padding-left: 0px;
+}
+
+.col_radio_label{
+	width: 113px;
 }
