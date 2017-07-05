@@ -1,8 +1,8 @@
 <div ng-if="template.active_view||template.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span ng-if="template.active_view == futureed.true">{!! trans('messages.admin_view_template') !!}</span>
-			<span ng-if="template.active_view == futureed.false">{!! trans('messages.admin_view_template') !!}</span>
+			<span ng-if="template.active_view == futureed.TRUE">{!! trans('messages.admin_view_template') !!}</span>
+			<span ng-if="template.active_view == futureed.FALSE">{!! trans('messages.admin_view_template') !!}</span>
 		</div>
 	</div>
 
@@ -154,7 +154,7 @@
 							'ng-model' => 'template.record.question_template_format'
 							, 'ng-disabled' => 'template.active_view'
 							, 'class' => 'form-control disabled-textarea'
-							, 'ng-class' => "{ 'required-field' : template.fields['description'] }"
+							, 'ng-class' => "{ 'required-field' : template.fields['question_template_format'] }"
 							, 'rows' => '5'
 						)
 					) !!}
