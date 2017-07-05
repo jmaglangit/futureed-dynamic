@@ -895,3 +895,16 @@ li.questions-answers > a, li.questions-answers div {
 .module-question-alert {
 	margin-left: initial;
 }
+
+.translation_req {
+    position: relative;
+    top: -20px;
+}
+
+.mod_radio_fields, .mod_radio_fields > label{
+    padding-left: 0px;
+}
+
+.col_radio_label{
+	width: 113px;
+}
