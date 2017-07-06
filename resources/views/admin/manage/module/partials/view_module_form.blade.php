@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<div class="panel-group search-container" id="accordion">
+	<div class="panel-group search-container-view" id="accordion">
 		<div class="panel panel-default">
 			<div id="detail_heading" class="panel-heading" data-toggle="collapse" ng-click="module.toggleDetail()" data-parent="#accordion" href="#module_detail" aria-expanded="true" aria-controls="module_detail">
 				<h4 class="panel-title">
@@ -41,8 +41,8 @@
 										</select>
 									</div>
 
-									<label class="col-xs-2 control-label ">{!! trans('messages.status') !!} <span class="required">*</span></label>
-									<div class="col-xs-4" ng-if="module.active_edit">
+									<label class="col-xs-2 col_radio_label control-label ">{!! trans('messages.status') !!} <span class="required">*</span></label>
+									<div class="col-xs-4 col_radio_fields" ng-if="module.active_edit">
 										<div class="col-xs-6 checkbox mod_radio_fields">
 											<label>
 												{!! Form::radio('status'
@@ -111,7 +111,7 @@
 										</div>
 									</div>
 
-									<label class="control-label col-xs-2 ">{!! trans('messages.dynamic') !!} <span class="required">*</span></label>
+									<label class="control-label col_radio_label col-xs-2 ">{!! trans('messages.dynamic') !!} <span class="required">*</span></label>
 									<!-- <div class="col-xs-4">
 										<select  ng-disabled="module.active_view" name="is_dynamic" class="form-control"
 												 ng-model="module.record.is_dynamic">
@@ -120,7 +120,7 @@
 											<option ng-selected="module.record.is_dynamic == futureed.FALSE" value="0">{!! trans('messages.no') !!}</option>
 										</select>
 									</div> -->
-									<div class="col-xs-4" ng-if="module.active_edit">
+									<div class="col-xs-4 col_radio_fields" ng-if="module.active_edit">
 										<div class="col-xs-6 checkbox mod_radio_fields">
 											<label>
 												{!! Form::radio('is_dynamic'
@@ -177,7 +177,7 @@
 											)
 										) !!}
 									</div>
-									<label class="control-label col-xs-2 ">{!! trans('messages.has_difficulty') !!} <span class="translation_req required">*</span></label>
+									<label class="control-label col_radio_label col-xs-2">{!! trans('messages.has_difficulty') !!} <span class="required">*</span></label>
 									<!-- <div class="col-xs-3 m-top-20">
 										<select ng-disabled="module.active_view" name="has_difficulty" class="form-control"
 												ng-model="module.record.no_difficulty">
@@ -186,7 +186,7 @@
 											<option ng-selected="module.record.is_dynamic == futureed.TRUE" value="1">{!! trans('messages.no') !!}</option>
 										</select>
 									</div> -->
-									<div class="col-xs-4" ng-if="module.active_edit">
+									<div class="col-xs-4 col_radio_fields" ng-if="module.active_edit">
 										<div class="col-xs-6 checkbox mod_radio_fields">
 											<label>
 												{!! Form::radio('no_difficulty'
@@ -242,8 +242,8 @@
 											)
 										) !!}
 									</div>
-									<label class="col-xs-2 control-label ">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
-									<div class="col-xs-4" ng-if="module.active_edit">
+									<label class="col-xs-2 col_radio_label control-label ">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
+									<div class="col-xs-4 col_radio_fields" ng-if="module.active_edit">
 										<div class="col-xs-6 checkbox mod_radio_fields">
 											<label>
 												{!! Form::radio('yes'
@@ -288,8 +288,8 @@
 									</div>
 									<div class="col-xs-6 control-label"></div>
 
-									<label class="control-label col-xs-2 ">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
-									<div class="col-xs-3">
+									<label class="control-label col_radio_label col-xs-2 ">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
+									<div class="col-xs-3 col_radio_fields">
 										{!! Form::text('points_to_unlock',''
 											, array(
 												'placeHolder' => trans('messages.admin_points_to_unlock')
@@ -301,8 +301,8 @@
 										) !!}
 									</div>
 									<div class="col-xs-6 control-label"></div>
-									<label class="control-label col-xs-2 ">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
-									<div class="col-xs-3">
+									<label class="control-label col_radio_label col-xs-2 m-top-10">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
+									<div class="col-xs-3 col_radio_fields m-top-10">
 										{!! Form::text('points_to_finish',''
 											, array(
 												'placeHolder' => trans('messages.admin_points_to_finish')
@@ -389,7 +389,7 @@
 										<select  name="curr_country" class="form-control" name="curr_country"
 												 ng-model="module.curr_country"
 												 ng-change="getGradeLevel(module.curr_country)">
-											<option value="">{!! 'select' !!}</option>
+											<option value="">{!! trans('messages.select') !!}</option>
 											<option ng-repeat="curr in module.curriculum_country" ng-value="curr.country.id">{! curr.country.name !}</option>
 										</select>
 									</div>
@@ -406,7 +406,7 @@
 										{{--drop down and seq no text--}}
 										<select  name="curr_grade" class="form-control" name="curr_grade"
 												 ng-model="module.curr_grade">
-											<option value="">{!! 'select' !!}</option>
+											<option value="">{!! trans('messages.select') !!}</option>
 											<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 										</select>
 									</div>

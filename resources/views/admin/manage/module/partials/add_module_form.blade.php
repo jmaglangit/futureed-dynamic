@@ -32,7 +32,7 @@
 					</select>
 				</div>
 				<label class="col-xs-2 col_radio_label control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
-				<div class="col-xs-4">
+				<div class="col-xs-4 col_radio_fields">
 					<div class="col-xs-6 checkbox mod_radio_fields">
 						<label>
 							{!! Form::radio('status'
@@ -96,7 +96,7 @@
 						<option value="0">{!! trans('messages.no') !!}</option>
 					</select>
 				</div> -->
-				<div class="col-xs-4">
+				<div class="col-xs-4 col_radio_fields">
 					<div class="col-xs-6 checkbox mod_radio_fields">
 						<label>
 							{!! Form::radio('is_dynamic'
@@ -146,7 +146,7 @@
 						<option value="1">{!! trans('messages.no') !!}</option>
 					</select>
 				</div> -->
-				<div class="col-xs-4">
+				<div class="col-xs-4 col_radio_fields">
 					<div class="col-xs-6 checkbox mod_radio_fields">
 						<label>
 							{!! Form::radio('no_difficulty'
@@ -187,8 +187,8 @@
 						)
 					) !!}
 				</div>
-				<label class="col-xs-2 col_radio_label control-label">{!! trans('messages.translatable') !!} <span class="translation_req required">*</span></label>
-				<div class="col-xs-4" ng-if="module.active_add">
+				<label class="col-xs-2 col_radio_label control-label">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
+				<div class="col-xs-4 col_radio_fields" ng-if="module.active_add">
 					<div class="col-xs-6 checkbox mod_radio_fields">
 						<label>
 							{!! Form::radio('translatable'
@@ -234,7 +234,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col_radio_label col-xs-2">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
-					<div class="col-xs-3">
+					<div class="col-xs-3 col_radio_fields">
 						{!! Form::text('points_to_unlock',''
 							, array(
 								'placeHolder' => trans('messages.admin_points_to_unlock')
@@ -244,9 +244,9 @@
 							)
 						) !!}
 					</div>
-					<div class="col-xs-3 control-label"></div>
-					<label class="control-label col_radio_label col-xs-2 m-top-20">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
-					<div class="col-xs-3 m-top-20">
+					<div class="col-xs-6 control-label m-top-10"></div>
+					<label class="control-label col_radio_label col-xs-2">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
+					<div class="col-xs-3 col_radio_fields">
 						{!! Form::text('points_to_finish',''
 							, array(
 								'placeHolder' => trans('messages.admin_points_to_finish')
