@@ -34,8 +34,8 @@ class AdminModuleRequest extends ApiRequest {
 					'common_core_area' => 'required|string',
 					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
-					'points_to_unlock' => 'required|integer',
-					'points_to_finish' => 'required|integer',
+					'points_to_unlock' => 'required|max:9999|regex:'. config('regex.numeric'),
+					'points_to_finish' => 'required|max:9999|regex:'. config('regex.numeric'),
 					'curriculum_country' => 'required|array',
 					'is_dynamic' => 'required',
 					'no_difficulty' => 'required'
@@ -52,8 +52,8 @@ class AdminModuleRequest extends ApiRequest {
 					'common_core_area' => 'required|string',
 					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
-					'points_to_unlock' => 'required|integer',
-					'points_to_finish' => 'required|integer',
+					'points_to_unlock' => 'required|max:9999|regex:'. config('regex.numeric'),
+					'points_to_finish' => 'required|max:9999|regex:'. config('regex.numeric'),
 					'translatable' => 'required|integer'
 
 				];
@@ -71,8 +71,8 @@ class AdminModuleRequest extends ApiRequest {
 			'subject_id.integer' => trans('errors.1018',['attribute' => strtolower(trans('errors.2155'))]),
 			'subject_area_id.required' => trans('errors.1017',['attribute' => strtolower(trans('errors.2156'))]),
 			'subject_area_id.integer' => trans('errors.1018',['attribute' => strtolower(trans('errors.2156'))]),
-			'points_to_unlock.integer' => trans('errors.1005',['attribute' => trans('errors.2158')]),
-			'points_to_finish.integer' => trans('errors.1005',['attribute' => trans('errors.2159')]),
+			'points_to_unlock.regex' => trans('errors.1005',['attribute' => trans('errors.2158')]),
+			'points_to_finish.regex' => trans('errors.1005',['attribute' => trans('errors.2159')]),
 			'name.required' => trans('validation.required',['attribute' => trans('errors.2160')]),
 			'is_dynamic.required' => trans('errors.1017',['attribute' => trans('errors.2227')]),
 			'no_difficulty.required' => trans('errors.1017',['attribute' => trans('errors.2228')]),

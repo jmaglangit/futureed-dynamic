@@ -242,7 +242,19 @@
 				</span>
 
 				<div class="result-tip tip-content" ng-if="mod.result.points_earned <= 0" ng-init="mod.getAnswerExplanation();" ng-show="mod.answer_explanation.length">
-					<div class="col-xs-12 tip-message" ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE && !mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+
+					<div class="col-xs-12 tip-message" ng-if="mod.record.is_dynamic == futureed.TRUE">
+						<div class="col-xs-12 tip-icon">
+							<img src="/images/icon-tipbulb.png">
+							<span class="tips-text">{{ trans('messages.tips') }}</span>
+						</div>
+						<div class="col-xs-12">
+							<p class="h4 m-bottom-0" ng-bind-html="mod.answer_explanation[mod.answer_exp_offset].explanation | trustAsHtml"></p>
+						</div>
+
+					</div>
+
+					<div class="col-xs-12 tip-message" ng-if="mod.record.is_dynamic == futureed.FALSE && mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE && !mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
 						<div class="col-xs-12 tip-icon">
 							<img src="/images/icon-tipbulb.png">
 							<span class="tips-text">{{ trans('messages.tips') }}</span>
@@ -257,7 +269,7 @@
 						</div>
 					</div>
 
-					<div class="col-xs-12 tip-message" ng-if="mod.answer_explanation[mod.answer_exp_offset].image == futureed.NONE && mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+					<div class="col-xs-12 tip-message" ng-if="mod.record.is_dynamic == futureed.FALSE && mod.answer_explanation[mod.answer_exp_offset].image == futureed.NONE && mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
 						<div class="col-xs-12 tip-icon">
 							<img src="/images/icon-tipbulb.png">
 							<span class="tips-text">{{ trans('messages.tips') }}</span>
@@ -272,7 +284,7 @@
 						</div>
 					</div>
 
-					<div class="col-xs-12 tip-message-side" ng-if="mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE && mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
+					<div class="col-xs-12 tip-message-side" ng-if="mod.record.is_dynamic == futureed.FALSE && mod.answer_explanation[mod.answer_exp_offset].image != futureed.NONE && mod.answer_explanation[mod.answer_exp_offset].answer_explanation">
 						<div class="col-xs-3">
 							<div class="tip-icon">
 								<img src="/images/icon-tipbulb.png">

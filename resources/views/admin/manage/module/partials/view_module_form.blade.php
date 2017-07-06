@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<div class="panel-group search-container" id="accordion">
+	<div class="panel-group search-container-view" id="accordion">
 		<div class="panel panel-default">
 			<div id="detail_heading" class="panel-heading" data-toggle="collapse" ng-click="module.toggleDetail()" data-parent="#accordion" href="#module_detail" aria-expanded="true" aria-controls="module_detail">
 				<h4 class="panel-title">
@@ -41,45 +41,9 @@
 										</select>
 									</div>
 
-									<label class="control-label col-xs-2">{!! trans('messages.dynamic') !!} <span class="required">*</span></label>
-									<div class="col-xs-4">
-										<select  ng-disabled="module.active_view" name="is_dynamic" class="form-control"
-												 ng-model="module.record.is_dynamic">
-											<option ng-selected="module.record.is_dynamic == ''" value="">{!! trans('messages.select') !!}</option>
-											<option ng-selected="module.record.is_dynamic == futureed.TRUE" value="1">{!! trans('messages.yes') !!}</option>
-											<option ng-selected="module.record.is_dynamic == futureed.FALSE" value="0">{!! trans('messages.no') !!}</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-xs-2">{!! trans('messages.subject_area') !!} <span class="required">*</span></label>
-									<div class="col-xs-4">
-										{!! Form::text('area',''
-											, array(
-												'placeHolder' => trans('messages.subject_area')
-												, 'ng-model' => 'module.record.area'
-												, 'ng-disabled' => 'module.active_view'
-												, 'class' => 'form-control'
-												, 'ng-change' => "module.searchArea()"
-												, 'ng-class' => "{ 'required-field' : module.fields['subject_area_id'] }"
-												, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-											)
-										) !!}
-										<div class="angucomplete-holder" ng-if="module.areas">
-											<ul class="col-md-6 angucomplete-dropdown">
-												<li class="angucomplete-row" ng-repeat="area in module.areas" ng-click="module.selectArea(area)">
-													{! area.name !}
-												</li>
-											</ul>
-										</div>
-										<div class="margin-top-8 center-err">
-											<i ng-if="module.validation.s_loading" class="fa fa-spinner fa-spin"></i>
-											<span ng-if="module.validation.s_error" class="error-msg-con">{! module.validation.s_error !}</span>
-										</div>
-									</div>
-									<label class="col-xs-2 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
-									<div class="col-xs-4" ng-if="module.active_edit">
-										<div class="col-xs-6 checkbox">
+									<label class="col-xs-2 col_radio_label control-label ">{!! trans('messages.status') !!} <span class="required">*</span></label>
+									<div class="col-xs-4 col_radio_fields" ng-if="module.active_edit">
+										<div class="col-xs-6 checkbox mod_radio_fields">
 											<label>
 												{!! Form::radio('status'
 													, 'Enabled'
@@ -92,7 +56,7 @@
 												<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 											</label>
 										</div>
-										<div class="col-xs-6 checkbox">
+										<div class="col-xs-6 checkbox mod_radio_fields">
 											<label>
 												{!! Form::radio('status'
 													, 'Disabled'
@@ -120,15 +84,85 @@
 										</label>
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="control-label col-xs-2">{!! trans('messages.subject_area') !!} <span class="required">*</span></label>
+									<div class="col-xs-4">
+										{!! Form::text('area',''
+											, array(
+												'placeHolder' => trans('messages.subject_area')
+												, 'ng-model' => 'module.record.area'
+												, 'ng-disabled' => 'module.active_view'
+												, 'class' => 'form-control'
+												, 'ng-change' => "module.searchArea()"
+												, 'ng-class' => "{ 'required-field' : module.fields['subject_area_id'] }"
+												, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+											)
+										) !!}
+										<div class="angucomplete-holder" ng-if="module.areas">
+											<ul class="col-md-6 angucomplete-dropdown">
+												<li class="angucomplete-row" ng-repeat="area in module.areas" ng-click="module.selectArea(area)">
+													{! area.name !}
+												</li>
+											</ul>
+										</div>
+										<div class="center-err">
+											<i ng-if="module.validation.s_loading" class="fa fa-spinner fa-spin"></i>
+											<span ng-if="module.validation.s_error" class="error-msg-con">{! module.validation.s_error !}</span>
+										</div>
+									</div>
 
-								<div class="form-group" ng-if="module.active_edit && module.record.uploaded">
-					                <div class="col-xs-6"></div>
-					                <div class="col-xs-6">
-										<div class="col-xs-2"></div>
-										<span class="col-xs-5 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span>
-										<a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.record)">{!! trans('messages.view_image') !!}</a>
-					                </div>
-					            </div>
+									<label class="control-label col_radio_label col-xs-2 ">{!! trans('messages.dynamic') !!} <span class="required">*</span></label>
+									<!-- <div class="col-xs-4">
+										<select  ng-disabled="module.active_view" name="is_dynamic" class="form-control"
+												 ng-model="module.record.is_dynamic">
+											<option ng-selected="module.record.is_dynamic == ''" value="">{!! trans('messages.select') !!}</option>
+											<option ng-selected="module.record.is_dynamic == futureed.TRUE" value="1">{!! trans('messages.yes') !!}</option>
+											<option ng-selected="module.record.is_dynamic == futureed.FALSE" value="0">{!! trans('messages.no') !!}</option>
+										</select>
+									</div> -->
+									<div class="col-xs-4 col_radio_fields" ng-if="module.active_edit">
+										<div class="col-xs-6 checkbox mod_radio_fields">
+											<label>
+												{!! Form::radio('is_dynamic'
+													, 1
+													, true
+													, array(
+														'class' => 'field'
+														, 'ng-model' => 'module.record.is_dynamic'
+													)
+												) !!}
+												<span class="lbl padding-8">{!! trans('messages.yes') !!}</span>
+											</label>
+										</div>
+										<div class="col-xs-6 checkbox mod_radio_fields">
+											<label>
+												{!! Form::radio('is_dynamic'
+													, 0
+													, false
+													, array(
+														'class' => 'field'
+														, 'ng-model' => 'module.record.is_dynamic'
+													)
+												) !!}
+												<span class="lbl padding-8">{!! trans('messages.no') !!}</span>
+											</label>
+										</div>
+									</div>
+
+									<div class="col-xs-3" ng-if="module.active_view">
+										<label ng-if="module.record.is_dynamic == futureed.TRUE">
+											<b class="success-icon">
+												<i class="margin-top-8 fa fa-check-circle-o"></i> {!! trans('messages.yes') !!}
+											</b>
+										</label>
+
+										<label ng-if="module.record.is_dynamic == futureed.FALSE">
+											<b class="error-icon">
+												<i class="margin-top-8 fa fa-ban"></i> {!! trans('messages.no') !!}
+											</b>
+										</label>
+									</div>
+								</div>
 
 								<div class="form-group">
 									<label class="control-label col-xs-2">{!! trans_choice('messages.module', 1) !!} <span class="required">*</span></label>
@@ -143,26 +177,55 @@
 											)
 										) !!}
 									</div>
-									<div class="form-group" ng-if="module.active_edit">
-										<label class="control-label col-xs-2">{!! trans('messages.image') !!}</label>
-										<div class="col-xs-3">
-											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.choose_image') !!}</div>
+									<label class="control-label col_radio_label col-xs-2">{!! trans('messages.has_difficulty') !!} <span class="required">*</span></label>
+									<!-- <div class="col-xs-3 m-top-20">
+										<select ng-disabled="module.active_view" name="has_difficulty" class="form-control"
+												ng-model="module.record.no_difficulty">
+											<option ng-selected="module.record.is_dynamic == ''" value="">{!! trans('messages.select') !!}</option>
+											<option ng-selected="module.record.is_dynamic == futureed.FALSE" value="0">{!! trans('messages.yes') !!}</option>
+											<option ng-selected="module.record.is_dynamic == futureed.TRUE" value="1">{!! trans('messages.no') !!}</option>
+										</select>
+									</div> -->
+									<div class="col-xs-4 col_radio_fields" ng-if="module.active_edit">
+										<div class="col-xs-6 checkbox mod_radio_fields">
+											<label>
+												{!! Form::radio('no_difficulty'
+													, 1
+													, true
+													, array(
+														'class' => 'field'
+														, 'ng-model' => 'module.record.no_difficulty'
+													)
+												) !!}
+												<span class="lbl padding-8">{!! trans('messages.yes') !!}</span>
+											</label>
 										</div>
-
-										<div class="margin-top-8" ng-if="module.record.uploaded">
-											<a href="" ng-click="module.removeImage(module.record)"><i class="fa fa-trash"></i></a>
+										<div class="col-xs-6 checkbox mod_radio_fields">
+											<label>
+												{!! Form::radio('no_difficulty'
+													, 0
+													, false
+													, array(
+														'class' => 'field'
+														, 'ng-model' => 'module.record.no_difficulty'
+													)
+												) !!}
+												<span class="lbl padding-8">{!! trans('messages.no') !!}</span>
+											</label>
 										</div>
 									</div>
+									<div class="col-xs-3" ng-if="module.active_view">
+										<label ng-if="module.record.no_difficulty == futureed.TRUE">
+											<b class="success-icon">
+												<i class="margin-top-8 fa fa-check-circle-o"></i> {!! trans('messages.yes') !!}
+											</b>
+										</label>
 
-									<div ng-if="module.active_view">
-										<label class="col-xs-2 control-label">{!! trans('messages.image') !!} </label>
-										<div class="col-xs-3" ng-if="module.record.icon_image != 'None'">
-											<a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.record)">{!! trans('messages.view_image') !!}</a>
-										</div>
-
-										<div class="col-xs-3" ng-if="module.record.icon_image == 'None'">
-											<span class="upload-label label label-info">{! module.record.icon_image !}</span>
-										</div>
+										<label ng-if="module.record.no_difficulty == futureed.FALSE">
+											<b class="error-icon">
+												<i class="margin-top-8 fa fa-ban"></i> {!! trans('messages.no') !!}
+											</b>
+										</label>
 									</div>
 								</div>
 								<div class="form-group">
@@ -175,48 +238,13 @@
 												, 'class' => 'form-control disabled-textarea'
 												, 'ng-disabled' => 'module.active_view'
 												, 'ng-class' => "{ 'required-field' : module.fields['description'] }"
-												, 'rows' => '5'
+												, 'rows' => '6'
 											)
 										) !!}
 									</div>
-									<label class="control-label col-xs-3">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
-									<div class="col-xs-3">
-										{!! Form::text('points_to_unlock',''
-											, array(
-												'placeHolder' => trans('messages.admin_points_to_unlock')
-												, 'ng-model' => 'module.record.points_to_unlock'
-												, 'class' => 'form-control'
-												, 'ng-disabled' => 'module.active_view'
-												, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
-											)
-										) !!}
-									</div>
-									<label class="control-label col-xs-3 m-top-20">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
-									<div class="col-xs-3 m-top-20">
-										{!! Form::text('points_to_finish',''
-											, array(
-												'placeHolder' => trans('messages.admin_points_to_finish')
-												, 'ng-model' => 'module.record.points_to_finish'
-												, 'class' => 'form-control'
-												, 'ng-disabled' => 'module.active_view'
-												, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
-											)
-										) !!}
-									</div>
-									<label class="control-label col-xs-3 m-top-20">{!! trans('messages.has_difficulty') !!} <span class="required">*</span></label>
-									<div class="col-xs-3 m-top-20">
-										<select ng-disabled="module.active_view" name="has_difficulty" class="form-control"
-												ng-model="module.record.no_difficulty">
-											<option ng-selected="module.record.is_dynamic == ''" value="">{!! trans('messages.select') !!}</option>
-											<option ng-selected="module.record.is_dynamic == futureed.FALSE" value="0">{!! trans('messages.yes') !!}</option>
-											<option ng-selected="module.record.is_dynamic == futureed.TRUE" value="1">{!! trans('messages.no') !!}</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-xs-3 control-label">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
-									<div class="col-xs-5" ng-if="module.active_edit">
-										<div class="col-xs-6 checkbox">
+									<label class="col-xs-2 col_radio_label control-label ">{!! trans('messages.translatable') !!} <span class="required">*</span></label>
+									<div class="col-xs-4 col_radio_fields" ng-if="module.active_edit">
+										<div class="col-xs-6 checkbox mod_radio_fields">
 											<label>
 												{!! Form::radio('yes'
 													, 1
@@ -230,7 +258,7 @@
 												<span class="lbl padding-8">{!! trans('messages.yes') !!}</span>
 											</label>
 										</div>
-										<div class="col-xs-6 checkbox">
+										<div class="col-xs-6 checkbox mod_radio_fields">
 											<label>
 												{!! Form::radio('no'
 													, 0
@@ -257,6 +285,67 @@
 												<i class="margin-top-8 fa fa-ban"></i> {!! trans('messages.no') !!}
 											</b>
 										</label>
+									</div>
+									<div class="col-xs-6 control-label"></div>
+
+									<label class="control-label col_radio_label col-xs-2 ">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
+									<div class="col-xs-3 col_radio_fields">
+										{!! Form::text('points_to_unlock',''
+											, array(
+												'placeHolder' => trans('messages.admin_points_to_unlock')
+												, 'ng-model' => 'module.record.points_to_unlock'
+												, 'class' => 'form-control'
+												, 'ng-disabled' => 'module.active_view'
+												, 'ng-maxlength' => '4'
+												, 'ng-click' => 'module.validateMaxLength()'
+												, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
+											)
+										) !!}
+									</div>
+									<div class="col-xs-6 control-label"></div>
+									<label class="control-label col_radio_label col-xs-2 m-top-10">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
+									<div class="col-xs-3 col_radio_fields m-top-10">
+										{!! Form::text('points_to_finish',''
+											, array(
+												'placeHolder' => trans('messages.admin_points_to_finish')
+												, 'ng-model' => 'module.record.points_to_finish'
+												, 'class' => 'form-control'
+												, 'ng-disabled' => 'module.active_view'
+												, 'ng-maxlength' => '4'
+												, 'ng-click' => 'module.validateMaxLength()'
+												, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
+											)
+										) !!}
+									</div>
+								</div>
+								<div class="form-group">
+									<div ng-if="module.active_edit">
+										<label class="control-label col-xs-2">{!! trans('messages.image') !!}</label>
+										<div class="col-xs-3" ng-if="!module.record.uploaded">
+											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.choose_image') !!}</div>
+										</div>
+									</div>
+									<div class="form-group" ng-if="module.active_edit && module.record.uploaded">
+						                <div class="col-xs-6">
+											<!-- <div class="col-xs-2"></div> -->
+											<!-- <span class="col-xs-5 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span> -->
+											<a href="" class="control-label col-xs-1" style="right:14px;" ng-click="module.viewImage(module.record)">{!! trans('messages.view') !!}</a>
+											<a href="" class="control-label col-xs-1" style="left:-5px;" ng-click="module.removeImage(module.record)"><i class="fa fa-trash"></i></a>
+											<div class="col-xs-6" style="right:15px;">
+												<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.change_image') !!}</div>
+											</div>
+						                </div>
+						            </div>
+
+									<div ng-if="module.active_view">
+										<label class="col-xs-2 control-label">{!! trans('messages.image') !!} </label>
+										<div class="col-xs-3" ng-if="module.record.icon_image != 'None'">
+											<a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.record)">{!! trans('messages.view') !!}</a>
+										</div>
+
+										<div class="col-xs-1 control-label" ng-if="module.record.icon_image == 'None'">
+											<span class="upload-label label label-info">{! module.record.icon_image !}</span>
+										</div>
 									</div>
 								</div>
 								<div class="form-group">
@@ -304,7 +393,7 @@
 										<select  name="curr_country" class="form-control" name="curr_country"
 												 ng-model="module.curr_country"
 												 ng-change="getGradeLevel(module.curr_country)">
-											<option value="">{!! 'select' !!}</option>
+											<option value="">{!! trans('messages.select_country') !!}</option>
 											<option ng-repeat="curr in module.curriculum_country" ng-value="curr.country.id">{! curr.country.name !}</option>
 										</select>
 									</div>
@@ -321,13 +410,13 @@
 										{{--drop down and seq no text--}}
 										<select  name="curr_grade" class="form-control" name="curr_grade"
 												 ng-model="module.curr_grade">
-											<option value="">{!! 'select' !!}</option>
+											<option value="">{!! trans('messages.select_level') !!}</option>
 											<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 										</select>
 									</div>
 									<div class="col-xs-3"  ng-if="module.active_edit">
 										<div class="btn btn-blue col-xs-2"
-											 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);"
+											 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);module.curr_country='';module.curr_seq_no='';module.curr_grade='';"
 												>{!! trans('messages.add_curriculum') !!}</div>
 									</div>
 

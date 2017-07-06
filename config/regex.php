@@ -31,4 +31,7 @@ return [
 		'http://en.wikipedia.org/wiki/',
 		'https://en.wikipedia.org/wiki/'
 	],
+
+	//accepts only numbers
+	'numeric' => '/^[0-9]+$/',
 ];

@@ -208,7 +208,7 @@
                 <table class="col-xs-12 table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th class="col-xs-1"><div class="checkbox">
+                        <th class="col-xs-1 template_col_size"><div class="checkbox">
                                 <label class="template_checkbox"><input type="checkbox" name="template_checkbox_all" ng-model="template.checkbox_all" >{!! 'All' !!}</label>
                             </div></th>
                         <th>{!! 'Templates' !!}</th>
