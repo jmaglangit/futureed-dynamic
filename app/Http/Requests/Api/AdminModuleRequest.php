@@ -34,8 +34,8 @@ class AdminModuleRequest extends ApiRequest {
 					'common_core_area' => 'required|string',
 					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
-					'points_to_unlock' => 'required|regex:'. config('regex.numeric'),
-					'points_to_finish' => 'required|regex:'. config('regex.numeric'),
+					'points_to_unlock' => 'required|max:9999|regex:'. config('regex.numeric'),
+					'points_to_finish' => 'required|max:9999|regex:'. config('regex.numeric'),
 					'curriculum_country' => 'required|array',
 					'is_dynamic' => 'required',
 					'no_difficulty' => 'required'
@@ -52,8 +52,8 @@ class AdminModuleRequest extends ApiRequest {
 					'common_core_area' => 'required|string',
 					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
-					'points_to_unlock' => 'required|regex:'. config('regex.numeric'),
-					'points_to_finish' => 'required|regex:'. config('regex.numeric'),
+					'points_to_unlock' => 'required|max:9999|regex:'. config('regex.numeric'),
+					'points_to_finish' => 'required|max:9999|regex:'. config('regex.numeric'),
 					'translatable' => 'required|integer'
 
 				];
