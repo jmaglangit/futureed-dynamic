@@ -324,7 +324,7 @@
 						<select  name="curr_country" class="form-control" name="curr_country"
 								 ng-model="module.curr_country"
 								 ng-change="getGradeLevel(module.curr_country)">
-							<option value="">{!! trans('messages.select') !!}</option>
+							<option value="">{!! trans('messages.select_country') !!}</option>
 							<option ng-repeat="curr in module.curriculum_country" ng-value="curr.country.id">{! curr.country.name !}</option>
 						</select>
 					</div>
@@ -341,7 +341,7 @@
 					{{--drop down and seq no text--}}
 					<select  name="curr_grade" class="form-control" name="curr_grade"
 							 ng-model="module.curr_grade">
-						<option value="">{!! trans('messages.select') !!}</option>
+						<option value="">{!! trans('messages.select_level') !!}</option>
 						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 					</select>
 				</div>
