@@ -916,5 +916,18 @@ li.questions-answers > a, li.questions-answers div {
 }
 
 .col_radio_label{
-	width: 113px;
+	width: 130px;
+}
+
+.col_radio_fields {
+    width: 198px;
+}
+
+.m-top-10 {
+    margin-top: 10px !important;
+}
+
+.search-container-view{
+	padding: 0px 20px 15px 20px;
+	color: #887c70;
 }
