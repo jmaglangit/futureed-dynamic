@@ -2,7 +2,7 @@
 	<div class="content-title">
 		<div class="title-main-content">
 			<span ng-if="template.active_view == futureed.TRUE">{!! trans('messages.admin_view_template') !!}</span>
-			<span ng-if="template.active_view == futureed.FALSE">{!! trans('messages.admin_view_template') !!}</span>
+			<span ng-if="template.active_view == futureed.FALSE">{!! trans('messages.admin_edit_template') !!}</span>
 		</div>
 	</div>
 
