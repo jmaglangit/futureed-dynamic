@@ -896,6 +896,15 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
         });
 	}
 
+	self.validateMaxLength = function(){
+		$('.form-control[name=points_to_unlock], .form-control[name=points_to_finish]').bind('keyup change input paste',function(e){
+			var val = $(this).val();
+			var maxCount = $(this).attr('ng-maxlength');
+			if(val.length > maxCount){
+				$(this).val($(this).val().substring(0,maxCount));
+			}
+		});
+	}
 
 }
 

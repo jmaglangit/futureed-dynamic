@@ -240,6 +240,8 @@
 								'placeHolder' => trans('messages.admin_points_to_unlock')
 								, 'ng-model' => 'module.record.points_to_unlock'
 								, 'class' => 'form-control'
+								, 'ng-maxlength' => '9999'
+								, 'ng-click' => 'module.validateMaxLength()'
 								, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
 							)
 						) !!}
@@ -252,6 +254,8 @@
 								'placeHolder' => trans('messages.admin_points_to_finish')
 								, 'ng-model' => 'module.record.points_to_finish'
 								, 'class' => 'form-control'
+								, 'ng-maxlength' => '9999'
+								, 'ng-click' => 'module.validateMaxLength()'
 								, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
 							)
 						) !!}
