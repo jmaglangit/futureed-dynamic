@@ -814,7 +814,6 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 
 		var listed = Constants.FALSE;
 		self.curr_country_fields = Constants.FALSE;
-		self.curr_country_list = [];
 
 		angular.forEach(self.curr_country_list, function(v,k){
 			if(v.country_id == country_id){
@@ -829,8 +828,8 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 			$("#curr_country_fields .form-control").addClass("required-field");
 		}
 
-		if(listed == Constants.FALSE && country_id != '' && country_id != Constants.UNDEFINE && seq_no != Constants.UNDEFINE  
-			&& seq_no != '' && grade_id != Constants.UNDEFINE && grade_id != ''){
+		if(listed == Constants.FALSE && country_id != '' && country_id != Constants.UNDEFINED && seq_no != Constants.UNDEFINED
+			&& seq_no != '' && grade_id != Constants.UNDEFINED && grade_id != ''){
 			self.curr_country_list.push({
 				'country_id' : country_id,
 				'seq_no' : seq_no,
@@ -897,6 +896,15 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
         });
 	}
 
+	self.validateMaxLength = function(){
+		$('.form-control[name=points_to_unlock], .form-control[name=points_to_finish]').bind('keyup change input paste',function(e){
+			var val = $(this).val();
+			var maxCount = $(this).attr('ng-maxlength');
+			if(val.length > maxCount){
+				$(this).val($(this).val().substring(0,maxCount));
+			}
+		});
+	}
 
 }
 

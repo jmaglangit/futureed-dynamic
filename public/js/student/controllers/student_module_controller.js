@@ -1350,26 +1350,36 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.getAnswerExplanation = function(){
 
-		var data = {
-			'module_id' : self.current_student_module.module_id,
-			'question_id' : self.current_student_module.question_id,
-			'seq_no' : self.current_student_module.seq_no
-		};
-		self.answer_explanation_fully_loaded = Constants.FALSE;
-		StudentModuleService.getAnswerExplanation(data).success(function(response){
-			if(response.errors){
-				self.errors = $scope.errorHandler(response.errors);
-			} else {
-				self.answer_explanation = response.data.records;
-				self.answer_explanation.count = response.data.records.length;
-				self.answer_exp_offset = 0;
-				self.answer_explanation_fully_loaded = Constants.TRUE;
-			}
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
+		//Check if module is dynamic
+		if(self.record.is_dynamic == Constants.TRUE){
+
+			self.answer_explanation = self.current_question.question_template.question_template_explanation;
+			self.answer_explanation.count = self.current_question.question_template.question_template_explanation.length;
+			self.answer_exp_offset = 0;
+            self.answer_explanation_fully_loaded = Constants.TRUE;
+
+		} else {
+			var data = {
+				'module_id' : self.current_student_module.module_id,
+				'question_id' : self.current_student_module.question_id,
+				'seq_no' : self.current_student_module.seq_no
+			};
+			self.answer_explanation_fully_loaded = Constants.FALSE;
+			StudentModuleService.getAnswerExplanation(data).success(function(response){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					self.answer_explanation = response.data.records;
+					self.answer_explanation.count = response.data.records.length;
+					self.answer_exp_offset = 0;
+					self.answer_explanation_fully_loaded = Constants.TRUE;
+				}
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+        }
 
 
 	}

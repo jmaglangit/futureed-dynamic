@@ -45,7 +45,7 @@ class QuestionCache extends Model{
 	//relationship
 	public function questionTemplate(){
 
-		return $this->hasOne('FutureEd\Models\Core\QuestionTemplate','id','question_template_id');
+		return $this->hasOne('FutureEd\Models\Core\QuestionTemplate','id','question_template_id')->with('questionTemplateExplanation');
 	}
 
 	public function moduleQuestionTemplate(){

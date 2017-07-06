@@ -13,6 +13,7 @@ class AdminModuleImageController extends ApiController {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param AdminModuleImageRequest $request
 	 * @return Response
 	 */
 	public function store(AdminModuleImageRequest $request)
@@ -27,7 +28,13 @@ class AdminModuleImageController extends ApiController {
 		//check if has images uploaded
 		if($input['file'])
 		{
-			if($_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/png'){
+			//max file size
+			if($_FILES['file']['error'] == 1){
+
+				return $this->respondErrorMessage(2143);
+			}
+
+			if($_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/png' && $_FILES['file']['error'] == 0){
 
 				return $this->respondErrorMessage(2142);
 

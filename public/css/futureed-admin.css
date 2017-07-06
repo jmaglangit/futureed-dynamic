@@ -65,7 +65,7 @@ div > .nav-list > li > a{
 	background-color: #f6f4f5;
 }
 .search-container{
-	padding: 0px 20px 15px 20px;
+	padding: 0px 30px 15px 30px;
 	color: #887c70;
 }
 .mid-container{
@@ -887,13 +887,23 @@ li.questions-answers > a, li.questions-answers div {
 }
 
 .dynamic_question_checkbox > input[type=checkbox], input[type=radio] {
-	margin: -5px 0px 0px -8px;
+	margin: -8px 0px 0px -19px;
 	/*margin-top: 1px \9;*/
 	line-height: normal;
 }
 
 .module-question-alert {
 	margin-left: initial;
+}
+
+
+.checkbox > .template_checkbox > input[type=checkbox] {
+	margin: -2px 0px 0px -22px;
+	line-height: normal;
+}
+
+.template_col_size{
+	width: 70px;
 }
 
 .translation_req {

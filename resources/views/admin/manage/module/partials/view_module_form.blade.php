@@ -412,7 +412,7 @@
 									</div>
 									<div class="col-xs-3"  ng-if="module.active_edit">
 										<div class="btn btn-blue col-xs-2"
-											 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);"
+											 ng-click="module.addCurriculumCountry(module.curr_country,module.curr_seq_no,module.curr_grade);module.curr_country='';module.curr_seq_no='';module.curr_grade='';"
 												>{!! trans('messages.add_curriculum') !!}</div>
 									</div>
 
