@@ -30,7 +30,7 @@ class AdminModuleRequest extends ApiRequest {
 					'subject_area_id' => 'required|integer',
 					'name' => 'required|string',
 					'code' => 'required|integer',
-					'description' => 'required|string|max:256',
+					'description' => 'required|string|max:500',
 					'common_core_area' => 'required|string',
 					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
@@ -38,7 +38,8 @@ class AdminModuleRequest extends ApiRequest {
 					'points_to_finish' => 'required|max:9999|regex:'. config('regex.numeric'),
 					'curriculum_country' => 'required|array',
 					'is_dynamic' => 'required',
-					'no_difficulty' => 'required'
+					'no_difficulty' => 'required',
+					'translatable' => 'required|integer'
 
 				];
 
@@ -48,7 +49,7 @@ class AdminModuleRequest extends ApiRequest {
 					'subject_id' => 'required|integer',
 					'subject_area_id' => 'required|integer',
 					'name' => 'required|string',
-					'description' => 'required|string|max:256',
+					'description' => 'required|string|max:500',
 					'common_core_area' => 'required|string',
 					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
@@ -76,6 +77,7 @@ class AdminModuleRequest extends ApiRequest {
 			'name.required' => trans('validation.required',['attribute' => trans('errors.2160')]),
 			'is_dynamic.required' => trans('errors.1017',['attribute' => trans('errors.2227')]),
 			'no_difficulty.required' => trans('errors.1017',['attribute' => trans('errors.2228')]),
+			'translatable.required' => trans('errors.1017',['attribute' => trans('errors.2229')]),
 
 		];
 	}
