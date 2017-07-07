@@ -524,4 +524,12 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 			$scope.div_unblock('help_request_list');
 		})
 	}
+
+	self.updateBackground = function() {
+		$("footer").css('background-image', 'none');
+
+		angular.element('body.student').css({
+			'background-image' : 'url("/images/student_page_bg.jpg")'
+		});
+	}
 }
