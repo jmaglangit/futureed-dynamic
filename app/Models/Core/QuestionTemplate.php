@@ -47,7 +47,7 @@ class QuestionTemplate extends Model{
 
 	//relationship
 	public function questionTemplateExplanation(){
-		return $this->hasMany('FutureEd\Models\Core\QuestionTemplateExplanation');
+		return $this->hasOne('FutureEd\Models\Core\QuestionTemplateExplanation');
 	}
 
 	//scope
