@@ -899,4 +899,12 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 			$scope.ui_unblock();
 		});;
 	});
+
+	self.updateBackground = function() {
+		$("footer").css('background-image', 'none');
+
+		angular.element('body.student').css({
+			'background-image' : 'url("/images/student_page_bg.jpg")'
+		});
+	}
 }	

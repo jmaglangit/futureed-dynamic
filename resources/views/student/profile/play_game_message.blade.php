@@ -26,7 +26,7 @@
                 <div class="btn btn-green btn-medium" aria-label="Play"
                      ng-if="!profile.errors"
                      ng-click="profile.countdownTimer(profile.student_game_time.countdown_time_played);">{!! trans('messages.play') !!}</div>
-                <div class="btn btn-maroon btn-medium" data-dismiss="modal" aria-label="Back"
+                <div class="btn btn-gray btn-medium" data-dismiss="modal" aria-label="Back"
                      ng-click="profile.setStudentProfileActive(futureed.GAMES)">{!! trans('messages.back') !!}</div>
             </div>
         </div>

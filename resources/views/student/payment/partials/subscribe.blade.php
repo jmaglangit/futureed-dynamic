@@ -9,7 +9,7 @@
 
 
             <div class="col-xs-2 pull-right top-10">
-                <a href="{!! route('student.class.index') !!}" class="btn btn-maroon">{!! trans('messages.back') !!}</a>
+                <a href="{!! route('student.class.index') !!}" class="btn btn-gray">{!! trans('messages.back') !!}</a>
             </div>
         </div>
 
