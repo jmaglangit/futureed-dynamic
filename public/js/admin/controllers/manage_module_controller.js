@@ -838,6 +838,8 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 			$("#curr_country_fields .form-control").removeClass("required-field");
 		}
 
+		//re-initialize curriculum country
+        self.packageCountries();
 		self.record.curriculum_country = self.curr_country_list;
 	}
 
@@ -904,6 +906,20 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 				$(this).val($(this).val().substring(0,maxCount));
 			}
 		});
+	}
+
+	//check if country exists.
+	self.checkCountryList = function(country_id){
+
+		var flag = Constants.TRUE;
+
+		angular.forEach(self.curr_country_list, function(v,k){
+			if(v.country_id == country_id){
+				flag = Constants.FALSE;
+			}
+		});
+
+		return flag;
 	}
 
 }

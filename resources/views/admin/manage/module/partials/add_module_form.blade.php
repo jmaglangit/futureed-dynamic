@@ -325,7 +325,8 @@
 								 ng-model="module.curr_country"
 								 ng-change="getGradeLevel(module.curr_country)">
 							<option value="">{!! trans('messages.select_country') !!}</option>
-							<option ng-repeat="curr in module.curriculum_country" ng-value="curr.country.id">{! curr.country.name !}</option>
+							<option ng-repeat="curr in module.curriculum_country" ng-value="curr.country.id"
+								ng-show="module.checkCountryList(curr.country.id) == futureed.TRUE">{! curr.country.name !}</option>
 						</select>
 					</div>
 				<div class="col-xs-3">
