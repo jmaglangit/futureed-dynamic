@@ -208,10 +208,12 @@
                 <table class="col-xs-12 table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th class="col-xs-1 template_col_size"><div class="checkbox">
-                                <label class="template_checkbox"><input type="checkbox" name="template_checkbox_all" ng-model="template.checkbox_all" >{!! 'All' !!}</label>
+                        <th class="col-xs-1">
+                            <label class="template_checkbox">{!! 'All' !!}</label>
+                            <div class="checkbox dynamic_question_checkbox template_checkbox" style="margin-bottom:-12px;top:-4px">
+                                <input type="checkbox" name="template_checkbox_all" ng-model="template.checkbox_all" >
                             </div></th>
-                        <th>{!! 'Templates' !!}</th>
+                        <th><label class="template_checkbox" style="float:left;margin:0px 0px 0px 6px">{!! 'Templates' !!}</label></th>
                     </tr>
                     </thead>
                     <tbody>

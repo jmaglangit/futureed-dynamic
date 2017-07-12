@@ -71,4 +71,45 @@ class ModuleCountryRepository implements ModuleCountryRepositoryInterface {
 		return $response;
 	}
 
+	/**
+	 * @param $module_id
+	 * @param $data
+	 * @return bool|static
+	 */
+	public function addModuleCountries($module_id,$data){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = ModuleCountry::create([
+				'module_id' => $module_id,
+				'country_id' => $data['country_id'],
+				'grade_id' => $data['grade_id'],
+				'seq_no' => $data['seq_no']
+			]);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $module_id
+	 * @return mixed
+	 */
+	public function deleteModuleCountries($module_id){
+
+		return ModuleCountry::where('module_id',$module_id)->delete();
+	}
+
 }
