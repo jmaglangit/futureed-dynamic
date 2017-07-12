@@ -21,29 +21,31 @@ class ModuleRepository implements ModuleRepositoryInterface
 	public function addModule($data)
 	{
 
+		DB::beginTransaction();
 		try {
 
 			$module = Module::create($data);
 
 			//assigning to module countries/curriculum
 			if(isset($data['curriculum_country'])){
-				foreach($data['curriculum_country'] as $country){
-					ModuleCountry::create([
-						'module_id' => $module->id,
-						'country_id' => $country['country_id'],
-						'grade_id' => $country['grade_id'],
-						'seq_no' => $country['seq_no']
-					]);
-				}
-
-
+				ModuleCountry::create([
+					'module_id' => $module->id,
+					'country_id' => $data['country_id'],
+					'grade_id' => $data['grade_id'],
+					'seq_no' => $data['seq_no']
+				]);
 			}
 
-		} catch (Exception $e) {
+		}catch(Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
 
 		return $module;
 
@@ -265,43 +267,19 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 			//assigning to module countries/curriculum
 
-			//get module countries
-			$module_country = ModuleCountry::whereModuleId($id)->get();
-
-			if(isset($data['curriculum_country']) && count($data['curriculum_country']) > count($module_country->toArray())){
-				//additional country
+			if(isset($data['curriculum_country'])){
+				//delete module country
+				ModuleCountry::where('module_id',$id)->delete();
 				foreach($data['curriculum_country'] as $country){
-					if(isset($country['id'])){
-						ModuleCountry::find($country['id'])->update([
-							'module_id' => $country['module_id'],
-							'country_id' => $country['country_id'],
-							'grade_id' => $country['grade_id'],
-							'seq_no' => $country['seq_no']
-						]);
-					} else {
-						ModuleCountry::create([
-							'module_id' => $id,
-							'country_id' => $country['country_id'],
-							'grade_id' => $country['grade_id'],
-							'seq_no' => $country['seq_no']
-						]);
-					}
-				}
-			} elseif(isset($data['curriculum_country']) && count($data['curriculum_country']) < count($module_country->toArray())){
-				//deleted country
-				foreach($module_country->toArray() as $country){
-					$has_country = 0;
-					foreach($data['curriculum_country'] as $curr){
-						if($country['country_id'] == $curr['country_id']){
-							$has_country++;
-						}
-					}
-
-					if($has_country == 0){
-						ModuleCountry::find($country['id'])->delete();
-					}
+					ModuleCountry::create([
+						'module_id' => $id,
+						'country_id' => $country['country_id'],
+						'grade_id' => $country['grade_id'],
+						'seq_no' => $country['seq_no']
+					]);
 				}
 			}
+
 
 		}catch (\Exception $e){
 
