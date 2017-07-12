@@ -100,7 +100,7 @@ class AdminModuleController extends ApiController {
 			$update = NULL;
 
 			$from = config('futureed.icon_image_path');
-			$to = config('futureed.icon_image_path_final').'/'.$return['id'];
+			$to = config('futureed.icon_image_path_final').'/';
 
 			//check if directory don't exist, it will create new directory
 			if (!$this->file->exists(config('futureed.icon_image_path_final'))){
@@ -115,8 +115,8 @@ class AdminModuleController extends ApiController {
 			$update['icon_image'] = config('futureed.icon').'_'.$return['id'].'.'.$image_type[1];
 
 			//move image to question directory
-			$this->file->move($from.'/'.$image[0],$to);
-			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['icon_image']);
+			$this->file->move($from.'/'.$image[0],$to.'/'.$return['id']);
+			$this->file->move($to.'/'.$return['id'].'/'.$image[1],$to.'/'.$update['icon_image']);
 
 			//add questions_image and original_image_name
 			$this->module->updateModule($return['id'],$update);
@@ -174,7 +174,7 @@ class AdminModuleController extends ApiController {
 			$update = NULL;
 
 			$from = config('futureed.icon_image_path');
-			$to = config('futureed.icon_image_path_final').'/'.$id;
+			$to = config('futureed.icon_image_path_final').'/';
 
 			//check if directory don't exist, it will create new directory
 			if (!$this->file->exists(config('futureed.icon_image_path_final'))){
@@ -189,9 +189,8 @@ class AdminModuleController extends ApiController {
 			$update['icon_image'] = config('futureed.icon').'_'.$id.'.'.$image_type[1];
 
 			//move image to question directory
-			$this->file->deleteDirectory($to);
-			$this->file->move($from.'/'.$image[0],$to);
-			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['icon_image']);
+			$this->file->move($from.'/'.$image[0],$to.'/'.$return['id']);
+			$this->file->move($to.'/'.$return['id'].'/'.$image[1],$to.'/'.$update['icon_image']);
 
 			//add questions_image and original_image_name
 			$this->module->updateModule($id,$update);
