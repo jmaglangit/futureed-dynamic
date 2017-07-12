@@ -28,12 +28,15 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 			//assigning to module countries/curriculum
 			if(isset($data['curriculum_country'])){
-				ModuleCountry::create([
-					'module_id' => $module->id,
-					'country_id' => $data['country_id'],
-					'grade_id' => $data['grade_id'],
-					'seq_no' => $data['seq_no']
-				]);
+				//delete module country
+				foreach($data['curriculum_country'] as $country){
+					ModuleCountry::create([
+						'module_id' => $module->id,
+						'country_id' => $country['country_id'],
+						'grade_id' => $country['grade_id'],
+						'seq_no' => $country['seq_no']
+					]);
+				}
 			}
 
 		}catch(Exception $e){
