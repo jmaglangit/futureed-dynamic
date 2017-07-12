@@ -189,6 +189,7 @@ class AdminModuleController extends ApiController {
 			$update['icon_image'] = config('futureed.icon').'_'.$id.'.'.$image_type[1];
 
 			//move image to question directory
+			$this->file->deleteDirectory($to.'/'.$return['id']);
 			$this->file->move($from.'/'.$image[0],$to.'/'.$return['id']);
 			$this->file->move($to.'/'.$return['id'].'/'.$image[1],$to.'/'.$update['icon_image']);
 
