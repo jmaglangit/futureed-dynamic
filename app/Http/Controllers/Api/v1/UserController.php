@@ -127,9 +127,10 @@ class UserController extends ApiController{
         $admin = config('futureed.admin');
 
         if( strtolower($client) == strtolower($input['user_type'])) {
-
-            // //update is activate and is lock for client
-            // $this->user_service->updateInactiveLock($user_check['user_id']);
+            if(!empty($user_detail['password'])){
+                // //update is activate and is lock for client
+                $this->user_service->updateInactiveLock($user_check['user_id']);
+            }
 
             //Remove session_token
             $this->user_service->emptySession($user_check['user_id']);

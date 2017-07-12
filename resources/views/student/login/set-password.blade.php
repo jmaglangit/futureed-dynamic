@@ -37,14 +37,14 @@
 					<div class="btn-container">
 						{!! Form::button(trans('messages.previous')
 							, array(
-								'class' => 'btn btn-gray btn-medium'
+								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'password.undoNewPassword()'
 							) 
 						) !!}
 
 						{!! Form::button(trans('messages.save')
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-green btn-medium'
 								, 'ng-click' => 'password.saveNewPassword()'
 							) 
 						) !!}

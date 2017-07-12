@@ -59,6 +59,9 @@
 
 				<p>{!! trans('messages.client_registration_success_msg') !!}</p>				
 			</div> 
+			<div class="btn-container">
+				<a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">{!! trans('messages.click_to_login') !!}</a>
+			</div>
 		</div> 
 	</div>
 </div>
