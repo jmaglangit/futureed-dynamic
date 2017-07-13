@@ -37,7 +37,7 @@
 					<div class="btn-container">
 						{!! Form::button(trans('messages.previous')
 							, array(
-								'class' => 'btn btn-gray btn-medium'
+								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'password.undoNewPassword()'
 							) 
 						) !!}
