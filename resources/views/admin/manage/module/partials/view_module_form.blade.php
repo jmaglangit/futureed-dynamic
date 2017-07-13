@@ -387,7 +387,10 @@
 								<div class="form-group">
 									<label class="col-xs-3 control-label">{!! 'Curriculum Country' !!} <span class="required">*</span></label>
 								</div>
-								<div class="form-group" ng-init="module.packageCountries();getGrades()">
+								<div class="form-group" ng-if="module.curr_country_fields">
+									<span style="margin-left:40px;" class="control-label alert alert-error">{! module.curr_country_fields !}</span>
+								</div>
+								<div id="curr_country_fields" class="form-group" ng-init="module.packageCountries();getGrades()">
 									<div class="col-xs-3"  ng-if="module.active_edit">
 										{{--drop down and seq no text--}}
 										<select  name="curr_country" class="form-control" name="curr_country"
