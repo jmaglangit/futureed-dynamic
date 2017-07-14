@@ -111,6 +111,12 @@ class UserController extends ApiController{
         //get user detail
         $user_detail = $this->user_service->getUserDetail($user_check['user_id'],$input['user_type']);
 
+        //check user if account is already activated
+        if($user_detail['is_account_activated'] == config('futureed.activated')){
+
+            return $this->respondErrorMessage(2109);
+        }
+
         if($input['email_code'] <> $user_detail['confirmation_code']){
 
             return $this->respondErrorMessage(2006);
