@@ -190,8 +190,8 @@ class AdminModuleController extends ApiController {
 
 			//move image to question directory
 			$this->file->deleteDirectory($to.'/'.$return['id']);
-			$this->file->move($from.'/'.$image[0],$to.'/'.$return['id']);
-			$this->file->move($to.'/'.$return['id'].'/'.$image[1],$to.'/'.$update['icon_image']);
+			$this->file->move($from.'/'.$image[0],$to.'/'.$image[0]);
+			$this->file->move($to.'/'.$image[0].'/'.$image[1],$to.'/'.$update['icon_image']);
 
 			//add questions_image and original_image_name
 			$this->module->updateModule($id,$update);
