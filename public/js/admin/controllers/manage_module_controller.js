@@ -128,6 +128,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 	self.list = function() {
 		self.errors = Constants.FALSE;
 		self.records = [];
+		self.curr_country_fields = Constants.FALSE;
 
 		self.table.loading = Constants.TRUE;
 
@@ -240,6 +241,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 
 	self.details = function(id) {
 		self.errors = Constants.FALSE;
+		self.curr_country_fields = Constants.FALSE;
 
 		$scope.ui_block();
 		ManageModuleService.details(id).success(function(response){
@@ -828,8 +830,8 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 			$("#curr_country_fields .form-control").addClass("required-field");
 		}
 
-		if(listed == Constants.FALSE && country_id != '' && country_id != Constants.UNDEFINED && seq_no != Constants.UNDEFINED
-			&& seq_no != '' && grade_id != Constants.UNDEFINED && grade_id != ''){
+		if(listed == Constants.FALSE && country_id != '' && country_id != Constants.UNDEFINE && seq_no != Constants.UNDEFINE
+			&& seq_no != '' && grade_id != Constants.UNDEFINE && grade_id != ''){
 			self.curr_country_list.push({
 				'country_id' : country_id,
 				'seq_no' : seq_no,
@@ -838,6 +840,8 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 			$("#curr_country_fields .form-control").removeClass("required-field");
 		}
 
+		//re-initialize curriculum country
+        self.packageCountries();
 		self.record.curriculum_country = self.curr_country_list;
 	}
 
@@ -904,6 +908,20 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 				$(this).val($(this).val().substring(0,maxCount));
 			}
 		});
+	}
+
+	//check if country exists.
+	self.checkCountryList = function(country_id){
+
+		var flag = Constants.TRUE;
+
+		angular.forEach(self.curr_country_list, function(v,k){
+			if(v.country_id == country_id){
+				flag = Constants.FALSE;
+			}
+		});
+
+		return flag;
 	}
 
 }

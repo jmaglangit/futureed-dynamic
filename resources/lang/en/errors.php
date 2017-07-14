@@ -239,6 +239,7 @@ return [
 
 		2227 => 'dynamic',
 		2228 => 'has difficulty',
+		2229 => 'for translation',
 
 		//  Parent Client Error Messages
 		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',

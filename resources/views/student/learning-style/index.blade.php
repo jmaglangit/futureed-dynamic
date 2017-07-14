@@ -10,7 +10,7 @@
 
             <h3>{!! trans('messages.learning_style_quiz') !!}</h3>
 
-            <div class="learning-style-form" ng-controller="LearningStyleController as learning_style" ng-cloak>
+            <div class="learning-style-form" ng-controller="LearningStyleController as learning_style" ng-init="learning_style.updateBackground();" ng-cloak>
                 <div class="wrapr">
                     <test-directive ng-show="data_loaded">
                         <div class="panel panel-brand panel-test" id="lsp_panel">
@@ -267,7 +267,7 @@
                                              tooltip-trigger="mouseenter"
                                              tooltip-enable="session.incomplete && session.current_state != 'sample questions'">
                                             <button type="button" id="btn_proceed"
-                                                    class="btn btn-brand btn-maroon"
+                                                    class="btn btn-brand btn-green"
                                                     ng-class="{disabled: session.incomplete && session.current_state != 'sample questions'}"
                                                     ng-click="proceed()">
                                                 <span ng-bind="session.next"></span> <i class="fa fa-chevron-right"></i>

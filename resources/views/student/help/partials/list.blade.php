@@ -4,7 +4,7 @@
 			<span><i class="fa fa-question-circle"></i> {!! trans('messages.general_help_req') !!} </span>
 			<div class="col-xs-2 pull-right">
 				<span>
-					<a href="{!! route('student.class.index') !!}" class="btn btn-maroon top-10">{!! trans('messages.back') !!}</a>
+					<a href="{!! route('student.class.index') !!}" class="btn btn-gray top-10">{!! trans('messages.back') !!}</a>
 				</span>
 			</div>
 		</div>
