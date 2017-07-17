@@ -303,7 +303,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			});
 		} else if(email) {
 			self.linked = Constants.TRUE;
-			self.setActive('registration_success');
+			// self.setActive('registration_success');
 
 			self.record.email = email;
 			self.record.email_code = code;
@@ -313,7 +313,15 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			StudentLoginService.confirmCode(self.record.email, self.record.email_code, self.record.user_type).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
+						self.setActive('registration_success');
 						self.errors = $scope.errorHandler(response.errors);
+
+						angular.forEach($scope.errors, function(value, key) {
+							if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
+								self.account_confirmed = Constants.TRUE;
+							}
+						});
+
 					} else if(response.data){
 						$("#redirect_form input[name='id']").val(response.data.id);
 						$("#redirect_form input[name='email']").val(self.record.email);
@@ -321,6 +329,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 						$("#redirect_form").submit();
 
 						self.confirmed = Constants.TRUE;
+						self.setActive('registration_success');
 					}
 				}
 
