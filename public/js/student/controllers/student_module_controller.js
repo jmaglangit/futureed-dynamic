@@ -1678,4 +1678,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.current_question.question_type = self.current_question.question_template.question_type;
 	};
 
+	//Dynamic Question with operation integrations
+	self.generateRandomDigits = function(){
+		//call generate random digits
+		randomDigitsOnclick();
+	}
+
+
 }
