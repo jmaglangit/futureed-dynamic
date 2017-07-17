@@ -11,15 +11,16 @@
 	<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 	<div class="client-container form-style">
+		<div class="title" ng-if="login.account_confirmed || login.confirmed">{!! trans('messages.success') !!}</div>
+
+		<div class="alert alert-danger" ng-if="login.errors">
+			<p ng-repeat="error in login.errors">
+				{! error !}
+			</p>
+		</div>
 
 		<div ng-if="!login.confirmed">
 			<div class="title">{!! trans('messages.confirm_email_address') !!}</div>
-
-			<div class="alert alert-danger" ng-if="login.errors">
-				<p ng-repeat="error in login.errors" > 
-					{! error !}
-				</p>
-			</div>
 
 			<div class="form_content">
 
@@ -47,11 +48,7 @@
 			</div>
 		</div>				
 
-		<div ng-if="login.confirmed">
-			<div class="title">
-				<h3>{!! trans('messages.success') !!}</h3>
-			</div>
-
+		<div ng-if="login.confirmed || login.account_confirmed">
 			<div class="form_content">
 				<div class="roundcon">
 					<i class="fa fa-check fa-5x img-rounded text-center"></i>

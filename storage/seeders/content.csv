@@ -1,5 +1,5 @@
 1,1,1,5,1,Counting,,1,,https://www.youtube.com/embed/y2-uaPiyoxc?origin=https://www.khanacademy.com,seed,1,Enabled
-2,2,1,1,2,Addition below 10,,1,,https://www.youtube.com/embed/fsTD_jqseBA?origin=https://www.khanacademy.com,seed,1,Enabled
+2,2,1,1,2,Addition,,1,,https://www.youtube.com/embed/fsTD_jqseBA?origin=https://www.khanacademy.com,seed,1,Enabled
 3,3,1,23,3,Subtraction,,1,,https://www.youtube.com/embed/AO9bHbUdg-M?origin=https://www.khanacademy.com,seed,1,Enabled
 4,4,1,11,4,Shapes,,1,,https://www.youtube.com/embed/10dTx1Zy_4w?origin=https://www.khanacademy.com,seed,1,Enabled
 5,5,1,20,5,Probability,,1,,https://player.vimeo.com/video/218646112,seed,1,Enabled
@@ -20,12 +20,12 @@
 20,20,1,3,20,Comparing And Ordering,,1,,https://player.vimeo.com/video/219632837,seed,1,Enabled
 21,21,1,17,21,Names Of Numbers,,1,,,seed,2,Enabled
 22,22,1,19,22,Patterns,,1,,https://player.vimeo.com/video/218727550,seed,1,Enabled
-23,23,1,1,23,"Addition, One Digit",,1,,https://www.youtube.com/embed/-3DFzxbP9Fk?origin=https://www.khanacademy.com,seed,1,Enabled
-24,24,1,23,24,"Subtraction, One Digit",,1,,https://www.youtube.com/embed/qSkpZswoZTc?origin=https://www.khanacademy.com,seed,1,Enabled
-25,25,1,1,25,"Addition, Two Digit",,1,,https://www.youtube.com/embed/K5rmfHlHy20,seed,1,Enabled
-26,26,1,23,26,"Subtraction, Two Digit",,1,,https://www.youtube.com/embed/egjDLFX9VHg,seed,1,Enabled
-27,27,1,1,27,"Addition, Three Digit",,1,,https://www.youtube.com/embed/Wm0zq-NqEFs,seed,1,Enabled
-28,28,1,23,28,"Subtraction, Three Digit",,1,,https://www.youtube.com/embed/3lHBgFvr3yE,seed,1,Enabled
+23,23,1,1,23,Addition,,1,,https://www.youtube.com/embed/-3DFzxbP9Fk?origin=https://www.khanacademy.com,seed,1,Enabled
+24,24,1,23,24,Subtraction,,1,,https://www.youtube.com/embed/qSkpZswoZTc?origin=https://www.khanacademy.com,seed,1,Enabled
+25,25,1,1,25,Addition,,1,,https://www.youtube.com/embed/K5rmfHlHy20,seed,1,Enabled
+26,26,1,23,26,Subtraction,,1,,https://www.youtube.com/embed/egjDLFX9VHg,seed,1,Enabled
+27,27,1,1,27,Addition,,1,,https://www.youtube.com/embed/Wm0zq-NqEFs,seed,1,Enabled
+28,28,1,23,28,Subtraction,,1,,https://www.youtube.com/embed/3lHBgFvr3yE,seed,1,Enabled
 29,29,1,5,29,Properties,,1,,,seed,2,Enabled
 30,30,1,18,30,Mixed Operations,,1,,https://www.youtube.com/embed/ClYdw4d4OmA,seed,1,Enabled
 31,31,1,25,31,Place Values,,1,,https://player.vimeo.com/video/219647790,seed,1,Enabled
@@ -411,7 +411,7 @@
 411,1,1,5,1,Counting,,1,,https://www.youtube.com/embed/D0Ajq682yrA,seed,1,Enabled
 412,1,1,5,1,Counting,,1,,https://www.youtube.com/embed/estMnWVEjrk,seed,1,Enabled
 413,1,1,5,1,Counting,,1,,https://www.youtube.com/embed/SAxmBJ5ufL8,seed,1,Enabled
-414,2,1,1,2,Addition below 10,,1,,https://www.youtube.com/embed/N0_TWQTrJ-k,seed,1,Enabled
+414,2,1,1,2,Addition,,1,,https://www.youtube.com/embed/N0_TWQTrJ-k,seed,1,Enabled
 415,3,1,23,3,Subtraction,,1,,https://www.youtube.com/embed/depLStKzbIE,seed,1,Enabled
 416,4,1,11,4002,Shapes,,1,,https://www.youtube.com/embed/E6qWBhEiP6g,0,1,Enabled
 417,6,1,8,6002,Estimation,,1,,https://www.youtube.com/embed/1F3AycEDksY,0,1,Enabled
@@ -421,16 +421,16 @@
 421,6,1,8,6006,Estimation,,1,,https://www.youtube.com/embed/w2M5CzTFYfI,0,1,Enabled
 422,11,1,3,11,Comparing,,1,,https://www.youtube.com/embed/9Jg5S7F2SMQ,0,1,Enabled
 423,15,1,25,15,Place Values,,1,,https://www.youtube.com/embed/-Zlq5tNl94M,0,1,Enabled
-424,,,,,,,,,,0,2,Enabled
-425,25,1,1,25,"Addition, Two Digit",,1,,https://www.youtube.com/embed/b22tMEc6Kko,0,1,Enabled
-426,25,1,1,25,"Addition, Two Digit",,1,,https://www.youtube.com/embed/UjfmOmPARyk,0,1,Enabled
-427,,,,,,,,,,0,2,Enabled
-428,27,1,1,27,Addition Three Digit,,1,,https://www.youtube.com/embed/jAfJcgPGqgI,0,1,Enabled
-429,27,1,1,27,Addition Three Digit,,1,,https://www.youtube.com/embed/Nq88IHw4Y9E,0,1,Enabled
-430,28,1,23,28,Subtraction Three Digit,,1,,https://www.youtube.com/embed/LSaaKau63Gg,0,1,Enabled
-431,,,,,,,,,,0,2,Enabled
+424,726,1,1,2,Addition,,1,,https://www.youtube.com/embed/fsTD_jqseBA?origin=https://www.khanacademy.com,0,1,Enabled
+425,25,1,1,25,Addition,,1,,https://www.youtube.com/embed/b22tMEc6Kko,0,1,Enabled
+426,25,1,1,25,Addition,,1,,https://www.youtube.com/embed/UjfmOmPARyk,0,1,Enabled
+427,743,1,1,25,Addition,,1,,https://www.youtube.com/embed/b22tMEc6Kko,0,1,Enabled
+428,27,1,1,27,Addition,,1,,https://www.youtube.com/embed/jAfJcgPGqgI,0,1,Enabled
+429,27,1,1,27,Addition,,1,,https://www.youtube.com/embed/Nq88IHw4Y9E,0,1,Enabled
+430,28,1,23,28,Subtraction,,1,,https://www.youtube.com/embed/LSaaKau63Gg,0,1,Enabled
+431,743,1,1,25,Addition,,1,,https://www.youtube.com/embed/UjfmOmPARyk,0,1,Enabled
 432,38,1,10,38,Fractions,,1,,https://cdn.kastatic.org/KA-youtube-converted/gEE6yIObbmg.mp4/gEE6yIObbmg.mp4,0,1,Enabled
-433,,,,,,,,,,0,2,Enabled
+433,743,1,1,25,Addition,,1,,https://www.youtube.com/embed/8mcTsyV56jI,0,1,Enabled
 434,40,1,16,40,Multiplication,,1,,https://cdn.kastatic.org/KA-youtube-converted/cDpBtkU2cf8.mp4/cDpBtkU2cf8.mp4,0,1,Enabled
 435,41,1,7,41,Division,,1,,https://cdn.kastatic.org/KA-youtube-converted/MTzTqvzWzm8.mp4/MTzTqvzWzm8.mp4,0,1,Enabled
 436,46,1,16,46,Multiplication,,1,,https://cdn.kastatic.org/KA-youtube-converted/Yw3EoxC_GXU.mp4/Yw3EoxC_GXU.mp4,0,1,Enabled
@@ -553,17 +553,17 @@
 553,510,1,16,519,Factors,,1,,,seed,2,Enabled
 554,511,1,18,520,Parenthesis and numbers,,1,,https://www.youtube.com/embed/ClYdw4d4OmA,seed,1,Enabled
 555,512,1,2,521,Two step operations,,1,,,seed,2,Enabled
-556,513,1,23,522,Subtraction below 100,,1,,,seed,2,Enabled
-557,514,1,1,523,Addition below 20,,1,,,seed,2,Enabled
-558,515,1,1,524,Addition below 50,,1,,,seed,2,Enabled
+556,513,1,23,522,Subtraction,,1,,,seed,2,Enabled
+557,514,1,1,523,Addition,,1,,,seed,2,Enabled
+558,515,1,1,524,Addition,,1,,,seed,2,Enabled
 559,516,1,1,525,Associative properties of addition,,1,,,seed,2,Enabled
 560,517,1,3,526,Dealing with the equal sign,,1,,https://www.youtube.com/embed/gEGKvx1wlFg,seed,1,Enabled
-561,518,1,23,527,Subtraction below 20,,1,,,seed,2,Enabled
-562,519,1,23,528,Subtraction below 50,,1,,,seed,2,Enabled
+561,518,1,23,527,Subtraction,,1,,,seed,2,Enabled
+562,519,1,23,528,Subtraction,,1,,,seed,2,Enabled
 563,520,1,3,529,Math Family Facts,,1,,,seed,2,Enabled
 564,521,1,3,530,"Signs, percents, fractions, decimals",,1,,,seed,2,Enabled
 565,522,1,5,531,Identifying Numbers,,1,,,seed,2,Enabled
-566,523,1,1,532,Addition to 100,,1,,,seed,2,Enabled
+566,523,1,1,532,Addition,,1,,,seed,2,Enabled
 567,524,1,5,533,Comparing double digit numbers,,1,,,seed,2,Enabled
 568,525,1,10,534,Fractions in pictures,,1,,,seed,2,Enabled
 569,526,1,6,535,Introduction to decimals,,1,,,seed,2,Enabled
@@ -768,7 +768,7 @@
 768,725,1,5,,Counting (D),,1,,https://www.youtube.com/embed/D0Ajq682yrA,seed,1,Enabled
 769,725,1,5,,Counting (D),,1,,https://www.youtube.com/embed/estMnWVEjrk,seed,1,Enabled
 770,725,1,5,,Counting (D),,1,,https://www.youtube.com/embed/SAxmBJ5ufL8,seed,1,Enabled
-771,726,1,1,,Addition below 10 (D),,1,,https://www.youtube.com/embed/N0_TWQTrJ-k,seed,1,Enabled
+771,726,1,1,2,Addition,,1,,https://www.youtube.com/embed/N0_TWQTrJ-k,seed,1,Enabled
 772,727,1,23,,Subtraction (D),,1,,https://www.youtube.com/embed/depLStKzbIE,seed,1,Enabled
 773,728,1,20,,Probability (D),,1,,,seed,2,Enabled
 774,729,1,8,,Estimation (D),,1,,https://www.youtube.com/embed/1F3AycEDksY,seed,1,Enabled
@@ -787,12 +787,12 @@
 787,738,1,5,,Counting (D),,1,,,seed,2,Enabled
 788,739,1,3,,Comparing And Ordering (D),,1,,,seed,2,Enabled
 789,740,1,17,,Names Of Numbers (D),,1,,,seed,2,Enabled
-790,741,1,1,,"Addition, One Digit (D)",,1,,,seed,2,Enabled
-791,742,1,23,,Subtraction One Digit (D),,1,,,seed,2,Enabled
-792,743,1,1,,Addition Two Digit (D),,1,,,seed,2,Enabled
-793,744,1,23,,Subtraction Two Digit (D),,1,,,seed,2,Enabled
-794,745,1,1,,Addition Three Digit (D),,1,,,seed,2,Enabled
-795,746,1,23,,Subtraction - Three Digit (D),,1,,,seed,2,Enabled
+790,741,1,1,23,Addition,,1,,https://www.youtube.com/embed/-3DFzxbP9Fk?origin=https://www.khanacademy.com,seed,1,Enabled
+791,742,1,23,24,Subtraction,,1,,https://www.youtube.com/embed/qSkpZswoZTc?origin=https://www.khanacademy.com,seed,1,Enabled
+792,743,1,1,25,Addition,,1,,https://www.youtube.com/embed/K5rmfHlHy20,seed,1,Enabled
+793,744,1,23,26,Subtraction,,1,,https://www.youtube.com/embed/egjDLFX9VHg,seed,1,Enabled
+794,745,1,1,27,Addition,,1,,https://www.youtube.com/embed/Wm0zq-NqEFs,seed,1,Enabled
+795,746,1,23,28,Subtraction,,1,,https://www.youtube.com/embed/3lHBgFvr3yE,seed,1,Enabled
 796,747,1,5,,Properties (D),,1,,,seed,2,Enabled
 797,748,1,18,,Mixed Operations (D),,1,,,seed,2,Enabled
 798,749,1,25,,Place Values (D),,1,,,seed,2,Enabled
@@ -896,9 +896,9 @@
 896,847,1,21,,"Ratios, Portions And Percents (D)",,1,,,seed,2,Enabled
 897,848,1,20,,Probability And Statistics (D),,1,,,seed,2,Enabled
 898,15,1,25,15,Place Values,,1,,https://www.youtube.com/embed/jxA8MffVmPs,seed,1,Enabled
-899,25,1,1,25,"Addition, Two Digit",,1,,https://www.youtube.com/embed/8mcTsyV56jI,seed,1,Enabled
-900,,,,,,,,,,seed,2,Enabled
-901,26,1,23,26,"Subtraction, Two Digit",,1,,https://www.youtube.com/embed/slIX9EDcHgE,seed,1,Enabled
+899,25,1,1,25,Addition,,1,,https://www.youtube.com/embed/8mcTsyV56jI,seed,1,Enabled
+900,744,1,23,26,Subtraction,,1,,https://www.youtube.com/embed/slIX9EDcHgE,seed,1,Enabled
+901,26,1,23,26,Subtraction,,1,,https://www.youtube.com/embed/slIX9EDcHgE,seed,1,Enabled
 902,140,2,26,140,Nouns,,1,,https://www.youtube.com/embed/UejW-WQpujs,seed,1,Enabled
 903,143,3,27,143,Personal Pronouns,,1,,https://player.vimeo.com/video/215930422,seed,1,Enabled
 904,145,2,27,145,Indefinite Pronouns,,1,,https://player.vimeo.com/video/217113864,seed,1,Enabled
@@ -1087,3 +1087,6 @@
 1087,401,2,9,401,Exponents,,1,,https://www.youtube.com/embed/XZRQhkii0h0,seed,1,Enabled
 1088,509,1,9,518,Basic Exponents,,1,,https://www.youtube.com/embed/XZRQhkii0h0,seed,1,Enabled
 1089,637,2,27,TBD,Indefinite Pronouns,,1,,https://www.youtube.com/embed/HaJUGgIFaXw,seed,1,Enabled
+1090,745,1,1,27,Addition,,1,,https://www.youtube.com/embed/jAfJcgPGqgI,0,1,Enabled
+1091,745,1,1,27,Addition,,1,,https://www.youtube.com/embed/Nq88IHw4Y9E,0,1,Enabled
+1092,746,1,23,28,Subtraction,,1,,https://www.youtube.com/embed/LSaaKau63Gg,0,1,Enabled
