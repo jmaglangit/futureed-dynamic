@@ -159,5 +159,22 @@ function StudentModuleService($http){
 		});
 	}
 
+    // api/v1/module/question-template/{module_id}
+    service.getModuleTemplates = function(module_id){
+        return $http({
+            method	: Constants.METHOD_GET
+            , url	: serviceUrl + 'module/question-template/' + module_id
+        });
+    }
+
+    // api/v1/grade/question-condition/{grade_id}
+    service.getQuestionGradeCondition = function(grade_id){
+    	return $http({
+			method 	:	Constants.METHOD_GET,
+			url		:	serviceUrl + 'grade/question-condition/' + grade_id
+		});
+	}
+
+
 	return service;
 }

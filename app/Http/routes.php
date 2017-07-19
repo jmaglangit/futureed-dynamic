@@ -69,6 +69,7 @@ Routes::group([
 	include('Routes/Api/QuestionAnswerTranslation.php');
 	include('Routes/Api/QuestionCache.php');
 	include('Routes/Api/QuestionCacheLog.php');
+	include('Routes/Api/QuestionGradeCondition.php');
 	include('Routes/Api/QuestionTemplate.php');
 	include('Routes/Api/QuestionTranslation.php');
 	include('Routes/Api/Quote.php');

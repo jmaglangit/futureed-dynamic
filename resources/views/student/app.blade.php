@@ -34,6 +34,7 @@
     {!! Html::style('/css/futureed.css') !!}
     {!! Html::style('/css/futureed-student.css') !!}
     {!! Html::style('/css/chart/student-progress.css') !!}
+{{--    {!! Html::style('/css/operations/w3.css') !!}--}}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
