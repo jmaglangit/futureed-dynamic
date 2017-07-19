@@ -18,6 +18,7 @@ var carr_over_var = [];
 var carr_over_var2 = [];
 
 var retry_attempt = 0;
+var answered = []; //ADDED
 
 function digits(digits){
     a = 1;
@@ -27,16 +28,82 @@ function digits(digits){
     return a;
 }
 
+// start ADDED functions
+//getter and setter
+function setRandomDigits(digit){
+    randomDigits = digit;
+}
+
+function getRandomNumber1(){
+    return randomNumber1;
+}
+
+function getRandomNumber2(){
+    return randomNumber2
+}
+
+function getAnswered(){
+    return answered;
+}
+
+function setAnswered(answer){
+    answered.push(answer);
+}
+
+function enabledNextQuestion(){
+    $("#dynamic_question_btn").show();
+}
+
+function disabledNextQuestion(){
+    $("#dynamic_question_btn").hide();
+}
+
+function answerDone(){
+    $("#questionPane").hide();
+    $("#answerPane").hide();
+    $("#tipsFlow").show();
+    $("#ansFlow").show();
+    $("#ansCorrectFlow").show();
+    enabledNextQuestion();
+}
+
+function answerReset(){
+    $("#questionPane").show();
+    $("#answerPane").show();
+    $("#tipsFlow").hide();
+    $("#ansFlow").hide();
+    $("#ansCorrectFlow").hide();
+    answered = [];
+    disabledNextQuestion();
+}
+
+function alertModal(message){
+    $("#message_text_modal").html(message);
+    $("#message_modal").show();
+    $("#close_modal").show();
+    $("#yes_modal").hide();
+    $("#no_modal").hide();
+}
+
+function carryOneModal(message){
+    $("#message_text_modal").html(message);
+    $("#message_modal").show();
+    $("#close_modal").hide();
+    $("#yes_modal").show();
+    $("#no_modal").show();
+}
+
+// end ADDED functions
 
 function randomDigitsOnclick(){
     carry_over = false;
-    randomDigits = $("#randomDigits").prop("value");
+    // randomDigits = $("#randomDigits").prop("value"); //REMOVED
     randomDigits = parseInt(randomDigits);
     if(isNaN(randomDigits)) randomDigits = 1;
     if(randomDigits > 7) randomDigits = 7;
     $("#randomDigits").prop("value", randomDigits);
     max_t = digits(randomDigits);
-    console.log(max_t);
+    // console.log(max_t); //REMOVED
 
     randomNumber1 = Math.floor(Math.random() * max_t);
     randomNumber2 = Math.floor(Math.random() * max_t);
@@ -66,6 +133,7 @@ function checkAnswer(elem) {
     answer_val = parseInt(elem.prop("value"));
     if(isNaN(answer_val)) return false;
     elem.prop("value", answer_val);
+    setAnswered(answer_val);
     return true;
 }
 
@@ -84,7 +152,8 @@ function checkAnswerValidation(elem) {
         return correct_answer;
     }
     if(retry_attempt > 1){
-        alert("Correct Answer is " + correct_answer + ". Retry! ");
+        // alert("Correct Answer is " + correct_answer + ". Retry! ");
+        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
         retry_attempt = 0;
         return -3;
     }
@@ -241,6 +310,8 @@ function generateAnswerStep() {
     retry_attempt = 0;
     if(step_count >= max_digit) {
         checkTotal();
+        // ADDED call function view hide
+        answerDone();
         return;
     }
     carr_over_var[step_count] = false;
@@ -250,27 +321,31 @@ function generateAnswerStep() {
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
-                $(this).prop("value", "").focus();
+                // alert("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet !");
+                // $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(checkAnswer2($(this)) == false){
-                alert("Answer can't be negative or more than 18 !");
-                $(this).prop("value", "").focus();
+                // alert("Answer can't be negative or more than 18 !");
+                // $(this).prop("value", "").focus();
+                alertModal("Answer can't be negative or more than 18 !");
                 retry_attempt++;
                 return false;
             }
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
-                $(this).prop("value", "").focus();
+                // alert("Your answer is larger than what we need.");
+                // $(this).prop("value", "").focus();
+                alertModal("Your answer is larger than what we need.");
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
-                $(this).prop("value", "").focus();
+                // alert("opps not enough, your answer needs to be larger.");
+                // $(this).prop("value", "").focus();
+                alertModal("opps not enough, your answer needs to be larger.");
                 retry_attempt++;
                 return false;
             }
@@ -282,7 +357,10 @@ function generateAnswerStep() {
             else {
                 carry_elem = $(this);
                 carry_elem.blur();
-                $("#myModal").show();
+
+                // $("#message_modal").show();
+                carryOneModal("Do you carry one?");
+
             }
         }
     }).focus();
@@ -295,49 +373,49 @@ function startAnswer() {
 
 
 function startOnclick(){
-    console.log(randomNumber1);
-    console.log(randomNumber2);
+    // console.log(randomNumber1);
+    // console.log(randomNumber2);
 
     var large_num = randomNumber1 > randomNumber2 ? randomNumber1 : randomNumber2;
     max_digit = getDigitsCouunt(large_num);
-    console.log("max_digit = "+ max_digit);
+    // console.log("max_digit = "+ max_digit);
 
     for (var i = 0; i < max_digit; i++) {
 
         first_ones = randomNumber1 % 10;
 
-        console.log("randomNumber1 = "+ randomNumber1);
-        console.log("randomNumber2 = "+ randomNumber2);
-        console.log("first_ones = "+ first_ones);
+        // console.log("randomNumber1 = "+ randomNumber1);
+        // console.log("randomNumber2 = "+ randomNumber2);
+        // console.log("first_ones = "+ first_ones);
 
         sec_ones = randomNumber2 % 10;
 
-        console.log("sec_ones = "+ sec_ones);
+        // console.log("sec_ones = "+ sec_ones);
 
         randomNumber1 = parseInt((randomNumber1 - randomNumber1 % 10) / 10);
         randomNumber2 = parseInt((randomNumber2 - randomNumber2 % 10) / 10);
     }
 
-    document.getElementById('myModal').style.display = "block";
+    document.getElementById('message_modal').style.display = "block";
 }
 
 function btnYEsOnclick(){
     carr_over_var[step_count - 1] = true;
     carr_over_var2[step_count - 1] = true;
     carry_over = true;
-    $("#myModal").hide();
+    $("#message_modal").hide();
     gotoNextLevel();
 }
 
 function btnNOOnclick(){
     carr_over_var2[step_count - 1] = true;
     carry_over = false;
-    $("#myModal").hide();
+    $("#message_modal").hide();
     gotoNextLevel();
 }
 
 function btnNOOnclose() {
-    $("#myModal").hide();
+    $("#message_modal").hide();
 }
 
 

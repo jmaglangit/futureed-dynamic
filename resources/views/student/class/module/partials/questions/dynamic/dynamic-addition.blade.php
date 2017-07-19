@@ -1,3 +1,70 @@
-<div style="float: left; width: 20%;" id="answerPane">
-    <div id="lastDiv"></div>
+<div ng-show="mod.record.is_dynamic == futureed.TRUE && mod.current_question.question_template.operation == futureed.ADDITION">
+    <div style="visibility:hidden">
+        <input type="text" name="randomDigits" id="randomDigits" required autofocus value="4">
+        <input type="text" name="randomNumber1" id="randomNumber1" readonly><br><br>
+        <input type="text" name="randomNumber2" id="randomNumber2" readonly><br><br>
+        <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
+    </div>
+
+    <div id="examPane" style="display: none;">
+        <!-- questions area -->
+        <div id="questionPane">
+            {{--<p class="col-xs-6 h3">Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>--}}
+            <p class="col-xs-6 h3" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+            {{--<button onclick="startAnswer();">Start Answer</button>--}}
+        </div>
+        <!-- answer area -->
+        <div id="answerPane" class="col-xs-6 pull-right h4">
+            <div id="lastDiv" class="h4"></div>
+        </div>
+        <div id="tipsFlow" style="display: none;">
+            <div class="tip-icon"><img src="/images/icon-tipbulb.png"></div>
+            <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
+                <div class="pull-right">
+                    <b>Answered Flow</b>
+                    <div id="lastDiv2"></div><br>
+                </div>
+            </div>
+            <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
+                <div class="pull-left">
+                    <b>Correct Answer Flow</b>
+                    <div id="lastDiv3"></div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    {{--modal--}}
+    <div id="message_modal" class="modal">
+
+        <div class="modal-content modal-dialog modal-lg">
+            <div class="modal-header">
+                {{--<span class="close" onclick="btnNOOnclose()">&times;</span>--}}
+                <h2>Question</h2>
+            </div>
+            <div class="modal-body">
+                <div id="message_text_modal" class="h4"></div>
+
+                <br><br>
+                <div id="num1_1div"></div>
+                <div id="num2_1div"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose()" style="display: none;">Close</button>
+                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick()">
+                    {!! trans('messages.yes') !!}
+                </button>
+
+
+                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick()">
+                    {!! trans('messages.no') !!}
+                </button>
+            </div>
+        </div>
+
+    </div>
+    {!! Html::script('/js/common/operations/addition.js')!!}
+{{--    {!! Html::script('/js/common/operations/jquery.js')!!}--}}
+
 </div>

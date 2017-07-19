@@ -30,7 +30,7 @@ class StudentModuleAnswerRequest extends ApiRequest
             'module_id' => 'required|integer',
             'seq_no' => 'integer',
             'question_id' => 'required|integer',
-            'answer_text' => 'string',
+//            'answer_text' => 'string',
             'student_id' => 'required|integer',
 			'date_start' => 'required|date',
 			'date_end' => 'required|date'

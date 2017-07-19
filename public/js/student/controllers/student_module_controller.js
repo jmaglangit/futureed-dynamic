@@ -227,24 +227,51 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 		self.search.module_id = self.record.id;
 
-		$scope.ui_block();
-		StudentModuleService.listQuestions(self.search, self.table).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.questions = response.data.records;
-					if(successCallback) {
-						successCallback(response);
+
+		if(self.record.is_dynamic){
+			//call module question template
+			StudentModuleService.getModuleTemplates(self.record.id).success(function(response){
+                if(angular.equals(response.status, Constants.STATUS_OK)) {
+                    if(response.errors) {
+                        self.errors = $scope.errorHandler(response.errors);
+                    } else if(response.data) {
+
+                        //randomize list of question templates.
+                        self.questions = self.shuffleTemplates(response.data.records);
+
+						//get grade condition
+						self.getQuestionGradeCondition(self.record.grade.country_grade.age_group_id);
+
+                        if(successCallback) {
+                            successCallback(response);
+                        }
+                    }
+                }
+			}).error(function(response) {
+                self.errors = $scope.internalError();
+                $scope.ui_unblock();
+            });
+		} else {
+
+			$scope.ui_block();
+			StudentModuleService.listQuestions(self.search, self.table).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.questions = response.data.records;
+						if(successCallback) {
+							successCallback(response);
+						}
 					}
 				}
-			}
 
-			//$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
+				//$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+        }
 	}
 
 	self.exitModule = function(redirect_to) {
@@ -1096,8 +1123,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.nextQuestion = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-		self.current_question = {};
-		angular.forEach(self.questions, function(value, key) {
+		// self.current_question = {};
+		var loop = 1;
+
+		angular.forEach(self.questions, function(value, key,array) {
 			if(angular.equals(parseInt(value.id), parseInt(self.result.next_question))) {
 				self.current_question = value;
 				self.current_question.answer_text = Constants.EMPTY_STR;
@@ -1124,6 +1153,16 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				self.result = {};
 				return;
+			} else if(self.record.is_dynamic == Constants.TRUE && loop){
+
+				if(self.current_question.id == value.id && key != array.length -1){
+					self.current_question = array[key+1];
+					loop = 0;
+				} else if(key === array.length - 1){
+                    	self.current_question = array[0];
+                    	loop = 0;
+				}
+
 			}
 		});
 	}
@@ -1656,7 +1695,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 		self.question_values = JSON.parse(question_values);
 
-		// return v;
 	}
 
 	self.stepsRepeat = function(iterations){
@@ -1679,9 +1717,201 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	};
 
 	//Dynamic Question with operation integrations
-	self.generateRandomDigits = function(){
-		//call generate random digits
-		randomDigitsOnclick();
+
+	self.shuffleTemplates = function(template_collection){
+
+		return template_collection.sort(function(a, b){return 0.5 - Math.random()});
+	}
+
+	self.dynamicQuestionSetup = function(question){
+
+
+		var question_text = question.question_template.question_template_format;
+
+        //TODO: 1. replace variable to operation logic requirements.
+		//TODO 	2. output string.
+
+		//get grade condition
+
+		//check type of operation
+		switch(question.question_template.operation){
+			case Constants.ADDITION:
+
+				//get grade condition
+				//add number of digits
+                //set strings
+
+            // <p>Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>
+            //  self.current_question.question_text =
+                self.date_start = new Date();
+
+
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+                question_text = question_text.replace("{addends1}",getRandomNumber1());
+                question_text = question_text.replace("{addends2}",getRandomNumber2());
+                self.current_question.questions_text = question_text;
+                startAnswer();
+
+				break;
+			case Constants.SUBTRACTION:
+				break;
+			case Constants.MULTIPLICATION:
+				break;
+			case Constants.DIVISION:
+				break;
+			default:
+				break;
+		}
+	}
+
+	self.getQuestionGradeCondition = function(grade_id){
+		//grade_id is the level
+
+		StudentModuleService.getQuestionGradeCondition(grade_id).success(function(response) {
+
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else {
+                    self.question_grade_condition = response.data;
+                }
+            }
+
+            $scope.ui_unblock();
+        }).error(function(response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+	}
+
+	self.dynamicNextQuestion = function(){
+
+        //record question and answered
+		var data = {
+			'question_text'	: 	self.current_question.questions_text,
+			'answer_text'	: 	JSON.stringify(getAnswered()),
+			'class_id'		:	self.record.student_module.class_id,
+			'module_id'		:	self.record.module_id,
+			'question_id'	:	self.current_question.id,
+			'student_id'	:	$scope.user.id,
+			'date_start'	:	self.date_start,
+			'date_end'		:	new Date(),
+			'student_module_id'	: self.record.student_module.id,
+			'is_dynamic'	:	1
+		};
+
+		if(data.answer_text.length > Constants.FALSE){
+			StudentModuleService.answerQuestion(data).success(function(response) {
+
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else {
+					   //do nothing
+						self.result = response.data;
+                        self.result.failed = Constants.FALSE;
+                        self.result.answered = Constants.FALSE;
+                        $scope.correct_counter = self.result.correct_counter;
+
+                        if(angular.equals(self.result.module_status, "Completed")) {
+                            // get points
+                            var data = $scope.user;
+                            data.points = parseInt(data.points) + parseInt(self.record.points_earned);
+
+                            apiService.updateUserSession(data).success(function(response) {
+                                $scope.getUserDetails();
+                            });
+
+
+                            var data = {};
+                            data.age_group = 1;
+                            data.module_id = self.record.id;
+                            getPointsEarned(data, function(response) {
+                                // save points
+                                var data = {};
+                                data.student_id = $scope.user.id;
+                                data.points_earned = self.record.points_earned;
+                                data.module_id = self.record.id;
+                                data.student_module_id = self.record.student_module.id;
+                                data.class_id = self.record.student_module.class_id;
+
+                                saveStudentPoints(data, function(response) {
+                                    var avatar_id = $scope.user.avatar_id;
+
+                                    // get wiki
+                                    getWiki(avatar_id, function(response) {
+                                        $scope.ui_unblock();
+
+                                        var avatar_wiki = response.data[0];
+
+                                        self.result = {};
+
+                                        self.errors = Constants.FALSE;
+                                        self.success = Constants.FALSE;
+
+                                        self.module_message = {};
+                                        self.module_message.points_earned = (self.record.no_difficulty)
+                                            ? $scope.correct_counter : self.record.points_earned;
+                                        self.module_message.show = Constants.TRUE;
+                                        self.module_message.title = avatar_wiki.title;
+                                        self.module_message.name = self.record.name;
+
+                                        self.module_message.description_summary = avatar_wiki.description_summary;
+                                        self.module_message.description_full = avatar_wiki.description_full;
+                                        self.module_message.message = self.module_message.description_summary;
+
+                                        self.module_message.image = avatar_wiki.image; // ok
+                                        self.module_message.source = avatar_wiki.source;
+                                        self.module_message.module_done = Constants.TRUE; // ok
+
+                                        $("#message_modal").modal({
+                                            backdrop: 'static',
+                                            keyboard: Constants.FALSE,
+                                            show    : Constants.TRUE
+                                        });
+                                    });
+                                });
+                            });
+                        }
+                        else if(angular.equals(self.result.module_status, "Failed")) {
+                            self.result.failed = Constants.TRUE;
+                            $scope.ui_unblock();
+                        }
+                        else {
+                            $scope.ui_unblock();
+
+                            // update student_module
+                            var data = {};
+                            data.module_id = self.result.id;
+                            data.last_answered_question_id = parseInt(self.result.next_question);
+
+                            updateModuleStudent(data);
+                        }
+
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+        }
+
+
+
+        //go to next questions.
+		self.nextQuestion();
+        self.dynamicQuestionSetup(self.current_question);
+        answerReset();
+
+
+
+
+
+
 	}
 
 

@@ -1,7 +1,7 @@
 <?php
 Routes::group([
 	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin'],
+	'permission' => ['admin','client','student'],
 	'role' => ['admin','super admin']
 ], function(){
 

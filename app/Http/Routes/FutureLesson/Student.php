@@ -233,6 +233,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@steps'
 					]);
 
+					Routes::get('/questions/dynamic/addition',[
+						'as' => 'student.class.module.partials.questions.dynamic.addition'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@addition'
+					]);
+
+					Routes::get('/questions/dynamic/addition/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.addition.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@additionAns'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'

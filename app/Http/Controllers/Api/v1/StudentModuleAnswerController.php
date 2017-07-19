@@ -125,6 +125,7 @@ class StudentModuleAnswerController extends ApiController{
 			'question_id',
 			'answer_id',
 			'answer_text',
+			'question_text',
 			'student_id',
 			'date_start',
 			'date_end',
@@ -134,7 +135,10 @@ class StudentModuleAnswerController extends ApiController{
 		$question_type = $this->question->getQuestionType($data['question_id']);
 
 		//check if module has complete setup.
-		if(!$this->module_content_services->checkModuleComplete($data['module_id']) && is_null($data['is_dynamic']) && $question_type != config('futureed.question_type_coding')){
+		if(!$this->module_content_services->checkModuleComplete($data['module_id'])
+			&& is_null($data['is_dynamic'])
+			&& $question_type != config('futureed.question_type_coding')
+			&& !$data['is_dynamic']){
 
 			return $this->respondErrorMessage(2058);
 		}
@@ -165,18 +169,12 @@ class StudentModuleAnswerController extends ApiController{
 		//check answer and points
 		//check if module is dynamic or not
 		if($module->is_dynamic){
-			//output answer if correct or not
-			$dynamic_response = $this->equation_compiler->answerChecker($data['question_id'],$data['answer_text']);
 
+			//Assume all correct
 			$data['seq_no'] = 0	;
+			$data['points_earned'] = 1;
+			$data['answer_status'] = config('futureed.answer_status_correct');
 
-			if($dynamic_response){
-				$data['points_earned'] = 1;
-				$data['answer_status'] = config('futureed.answer_status_correct');
-			}else{
-				$data['points_earned'] = 0;
-				$data['answer_status'] = config('futureed.answer_status_wrong');
-			}
 			//output correct or wrong based on boolean output of dynamic.
 		} elseif($question_type == config('futureed.question_type_multiple_choice')){
 
@@ -423,14 +421,8 @@ class StudentModuleAnswerController extends ApiController{
 			);
 		} else {
 
-			//TODO set dynamic next questions
-			$next_question = $this->question_cache_service->dynamicNextQuestion(
-				$data['student_module_id'],
-				$data['module_id'],
-				$student_answer
-			);
-			// question is question_cache table
-//			dd($next_question);
+			//set to none.
+			$next_question = 0;
 		}
 
 

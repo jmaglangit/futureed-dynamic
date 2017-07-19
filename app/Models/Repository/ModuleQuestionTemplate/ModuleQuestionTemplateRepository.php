@@ -27,6 +27,8 @@ class ModuleQuestionTemplateRepository implements ModuleQuestionTemplateReposito
 
 		$module_question_template = new ModuleQuestionTemplate();
 
+
+
 		//question_template_id
 		if(isset($criteria['question_template_id'])){
 			$module_question_template = $module_question_template->questionTemplateId($criteria['question_template_id']);
@@ -41,6 +43,8 @@ class ModuleQuestionTemplateRepository implements ModuleQuestionTemplateReposito
 		if(isset($criteria['status'])){
 			$module_question_template = $module_question_template->status($criteria['status']);
 		}
+
+		$module_question_template = $module_question_template->with('questionTemplate');
 
 		$count = $module_question_template->count();
 
