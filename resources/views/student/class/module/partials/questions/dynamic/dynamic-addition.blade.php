@@ -21,13 +21,13 @@
             <div class="prof-info h4"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
             <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-right">
-                    <div class="prof-info"><b>Answered Flow</b></div>
+                    <div class="prof-info"><b>Answered Flow</b></div><br/>
                     <div id="lastDiv2"></div><br>
                 </div>
             </div>
             <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-left">
-                    <div class="prof-info"><b>Correct Answer Flow</b></div>
+                    <div class="prof-info"><b>Correct Answer Flow</b></div><br/>git sta
                     <div id="lastDiv3"></div>
                 </div>
             </div>
