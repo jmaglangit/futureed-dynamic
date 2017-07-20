@@ -25,8 +25,8 @@ class QuestionTemplateRequest extends ApiRequest {
 				return [
 					'question_type' => 'required|string',
 					'question_template_format' => 'required|string',
-					'question_template_explanation' => 'required|string',
-					'question_equation' => 'required|string',
+					// 'question_template_explanation' => 'required|string',
+					// 'question_equation' => 'required|string',
 					'question_form' => 'required|string',
 					'operation' => 'required|string'
 				];
@@ -35,8 +35,8 @@ class QuestionTemplateRequest extends ApiRequest {
 				return [
 					'question_type' => 'required|string',
 					'question_template_format' => 'required|string',
-					'question_template_explanation.explanation' => 'required|string',
-					'question_equation' => 'required|string',
+					// 'question_template_explanation.explanation' => 'required|string',
+					// 'question_equation' => 'required|string',
 					'question_form' => 'required|string',
 					'operation' => 'required|string'
 				];

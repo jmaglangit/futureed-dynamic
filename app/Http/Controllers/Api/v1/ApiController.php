@@ -23,6 +23,7 @@ use FutureEd\Services\TokenServices;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\AdminServices;
 use FutureEd\Services\PasswordServices;
+use FutureEd\Services\QuestionTemplateServices;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Matching\ValidatorInterface;
 use Illuminate\Support\Facades\Input;
