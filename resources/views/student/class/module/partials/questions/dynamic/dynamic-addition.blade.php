@@ -15,7 +15,7 @@
         </div>
         <!-- answer area -->
         <div id="answerPane" class="col-xs-6 pull-right h4">
-            <div id="lastDiv" class="h4"></div>
+            <div id="lastDiv" class="margin-10-top margin-10-bot h4"></div>
         </div>
         <div id="tipsFlow" style="display: none;">
             <div class="tip-icon"><img src="/images/icon-tipbulb.png"></div>

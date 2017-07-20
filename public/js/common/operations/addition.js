@@ -259,7 +259,7 @@ function displayTotalFlow(){
         result += "--";
     result += "</p>";
     for(i=1; i<=max_digit; i++){
-        result += "<p align=left style='text-indent:10px;'>";
+        result += "<p align=left style='text-indent:10px;' class='h4'>"; // ADDED
         result += "Step " + i + " : Add the " + step_words[i - 1];
         result += "</p>";
         result += "<p align=left style='text-indent:20px;'>";
