@@ -1813,7 +1813,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						self.result = response.data;
                         self.result.failed = Constants.FALSE;
                         self.result.answered = Constants.FALSE;
-                        self.question_counter = self.result.question_counter;
+                        self.question_counter = self.result.question_counter + 1;
                         $scope.correct_counter = self.result.correct_counter;
 
                         if(angular.equals(self.result.module_status, "Completed")) {
