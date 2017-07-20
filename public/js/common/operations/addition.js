@@ -317,7 +317,7 @@ function generateAnswerStep() {
     carr_over_var[step_count] = false;
     carr_over_var2[step_count] = false;
     $(".answer_value").unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-    $("<p style='margin-top: 7px;'>Step " + (step_count + 1) + ": Add the " + step_words[step_count] + "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+    $("<p style='margin-top: 20px;'>Step " + (step_count + 1) + ": Add the " + step_words[step_count] + "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
