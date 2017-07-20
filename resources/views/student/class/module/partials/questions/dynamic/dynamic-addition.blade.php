@@ -27,7 +27,7 @@
             </div>
             <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-left">
-                    <div class="prof-info"><b>Correct Answer Flow</b></div><br/>git sta
+                    <div class="prof-info"><b>Correct Answer Flow</b></div><br/>
                     <div id="lastDiv3"></div>
                 </div>
             </div>
