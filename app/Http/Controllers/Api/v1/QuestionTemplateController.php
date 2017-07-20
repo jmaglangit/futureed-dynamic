@@ -6,6 +6,7 @@ use FutureEd\Models\Repository\QuestionTemplate\QuestionTemplateRepositoryInterf
 use FutureEd\Models\Repository\QuestionTemplateExplanation\QuestionTemplateExplanationRepositoryInterface;
 use FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepositoryInterface;
 use Illuminate\Support\Facades\Input;
+use FutureEd\Services\QuestionTemplateServices;
 
 class QuestionTemplateController extends ApiController {
 
@@ -15,6 +16,8 @@ class QuestionTemplateController extends ApiController {
 
 	protected $question_template_explanation;
 
+	protected $question_temp_operation_service;
+
 	/**
 	 * @param QuestionTemplateRepositoryInterface $questionTemplateRepositoryInterface
 	 * @param QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface
@@ -23,11 +26,13 @@ class QuestionTemplateController extends ApiController {
 	public function __construct(
 		QuestionTemplateRepositoryInterface $questionTemplateRepositoryInterface,
 		QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface,
-		QuestionTemplateExplanationRepositoryInterface $questionTemplateExplanationRepositoryInterface
+		QuestionTemplateExplanationRepositoryInterface $questionTemplateExplanationRepositoryInterface,
+		QuestionTemplateServices $questionTemplateServices
 	){
 		$this->question_template = $questionTemplateRepositoryInterface;
 		$this->question_template_operation = $questionTemplateOperationRepositoryInterface;
 		$this->question_template_explanation = $questionTemplateExplanationRepositoryInterface;
+		$this->question_temp_operation_service = $questionTemplateServices;
 	}
 
 	/**
@@ -102,19 +107,29 @@ class QuestionTemplateController extends ApiController {
 		//change filter of operation into id
 		$operations = $this->question_template_operation->getOperationByData($request->only('operation'));
 
-		$question_template['operation'] = $operations->id;
+		// $question_template['operation'] = $operations->id;
+		$check_operation_var = $this->question_temp_operation_service->checkOperationVariables($question_template);
 
-		$template = $this->question_template->addQuestionTemplate($question_template);
-
+		if($check_operation_var){
+			if($check_operation_var == config('futureed.true')){
+				$template = $this->question_template->addQuestionTemplate($question_template);
+				return $this->respondWithData($template);
+			}
+			else{
+				return $this->respondWithError([
+					'error_code' => 2605,
+					'message' => $check_operation_var['message']
+				]);
+			}
+		}
 		//add question_template_explanation
 		$explanation = $this->question_template_explanation->addQuestionTemplateExplanation([
 			'question_template_id' => $template->id,
 			'explanation' => $request->get('question_template_explanation')
 		]);
 
-		$template->question_template_tips = $explanation->explanation;
+		// $template->question_template_tips = $explanation->explanation;
 
-		return $this->respondWithData($template);
 	}
 
 	/**
@@ -141,11 +156,9 @@ class QuestionTemplateController extends ApiController {
 			'equation_type',
 			'question_template_format',
 			'question_equation',
+			'operation',
 			'status'
 		]);
-
-		$this->question_template->updateQuestionTemplate($id,$question_template);
-
 
 		//update question template by question_template_id
 		$explanation_request = $request->get('question_template_explanation');
@@ -154,9 +167,23 @@ class QuestionTemplateController extends ApiController {
 			'explanation' => $explanation_request['explanation']
 		]);
 
-		$template = $this->question_template->getQuestionTemplate($id);
+		$question_template = $this->question_template->getQuestionTemplate($id);
+		$check_operation_var = $this->question_temp_operation_service->checkOperationVariables($question_template);
 
-		return $this->respondWithData($template);
+		if($check_operation_var){
+			if($check_operation_var == config('futureed.true')){
+
+				$this->question_template->updateQuestionTemplate($id,$question_template);
+
+				return $this->respondWithData($question_template);
+			}
+			else{
+				return $this->respondWithError([
+					'error_code' => 2605,
+					'message' => $check_operation_var['message']
+				]);
+			}
+		}
 	}
 
 	/**

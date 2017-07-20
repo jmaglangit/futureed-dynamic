@@ -1535,6 +1535,15 @@ return [
 	'subtraction_symbol' => '-',
 	'division_symbol' => '/',
 	'multiply_symbol' => '*',
+	'addends_one' => 'ADDENDS 1',
+	'addends_two' => 'ADDENDS 2',
+	'minuend' => 'MINUEND',
+	'subtrahend' => 'SUBTRAHEND',
+	'multiplicand' => 'MULTIPLICAND',
+	'multiplier' => 'MULTIPLIER',
+	'dividend' => 'DIVIDEND',
+	'divisor' => 'DIVISOR',
+	'template_text_requires_both' => 'Template text requires to include both variables',
 
 	//resources/views/student/login/register/registration-form.blade.php
 	'register_city_may_not_be_greater' => 'The city may not be greater than 128 characters.',
