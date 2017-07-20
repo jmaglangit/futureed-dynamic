@@ -18,16 +18,16 @@
             <div id="lastDiv" class="margin-10-top margin-10-bot h4"></div>
         </div>
         <div id="tipsFlow" style="display: none;">
-            <div class="tip-icon"><img src="/images/icon-tipbulb.png"></div>
+            <div class="prof-info h4"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
             <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-right">
-                    <b>Answered Flow</b>
+                    <div class="prof-info"><b>Answered Flow</b></div>
                     <div id="lastDiv2"></div><br>
                 </div>
             </div>
             <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-left">
-                    <b>Correct Answer Flow</b>
+                    <div class="prof-info"><b>Correct Answer Flow</b></div>
                     <div id="lastDiv3"></div>
                 </div>
             </div>
