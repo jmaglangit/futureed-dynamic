@@ -259,7 +259,7 @@ function displayTotalFlow(){
         result += "--";
     result += "</p>";
     for(i=1; i<=max_digit; i++){
-        result += "<p align=left style='text-indent:10px;'>";
+        result += "<p align=left style='text-indent:10px;' class='h4'>"; // ADDED
         result += "Step " + i + " : Add the " + step_words[i - 1];
         result += "</p>";
         result += "<p align=left style='text-indent:20px;'>";
@@ -323,29 +323,29 @@ function generateAnswerStep() {
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
                 alertModal("Answer can't be alphabet !");
-                // $(this).prop("value", "").focus();
+                $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(checkAnswer2($(this)) == false){
                 // alert("Answer can't be negative or more than 18 !");
-                // $(this).prop("value", "").focus();
                 alertModal("Answer can't be negative or more than 18 !");
+                $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
                 // alert("Your answer is larger than what we need.");
-                // $(this).prop("value", "").focus();
                 alertModal("Your answer is larger than what we need.");
+                $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
                 // alert("opps not enough, your answer needs to be larger.");
-                // $(this).prop("value", "").focus();
                 alertModal("opps not enough, your answer needs to be larger.");
+                $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
