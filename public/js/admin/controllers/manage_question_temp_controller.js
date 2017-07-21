@@ -183,6 +183,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 
 	//operation type
 	self.operationType = function(){
+		self.isClicked = Constants.TRUE;
 		self.record.question_template_format = '';
 
 		 switch(self.record.operation){
