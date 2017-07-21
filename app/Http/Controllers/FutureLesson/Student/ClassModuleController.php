@@ -53,4 +53,12 @@ class ClassModuleController extends Controller {
 		$steps = 3;
 		return view('student.class.module.partials.questions.dynamic.answer-steps')->with('steps',$steps);
 	}
+
+	public function addition(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-addition');
+	}
+
+	public function additionAns(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-addition-ans');
+	}
 }

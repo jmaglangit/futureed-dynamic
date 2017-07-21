@@ -1527,6 +1527,10 @@ hr {
     text-align: center;
 }
 
+.review-lesson {
+    text-align: center;
+    bottom: -333px;
+}
 .pass-img {
     width: 100px;
     height: 100px;

@@ -329,6 +329,16 @@ var Constants = {
 	, DIVISION					: 'DIVISION'
 	, MULTIPLICATION			: 'MULTIPLICATION'
 
+	/* question dynamic template variables */
+	, ADDENDS1					: 'ADDENDS1'
+	, ADDENDS2					: 'ADDENDS2'
+	, MINUEND					: 'MINUEND'
+	, SUBTRAHEND				: 'SUBTRAHEND'
+	, MULTIPLICAND				: 'MULTIPLICAND'
+	, MULTIPLIER				: 'MULTIPLIER'
+	, DIVIDEND					: 'DIVIDEND'
+	, DIVISOR					: 'DIVISOR'
+
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']
 	, NTH_INDEX					: 'nth'

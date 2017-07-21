@@ -312,45 +312,41 @@ class QuestionCacheServices {
 	/**
 	 * @param $question_strings
 	 * @param array $attributes
-	 * @internal param $form
+	 * @return mixed
 	 */
 	public function generatePreviewQuestion($question_strings, $attributes = []){
 
-		//replace questions variables with object
-		//set min and max values
-		//max value 1-999
+		$max_value = 999;
 
-		//check what type of question
-
-		//initialize attributes
-		$question_template = new \stdClass();
-		$question_template->question_equation = $question_strings;
-		$question_template->operation = $attributes['operation'];
-		$question_template->max_value = 999;
-		$question_template->question_template_format = $question_strings;
-
-
-
-		//blank,series,word
-		switch($attributes['question_form']){
-
-			case config('futureed.question_form_word'):
-				//generate word question form
-				$question = '';
-				dd('word');
+		//find strings first and second
+		switch($attributes['operation']){
+			case config('futureed.addition'):
+				// {addends1} {addends2}
+				$question_preview = str_replace('{addends1}',rand(1,$max_value),$question_strings);
+				$question_preview = str_replace('{addends2}',rand(1,$max_value),$question_preview);
 				break;
-			case config('futureed.question_form_series'):
-				//generate word question series
-				$question = $this->questionFormSeries($question_template);
+			case config('futureed.subtraction'):
+				// {minuend} {subtrahend}
+				$question_preview = str_replace('{minuend}',rand(1,$max_value),$question_strings);
+				$question_preview = str_replace('{subtrahend}',rand(1,$max_value),$question_preview);
+
+				break;
+			case config('futureed.multiplication'):
+				//  {multiplicand} {multiplier}
+				$question_preview = str_replace('{multiplicand}',rand(1,$max_value),$question_strings);
+				$question_preview = str_replace('{multiplier}',rand(1,$max_value),$question_preview);
+				break;
+			case config('futureed.division'):
+				//  {dividend} {divisor}
+				$question_preview = str_replace('{dividend}',rand(1,$max_value),$question_strings);
+				$question_preview = str_replace('{divisor}',rand(1,$max_value),$question_preview);
 				break;
 			default :
-				//generate word question blank
-				dd('blank');
-				$question = '';
+				$question_preview = $question_strings;
 				break;
 		}
 
-		return $question[0];
+		return $question_preview;
 	}
 
 }

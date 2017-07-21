@@ -183,6 +183,8 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 
 	//operation type
 	self.operationType = function(){
+		self.isClicked = Constants.TRUE;
+		self.record.question_template_format = '';
 
 		 switch(self.record.operation){
 			 // operations
@@ -195,37 +197,41 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 
 		// scan whole text if there is an existing variable.
 		// php scan strings with text combination.
-		//
+		// disable button once clicked.
 
 		//add case switch
 		switch(variable){
-			case Constants.NUMBER :
-				//search on the text if {num[1-9]} exist
-				//append to the next
-				//add counter for number variable naming
-				var variableName = self.actionVariableNames('num');
-				self.record.question_template_format += variableName;
-				self.record.question_equation += variableName;
+			case Constants.ADDENDS1 :
+				self.record.question_template_format += self.actionVariableNames('addends1');
+			    $('button[name=btn_addends_one]').prop('disabled', true);
 				break;
-			case Constants.OBJECT :
-				// add counter object variable naming
-				self.record.question_template_format += self.actionVariableNames('object');
+			case Constants.ADDENDS2 :
+				self.record.question_template_format += self.actionVariableNames('addends2');
+			    $('button[name=btn_addends_two]').prop('disabled', true);
 				break;
-			case Constants.NAME :
-				//add counter for name variable naming
-				self.record.question_template_format += self.actionVariableNames('name');
+			case Constants.MINUEND :
+				self.record.question_template_format += self.actionVariableNames('minuend');
+			    $('button[name=btn_minuend]').prop('disabled', true);
 				break;
-			case Constants.ADDITION :
-				self.record.question_template_format += ' +';
+			case Constants.SUBTRAHEND :
+				self.record.question_template_format += self.actionVariableNames('subtrahend');
+			    $('button[name=btn_subtrahend]').prop('disabled', true);
 				break;
-			case Constants.SUBTRACTION :
-				self.record.question_template_format += ' -';
+			case Constants.MULTIPLICAND :
+				self.record.question_template_format += self.actionVariableNames('multiplicand');
+			    $('button[name=btn_multiplicand]').prop('disabled', true);
 				break;
-			case Constants.DIVISION :
-				self.record.question_template_format += ' /';
+			case Constants.MULTIPLIER :
+				self.record.question_template_format += self.actionVariableNames('multiplier');
+			    $('button[name=btn_multiplier]').prop('disabled', true);
 				break;
-			case Constants.MULTIPLICATION :
-				self.record.question_template_format += ' *';
+			case Constants.DIVIDEND :
+				self.record.question_template_format += self.actionVariableNames('dividend');
+			    $('button[name=btn_dividend]').prop('disabled', true);
+				break;
+			case Constants.DIVISOR :
+				self.record.question_template_format += self.actionVariableNames('divisor');
+			    $('button[name=btn_divisor]').prop('disabled', true);
 				break;
 			default:
 				self.record.question_template_format += ' ';
@@ -239,7 +245,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 			i++;
 		}
 
-		return ' {' + variableName + i + '}';
+		return ' {' + variableName + '}';
 	}
 
 	self.details = function(id) {

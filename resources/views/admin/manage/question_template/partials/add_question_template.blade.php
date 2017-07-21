@@ -49,8 +49,8 @@
 							  ''=>trans('messages.admin_select_operation')
 							, '{! futureed.ADDITION !}' => trans('messages.admin_operation_add')
 							, '{! futureed.SUBTRACTION !} ' => trans('messages.admin_operation_subtract')
-							//, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
 							, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
+							, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
 					 	)
 					 	, null
 					 	, array(
@@ -87,67 +87,99 @@
 				</div>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group" ng-if="template.record.operation != Constants.FALSE">
 				<label class="control-label col-xs-2">{!! trans('messages.admin_template_text') !!} <span class="required">*</span></label>
 			</div>
 
 
 			<div class="form-group">				
 				<div class="col-xs-8">
-					<div class="col-xs-3 admin-search-module">
-						{!! Form::button(trans('messages.admin_template_text_num')
-							,array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons(futureed.NUMBER)'
-							)
-						)!!}
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.ADDITION">
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.addends_one')
+								,array(
+									 'class' => 'btn btn-blue'
+									, 'name' => 'btn_addends_one'
+									, 'ng-click' => 'template.actionButtons(futureed.ADDENDS1)'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.addends_two')
+								,array(
+									 'class' => 'btn btn-blue'
+									, 'name' => 'btn_addends_two'
+									, 'ng-click' => 'template.actionButtons(futureed.ADDENDS2)'
+								)
+							)!!}
+						</div>
 					</div>
-					<div class="col-xs-3 admin-search-module">
-						{!! Form::button('object'
-							,array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons(futureed.OBJECT)'
-							)
-						)!!}
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.SUBTRACTION">
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.minuend')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_minuend'
+									, 'ng-click' => 'template.actionButtons(futureed.MINUEND)'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.subtrahend')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_subtrahend'
+									, 'ng-click' => 'template.actionButtons(futureed.SUBTRAHEND)'
+								)
+							)!!}
+						</div>
 					</div>
-					<div class="col-xs-3 admin-search-module">
-						{!! Form::button(trans('messages.admin_template_text_name')
-							,array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons(futureed.NAME)'
-							)
-						)!!}
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.MULTIPLICATION">
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.multiplicand')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_multiplicand'
+									, 'ng-click' => 'template.actionButtons(futureed.MULTIPLICAND)'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.multiplier')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_multiplier'
+									, 'ng-click' => 'template.actionButtons(futureed.MULTIPLIER)'
+								)
+							)!!}
+						</div>
 					</div>
-					<div class="col-xs-3 admin-search-module" ng-if="template.record.operation == futureed.ADDITION">
-						{!! Form::button(trans('messages.addition_symbol')
-							,array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons(futureed.ADDITION)'
-							)
-						)!!}
-					</div>
-					<div class="col-xs-3 admin-search-module" ng-if="template.record.operation == futureed.SUBTRACTION">
-						{!! Form::button(trans('messages.subtraction_symbol')
-							,array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons(futureed.SUBTRACTION)'
-							)
-						)!!}
-					</div>
-					<div class="col-xs-3 admin-search-module" ng-if="template.record.operation == futureed.MULTIPLICATION">
-						{!! Form::button(trans('messages.multiply_symbol')
-							,array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => 'template.actionButtons(futureed.MULTIPLICATION)'
-							)
-						)!!}
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.DIVISION">
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.dividend')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_dividend'
+									, 'ng-click' => 'template.actionButtons(futureed.DIVIDEND)'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.divisor')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_divisor'
+									, 'ng-click' => 'template.actionButtons(futureed.DIVISOR)'
+								)
+							)!!}
+						</div>
 					</div>
 					<div class="col-xs-2"></div>
 					
 				</div>
 				{{--<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
-			<div class="form-group">
+			<div class="form-group" ng-if="template.record.operation != Constants.FALSE">
 				<div class="col-xs-12">
 					{!! Form::textarea('search_question_template_format',''
 						, array(
@@ -160,41 +192,9 @@
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label class="col-xs-4">{!! trans('messages.admin_question_equation') !!} <span class="required">*</span></label>
-			</div>
-
-			<div class="form-group">
-				<div class="col-xs-12">
-					{!! Form::text('search_question_equation',''
-						, array(
-							'ng-model' => 'template.record.question_equation'
-							, 'class' => 'form-control'
-							, 'ng-class' => "{ 'required-field' : template.fields['question_equation'] }"
-						)
-					) !!}
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-xs-4">{!! trans('messages.tips') !!} <span class="required">*</span></label>
-			</div>
-
-			<div class="form-group">
-				<div class="col-xs-12">
-					{!! Form::textarea('search_question_equation',''
-						, array(
-							'ng-model' => 'template.record.question_template_explanation'
-							, 'class' => 'form-control disabled-textarea'
-							, 'ng-class' => "{ 'required-field' : template.fields['question_template_explanation'] }"
-							, 'rows' => '5'
-						)
-					) !!}
-				</div>
-			</div>
 		</fieldset>
 		<fieldset>
-			<div class="form-group">
+			<div class="form-group" ng-if="template.record.operation != Constants.FALSE">
 				<div class="btn-container col-xs-9 col-xs-offset-2">
 					{!! Form::button(trans('messages.add')
 						, array(

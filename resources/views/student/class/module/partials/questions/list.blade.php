@@ -25,14 +25,19 @@
 						<h3 class="border-radius-30">{! mod.current_question.questions_text !}</h3>
 					</div>
 					<div class="row col-xs-6">
-						<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed && mod.current_question.question_type != futureed.CODING"
+						<button ng-if="!mod.result.answered && !mod.result.quoted
+						&& !mod.result.failed && mod.current_question.question_type != futureed.CODING && mod.record.is_dynamic == futureed.FALSE"
 								type="button"
 								class="btn btn-orange next-btn right-0"
 								ng-click="mod.checkAnswer()"> {{ trans('messages.submit') }} </button>
 						<button type="button"
-								ng-if="mod.current_question.question_type == futureed.CODING"
+								ng-if="mod.current_question.question_type == futureed.CODING && mod.record.is_dynamic == futureed.FALSE"
 								class="btn btn-orange next-btn right-0 btn-code-run"
 								ng-click="mod.runCode();"> {{ trans('messages.run') }} </button>
+						<button id="dynamic_question_btn" type="button"
+								ng-if="mod.record.is_dynamic != futureed.FALSE"
+								class="btn btn-orange next-btn right-0 btn-code-run"
+								ng-click="mod.dynamicNextQuestion()" style="display: none;"> {{ trans('messages.next') }} </button>
 					</div>
 				</div>
 			</div>
@@ -53,16 +58,20 @@
 				{{--Snap Table loading--}}
 				<div class="col-xs-12"
 					 id="loading"
-					 ng-if="mod.loading && mod.current_question.question_type == futureed.CODING"
+					 ng-show="mod.loading && mod.current_question.question_type == futureed.CODING && mod.record.is_dynamic == futureed.false"
 					 style="margin-top:40px;"
 				>
 					<center>
 						<h1>{{ trans('messages.loading') }}</h1>
 					</center>
 				</div>
+				{{--Dynamic Questions--}}
+				<div class="col-xs-12">
+					<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition') !!}"></div>
+				</div>
 				{{--Main Question Contents--}}
 				<div class="col-xs-6"
-					 ng-if="mod.current_question.question_type != futureed.CODING"
+					 ng-show="mod.current_question.question_type != futureed.CODING && mod.record.is_dynamic == futureed.FALSE"
 				>
 					{{--Image--}}
 					<div class="col-xs-12">
@@ -73,9 +82,12 @@
 					{{--Message--}}
 					<div class="col-xs-12">
 						<div class="questions-message">
+
 							<p  ng-if="mod.record.is_dynamic == futureed.FALSE" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
 							{{--TODO dynamic question text here--}}
-							<p  ng-if="mod.record.is_dynamic == futureed.TRUE" ng-bind-html="mod.current_question.question_text | trustAsHtml"></p>
+							{{--<p  ng-if="mod.record.is_dynamic == futureed.TRUE" ng-bind-html="mod.current_question.question_text | trustAsHtml"></p>--}}
+							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition') !!}"></div>
+
 						</div>
 					</div>
 					{{--Tips--}}
@@ -91,13 +103,12 @@
 				{{--Answers--}}
 				{{--TODO add module if dynamic--}}
 				<div class="col-xs-6"
-					 ng-if="mod.current_question.question_type != futureed.CODING"
+					 ng-if="mod.current_question.question_type != futureed.CODING && mod.record.is_dynamic == futureed.false"
 				>
 					<div class="questions-answers">
 
 						{{-- TODO insert dynamic qu	estions --}}
-						{{--student.class.module.partials.questions.dynamic.fib--}}
-						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.steps') !!}"></div>
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition.answer') !!}"></div>
 
 						{{--mod.current_question.question_type == futureed.MULTIPLECHOICE--}}
 						<div class="margin-top-30">
@@ -219,7 +230,7 @@
 				</div>
 				<div ng-init="mod.set_IDE();" ng-if="mod.current_question.question_type == futureed.CODING"></div>
 			</div>
-            <div class="col-xs-12 text-center">
+            <div class="col-xs-12 text-center review-lesson">
                 <a id="review-lesson" href="javascript:void(0);" ng-click="mod.skipModule()"><img ng-src="/images/video-camera-with-play-button.png"/> {{ trans('messages.review_lessons') }}</a>
             </div>
 		</div>
@@ -398,3 +409,8 @@
 		</div>
 	</div>
 </div>
+
+@section('scripts')
+	{!! Html::script('/js/common/operations/addition.js')!!}
+	{!! Html::script('/js/common/operations/jquery.js')!!}
+@stop

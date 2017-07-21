@@ -264,6 +264,7 @@ return [
 		// Custom country messages.
 		2603 => 'The country field is required.',
 		2604 => 'The country is invalid',
+		2605 => 'Template text requires to include both variables.',
 
 		7000 => 'Hmm, something went wrong. Please contact the system administrator.',
 

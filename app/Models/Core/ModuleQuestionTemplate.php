@@ -44,6 +44,10 @@ class ModuleQuestionTemplate extends Model{
 		return $this->hasOne('FutureEd\Models\Core\QuestionCache');
 	}
 
+	public function questionTemplate(){
+		return $this->hasOne('FutureEd\Models\Core\QuestionTemplate','id','question_template_id');
+	}
+
 	//scope
 	public function scopeQuestionTemplateId($query,$template_id){
 		return $query->where('question_template_id',$template_id);

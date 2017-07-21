@@ -10,15 +10,17 @@
 					{!! Form::hidden('id', '') !!}
 				{!! Form::close() !!}
 
+				<div class="title" ng-if="confirm.account_confirmed || confirm.confirmed">{!! trans('messages.success') !!}</div>
+
+				<div class="alert alert-danger" ng-if="confirm.errors">
+					<p ng-repeat="error in confirm.errors" >
+						{! error !}
+					</p>
+				</div>
+
 				<div ng-if="!confirm.confirmed">
 					<div class="title">{!! trans('messages.client_thank_you_for_register') !!}</div>
-			
-					<div class="alert alert-danger" ng-if="confirm.errors">
-						<p ng-repeat="error in confirm.errors" > 
-							{! error !}
-						</p>
-					</div>
-							
+
 					<div class="form_content">
 						<div ng-if="!confirm.resent">
 							<div class="roundcon">
@@ -45,9 +47,7 @@
 					</div>
 				</div>
 
-				<div ng-if="confirm.confirmed">
-						<div class="title">{!! trans('messages.success') !!}</div>
-
+				<div ng-if="confirm.confirmed && !confirm.account_confirmed">
 						<div class="alert alert-danger" ng-if="confirm.errors">
 							<p ng-repeat="error in confirm.errors" >
 								{! error !}
@@ -61,6 +61,19 @@
 						<p>{!! trans('messages.client_registration_success_msg') !!}</p>
 
 						<br />
+				</div>
+
+				<div ng-if="confirm.account_confirmed">
+					<div class="form_content">
+						<div class="roundcon">
+							<i class="fa fa-check fa-5x img-rounded text-center"></i>
+						</div>
+
+						<p>{!! trans('messages.client_registration_success_msg') !!}</p>
+					</div>
+					<div class="btn-container">
+						<a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">{!! trans('messages.click_to_login') !!}</a>
+					</div>
 				</div>
 		</div>
 	</div>

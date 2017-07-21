@@ -28,6 +28,7 @@ class StudentModuleAnswerRepository implements StudentModuleAnswerRepositoryInte
 
             $this->errorLog($e->getMessage());
 
+            dd($e->getMessage());
             return false;
         }
 
