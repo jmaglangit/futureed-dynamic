@@ -145,10 +145,10 @@ class QuestionCacheController extends ApiController {
 	}
 
 
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function previewQuestion(){
-
-		//operation
-			//filter operation
 
 		//question template and attributes
 		$question = $this->question_cache_service->generatePreviewQuestion(Input::get('question_template_format'),
