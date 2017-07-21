@@ -102,6 +102,7 @@
 									 'class' => 'btn btn-blue'
 									, 'name' => 'btn_addends_one'
 									, 'ng-click' => 'template.actionButtons(futureed.ADDENDS1)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
@@ -111,6 +112,7 @@
 									 'class' => 'btn btn-blue'
 									, 'name' => 'btn_addends_two'
 									, 'ng-click' => 'template.actionButtons(futureed.ADDENDS2)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
@@ -122,6 +124,7 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_minuend'
 									, 'ng-click' => 'template.actionButtons(futureed.MINUEND)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
@@ -131,6 +134,7 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_subtrahend'
 									, 'ng-click' => 'template.actionButtons(futureed.SUBTRAHEND)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
@@ -142,6 +146,7 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_multiplicand'
 									, 'ng-click' => 'template.actionButtons(futureed.MULTIPLICAND)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
@@ -151,6 +156,7 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_multiplier'
 									, 'ng-click' => 'template.actionButtons(futureed.MULTIPLIER)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
@@ -162,6 +168,7 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_dividend'
 									, 'ng-click' => 'template.actionButtons(futureed.DIVIDEND)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
@@ -171,6 +178,7 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_divisor'
 									, 'ng-click' => 'template.actionButtons(futureed.DIVISOR)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
