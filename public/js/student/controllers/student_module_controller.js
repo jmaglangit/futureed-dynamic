@@ -238,6 +238,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
                         //randomize list of question templates.
                         self.questions = self.shuffleTemplates(response.data.records);
+                        self.current_question = self.questions[0];
 
 						//get grade condition
 						self.getQuestionGradeCondition(self.record.grade.country_grade.age_group_id);
