@@ -103,19 +103,18 @@ class QuestionTemplateController extends ApiController {
 			'question_form'
 		]);
 
+		//check operation variables used if exist
+		$check_operation_var = $this->question_temp_operation_service->checkOperationVariables($question_template);
 
 		//change filter of operation into id
 		$operations = $this->question_template_operation->getOperationByData($request->only('operation'));
-
-		// $question_template['operation'] = $operations->id;
-		$check_operation_var = $this->question_temp_operation_service->checkOperationVariables($question_template);
+		$question_template['operation'] = $operations->id;
 
 		if($check_operation_var){
 			if($check_operation_var == config('futureed.true')){
 				$template = $this->question_template->addQuestionTemplate($question_template);
 				return $this->respondWithData($template);
-			}
-			else{
+			}else{
 				return $this->respondWithError([
 					'error_code' => 2605,
 					'message' => $check_operation_var['message']
@@ -160,24 +159,27 @@ class QuestionTemplateController extends ApiController {
 			'status'
 		]);
 
-		//update question template by question_template_id
 		$explanation_request = $request->get('question_template_explanation');
 
 		$explanation = $this->question_template_explanation->updateQuestionTemplateExplanationByTemplateId($id,[
 			'explanation' => $explanation_request['explanation']
 		]);
 
-		$question_template = $this->question_template->getQuestionTemplate($id);
+		//check operation variables used if exist
 		$check_operation_var = $this->question_temp_operation_service->checkOperationVariables($question_template);
+
+		//change filter of operation into id
+		$operations = $this->question_template_operation->getOperationByData($request->only('operation'));
+		$question_template['operation'] = $operations->id;
 
 		if($check_operation_var){
 			if($check_operation_var == config('futureed.true')){
-
+				//update question template by question_template_id
 				$this->question_template->updateQuestionTemplate($id,$question_template);
 
+				$question_template = $this->question_template->getQuestionTemplate($id);
 				return $this->respondWithData($question_template);
-			}
-			else{
+			}else{
 				return $this->respondWithError([
 					'error_code' => 2605,
 					'message' => $check_operation_var['message']
