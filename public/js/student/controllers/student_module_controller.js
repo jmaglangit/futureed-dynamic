@@ -1902,18 +1902,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
         }
 
-
-
         //go to next questions.
 		self.nextQuestion();
         self.dynamicQuestionSetup(self.current_question);
         answerReset();
-
-
-
-
-
-
 	}
 
 
