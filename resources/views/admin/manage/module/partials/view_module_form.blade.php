@@ -349,10 +349,10 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-xs-3">{!! trans('messages.admin_common_core_area') !!} <span class="required">*</span></label>
+									<label class="control-label col-xs-3">{!! trans('messages.admin_common_core_area') !!}</label>
 									<div class="col-xs-3"></div>
 
-									<label class="control-label col-xs-3">{!! trans('messages.admin_common_core_url') !!} <span class="required">*</span></label>
+									<label class="control-label col-xs-3">{!! trans('messages.admin_common_core_url') !!}</label>
 									<div class="col-xs-3"></div>
 								</div>
 
