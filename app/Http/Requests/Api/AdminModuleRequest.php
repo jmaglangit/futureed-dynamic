@@ -31,8 +31,8 @@ class AdminModuleRequest extends ApiRequest {
 					'name' => 'required|string',
 					'code' => 'required|integer',
 					'description' => 'required|string|max:500',
-					'common_core_area' => 'required|string',
-					'common_core_url' => 'required|string',
+//					'common_core_area' => 'required|string',
+//					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
 					'points_to_unlock' => 'required|max:9999|regex:'. config('regex.numeric'),
 					'points_to_finish' => 'required|max:9999|regex:'. config('regex.numeric'),
@@ -50,12 +50,13 @@ class AdminModuleRequest extends ApiRequest {
 					'subject_area_id' => 'required|integer',
 					'name' => 'required|string',
 					'description' => 'required|string|max:500',
-					'common_core_area' => 'required|string',
-					'common_core_url' => 'required|string',
+//					'common_core_area' => 'required|string',
+//					'common_core_url' => 'required|string',
 					'status' => 'required|alpha|in:Enabled,Disabled',
 					'points_to_unlock' => 'required|max:9999|regex:'. config('regex.numeric'),
 					'points_to_finish' => 'required|max:9999|regex:'. config('regex.numeric'),
-					'translatable' => 'required|integer'
+					'translatable' => 'required|integer',
+					'curriculum_country' => 'required|array',
 
 				];
 		}
