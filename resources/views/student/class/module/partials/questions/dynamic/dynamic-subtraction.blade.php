@@ -1,4 +1,4 @@
-<div ng-show="mod.record.is_dynamic == futureed.TRUE && mod.current_question.question_template.operation == futureed.SUBTRACTION">
+<div>
     <div style="visibility:hidden">
         <input type="text" name="randomDigits" id="randomDigits" required autofocus value="4">
         <input type="text" name="randomNumber1" id="randomNumber1" readonly><br><br>
@@ -36,7 +36,7 @@
     </div>
 
     {{--modal--}}
-    <div id="message_modal" class="modal">
+    <div id="message_modal_dynamic" class="modal">
 
         <div class="modal-content modal-dialog modal-lg">
             <div class="modal-header">
@@ -65,5 +65,6 @@
 
     </div>
     {!! Html::script('/js/common/operations/subtraction.js')!!}
-    {!! Html::script('/js/common/operations/subtraction-global.js')!!}
+    {!! Html::script('/js/common/operations/global.js?20170713')!!}
+
 </div>

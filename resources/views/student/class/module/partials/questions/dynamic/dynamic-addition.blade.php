@@ -1,4 +1,4 @@
-<div ng-show="mod.record.is_dynamic == futureed.TRUE && mod.current_question.question_template.operation == futureed.ADDITION">
+<div>
     <div style="visibility:hidden">
         <input type="text" name="randomDigits" id="randomDigits" required autofocus value="4">
         <input type="text" name="randomNumber1" id="randomNumber1" readonly><br><br>
@@ -6,7 +6,7 @@
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
 
-    <div id="examPane" style="display: none;">
+    <div id="examPane" style="display:none;">
         <!-- questions area -->
         <div id="questionPane">
             {{--<p class="col-xs-6 h3">Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>--}}
@@ -36,7 +36,7 @@
     </div>
 
     {{--modal--}}
-    <div id="message_modal" class="modal">
+    <div id="message_modal_dynamic" class="modal">
 
         <div class="modal-content modal-dialog modal-lg">
             <div class="modal-header">

@@ -47,7 +47,8 @@
 
     // error handler function
     function _errorHandler(_elem, _err_num, _err_description) {
-		alert( _err_description );
+		// alert( _err_description );
+        alertModal( _err_description ); // INSERTED
 		if(_err_num != -5) retry_attempt++;
 		_elem.prop("value", "").focus();
 		return _err_num;

@@ -16,8 +16,81 @@ var y_var = [];
 
 _end_num = 9;
 
+var answered = []; //ADDED
+
+//START ADDED FUNCTIONS
+
+function setRandomDigits(digit){
+    randomDigits = digit;
+}
+
+function getRandomNumber1(){
+    return randomNumber1;
+}
+
+function getRandomNumber2(){
+    return randomNumber2
+}
+
+function getAnswered(){
+    return answered;
+}
+
+function setAnswered(answer){
+    answered.push(answer);
+}
+
+function enabledNextQuestion(){
+    $("#dynamic_question_btn").show();
+}
+
+function disabledNextQuestion(){
+    $("#dynamic_question_btn").hide();
+}
+
+function answerDone(){
+    $("#questionPane").hide();
+    $("#answerPane").hide();
+    $("#tipsFlow").show();
+    $("#ansFlow").show();
+    $("#ansCorrectFlow").show();
+    enabledNextQuestion();
+}
+
+function answerReset(){
+    $("#questionPane").show();
+    $("#answerPane").show();
+    $("#tipsFlow").hide();
+    $("#ansFlow").hide();
+    $("#ansCorrectFlow").hide();
+    answered = [];
+    disabledNextQuestion();
+}
+
+function alertModal(message){
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#close_modal").show();
+    $("#yes_modal").hide();
+    $("#no_modal").hide();
+}
+
+function borrowOneModal(message){
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#close_modal").hide();
+    $("#yes_modal").show();
+    $("#no_modal").show();
+}
+
+function btnNOOnclose() {
+    $("#message_modal_dynamic").hide();
+}
+
+//END ADDED FUNCTION
+
 function randomDigitsOnclick(){
-    randomDigits = _validateNum($("#randomDigits").prop("value"), 4);
+    // randomDigits = _validateNum($("#randomDigits").prop("value"), 4); //REMOVED
     if(randomDigits > 9) randomDigits = 8;
     $("#randomDigits").prop("value", randomDigits);
 
@@ -61,6 +134,8 @@ function generateAnswerStep() {
     retry_attempt = 0;
     if(step_count >= max_digit) {
         checkTotal();
+        // ADDED call function view hide
+        answerDone();
         return;
     }
 
@@ -70,6 +145,7 @@ function generateAnswerStep() {
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             correct_answer = getCorrectAnswer();
+            setAnswered($(this).prop("value")); //ADDED
             temp_answer = validateAnswer4Substraction($(this), correct_answer);
             if(temp_answer == 0) generateAnswerStep();
         }
@@ -78,7 +154,8 @@ function generateAnswerStep() {
     if((step_count < y_var.length) && (x_var[step_count] < y_var[step_count])){
         borrowNumber(step_count + 1);
         borrow_var[step_count] = true;
-        $("#myModal").show();
+        // $("#message_modal").show(); //REMOVED
+        borrowOneModal("Do you need to BORROW 1 from next column?");
     } else $(".inputCheck").focus();
     step_count++;
 }
@@ -110,6 +187,7 @@ function checkTotal() {
     str_answer = dismissZero(str_answer);
     $(".inputCheck").prop("value", str_answer);
     displayTotalFlow();
+    displayTotalFlow2();
 }
 
 function displayTotalFlow(){
@@ -163,15 +241,69 @@ function displayTotalFlow(){
     $("#lastDiv2").html(result);
 }
 
+function displayTotalFlow2(){
+
+    for(i=0; i<getDigitsCouunt(randomNumber1); i++){
+        x_var2[i] = getDigitNum(randomNumber1, i + 1);
+    }
+
+    for(i=0; i<max_digit; i++){
+
+    }
+
+    diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
+    result = '<p>Subtract ' + randomNumber2 + ' from ' + randomNumber1 + '</label></p>';
+
+    for(i=1; i<=max_digit; i++){
+        result += "<p align=left style='text-indent:10px;'>";
+        result += "Step " + i + " : Substract the " + step_words[i - 1];
+        result += "</p>";
+
+        result += "<p align=left style='text-indent:20px;'>";
+        result += x_var2[i-1];
+        if(y_var.length > i - 1) result += " - " + y_var[i-1];
+        if(i>1){
+            if(borrow_var[i - 2]){
+                result += ", but remember we borrowed 1 so it is " + x_var[i - 1];
+                if(y_var.length > i - 1) result += " - " + y_var[i-1];
+            }
+        }
+
+        result += "</p><p align=left style='text-indent:20px;'>";
+        if(y_var.length > i - 1){
+            if(x_var[i - 1] < y_var[i - 1]) result += "Since " + x_var[i - 1] + " < " + y_var[i - 1] + " you need to borrow 1 from the next column hence";
+        }
+
+        result += "</p><p align=left style='text-indent:20px;'>";
+        if(y_var.length > i - 1){
+            if(x_var[i - 1] < y_var[i - 1]) result += (x_var[i - 1] + 10) + " - " + y_var[i - 1] + " = " + (x_var[i - 1] + 10 - y_var[i - 1]);
+            else result += x_var[i - 1] + " - " + y_var[i - 1] + " = " + (x_var[i - 1] - y_var[i - 1]);
+        } else {
+            result += x_var[i - 1];
+        }
+
+        result += "</p>";
+
+    }
+
+    result += "<p align=left style='text-indent:10px;'>Answer:</p>";
+    result += "<p align=left style='text-indent:20px;'>" + $(".inputCheck").prop("value") + "</p>";
+
+    $("#lastDiv3").html(result);
+}
+
 
 function btnYEsOnclick(){
-    $("#myModal").hide();
-    if(borrow_var[step_count - 2]) alert("Remember you borrowed 1 in the previous step.");
+    $("#message_modal_dynamic").hide();
+    // if(borrow_var[step_count - 2]) alert("Remember you borrowed 1 in the previous step.");
+    if(borrow_var[step_count - 2]) alertModal("Remember you borrowed 1 in the previous step.");
     $(".inputCheck").focus();
 }
 
 function btnNOOnclick(){
-    $("#myModal").hide();
-    alert(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
+    $("#message_modal_dynamic").hide();
+    // alert(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
+    alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
     $(".inputCheck").focus();
 }
+

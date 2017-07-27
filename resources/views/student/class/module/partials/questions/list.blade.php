@@ -67,7 +67,14 @@
 				</div>
 				{{--Dynamic Questions--}}
 				<div class="col-xs-12">
-					<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition') !!}"></div>
+					<div ng-if="mod.current_question.question_template.operation == futureed.ADDITION">
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition') !!}"></div>
+					</div>
+					<div ng-if="mod.current_question.question_template.operation == futureed.SUBTRACTION">
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.subtraction') !!}"></div>
+					</div>
+
+
 				</div>
 				{{--Main Question Contents--}}
 				<div class="col-xs-6"
@@ -84,10 +91,6 @@
 						<div class="questions-message">
 
 							<p  ng-if="mod.record.is_dynamic == futureed.FALSE" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
-							{{--TODO dynamic question text here--}}
-							{{--<p  ng-if="mod.record.is_dynamic == futureed.TRUE" ng-bind-html="mod.current_question.question_text | trustAsHtml"></p>--}}
-							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition') !!}"></div>
-
 						</div>
 					</div>
 					{{--Tips--}}
@@ -107,8 +110,13 @@
 				>
 					<div class="questions-answers">
 
-						{{-- TODO insert dynamic qu	estions --}}
+						{{-- TODO insert dynamic questions --}}
+						<div ng-if="mod.current_question.question_template.operation == futureed.ADDITION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition.answer') !!}"></div>
+						</div>
+						<div mod.current_question.question_template.operation == futureed.SUBTRACTION>
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.subtraction.answer') !!}"></div>
+						</div>
 
 						{{--mod.current_question.question_type == futureed.MULTIPLECHOICE--}}
 						<div class="margin-top-30">
