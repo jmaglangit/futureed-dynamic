@@ -243,6 +243,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@additionAns'
 					]);
 
+					Routes::get('/questions/dynamic/multiplication',[
+						'as' => 'student.class.module.partials.questions.dynamic.multiplication'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@multiplication'
+					]);
+
+					Routes::get('/questions/dynamic/multiplication/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.multiplication.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@multiplicationAns'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'

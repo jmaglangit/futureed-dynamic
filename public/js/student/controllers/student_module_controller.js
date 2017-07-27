@@ -1759,6 +1759,17 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			case Constants.SUBTRACTION:
 				break;
 			case Constants.MULTIPLICATION:
+
+                self.date_start = new Date();
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+
+                question_text = question_text.replace("{multiplier}",getRandomNumber2());
+                question_text = question_text.replace("{multiplicand}",getRandomNumber1());
+                self.current_question.questions_text = question_text;
+
+                startAnswer();
+
 				break;
 			case Constants.DIVISION:
 				break;

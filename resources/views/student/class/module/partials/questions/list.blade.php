@@ -69,6 +69,9 @@
 				<div class="col-xs-12">
 					<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition') !!}"></div>
 				</div>
+				<div class="col-xs-12">
+					<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.multiplication') !!}"></div>
+				</div>
 				{{--Main Question Contents--}}
 				<div class="col-xs-6"
 					 ng-show="mod.current_question.question_type != futureed.CODING && mod.record.is_dynamic == futureed.FALSE"
@@ -87,7 +90,7 @@
 							{{--TODO dynamic question text here--}}
 							{{--<p  ng-if="mod.record.is_dynamic == futureed.TRUE" ng-bind-html="mod.current_question.question_text | trustAsHtml"></p>--}}
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition') !!}"></div>
-
+							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.multiplication') !!}"></div>
 						</div>
 					</div>
 					{{--Tips--}}
@@ -109,6 +112,8 @@
 
 						{{-- TODO insert dynamic qu	estions --}}
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.addition.answer') !!}"></div>
+
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.multiplication.answer') !!}"></div>
 
 						{{--mod.current_question.question_type == futureed.MULTIPLECHOICE--}}
 						<div class="margin-top-30">
