@@ -78,9 +78,7 @@
 					</div>
 
 				</div>
-				<div class="col-xs-12">
-					<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.multiplication') !!}"></div>
-				</div>
+
 				{{--Main Question Contents--}}
 				<div class="col-xs-6"
 					 ng-show="mod.current_question.question_type != futureed.CODING && mod.record.is_dynamic == futureed.FALSE"
