@@ -73,6 +73,9 @@
 					<div ng-if="mod.current_question.question_template.operation == futureed.SUBTRACTION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.subtraction') !!}"></div>
 					</div>
+					<div>
+
+					</div>
 
 
 				</div>
