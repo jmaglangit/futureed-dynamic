@@ -31,7 +31,7 @@
     </div>
 
     {{--modal--}}
-    <div id="message_modal" class="modal">
+    <div id="message_modal_dynamic" class="modal">
 
         <div class="modal-content modal-dialog modal-lg">
             <div class="modal-header">

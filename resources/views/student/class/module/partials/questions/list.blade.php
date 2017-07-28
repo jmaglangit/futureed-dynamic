@@ -73,7 +73,7 @@
 					<div ng-if="mod.current_question.question_template.operation == futureed.SUBTRACTION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.subtraction') !!}"></div>
 					</div>
-					<div ng-if="mod.current_question.question_template.operation == futureed.MUTIPLICATION">
+					<div ng-if="mod.current_question.question_template.operation == futureed.MULTIPLICATION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.multiplication') !!}"></div>
 					</div>
 
@@ -120,7 +120,7 @@
 						<div ng-if="mod.current_question.question_template.operation == futureed.SUBTRACTION">
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.subtraction.answer') !!}"></div>
 						</div>
-						<div ng-if="mod.current_question.question_template.operation == futureed.MUTIPLICATION">
+						<div ng-if="mod.current_question.question_template.operation == futureed.MULTIPLICATION">
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.multiplication.answer') !!}"></div>
 						</div>
 

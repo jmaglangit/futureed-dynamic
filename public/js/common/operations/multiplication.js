@@ -78,7 +78,7 @@ function answerReset(){
 
 function alertModal(message){
     $("#message_text_modal").html(message);
-    $("#message_modal").show();
+    $("#message_modal_dynamic").show();
     $("#close_modal").show();
     $("#yes_modal").hide();
     $("#no_modal").hide();
@@ -86,7 +86,7 @@ function alertModal(message){
 
 function carryOneModal(message){
     $("#message_text_modal").html(message);
-    $("#message_modal").show();
+    $("#message_modal_dynamic").show();
     $("#close_modal").hide();
     $("#yes_modal").show();
     $("#no_modal").show();
@@ -451,14 +451,14 @@ function startOnclick(){
 		randomNumber2 = parseInt((randomNumber2 - randomNumber2 % 10) / 10);
 	}
 
-	document.getElementById('message_modal').style.display = "block"; //'myModal'
+	document.getElementById('message_modal_dynamic').style.display = "block"; //'myModal'
 }
 
 function btnYEsOnclick(){
 //	carr_over_var[step_count_row1 - 1] = true;
 //	carr_over_var2[step_count_row1 - 1] = true;
 	carry_over = true;
-	$("#message_modal").hide(); //'myModal'
+	$("#message_modal_dynamic").hide(); //'myModal'
 	$("<p>Carry " + carry_over_Step_Values_Real[step_count_row1] + "</p>").insertBefore("#lastDiv");
 	gotoNextLevel();
 }
@@ -469,12 +469,12 @@ function btnNOOnclick(){
 	sub_step_Value[step_count_row1] = 0;
 //	carr_over_var2[step_count_row1 - 1] = true;
 	carry_over = false;
-	$("#message_modal").hide(); //'myModal'
+	$("#message_modal_dynamic").hide(); //'myModal'
 	gotoNextLevel();
 }
 
 function btnNOOnclose() {
-	$("#message_modal").hide(); //'myModal'
+	$("#message_modal_dynamic").hide(); //'myModal'
 }
 
 
