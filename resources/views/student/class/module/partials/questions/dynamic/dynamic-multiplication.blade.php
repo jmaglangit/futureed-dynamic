@@ -1,4 +1,4 @@
-<div ng-show="mod.record.is_dynamic == futureed.TRUE && mod.current_question.question_template.operation == futureed.MULTIPLICATION">
+<div>
     <div style="visibility:hidden">
         <input type="text" name="randomDigits" id="randomDigits" required autofocus value="4">
         <input type="text" name="randomNumber1" id="randomNumber1" readonly><br><br>
@@ -61,6 +61,5 @@
     </div>
     {!! Html::script('/js/common/operations/multiplication.js')!!}
     {!! Html::script('/js/common/operations/multiplication_global.js')!!}
-{{--    {!! Html::script('/js/common/operations/jquery.js')!!}--}}
 
 </div>

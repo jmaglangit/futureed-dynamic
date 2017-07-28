@@ -72,6 +72,23 @@ class Module extends Model
 	//Mutators
 
 	//Translations -- transfered to observers
+	public function setCommonCoreAreaAttribute($value){
+
+		if($value == NULL){
+			$this->attributes['common_core_area'] = 'None';
+		} else {
+			$this->attributes['common_core_area'] = $value;
+		}
+	}
+
+	public function setCommonCoreUrlAttribute($value){
+
+		if($value == NULL){
+			$this->attributes['common_core_url'] = 'None';
+		} else {
+			$this->attributes['common_core_url'] = $value;
+		}
+	}
 
 
 	/**

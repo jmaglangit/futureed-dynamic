@@ -1757,6 +1757,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 			case Constants.SUBTRACTION:
+
+                self.date_start = new Date();
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
+
+                randomDigitsOnclick();
+                // Deduct {subtrahend} from {minuend}.
+                question_text = question_text.replace("{minuend}", getRandomNumber1());
+                question_text = question_text.replace("{subtrahend}", getRandomNumber2());
+                self.current_question.questions_text = question_text;
+                startAnswer();
+
+
 				break;
 			case Constants.MULTIPLICATION:
 
@@ -1901,8 +1913,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
                             data.last_answered_question_id = parseInt(self.result.next_question);
 
                             updateModuleStudent(data);
-                        }
 
+                            //go to next questions.
+                            self.nextQuestion();
+                            self.dynamicQuestionSetup(self.current_question);
+                            answerReset();
+                        }
 					}
 				}
 
@@ -1911,12 +1927,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.errors = $scope.internalError();
 				$scope.ui_unblock();
 			});
-        }
-
-        //go to next questions.
-		self.nextQuestion();
-        self.dynamicQuestionSetup(self.current_question);
-        answerReset();
+        } else {
+            //go to next questions.
+            self.nextQuestion();
+            self.dynamicQuestionSetup(self.current_question);
+            answerReset();
+		}
 	}
 
 
