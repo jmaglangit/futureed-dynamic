@@ -355,7 +355,7 @@ function generateAnswerStep() {
 		if(step_count_row1 >= getDigitsCouunt(randomNumber1))
 			$("<p>Step " + (total_step) + ": Result#"+ (step_count_row2) +": What is the result?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 		else
-			$("<p>Step " + (total_step) + ": Multiple Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+			$("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv"); //change multiple to multiply
 	}
 	$(".inputCheck").keydown(function(event){
 		if(event.keyCode == 13){
@@ -387,15 +387,13 @@ function generateAnswerStep() {
 			}
 			if(step_count_row1 > getDigitsCouunt(randomNumber1)){
 				if(checkTotal())
-       			    // ADDED call function view hide
-			    	answerDone(); //added
-       				displayTotalFlow(); //added
 					return;
 				temp_answer = 0;
 				generateAnswerStep();
 				return;
 			}
 			if( IsFinish){
+				answerDone(); //ADDED
 				displayTotalFlow();
 				$(this).blur();
 				return;
@@ -424,7 +422,7 @@ function generateAnswerStep() {
 				carry_elem = $(this);
 				carry_elem.blur();
 				// $("#myModal").show();
-                carryOneModal("Do you carry one?"); //added
+                carryOneModal("Do you need to carry over?"); //added
 			}
 		}
 	}).focus();
@@ -513,7 +511,7 @@ function displayTotalFlow(){
 	   	for(i = 1; i <= getDigitsCouunt(randomNumber1); i++){
     		steps++;
     		result = "<p align=left style='text-indent:10px;'>";
-    		result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + "</p>";
+    		result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + "</p>"; //change multiple to multiply
     		$(result).insertBefore("#lastDiv2");
 
 	 	 	diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
