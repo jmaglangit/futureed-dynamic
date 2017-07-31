@@ -4,7 +4,7 @@
  */
 
 var retry_attempt = 0;
-var retry_attempt_limit = 3;
+var retry_attempt_limit = 1;
 var _start_num = 0;
 var _end_num = 19;
 
@@ -32,7 +32,7 @@ function _validateNum(_num, _default_num) {
 
 // function to get 10^_digits
 function digits(_digits) {
-	_digits = _validateNum(_digits, 4);
+	_digits = _validateNum(_digits, 9);
 	_a = 1;
 	for (_i = 0; _i < _digits; _i++) {
 		_a *= 10;

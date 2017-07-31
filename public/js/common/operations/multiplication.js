@@ -23,6 +23,8 @@ var carry_over = false;
 var carry_over_value = 0;
 var subResult;
 var IsFinish = false;
+var arry_tempanswer = [];
+var carry_words = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 var answered = []; //ADDED
 
 
@@ -109,6 +111,8 @@ function randomDigitsOnclick(){
 	$("#randomDigits2").prop("value", randomDigits2);
 	randomNumber1 = Math.floor(Math.random() * digits(randomDigits1));
 	randomNumber2 = Math.floor(Math.random() * digits(randomDigits2));
+	// randomNumber1 = 27;
+	// randomNumber2 = 56;
 
 	$("#randomNumber1").prop("value", randomNumber1);
 	$("#randomNumber2").prop("value", randomNumber2);
@@ -116,7 +120,8 @@ function randomDigitsOnclick(){
 	$("#subject_number2_p").html(randomNumber2);
 	$("#answerPane").html('<div id="lastDiv"></div>');
 	$("#examPane").show();
-	$("#tipPane").html("<b style='color: #005588;'>Tip</b><div id='lastDiv2'></div><br>");
+	$("#answertipPane").html("<b style='color: #005588;'>Answer Flow</b><div id='lastDiv2'></div><br>");
+	$("#correctanswertipPane").html("<b style='color: #005588;'>Correct Answer Flow</b><div id='lastDiv3'></div><br>");
 
 	total_step = 0;
 	step_count_row1 = 0;
@@ -139,15 +144,17 @@ function checkAnswer(elem) {
 
 function checkAnswerValidation(elem) {
 	answer_val = parseInt(elem.prop("value"));
-	// console.log("step_count_row1 : " + step_count_row1);
-	// console.log("getDigitsCouunt(randomNumber1) : " + getDigitsCouunt(randomNumber1));
-	// console.log(sub_step_Value);
 	correct_answer = 0;
 	if( step_count_row1 == getDigitsCouunt(randomNumber1) + 1){
 		for( i = 0; i < sub_step_Value.length - 1; i++){
+			// console.log("sub_step_Value.length = "+ sub_step_Value.length);
+		
 			correct_answer += sub_step_Value[i+1] * digits(i);
 		}
 		correct_answer *= digits(step_count_row2-1);
+		
+		// console.log("correct_answer = "+ correct_answer);
+		
 		sub_result_Value[ step_count_row2] = correct_answer;
 	}
 	else{
@@ -163,19 +170,34 @@ function checkAnswerValidation(elem) {
 			correct_answer += sub_result_Value[i+1];
 		}
 	}
-	// console.log("correct_answer : " + correct_answer);
 	if (answer_val == correct_answer){
 		carry_over = false;
 		return correct_answer;	
 	} 
 	if(retry_attempt > 1){
-		// alert("Correct Answer is " + correct_answer + ". Retry! ");
+		// alert("Correct Answer is " + correct_answer + ". Retry! "); //removed
 		alertModal("Correct Answer is " + correct_answer + ". Retry! "); //added
 		retry_attempt = 0;
+		if (!arry_tempanswer[total_step]) {
+			arry_tempanswer[total_step] = answer_val;
+			// console.log("arry_tempanswer[total_step] = " + arry_tempanswer[total_step]);
+		}
 		return -3;
 	}
-	if (answer_val > correct_answer) return -1;
-	return -2;
+	if (answer_val > correct_answer) {
+		if (!arry_tempanswer[total_step]) {
+			arry_tempanswer[total_step] = answer_val;
+			// console.log("arry_tempanswer[total_step] = " + arry_tempanswer[total_step]);
+		}
+		return -1;
+	}else {
+		if (!arry_tempanswer[total_step]) {
+			arry_tempanswer[total_step] = answer_val;
+			// console.log("arry_tempanswer[total_step] = " + arry_tempanswer[total_step]);
+		}
+		return -2;	
+	}
+	
 }
 
 /////////////////????????????????????????/////////////////////////
@@ -194,7 +216,6 @@ function displayFunction(IsShowCarry, nRow1, nRow2, elemBefore){
 	else
 		result = "<p class='functionVal' align=right style='width:150px;'>";
 	nRow1 = nRow1 * 1; nRow2 = nRow2 * 1;
-	// console.log(carry_over_All_Values_Correct);
 	for(k=getDigitsCouunt(randomNumber1); k >= 1; k--){
 		if( IsShowCarry){
 			if( k == nRow1){
@@ -228,7 +249,6 @@ function displayFunction(IsShowCarry, nRow1, nRow2, elemBefore){
 	result += "</p>";
 	$(result).insertBefore(elemBefore);
 	//display prev results 
-	// console.log("display prev results");
 	nBuff = nRow2 < getDigitsCouunt(randomNumber2) ? nRow2: getDigitsCouunt(randomNumber2);
 	for( k = 1; k <= getDigitsCouunt(randomNumber2)-1; k ++){
 		if(IsShowCarry)break;
@@ -258,29 +278,26 @@ function displayFunction(IsShowCarry, nRow1, nRow2, elemBefore){
 		if( nRow2 > 2)
 			cur_Disp_val *= digits(nRow2-2);
 		if (nRow2 == getDigitsCouunt(randomNumber2)+1 && nRow2 > 1) {
-			result = "<p class='functionVal under_line' align=right style='width:150px;'>+  ";
+			result = "<p class='functionVal under_line' align=right style='width:150px;'>+ ";
 		}
 		else
 			result = "<p class='functionVal' align=right style='width:150px;'>";
 		for(k=getDigitsCouunt(cur_Disp_val); k >= 1; k--){
-			if( k==getDigitsCouunt(cur_Disp_val)-1){
-				if(carry_over_All_Values_Correct[nRow2-1][k]){
-					continue;
-				}
-			}
-			result += getDigitNum(cur_Disp_val, k) + " ";	
+			// if( k==getDigitsCouunt(cur_Disp_val)-1){
+			// 	console.log("getDigitsCouunt(cur_Disp_val) = " +getDigitsCouunt(cur_Disp_val));
+			// 	if(carry_over_All_Values_Correct[nRow2-1][k]){
+			// 		continue;
+			// 	}
+			// }
+			result += getDigitNum(cur_Disp_val, k) + " ";
 		}
 		result += "</p>";
 		$(result).insertBefore(elemBefore);
 	}
 	if( IsShowCarry){
-		// console.log("nRow1 = " + nRow1);
-		// console.log("nRow2 = " + nRow2);
 		var cur_Disp_val = randomNumber1 % digits(nRow1);
-		// console.log("randomNumber1 % digits(nRow1) = " + cur_Disp_val);
 		cur_Disp_val *= getDigitNum(randomNumber2, nRow2);
 		cur_Disp_Buff = cur_Disp_val;
-		// console.log("cur_Disp_val = " + cur_Disp_val);
 		if( nRow2 > 1)
 			cur_Disp_val *= digits(nRow2-1);
 		if (nRow2 == getDigitsCouunt(randomNumber2)+1 && nRow2 > 1) {
@@ -288,8 +305,6 @@ function displayFunction(IsShowCarry, nRow1, nRow2, elemBefore){
 		}
 		else
 			result = "<p class='functionVal' align=right style='width:150px;'>";
-		// console.log("LOOP cur_Disp_val="+ cur_Disp_val);
-		// console.log(carry_over_All_Values_Correct);
 		for(k=getDigitsCouunt(cur_Disp_val); k >= 1; k--){
 			if( k==getDigitsCouunt(cur_Disp_val)){
 				if(carry_over_All_Values_Correct[nRow2][getDigitsCouunt(cur_Disp_Buff) - 1]){
@@ -354,13 +369,22 @@ function generateAnswerStep() {
 	else{
 		if(step_count_row1 >= getDigitsCouunt(randomNumber1))
 			$("<p>Step " + (total_step) + ": Result#"+ (step_count_row2) +": What is the result?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
-		else
-			$("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv"); //change multiple to multiply
+		else{
+			// if (true) {}
+			// console.log("total_step = " + total_step);
+			// console.log("step_count_row2 = " + step_count_row2);
+			if (total_step > 1) {
+				$("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+			}else{
+				$("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+			}
+			
+		}
 	}
 	$(".inputCheck").keydown(function(event){
 		if(event.keyCode == 13){
 			if(checkAnswer($(this)) == false){
-				// alert("Answer can't be alphabet !");
+				alert("Answer can't be alphabet !"); //removed
                 alertModal("Answer can't be alphabet !"); //added
 				$(this).prop("value", "").focus();
 				retry_attempt++;
@@ -368,15 +392,16 @@ function generateAnswerStep() {
 			}
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
-				// alert("Your answer is larger than what we need.");
+				// alert("Your answer is larger than what we need."); //removed
 				alertModal("Your answer is larger than what we need."); //added
+
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
 			if(temp_answer == -2){
-				// alert("opps not enough, your answer needs to be larger.");
-				alertModal("opps not enough, your answer needs to be larger."); //added				
+				// alert("opps not enough, your answer needs to be larger."); //removed
+				alertModal("opps not enough, your answer needs to be larger."); //added
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -395,12 +420,13 @@ function generateAnswerStep() {
 			if( IsFinish){
 				answerDone(); //ADDED
 				displayTotalFlow();
+				displayTotalFlow1();
 				$(this).blur();
 				return;
 			}
 			if(temp_answer < 10) {
 				sub_step_Value[step_count_row1] = temp_answer;
-				carry_over_value = 0;
+				
                 carry_over_Step_Values_Correct[step_count_row1] = 0;
                 carry_over_Step_Values_Real[step_count_row1] = 0;
 				if(step_count_row1 > 1){
@@ -411,6 +437,8 @@ function generateAnswerStep() {
 			}
 			else {
 				carry_over_value = parseInt(temp_answer / 10);
+				// console.log("carry_over_value = "+ carry_over_value);
+			
 				sub_step_Value[step_count_row1] = temp_answer % 10;
 				sub_step_Value[step_count_row1 + 1] = carry_over_value;
 				carry_over_Step_Values_Correct[step_count_row1] = carry_over_value;
@@ -423,6 +451,9 @@ function generateAnswerStep() {
 				carry_elem.blur();
 				// $("#myModal").show();
                 carryOneModal("Do you need to carry over?"); //added
+
+				$("#number_count").html(carry_words[carry_over_value - 1]);
+				$("#question_b2").show();
 			}
 		}
 	}).focus();
@@ -432,7 +463,7 @@ function generateAnswerStep() {
 function startAnswer() {
 	if($(".answer_value").length == 0) {
  	 	displayFunction(false, 0, 1, "#lastDiv");
-		generateAnswerStep();
+ 	 	generateAnswerStep();
 	}
 }
 
@@ -449,14 +480,14 @@ function startOnclick(){
 		randomNumber2 = parseInt((randomNumber2 - randomNumber2 % 10) / 10);
 	}
 
-	document.getElementById('message_modal_dynamic').style.display = "block"; //'myModal'
+	document.getElementById('message_modal_dynamic').style.display = "block";
 }
 
 function btnYEsOnclick(){
 //	carr_over_var[step_count_row1 - 1] = true;
 //	carr_over_var2[step_count_row1 - 1] = true;
 	carry_over = true;
-	$("#message_modal_dynamic").hide(); //'myModal'
+	$("#message_modal_dynamic").hide();
 	$("<p>Carry " + carry_over_Step_Values_Real[step_count_row1] + "</p>").insertBefore("#lastDiv");
 	gotoNextLevel();
 }
@@ -467,12 +498,12 @@ function btnNOOnclick(){
 	sub_step_Value[step_count_row1] = 0;
 //	carr_over_var2[step_count_row1 - 1] = true;
 	carry_over = false;
-	$("#message_modal_dynamic").hide(); //'myModal'
+	$("#message_modal_dynamic").hide();
 	gotoNextLevel();
 }
 
 function btnNOOnclose() {
-	$("#message_modal_dynamic").hide(); //'myModal'
+	$("#message_modal_dynamic").hide();
 }
 
 
@@ -497,7 +528,6 @@ function displayTotalFlow(){
 	var steps = 0;
 	var step_values = [];
 	for(j = 1; j <= getDigitsCouunt(randomNumber2); j++){
-///Display the step's function
 		if( j > 1){
 			steps++;
 			result = "<p align=left style='text-indent:10px;'>";
@@ -511,7 +541,18 @@ function displayTotalFlow(){
 	   	for(i = 1; i <= getDigitsCouunt(randomNumber1); i++){
     		steps++;
     		result = "<p align=left style='text-indent:10px;'>";
-    		result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + "</p>"; //change multiple to multiply
+    		if (steps > 1) {
+    			result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Correct[j][i] + " carried over"+"</p>";	
+    			if (arry_tempanswer[steps]) {
+    				result += "<label style='color:red;'> error : " + arry_tempanswer[steps] + "</label>";
+    			}
+    		}else{
+    			result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + "</p>";	
+    			if (arry_tempanswer[steps]) {
+    				result += "<label style='color:red;'> error : " + arry_tempanswer[steps] + "</label>";
+    			}
+    		}
+    		
     		$(result).insertBefore("#lastDiv2");
 
 	 	 	diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
@@ -535,6 +576,70 @@ function displayTotalFlow(){
 	result = "<p align=left style='text-indent:10px;'>Answer:</p>";
 	result += "<p align=left style='text-indent:20px;'>" + randomNumber1 * randomNumber2 + "</p>";
 
-	$("#lastDiv2").html(result);
-	
+	$("#lastDiv2").html(result);	
+}
+
+function displayTotalFlow1(){
+ 	diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
+	result = "<p class='mul_num1' align=right style='width:150px;'>";
+
+	for(k=getDigitsCouunt(randomNumber1); k >= 1; k--){
+		result += getDigitNum(randomNumber1, k) + " ";
+	}
+	result += "</p>";
+	$(result).insertBefore("#lastDiv3");
+
+	result = "<p class='under_line mul_num1' align=right style='width:150px;'> x ";
+	if(diff_space > 0) result += "  ";
+
+	for(k=getDigitsCouunt(randomNumber2); k >= 1; k--){
+		result += getDigitNum(randomNumber2, k) + " ";
+	}
+	result += "</p>";
+	$(result).insertBefore("#lastDiv3");
+	var steps = 0;
+	var step_values = [];
+	for(j = 1; j <= getDigitsCouunt(randomNumber2); j++){
+		if( j > 1){
+			steps++;
+			result = "<p align=left style='text-indent:10px;'>";
+			result += "Step " + steps + " : Add ";
+			for( k = 1; k < j; k++)
+				result += "0";
+			result += " in Row" + j + "</p>";
+			$(result).insertBefore("#lastDiv3");
+			displayFunction( false, -j+1, step_count_row2, "#lastDiv3");
+		}
+	   	for(i = 1; i <= getDigitsCouunt(randomNumber1); i++){
+    		steps++;
+    		result = "<p align=left style='text-indent:10px;'>";
+    		if (steps > 1) {
+    			result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Correct[j][i] + " carried over"+"</p>";	
+    		}else{
+    			result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + "</p>";	
+    		}
+    		$(result).insertBefore("#lastDiv3");
+
+	 	 	diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
+	 	 	displayFunction( true, i, j, "#lastDiv3");
+    	}
+    	steps++;
+    	result = "<p align=left style='text-indent:10px;'>";
+    	result += "Step " + steps + " : Result # " + j + "<br>";
+    	result += randomNumber1 * getDigitNum(randomNumber2, j) * digits(j-1) +"</p>";
+    	$(result).insertBefore("#lastDiv3");
+	}
+	steps++;
+	var strHtml = "<p>Step " + steps + ":  Add ";
+	for( i = 0; i < step_count_row2 - 1; i++){
+		if( i > 0) strHtml += " and "
+		strHtml += "Result #" + (i+1);
+	}
+	strHtml += "</p>";
+	$(strHtml).insertBefore("#lastDiv3");
+	displayFunction(false, getDigitsCouunt(randomNumber1)+1, getDigitsCouunt(randomNumber2)+1, "#lastDiv3");
+	result = "<p align=left style='text-indent:10px;'>Answer:</p>";
+	result += "<p align=left style='text-indent:20px;'>" + randomNumber1 * randomNumber2 + "</p>";
+
+	$("#lastDiv3").html(result);	
 }
