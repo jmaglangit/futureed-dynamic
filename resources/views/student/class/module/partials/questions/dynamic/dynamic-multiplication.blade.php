@@ -25,7 +25,12 @@
                     <div id="lastDiv2"></div><br>
                 </div>
             </div>
-
+            <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
+                <div class="pull-left">
+                    <div class="prof-info"><b>Correct Answer Flow</b></div><br/>
+                    <div id="lastDiv3"></div>
+                </div>
+            </div>
         </div>
         <div style="clear: both;"></div>
     </div>
@@ -39,8 +44,8 @@
                 <h2>Question</h2>
             </div>
             <div class="modal-body">
-                <div id="message_text_modal" class="h4"></div>
-
+                <!-- <div id="message_text_modal" class="h4"></div> -->
+                <div class="h4"><b id="question_b2" style="display: none;">Do you need to carry the <b id="number_count"></b> over?</b></div>
                 <br><br>
                 <div id="num1_1div"></div>
                 <div id="num2_1div"></div>
