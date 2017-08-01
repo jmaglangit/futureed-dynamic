@@ -64,7 +64,9 @@
         </div>
 
     </div>
-    {!! Html::script('/js/common/operations/subtraction.js')!!}
-    {!! Html::script('/js/common/operations/global.js?20170713')!!}
+    {!! Html::style('/css/operations/division.css') !!}
+    {!! Html::script('/js/common/operations/division_main.js')!!}
+    {!! Html::script('/js/common/operations/division2.js?20170715')!!}
+    {!! Html::script('/js/common/operations/global.js?20170715')!!}
 
 </div>

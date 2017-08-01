@@ -1784,6 +1784,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 			case Constants.DIVISION:
+
+				// console.log('panzer division here...');
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
+
+                randomDigitsOnclick();
+
+                question_text = question_text.replace("{dividend}",getRandomNumber2());
+                question_text = question_text.replace("{divisor}",getRandomNumber1());
+                self.current_question.questions_text = question_text;
+
+                startAnswer();
+
 				break;
 			default:
 				break;

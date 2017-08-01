@@ -64,7 +64,7 @@
 
     	_answer = parseInt(_elem.prop("value"));
 
-    	console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
+    	// console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
 
     	
     	if(isNaN(_answer))											return _errorHandler(_elem, -1, "Answer can't be alphabet !");
@@ -87,7 +87,7 @@
 
     	_answer = parseInt(_elem.prop("value"));
 
-    	console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
+    	// console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
 
     	
     	if(isNaN(_answer))											return _errorHandler(_elem, -1, "Answer can't be alphabet !");
