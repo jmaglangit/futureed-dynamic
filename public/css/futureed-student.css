@@ -2795,3 +2795,23 @@ canvas#world {
     right: 20px;
     text-align: left;
 }
+
+/* for multiplication dynamic questions */
+.under_line{
+    border:0;
+    border-bottom: solid 2px black;
+}
+.functionVal{
+    font-size: large;
+}
+.mul_num1, .mul_num2{
+    font-weight: bold;
+    color: #0055BB;
+    font-size: 16pt;
+}
+.carry_num{
+    font-style: italic;
+    font-size: smaller;
+    color: #f00;
+    vertical-align: super;
+}
