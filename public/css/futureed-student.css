@@ -2802,7 +2802,7 @@ canvas#world {
     border-bottom: solid 2px black;
 }
 .functionVal{
-    font-size: large;
+    font-size: 16pt;
 }
 .mul_num1, .mul_num2{
     font-weight: bold;
