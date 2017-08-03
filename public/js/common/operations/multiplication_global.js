@@ -71,12 +71,12 @@ function validateAnswer(_elem, _correct_answer) {
 	console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
 
 	
-	if(isNaN(_answer))											return _errorHandler(_elem, -1, "Answer can't be alphabet !");
+	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
 
 	_elem.prop("value", _answer);
 	if((_answer * 1 < _start_num) || (_answer * 1 > _end_num))	return _errorHandler(_elem, -2, "Answer can't less than " + _start_num + " or more than " + _end_num + " !");
 	if(_answer < _correct_answer)								return _errorHandler(_elem, -3, "opps not enough, your answer needs to be larger.");
-	if(_answer > _correct_answer)								return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
+	if(_answer > _correct_answer)								return _errorHandler(_elem, -4, "That is incorrect. Answer cannot be less than 0 or more than 18. Please retry..");
 
 	return 0;
 }
@@ -94,7 +94,7 @@ function validateAnswer4Substraction(_elem, _correct_answer) {
 	console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
 
 	
-	if(isNaN(_answer))											return _errorHandler(_elem, -1, "Answer can't be alphabet !");
+	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
 
 	_elem.prop("value", _answer);
 	if((_answer * 1 < _start_num) || (_answer * 1 > _end_num))	return _errorHandler(_elem, -2, "Answer can't less than " + _start_num + " or more than " + _end_num + " !");
@@ -105,7 +105,7 @@ function validateAnswer4Substraction(_elem, _correct_answer) {
 		}
 
 	if(_answer < _correct_answer)								return _errorHandler(_elem, -3, "opps not enough, your answer needs to be larger.");    	
-	if(_answer > _correct_answer)								return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
+	if(_answer > _correct_answer)								return _errorHandler(_elem, -4, "That is incorrect. Answer cannot be less than 0 or more than 18. Please retry..");
 
 	return 0;
 }
