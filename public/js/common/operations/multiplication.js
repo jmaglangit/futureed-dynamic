@@ -29,6 +29,7 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
+	digit = 2;
     randomDigits1 = digit;
     randomDigits2 = digit;
 }
