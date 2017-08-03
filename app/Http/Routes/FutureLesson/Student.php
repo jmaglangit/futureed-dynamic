@@ -273,6 +273,11 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@divisionAns'
 					]);
 
+					Routes::get('/questions/dynamic/fraction-subtraction',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction_subtraction'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'
@@ -287,6 +292,7 @@
 						'as' => 'student.class.module.partials.notepad',
 						'uses' => 'FutureLesson\Student\ClassModuleController@notepad'
 					]);
+
 				});
 			});
 		});
