@@ -324,7 +324,7 @@ function generateAnswerStep() {
     for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
 
         if ((step_count+1) == i) {
-            result += "<label style='color:red'>" + getDigitNum(randomNumber1, i) + " " + "</label>";
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber1, i) + " " + "</label>";
         }else{
             result += getDigitNum(randomNumber1, i) + " ";
         }
@@ -335,7 +335,7 @@ function generateAnswerStep() {
 
     for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
         if ((step_count+1) == i) {
-            result += "<label style='color:red'>" + getDigitNum(randomNumber2, i) + " " + "</label>";
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber2, i) + " " + "</label>";
         }else{
             result += getDigitNum(randomNumber2, i) + " ";
         }
@@ -350,8 +350,8 @@ function generateAnswerStep() {
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                // alert("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -366,7 +366,7 @@ function generateAnswerStep() {
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
                 // alert("Your answer is larger than what we need.");
-                alertModal("Your answer is larger than what we need.");
+                alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry..");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
