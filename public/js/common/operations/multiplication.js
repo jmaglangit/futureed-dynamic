@@ -384,8 +384,8 @@ function generateAnswerStep() {
 	$(".inputCheck").keydown(function(event){
 		if(event.keyCode == 13){
 			if(checkAnswer($(this)) == false){
-				alert("Answer can't be alphabet !"); //removed
-                alertModal("Answer can't be alphabet !"); //added
+				alert("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !"); //removed
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !"); //added
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -393,7 +393,7 @@ function generateAnswerStep() {
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need."); //removed
-				alertModal("Your answer is larger than what we need."); //added
+				alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry.."); //added
 
 				$(this).prop("value", "").focus();
 				retry_attempt++;

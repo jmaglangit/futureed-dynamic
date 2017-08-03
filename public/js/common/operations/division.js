@@ -76,7 +76,7 @@
         // strHTML = generateDivisionExpr(randomNumber2, temp_val, (randomNumber1 + "").substring(getDigitsCouunt(randomNumber2) + step_count));
 
         if(remainder_val > 0){
-            $("<p>Step " + (real_step_count + 1) + ": " + "Drop down the " + step_words[max_digit - step_count - 1] + " digit</p>").insertBefore("#lastDiv");
+            $("<p>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>").insertBefore("#lastDiv");
             real_step_count++;
             generateAnswerEquation(real_step_count).insertBefore("#lastDiv");
         }
@@ -86,7 +86,7 @@
         retry_second_answer = 0;
         retry_third_answer = 0;
 
-        $("<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>" + strHTML + "<p>What is the corresponding multiplication?  (Write it out, example "+randomNumber2+"x1)</p><input type=text placeholder='answer' class='first_answer inputCheck'>").insertBefore("#lastDiv");
+        $("<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>" + strHTML + "<p>What is the corresponding multiplication?  (Write it out, example "+randomNumber2+"x1)</p><input type=text placeholder='answer' class='first_answer inputCheck'>").insertBefore("#lastDiv");
         
         $(".inputCheck").keydown(function(event){
             if(event.keyCode == 13){
@@ -107,7 +107,7 @@
                     }
                     if(($(this).prop("value") != correct_answer + "x" + randomNumber2 + "") && ($(this).prop("value") != "" + randomNumber2 + "x" + correct_answer)) {
                         retry_first_answer++;
-                        alert("Correct Answer is " + randomNumber2 + "x4 format, please Retry !");
+                        alert("That is incorrect. The correct format is " + randomNumber2 + "x4, please Retry !");
                         $(this).prop("value", "").focus();
                         return false;
                     }
@@ -134,13 +134,13 @@
                                 }
                                 if($(this).prop("value") != "" + temp_val + "-" + (randomNumber2 * correct_answer)) {
                                     retry_second_answer++;
-                                    alert("Correct Answer is " + temp_val + "-" + randomNumber2 + " format, please Retry !");
+                                    alert("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please Retry !");
                                     $(this).prop("value", "").focus();
                                     return false;
                                 }
 
                                 $(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-                                $("<p>How much is left?</p><input type=text placeholder='answer' class='third_answer inputCheck'>").insertBefore("#lastDiv");
+                                $("<p>What is the difference?</p><input type=text placeholder='answer' class='third_answer inputCheck'>").insertBefore("#lastDiv");
                                 
                                 $(".inputCheck").unbind("keydown").keydown(function(event){
 
@@ -159,7 +159,7 @@
                                         }
                                         if($(this).prop("value") * 1 > (temp_val - randomNumber2 * correct_answer) * 1) {
                                             retry_third_answer++;
-                                            alert("Your answer is larger than what we need.");
+                                            alert("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry..");
                                             $(this).prop("value", "").focus();
                                             return false;
                                         } else if($(this).prop("value") * 1 < (temp_val - randomNumber2 * correct_answer) * 1) {
@@ -171,7 +171,7 @@
 
                                         if($(this).hasClass("third_answer")){
                                             $(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-                                            $("<p>What is answer?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+                                            $("<p>What is the answer?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 
                                             $(".inputCheck").unbind("keydown").keydown(function(event){
 
@@ -251,12 +251,12 @@
         for(step_count=0; step_count<max_digit; step_count++){
             
             if(remainder_val > 0){
-                result += "<p>Step " + (real_step_count + 1) + ": " + "Drop down the " + step_words[max_digit - step_count - 1] + " digit</p>";
+                result += "<p>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>";
                 real_step_count++;
                 result += generateAnswerEquationColor(real_step_count);
             }
 
-            result += "<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
+            result += "<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
             if (arry_tempanswer[real_step_count + 1]) {
                 result += "<label style='color:red;'> error : " + arry_tempanswer[real_step_count + 1] + "</label>";
             }
@@ -289,7 +289,7 @@
             }
 
             if (arry_left_temp[real_step_count + 1]) {
-                result += "<p style='color:red'> How much is left?</p>";
+                result += "<p style='color:red'> What is the difference?</p>";
                 result += "<p style='color:red'> error : " + arry_left_temp[real_step_count + 1] + "</p>";
             }
             if(remainder_val > 0) 
@@ -311,12 +311,12 @@
         for(step_count=0; step_count<max_digit; step_count++){
             
             if(remainder_val > 0){
-                result += "<p>Step " + (real_step_count + 1) + ": " + "Drop down the " + step_words[max_digit - step_count - 1] + " digit</p>";
+                result += "<p>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>";
                 real_step_count++;
                 result += generateAnswerEquationColor(real_step_count);
             }
 
-            result += "<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
+            result += "<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
 
             if(remainder_val > 0){
                 result += "<p class='detail_step notice'>Bring down remainder, add " + step_words[max_digit - step_count - 1] + " digit</p>";
