@@ -393,7 +393,7 @@ function generateAnswerStep() {
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need."); //removed
-				alertModal("That is incorrect. Answer is larger than what we need. Please retry."); //added
+				alertModal("Your answer is larger than what we need."); //added
 
 				$(this).prop("value", "").focus();
 				retry_attempt++;
