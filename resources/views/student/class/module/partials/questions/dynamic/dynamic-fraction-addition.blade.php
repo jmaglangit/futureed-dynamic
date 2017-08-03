@@ -88,8 +88,8 @@
 				<h2>Question</h2>
 			</div>
 			<div class="modal-body">
-				<!-- <b>Simplify fraction if possible ? </b> -->
 				<div id="message_text_modal" class="h4"></div>
+
 				<br><br>
 				<div id="num1_1div"></div>
 				<div id="num2_1div"></div>

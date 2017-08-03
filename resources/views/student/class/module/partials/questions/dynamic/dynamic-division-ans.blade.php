@@ -1,4 +1,4 @@
-<div ng-show="mod.record.is_dynamic == futureed.TRUE && mod.current_question.question_template.operation == futureed.MULTIPLICATION">
+<div ng-show="mod.record.is_dynamic == futureed.TRUE && mod.current_question.question_template.operation == futureed.DIVISION">
     <div id="examPane" style="display: none;">
         <!-- answer area -->
         <div
@@ -7,7 +7,7 @@
             <div id="lastDiv"></div>
         </div>
         <div style="float: left; width: 20%;">
-            <b style="color: #005588;   ">Answered Flow</b>
+            <b style="color: #005588;	">Answered Flow</b>
             <div id="lastDiv2"></div><br>
         </div>
         <div style="float: left; width: 20%;">

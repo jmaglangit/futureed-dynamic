@@ -4,7 +4,7 @@
  */
 
 var m1 = "";
-var m2 = "";
+var m2 = ""; //added
 var z2 = "";
 var z1 = "";
 var randomDigits = "";
@@ -40,7 +40,6 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-	digit = 1;
 	randomDigits = digit;
 }
 
