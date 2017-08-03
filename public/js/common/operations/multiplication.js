@@ -368,15 +368,15 @@ function generateAnswerStep() {
 	}
 	else{
 		if(step_count_row1 >= getDigitsCouunt(randomNumber1))
-			$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Result#"+ (step_count_row2) +": What is the result?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+			$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Result#"+ (step_count_row2) +": What is the combined answer?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 		else{
 			// if (true) {}
 			// console.log("total_step = " + total_step);
 			// console.log("step_count_row2 = " + step_count_row2);
 			if (total_step > 1) {
-				$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+				$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 			}else{
-				$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+				$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row1 " + step_words[step_count_row1]+ "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 			}
 			
 		}
@@ -401,7 +401,7 @@ function generateAnswerStep() {
 			}
 			if(temp_answer == -2){
 				// alert("opps not enough, your answer needs to be larger."); //removed
-				alertModal("opps not enough, your answer needs to be larger."); //added
+				alertModal("Oops not enough, your answer needs to be larger."); //added
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -450,7 +450,7 @@ function generateAnswerStep() {
 				carry_elem = $(this);
 				carry_elem.blur();
 				// $("#myModal").show(); //removed
-                carryOneModal("Do you need to carry the " + carry_words[carry_over_value - 1] + " over?"); //added
+                carryOneModal("Do you need to carry " + carry_words[carry_over_value - 1] + " over?"); //added
 
 				// $("#number_count").html(carry_words[carry_over_value - 1]); //removed
 				// $("#question_b2").show(); //removed
