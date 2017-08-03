@@ -314,15 +314,44 @@ function generateAnswerStep() {
         answerDone();
         return;
     }
+
+    var str1 = randomNumber1.toString();
+
+    diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
+    result = "<p>Add</p>";
+    result += "<p align=right style='width:100px;'>";
+
+    for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
+
+        if ((step_count+1) == i) {
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber1, i) + " " + "</label>";
+        }else{
+            result += getDigitNum(randomNumber1, i) + " ";
+        }
+    }
+    result += "</p>";
+    result += "<p align=right style='width:100px;'> + ";
+    if(diff_space > 0) result += "  ";
+
+    for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
+        if ((step_count+1) == i) {
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber2, i) + " " + "</label>";
+        }else{
+            result += getDigitNum(randomNumber2, i) + " ";
+        }
+    }
+
+    result += "</p>";
+
     carr_over_var[step_count] = false;
     carr_over_var2[step_count] = false;
     $(".answer_value").unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-    $("<p style='margin-top: 20px;'>Step " + (step_count + 1) + ": Add the " + step_words[step_count] + "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+    $("<p style='margin-top: 20px;'>Step " + (step_count + 1) + ": Add the " + step_words[step_count] + "</p>" + result + "<input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                // alert("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -337,7 +366,7 @@ function generateAnswerStep() {
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
                 // alert("Your answer is larger than what we need.");
-                alertModal("Your answer is larger than what we need.");
+                alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry..");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -430,6 +459,3 @@ function getDigitsCouunt(number){
 
     return digitsCount;
 }
-
-
-

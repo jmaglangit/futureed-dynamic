@@ -13,6 +13,8 @@ var borrow_var = [];
 var x_var = [];
 var x_var2 = [];
 var y_var = [];
+var arr_randomNumber1 = [];
+var arr_randomNumber2 = [];
 
 _end_num = 9;
 
@@ -90,7 +92,7 @@ function btnNOOnclose() {
 //END ADDED FUNCTION
 
 function randomDigitsOnclick(){
-    // randomDigits = _validateNum($("#randomDigits").prop("value"), 4); //REMOVED
+    randomDigits = _validateNum($("#randomDigits").prop("value"), 4);
     if(randomDigits > 9) randomDigits = 8;
     $("#randomDigits").prop("value", randomDigits);
 
@@ -138,10 +140,38 @@ function generateAnswerStep() {
         answerDone();
         return;
     }
+    var str1 = randomNumber1.toString();
+
+    diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
+    result = "<p>Substract</p>";
+    result += "<p align=right style='width:100px;'>";
+
+    for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
+
+        if ((step_count+1) == i) {
+            result += "<label style='color:red'>" + getDigitNum(randomNumber1, i) + " " + "</label>";
+        }else{
+            result += getDigitNum(randomNumber1, i) + " ";
+        }
+    }
+    result += "</p>";
+    result += "<p align=right style='width:100px;'> - ";
+    if(diff_space > 0) result += "  ";
+
+    for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
+        if ((step_count+1) == i) {
+            result += "<label style='color:red'>" + getDigitNum(randomNumber2, i) + " " + "</label>";
+        }else{
+            result += getDigitNum(randomNumber2, i) + " ";
+        }
+    }
+
+    result += "</p>";
 
     borrow_var[step_count] = false;
+    console.log("step_count = " + step_count);
     $(".answer_value").unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-    $("<p>Step " + (step_count + 1) + ": Subtract the " + step_words[step_count] + "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+    $("<p>Step " + (step_count + 1) + ": Subtract the " + step_words[step_count] + "</p>" + result + "<input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             correct_answer = getCorrectAnswer();
@@ -306,4 +336,3 @@ function btnNOOnclick(){
     alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
     $(".inputCheck").focus();
 }
-

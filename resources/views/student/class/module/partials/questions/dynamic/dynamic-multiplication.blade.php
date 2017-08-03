@@ -44,8 +44,8 @@
                 <h2>Question</h2>
             </div>
             <div class="modal-body">
-                <!-- <div id="message_text_modal" class="h4"></div> -->
-                <div class="h4"><b id="question_b2" style="display: none;">Do you need to carry the <b id="number_count"></b> over?</b></div>
+                <div id="message_text_modal" class="h4"></div>
+
                 <br><br>
                 <div id="num1_1div"></div>
                 <div id="num2_1div"></div>

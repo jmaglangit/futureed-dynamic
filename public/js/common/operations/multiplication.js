@@ -368,15 +368,15 @@ function generateAnswerStep() {
 	}
 	else{
 		if(step_count_row1 >= getDigitsCouunt(randomNumber1))
-			$("<p>Step " + (total_step) + ": Result#"+ (step_count_row2) +": What is the result?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+			$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Result#"+ (step_count_row2) +": What is the result?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 		else{
 			// if (true) {}
 			// console.log("total_step = " + total_step);
 			// console.log("step_count_row2 = " + step_count_row2);
 			if (total_step > 1) {
-				$("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+				$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 			}else{
-				$("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+				$("<p style='margin-top: 20px;'>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ "</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 			}
 			
 		}
@@ -384,8 +384,8 @@ function generateAnswerStep() {
 	$(".inputCheck").keydown(function(event){
 		if(event.keyCode == 13){
 			if(checkAnswer($(this)) == false){
-				alert("Answer can't be alphabet !"); //removed
-                alertModal("Answer can't be alphabet !"); //added
+				//alert("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !"); //removed
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !"); //added
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -393,7 +393,7 @@ function generateAnswerStep() {
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need."); //removed
-				alertModal("Your answer is larger than what we need."); //added
+				alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry.."); //added
 
 				$(this).prop("value", "").focus();
 				retry_attempt++;
@@ -449,11 +449,11 @@ function generateAnswerStep() {
 
 				carry_elem = $(this);
 				carry_elem.blur();
-				// $("#myModal").show();
-                carryOneModal("Do you need to carry over?"); //added
+				// $("#myModal").show(); //removed
+                carryOneModal("Do you need to carry the " + carry_words[carry_over_value - 1] + " over?"); //added
 
-				$("#number_count").html(carry_words[carry_over_value - 1]);
-				$("#question_b2").show();
+				// $("#number_count").html(carry_words[carry_over_value - 1]); //removed
+				// $("#question_b2").show(); //removed
 			}
 		}
 	}).focus();
@@ -488,7 +488,7 @@ function btnYEsOnclick(){
 //	carr_over_var2[step_count_row1 - 1] = true;
 	carry_over = true;
 	$("#message_modal_dynamic").hide();
-	$("<p>Carry " + carry_over_Step_Values_Real[step_count_row1] + "</p>").insertBefore("#lastDiv");
+	$("<p style='margin-top: 10px;'>Carry " + carry_over_Step_Values_Real[step_count_row1] + "</p>").insertBefore("#lastDiv");
 	gotoNextLevel();
 }
 
