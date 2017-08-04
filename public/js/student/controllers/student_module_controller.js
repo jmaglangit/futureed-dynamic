@@ -1737,7 +1737,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
 
-				console.log("<h1> Addition </h1>");
 				//get grade condition
 				//add number of digits
                 //set strings
