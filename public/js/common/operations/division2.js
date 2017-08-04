@@ -244,7 +244,7 @@ function btnNOOnclose() {
                                                 
                                             }
                                             // alert("Your answer is larger than what we need.");
-                                            alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry..");
+                                            alertModal("Your answer is larger than what we need.");
 											$(this).prop("value", "").focus();
 											return false;
 										} else if($(this).prop("value") * 1 < (temp_val - randomNumber2 * correct_answer) * 1) {
