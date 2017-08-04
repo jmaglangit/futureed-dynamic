@@ -217,7 +217,7 @@ function btnNOOnclose() {
                                         
                                     }
 									//alert("Correct Answer is " + temp_val + "-" + randomNumber2 + " format, please Retry !");
-                                    alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please Retry!");
+                                    alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please retry!");
 									$(this).prop("value", "").focus();
 									return false;
 								}
