@@ -194,7 +194,7 @@ function btnNOOnclose() {
 					}
 
             		$(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-            		$("<p style='margin-top:10px;'>What is the subtraction?  (Write it out, example "+temp_val+"-"+randomNumber2+")</p><input type=text placeholder='answer' class='second_answer inputCheck'>").insertBefore("#lastDiv");
+            		$("<p style='margin-top:10px;'>What is the equation for subtraction?  (Write it out, example "+temp_val+"-"+randomNumber2+")</p><input type=text placeholder='answer' class='second_answer inputCheck'>").insertBefore("#lastDiv");
                     
             		$(".inputCheck").unbind("keydown").keydown(function(event){
 
