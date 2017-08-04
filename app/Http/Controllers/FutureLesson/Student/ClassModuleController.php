@@ -85,4 +85,13 @@ class ClassModuleController extends Controller {
 	public function divisionAns(){
 		return view('student.class.module.partials.questions.dynamic.dynamic-division-ans');
 	}
+
+	public function fraction_multiplication(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication');
+	}
+
+	public function fraction_multiplication_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication-ans');
+	}
+
 }

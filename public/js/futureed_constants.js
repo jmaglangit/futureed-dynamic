@@ -328,6 +328,7 @@ var Constants = {
 	, SUBTRACTION				: 'SUBTRACTION'
 	, DIVISION					: 'DIVISION'
 	, MULTIPLICATION			: 'MULTIPLICATION'
+	, FRACTION_MULTIPLICATION	: 'FRACTION_MULTIPLICATION'
 
 	/* question dynamic template variables */
 	, ADDENDS1					: 'ADDENDS1'
