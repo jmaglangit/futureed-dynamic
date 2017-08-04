@@ -156,7 +156,7 @@ function btnNOOnclose() {
         // strHTML = generateDivisionExpr(randomNumber2, temp_val, (randomNumber1 + "").substring(getDigitsCouunt(randomNumber2) + step_count));
 
         if(remainder_val > 0){
-            $("<p>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>").insertBefore("#lastDiv");
+            $("<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>").insertBefore("#lastDiv");
             real_step_count++;
             generateAnswerEquation(real_step_count).insertBefore("#lastDiv");
         }
@@ -166,7 +166,7 @@ function btnNOOnclose() {
         retry_second_answer = 0;
         retry_third_answer = 0;
 
-        $("<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>" + strHTML + "<p>What is the corresponding multiplication?  (Write it out, example "+randomNumber2+"x1)</p><input type=text placeholder='answer' class='first_answer inputCheck'>").insertBefore("#lastDiv");
+        $("<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>" + strHTML + "<p>What is the corresponding multiplication?  (Write it out, example "+randomNumber2+"x1)</p><input type=text placeholder='answer' class='first_answer inputCheck'>").insertBefore("#lastDiv");
         $(".inputCheck").keydown(function(event){
             if(event.keyCode == 13){
             	if($(this).hasClass("first_answer")){
@@ -182,7 +182,7 @@ function btnNOOnclose() {
 					if(($(this).prop("value") != correct_answer + "x" + randomNumber2 + "") && ($(this).prop("value") != "" + randomNumber2 + "x" + correct_answer)) {
 						retry_first_answer++;
 						//alert("Correct Answer is " + randomNumber2 + "x4 format, please Retry !");
-                        alertModal("That is incorrect. The correct format is " + randomNumber2 + ". Please Retry !");
+                        alertModal("The answer is incorrect. Please retry!");
                         if (!arry_step_count_temp[real_step_count]) {
                             //console.log("2 = " + $(this).prop("value"));
                             arry_step_count_temp[real_step_count] = $(this).prop("value");
@@ -194,7 +194,7 @@ function btnNOOnclose() {
 					}
 
             		$(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-            		$("<p>What is the subtraction?  (Write it out, example "+temp_val+"-"+randomNumber2+")</p><input type=text placeholder='answer' class='second_answer inputCheck'>").insertBefore("#lastDiv");
+            		$("<p style='margin-top:10px;'>What is the subtraction?  (Write it out, example "+temp_val+"-"+randomNumber2+")</p><input type=text placeholder='answer' class='second_answer inputCheck'>").insertBefore("#lastDiv");
                     
             		$(".inputCheck").unbind("keydown").keydown(function(event){
 
@@ -217,13 +217,13 @@ function btnNOOnclose() {
                                         
                                     }
 									//alert("Correct Answer is " + temp_val + "-" + randomNumber2 + " format, please Retry !");
-                                    alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please Retry !");
+                                    alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please Retry!");
 									$(this).prop("value", "").focus();
 									return false;
 								}
 
 			            		$(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-			            		$("<p>What is the difference?</p><input type=text placeholder='answer' class='third_answer inputCheck'>").insertBefore("#lastDiv");
+			            		$("<p style='margin-top:10px'>What is the difference?</p><input type=text placeholder='answer' class='third_answer inputCheck'>").insertBefore("#lastDiv");
                                 
 			            		$(".inputCheck").unbind("keydown").keydown(function(event){
 
@@ -250,14 +250,14 @@ function btnNOOnclose() {
 										} else if($(this).prop("value") * 1 < (temp_val - randomNumber2 * correct_answer) * 1) {
 											retry_third_answer++;
 											// alert("opps not enough, your answer needs to be larger.");
-                                            alertModal("opps not enough, your answer needs to be larger.");
+                                            alertModal("Oops not enough, your answer needs to be larger.");
 											$(this).prop("value", "").focus();
 											return false;
 										}
 
 						            	if($(this).hasClass("third_answer")){
 						            		$(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-						            		$("<p>What is the answer?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+						            		$("<p style='margin-top:10px;'>What is the answer?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 
 						            		$(".inputCheck").unbind("keydown").keydown(function(event){
 
@@ -270,7 +270,7 @@ function btnNOOnclose() {
 										                
 										                if(temp_answer == 0){
 										                	$(this).blur();
-										                	if(remainder_val * 1 > 0) remainderModal("Do you need to bring down remainder to below digits ?");
+										                	if(remainder_val * 1 > 0) remainderModal("Do you need to bring down remainder to below digits?");
 										                	else generateAnswerStep();
 										                }
 										            }
@@ -338,12 +338,12 @@ function btnNOOnclose() {
     	for(step_count=0; step_count<max_digit; step_count++){
             
             if(remainder_val > 0){
-                result += "<p>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>";
+                result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>";
                 real_step_count++;
                 result += generateAnswerEquationColor(real_step_count);
             }
 
-    		result += "<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
+    		result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
 
             if(remainder_val > 0){
                 result += "<p class='detail_step notice'>Bring down remainder, add " + step_words[max_digit - step_count - 1] + " digit</p>";
@@ -397,12 +397,12 @@ function btnNOOnclose() {
         for(step_count=0; step_count<max_digit; step_count++){
             
             if(remainder_val > 0){
-                result += "<p>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>";
+                result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>";
                 real_step_count++;
                 result += generateAnswerEquationColor(real_step_count);
             }
 
-            result += "<p>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
+            result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
 
             if(remainder_val > 0){
                 result += "<p class='detail_step notice'>Bring down remainder, add " + step_words[max_digit - step_count - 1] + " digit</p>";
@@ -575,8 +575,9 @@ function btnNOOnclose() {
     }
 
     function btnNOOnclick(){
-    	$("#myModal").hide();
-        alert("Remainder is not zero, So you must drop down remainder to the lower digits !");
+    	$("#message_modal_dynamic").hide();
+        //alert("Remainder is not zero, So you must drop down remainder to the lower digits !");
+        alertModal("Remainder is not zero, So you must drop down remainder to the lower digits.");
         generateAnswerStep();
     }
 

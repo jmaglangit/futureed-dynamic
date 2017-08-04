@@ -59,7 +59,7 @@
     	_correct_answer = _validateNum(_correct_answer, 0);
 
     	if( retry_attempt > retry_attempt_limit ) {
-    		retry_attempt = 0;										return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry! ");
+    		retry_attempt = 0;										return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry.");
     	}    	
 
     	_answer = parseInt(_elem.prop("value"));
@@ -67,12 +67,12 @@
     	// console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
 
     	
-    	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
+    	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 
     	_elem.prop("value", _answer);
-    	if((_answer * 1 < _start_num) || (_answer * 1 > _end_num))	return _errorHandler(_elem, -2, "Answer can't less than " + _start_num + " or more than " + _end_num + " !");
-    	if(_answer < _correct_answer)								return _errorHandler(_elem, -3, "opps not enough, your answer needs to be larger.");
-    	if(_answer > _correct_answer)								return _errorHandler(_elem, -4, "That is incorrect. Answer cannot be less than 0 or more than 18. Please retry..");
+    	if((_answer * 1 < _start_num) || (_answer * 1 > _end_num))	return _errorHandler(_elem, -2, "That is incorrect. Answer cannot be less than " + _start_num + " or more than " + _end_num + ". Please retry.");
+    	if(_answer < _correct_answer)								return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
+    	if(_answer > _correct_answer)								return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
 
     	return 0;
     }
@@ -82,7 +82,7 @@
     	_correct_answer = _validateNum(_correct_answer, 0);
 
     	if( retry_attempt > retry_attempt_limit ) {
-    		retry_attempt = 0;										return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry! ");
+    		retry_attempt = 0;										return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry.");
     	}    	
 
     	_answer = parseInt(_elem.prop("value"));
@@ -90,18 +90,18 @@
     	// console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
 
     	
-    	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
+    	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 
     	_elem.prop("value", _answer);
-    	if((_answer * 1 < _start_num) || (_answer * 1 > _end_num))	return _errorHandler(_elem, -2, "Answer can't less than " + _start_num + " or more than " + _end_num + " !");
+    	if((_answer * 1 < _start_num) || (_answer * 1 > _end_num))	return _errorHandler(_elem, -2, "That is incorrect. Answer cannot be less than " + _start_num + " or more than " + _end_num + ". Please retry.");
     	if(step_count > 1)
     		if(borrow_var[step_count - 2]){
     			if((_answer == _correct_answer + 1)||(_answer == _correct_answer - 9))
     																return _errorHandler(_elem, -5, "Remember you borrowed 1 in the previous step.");
     		}
 
-    	if(_answer < _correct_answer)								return _errorHandler(_elem, -3, "opps not enough, your answer needs to be larger.");    	
-    	if(_answer > _correct_answer)								return _errorHandler(_elem, -4, "That is incorrect. Answer cannot be less than 0 or more than 18. Please retry..");
+    	if(_answer < _correct_answer)								return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
+    	if(_answer > _correct_answer)								return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
 
     	return 0;
     }

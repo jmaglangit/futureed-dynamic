@@ -149,7 +149,7 @@ function generateAnswerStep() {
     for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
 
         if ((step_count+1) == i) {
-            result += "<label style='color:red'>" + getDigitNum(randomNumber1, i) + " " + "</label>";
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber1, i) + "&nbsp;" + "</label>";
         }else{
             result += getDigitNum(randomNumber1, i) + " ";
         }
@@ -160,7 +160,7 @@ function generateAnswerStep() {
 
     for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
         if ((step_count+1) == i) {
-            result += "<label style='color:red'>" + getDigitNum(randomNumber2, i) + " " + "</label>";
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber2, i) + "&nbsp;" + "</label>";
         }else{
             result += getDigitNum(randomNumber2, i) + " ";
         }
@@ -333,6 +333,6 @@ function btnYEsOnclick(){
 function btnNOOnclick(){
     $("#message_modal_dynamic").hide();
     // alert(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
-    alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
+    alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1.");
     $(".inputCheck").focus();
 }
