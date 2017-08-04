@@ -339,7 +339,6 @@ var Constants = {
 	, MULTIPLIER				: 'MULTIPLIER'
 	, DIVIDEND					: 'DIVIDEND'
 	, DIVISOR					: 'DIVISOR'
-	, FRACTION_SUBTRACTION		: 'FRACTION_SUBTRACTION'
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']
