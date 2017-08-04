@@ -166,7 +166,7 @@ function btnNOOnclose() {
         retry_second_answer = 0;
         retry_third_answer = 0;
 
-        $("<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>" + strHTML + "<p>What is the corresponding multiplication?  (Write it out, example "+randomNumber2+"x1)</p><input type=text placeholder='answer' class='first_answer inputCheck'>").insertBefore("#lastDiv");
+        $("<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>" + strHTML + "<p>What is the corresponding multiplication?  (Write it out, example "+randomNumber2+"x1)</p><input type=text placeholder='answer' class='first_answer inputCheck'>").insertBefore("#lastDiv");
         $(".inputCheck").keydown(function(event){
             if(event.keyCode == 13){
             	if($(this).hasClass("first_answer")){
@@ -343,7 +343,7 @@ function btnNOOnclose() {
                 result += generateAnswerEquationColor(real_step_count);
             }
 
-    		result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
+    		result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
 
             if(remainder_val > 0){
                 result += "<p class='detail_step notice'>Bring down remainder, add " + step_words[max_digit - step_count - 1] + " digit</p>";
@@ -402,7 +402,7 @@ function btnNOOnclose() {
                 result += generateAnswerEquationColor(real_step_count);
             }
 
-            result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on far left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
+            result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
 
             if(remainder_val > 0){
                 result += "<p class='detail_step notice'>Bring down remainder, add " + step_words[max_digit - step_count - 1] + " digit</p>";
