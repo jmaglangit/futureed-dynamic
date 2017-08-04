@@ -76,7 +76,7 @@
 								'' =>trans('messages.admin_select_operation')
 								, '{! futureed.ADDITION !}' => trans('messages.admin_operation_add')
 								, '{! futureed.SUBTRACTION !} ' => trans('messages.admin_operation_subtract')
-							//, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
+								, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
 								, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
 							)
 							, null

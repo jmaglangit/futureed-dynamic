@@ -232,6 +232,9 @@ class AdminModuleController extends ApiController {
 			return $this->respondErrorMessage(2141);
 		}
 
+		//delete module country
+		$this->module_country->deleteModuleCountries($id);
+
 		//delete module
 		return $this->respondWithData($this->module->deleteModule($id));
 

@@ -628,6 +628,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				->where('o.date_end', '>=', Carbon::now())
 				->where('class_students.student_id','=',$student_id)
 				->where('s.id','=',$subject_id)
+				->where('m.grade_id','>',0)
 				->groupBy('m.grade_id')
 				->get()
 			;

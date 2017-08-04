@@ -187,6 +187,8 @@
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : template.fields['question_template_format'] }"
 							, 'rows' => '5'
+							, 'ng-click' => "template.validateTemplateText()"
+							, 'id' => 'template_text'
 						)
 					) !!}
 				</div>

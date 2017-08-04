@@ -6,7 +6,7 @@
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
 
-    <div id="examPane" style="display:none;">
+    <div id="examPane" style="display: none;">
         <!-- questions area -->
         <div id="questionPane">
             {{--<p class="col-xs-6 h3">Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>--}}
@@ -64,7 +64,7 @@
         </div>
 
     </div>
-    {!! Html::script('/js/common/operations/addition.js')!!}
-{{--    {!! Html::script('/js/common/operations/jquery.js')!!}--}}
+    {!! Html::script('/js/common/operations/subtraction.js')!!}
+    {!! Html::script('/js/common/operations/global.js?20170713')!!}
 
 </div>
