@@ -182,7 +182,7 @@ function btnNOOnclose() {
 					if(($(this).prop("value") != correct_answer + "x" + randomNumber2 + "") && ($(this).prop("value") != "" + randomNumber2 + "x" + correct_answer)) {
 						retry_first_answer++;
 						//alert("Correct Answer is " + randomNumber2 + "x4 format, please Retry !");
-                        alertModal("That is incorrect. The correct format is " + randomNumber2 + "x1. Please Retry!");
+                        alertModal("The answer is incorrect. Please retry!");
                         if (!arry_step_count_temp[real_step_count]) {
                             //console.log("2 = " + $(this).prop("value"));
                             arry_step_count_temp[real_step_count] = $(this).prop("value");
