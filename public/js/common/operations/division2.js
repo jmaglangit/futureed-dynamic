@@ -250,7 +250,7 @@ function btnNOOnclose() {
 										} else if($(this).prop("value") * 1 < (temp_val - randomNumber2 * correct_answer) * 1) {
 											retry_third_answer++;
 											// alert("opps not enough, your answer needs to be larger.");
-                                            alertModal("opps not enough, your answer needs to be larger.");
+                                            alertModal("Oops not enough, your answer needs to be larger.");
 											$(this).prop("value", "").focus();
 											return false;
 										}
