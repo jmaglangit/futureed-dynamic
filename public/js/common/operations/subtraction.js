@@ -333,6 +333,6 @@ function btnYEsOnclick(){
 function btnNOOnclick(){
     $("#message_modal_dynamic").hide();
     // alert(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
-    alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
+    alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1.");
     $(".inputCheck").focus();
 }
