@@ -279,8 +279,8 @@
 					]);
 
 					Routes::get('/questions/dynamic/fraction-subtraction/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction_subtraction.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtractionAns'
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_answer'
 					]);
 
 					Routes::get('/trial/questions', [
