@@ -176,7 +176,7 @@ function checkAnswerValidation(elem) {
 	} 
 	if(retry_attempt > 1){
 		// alert("Correct Answer is " + correct_answer + ". Retry! "); //removed
-		alertModal("Correct Answer is " + correct_answer + ". Retry! "); //added
+		alertModal("Correct Answer is " + correct_answer + ". Retry. "); //added
 		retry_attempt = 0;
 		if (!arry_tempanswer[total_step]) {
 			arry_tempanswer[total_step] = answer_val;
@@ -385,7 +385,7 @@ function generateAnswerStep() {
 		if(event.keyCode == 13){
 			if(checkAnswer($(this)) == false){
 				//alert("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !"); //removed
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !"); //added
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry."); //added
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
