@@ -90,4 +90,8 @@ class ClassModuleController extends Controller {
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction');
 	}
 
+	public function fraction_subtractionAns(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-ans');
+	}
+
 }

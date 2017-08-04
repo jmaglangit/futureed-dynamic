@@ -1803,14 +1803,16 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			case Constants.FRACTION_SUBTRACTION:
 
 			   	self.date_start = new Date();
-                setRandomDigits(self.question_grade_condition.max_number.toString().length);
 
-                randomDigitsOnclick();
-                // Deduct {subtrahend} from {minuend}.
-                question_text = question_text.replace("{minuend}", getRandomNumber1());
-                question_text = question_text.replace("{subtrahend}", getRandomNumber2());
-                self.current_question.questions_text = question_text;
-                startAnswer();
+               	setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+ 				question_text = question_text.replace("{numerator1}",getRandomNumber1());
+				question_text = question_text.replace("{numerator2}",getRandomNumber2());
+				question_text = question_text.replace("{denominator1}",getRandomNumber3());
+ 				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+
+ 				self.current_question.questions_text = question_text;
+ 				btncalculateOnclick();
 
 				break;
 

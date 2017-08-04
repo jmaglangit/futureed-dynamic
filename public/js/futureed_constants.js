@@ -328,6 +328,7 @@ var Constants = {
 	, SUBTRACTION				: 'SUBTRACTION'
 	, DIVISION					: 'DIVISION'
 	, MULTIPLICATION			: 'MULTIPLICATION'
+	, FRACTION_SUBTRACTION		: 'FRACTION_SUBTRACTION'
 
 	/* question dynamic template variables */
 	, ADDENDS1					: 'ADDENDS1'
@@ -338,6 +339,7 @@ var Constants = {
 	, MULTIPLIER				: 'MULTIPLIER'
 	, DIVIDEND					: 'DIVIDEND'
 	, DIVISOR					: 'DIVISOR'
+	, FRACTION_SUBTRACTION		: 'FRACTION_SUBTRACTION'
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']
