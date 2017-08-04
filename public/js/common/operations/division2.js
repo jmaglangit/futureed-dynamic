@@ -223,7 +223,7 @@ function btnNOOnclose() {
 								}
 
 			            		$(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-			            		$("<p style='margin-top:10px'>What is the difference?</p><input type=text placeholder='answer' class='third_answer inputCheck'>").insertBefore("#lastDiv");
+			            		$("<p style='margin-top:10px'>How much is left?</p><input type=text placeholder='answer' class='third_answer inputCheck'>").insertBefore("#lastDiv");
                                 
 			            		$(".inputCheck").unbind("keydown").keydown(function(event){
 
@@ -374,7 +374,7 @@ function btnNOOnclose() {
             }
 
             if (arry_left_temp[real_step_count + 1]) {
-                result += "<p style='color:red'> What is the difference?</p>";
+                result += "<p style='color:red'> How much is left?</p>";
                 result += "<p style='color:red'> error : " + arry_left_temp[real_step_count + 1] + "</p>";
             }
         	if(remainder_val > 0) 
