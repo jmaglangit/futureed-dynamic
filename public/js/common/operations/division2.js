@@ -570,14 +570,14 @@ function btnNOOnclose() {
     function btnYEsOnclick(){
     	$("#message_modal_dynamic").hide();
     	// if(dropdown_var[step_count - 2]) alert("Remember you drop down remainder in the previous step.");
-        if(dropdown_var[step_count - 2]) alertModal("Remember you drop down remainder in the previous step.");
+        if(dropdown_var[step_count - 2]) alertModal("Remember you bring down remainder in the previous step.");
         generateAnswerStep();
     }
 
     function btnNOOnclick(){
     	$("#message_modal_dynamic").hide();
         //alert("Remainder is not zero, So you must drop down remainder to the lower digits !");
-        alertModal("Remainder is not zero, So you must drop down remainder to the lower digits.");
+        alertModal("Remainder is not zero, So you must bring down remainder to the lower digits.");
         generateAnswerStep();
     }
 
