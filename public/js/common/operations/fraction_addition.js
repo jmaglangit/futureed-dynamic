@@ -1265,6 +1265,7 @@ function checkAnswer(elem) {
 	answer_val = parseInt(elem.prop("value"));
 	if(isNaN(answer_val)) return false;
 	elem.prop("value", answer_val);
+	setAnswered(answer_val);
 	return true;
 }
 

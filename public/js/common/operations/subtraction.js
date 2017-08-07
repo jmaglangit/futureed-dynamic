@@ -149,7 +149,7 @@ function generateAnswerStep() {
     for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
 
         if ((step_count+1) == i) {
-            result += "<label style='color:red'>" + getDigitNum(randomNumber1, i) + " " + "</label>";
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber1, i) + "&nbsp;" + "</label>";
         }else{
             result += getDigitNum(randomNumber1, i) + " ";
         }
@@ -160,7 +160,7 @@ function generateAnswerStep() {
 
     for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
         if ((step_count+1) == i) {
-            result += "<label style='color:red'>" + getDigitNum(randomNumber2, i) + " " + "</label>";
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber2, i) + "&nbsp;" + "</label>";
         }else{
             result += getDigitNum(randomNumber2, i) + " ";
         }
@@ -171,7 +171,7 @@ function generateAnswerStep() {
     borrow_var[step_count] = false;
     console.log("step_count = " + step_count);
     $(".answer_value").unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-    $("<p>Step " + (step_count + 1) + ": Subtract the " + step_words[step_count] + "</p>" + result + "<input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+    $("<p class='margin-10-top'>Step " + (step_count + 1) + ": Subtract the " + step_words[step_count] + "</p>" + result + "<input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             correct_answer = getCorrectAnswer();
@@ -234,7 +234,7 @@ function displayTotalFlow(){
     result = '<p>Subtract ' + randomNumber2 + ' from ' + randomNumber1 + '</label></p>';
 
     for(i=1; i<=max_digit; i++){
-        result += "<p align=left style='text-indent:10px;'>";
+        result += "<p align=left style='text-indent:10px;' class='margin-10-top'>";
         result += "Step " + i + " : Substract the " + step_words[i - 1];
         result += "</p>";
 
@@ -285,7 +285,7 @@ function displayTotalFlow2(){
     result = '<p>Subtract ' + randomNumber2 + ' from ' + randomNumber1 + '</label></p>';
 
     for(i=1; i<=max_digit; i++){
-        result += "<p align=left style='text-indent:10px;'>";
+        result += "<p align=left style='text-indent:10px;' class='margin-10-top'>";
         result += "Step " + i + " : Substract the " + step_words[i - 1];
         result += "</p>";
 
@@ -333,6 +333,6 @@ function btnYEsOnclick(){
 function btnNOOnclick(){
     $("#message_modal_dynamic").hide();
     // alert(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
-    alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
+    alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1.");
     $(".inputCheck").focus();
 }
