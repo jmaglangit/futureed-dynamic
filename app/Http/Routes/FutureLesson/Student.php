@@ -273,6 +273,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@divisionAns'
 					]);
 
+					Routes::get('/questions/dynamic/fraction-division',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-division'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_division'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-division/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-division.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_division_answer'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'

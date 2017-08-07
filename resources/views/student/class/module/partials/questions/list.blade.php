@@ -79,6 +79,10 @@
 					<div ng-if="mod.current_question.question_template.operation == futureed.DIVISION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.division') !!}"></div>
 					</div>
+					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_DIVISION">
+						<H1> FRACTION DIVISION </H1>
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-division') !!}"></div>
+					</div>
 				</div>
 
 				{{--Main Question Contents--}}
@@ -128,6 +132,11 @@
 						<div ng-if="mod.current_question.question_template.operation == futureed.DIVISION">
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.division.answer') !!}"></div>
 						</div>
+						<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_DIVISION">
+							<h1> Display the answers </h1>
+							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-division.answer') !!}"></div>
+						</div>
+
 
 						{{--mod.current_question.question_type == futureed.MULTIPLECHOICE--}}
 						<div class="margin-top-30">
