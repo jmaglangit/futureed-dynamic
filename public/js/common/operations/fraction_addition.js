@@ -4,9 +4,9 @@
  */
 
 var m1 = "";
+var m2 = ""; //added
 var z2 = "";
 var z1 = "";
-var m2 = "";
 var randomDigits = "";
 var max_t = 0;
 var min_t = 0;
@@ -24,13 +24,11 @@ var simplify_count = 0;
 
 var step1_error = "";
 var step2_error = "";
-var step3_error = "";
-var step4_error = "";
-var step5_whole_numerator_error = "";
-var step5_whole_denominator_error = "";
-var step5_whole = "";
-var step5_numerator_error = "";
-var step5_denominator_error = "";
+var step3_whole_numerator_error = "";
+var step3_whole_denominator_error = "";
+var step3_whole = "";
+var step3_numerator_error = "";
+var step3_denominator_error = "";
 
 var possibleFlag = false;
 var simplifyFlag=false;
@@ -42,7 +40,6 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-	digit = 1;
 	randomDigits = digit;
 }
 
@@ -56,10 +53,6 @@ function getRandomNumber2(){
 
 function getRandomNumber3(){
 	return m1;
-}
-
-function getRandomNumber4(){
-	return m2;
 }
 
 function getAnswered(){
@@ -190,7 +183,6 @@ function btnOkWholeNumRetry() {
 
 // end ADDED functions
 
-
 function digits(digits){
 	a = 1;		
 	for (var i = 0; i < digits; i++) {
@@ -202,7 +194,7 @@ function digits(digits){
 function randomDigitsOnclick(){
 	carry_over1 = false;
 	carry_over = false;
-	// randomDigits = $("#randomDigits").prop("value");
+	// randomDigits = $("#randomDigits").prop("value"); //removed
 	randomDigits = parseInt(randomDigits);
 	if(isNaN(randomDigits)) randomDigits = 1;
 	if(randomDigits > 7) randomDigits = 7;
@@ -210,7 +202,6 @@ function randomDigitsOnclick(){
 	max_t = digits(randomDigits);
 	
 	m1 = Math.floor(Math.random() * max_t);
-	m2 = Math.floor(Math.random() * max_t);
 	z1 = Math.floor(Math.random() * max_t);
 	z2 = Math.floor(Math.random() * max_t);
 
@@ -218,24 +209,21 @@ function randomDigitsOnclick(){
 	m2 = m2>1 ? m2 : m2 + 2;
 	z1 = z1 ? z1 : z1 + 1;
 	z2 = z2 ? z2 : z2 + 1;
-	if ( m1 == m2 ) {
-		m1 ++;
-	}
 	
 	$("#m1").prop("value", m1);
-	$("#m2").prop("value", m2);
+	$("#m2").prop("value", m1);
 	$("#z1").prop("value", z1);
 	$("#z2").prop("value", z2);
 
 	$("#subject_z1_b").html(z1);
 	$("#subject_z2_b").html(z2);
 	$("#subject_m1_b").html(m1);
-	$("#subject_m2_b").html(m2);
+	$("#subject_m2_b").html(m1);
 
 	$("#subject_z1_b1").html(z1);
 	$("#subject_z2_b1").html(z2);
 	$("#subject_m1_b1").html(m1);
-	$("#subject_m2_b1").html(m2);
+	$("#subject_m2_b1").html(m1);
 
 	$("#examPane").show();
 	// displayFraction(true, false, "#examPane");
@@ -251,15 +239,17 @@ function btncalculateOnclick(){
 	var result_str = "";
 	if (step_count == 1) {
 		result_str = "<div>";
-		result_str += "<p style='margin-top:20px;'>Step " + step_count +": Cross multiple #1 </p>";
+		result_str += "<p>Step " + step_count +": what is the numerator?</p>";
 		result_str += '<div>';
-			result_str += '<table style="margin-left:45px">';
+			result_str += '<table>';
 				result_str += '<tr>';
 					
 					result_str += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
 					result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-					result_str += '<td align="center"><label>'+ z2 +'</label></td>';
+					result_str += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
 					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
 				result_str += '</tr>';
 				result_str += '<tr>';
 					result_str += '<td bgcolor="#000000" height="2"></td>';
@@ -267,27 +257,14 @@ function btncalculateOnclick(){
 				result_str += '</tr>';
 				result_str += '<tr>';
 					result_str += '<td align="center"><label>'+ m1 +'</label></td>';
-					result_str += '<td align="center"><label style = "color:blue">'+ m2 +'</td>';
+					result_str += '<td align="center"><label>'+ m1 +'</td>';
 
 				result_str += '</tr>';				
 			result_str += '</table>';
 
-		result_str += '</div>';
-		result_str += '<div>';
-			result_str += '<table>';
-				result_str += '<tr>';
-					
-					result_str += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
-					result_str += '<td align="center" valign="middle"><label> '+ "&nbsp;" +'X'+ "&nbsp;" +'</label></td>'; //modify
-					result_str += '<td align="center"><label style = "color:blue">'+ m2 +'</label></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
-				result_str += '</tr>';				
-			result_str += '</table>';
 		result_str += '</div>';
 		result_str += "</div>";
-		$("#crossone").html(result_str);
+		$("#questionsz").html(result_str);
 	}
 
 	$(".inputCheck").keydown(function(event){
@@ -340,86 +317,35 @@ function nextsetp(){
 	result_str = "";
 	if (step_count == 2) {
 		result_str = "<div>";
-		result_str += "<p style='margin-top:20px;'>Step " + step_count +": Cross Multiple #2</p>";
+		result_str += "<p>Step " + step_count +": what is the denominator?</p>";
 		result_str += '<div>';
-			result_str += '<table style="margin-left:45px;">';
+			result_str += '<table>';
 				result_str += '<tr>';
 					
 					result_str += '<td align="center"><label>'+ z1 +'</label></td>';
 					result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-					result_str += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-				result_str += '</tr>';
-				result_str += '<tr>';
-					result_str += '<td bgcolor="#000000" height="2"></td>';
-					result_str += '<td bgcolor="#000000" height="2"></td>';
-				result_str += '</tr>';
-				result_str += '<tr>';
-					result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
-					result_str += '<td align="center"><label>'+ m2 +'</td>';
-
-				result_str += '</tr>';				
-			result_str += '</table>';
-
-		result_str += '</div>';
-		result_str += '<div>';
-			result_str += '<table>';
-				result_str += '<tr>';
-					
-					result_str += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-					result_str += '<td align="center" valign="middle"><label> '+ "&nbsp;" +'X'+ "&nbsp;" +'</label></td>'; //modify
-					result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
+					result_str += '<td align="center"><label>'+ z2 +'</label></td>';
 					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
 					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
+				result_str += '</tr>';
+				result_str += '<tr>';
+					result_str += '<td bgcolor="#000000" height="2"></td>';
+					result_str += '<td bgcolor="#000000" height="2"></td>';
+				result_str += '</tr>';
+				result_str += '<tr>';
+					result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
+					result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
+
 				result_str += '</tr>';				
 			result_str += '</table>';
+
 		result_str += '</div>';
 		result_str += "</div>";
-		$("#crosstwo").html(result_str);
+		$("#questionsm").html(result_str);
 	}
 
 	if (step_count == 3) {
-		result_str = "<div>";
-		result_str += "<p style='margin-top:20px;'>Step " + step_count +": Add #1 and #2 </p>";
-		result_str += '<div>';
-			result_str += '<table>';
-				result_str += '<tr>';
-					
-					result_str += '<td align="center"><label style="color:blue;">'+ arry_correctval[10] +'</label></td>';
-					result_str += '<td align="center" valign="middle"><label> '+ "&nbsp;" +'+'+ "&nbsp;" +'</label></td>'; //modify
-					result_str += '<td align="center"><label style="color:blue;">'+ arry_correctval[9] +'</label></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
-				result_str += '</tr>';			
-			result_str += '</table>';
-
-		result_str += '</div>';
-		result_str += "</div>";
-		$("#addoneandtwo").html(result_str);
-	}
-
-	if (step_count == 4) {
-		result_str = "<div>";
-		result_str += "<p style='margin-top:20px;'>Step " + step_count +": Multiply denominators </p>";
-		result_str += '<div>';
-			result_str += '<table>';
-				result_str += '<tr>';
-					
-					result_str += '<td align="center"><label style="color:blue;">'+ m1 +'</label></td>';
-					result_str += '<td align="center" valign="middle"><label> '+ "&nbsp;" +' X '+ "&nbsp;" +'</label></td>'; //modify
-					result_str += '<td align="center"><label style="color:blue;">'+ m2 +'</label></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
-				result_str += '</tr>';			
-			result_str += '</table>';
-
-		result_str += '</div>';
-		result_str += "</div>";
-		$("#multiply_denominator").html(result_str);
-	}
-
-	if (step_count == 5) {
 		
 		
 		flag = possibleFlagfunc();
@@ -439,10 +365,9 @@ function nextsetp(){
 		}
 
 		if (flag == 1 && simplifyFlag == false) {
-			// console.log("simplifyFlag == false");
 			arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
 			result_str = "<div>";
-			result_str += "<p style='margin-top:20px;'>Step " + step_count +": Simplify fraction if possible</p>";
+			result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
 			
 			result_str += '<table id="step_count3">';
 
@@ -470,12 +395,12 @@ function nextsetp(){
 				result_str += '</tr>';				
 			result_str += '</table>';
 			result_str += "</div>";
-
+			
 			$("#simplify").html(result_str);
 		}else if (arry_correctval[1] < arry_correctval[2] && flag == 0 ) {
 			specialFlag = true;
 			result_str = "<div>";
-			result_str += "<p style='margin-top:20px;'>Step " + step_count +": Simplify fraction if possible</p>";
+			result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
 			
 			result_str += '<table id="step_count3">';
 
@@ -499,12 +424,13 @@ function nextsetp(){
 				result_str += '</tr>';				
 			result_str += '</table>';
 			result_str += "</div>";
-
+			
 			$("#simplify").html(result_str);
 			nextsetp();
+
 		}else if (wholeBtnFlag == false && flag == 0 && simplifyFlag == false) { 
 			result_str = "<div>";
-			result_str += "<p style='margin-top:20px;'>Step " + step_count +": Simplify fraction if possible</p>";
+			result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
 			
 			result_str += '<table id="step_count3">';
 
@@ -529,13 +455,14 @@ function nextsetp(){
 				result_str += '</tr>';				
 			result_str += '</table>';
 			result_str += "</div>";
-
+			
 			$("#simplify").html(result_str);
 			wholeOfValidationFunc();
 		}
+
 	}
 
-	if (step_count == 6) {
+	if (step_count == 4) {
 		if (arry_correctval[1] < arry_correctval[2] && factorX != 1 || specialFlag == true) {
 			// $("#myModal2").show();
 			cannotSimplifyModal("Can not Simplify."); //added
@@ -578,7 +505,7 @@ function nextsetp(){
 			}
 			
 			$("#answer").html(result_str);
-			answerDone(); //added   		
+			answerDone(); //added
 			displayTotalFlow();
 			displayTotalFlow1();
 		}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
@@ -616,7 +543,7 @@ function nextsetp(){
 			}
 			
 			$("#answer").html(result_str);
-			answerDone(); //added
+			answerDone();
 			displayTotalFlow();
 			displayTotalFlow1();
 		}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
@@ -659,7 +586,7 @@ function nextsetp(){
 			displayTotalFlow1();
 		}else if (arry_correctval[6] == arry_correctval[7] && factorX != 1) {
 			result_str = "<div>";
-			result_str += "<p style='margin-top:20px;'>Step " + step_count +": Answer</p>";
+			result_str += "<p>Step " + step_count +": Answer</p>";
 			
 			result_str += '<table>';
 
@@ -669,10 +596,7 @@ function nextsetp(){
 			result_str += '</table>';
 			result_str += "</div>";
 			$("#answer").html(result_str);
-			answerDone(); //added
-			displayTotalFlow();
-			displayTotalFlow1();
-		}else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && startdisplay == true) { 
+		}else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
 			result_str = "<div>";
 			
 			result_str += '<table id="step_count3">';
@@ -704,7 +628,6 @@ function nextsetp(){
 			displayTotalFlow();
 			displayTotalFlow1();
 		}
-		
 	}
 
 	$(".inputCheck").unbind("keydown").keydown(function(event){
@@ -761,8 +684,8 @@ function nextsetp(){
 			}
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
-				if (!step5_numerator_error) {
-					step5_numerator_error = $(this).prop("value");
+				if (!step3_numerator_error) {
+					step3_numerator_error = $(this).prop("value");
 				}
 				// alert("Your answer is larger than what we need.");
 				alertModal("Your answer is larger than what we need.");
@@ -771,18 +694,18 @@ function nextsetp(){
 				return false;
 			}
 			if(temp_answer == -2){
-				if (!step5_numerator_error) {
-					step5_numerator_error = $(this).prop("value");
-				}
 				// alert("opps not enough, your answer needs to be larger.");
 				alertModal("Oops not enough, your answer needs to be larger.");
+				if (!step3_numerator_error) {
+					step3_numerator_error = $(this).prop("value");
+				}
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
 			if(temp_answer == -3){
-				if (!step5_numerator_error) {
-					step5_numerator_error = $(this).prop("value");
+				if (!step3_numerator_error) {
+					step3_numerator_error = $(this).prop("value");
 				}
 				$(this).prop("value", "").focus();
 				return false;
@@ -802,28 +725,28 @@ function nextsetp(){
 					
 					temp_answer = checkAnswerValidation($(this));
 					if(temp_answer == -1){
-						if (!step5_denominator_error) {
-							step5_denominator_error = $(this).prop("value");
-						}
 						// alert("Your answer is larger than what we need.");
 						alertModal("Your answer is larger than what we need.");
+						if (!step3_denominator_error) {
+							step3_denominator_error = $(this).prop("value");
+						}
 						$(this).prop("value", "").focus();
 						retry_attempt++;
 						return false;
 					}
 					if(temp_answer == -2){
-						if (!step5_denominator_error) {
-							step5_denominator_error = $(this).prop("value");
-						}
 						// alert("opps not enough, your answer needs to be larger.");
 						alertModal("Oops not enough, your answer needs to be larger.");
+						if (!step3_denominator_error) {
+							step3_denominator_error = $(this).prop("value");
+						}
 						$(this).prop("value", "").focus();
 						retry_attempt++;
 						return false;
 					}
 					if(temp_answer == -3){
-						if (!step5_denominator_error) {
-							step5_denominator_error = $(this).prop("value");
+						if (!step3_denominator_error) {
+							step3_denominator_error = $(this).prop("value");
 						}
 						$(this).prop("value", "").focus();
 						return false;
@@ -838,7 +761,8 @@ function nextsetp(){
 					nextsetp();
 				}
 			}).focus();
-		}	
+		}
+		
 	}).focus();
 }
 
@@ -856,8 +780,8 @@ function wholeOfValidationFunc() {
 			
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
-				if (!step5_whole) {
-					step5_whole = $(this).prop("value");
+				if (!step3_whole) {
+					step3_whole = $(this).prop("value");
 				}
 				// alert("Your answer is larger than what we need.");
 				alertModal("Your answer is larger than what we need.");
@@ -866,8 +790,8 @@ function wholeOfValidationFunc() {
 				return false;
 			}
 			if(temp_answer == -2){
-				if (!step5_whole) {
-					step5_whole = $(this).prop("value");
+				if (!step3_whole) {
+					step3_whole = $(this).prop("value");
 				}
 				// alert("opps not enough, your answer needs to be larger.");
 				alertModal("Oops not enough, your answer needs to be larger.");
@@ -876,8 +800,8 @@ function wholeOfValidationFunc() {
 				return false;
 			}
 			if(temp_answer == -3){
-				if (!step5_whole) {
-					step5_whole = $(this).prop("value");
+				if (!step3_whole) {
+					step3_whole = $(this).prop("value");
 				}
 				$(this).prop("value", "").focus();
 				return false;
@@ -897,8 +821,8 @@ function wholeOfValidationFunc() {
 					
 					temp_answer = checkAnswerValidation($(this));
 					if(temp_answer == -1){
-						if (!step5_whole_numerator_error) {
-							step5_whole_numerator_error = $(this).prop("value");
+						if (!step3_whole_numerator_error) {
+							step3_whole_numerator_error = $(this).prop("value");
 						}
 						// alert("Your answer is larger than what we need.");
 						alertModal("Your answer is larger than what we need.");
@@ -907,8 +831,8 @@ function wholeOfValidationFunc() {
 						return false;
 					}
 					if(temp_answer == -2){
-						if (!step5_whole_numerator_error) {
-							step5_whole_numerator_error = $(this).prop("value");
+						if (!step3_whole_numerator_error) {
+							step3_whole_numerator_error = $(this).prop("value");
 						}
 						// alert("opps not enough, your answer needs to be larger.");
 						alertModal("Oops not enough, your answer needs to be larger.");
@@ -917,8 +841,8 @@ function wholeOfValidationFunc() {
 						return false;
 					}
 					if(temp_answer == -3){
-						if (!step5_whole_numerator_error) {
-							step5_whole_numerator_error = $(this).prop("value");
+						if (!step3_whole_numerator_error) {
+							step3_whole_numerator_error = $(this).prop("value");
 						}
 						$(this).prop("value", "").focus();
 						return false;
@@ -938,8 +862,8 @@ function wholeOfValidationFunc() {
 							
 							temp_answer = checkAnswerValidation($(this));
 							if(temp_answer == -1){
-								if (!step5_whole_denominator_error) {
-									step5_whole_denominator_error = $(this).prop("value");
+								if (!step3_whole_denominator_error) {
+									step3_whole_denominator_error = $(this).prop("value");
 								}
 								// alert("Your answer is larger than what we need.");
 								alertModal("Your answer is larger than what we need.");
@@ -948,8 +872,8 @@ function wholeOfValidationFunc() {
 								return false;
 							}
 							if(temp_answer == -2){
-								if (!step5_whole_denominator_error) {
-									step5_whole_denominator_error = $(this).prop("value");
+								if (!step3_whole_denominator_error) {
+									step3_whole_denominator_error = $(this).prop("value");
 								}
 								// alert("opps not enough, your answer needs to be larger.");
 								alertModal("Oops not enough, your answer needs to be larger.");
@@ -958,8 +882,8 @@ function wholeOfValidationFunc() {
 								return false;
 							}
 							if(temp_answer == -3){
-								if (!step5_whole_denominator_error) {
-									step5_whole_denominator_error = $(this).prop("value");
+								if (!step3_whole_denominator_error) {
+									step3_whole_denominator_error = $(this).prop("value");
 								}
 								$(this).prop("value", "").focus();
 								return false;
@@ -1015,76 +939,18 @@ function checkAnswerValidation(elem) {
 
 	getz1 = parseInt($("#z1").prop("value"));
 	getz2 = parseInt($("#z2").prop("value"));
-	getm1 = parseInt($("#m1").prop("value"));
-	getm2 = parseInt($("#m2").prop("value"));
+	getm1 = parseInt($("#m2").prop("value"));
 	
 	if (step_count == 1) {
-		correct_answer = getz1 * getm2;
-		if (answer_val == correct_answer){
-			carry_over = false;
-			arry_correctval[10] = correct_answer;
-			return correct_answer;	
-		} 
-		if(retry_attempt > 1){
-			if (!step1_error) {
-				step1_error = answer_val;
-			}
-			// alert("Correct Answer is " + correct_answer + ". Retry! ");
-			alertModal("Correct Answer is " + correct_answer + ". Retry. ");
-			retry_attempt = 0;
-			return -3;
-		}
-		if (answer_val > correct_answer) {
-			if (!step1_error) {
-				step1_error = answer_val;
-			}
-			return -1;
-		}else{
-			if (!step1_error) {
-				step1_error = answer_val;
-			}
-			return -2;	
-		}
-	}
-	if (step_count == 2) {
-		correct_answer = getm1 * getz2;
-		if (answer_val == correct_answer){
-			carry_over = false;
-			arry_correctval[9] = correct_answer;
-			return correct_answer;
-		} 
-		if(retry_attempt > 1){
-			if (!step2_error) {
-				step2_error = answer_val;
-			}
-			// alert("Correct Answer is " + correct_answer + ". Retry! ");
-			alertModal("Correct Answer is " + correct_answer + ". Retry. ");
-			retry_attempt = 0;
-			return -3;
-		}
-		if (answer_val > correct_answer) {
-			if (!step2_error) {
-				step2_error = answer_val;
-			}
-			return -1;
-		}else{
-			if (!step2_error) {
-				step2_error = answer_val;
-			}
-			return -2;	
-		}
-	}
-
-	if (step_count == 3) {
-		correct_answer = getz1 * getm2 + getz2 * getm1;
+		correct_answer = getz1 + getz2;
 		if (answer_val == correct_answer){
 			carry_over = false;
 			arry_correctval[1] = correct_answer;
 			return correct_answer;	
 		} 
 		if(retry_attempt > 1){
-			if (!step3_error) {
-				step3_error = answer_val;
+			if (!step1_error) {
+				step1_error = answer_val;
 			}
 			// alert("Correct Answer is " + correct_answer + ". Retry! ");
 			alertModal("Correct Answer is " + correct_answer + ". Retry. ");
@@ -1092,21 +958,21 @@ function checkAnswerValidation(elem) {
 			return -3;
 		}
 		if (answer_val > correct_answer) {
-			if (!step3_error) {
-				step3_error = answer_val;
+			if (!step1_error) {
+				step1_error = answer_val;
 			}
 			return -1;
 		}else{
-			if (!step3_error) {
-				step3_error = answer_val;
+			if (!step1_error) {
+				step1_error = answer_val;
 			}
 			return -2;	
 		}
 	}
 
-	if (step_count == 4) {
+	if (step_count == 2) {
 
-		correct_answer = getm1 * getm2;
+		correct_answer = getm1;
 		
 		if (answer_val == correct_answer){
 			arry_correctval[2] = correct_answer;
@@ -1116,27 +982,27 @@ function checkAnswerValidation(elem) {
 		} 
 
 		if(retry_attempt > 1){
-			if (!step4_error) {
-				step4_error = answer_val;
+			if (!step2_error) {
+				step2_error = answer_val;
 			}
 			// alert("Correct Answer is " + correct_answer + ". Retry! ");
-			alertModal("Correct Answer is " + correct_answer + ". Retry. ");
+			alertModal("Correct Answer is " + correct_answer + ". Retry. "); 
 			retry_attempt = 0;
 			return -3;
 		}
 		if (answer_val > correct_answer) {
-			if (!step4_error) {
-				step4_error = answer_val;
+			if (!step2_error) {
+				step2_error = answer_val;
 			}
 			return -1;
 		}else{
-			if (!step4_error) {
-				step4_error = answer_val;
+			if (!step2_error) {
+				step2_error = answer_val;
 			}
 			return -2;	
 		}
 	}
-	if (step_count == 5) {
+	if (step_count == 3) {
 
 		if (simplifyFlag == true) {
 			simplify_count++;	
@@ -1323,6 +1189,12 @@ function checkAnswerValidation(elem) {
 		}	        	
 	}
 	
+	if (step_count == 4) {
+		answerDone(); //added
+		displayTotalFlow();
+		displayTotalFlow1();
+	}
+	
 }
 
 function possibleFlagfunc() {
@@ -1360,8 +1232,7 @@ function wholebtnYEsOnclick() {
 	wholeOfValidationFunc();
 	$(".inputCheck2").attr("readonly", true);
 	$(".inputCheck3").attr("readonly", true);
-	// $("#myModal1").hide();
-	$("#message_modal_dynamic").hide(); //added
+	$("#message_modal_dynamic").hide();
 }
 function wholebtnNOOnclick() {
 	// alert("Can not! Retry!");
@@ -1382,9 +1253,7 @@ function btnYEsOnclick(){
 	$(".inputCheck4").attr("readonly", false);
 	$(".inputCheck5").attr("readonly", true);
 	nextsetp();
-	// $("#myModal").hide();
-	$("#message_modal_dynamic").hide(); //added
-
+	$("#message_modal_dynamic").hide(); //'myModal'
 }
 
 function btnNOOnclick(){
@@ -1403,7 +1272,7 @@ function checkAnswer(elem) {
 function displayTotalFlow(){
 	
 	strhtml = "";
-	// strhtml += "<b style='color:blue'>Answered Flow</b>";
+	// strhtml += "<b style='color:blue'>Answered Flow</b>"; //removed
 	// strhtml += "<br><br>";
 	strhtml += '<div id="examPane1" style="">';
 		strhtml += '<table>';
@@ -1427,26 +1296,27 @@ function displayTotalFlow(){
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-				strhtml += '<td align="center"><label>'+ m2 +'</td>';
+				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 
 	strhtml += '</div>';
 
-	strhtml += "<p>Step 1: Cross Multiple #1</p>";
+	strhtml += "<p>Step 1: What is the numerator?</p>";
 	if (step1_error) {
-		strhtml += "<p style='color:red;'> Step 1 Error : " +  step1_error + "</p>";
+		strhtml += "<p style='color:red;'> Step 1 Error: " + step1_error + "</p>";
 	}
-	strhtml += "<div>";
 	strhtml += '<div>';
-		strhtml += '<table style="margin-left:45px;">';
+		strhtml += '<table>';
 			strhtml += '<tr>';
 				
 				strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-				strhtml += '<td align="center"><label>'+ z2 +'</label></td>';
+				strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
@@ -1454,27 +1324,27 @@ function displayTotalFlow(){
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-				strhtml += '<td align="center"><label style = "color:blue">'+ m2 +'</td>';
+				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 
 	strhtml += '</div>';
-	strhtml += "<p style='color:blue'>" + z1 + " x "+ m2 +" = "+ arry_correctval[10] +"</p>";
-
-	strhtml += "<p>Step 2: Cross Multiple #2</p>";
+	strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
+	strhtml += "<p>Step 2: What is the denominator?</p>";
 	if (step2_error) {
-		strhtml += "<p style='color:red;'> Step 2 Error : " +  step2_error + "</p>";
+		strhtml += "<p style='color:red;'> Step 2 Error:" + step2_error + "</p>";
 	}
-	strhtml += "<div>";
 	strhtml += '<div>';
-		strhtml += '<table style="margin-left:45px;">';
+		strhtml += '<table>';
 			strhtml += '<tr>';
 				
 				strhtml += '<td align="center"><label>'+ z1 +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-				strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+				strhtml += '<td align="center"><label>'+ z2 +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
@@ -1482,75 +1352,33 @@ function displayTotalFlow(){
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
-				strhtml += '<td align="center"><label>'+ m2 +'</td>';
+				strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
 
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 
 	strhtml += '</div>';
-	strhtml += "<p style='color:blue'>" + z2 + " x "+ m1 +" = "+ arry_correctval[10] +"</p>";
+	strhtml += "<p style='color:blue'>"+ m1+"</p>";
+	strhtml += "<p>Step 3: Simplify fraction if possible</p>";
 
-	strhtml += "<div>";
-	strhtml += "<p>Step 3: Add #1 and #2 </p>";
-	if (step3_error) {
-		strhtml += "<p style='color:red;'> Step 3 Error : " +  step3_error + "</p>";
-	}
-	strhtml += '<div>';
-		strhtml += '<table>';
-			strhtml += '<tr>';
-				
-				strhtml += '<td align="center"><label style="color:blue;">'+ arry_correctval[10] +'</label></td>';
-				strhtml += '<td align="center" valign="middle"><b> + </b></td>';
-				strhtml += '<td align="center"><label style="color:blue;">'+ arry_correctval[9] +'</label></td>';
-				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><label>' + arry_correctval[1] + '</label></td>';
-			strhtml += '</tr>';			
-		strhtml += '</table>';
-
-	strhtml += '</div>';
-	strhtml += "</div>";
-
-	strhtml += "<div>";
-	strhtml += "<p>Step 4: Multiply denominators</p>";
-	if (step4_error) {
-		strhtml += "<p style='color:red;'> Step 4 Error : " +  step4_error + "</p>";
-	}
-	strhtml += '<div>';
-		strhtml += '<table>';
-			strhtml += '<tr>';
-				
-				strhtml += '<td align="center"><label style="color:blue;">'+ m1 +'</label></td>';
-				strhtml += '<td align="center" valign="middle"><b> X </b></td>';
-				strhtml += '<td align="center"><label style="color:blue;">'+ m2 +'</label></td>';
-				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><label>' + arry_correctval[2] + '</label></td>';
-			strhtml += '</tr>';			
-		strhtml += '</table>';
-
-	strhtml += '</div>';
-	strhtml += "</div>";
-
-	strhtml += "<p>Step 5: Simplify fraction if possible</p>";
-
-	if (step5_whole) {
-		strhtml += "<p style='color:red;'> Step5 Whole Error : " + step5_whole + "</p>";
+	if (step3_whole) {
+		strhtml += "<p style='color:red;'> Step3 Whole Error : " + step3_whole + "</p>";
 	}
 
-	if (step5_whole_numerator_error) {
-		strhtml += "<p style='color:red;'> Step5 Whole Numerator Error : " + step5_whole_numerator_error + "</p>";
+	if (step3_whole_numerator_error) {
+		strhtml += "<p style='color:red;'> Step3 Whole Numerator Error : " + step3_whole_numerator_error + "</p>";
 	}
-	if (step5_whole_denominator_error) {
-		strhtml += "<p style='color:red;'> Step5 Whole Denominator Error : " + step5_whole_denominator_error + "</p>";
+	if (step3_whole_denominator_error) {
+		strhtml += "<p style='color:red;'> Step3 Whole Denominator Error : " + step3_whole_denominator_error + "</p>";
 	}
-	if (step5_numerator_error) {
-		strhtml += "<p style='color:red;'> Step5 Numerator Error : " + step5_numerator_error + "</p>";
+	if (step3_numerator_error) {
+		strhtml += "<p style='color:red;'> Step3 Numerator Error : " + step3_numerator_error + "</p>";
 	}
-	if (step5_denominator_error) {
-		strhtml += "<p style='color:red;'> Step5 Denominator Error : " + step5_denominator_error + "</p>";
+	if (step3_denominator_error) {
+		strhtml += "<p style='color:red;'> Step3 Denominator Error : " + step3_denominator_error + "</p>";
 	}
 
 	if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-		// console.log("4= 0");
 		strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";
 		
 		strhtml += "<div>";
@@ -1562,23 +1390,26 @@ function displayTotalFlow(){
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+				// strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 				
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				
+				// strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+				// strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
 				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
-		// console.log("4!= 0");
 		strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";
 		
 		strhtml += "<div>";
@@ -1588,7 +1419,8 @@ function displayTotalFlow(){
 				
 				strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
@@ -1602,7 +1434,7 @@ function displayTotalFlow(){
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
+				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				
 			strhtml += '</tr>';				
@@ -1619,17 +1451,20 @@ function displayTotalFlow(){
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 				
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				
+				// strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
@@ -1643,18 +1478,22 @@ function displayTotalFlow(){
 				
 				strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 				
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				
+				// strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
@@ -1668,17 +1507,23 @@ function displayTotalFlow(){
 				
 				strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[1] + '</label></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 				
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+				// strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';						
+				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
+				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 		strhtml += "</div>";
@@ -1704,7 +1549,7 @@ function displayTotalFlow(){
 		strhtml += "</div>";
 	}
 	
-	strhtml += "<p>Step 6: Answer: </p>";
+	strhtml += "<p>Step 4: Answer: </p>";
 	if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
 		if (arry_correctval[4] == 0) {
 			strhtml += "<div>";
@@ -1854,11 +1699,10 @@ function displayTotalFlow(){
 
 	$("#correct_flow").html(strhtml);
 }
-
 function displayTotalFlow1(){
 	
 	strhtml = "";
-	// strhtml += "<b style='color:blue'>Answered Flow</b>";
+	// strhtml += "<b style='color:blue'>Answered Flow</b>"; //removed
 	// strhtml += "<br><br>";
 	strhtml += '<div id="examPane1" style="">';
 		strhtml += '<table>';
@@ -1882,23 +1726,24 @@ function displayTotalFlow1(){
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-				strhtml += '<td align="center"><label>'+ m2 +'</td>';
+				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 
 	strhtml += '</div>';
 
-	strhtml += "<p>Step 1: Cross Multiple #1</p>";
-	strhtml += "<div>";
+	strhtml += "<p>Step 1: What is the numerator?</p>";
 	strhtml += '<div>';
-		strhtml += '<table style="margin-left:45px;">';
+		strhtml += '<table>';
 			strhtml += '<tr>';
 				
 				strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-				strhtml += '<td align="center"><label>'+ z2 +'</label></td>';
+				strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
@@ -1906,24 +1751,24 @@ function displayTotalFlow1(){
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-				strhtml += '<td align="center"><label style = "color:blue">'+ m2 +'</td>';
+				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 
 	strhtml += '</div>';
-	strhtml += "<p style='color:blue'>" + z1 + " x "+ m2 +" = "+ arry_correctval[10] +"</p>";
-
-	strhtml += "<p>Step 2: Cross Multiple #2</p>";
-	strhtml += "<div>";
+	strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
+	strhtml += "<p>Step 2: What is the denominator?</p>";
 	strhtml += '<div>';
-		strhtml += '<table style="margin-left:45px;">';
+		strhtml += '<table>';
 			strhtml += '<tr>';
 				
 				strhtml += '<td align="center"><label>'+ z1 +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-				strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+				strhtml += '<td align="center"><label>'+ z2 +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
@@ -1931,52 +1776,16 @@ function displayTotalFlow1(){
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
-				strhtml += '<td align="center"><label>'+ m2 +'</td>';
+				strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
 
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 
 	strhtml += '</div>';
-	strhtml += "<p style='color:blue'>" + z2 + " x "+ m1 +" = "+ arry_correctval[10] +"</p>";
-
-	strhtml += "<div>";
-	strhtml += "<p>Step 3: Add #1 and #2 </p>";
-	strhtml += '<div>';
-		strhtml += '<table>';
-			strhtml += '<tr>';
-				
-				strhtml += '<td align="center"><label style="color:blue;">'+ arry_correctval[10] +'</label></td>';
-				strhtml += '<td align="center" valign="middle"><b> + </b></td>';
-				strhtml += '<td align="center"><label style="color:blue;">'+ arry_correctval[9] +'</label></td>';
-				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><label>' + arry_correctval[1] + '</label></td>';
-			strhtml += '</tr>';			
-		strhtml += '</table>';
-
-	strhtml += '</div>';
-	strhtml += "</div>";
-
-	strhtml += "<div>";
-	strhtml += "<p>Step 4: Multiply denominators</p>";
-	strhtml += '<div>';
-		strhtml += '<table>';
-			strhtml += '<tr>';
-				
-				strhtml += '<td align="center"><label style="color:blue;">'+ m1 +'</label></td>';
-				strhtml += '<td align="center" valign="middle"><b> X </b></td>';
-				strhtml += '<td align="center"><label style="color:blue;">'+ m2 +'</label></td>';
-				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><label>' + arry_correctval[2] + '</label></td>';
-			strhtml += '</tr>';			
-		strhtml += '</table>';
-
-	strhtml += '</div>';
-	strhtml += "</div>";
-
-	strhtml += "<p>Step 5: Simplify fraction if possible</p>";
+	strhtml += "<p style='color:blue'>"+ m1+"</p>";
+	strhtml += "<p>Step 3: Simplify fraction if possible</p>";
 
 	if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-		// console.log("4= 0");
 		strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";
 		
 		strhtml += "<div>";
@@ -1988,23 +1797,26 @@ function displayTotalFlow1(){
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+				// strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 				
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				
+				// strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+				// strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
 				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
-		// console.log("4!= 0");
 		strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";
 		
 		strhtml += "<div>";
@@ -2014,7 +1826,8 @@ function displayTotalFlow1(){
 				
 				strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
@@ -2028,7 +1841,7 @@ function displayTotalFlow1(){
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
+				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				
 			strhtml += '</tr>';				
@@ -2045,17 +1858,20 @@ function displayTotalFlow1(){
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 				
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				
+				// strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
@@ -2069,18 +1885,22 @@ function displayTotalFlow1(){
 				
 				strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 				
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				
+				// strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
@@ -2094,17 +1914,23 @@ function displayTotalFlow1(){
 				
 				strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[1] + '</label></td>';
+				// strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
 				strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 				
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+				// strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';						
+				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';
+				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
+				
 			strhtml += '</tr>';				
 		strhtml += '</table>';
 		strhtml += "</div>";
@@ -2130,7 +1956,7 @@ function displayTotalFlow1(){
 		strhtml += "</div>";
 	}
 	
-	strhtml += "<p>Step 6: Answer: </p>";
+	strhtml += "<p>Step 4: Answer: </p>";
 	if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
 		if (arry_correctval[4] == 0) {
 			strhtml += "<div>";
@@ -2280,6 +2106,7 @@ function displayTotalFlow1(){
 
 	$("#Answer_correct_flow").html(strhtml);
 }
+
 function displayFraction(IsShowWholeNumber, IsAfter, elemAfter){
 	
 	strhtml = "";

@@ -271,6 +271,26 @@
 					Routes::get('/questions/dynamic/division/answer',[
 						'as' => 'student.class.module.partials.questions.dynamic.division.answer'
 						,'uses' => 'FutureLesson\Student\ClassModuleController@divisionAns'
+
+					]);
+					Routes::get('/questions/dynamic/fraction-addition',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-addition/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_answer'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-subtraction',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction_subtraction'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-subtraction/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_answer'
 					]);
 
 					Routes::get('/questions/dynamic/fraction-addition-butterfly',[
@@ -297,6 +317,7 @@
 						'as' => 'student.class.module.partials.notepad',
 						'uses' => 'FutureLesson\Student\ClassModuleController@notepad'
 					]);
+
 				});
 			});
 		});
