@@ -93,4 +93,13 @@ class ClassModuleController extends Controller {
 	public function fraction_addition_answer(){
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-ans');
 	}
+
+	public function fraction_subtraction(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction');
+	}
+
+	public function fraction_subtraction_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-ans');
+	}
+
 }
