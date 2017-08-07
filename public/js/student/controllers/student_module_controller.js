@@ -1726,8 +1726,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.dynamicQuestionSetup = function(question){
 
+<<<<<<< HEAD
 		console.log("function start here");
 
+=======
+>>>>>>> f255ebc73828443bb4eb8dbdbc5eb17d45e4c275
 		var question_text = question.question_template.question_template_format;
 
         //TODO: 1. replace variable to operation logic requirements.
@@ -1755,6 +1758,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
                 question_text = question_text.replace("{addends2}",getRandomNumber2());
                 self.current_question.questions_text = question_text;
                 startAnswer();
+
+                console.log(self.current_question.questions_text ,"current question");
 
 				break;
 			case Constants.SUBTRACTION:
@@ -1784,6 +1789,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				startAnswer();
 
 				break;
+
 			case Constants.DIVISION:
 
 				// console.log('panzer division here...');
@@ -1800,7 +1806,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 
 			case Constants.FRACTION_DIVISION:
-				console.log("fraction division");
+
 				self.date_start = new Date();
 
                 setRandomDigits(self.question_grade_condition.max_number.toString().length);
@@ -1814,6 +1820,38 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
                 self.current_question.questions_text = question_text;
 
   				btncalculateOnclick();
+
+  				break;
+
+			case Constants.FRACTION_ADDITION:
+				//for fraction_addition
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+				question_text = question_text.replace("{numerator1}",getRandomNumber1());
+				question_text = question_text.replace("{numerator2}",getRandomNumber2());
+				question_text = question_text.replace("{denominator1}",getRandomNumber3());
+				question_text = question_text.replace("{denominator2}",getRandomNumber3());
+
+				self.current_question.questions_text = question_text;
+				btncalculateOnclick();
+
+				break;
+
+			case Constants.FRACTION_SUBTRACTION:
+
+			   	self.date_start = new Date();
+
+               	setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+ 				question_text = question_text.replace("{numerator1}",getRandomNumber1());
+				question_text = question_text.replace("{numerator2}",getRandomNumber2());
+				question_text = question_text.replace("{denominator1}",getRandomNumber3());
+ 				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+
+ 				self.current_question.questions_text = question_text;
+ 				btncalculateOnclick();
 
 				break;
 

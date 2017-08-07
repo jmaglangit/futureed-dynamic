@@ -45,8 +45,6 @@ var startdisplay = false;
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-    digit = 1;
-    console.log(digit);
     randomDigits = digit;
 }
 
@@ -201,11 +199,11 @@ function btnNOOnclose() {
 }
 
 function btnOkSimplifyRetry() {
-    simplifyModal("Simplify fraction if possible ? testing 1");
+    simplifyModal("Simplify fraction if possible ?");
 }
 
 function btnOkWholeNumRetry() {
-    wholeNumberModal("Would you make a whole number ? whole numbe 1");
+    wholeNumberModal("Would you make a whole number ?");
 }
 // end ADDED functions
 
@@ -466,16 +464,16 @@ function nextsetp(){
         flag = possibleFlagfunc();
         if (flag == 1 && wholeBtnFlag == false) {
             // $("#myModal").show();
-            simplifyModal("Simplify fraction if possible ? testing 2"); //added
+            simplifyModal("Simplify fraction if possible ?"); //added
         }
         if (arry_correctval[6] > arry_correctval[7]) {
             // $("#myModal1").show();
-            wholeNumberModal("Would you make a whole number ? whoel number 2"); //added
+            wholeNumberModal("Would you make a whole number ?"); //added
         }
 
         if ( arry_correctval[1] > arry_correctval[2] && flag == 0 ) {
             // $("#myModal1").show();
-            wholeNumberModal("Would you make a whole number ? whoel number 3"); //added
+            wholeNumberModal("Would you make a whole number ?"); //added
         }
 
         if (flag == 1 && simplifyFlag == false) {
@@ -577,13 +575,10 @@ function nextsetp(){
     }
 
     if (step_count == 5) {
-        console.log("step 5 aaa ");
         if (arry_correctval[1] < arry_correctval[2] && factorX != 1 || specialFlag == true) {
             // $("#myModal2").show();
-            console.log("ssss");
-            cannotSimplifyModal("Can not Simplify teting."); //added
+            cannotSimplifyModal("Can not Simplify."); //added
         }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-            console.log("ssss1");
             arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
             arry_correctval[4] = arry_correctval[1] % arry_correctval[2];
             arry_correctval[5] = arry_correctval[2];
@@ -625,7 +620,6 @@ function nextsetp(){
             displayTotalFlow();
             displayTotalFlow1();
         }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
-             console.log("ssss2");
             if (arry_correctval[6] == 0) {
                 result_str = "<div>";
                 result_str += "<p>Step " + step_count +": Answer</p>";
@@ -664,7 +658,6 @@ function nextsetp(){
             displayTotalFlow();
             displayTotalFlow1();
         }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-            console.log("ssss3");
             if (arry_correctval[4] == 0) {
                 result_str = "<div>";
                 result_str += "<p>Step " + step_count +": Answer</p>";
@@ -703,7 +696,6 @@ function nextsetp(){
             displayTotalFlow();
             displayTotalFlow1();
         }else if (arry_correctval[6] == arry_correctval[7] && factorX != 1) {
-            console.log("ssss4");
             result_str = "<div>";
             result_str += "<p>Step " + step_count +": Answer</p>";
 
@@ -741,7 +733,6 @@ function nextsetp(){
                 result_str += '</tr>';
             result_str += '</table>';
             result_str += "</div>";
-            console.log("ssss5");
             $("#simplify").html(result_str);
             nextsetp();
             answerDone(); //added
@@ -791,7 +782,7 @@ function nextsetp(){
                 carry_elem = $(this);
                 carry_elem.blur();
                 // $("#myModal").show();
-                simplifyModal("Simplify fraction if possible ? testing 3"); //added
+                simplifyModal("Simplify fraction if possible ?"); //added
             }
         }
 
@@ -838,7 +829,6 @@ function nextsetp(){
             $(".inputCheck4").attr("readonly", true);
             $(".inputCheck5").attr("readonly", false);
             $(".inputCheck5").unbind("keydown").keydown(function(event){
-                console.log("step 5 a");
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false && carry_over1 == false){
                         // alert("Answer can't be alphabet !");
@@ -1413,7 +1403,6 @@ function checkAnswer(elem) {
 }
 
 function displayTotalFlow(){
-    console.log("correct flow should display");
     strhtml = "";
     strhtml += "<b style='color:blue'>Answered Flow</b>";
     strhtml += "<br><br>";
@@ -1865,7 +1854,6 @@ function displayTotalFlow(){
     $("#correct_flow").html(strhtml);
 }
 function displayTotalFlow1(){
-    console.log("correct flow should display");
     strhtml = "";
     strhtml += "<b style='color:blue'>Correct Answered Flow</b>";
     strhtml += "<br><br>";

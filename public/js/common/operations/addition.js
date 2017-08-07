@@ -358,7 +358,7 @@ function generateAnswerStep() {
             }
             if(checkAnswer2($(this)) == false){
                 // alert("Answer can't be negative or more than 18 !");
-                alertModal("Answer can't be negative or more than 18 !");
+                alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -366,14 +366,14 @@ function generateAnswerStep() {
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
                 // alert("Your answer is larger than what we need.");
-                alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
                 // alert("opps not enough, your answer needs to be larger.");
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
