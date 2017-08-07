@@ -102,4 +102,12 @@ class ClassModuleController extends Controller {
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-ans');
 	}
 
+	public function fraction_addition_whole(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-whole');
+	}
+
+	public function fraction_addition_whole_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-whole-ans');
+	}
+
 }
