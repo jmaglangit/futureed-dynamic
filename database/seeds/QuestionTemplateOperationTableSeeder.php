@@ -16,7 +16,14 @@ class QuestionTemplateOperationTableSeeder extends Seeder
             'ADDITION',
             'SUBTRACTION',
             'MULTIPLICATION',
-            'DIVISION'
+            'DIVISION',
+			'FRACTION_ADDITION',
+			'FRACTION_SUBTRACTION',
+			'FRACTION_DIVISION',
+			'FRACTION_ADDITION_BUTTERFLY',
+			'FRACTION_SUBTRACTION_BUTTERFLY',
+			'FRACTION_ADDITION_WHOLE',
+			'FRACTION_SUBTRACTION_WHOLE',
         ];
 
         $seeder = [];

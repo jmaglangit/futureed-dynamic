@@ -1737,16 +1737,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
 
-				//get grade condition
-				//add number of digits
-                //set strings
-
-            // <p>Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>
-            //  self.current_question.question_text =
                 self.date_start = new Date();
-
-
-
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
                 question_text = question_text.replace("{addends1}",getRandomNumber1());
