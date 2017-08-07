@@ -40,6 +40,7 @@ var simplifyFlag=false;
 var wholeBtnFlag = false;
 var specialFlag = false;
 var startdisplay = false;
+var answered = []; //ADDED
 
 // nerubia code
 // start ADDED functions
