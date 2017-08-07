@@ -271,6 +271,16 @@
 					Routes::get('/questions/dynamic/division/answer',[
 						'as' => 'student.class.module.partials.questions.dynamic.division.answer'
 						,'uses' => 'FutureLesson\Student\ClassModuleController@divisionAns'
+
+					]);
+					Routes::get('/questions/dynamic/fraction-addition',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-addition/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_answer'
 					]);
 
 					Routes::get('/questions/dynamic/fraction-multiplication',[
