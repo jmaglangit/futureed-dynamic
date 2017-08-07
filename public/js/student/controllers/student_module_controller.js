@@ -1726,11 +1726,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.dynamicQuestionSetup = function(question){
 
-<<<<<<< HEAD
-		console.log("function start here");
-
-=======
->>>>>>> f255ebc73828443bb4eb8dbdbc5eb17d45e4c275
 		var question_text = question.question_template.question_template_format;
 
         //TODO: 1. replace variable to operation logic requirements.
