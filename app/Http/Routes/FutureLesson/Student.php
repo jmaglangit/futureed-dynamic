@@ -303,6 +303,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_answer'
 					]);
 
+					Routes::get('/questions/dynamic/fraction-multiplication',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-multiplication'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_multiplication'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-multiplication/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-multiplication.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_multiplication_answer'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'
@@ -317,7 +327,6 @@
 						'as' => 'student.class.module.partials.notepad',
 						'uses' => 'FutureLesson\Student\ClassModuleController@notepad'
 					]);
-
 				});
 			});
 		});

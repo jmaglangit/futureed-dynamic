@@ -76,16 +76,18 @@
 					<div ng-if="mod.current_question.question_template.operation == futureed.MULTIPLICATION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.multiplication') !!}"></div>
 					</div>
-					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_ADDITION">
-						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-addition') !!}"></div>
-
 					<div ng-if="mod.current_question.question_template.operation == futureed.DIVISION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.division') !!}"></div>
 					</div>
+					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_ADDITION">
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-addition') !!}"></div>
+					</div>	
 					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_SUBTRACTION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction_subtraction') !!}"></div>
 					</div>
-
+					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_MULTIPLICATION">
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-multiplication') !!}"></div>
+					</div>
 				</div>
 
 				{{--Main Question Contents--}}
@@ -140,6 +142,9 @@
 						</div>
 						<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_SUBTRACTION">
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-subtraction.answer') !!}"></div>
+						</div>
+						<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_MULTIPLICATION">
+							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-multiplication.answer') !!}"></div>
 						</div>
 
 						{{--mod.current_question.question_type == futureed.MULTIPLECHOICE--}}
