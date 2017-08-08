@@ -42,7 +42,6 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-	digit = 1;
 	randomDigits = digit;
 }
 
