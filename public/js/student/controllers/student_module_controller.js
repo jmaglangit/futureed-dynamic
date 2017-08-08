@@ -1839,7 +1839,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
  				question_text = question_text.replace("{numerator1}",getRandomNumber1());
 				question_text = question_text.replace("{numerator2}",getRandomNumber2());
 				question_text = question_text.replace("{denominator1}",getRandomNumber3());
- 				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+ 				question_text = question_text.replace("{denominator2}",getRandomNumber3());
 
  				self.current_question.questions_text = question_text;
  				btncalculateOnclick();
