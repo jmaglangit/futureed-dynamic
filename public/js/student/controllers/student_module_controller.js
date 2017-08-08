@@ -1784,6 +1784,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				startAnswer();
 
 				break;
+
 			case Constants.DIVISION:
 
 				// console.log('panzer division here...');
@@ -1798,6 +1799,23 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
                 startAnswer();
 
 				break;
+
+			case Constants.FRACTION_DIVISION:
+
+				self.date_start = new Date();
+
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
+                randomDigitsOnclick();
+                question_text = question_text.replace("{numerator1}",getRandomNumber1());
+                question_text = question_text.replace("{numerator2}",getRandomNumber2());
+                question_text = question_text.replace("{denominator1}",getRandomNumber3());
+                question_text = question_text.replace("{denominator2}",getRandomNumber4());
+
+                self.current_question.questions_text = question_text;
+  				btncalculateOnclick();
+
+  				break;
+
 			case Constants.FRACTION_ADDITION:
 				//for fraction_addition
 				self.date_start = new Date();
@@ -1822,7 +1840,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
  				question_text = question_text.replace("{numerator1}",getRandomNumber1());
 				question_text = question_text.replace("{numerator2}",getRandomNumber2());
 				question_text = question_text.replace("{denominator1}",getRandomNumber3());
- 				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+ 				question_text = question_text.replace("{denominator2}",getRandomNumber3());
 
  				self.current_question.questions_text = question_text;
  				btncalculateOnclick();
@@ -1858,7 +1876,21 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				btncalculateOnclick();
 
 				break;
+			case Constants.FRACTION_ADDITION_BUTTERFLY:
+				//for fraction addition butterfly
+				self.date_start = new Date();
 
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+				question_text = question_text.replace("{numerator1}",getRandomNumber1());
+				question_text = question_text.replace("{numerator2}",getRandomNumber2());
+				question_text = question_text.replace("{denominator1}",getRandomNumber3());
+				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+
+				self.current_question.questions_text = question_text;
+				btncalculateOnclick();
+
+				break;
 			default:
 				break;
 		}
