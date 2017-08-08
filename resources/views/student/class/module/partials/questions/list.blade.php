@@ -85,6 +85,9 @@
 					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_SUBTRACTION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction_subtraction') !!}"></div>
 					</div>
+					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_MULTIPLICATION">
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-multiplication') !!}"></div>
+					</div>
 					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_ADDITION_BUTTERFLY">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-addition-butterfly') !!}"></div>
 					</div>
@@ -144,6 +147,9 @@
 						</div>
 						<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_SUBTRACTION">
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-subtraction.answer') !!}"></div>
+						</div>
+						<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_MULTIPLICATION">
+							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-multiplication.answer') !!}"></div>
 						</div>
 						<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_ADDITION_BUTTERFLY">
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-addition-butterfly.answer') !!}"></div>

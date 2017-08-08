@@ -293,6 +293,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_answer'
 					]);
 
+					Routes::get('/questions/dynamic/fraction-multiplication',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-multiplication'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_multiplication'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-multiplication/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-multiplication.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_multiplication_answer'
+					]);
+
 					Routes::get('/questions/dynamic/fraction-addition-butterfly',[
 						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-butterfly'
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_butterfly'
@@ -317,7 +327,6 @@
 						'as' => 'student.class.module.partials.notepad',
 						'uses' => 'FutureLesson\Student\ClassModuleController@notepad'
 					]);
-
 				});
 			});
 		});
