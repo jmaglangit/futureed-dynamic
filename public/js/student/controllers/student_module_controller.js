@@ -1725,7 +1725,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.dynamicQuestionSetup = function(question){
-
+		console.log("FRACTION_SUBTRACTION_BUTTERFLY ");
 		var question_text = question.question_template.question_template_format;
 
         //TODO: 1. replace variable to operation logic requirements.
@@ -1815,6 +1815,21 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 			case Constants.FRACTION_SUBTRACTION:
 
+			   	self.date_start = new Date();
+
+               	setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+ 				question_text = question_text.replace("{numerator1}",getRandomNumber1());
+				question_text = question_text.replace("{numerator2}",getRandomNumber2());
+				question_text = question_text.replace("{denominator1}",getRandomNumber3());
+ 				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+
+ 				self.current_question.questions_text = question_text;
+ 				btncalculateOnclick();
+
+				break;
+			case Constants.FRACTION_SUBTRACTION_BUTTERFLY:
+				console.log("FRACTION_SUBTRACTION_BUTTERFLY");
 			   	self.date_start = new Date();
 
                	setRandomDigits(self.question_grade_condition.max_number.toString().length);
