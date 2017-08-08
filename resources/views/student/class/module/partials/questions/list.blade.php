@@ -79,11 +79,14 @@
 					<div ng-if="mod.current_question.question_template.operation == futureed.DIVISION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.division') !!}"></div>
 					</div>
+					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_DIVISION">
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-division') !!}"></div>
+					</div>
 					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_ADDITION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-addition') !!}"></div>
-					</div>	
+					</div>
 					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_SUBTRACTION">
-						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction_subtraction') !!}"></div>
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-subtraction') !!}"></div>
 					</div>
 					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_MULTIPLICATION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-multiplication') !!}"></div>
@@ -136,6 +139,9 @@
 						</div>
 						<div ng-if="mod.current_question.question_template.operation == futureed.DIVISION">
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.division.answer') !!}"></div>
+						</div>
+						<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_DIVISION">
+							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-division.answer') !!}"></div>
 						</div>
 						<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_ADDITION">
 							<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-addition.answer') !!}"></div>

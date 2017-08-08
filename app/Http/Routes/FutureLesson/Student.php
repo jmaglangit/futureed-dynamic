@@ -284,13 +284,23 @@
 					]);
 
 					Routes::get('/questions/dynamic/fraction-subtraction',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction_subtraction'
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction'
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction'
 					]);
 
 					Routes::get('/questions/dynamic/fraction-subtraction/answer',[
 						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction.answer'
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_answer'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-division',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-division'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_division'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-division/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-division.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_division_answer'
 					]);
 
 					Routes::get('/questions/dynamic/fraction-multiplication',[
