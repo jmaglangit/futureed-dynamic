@@ -313,6 +313,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_multiplication_answer'
 					]);
 
+					Routes::get('/questions/dynamic/fraction-addition-butterfly',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-butterfly'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_butterfly'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-addition-butterfly/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-butterfly.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_butterfly_ans'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'

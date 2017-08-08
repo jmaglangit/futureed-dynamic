@@ -118,4 +118,12 @@ class ClassModuleController extends Controller {
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication-ans');
 	}
 
+	public function fraction_addition_butterfly(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-butterfly');
+	}
+
+	public function fraction_addition_butterfly_ans(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-butterfly-ans');
+	}
+
 }
