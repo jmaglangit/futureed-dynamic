@@ -132,5 +132,5 @@
         </div>
     </div>
 
-    {!! Html::script('/js/common/operations/fraction_addition.js')!!}
+    {!! Html::script('/js/common/operations/fraction_addition_whole.js')!!}
 </div>
