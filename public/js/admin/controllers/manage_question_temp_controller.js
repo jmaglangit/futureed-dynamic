@@ -233,6 +233,38 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 				self.record.question_template_format += self.actionVariableNames('divisor');
 			    $('button[name=btn_divisor]').prop('disabled', true);
 				break;
+			case Constants.FRACTION_ADDITION :
+				self.record.question_template_format += self.actionVariableNames('fraction_addition');
+			    $('button[name=btn_fraction_addition]').prop('disabled', true);
+				break;
+			case Constants.FRACTION_SUBTRACTION :
+				self.record.question_template_format += self.actionVariableNames('fraction_subtraction');
+			    $('button[name=btn_fraction_subtraction]').prop('disabled', true);
+				break;
+			case Constants.FRACTION_MULTIPLICATION :
+				self.record.question_template_format += self.actionVariableNames('fraction_multiplication');
+			    $('button[name=btn_fraction_multiplication]').prop('disabled', true);
+				break;
+			case Constants.FRACTION_DIVISION :
+				self.record.question_template_format += self.actionVariableNames('fraction_division');
+			    $('button[name=btn_fraction_division]').prop('disabled', true);
+				break;
+			case Constants.FRACTION_ADDITION_BUTTERFLY :
+				self.record.question_template_format += self.actionVariableNames('fraction_addition_butterfly');
+			    $('button[name=btn_fraction_addition_butterfly]').prop('disabled', true);
+				break;
+			case Constants.FRACTION_SUBTRACTION_BUTTERFLY :
+				self.record.question_template_format += self.actionVariableNames('fraction_subtraction_butterfly');
+			    $('button[name=btn_fraction_subtraction_butterfly]').prop('disabled', true);
+				break;
+			case Constants.FRACTION_ADDITION_WHOLE :
+				self.record.question_template_format += self.actionVariableNames('fraction_addition_whole');
+			    $('button[name=btn_fraction_addition_whole]').prop('disabled', true);
+				break;
+			case Constants.FRACTION_SUBTRACTION_WHOLE :
+				self.record.question_template_format += self.actionVariableNames('fraction_subtraction_whole');
+			    $('button[name=btn_fraction_subtraction_whole]').prop('disabled', true);
+				break;
 			default:
 				self.record.question_template_format += ' ';
 				break;
