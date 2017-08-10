@@ -303,6 +303,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_answer'
 					]);
 
+					Routes::get('/questions/dynamic/fraction-subtraction-butterfly',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-butterfly'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_butterfly'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-subtraction-butterfly/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-butterfly.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_butterfly_answer'
+					]);
+
 					Routes::get('/questions/dynamic/fraction-division',[
 						'as' => 'student.class.module.partials.questions.dynamic.fraction-division'
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_division'
