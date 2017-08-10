@@ -200,7 +200,8 @@ function btnOkSimplifyRetry() {
 }
 
 function btnOkWholeNumRetry() {
-    wholeNumberModal("Would you make a whole number?");
+    // wholeNumberModal("Would you make a whole number?");
+    wholeNumberModal("Would you get a whole number?");
 }
 // end ADDED functions
 
@@ -387,12 +388,14 @@ function nextsetp(){
         }
         if (arry_correctval[6] > arry_correctval[7]) {
             // $("#myModal1").show();
-            wholeNumberModal("Would you make a whole number?"); //added
+            // wholeNumberModal("Would you make a whole number?"); //added
+            wholeNumberModal("Would you get a whole number?"); //added
         }
 
         if ( arry_correctval[1] > arry_correctval[2] && flag == 0 ) {
             // $("#myModal1").show();
-            wholeNumberModal("Would you make a whole number?"); //added
+            // wholeNumberModal("Would you make a whole number?"); //added
+            wholeNumberModal("Would you get a whole number?"); //added
         }
 
         if (flag == 1 && simplifyFlag == false) {
