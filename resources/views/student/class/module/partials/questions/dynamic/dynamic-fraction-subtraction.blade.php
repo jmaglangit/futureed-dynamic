@@ -33,7 +33,7 @@
         <!-- fraction -->
         <table id="examPane1" style="display: none;">
               <tr>
-                  <td colspan="5"><b>Subtraction:</b></td>
+                  <td colspan="5"><b class="fract_title_addjust">Subtraction:</b></td>
               </tr>
               <tr>
                   <td align="center">
@@ -67,7 +67,7 @@
         <!-- #end fraction -->
 
         <!-- answer area -->
-        <div id="step_div" class="col-xs-6 pull-right h4">
+        <div id="step_div" class="col-xs-6 pull-right h4 fsb_adjust">
             <div id="questionsz"></div>
             <div id="questionsm"></div>
             <div id="simplify"></div>
@@ -124,6 +124,6 @@
               </div>
           </div>
       </div>
-
+    {!! Html::style('/css/operations/fraction_subtraction.css') !!}
     {!! Html::script('/js/common/operations/fraction_subtraction.js')!!}
 </div>
