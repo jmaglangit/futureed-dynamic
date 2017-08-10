@@ -27,43 +27,41 @@
 
     <div>
         <!-- questions area -->
-        <div id="questionPane">
-            <p class="col-xs-6 h3" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
-        </div>
-        <div style="width: 25%; float: left;">
-            <div id="examPane1" style="display: none;">
-                <table>
+        <div id="questionPane" class="col-xs-6">
+            <div id="examPane" style="display: none;" class="h4">
+                    <table>
 
-                    <tr>
-                        <td colspan="5"><b>Add:</b></td>
+                        <tr>
+                            <td colspan="5"><p class="h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p></td>
+                        </tr>
 
-                    </tr>
+                        <tr class="h4">
+                            <td rowspan="3" align="center" valign="middle"><label id="subject_w1_b"></label></td>
+                            <td align="center"><label id="subject_z1_b"></label></td>
+                            <td rowspan="3" align="center" valign="middle"><b> + </b></td>
+                            <td rowspan="3" align="center" valign="middle"><label id="subject_w2_b"></label></td>
+                            <td align="center"><label id="subject_z2_b"></label></td>
+                            <td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>
+                            <td align="center" class="verybigtext">?</td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#000000" height="2"></td>
+                            <td bgcolor="#000000" height="2"></td>
+                        </tr>
+                        <tr class="h4">
+                            <td align="center"><label id="subject_m1_b1"></label></td>
+                            <td align="center"><label id="subject_m2_b1"></label></td>
+                            <td align="center" class="verybigtext">?</td>
+                        </tr>
+                    </table>
 
-                    <tr>
-                        <td rowspan="3" align="center" valign="middle"><label id="subject_w1_b1"></label></td>
-                        <td align="center"><label id="subject_z1_b1"></label></td>
-                        <td rowspan="3" align="center" valign="middle"><b> + </b></td>
-                        <td rowspan="3" align="center" valign="middle"><label id="subject_w2_b1"></label></td>
-                        <td align="center"><label id="subject_z2_b1"></label></td>
-                        <td rowspan="3" align="center" valign="middle" class="verybigtext"></td>
-                        <td align="center" class="verybigtext">?</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#000000" height="2"></td>
-                        <td bgcolor="#000000" height="2"></td>
-                    </tr>
-                    <tr>
-                        <td align="center"><label id="subject_m1_b1"></label></td>
-                        <td align="center"><label id="subject_m2_b1"></td>
-                    </tr>
-                </table>
-
+                </div>
             </div>
         </div>
 
         <!-- answer area -->
         <div id="step_div" class="col-xs-6 pull-right h4">
-            <div id="whole">
+            <div id="whole" class="h4">
             </div>
             <div id="questionsz">
             </div>
@@ -115,9 +113,7 @@
             </div>
 
             <div class="modal-footer">
-                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose()" style="display: none;">Close</button>
-                <button id="ok_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkSimplifyRetry()" style="display: none;">OK</button>
-                <button id="ok_whole_num_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkWholeNumRetry()" style="display: none;">OK</button>
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="closeModal()" style="display: none;">Close</button>
                 <button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick()">
                     {!! trans('messages.yes') !!}</button>
                 <button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick()">
@@ -126,7 +122,11 @@
                     {!! trans('messages.yes') !!}</button>
                 <button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick()">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="canbtnYEsOnclick()">
+                <button id="yes_combine_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnYEsOnclick()">
+                    {!! trans('messages.yes') !!}</button>
+                <button id="no_combine_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick()">
+                    {!! trans('messages.no') !!}</button>
+                <button id="yes_can_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnNOOnclick()">
                     {!! trans('messages.yes') !!}</button>
             </div>
         </div>

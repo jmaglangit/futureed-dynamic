@@ -1855,13 +1855,13 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 			case Constants.FRACTION_ADDITION_WHOLE:
 
+				console.log('new whole');
 				self.date_start = new Date();
 
-				console.log('fraction addition whole number');
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 
-				question_text = question_text.replace("{fraction_addition_whole_number}",'');
+				question_text = question_text.replace("{fraction_addition_whole_number}","");
 
 
                 self.current_question.questions_text = question_text;

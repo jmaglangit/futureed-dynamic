@@ -290,7 +290,7 @@
 
 					Routes::get('/questions/dynamic/fraction-addition-whole/answer',[
 						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-whole.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_answer_whole'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_whole_answer'
 					]);
 
 					Routes::get('/questions/dynamic/fraction-subtraction',[

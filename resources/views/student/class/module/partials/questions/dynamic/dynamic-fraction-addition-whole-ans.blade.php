@@ -1,19 +1,14 @@
 <div ng-show="mod.record.is_dynamic == futureed.TRUE && mod.current_question.question_template.operation == futureed.FRACTION_ADDITION_WHOLE">
-    <div id="examPane" style="display: none;">
+    <div>
         <!-- answer area -->
-        <div
-                style="float: left; width: 20%;"
-                id="answerPane">
-            <div id="lastDiv"></div>
+        <div id="step_div" class="col-xs-6 pull-right h4">
+            <div id="questionsz"></div>
+            <div id="questionsm"></div>
+            <div id="simplify"></div>
+            <div id="answer"></div>
         </div>
-        <div style="float: left; width: 20%;">
-            <b style="color: #005588;	">Answered Flow</b>
-            <div id="lastDiv2"></div><br>
-        </div>
-        <div style="float: left; width: 20%;">
-            <b style="color: #005588;">Correct Answer Flow</b>
-            <div id="lastDiv3"></div>
-        </div>
+        <div id="correct_flow" style="width: 25%;float: left;"></div>
+        <div id="Answer_correct_flow" style="width: 25%;float: left;"></div>
         <div style="clear: both;"></div>
     </div>
 </div>
