@@ -283,6 +283,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_answer'
 					]);
 
+					Routes::get('/questions/dynamic/fraction-addition-whole',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-whole'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_whole'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-addition-whole/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-whole.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_whole_answer'
+					]);
+
 					Routes::get('/questions/dynamic/fraction-subtraction',[
 						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction'
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction'
@@ -291,6 +301,16 @@
 					Routes::get('/questions/dynamic/fraction-subtraction/answer',[
 						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction.answer'
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_answer'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-subtraction-butterfly',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-butterfly'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_butterfly'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-subtraction-butterfly/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-butterfly.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_butterfly_answer'
 					]);
 
 					Routes::get('/questions/dynamic/fraction-division',[

@@ -110,12 +110,28 @@ class ClassModuleController extends Controller {
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-ans');
 	}
 
+	public function fraction_addition_whole(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-whole');
+	}
+
+	public function fraction_addition_whole_answer() {
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-whole-ans');
+	}
+
 	public function fraction_multiplication(){
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication');
 	}
 
 	public function fraction_multiplication_answer(){
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication-ans');
+	}
+
+	public function fraction_subtraction_butterfly(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-butterfly');
+	}
+
+	public function fraction_subtraction_butterfly_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-butterfly-ans');
 	}
 
 	public function fraction_addition_butterfly(){
