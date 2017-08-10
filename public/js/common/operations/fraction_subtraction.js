@@ -196,11 +196,11 @@ function btnNOOnclose() {
 }
 
 function btnOkSimplifyRetry() {
-    simplifyModal("Simplify fraction if possible ?");
+    simplifyModal("Simplify fraction if possible?");
 }
 
 function btnOkWholeNumRetry() {
-    wholeNumberModal("Would you make a whole number ?");
+    wholeNumberModal("Would you make a whole number?");
 }
 // end ADDED functions
 
@@ -383,16 +383,16 @@ function nextsetp(){
         flag = possibleFlagfunc();
         if (flag == 1 && wholeBtnFlag == false) {
             // $("#myModal").show();
-             simplifyModal("Simplify fraction if possible ?"); //added
+             simplifyModal("Simplify fraction if possible?"); //added
         }
         if (arry_correctval[6] > arry_correctval[7]) {
             // $("#myModal1").show();
-            wholeNumberModal("Would you make a whole number ?"); //added
+            wholeNumberModal("Would you make a whole number?"); //added
         }
 
         if ( arry_correctval[1] > arry_correctval[2] && flag == 0 ) {
             // $("#myModal1").show();
-            wholeNumberModal("Would you make a whole number ?"); //added
+            wholeNumberModal("Would you make a whole number?"); //added
         }
 
         if (flag == 1 && simplifyFlag == false) {
@@ -703,7 +703,7 @@ function nextsetp(){
                 carry_elem = $(this);
                 carry_elem.blur();
                 // $("#myModal").show();
-                simplifyModal("Simplify fraction if possible ?"); //added
+                simplifyModal("Simplify fraction if possible?"); //added
             }
         }
 
