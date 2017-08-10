@@ -1276,7 +1276,8 @@ function wholebtnYEsOnclick() {
 }
 function wholebtnNOOnclick() {
     // alert("Can not! Retry!");
-    retryWholeNumModal("Can not! Retry!");
+    // retryWholeNumModal("Can not! Retry!");
+    retryWholeNumModal("That is incorrect. Fraction can be simplified. Please retry.");
     // wholeBtnFlag = false;
     // nextsetp();
     // $(".inputCheck2").show();
