@@ -46,6 +46,7 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
+    digit = 1;
     randomDigits = digit;
 }
 
@@ -200,11 +201,13 @@ function btnNOOnclose() {
 }
 
 function btnOkSimplifyRetry() {
-    simplifyModal("Simplify fraction if possible ?");
+    // simplifyModal("Simplify fraction if possible ?");
+    simplifyModal("Can you simply the fraction?");
 }
 
 function btnOkWholeNumRetry() {
-    wholeNumberModal("Would you make a whole number ?");
+    // wholeNumberModal("Would you make a whole number?");
+    wholeNumberModal("Would you get a whole number?");
 }
 // end ADDED functions
 
@@ -465,16 +468,19 @@ function nextsetp(){
         flag = possibleFlagfunc();
         if (flag == 1 && wholeBtnFlag == false) {
             // $("#myModal").show();
-            simplifyModal("Simplify fraction if possible ?"); //added
+            // simplifyModal("Simplify fraction if possible?"); //added
+            simplifyModal("Can you simplify the fraction?"); //added
         }
         if (arry_correctval[6] > arry_correctval[7]) {
             // $("#myModal1").show();
-            wholeNumberModal("Would you make a whole number ?"); //added
+            // wholeNumberModal("Would you make a whole number?"); //added
+            wholeNumberModal("Would you get a whole number?"); //added
         }
 
         if ( arry_correctval[1] > arry_correctval[2] && flag == 0 ) {
             // $("#myModal1").show();
-            wholeNumberModal("Would you make a whole number ?"); //added
+            // wholeNumberModal("Would you make a whole number?"); //added
+            wholeNumberModal("Would you get a whole number?"); //added
         }
 
         if (flag == 1 && simplifyFlag == false) {
@@ -578,7 +584,8 @@ function nextsetp(){
     if (step_count == 5) {
         if (arry_correctval[1] < arry_correctval[2] && factorX != 1 || specialFlag == true) {
             // $("#myModal2").show();
-            cannotSimplifyModal("Can not Simplify."); //added
+            // cannotSimplifyModal("Can not Simplify."); //added
+            cannotSimplifyModal("Fraction is already in its simplest form."); //added
         }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
             arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
             arry_correctval[4] = arry_correctval[1] % arry_correctval[2];
@@ -783,7 +790,8 @@ function nextsetp(){
                 carry_elem = $(this);
                 carry_elem.blur();
                 // $("#myModal").show();
-                simplifyModal("Simplify fraction if possible ?"); //added
+                // simplifyModal("Simplify fraction if possible ?"); //added
+                simplifyModal("Can you simplify the fraction?"); //added
             }
         }
 
@@ -1377,7 +1385,8 @@ function wholebtnYEsOnclick() {
     $("#message_modal_dynamic").hide();
 }
 function wholebtnNOOnclick() {
-    retryWholeNumModal("Can not! Retry!");
+    // retryWholeNumModal("Can not! Retry!");
+    retryWholeNumModal("That is incorrect. Fraction can be simplified. Please retry.");
 }
 
 function btnYEsOnclick(){
@@ -1533,7 +1542,7 @@ function displayTotalFlow(){
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>"+ m1 +" * " + z2 + "</p>";
-    strhtml += "<p>Step 4: Simplify fraction if possible first </p>";
+    strhtml += "<p>Step 4: Simplify fraction if possible </p>";
     
     if (step4_whole) {
         strhtml += "<p style='color:red;'>Step 4 Whole Error : " + step4_whole + "</p>";    
@@ -1969,7 +1978,7 @@ function displayTotalFlow1(){
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>"+ m1 +" * " + z2 + "</p>";
-    strhtml += "<p>Step 4: Simplify fraction if possible first 2</p>";
+    strhtml += "<p>Step 4: Simplify fraction if possible</p>";
  
     if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
         strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";
@@ -2297,3 +2306,5 @@ function displayFraction(IsShowWholeNumber, IsAfter, elemAfter){
     else
         $(strhtml).insertBefore(elemAfter);
 }
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
