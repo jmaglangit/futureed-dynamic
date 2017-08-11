@@ -2815,3 +2815,53 @@ canvas#world {
     color: #f00;
     vertical-align: super;
 }
+
+b.fsb_adjust{
+    padding: 0 10px;
+}
+
+.m-top-20{
+    margin-top:20px;
+}
+
+.answer_area table b{
+    margin: 5px;
+}
+
+.answer_area table label, .answer_area table input{
+    margin: 3px;
+}
+
+.answer_area > div#correct_flow > p, .answer_area > div#Answer_correct_flow > p {
+    margin-top: 20px;
+}
+
+/* fraction subtraction and fraction division style */
+#step_div b{
+    padding: 0 5px;
+}
+
+.answer_area div#correct_flow p, .answer_area div#Answer_correct_flow p {
+    margin-top: 20px;
+}
+
+#correct_flow b, #ansCorrectFlow b{
+    padding: 0 5px;
+}
+
+#step_count3 .inputCheck1{
+    margin-right: 10px;
+}
+
+b.fract_title_addjust{
+    padding-bottom: 10px;
+    background: red;
+}
+
+#Answer_correct_flow #step_count3 label, #correct_flow #step_count3 label{
+    padding: 5px;
+}
+
+#Answer_correct_flow #step_count3 p, #correct_flow #step_count3 p{
+    padding: 10px;
+}

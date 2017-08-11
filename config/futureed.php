@@ -382,9 +382,16 @@ return [
 	'question_form_series' => 'Series',
 
 	//question template operation
-	'addition' => 'ADDITION',
-	'subtraction' => 'SUBTRACTION',
-	'multiplication' => 'MULTIPLICATION',
-	'division' => 'DIVISION',
-
+	'addition' => 'addition',
+	'subtraction' => 'subtraction',
+	'multiplication' => 'multiplication',
+	'division' => 'division',
+	'fraction_addition' => 'fraction_addition',
+	'fraction_subtraction' => 'fraction_subtraction',
+	'fraction_multiplication' => 'fraction_multiplication',
+	'fraction_division' => 'fraction_division',
+	'fraction_addition_butterfly' => 'fraction_addition_butterfly',
+	'fraction_subtraction_butterfly' => 'fraction_subtraction_butterfly',
+	'fraction_addition_whole' => 'fraction_addition_whole',
+	'fraction_subtraction_whole' => 'fraction_subtraction_whole',
 ];

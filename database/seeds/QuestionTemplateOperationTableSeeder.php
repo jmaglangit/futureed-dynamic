@@ -13,10 +13,18 @@ class QuestionTemplateOperationTableSeeder extends Seeder
         // TestDummy::times(20)->create('App\Post');
         //ADD ADDITION
         $datas = [
-            'ADDITION',
-            'SUBTRACTION',
-            'MULTIPLICATION',
-            'DIVISION'
+            'addition',
+            'subtraction',
+            'multiplication',
+            'division',
+            'fraction_addition',
+            'fraction_subtraction',
+            'fraction_multiplication',
+            'fraction_division',
+            'fraction_addition_butterfly',
+            'fraction_subtraction_butterfly',
+            'fraction_addition_whole',
+            'fraction_subtraction_whole'
         ];
 
         $seeder = [];

@@ -1726,28 +1726,23 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.dynamicQuestionSetup = function(question){
 
-
 		var question_text = question.question_template.question_template_format;
+		var module_map = module_mapper[self.current_question.module_id];
 
         //TODO: 1. replace variable to operation logic requirements.
 		//TODO 	2. output string.
 
 		//get grade condition
+		console.log(self.current_question);
+		console.log(module_map);
+
 
 		//check type of operation
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
 
-				//get grade condition
-				//add number of digits
-                //set strings
-
-            // <p>Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>
-            //  self.current_question.question_text =
+				console.log('addition');
                 self.date_start = new Date();
-
-
-
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
                 question_text = question_text.replace("{addends1}",getRandomNumber1());
@@ -1755,11 +1750,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
                 self.current_question.questions_text = question_text;
                 startAnswer();
 
+                console.log(self.current_question.questions_text ,"current question");
+
 				break;
 			case Constants.SUBTRACTION:
 
                 self.date_start = new Date();
-                setRandomDigits(self.question_grade_condition.max_number.toString().length);
 
                 randomDigitsOnclick();
                 // Deduct {subtrahend} from {minuend}.
@@ -1783,10 +1779,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				startAnswer();
 
 				break;
+
 			case Constants.DIVISION:
 
-				// console.log('panzer division here...');
-                setRandomDigits(self.question_grade_condition.max_number.toString().length);
+                var digit = module_algo[module_map[Constants.DIVISION]]();
+                setRandomNumber1(digit.randomNumber1);
+                setRandomNumber2(digit.randomNumber2);
 
                 randomDigitsOnclick();
 
@@ -1795,6 +1793,96 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
                 self.current_question.questions_text = question_text;
 
                 startAnswer();
+
+				break;
+
+			case Constants.FRACTION_DIVISION:
+
+				self.date_start = new Date();
+
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
+                randomDigitsOnclick();
+				question_text = question_text.replace("{fraction_division}", "");
+
+                self.current_question.questions_text = question_text;
+  				btncalculateOnclick();
+
+  				break;
+
+			case Constants.FRACTION_ADDITION:
+				//for fraction_addition
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+				question_text = question_text.replace("{fraction_addition}", "");
+
+				self.current_question.questions_text = question_text;
+				btncalculateOnclick();
+
+				break;
+			case Constants.FRACTION_SUBTRACTION:
+
+			   	self.date_start = new Date();
+
+               	setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+				question_text = question_text.replace("{fraction_subtraction}", "");
+
+ 				self.current_question.questions_text = question_text;
+ 				btncalculateOnclick();
+
+				break;
+			case Constants.FRACTION_SUBTRACTION_BUTTERFLY:
+
+			   	self.date_start = new Date();
+
+               	setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+ 				question_text = question_text.replace("{numerator1}",getRandomNumber1());
+				question_text = question_text.replace("{numerator2}",getRandomNumber2());
+				question_text = question_text.replace("{denominator1}",getRandomNumber3());
+ 				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+
+ 				self.current_question.questions_text = question_text;
+ 				btncalculateOnclick();
+
+				break;
+			case Constants.FRACTION_MULTIPLICATION:
+				//for fraction_multiplication
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+				question_text = question_text.replace("{fraction_multiplication}", "");
+
+				self.current_question.questions_text = question_text;
+				btncalculateOnclick();
+
+				break;
+			case Constants.FRACTION_ADDITION_WHOLE:
+
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+
+				question_text = question_text.replace("{fraction_addition_whole_number}","");
+
+                self.current_question.questions_text = question_text;
+                btncalculateOnclick();
+
+                break;
+			case Constants.FRACTION_ADDITION_BUTTERFLY:
+				//for fraction addition butterfly
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+				question_text = question_text.replace("{fraction_addition_buterfly}", "");
+
+				self.current_question.questions_text = question_text;
+				btncalculateOnclick();
 
 				break;
 			default:

@@ -499,6 +499,7 @@ return [
 	'welcome' => 'Welcome',
 	'wrong' => 'Wrong.',
 	'yes' => 'Yes',
+	'ok' => 'OK',
 	'you_have_successfully_registered' => 'You have successfully registered.',
 	'your_req' => 'Your Requests',
 	'your_pic_password_set' => 'Your picture password has been set.',
@@ -975,6 +976,14 @@ return [
 	'admin_question_form_word' => 'WORD',
 	'admin_question_form_blank' => 'BLANK',
 	'admin_question_form_series' => 'SERIES',
+	'admin_operation_fraction_addition' => 'FRACTION_ADDITION',
+	'admin_operation_fraction_subtraction' => 'FRACTION_SUBTRACTION',
+	'admin_operation_fraction_multiplication' => 'FRACTION_MULTIPLICATION',
+	'admin_operation_fraction_division' => 'FRACTION_DIVISION',
+	'admin_operation_fraction_addition_butterfly' => 'FRACTION_ADDITION_BUTTERFLY',
+	'admin_operation_fraction_subtraction_butterfly' => 'FRACTION_SUBTRACTION_BUTTERFLY',
+	'admin_operation_fraction_addition_whole' => 'FRACTION_ADDITION_WHOLE',
+	'admin_operation_fraction_subtraction_whole' => 'FRACTION_SUBTRACTION_WHOLE',
 
 	//Client
 	//resources/views/client/dashboard/index.blade.php

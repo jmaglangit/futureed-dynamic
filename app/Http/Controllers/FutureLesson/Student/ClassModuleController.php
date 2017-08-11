@@ -85,4 +85,61 @@ class ClassModuleController extends Controller {
 	public function divisionAns(){
 		return view('student.class.module.partials.questions.dynamic.dynamic-division-ans');
 	}
+
+	public function fraction_division(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-division');
+	}
+
+	public function fraction_division_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-division-ans');
+	}
+
+	public function fraction_addition(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition');
+	}
+
+	public function fraction_addition_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-ans');
+	}
+
+	public function fraction_subtraction(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction');
+	}
+
+	public function fraction_subtraction_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-ans');
+	}
+
+	public function fraction_addition_whole(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-whole');
+	}
+
+	public function fraction_addition_whole_answer() {
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-whole-ans');
+	}
+
+	public function fraction_multiplication(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication');
+	}
+
+	public function fraction_multiplication_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication-ans');
+	}
+
+	public function fraction_subtraction_butterfly(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-butterfly');
+	}
+
+	public function fraction_subtraction_butterfly_answer(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-butterfly-ans');
+	}
+
+	public function fraction_addition_butterfly(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-butterfly');
+	}
+
+	public function fraction_addition_butterfly_ans(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-butterfly-ans');
+	}
+
 }
