@@ -113,7 +113,7 @@
             </div>
         </div>
     </div>
-    {!! Html::style('/css/operations/fraction-division.css') !!}
+    {!! Html::style('/css/operations/fraction_division.css') !!}
     {!! Html::style('/css/futureed-student.css') !!}
     {!! Html::script('/js/common/operations/fraction-division.js')!!}
 </div>
