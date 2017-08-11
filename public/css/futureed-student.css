@@ -2820,14 +2820,11 @@ canvas#world {
     margin-top:20px;
 }
 
-.answer_area > div>div>div>table>tbody>tr>td>b
-,.answer_area > div>div>table>tbody>tr>td>b{
+.answer_area table b{
     margin: 5px;
 }
 
-.answer_area > div>div>div>table>tbody>tr>td>label
-,.answer_area > div>div>table>tbody>tr>td>label
-,.answer_area > div>div>table>tbody>tr>td>input{
+.answer_area table label, .answer_area table input{
     margin: 3px;
 }
 

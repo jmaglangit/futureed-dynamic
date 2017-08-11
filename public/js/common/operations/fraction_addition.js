@@ -102,6 +102,7 @@ function alertModal(message){
 	$("#yes_modal").hide();
 	$("#ok_simplify_modal").hide();
 	$("#ok_whole_num_modal").hide();
+	$("input").attr("readonly", true);
 }
 
 function retrySimplifyModal(message){
@@ -141,6 +142,7 @@ function simplifyModal(message){
 	$("#yes_whole_modal").hide();
 	$("#no_whole_modal").hide();
 	$("#yes_modal").hide();
+	$(".inputCheck").attr("readonly", true);
 }
 
 function wholeNumberModal(message){
@@ -171,6 +173,7 @@ function cannotSimplifyModal(message){
 
 function btnNOOnclose() {
 	$("#message_modal_dynamic").hide();
+	$("input").attr("readonly", false);
 }
 
 function btnOkSimplifyRetry() {
