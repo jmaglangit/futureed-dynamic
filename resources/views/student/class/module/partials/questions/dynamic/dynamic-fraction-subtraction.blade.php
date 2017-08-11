@@ -147,7 +147,7 @@
                   {!! trans('messages.yes') !!}</button>
                 <button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick()">
                       {!! trans('messages.no') !!}</button>
-                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="canbtnYEsOnclick()">
+                <button id="yes_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="canbtnYEsOnclick()">
                       {!! trans('messages.ok') !!}</button>
               </div>
           </div>
