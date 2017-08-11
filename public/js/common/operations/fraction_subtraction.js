@@ -123,6 +123,7 @@ function alertModal(message){
     $("#yes_modal").hide();
     $("#ok_simplify_modal").hide();
     $("#ok_whole_num_modal").hide();
+    $("input").attr("readonly", true);
 }
 
 function retrySimplifyModal(message){
@@ -162,6 +163,7 @@ function simplifyModal(message){
     $("#yes_whole_modal").hide();
     $("#no_whole_modal").hide();
     $("#yes_modal").hide();
+    $(".inputCheck").attr("readonly", true);
 }
 
 function wholeNumberModal(message){
@@ -193,6 +195,7 @@ function cannotSimplifyModal(message){
 
 function btnNOOnclose() {
     $("#message_modal_dynamic").hide();
+    $("input").attr("readonly", false);
 }
 
 function btnOkSimplifyRetry() {
@@ -1000,7 +1003,7 @@ function checkAnswerValidation(elem) {
                 step1_error = answer_val;
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Please retry ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1033,7 +1036,8 @@ function checkAnswerValidation(elem) {
                 step2_error = answer_val;
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
             retry_attempt = 0;
             return -3;
         }
@@ -1094,7 +1098,8 @@ function checkAnswerValidation(elem) {
             if(retry_attempt > 1){
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
                 retry_attempt = 0;
                 return -3;
             }
@@ -1148,7 +1153,8 @@ function checkAnswerValidation(elem) {
             if(retry_attempt > 1){
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
                 retry_attempt = 0;
                 return -3;
             }
@@ -1194,7 +1200,8 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                    alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
+                    alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
                     retry_attempt = 0;
                     return -3;
                 }
@@ -1221,7 +1228,8 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                    alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
+                    alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
                     retry_attempt = 0;
                     return -3;
                 }
@@ -1306,7 +1314,8 @@ function btnYEsOnclick(){
 
 function btnNOOnclick(){
     // alert("Can not!Retry!");
-    retrySimplifyModal("Can not!Retry!");
+    // retrySimplifyModal("Can not!Retry!");
+    retrySimplifyModal("That is incorrect. Fraction can be simplified. Please retry.");
 }
 
 function checkAnswer(elem) {
@@ -1407,7 +1416,7 @@ function displayTotalFlow(){
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>"+ m1+"</p>";
     // strhtml += "<p>Step 3: Simplify fraction if possible</p>";
-    strhtml += "<p>Step 3: Can you simplify the fraction?</p>";
+    strhtml += "<p>Step 3: Simplify the fraction if possible</p>";
 
     if (step3_whole) {
         strhtml += "<p style='color:red;'> Step3 Whole Error : " + step3_whole + "</p>";
@@ -1834,7 +1843,7 @@ function displayTotalFlow1(){
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>"+ m1+"</p>";
     // strhtml += "<p>Step 3: Simplify fraction if possible</p>";
-    strhtml += "<p>Step 3: Can you simplify the fraction?</p>";
+    strhtml += "<p>Step 3: Simplify the fraction if possible</p>";
 
     if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
         strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";
