@@ -25,7 +25,7 @@
 
 	<div>
 		<!-- questions area -->
-		<div id="questionPane" class="col-xs-6">
+		<div id="questionPane" class="col-xs-6 answer_area">
 			<div id="examPane" style="display: none;" class="h4">
 				<table>
 					<tr>

@@ -25,42 +25,14 @@
 
     <div>
         <!-- questions area -->
-        <div id="questionPane" class="col-xs-6 answer_area">
-            <div id="examPane" style="display: none;" class="h4">
-                <table>
-                    <tr>
-                        <td colspan="5"><p class="h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p></td>
-                    </tr>
-                    <tr class="h4">
-                        <td align="center">
-                            <label id="subject_z1_b"></label>
-                        </td>
-                        <td rowspan="3" align="center" valign="middle">
-                            <b> / </b>
-                        </td>
-                        <td align="center"><label id="subject_z2_b"></label></td>
-                        <td rowspan="3" align="center" valign="middle" class="verybigtext">
-                            <b>=</b>
-                        </td>
-                        <td align="center" class="verybigtext">?</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#000000" height="2"></td>
-                        <td bgcolor="#000000" height="2"></td>
-                    </tr>
-                    <tr class="h4">
-                        <td align="center"><label id="subject_m1_b"></label></td>
-                        <td align="center"><label id="subject_m2_b"></td>
-                        <td align="center" class="verybigtext">?</td>
-                    </tr>
-                </table>
-            </div>
+        <div id="questionPane">
+            <p class="col-xs-6 h3" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
         </div>
         <div style="width: 25%; float: left;">
             <div id="examPane1" style="display: none;">
                 <table>
                     <tr>
-                    <td colspan="5"><b>Divide :</b></td>
+                    <td colspan="5"><b>Subtraction:</b></td>
                     </tr>
                     <tr>
                         <td align="center"><label id="subject_z1_b1"></label></td>
@@ -84,9 +56,10 @@
 
         <!-- answer area -->
         <div id="step_div" class="col-xs-6 pull-right h4">
-            <div id="flip"></div>
-            <div id="questionsz"></div>
-            <div id="questionsm"></div>
+            <div id="crossone"></div>
+            <div id="crosstwo"></div>
+            <div id="Subtractiononeandtwo"></div>
+            <div id="multiply_denominator"></div>
             <div id="simplify"></div>
             <div id="answer"></div>
         </div>
@@ -142,5 +115,5 @@
         </div>
     </div>
 
-    {!! Html::script('/js/common/operations/fraction_division.js')!!}
+    {!! Html::script('/js/common/operations/fraction_subtraction_butterfly.js')!!}
 </div>

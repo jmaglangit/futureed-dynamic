@@ -249,22 +249,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 				self.record.question_template_format += self.actionVariableNames('fraction_division');
 			    $('button[name=btn_fraction_division]').prop('disabled', true);
 				break;
-			case Constants.FRACTION_ADDITION_BUTTERFLY :
-				self.record.question_template_format += self.actionVariableNames('fraction_addition_butterfly');
-			    $('button[name=btn_fraction_addition_butterfly]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_SUBTRACTION_BUTTERFLY :
-				self.record.question_template_format += self.actionVariableNames('fraction_subtraction_butterfly');
-			    $('button[name=btn_fraction_subtraction_butterfly]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_ADDITION_WHOLE :
-				self.record.question_template_format += self.actionVariableNames('fraction_addition_whole');
-			    $('button[name=btn_fraction_addition_whole]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_SUBTRACTION_WHOLE :
-				self.record.question_template_format += self.actionVariableNames('fraction_subtraction_whole');
-			    $('button[name=btn_fraction_subtraction_whole]').prop('disabled', true);
-				break;
 			default:
 				self.record.question_template_format += ' ';
 				break;
@@ -345,6 +329,23 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 			if(val.indexOf("{divisor}") == Constants.NEGATIVE_1){
 				$('button[name=btn_divisor]').prop('disabled', false);
 			}else{$('button[name=btn_divisor]').prop('disabled', true);}
+
+			//fraction variables
+			if(val.indexOf("{fraction_addition}") == Constants.NEGATIVE_1){
+				$('button[name=btn_fraction_addition]').prop('disabled', false);
+			}else{$('button[name=btn_fraction_addition]').prop('disabled', true);}
+
+			if(val.indexOf("{fraction_subtraction}") == Constants.NEGATIVE_1){
+				$('button[name=btn_fraction_subtraction]').prop('disabled', false);
+			}else{$('button[name=btn_fraction_subtraction]').prop('disabled', true);}
+
+			if(val.indexOf("{fraction_multiplication}") == Constants.NEGATIVE_1){
+				$('button[name=btn_fraction_multiplication]').prop('disabled', false);
+			}else{$('button[name=btn_fraction_multiplication]').prop('disabled', true);}
+
+			if(val.indexOf("{fraction_division}") == Constants.NEGATIVE_1){
+				$('button[name=btn_fraction_division]').prop('disabled', false);
+			}else{$('button[name=btn_fraction_division]').prop('disabled', true);}
 		}
 	}
 

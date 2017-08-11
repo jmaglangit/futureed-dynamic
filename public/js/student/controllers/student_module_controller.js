@@ -1737,16 +1737,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
 
-				//get grade condition
-				//add number of digits
-                //set strings
-
-            // <p>Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>
-            //  self.current_question.question_text =
                 self.date_start = new Date();
-
-
-
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
                 question_text = question_text.replace("{addends1}",getRandomNumber1());
@@ -1837,7 +1828,21 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
  				btncalculateOnclick();
 
 				break;
+			case Constants.FRACTION_SUBTRACTION_BUTTERFLY:
 
+			   	self.date_start = new Date();
+
+               	setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+ 				question_text = question_text.replace("{numerator1}",getRandomNumber1());
+				question_text = question_text.replace("{numerator2}",getRandomNumber2());
+				question_text = question_text.replace("{denominator1}",getRandomNumber3());
+ 				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+
+ 				self.current_question.questions_text = question_text;
+ 				btncalculateOnclick();
+
+				break;
 			case Constants.FRACTION_MULTIPLICATION:
 				//for fraction_multiplication
 				self.date_start = new Date();
@@ -1850,6 +1855,19 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				btncalculateOnclick();
 
 				break;
+			case Constants.FRACTION_ADDITION_WHOLE:
+
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+
+				question_text = question_text.replace("{fraction_addition_whole_number}","");
+
+                self.current_question.questions_text = question_text;
+                btncalculateOnclick();
+
+                break;
 			case Constants.FRACTION_ADDITION_BUTTERFLY:
 				//for fraction addition butterfly
 				self.date_start = new Date();
