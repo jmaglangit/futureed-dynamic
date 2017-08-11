@@ -13,6 +13,14 @@ function getRandomNumber2(){
     return randomNumber2
 }
 
+function setRandomNumber1(number){
+    randomNumber1 = number;
+}
+
+function setRandomNumber2(number){
+    randomNumber2 = number;
+}
+
 function getAnswered(){
     return answered;
 }
@@ -77,16 +85,16 @@ function btnNOOnclose() {
     }
 
     function randomDigitsOnclick(){
-    	randomDigits = _validateNum($("#randomDigits").prop("value"), 2);
-    	if(randomDigits > 5) randomDigits = 4;
-        $("#randomDigits").prop("value", randomDigits);
+    	// randomDigits = _validateNum($("#randomDigits").prop("value"), 2);
+    	// if(randomDigits > 5) randomDigits = 4;
+        // $("#randomDigits").prop("value", randomDigits);
         
         randomDigits2 = _validateNum($("#randomDigits2").prop("value"), 1);
-        if(randomDigits2 > 4) randomDigits2 = 3;
-        $("#randomDigits2").prop("value", randomDigits2);
+        // if(randomDigits2 > 4) randomDigits2 = 3;
+        // $("#randomDigits2").prop("value", randomDigits2);
 
-        randomNumber1 = Math.floor(Math.random() * digits(randomDigits));
-        randomNumber2 = Math.floor(Math.random() * digits(randomDigits2));
+        // randomNumber1 = Math.floor(Math.random() * digits(randomDigits));
+        // randomNumber2 = Math.floor(Math.random() * digits(randomDigits2));
 
         if(randomNumber1 < 7) randomNumber1 = 7 + Math.floor(Math.random() * 7);
         if(randomNumber2 < 3) randomNumber2 = 3 + Math.floor(Math.random() * 7);

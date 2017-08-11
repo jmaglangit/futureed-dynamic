@@ -130,6 +130,8 @@
 	{!! Html::script('/js/student/constants/student_module_constant.js')!!}
 	{!! Html::script('/js/student/constants/student_help_constant.js')!!}
 
+	{!! Html::script('/js/common/operations/math_algo.js')!!}
+	{!! Html::script('/js/common/operations/module_mapper.js')!!}
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}
 	{!! Html::script('/js/common/sketch.min.js')!!}

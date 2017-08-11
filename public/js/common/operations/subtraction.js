@@ -34,6 +34,14 @@ function getRandomNumber2(){
     return randomNumber2
 }
 
+function setRandomNumber1(number){
+    randomNumber1 = number;
+}
+
+function setRandomNumber2(number){
+    randomNumber2 = number;
+}
+
 function getAnswered(){
     return answered;
 }
@@ -92,12 +100,12 @@ function btnNOOnclose() {
 //END ADDED FUNCTION
 
 function randomDigitsOnclick(){
-    randomDigits = _validateNum($("#randomDigits").prop("value"), 4);
-    if(randomDigits > 9) randomDigits = 8;
-    $("#randomDigits").prop("value", randomDigits);
+    // randomDigits = _validateNum($("#randomDigits").prop("value"), 4);
+    // if(randomDigits > 9) randomDigits = 8;
+    // $("#randomDigits").prop("value", randomDigits);
 
-    randomNumber1 = Math.floor(Math.random() * digits(randomDigits));
-    randomNumber2 = Math.floor(Math.random() * randomNumber1);
+    // randomNumber1 = Math.floor(Math.random() * digits(randomDigits));
+    // randomNumber2 = Math.floor(Math.random() * randomNumber1);
 
 //        randomNumber1 = 1002;
 //        randomNumber2 = 3;

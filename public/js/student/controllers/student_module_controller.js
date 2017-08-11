@@ -1727,16 +1727,21 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.dynamicQuestionSetup = function(question){
 
 		var question_text = question.question_template.question_template_format;
+		var module_map = module_mapper[self.current_question.module_id];
 
         //TODO: 1. replace variable to operation logic requirements.
 		//TODO 	2. output string.
 
 		//get grade condition
+		console.log(self.current_question);
+		console.log(module_map);
+
 
 		//check type of operation
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
 
+				console.log('addition');
                 self.date_start = new Date();
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
@@ -1751,7 +1756,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			case Constants.SUBTRACTION:
 
                 self.date_start = new Date();
-                setRandomDigits(self.question_grade_condition.max_number.toString().length);
 
                 randomDigitsOnclick();
                 // Deduct {subtrahend} from {minuend}.
@@ -1778,8 +1782,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.DIVISION:
 
-				// console.log('panzer division here...');
-                setRandomDigits(self.question_grade_condition.max_number.toString().length);
+                var digit = module_algo[module_map[Constants.DIVISION]]();
+                setRandomNumber1(digit.randomNumber1);
+                setRandomNumber2(digit.randomNumber2);
 
                 randomDigitsOnclick();
 
