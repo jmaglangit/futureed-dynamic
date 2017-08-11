@@ -499,6 +499,7 @@ return [
 	'welcome' => 'Welcome',
 	'wrong' => 'Wrong.',
 	'yes' => 'Yes',
+	'ok' => 'OK',
 	'you_have_successfully_registered' => 'You have successfully registered.',
 	'your_req' => 'Your Requests',
 	'your_pic_password_set' => 'Your picture password has been set.',
