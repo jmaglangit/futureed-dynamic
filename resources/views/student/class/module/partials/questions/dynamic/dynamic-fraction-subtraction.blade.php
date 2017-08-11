@@ -26,10 +26,11 @@
     <div>
         <!-- questions area -->
         <div id="questionPane" class="col-xs-6 answer_area">
+          <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
           <div id="examPane" style="display: none;" class="h4">
             <table>
               <tr>
-                <td colspan="5"><p class="h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p></td>
+                <td colspan="5"></td>
               </tr>
               <tr class="h4">
                 <td align="center">
@@ -77,8 +78,8 @@
                   <td align="center" class="verybigtext">?</td>
               </tr>
               <tr>
-                  <td bgcolor="#000000" height="2"></td>
-                  <td bgcolor="#000000" height="2"></td>
+                  <td class="fsb_dvr" bgcolor="#000000" height="2"></td>
+                  <td class="fsb_dvr" bgcolor="#000000" height="2"></td>
               </tr>
               <tr>
                   <td align="center"><label id="subject_m1_b"></label></td>
@@ -95,24 +96,24 @@
         <!-- #end fraction -->
 
         <!-- answer area -->
-        <div id="step_div" class="col-xs-6 pull-right h4 fsb_adjust">
-            <div id="questionsz"></div>
-            <div id="questionsm"></div>
-            <div id="simplify"></div>
-            <div id="answer"></div>
+        <div id="step_div" class="col-xs-6 pull-right h4 answer_area">
+            <div id="questionsz" class="m-top-20"></div>
+            <div id="questionsm" class="m-top-20"></div>
+            <div id="simplify" class="m-top-20"></div>
+            <div id="answer" class="m-top-20"></div>
         </div>
         <!-- end answer area -->
 
         <div id="tipsFlow" style="display: none;">
            <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
            <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
-               <div class="pull-right">
+               <div class="pull-right answer_area">
                    <div class="prof-info"><b>Answered Flow</b></div><br/>
                    <div id="correct_flow"></div><br>
                </div>
            </div>
            <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
-               <div class="pull-left">
+               <div class="pull-left answer_area">
                    <div class="prof-info"><b>Correct Answer Flow</b></div><br/>
                    <div id="Answer_correct_flow"></div>
                </div>

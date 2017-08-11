@@ -2841,12 +2841,7 @@ b.fsb_adjust{
     padding: 0 5px;
 }
 
-#step_div #questionsm{
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-.answer_area > div#correct_flow > p, .answer_area > div#Answer_correct_flow > p {
+.answer_area div#correct_flow p, .answer_area div#Answer_correct_flow p {
     margin-top: 20px;
 }
 
@@ -2865,4 +2860,8 @@ b.fract_title_addjust{
 
 #Answer_correct_flow #step_count3 label, #correct_flow #step_count3 label{
     padding: 5px;
+}
+
+#Answer_correct_flow #step_count3 p, #correct_flow #step_count3 p{
+    padding: 10px;
 }

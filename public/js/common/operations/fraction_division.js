@@ -129,6 +129,7 @@ function alertModal(message){
     $("#yes_modal").hide();
     $("#ok_simplify_modal").hide();
     $("#ok_whole_num_modal").hide();
+    $("input").attr("readonly", true); 
 }
 
 function retrySimplifyModal(message){
@@ -168,6 +169,8 @@ function simplifyModal(message){
     $("#yes_whole_modal").hide();
     $("#no_whole_modal").hide();
     $("#yes_modal").hide();
+    $(".inputCheck").attr("readonly", true);
+
 }
 
 function wholeNumberModal(message){
@@ -198,6 +201,7 @@ function cannotSimplifyModal(message){
 
 function btnNOOnclose() {
     $("#message_modal_dynamic").hide();
+    $("input").attr("readonly", false);
 }
 
 function btnOkSimplifyRetry() {
@@ -238,11 +242,6 @@ function randomDigitsOnclick(){
     m2 = m2>1 ? m2 : m2 + 2;
     z1 = z1 ? z1 : z1 + 1;
     z2 = z2 ? z2 : z2 + 1;
-
-    // m1 = 5;
-    // m2 = 5;
-    // z1 = 4;
-    // z2 = 8;
 
     $("#m1").prop("value", m1);
     $("#m2").prop("value", m2);
@@ -404,7 +403,7 @@ function nextsetp(){
     result_str = "";
     if (step_count == 2) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": what is the numerator?</p>";
+        result_str += "<p>Step " + step_count +": What is the numerator?</p>";
         result_str += '<div>';
             result_str += '<table>';
                 result_str += '<tr>';
@@ -1108,6 +1107,7 @@ function checkAnswerValidation(elem) {
                 step2_error = answer_val;
             }
             alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
             retry_attempt = 0;
             return -3;
         }

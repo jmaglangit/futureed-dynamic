@@ -41,7 +41,6 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-    digit = 1;
     randomDigits = digit;
 }
 
@@ -124,6 +123,7 @@ function alertModal(message){
     $("#yes_modal").hide();
     $("#ok_simplify_modal").hide();
     $("#ok_whole_num_modal").hide();
+    $("input").attr("readonly", true);
 }
 
 function retrySimplifyModal(message){
@@ -163,6 +163,7 @@ function simplifyModal(message){
     $("#yes_whole_modal").hide();
     $("#no_whole_modal").hide();
     $("#yes_modal").hide();
+    $(".inputCheck").attr("readonly", true);
 }
 
 function wholeNumberModal(message){
@@ -194,6 +195,7 @@ function cannotSimplifyModal(message){
 
 function btnNOOnclose() {
     $("#message_modal_dynamic").hide();
+    $("input").attr("readonly", false);
 }
 
 function btnOkSimplifyRetry() {
@@ -1035,6 +1037,7 @@ function checkAnswerValidation(elem) {
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
             alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
             retry_attempt = 0;
             return -3;
         }
@@ -1096,6 +1099,7 @@ function checkAnswerValidation(elem) {
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
                 alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
                 retry_attempt = 0;
                 return -3;
             }
@@ -1150,6 +1154,7 @@ function checkAnswerValidation(elem) {
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
                 alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
                 retry_attempt = 0;
                 return -3;
             }
@@ -1196,6 +1201,7 @@ function checkAnswerValidation(elem) {
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
                     alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
                     retry_attempt = 0;
                     return -3;
                 }
@@ -1223,6 +1229,7 @@ function checkAnswerValidation(elem) {
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
                     alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+
                     retry_attempt = 0;
                     return -3;
                 }
