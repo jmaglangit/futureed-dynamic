@@ -1,4 +1,4 @@
-var module = {
+var module_algo = {
     p_1 : function () {
         // Generate two numbers, both < 10
         return math.randomMax(10,10);

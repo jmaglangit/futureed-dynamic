@@ -1,8 +1,8 @@
-var module_map = {
+var module_mapper = {
 	//division module id
 	758: {
 		addition: 'p_1',
-		subtraction: 'p_1',
+		subtraction: 'p_21',
 		multiplication: 'p_20',
 		division: 'p_23',
 
