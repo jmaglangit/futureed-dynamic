@@ -2819,3 +2819,22 @@ canvas#world {
 b.fsb_adjust{
     padding: 0 10px;
 }
+
+.m-top-20{
+    margin-top:20px;
+}
+
+.answer_area > div>div>div>table>tbody>tr>td>b
+,.answer_area > div>div>table>tbody>tr>td>b{
+    margin: 5px;
+}
+
+.answer_area > div>div>div>table>tbody>tr>td>label
+,.answer_area > div>div>table>tbody>tr>td>label
+,.answer_area > div>div>table>tbody>tr>td>input{
+    margin: 3px;
+}
+
+.answer_area > div#correct_flow > p, .answer_area > div#Answer_correct_flow > p {
+    margin-top: 20px;
+}
