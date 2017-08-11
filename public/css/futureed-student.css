@@ -2815,3 +2815,7 @@ canvas#world {
     color: #f00;
     vertical-align: super;
 }
+
+b.fsb_adjust{
+    padding: 0 10px;
+}
