@@ -83,7 +83,7 @@
         </div>
 
         <!-- answer area -->
-        <div id="step_div" class="col-xs-6 pull-right h4">
+        <div id="step_div" class="col-xs-6 pull-right h4 fsb_adjust">
             <div id="flip"></div>
             <div id="questionsz"></div>
             <div id="questionsm"></div>
@@ -136,11 +136,11 @@
                 {!! trans('messages.yes') !!}</button>
                 <button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick()">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="canbtnYEsOnclick()">
-                    {!! trans('messages.yes') !!}</button>
+                <button id="yes_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="canbtnYEsOnclick()">
+                    {!! trans('messages.ok') !!}</button>
             </div>
         </div>
     </div>
-
+    {!! Html::style('/css/futureed-student.css') !!}
     {!! Html::script('/js/common/operations/fraction_division.js')!!}
 </div>
