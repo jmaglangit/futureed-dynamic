@@ -46,7 +46,6 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-    digit = 1;
     randomDigits = digit;
 }
 
@@ -2306,5 +2305,3 @@ function displayFraction(IsShowWholeNumber, IsAfter, elemAfter){
     else
         $(strhtml).insertBefore(elemAfter);
 }
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help

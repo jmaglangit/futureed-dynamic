@@ -115,5 +115,5 @@
     </div>
     {!! Html::style('/css/operations/fraction-division.css') !!}
     {!! Html::style('/css/futureed-student.css') !!}
-    {!! Html::script('/js/common/operations/fraction_division.js')!!}
+    {!! Html::script('/js/common/operations/fraction-division.js')!!}
 </div>
