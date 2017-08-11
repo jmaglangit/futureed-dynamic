@@ -26,10 +26,11 @@
     <div>
         <!-- questions area -->
         <div id="questionPane" class="col-xs-6 answer_area">
+            <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
             <div id="examPane" style="display: none;" class="h4">
                 <table>
                     <tr>
-                        <td colspan="5"><p class="h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p></td>
+                        <td colspan="5"></td>
                     </tr>
                     <tr class="h4">
                         <td align="center">
