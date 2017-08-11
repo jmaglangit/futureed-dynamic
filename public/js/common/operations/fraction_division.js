@@ -403,7 +403,7 @@ function nextsetp(){
     result_str = "";
     if (step_count == 2) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": what is the numerator?</p>";
+        result_str += "<p>Step " + step_count +": What is the numerator?</p>";
         result_str += '<div>';
             result_str += '<table>';
                 result_str += '<tr>';
@@ -1081,7 +1081,7 @@ function checkAnswerValidation(elem) {
         }
         if(retry_attempt > 1){
             flip_count--;
-            alertModal("The correct answer is " + correct_answer + ". Please retry ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1139,7 +1139,7 @@ function checkAnswerValidation(elem) {
             if (!step3_error) {
                 step3_error = answer_val;
             }
-            alertModal("The correct answer is " + correct_answer + ". Please retry ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }

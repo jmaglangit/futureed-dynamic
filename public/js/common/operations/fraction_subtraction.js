@@ -1033,7 +1033,7 @@ function checkAnswerValidation(elem) {
                 step2_error = answer_val;
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Please retry ");
+            alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1094,7 +1094,7 @@ function checkAnswerValidation(elem) {
             if(retry_attempt > 1){
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                alertModal("Correct Answer is " + correct_answer + ". Please retry ");
+                alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
                 retry_attempt = 0;
                 return -3;
             }
@@ -1148,7 +1148,7 @@ function checkAnswerValidation(elem) {
             if(retry_attempt > 1){
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                alertModal("Correct Answer is " + correct_answer + ". Please retry ");
+                alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
                 retry_attempt = 0;
                 return -3;
             }
@@ -1194,7 +1194,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                    alertModal("Correct Answer is " + correct_answer + ". Please retry ");
+                    alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
                     retry_attempt = 0;
                     return -3;
                 }
@@ -1221,7 +1221,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                    alertModal("Correct Answer is " + correct_answer + ". Please retry ");
+                    alertModal("Correct Answer is " + correct_answer + ". Please retry. ");
                     retry_attempt = 0;
                     return -3;
                 }
