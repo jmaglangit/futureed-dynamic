@@ -178,7 +178,7 @@ function wholeNumberModal(message){
 }
 
 function cannotSimplifyModal(message){
-    console.log(message);
+    // console.log(message);
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#yes_simplify_modal").hide();
@@ -273,7 +273,7 @@ function btncalculateOnclick(){
     var result_str = "";
     if (step_count == 1) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": what is the numerator?</p>";
+        result_str += "<p>Step " + step_count +": What is the numerator?</p>";
         result_str += '<div>';
             result_str += '<table>';
                 result_str += '<tr>';
@@ -351,7 +351,7 @@ function nextsetp(){
     result_str = "";
     if (step_count == 2) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": what is the denominator?</p>";
+        result_str += "<p>Step " + step_count +": What is the denominator?</p>";
         result_str += '<div>';
             result_str += '<table>';
                 result_str += '<tr>';
@@ -404,7 +404,7 @@ function nextsetp(){
             arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
             result_str = "<div>";
             // result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
-            result_str += "<p>Step " + step_count +": Can you simplify the fraction?</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
 
             result_str += '<table id="step_count3">';
 
@@ -434,11 +434,11 @@ function nextsetp(){
             result_str += "</div>";
             $("#simplify").html(result_str);
         }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 ) {
-            console.log("step count 3 arry_correctval[1] < arry_correctval[2] && flag == 0");
+            // console.log("step count 3 arry_correctval[1] < arry_correctval[2] && flag == 0");
             specialFlag = true;
             result_str = "<div>";
             // result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
-            result_str += "<p>Step " + step_count +": Can you simplify the fraction?</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
 
             result_str += '<table id="step_count3">';
 
@@ -469,7 +469,7 @@ function nextsetp(){
         }else if (wholeBtnFlag == false && flag == 0 && simplifyFlag == false) {
             result_str = "<div>";
             // result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
-            result_str += "<p>Step " + step_count +": Can you simplify the fraction?</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
 
             result_str += '<table id="step_count3">';
 
@@ -505,7 +505,8 @@ function nextsetp(){
 
         if (arry_correctval[1] < arry_correctval[2] && factorX != 1 || specialFlag == true) {
             // $("#myModal2").show();
-            cannotSimplifyModal("Can not Simplify."); //added
+            // cannotSimplifyModal("Can not Simplify."); //added
+            cannotSimplifyModal("Fraction is already in its simplest form."); //added
 
         }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
             arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
@@ -687,7 +688,7 @@ function nextsetp(){
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
                 // alert("Your answer is larger than what we need.");
-                alertModal("our answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -799,7 +800,7 @@ function nextsetp(){
                     $(".inputCheck5").attr("value", temp_answer);
                     $(".inputCheck5").attr("readonly", true);
                     if (arry_correctval[6] <= arry_correctval[7]) {
-                        console.log("arry_correctval[6] <= arry_correctval[7]");
+                        // console.log("arry_correctval[6] <= arry_correctval[7]");
                         wholeBtnFlag = false;
                         simplifyFlag = false;
                     }
@@ -999,7 +1000,7 @@ function checkAnswerValidation(elem) {
                 step1_error = answer_val;
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("Correct Answer is " + correct_answer + ". Please retry ");
             retry_attempt = 0;
             return -3;
         }
@@ -1032,7 +1033,7 @@ function checkAnswerValidation(elem) {
                 step2_error = answer_val;
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("Correct Answer is " + correct_answer + ". Please retry ");
             retry_attempt = 0;
             return -3;
         }
@@ -1093,7 +1094,7 @@ function checkAnswerValidation(elem) {
             if(retry_attempt > 1){
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("Correct Answer is " + correct_answer + ". Please retry ");
                 retry_attempt = 0;
                 return -3;
             }
@@ -1147,7 +1148,7 @@ function checkAnswerValidation(elem) {
             if(retry_attempt > 1){
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("Correct Answer is " + correct_answer + ". Please retry ");
                 retry_attempt = 0;
                 return -3;
             }
@@ -1193,7 +1194,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                    alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                    alertModal("Correct Answer is " + correct_answer + ". Please retry ");
                     retry_attempt = 0;
                     return -3;
                 }
@@ -1220,7 +1221,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                    alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                    alertModal("Correct Answer is " + correct_answer + ". Please retry ");
                     retry_attempt = 0;
                     return -3;
                 }
