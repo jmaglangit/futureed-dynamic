@@ -1802,10 +1802,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
                 setRandomDigits(self.question_grade_condition.max_number.toString().length);
                 randomDigitsOnclick();
-                question_text = question_text.replace("{numerator1}",getRandomNumber1());
-                question_text = question_text.replace("{numerator2}",getRandomNumber2());
-                question_text = question_text.replace("{denominator1}",getRandomNumber3());
-                question_text = question_text.replace("{denominator2}",getRandomNumber4());
+				question_text = question_text.replace("{fraction_division}", "");
 
                 self.current_question.questions_text = question_text;
   				btncalculateOnclick();
@@ -1818,10 +1815,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
-				question_text = question_text.replace("{numerator1}",getRandomNumber1());
-				question_text = question_text.replace("{numerator2}",getRandomNumber2());
-				question_text = question_text.replace("{denominator1}",getRandomNumber3());
-				question_text = question_text.replace("{denominator2}",getRandomNumber3());
+				question_text = question_text.replace("{fraction_addition}", "");
 
 				self.current_question.questions_text = question_text;
 				btncalculateOnclick();
@@ -1833,10 +1827,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
                	setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
- 				question_text = question_text.replace("{numerator1}",getRandomNumber1());
-				question_text = question_text.replace("{numerator2}",getRandomNumber2());
-				question_text = question_text.replace("{denominator1}",getRandomNumber3());
- 				question_text = question_text.replace("{denominator2}",getRandomNumber3());
+				question_text = question_text.replace("{fraction_subtraction}", "");
 
  				self.current_question.questions_text = question_text;
  				btncalculateOnclick();
@@ -1863,10 +1854,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
-				question_text = question_text.replace("{numerator1}",getRandomNumber1());
-				question_text = question_text.replace("{numerator2}",getRandomNumber2());
-				question_text = question_text.replace("{denominator1}",getRandomNumber3());
-				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+				question_text = question_text.replace("{fraction_multiplication}", "");
 
 				self.current_question.questions_text = question_text;
 				btncalculateOnclick();
@@ -1891,10 +1879,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
-				question_text = question_text.replace("{numerator1}",getRandomNumber1());
-				question_text = question_text.replace("{numerator2}",getRandomNumber2());
-				question_text = question_text.replace("{denominator1}",getRandomNumber3());
-				question_text = question_text.replace("{denominator2}",getRandomNumber4());
+				question_text = question_text.replace("{fraction_addition_buterfly}", "");
 
 				self.current_question.questions_text = question_text;
 				btncalculateOnclick();
