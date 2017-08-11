@@ -66,7 +66,54 @@ class QuestionTemplateServices {
  					];				
  				}
 				break;
+			case config('futureed.fraction_addition'):
 
+				if((strpos($operation_var, '{fraction_addition}') != false)){
+
+					return true;
+
+				}else{
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
+				break;
+			case config('futureed.fraction_subtraction'):
+
+				if((strpos($operation_var, '{fraction_subtraction}') != false)){
+
+					return true;
+
+				}else{
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
+				break;
+			case config('futureed.fraction_multiplication'):
+
+				if((strpos($operation_var, '{fraction_multiplication}') != false)){
+
+					return true;
+
+				}else{
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
+				break;
+			case config('futureed.fraction_division'):
+
+				if((strpos($operation_var, '{fraction_division}') != false)){
+
+					return true;
+
+				}else{
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
+				break;
 			default:
 				break;
 		}

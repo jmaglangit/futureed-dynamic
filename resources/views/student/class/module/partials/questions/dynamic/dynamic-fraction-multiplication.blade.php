@@ -25,8 +25,36 @@
 
 	<div>
 		<!-- questions area -->
-		<div id="questionPane">
-			<p class="col-xs-6 h3" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+		<div id="questionPane" class="col-xs-6 answer_area">
+			<div id="examPane" style="display: none;" class="h4">
+				<table>
+					<tr>
+						<td colspan="5"><p class="h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p></td>
+					</tr>
+					<tr class="h4">
+						<td align="center">
+							<label id="subject_z1_b"></label>
+						</td>
+						<td rowspan="3" align="center" valign="middle">
+							<b> X </b>
+						</td>
+						<td align="center"><label id="subject_z2_b"></label></td>
+						<td rowspan="3" align="center" valign="middle" class="verybigtext">
+							<b>=</b>
+						</td>
+						<td align="center" class="verybigtext">?</td>
+					</tr>
+					<tr>
+						<td bgcolor="#000000" height="2"></td>
+						<td bgcolor="#000000" height="2"></td>
+					</tr>
+					<tr class="h4">
+						<td align="center"><label id="subject_m1_b"></label></td>
+						<td align="center"><label id="subject_m2_b"></td>
+						<td align="center" class="verybigtext">?</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 		<div style="width: 25%; float: left;">
 			<div id="examPane1" style="display: none;">
