@@ -984,6 +984,7 @@ return [
 	'admin_operation_fraction_subtraction_butterfly' => 'FRACTION_SUBTRACTION_BUTTERFLY',
 	'admin_operation_fraction_addition_whole' => 'FRACTION_ADDITION_WHOLE',
 	'admin_operation_fraction_subtraction_whole' => 'FRACTION_SUBTRACTION_WHOLE',
+	'admin_template_add_fraction' => 'ADD FRACTION',
 
 	//Client
 	//resources/views/client/dashboard/index.blade.php
