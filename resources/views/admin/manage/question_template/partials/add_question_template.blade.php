@@ -55,8 +55,10 @@
 							, '{! futureed.FRACTION_SUBTRACTION !} ' => trans('messages.admin_operation_fraction_subtraction')
 							, '{! futureed.FRACTION_MULTIPLICATION !} ' => trans('messages.admin_operation_fraction_multiplication')
 							, '{! futureed.FRACTION_DIVISION !} ' => trans('messages.admin_operation_fraction_division')
-							//, '{! futureed.FRACTION_ADDITION_BUTTERFLY !} ' => trans('messages.admin_operation_fraction_addition_butterfly')
-							//, '{! futureed.FRACTION_SUBTRACTION_BUTTERFLY !} ' => trans('messages.admin_operation_fraction_subtraction_butterfly')
+							, '{! futureed.FRACTION_ADDITION_BUTTERFLY !} ' => trans('messages.admin_operation_fraction_addition_butterfly')
+							, '{! futureed.FRACTION_SUBTRACTION_BUTTERFLY !} ' => trans('messages.admin_operation_fraction_subtraction_butterfly')
+							, '{! futureed.FRACTION_ADDITION_WHOLE !} ' => trans('messages.admin_operation_fraction_addition_whole')
+							, '{! futureed.FRACTION_SUBTRACTION_WHOLE !} ' => trans('messages.admin_operation_fraction_subtraction_whole')
 					 	)
 					 	, null
 					 	, array(
@@ -182,7 +184,7 @@
 					</div>
 					<div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_ADDITION">
 						<div class="col-xs-5 admin-search-module">
-							{!! Form::button(trans('messages.admin_operation_fraction_addition')
+							{!! Form::button(trans('messages.admin_template_add_fraction')
 								,array(
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_fraction_addition'
@@ -193,7 +195,7 @@
 					</div>
 					<div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_SUBTRACTION">
 						<div class="col-xs-5 admin-search-module">
-							{!! Form::button(trans('messages.admin_operation_fraction_subtraction')
+							{!! Form::button(trans('messages.admin_template_add_fraction')
 								,array(
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_fraction_subtraction'
@@ -204,7 +206,7 @@
 					</div>
 					<div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_MULTIPLICATION">
 						<div class="col-xs-6 admin-search-module">
-							{!! Form::button(trans('messages.admin_operation_fraction_multiplication')
+							{!! Form::button(trans('messages.admin_template_add_fraction')
 								,array(
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_fraction_multiplication'
@@ -215,11 +217,55 @@
 					</div>
 					<div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_DIVISION">
 						<div class="col-xs-5 admin-search-module">
-							{!! Form::button(trans('messages.admin_operation_fraction_division')
+							{!! Form::button(trans('messages.admin_template_add_fraction')
 								,array(
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_fraction_division'
 									, 'ng-click' => 'template.actionButtons(futureed.FRACTION_DIVISION)'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_ADDITION_BUTTERFLY">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_fraction')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_fraction_addition_butterfly'
+									, 'ng-click' => 'template.actionButtons(futureed.FRACTION_ADDITION_BUTTERFLY)'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_SUBTRACTION_BUTTERFLY">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_fraction')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_fraction_subtraction_butterfly'
+									, 'ng-click' => 'template.actionButtons(futureed.FRACTION_SUBTRACTION_BUTTERFLY)'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_ADDITION_WHOLE">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_fraction')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_fraction_addition_whole'
+									, 'ng-click' => 'template.actionButtons(futureed.FRACTION_ADDITION_WHOLE)'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_SUBTRACTION_WHOLE">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_fraction')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_fraction_subtraction_whole'
+									, 'ng-click' => 'template.actionButtons(futureed.FRACTION_SUBTRACTION_WHOLE)'
 								)
 							)!!}
 						</div>
@@ -230,14 +276,13 @@
 				{{--<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
 			<div class="form-group" ng-if="template.record.operation != Constants.FALSE">
-				<div class="col-xs-12">
+				<div class="col-xs-12" onclick="validateTemplateText()">
 					{!! Form::textarea('search_question_template_format',''
 						, array(
 							'ng-model' => 'template.record.question_template_format'
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : template.fields['question_template_format'] }"
 							, 'rows' => '5'
-							, 'ng-click' => "template.validateTemplateText()"
 							, 'id' => 'template_text'
 						)
 					) !!}

@@ -1,0 +1,78 @@
+/*check question template format if variable exist button is disable, if not enable button*/
+function validateTemplateText(){
+	var tempTextArea = document.getElementById('template_text');
+
+	//enable/disable variables button
+	tempTextArea.onkeyup = function(){
+		var val = tempTextArea.value;
+
+		//addition variables
+		if((val.indexOf("{addends1}")) == Constants.NEGATIVE_1){
+			$('button[name=btn_addends_one]').prop('disabled', false);
+		}else{$('button[name=btn_addends_one]').prop('disabled', true);}
+
+		if((val.indexOf("{addends2}")) == Constants.NEGATIVE_1){
+			$('button[name=btn_addends_two]').prop('disabled', false);
+		}else{$('button[name=btn_addends_two]').prop('disabled', true);}
+
+		//subtraction variables
+		if(val.indexOf("{minuend}") == Constants.NEGATIVE_1){
+			$('button[name=btn_minuend]').prop('disabled', false);
+		}else{ $('button[name=btn_minuend]').prop('disabled', true);}
+
+		if(val.indexOf("{subtrahend}") == Constants.NEGATIVE_1){
+			$('button[name=btn_subtrahend]').prop('disabled', false);
+		}else{$('button[name=btn_subtrahend]').prop('disabled', true);}
+
+		//multiplication variables
+		if(val.indexOf("{multiplicand}") == Constants.NEGATIVE_1){
+			$('button[name=btn_multiplicand]').prop('disabled', false);
+		}else{$('button[name=btn_multiplicand]').prop('disabled', true);}
+
+		if(val.indexOf("{multiplier}") == Constants.NEGATIVE_1){
+			$('button[name=btn_multiplier]').prop('disabled', false);
+		}else{$('button[name=btn_multiplier]').prop('disabled', true);}
+
+		//division variables
+		if(val.indexOf("{dividend}") == Constants.NEGATIVE_1){
+			$('button[name=btn_dividend]').prop('disabled', false);
+		}else{$('button[name=btn_dividend]').prop('disabled', true);}
+
+		if(val.indexOf("{divisor}") == Constants.NEGATIVE_1){
+			$('button[name=btn_divisor]').prop('disabled', false);
+		}else{$('button[name=btn_divisor]').prop('disabled', true);}
+
+		//fraction variables
+		if(val.indexOf("{fraction_addition}") == Constants.NEGATIVE_1){
+			$('button[name=btn_fraction_addition]').prop('disabled', false);
+		}else{$('button[name=btn_fraction_addition]').prop('disabled', true);}
+
+		if(val.indexOf("{fraction_subtraction}") == Constants.NEGATIVE_1){
+			$('button[name=btn_fraction_subtraction]').prop('disabled', false);
+		}else{$('button[name=btn_fraction_subtraction]').prop('disabled', true);}
+
+		if(val.indexOf("{fraction_multiplication}") == Constants.NEGATIVE_1){
+			$('button[name=btn_fraction_multiplication]').prop('disabled', false);
+		}else{$('button[name=btn_fraction_multiplication]').prop('disabled', true);}
+
+		if(val.indexOf("{fraction_division}") == Constants.NEGATIVE_1){
+			$('button[name=btn_fraction_division]').prop('disabled', false);
+		}else{$('button[name=btn_fraction_division]').prop('disabled', true);}
+
+		if(val.indexOf("{fraction_addition_butterfly}") == Constants.NEGATIVE_1){
+			$('button[name=btn_fraction_addition_butterfly]').prop('disabled', false);
+		}else{$('button[name=btn_fraction_addition_butterfly]').prop('disabled', true);}
+
+		if(val.indexOf("{fraction_subtraction_butterfly}") == Constants.NEGATIVE_1){
+			$('button[name=btn_fraction_subtraction_butterfly]').prop('disabled', false);
+		}else{$('button[name=btn_fraction_subtraction_butterfly]').prop('disabled', true);}
+
+		if(val.indexOf("{fraction_addition_whole}") == Constants.NEGATIVE_1){
+			$('button[name=btn_fraction_addition_whole]').prop('disabled', false);
+		}else{$('button[name=btn_fraction_addition_whole]').prop('disabled', true);}
+
+		if(val.indexOf("{fraction_subtraction_whole}") == Constants.NEGATIVE_1){
+			$('button[name=btn_fraction_subtraction_whole]').prop('disabled', false);
+		}else{$('button[name=btn_fraction_subtraction_whole]').prop('disabled', true);}
+	}
+}
