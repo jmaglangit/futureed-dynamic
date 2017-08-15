@@ -372,7 +372,7 @@ function nextsetp(){
         result_str = "<div>";
         result_str += "<p>Step " + step_count +": Cross Multiple #2</p>";
         result_str += '<div>';
-            result_str += '<table style="margin-left:45px;">';
+            result_str += '<table>';
                 result_str += '<tr>';
                     
                     result_str += '<td align="center"><label>'+ z1 +'</label></td>';
@@ -1461,7 +1461,7 @@ function displayTotalFlow(){
     }
     strhtml += "<div>";
     strhtml += '<div>';
-        strhtml += '<table style="margin-left:45px;">';
+        strhtml += '<table>';
             strhtml += '<tr>';
                 
                 strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
@@ -1489,7 +1489,7 @@ function displayTotalFlow(){
     }
     strhtml += "<div>";
     strhtml += '<div>';
-        strhtml += '<table style="margin-left:45px;">';
+        strhtml += '<table>';
             strhtml += '<tr>';
                 
                 strhtml += '<td align="center"><label>'+ z1 +'</label></td>';
@@ -1912,7 +1912,7 @@ function displayTotalFlow1(){
     strhtml += "<p>Step 1: Cross Multiple #1</p>";
     strhtml += "<div>";
     strhtml += '<div>';
-        strhtml += '<table style="margin-left:45px;">';
+        strhtml += '<table>';
             strhtml += '<tr>';
                 
                 strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
@@ -1937,7 +1937,7 @@ function displayTotalFlow1(){
     strhtml += "<p>Step 2: Cross Multiple #2</p>";
     strhtml += "<div>";
     strhtml += '<div>';
-        strhtml += '<table style="margin-left:45px;">';
+        strhtml += '<table>';
             strhtml += '<tr>';
                 
                 strhtml += '<td align="center"><label>'+ z1 +'</label></td>';
