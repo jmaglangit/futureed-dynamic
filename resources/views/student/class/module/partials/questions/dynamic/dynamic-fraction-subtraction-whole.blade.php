@@ -31,11 +31,9 @@
             <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
             <div id="examPane" style="display: none;" class="h4">
                     <table>
-
                         <tr>
                             <td colspan="5"></td>
                         </tr>
-
                         <tr class="h4">
                             <td rowspan="3" align="center" valign="middle"><label id="subject_w1_b"></label></td>
                             <td align="center"><label id="subject_z1_b"></label></td>

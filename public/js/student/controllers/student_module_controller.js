@@ -1889,13 +1889,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
-
 				question_text = question_text.replace("{fraction_subtraction_whole}","");
 
-                self.current_question.questions_text = question_text;
-                btncalculateOnclick();
+				self.current_question.questions_text = question_text;
+				btncalculateOnclick();
 
-                break;
+				break;
 
 			default:
 				break;

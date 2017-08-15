@@ -2841,7 +2841,7 @@ b.fsb_adjust{
     padding: 0 5px;
 }
 
-.answer_area div#correct_flow p, .answer_area div#Answer_correct_flow p {
+.answer_area div#correct_flow p, .answer_area div#Answer_correct_flow p ,.answer_area div#whole{
     margin-top: 20px;
 }
 
