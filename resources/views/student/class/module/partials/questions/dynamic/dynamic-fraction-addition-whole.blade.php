@@ -61,7 +61,7 @@
         </div>
 
         <!-- answer area -->
-        <div id="step_div" class="col-xs-6 pull-right h4">
+        <div id="step_div" class="answer_area col-xs-6 pull-right h4">
             <div id="whole" class="h4">
             </div>
             <div id="questionsz">
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <div id="tipsFlow" style="display: none;">
+        <div id="tipsFlow" class="answer_area" style="display: none;">
             <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
             <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-right">

@@ -1551,7 +1551,7 @@ function displayTotalFlow(){
     strhtml += '</div>';
     strhtml += "</div>";
 
-    strhtml += "<p>Step 5: Simplify fraction if possible</p>";
+    strhtml += "<p>Step 5: Simplify the fraction if possible</p>";
     if (step5_whole) {
         strhtml += "<p style='color:red;'> Step5 Whole Error : " + step5_whole + "</p>";
     }
@@ -1993,7 +1993,7 @@ function displayTotalFlow1(){
     strhtml += '</div>';
     strhtml += "</div>";
 
-    strhtml += "<p>Step 5: Simplify fraction if possible</p>";
+    strhtml += "<p>Step 5: Simplify the fraction if possible</p>";
 
     if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
         console.log("4= 0");
