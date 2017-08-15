@@ -343,6 +343,16 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_butterfly_ans'
 					]);
 
+					Routes::get('/questions/dynamic/fraction-subtraction-whole',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-whole'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_whole'
+					]);
+
+					Routes::get('/questions/dynamic/fraction-subtraction-whole/answer',[
+						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-whole.answer'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_whole_answer'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'
