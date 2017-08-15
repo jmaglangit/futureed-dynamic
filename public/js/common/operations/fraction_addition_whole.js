@@ -342,7 +342,7 @@ function nextsetp(){
 
     if (step_count == 2) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": what is the numerator?</p>";
+        result_str += "<p>Step " + step_count +": What is the numerator?</p>";
         result_str += '<div>';
         result_str += '<table>';
         result_str += '<tr>';
@@ -373,7 +373,7 @@ function nextsetp(){
 
     if (step_count == 3) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": what is the denominator?</p>";
+        result_str += "<p>Step " + step_count +": What is the denominator?</p>";
         result_str += '<div>';
         result_str += '<table>';
         result_str += '<tr>';
@@ -425,7 +425,7 @@ function nextsetp(){
         if (flag == 1 && simplifyFlag == false) {
             arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
             result_str = "<div>";
-            result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
 
             result_str += '<table id="step_count3">';
 
@@ -458,7 +458,7 @@ function nextsetp(){
         }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 ) {
             var specialFlag = true;
             result_str = "<div>";
-            result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
 
             result_str += '<table id="step_count3">';
 
@@ -489,7 +489,7 @@ function nextsetp(){
             // nextsetp();
         }else if (wholeBtnFlag == false && flag == 0 && simplifyFlag == false) {
             result_str = "<div>";
-            result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
 
             result_str += '<table id="step_count3">';
 
