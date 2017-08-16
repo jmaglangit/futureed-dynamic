@@ -62,22 +62,12 @@
 
         <!-- answer area -->
         <div id="step_div" class="answer_area col-xs-6 pull-right h4">
-            <div id="whole" class="h4">
-            </div>
-            <div id="questionsz">
-            </div>
-
-            <div id="questionsm">
-            </div>
-
-            <div id="simplify">
-            </div>
-
-            <div id="combine">
-            </div>
-
-            <div id="answer">
-            </div>
+            <div id="whole" class="h4 m-top-20"></div>
+            <div id="questionsz" class="m-top-20"></div>
+            <div id="questionsm" class="m-top-20"></div>
+            <div id="simplify" class="m-top-20"></div>
+            <div id="combine" class="m-top-20"></div>
+            <div id="answer" class="m-top-20"></div>
         </div>
 
         <div id="tipsFlow" class="answer_area" style="display: none;">
