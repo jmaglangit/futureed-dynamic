@@ -250,7 +250,7 @@ function btncalculateOnclick(){
 	var result_str = "";
 	if (step_count == 1) {
 		result_str = "<div>";
-		result_str += "<p style='margin-top:20px;'>Step " + step_count +": Cross multiple #1 </p>";
+		result_str += "<p style='margin-top:20px;'>Step " + step_count +": Cross multiply #1 </p>";
 		result_str += '<div>';
 			result_str += '<table>';
 				result_str += '<tr>';
@@ -339,7 +339,7 @@ function nextsetp(){
 	result_str = "";
 	if (step_count == 2) {
 		result_str = "<div>";
-		result_str += "<p style='margin-top:20px;'>Step " + step_count +": Cross Multiple #2</p>";
+		result_str += "<p style='margin-top:20px;'>Step " + step_count +": Cross multiply #2</p>";
 		result_str += '<div>';
 			result_str += '<table>';
 				result_str += '<tr>';
@@ -1461,7 +1461,7 @@ function displayTotalFlow(){
 	strhtml += '</div>';
 	strhtml += "<p style='color:blue'>" + z1 + " x "+ m2 +" = "+ arry_correctval[10] +"</p>";
 
-	strhtml += "<p>Step 2: Cross Multiple #2</p>";
+	strhtml += "<p>Step 2: Cross multiply #2</p>";
 	if (step2_error) {
 		strhtml += "<p style='color:red;'> Step 2 Error : " +  step2_error + "</p>";
 	}
@@ -1913,7 +1913,7 @@ function displayTotalFlow1(){
 	strhtml += '</div>';
 	strhtml += "<p style='color:blue'>" + z1 + " x "+ m2 +" = "+ arry_correctval[10] +"</p>";
 
-	strhtml += "<p>Step 2: Cross Multiple #2</p>";
+	strhtml += "<p>Step 2: Cross multiply #2</p>";
 	strhtml += "<div>";
 	strhtml += '<div>';
 		strhtml += '<table>';

@@ -281,9 +281,9 @@ function btncalculateOnclick(){
     var result_str = "";
     if (step_count == 1) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": Cross multiple #1 </p>";
+        result_str += "<p>Step " + step_count +": Cross multiply #1 </p>";
         result_str += '<div>';
-            result_str += '<table style="margin-left:45px">';
+            result_str += '<table>';
                 result_str += '<tr>';
                     
                     result_str += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
@@ -370,7 +370,7 @@ function nextsetp(){
     result_str = "";
     if (step_count == 2) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": Cross Multiple #2</p>";
+        result_str += "<p>Step " + step_count +": Cross multiply #2</p>";
         result_str += '<div>';
             result_str += '<table>';
                 result_str += '<tr>';
@@ -411,7 +411,7 @@ function nextsetp(){
 
     if (step_count == 3) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": Subtraction #1 and #2 </p>";
+        result_str += "<p>Step " + step_count +": Subtract #1 from #2 </p>";
         result_str += '<div>';
             result_str += '<table>';
                 result_str += '<tr>';
@@ -472,7 +472,7 @@ function nextsetp(){
             console.log("simplifyFlag == false");
             arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
             result_str = "<div>";
-            result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
             
             result_str += '<table id="step_count3">';
 
@@ -505,7 +505,7 @@ function nextsetp(){
         }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 ) {
             specialFlag = true;
             result_str = "<div>";
-            result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
             
             result_str += '<table id="step_count3">';
 
@@ -534,7 +534,7 @@ function nextsetp(){
             nextsetp();
         }else if (wholeBtnFlag == false && flag == 0 && simplifyFlag == false) { 
             result_str = "<div>";
-            result_str += "<p>Step " + step_count +": Simplify fraction if possible</p>";
+            result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
             
             result_str += '<table id="step_count3">';
 
@@ -1388,7 +1388,7 @@ function wholebtnYEsOnclick() {
 }
 function wholebtnNOOnclick() {
     // alert("Can not! Retry!");
-     retryWholeNumModal("hat is incorrect. Fraction can be simplified. Please retry.");
+     retryWholeNumModal("That is incorrect. Fraction can be simplified. Please retry.");
     // wholeBtnFlag = false;
     // nextsetp();
     // $(".inputCheck2").show();
@@ -1411,7 +1411,7 @@ function btnYEsOnclick(){
 
 function btnNOOnclick(){
     // alert("Can not!Retry!");
-    retrySimplifyModal("hat is incorrect. Fraction can be simplified. Please retry.");
+    retrySimplifyModal("That is incorrect. Fraction can be simplified. Please retry.");
 }
 
 function checkAnswer(elem) {
@@ -1455,7 +1455,7 @@ function displayTotalFlow(){
 
     strhtml += '</div>';
 
-    strhtml += "<p>Step 1: Cross Multiple #1</p>";
+    strhtml += "<p>Step 1: Cross multiply #1</p>";
     if (step1_error) {
         strhtml += "<p style='color:red;'> Step 1 Error : " +  step1_error + "</p>";
     }
@@ -1483,7 +1483,7 @@ function displayTotalFlow(){
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>" + z1 + " x "+ m2 +" = "+ arry_correctval[10] +"</p>";
 
-    strhtml += "<p>Step 2: Cross Multiple #2</p>";
+    strhtml += "<p>Step 2: Cross multiply #2</p>";
     if (step2_error) {
         strhtml += "<p style='color:red;'> Step 2 Error : " +  step2_error + "</p>";
     }
@@ -1512,7 +1512,7 @@ function displayTotalFlow(){
     strhtml += "<p style='color:blue'>" + z2 + " x "+ m1 +" = "+ arry_correctval[10] +"</p>";
 
     strhtml += "<div>";
-    strhtml += "<p>Step 3: Subtraction #1 and #2 </p>";
+    strhtml += "<p>Step 3: Subtract #1 from #2 </p>";
     if (step3_error) {
         strhtml += "<p style='color:red;'> Step 3 Error : " +  step3_error + "</p>";
     }
@@ -1909,7 +1909,7 @@ function displayTotalFlow1(){
 
     strhtml += '</div>';
 
-    strhtml += "<p>Step 1: Cross Multiple #1</p>";
+    strhtml += "<p>Step 1: Cross multiply #1</p>";
     strhtml += "<div>";
     strhtml += '<div>';
         strhtml += '<table>';
@@ -1934,7 +1934,7 @@ function displayTotalFlow1(){
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>" + z1 + " x "+ m2 +" = "+ arry_correctval[10] +"</p>";
 
-    strhtml += "<p>Step 2: Cross Multiple #2</p>";
+    strhtml += "<p>Step 2: Cross multiply #2</p>";
     strhtml += "<div>";
     strhtml += '<div>';
         strhtml += '<table>';
@@ -1960,7 +1960,7 @@ function displayTotalFlow1(){
     strhtml += "<p style='color:blue'>" + z2 + " x "+ m1 +" = "+ arry_correctval[10] +"</p>";
 
     strhtml += "<div>";
-    strhtml += "<p>Step 3: Subtraction #1 and #2 </p>";
+    strhtml += "<p>Step 3: Subtract #1 from #2 </p>";
     strhtml += '<div>';
         strhtml += '<table>';
             strhtml += '<tr>';
