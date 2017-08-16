@@ -102,20 +102,20 @@
             </div>
 
             <div class="modal-footer">
-                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="closeModal()" style="display: none;">Close</button>
-                <button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick()">
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="closeModal();dynamicUnBlock()" style="display: none;">Close</button>
+                <button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick();dynamicUnBlock()">
                     {!! trans('messages.yes') !!}</button>
-                <button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick()">
+                <button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();dynamicUnBlock()">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="wholebtnYEsOnclick()">
+                <button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="wholebtnYEsOnclick();dynamicUnBlock()">
                     {!! trans('messages.yes') !!}</button>
-                <button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick()">
+                <button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick();dynamicUnBlock()">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_combine_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnYEsOnclick()">
+                <button id="yes_combine_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnYEsOnclick();dynamicUnBlock()">
                     {!! trans('messages.yes') !!}</button>
-                <button id="no_combine_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick()">
+                <button id="no_combine_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick();dynamicUnBlock()">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_can_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="canbtnYEsOnclick()">
+                <button id="yes_can_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="canbtnYEsOnclick();dynamicUnBlock()">
                     {!! trans('messages.ok') !!}</button>
             </div>
         </div>
