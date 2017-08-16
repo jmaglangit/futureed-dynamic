@@ -141,5 +141,11 @@ class ClassModuleController extends Controller {
 	public function fraction_addition_butterfly_ans(){
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-butterfly-ans');
 	}
+	public function fraction_subtraction_whole(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-whole');
+	}
 
+	public function fraction_subtraction_whole_answer() {
+		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-whole-ans');
+	}
 }
