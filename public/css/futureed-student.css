@@ -2824,46 +2824,24 @@ b.fsb_adjust{
     margin-top:20px;
 }
 
-.answer_area table b{
+#step_div table b, .answer_area table b,
+#correct_flow table b, #Answer_correct_flow table b{
     margin: 5px;
 }
 
-.answer_area table label, .answer_area table input{
+.answer_area table label, .answer_area table input,
+#step_div table label, #step_div table input,
+#correct_flow table label, #correct_flow table input,
+#Answer_correct_flow table label, #Answer_correct_flow table input{
     margin: 3px;
 }
 
-.answer_area > div#correct_flow > p, .answer_area > div#Answer_correct_flow > p {
+div#correct_flow p, div#Answer_correct_flow p,
+#step_div div#questionsz, #step_div div#questionsm, 
+#step_div div#simplify, #step_div div#answer,
+#step_div div#flip, #step_div div#combine, 
+#step_div div#addoneandtwo, #step_div div#Subtractiononeandtwo, 
+#step_div div#whole, #step_div div#crossone, #step_div div#crosstwo, 
+#step_div div#multiply_denominator{
     margin-top: 20px;
-}
-
-/* fraction subtraction and fraction division style */
-#step_div b{
-    padding: 0 5px;
-}
-
-.answer_area div#correct_flow p, .answer_area div#Answer_correct_flow p ,.answer_area div#whole,
-.answer_area div#crosstwo, .answer_area div#Subtractiononeandtwo, .answer_area div#multiply_denominator,
-.answer_area div#simplify{
-    margin-top: 20px;
-}
-
-#correct_flow b, #ansCorrectFlow b{
-    padding: 0 5px;
-}
-
-#step_count3 .inputCheck1{
-    margin-right: 10px;
-}
-
-b.fract_title_addjust{
-    padding-bottom: 10px;
-    background: red;
-}
-
-#Answer_correct_flow #step_count3 label, #correct_flow #step_count3 label{
-    padding: 5px;
-}
-
-#Answer_correct_flow #step_count3 p, #correct_flow #step_count3 p{
-    padding: 10px;
 }
