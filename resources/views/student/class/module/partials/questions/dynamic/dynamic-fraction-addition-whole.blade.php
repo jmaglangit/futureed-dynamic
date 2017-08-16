@@ -62,22 +62,12 @@
 
         <!-- answer area -->
         <div id="step_div" class="answer_area col-xs-6 pull-right h4">
-            <div id="whole" class="h4">
-            </div>
-            <div id="questionsz">
-            </div>
-
-            <div id="questionsm">
-            </div>
-
-            <div id="simplify">
-            </div>
-
-            <div id="combine">
-            </div>
-
-            <div id="answer">
-            </div>
+            <div id="whole" class="h4"></div>
+            <div id="questionsz"></div>
+            <div id="questionsm"></div>
+            <div id="simplify"></div>
+            <div id="combine"></div>
+            <div id="answer"></div>
         </div>
 
         <div id="tipsFlow" class="answer_area" style="display: none;">
@@ -127,8 +117,8 @@
                     {!! trans('messages.yes') !!}</button>
                 <button id="no_combine_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick()">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_can_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnNOOnclick()">
-                    {!! trans('messages.yes') !!}</button>
+                <button id="yes_can_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick()">
+                    {!! trans('messages.ok') !!}</button>
             </div>
         </div>
     </div>

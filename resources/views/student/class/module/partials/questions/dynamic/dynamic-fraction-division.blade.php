@@ -84,11 +84,11 @@
         </div>
 
         <!-- answer area -->
-        <div id="step_div" class="col-xs-6 pull-right h4 answer_area">
-            <div id="flip" class="m-top-20"></div>
-            <div id="questionsz" class="m-top-20"></div>
-            <div id="questionsm" class="m-top-20"></div>
-            <div id="simplify" class="m-top-20"></div>
+        <div id="step_div" class="col-xs-6 pull-right h4">
+            <div id="flip"></div>
+            <div id="questionsz"></div>
+            <div id="questionsm"></div>
+            <div id="simplify"></div>
             <div id="answer"></div>
         </div>
 
