@@ -2841,7 +2841,9 @@ b.fsb_adjust{
     padding: 0 5px;
 }
 
-.answer_area div#correct_flow p, .answer_area div#Answer_correct_flow p ,.answer_area div#whole{
+.answer_area div#correct_flow p, .answer_area div#Answer_correct_flow p ,.answer_area div#whole,
+.answer_area div#crosstwo, .answer_area div#Subtractiononeandtwo, .answer_area div#multiply_denominator,
+.answer_area div#simplify{
     margin-top: 20px;
 }
 
