@@ -96,6 +96,7 @@ function answerReset(){
 }
 
 function alertModal(message){
+    dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#yes_simplify_modal").hide();
@@ -110,6 +111,7 @@ function alertModal(message){
 }
 
 function retrySimplifyModal(message){
+    dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#ok_simplify_modal").show();
@@ -123,6 +125,7 @@ function retrySimplifyModal(message){
 }
 
 function retryWholeNumModal(message){
+    dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#ok_simplify_modal").hide();
@@ -136,6 +139,7 @@ function retryWholeNumModal(message){
 }
 
 function simplifyModal(message){
+    dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#ok_simplify_modal").hide();
@@ -150,6 +154,7 @@ function simplifyModal(message){
 }
 
 function wholeNumberModal(message){
+    dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#yes_simplify_modal").hide();
@@ -163,6 +168,7 @@ function wholeNumberModal(message){
 }
 
 function cannotSimplifyModal(message){
+    dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#yes_simplify_modal").hide();
