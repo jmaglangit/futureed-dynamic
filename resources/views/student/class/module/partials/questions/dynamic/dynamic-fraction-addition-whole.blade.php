@@ -27,12 +27,13 @@
 
     <div>
         <!-- questions area -->
-        <div id="questionPane" class="col-xs-6">
+        <div id="questionPane" class="col-xs-6 answer_area">
+            <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
             <div id="examPane" style="display: none;" class="h4">
                     <table>
 
                         <tr>
-                            <td colspan="5"><p class="h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p></td>
+                            <td colspan="5"></td>
                         </tr>
 
                         <tr class="h4">
@@ -60,26 +61,16 @@
         </div>
 
         <!-- answer area -->
-        <div id="step_div" class="col-xs-6 pull-right h4">
-            <div id="whole" class="h4">
-            </div>
-            <div id="questionsz">
-            </div>
-
-            <div id="questionsm">
-            </div>
-
-            <div id="simplify">
-            </div>
-
-            <div id="combine">
-            </div>
-
-            <div id="answer">
-            </div>
+        <div id="step_div" class="answer_area col-xs-6 pull-right h4">
+            <div id="whole" class="h4"></div>
+            <div id="questionsz"></div>
+            <div id="questionsm"></div>
+            <div id="simplify"></div>
+            <div id="combine"></div>
+            <div id="answer"></div>
         </div>
 
-        <div id="tipsFlow" style="display: none;">
+        <div id="tipsFlow" class="answer_area" style="display: none;">
             <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
             <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-right">
@@ -113,20 +104,20 @@
             </div>
 
             <div class="modal-footer">
-                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="closeModal()" style="display: none;">Close</button>
-                <button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick()">
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="closeModal();" style="display: none;">Close</button>
+                <button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick();">
                     {!! trans('messages.yes') !!}</button>
-                <button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick()">
+                <button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="wholebtnYEsOnclick()">
+                <button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="wholebtnYEsOnclick();">
                     {!! trans('messages.yes') !!}</button>
-                <button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick()">
+                <button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick();">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_combine_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnYEsOnclick()">
+                <button id="yes_combine_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnYEsOnclick();">
                     {!! trans('messages.yes') !!}</button>
-                <button id="no_combine_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick()">
+                <button id="no_combine_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick();">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_can_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnNOOnclick()">
+                <button id="yes_can_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnNOOnclick();">
                     {!! trans('messages.yes') !!}</button>
             </div>
         </div>
