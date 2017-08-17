@@ -57,6 +57,7 @@ function answerReset(){
 }
 
 function alertModal(message){
+    //dynamicBlock()
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#close_modal").show();
@@ -65,6 +66,7 @@ function alertModal(message){
 }
 
 function remainderModal(message){
+    //dynamicBlock()
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#close_modal").hide();

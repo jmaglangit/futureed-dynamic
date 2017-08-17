@@ -121,8 +121,16 @@
 							  ''=>trans('messages.admin_select_operation')
 							, '{! futureed.ADDITION !}' => trans('messages.admin_operation_add')
 							, '{! futureed.SUBTRACTION !} ' => trans('messages.admin_operation_subtract')
-							//, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
+							, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
 							, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
+							, '{! futureed.FRACTION_ADDITION !} ' => trans('messages.admin_operation_fraction_addition')
+							, '{! futureed.FRACTION_SUBTRACTION !} ' => trans('messages.admin_operation_fraction_subtraction')
+							, '{! futureed.FRACTION_MULTIPLICATION !} ' => trans('messages.admin_operation_fraction_multiplication')
+							, '{! futureed.FRACTION_DIVISION !} ' => trans('messages.admin_operation_fraction_division')
+							, '{! futureed.FRACTION_ADDITION_BUTTERFLY !} ' => trans('messages.admin_operation_fraction_addition_butterfly')
+							, '{! futureed.FRACTION_SUBTRACTION_BUTTERFLY !} ' => trans('messages.admin_operation_fraction_subtraction_butterfly')
+							, '{! futureed.FRACTION_ADDITION_WHOLE !} ' => trans('messages.admin_operation_fraction_addition_whole')
+							, '{! futureed.FRACTION_SUBTRACTION_WHOLE !} ' => trans('messages.admin_operation_fraction_subtraction_whole')
 					 	)
 					 	, null
 					 	, array(

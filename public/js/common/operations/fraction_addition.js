@@ -92,6 +92,7 @@ function answerReset(){
 }
 
 function alertModal(message){
+    //dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#yes_simplify_modal").hide();
@@ -102,10 +103,10 @@ function alertModal(message){
 	$("#yes_modal").hide();
 	$("#ok_simplify_modal").hide();
 	$("#ok_whole_num_modal").hide();
-	$("input").attr("readonly", true);
 }
 
 function retrySimplifyModal(message){
+    //dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#ok_simplify_modal").show();
@@ -119,6 +120,7 @@ function retrySimplifyModal(message){
 }
 
 function retryWholeNumModal(message){
+    //dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#ok_simplify_modal").hide();
@@ -132,6 +134,7 @@ function retryWholeNumModal(message){
 }
 
 function simplifyModal(message){
+    //dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#ok_simplify_modal").hide();
@@ -142,10 +145,10 @@ function simplifyModal(message){
 	$("#yes_whole_modal").hide();
 	$("#no_whole_modal").hide();
 	$("#yes_modal").hide();
-	$(".inputCheck").attr("readonly", true);
 }
 
 function wholeNumberModal(message){
+    //dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#yes_simplify_modal").hide();
@@ -159,6 +162,7 @@ function wholeNumberModal(message){
 }
 
 function cannotSimplifyModal(message){
+    //dynamicBlock();
 	$("#message_text_modal").html(message);
 	$("#message_modal_dynamic").show();
 	$("#yes_simplify_modal").hide();
@@ -173,7 +177,6 @@ function cannotSimplifyModal(message){
 
 function btnNOOnclose() {
 	$("#message_modal_dynamic").hide();
-	$("input").attr("readonly", false);
 }
 
 function btnOkSimplifyRetry() {

@@ -25,8 +25,37 @@
 
 	<div>
 		<!-- questions area -->
-		<div id="questionPane">
-			<p class="col-xs-6 h3" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+		<div id="questionPane" class="col-xs-6 answer_area">
+			<p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+			<div id="examPane" style="display: none;" class="h4">
+				<table>
+					<tr>
+						<td colspan="5"></td>
+					</tr>
+					<tr class="h4">
+						<td align="center">
+							<label id="subject_z1_b"></label>
+						</td>
+						<td rowspan="3" align="center" valign="middle">
+							<b> + </b>
+						</td>
+						<td align="center"><label id="subject_z2_b"></label></td>
+						<td rowspan="3" align="center" valign="middle" class="verybigtext">
+							<b>=</b>
+						</td>
+						<td align="center" class="verybigtext">?</td>
+					</tr>
+					<tr>
+						<td bgcolor="#000000" height="2"></td>
+						<td bgcolor="#000000" height="2"></td>
+					</tr>
+					<tr class="h4">
+						<td align="center"><label id="subject_m1_b"></label></td>
+						<td align="center"><label id="subject_m2_b"></td>
+						<td align="center" class="verybigtext">?</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 		<div style="width: 25%; float: left;">
 			<div id="examPane1" style="display: none;">
@@ -98,18 +127,18 @@
 			</div>
 
 			<div class="modal-footer">
-				<button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose()" style="display: none;">Close</button>
-				<button id="ok_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkSimplifyRetry()" style="display: none;">OK</button>
-				<button id="ok_whole_num_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkWholeNumRetry()" style="display: none;">OK</button>
-				<button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick()">
+				<button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();" style="display: none;">Close</button>
+				<button id="ok_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkSimplifyRetry();" style="display: none;">OK</button>
+				<button id="ok_whole_num_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkWholeNumRetry();" style="display: none;">OK</button>
+				<button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick();">
 					{!! trans('messages.yes') !!}</button>
-				<button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick()">
+				<button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();">
 					{!! trans('messages.no') !!}</button>
-				<button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="wholebtnYEsOnclick()">
+				<button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="wholebtnYEsOnclick();">
 				{!! trans('messages.yes') !!}</button>
-				<button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick()">
+				<button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick();">
 					{!! trans('messages.no') !!}</button>
-				<button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="canbtnYEsOnclick()">
+				<button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="canbtnYEsOnclick();">
 					{!! trans('messages.yes') !!}</button>
 			</div>
 		</div>

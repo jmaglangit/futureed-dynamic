@@ -84,23 +84,23 @@
 		</div>
 
 		<!-- answer area -->
-		<div id="step_div" class="col-xs-6 pull-right h4 answer_area">
-			<div id="questionsz" class="m-top-20"></div>
-			<div id="questionsm" class="m-top-20"></div>
-			<div id="simplify" class="m-top-20"></div>
-			<div id="answer" class="m-top-20"></div>
+		<div id="step_div" class="col-xs-6 pull-right h4">
+			<div id="questionsz"></div>
+			<div id="questionsm"></div>
+			<div id="simplify"></div>
+			<div id="answer"></div>
 		</div>
 			
 		<div id="tipsFlow" style="display: none;">
 			<div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
 			<div id="ansFlow" style="display: none;" class="col-xs-6 h4">
-				<div class="pull-right answer_area">
+				<div class="pull-right">
 					<div class="prof-info"><b>Answered Flow</b></div><br/>
 					<div id="correct_flow"></div><br>
 				</div>
 			</div>
 			<div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
-				<div class="pull-left answer_area">
+				<div class="pull-left">
 					<div class="prof-info"><b>Correct Answer Flow</b></div><br/>
 					<div id="Answer_correct_flow"></div>
 				</div>
@@ -125,18 +125,18 @@
 			</div>
 
 			<div class="modal-footer">
-				<button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose()" style="display: none;">Close</button>
-				<button id="ok_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkSimplifyRetry()" style="display: none;">OK</button>
-				<button id="ok_whole_num_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkWholeNumRetry()" style="display: none;">OK</button>
-				<button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick()">
+				<button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();" style="display: none;">Close</button>
+				<button id="ok_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkSimplifyRetry();" style="display: none;">OK</button>
+				<button id="ok_whole_num_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkWholeNumRetry();" style="display: none;">OK</button>
+				<button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick();">
 					{!! trans('messages.yes') !!}</button>
-				<button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick()">
+				<button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();">
 					{!! trans('messages.no') !!}</button>
-				<button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="wholebtnYEsOnclick()">
+				<button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="wholebtnYEsOnclick();">
 				{!! trans('messages.yes') !!}</button>
-				<button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick()">
+				<button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick();">
 					{!! trans('messages.no') !!}</button>
-				<button id="yes_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="canbtnYEsOnclick()">
+				<button id="yes_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="canbtnYEsOnclick();">
 					OK</button>
 			</div>
 		</div>

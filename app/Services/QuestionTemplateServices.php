@@ -30,6 +30,7 @@ class QuestionTemplateServices {
 				}
 
 				break;
+
 			case config('futureed.subtraction'):
 
 				if((strpos($operation_var, '{minuend}') != false) && (strpos($operation_var, '{subtrahend}') != false)){
@@ -41,6 +42,7 @@ class QuestionTemplateServices {
  				}
 
 				break;
+
 			case config('futureed.multiplication'):
 
 				if((strpos($operation_var, '{multiplicand}') != false) && (strpos($operation_var, '{multiplier}') != false)){
@@ -54,6 +56,7 @@ class QuestionTemplateServices {
  				}
 
 				break;
+
 			case config('futureed.division'):
 
 				if((strpos($operation_var, '{dividend}') != false) && (strpos($operation_var, '{divisor}') != false)){
@@ -65,7 +68,9 @@ class QuestionTemplateServices {
 	 					'message' => trans('errors.2605')
  					];				
  				}
+
 				break;
+
 			case config('futureed.fraction_addition'):
 
 				if((strpos($operation_var, '{fraction_addition}') != false)){
@@ -77,7 +82,9 @@ class QuestionTemplateServices {
 						'message' => trans('errors.2606')
 					];
 				}
+
 				break;
+
 			case config('futureed.fraction_subtraction'):
 
 				if((strpos($operation_var, '{fraction_subtraction}') != false)){
@@ -89,7 +96,9 @@ class QuestionTemplateServices {
 						'message' => trans('errors.2606')
 					];
 				}
+
 				break;
+
 			case config('futureed.fraction_multiplication'):
 
 				if((strpos($operation_var, '{fraction_multiplication}') != false)){
@@ -101,7 +110,9 @@ class QuestionTemplateServices {
 						'message' => trans('errors.2606')
 					];
 				}
+
 				break;
+
 			case config('futureed.fraction_division'):
 
 				if((strpos($operation_var, '{fraction_division}') != false)){
@@ -113,7 +124,65 @@ class QuestionTemplateServices {
 						'message' => trans('errors.2606')
 					];
 				}
+
 				break;
+
+			case config('futureed.fraction_addition_butterfly'):
+
+				if((strpos($operation_var, '{fraction_addition_butterfly}') != false)){
+
+					return true;
+
+				}else{
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
+
+				break;
+
+			case config('futureed.fraction_subtraction_butterfly'):
+
+				if((strpos($operation_var, '{fraction_subtraction_butterfly}') != false)){
+
+					return true;
+
+				}else{
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
+
+				break;
+
+			case config('futureed.fraction_addition_whole'):
+
+				if((strpos($operation_var, '{fraction_addition_whole}') != false)){
+
+					return true;
+
+				}else{
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
+
+				break;
+
+			case config('futureed.fraction_subtraction_whole'):
+
+				if((strpos($operation_var, '{fraction_subtraction_whole}') != false)){
+
+					return true;
+
+				}else{
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
+
+				break;
+
 			default:
 				break;
 		}
