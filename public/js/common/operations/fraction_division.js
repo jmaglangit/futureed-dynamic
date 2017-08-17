@@ -438,7 +438,7 @@ function nextsetp(){
 
     if (step_count == 3) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": what is the denominator?</p>";
+        result_str += "<p>Step " + step_count +": What is the denominator?</p>";
         result_str += '<div>';
             result_str += '<table>';
                 result_str += '<tr>';

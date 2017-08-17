@@ -136,7 +136,7 @@ function alertModal(message,modal){
 
 function modal0(){
     showModal();
-    $("#message_text_modal").html("Simplify fraction if possible? ");
+    $("#message_text_modal").html("Can you simplify the fraction? ");
     $("#yes_simplify_modal").show();
     $("#no_simplify_modal").show();
     $("#yes_whole_modal").hide();
@@ -149,7 +149,7 @@ function modal0(){
 
 function modal1(){
     showModal();
-    $("#message_text_modal").html("Would you make a whole number?");
+    $("#message_text_modal").html("Would you get a whole number?");
     $("#yes_whole_modal").show();
     $("#no_whole_modal").show();
     $("#yes_simplify_modal").hide();
@@ -162,7 +162,7 @@ function modal1(){
 
 function modal2(){
     showModal();
-    $("#message_text_modal").html("Can not Simplify.");
+    $("#message_text_modal").html("Fraction is already in its simplest form.");
     $("#yes_can_simplify_modal").show();
     $("#yes_simplify_modal").hide();
     $("#no_simplify_modal").hide();
@@ -297,7 +297,7 @@ function btncalculateOnclick(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -313,7 +313,7 @@ function btncalculateOnclick(){
             }
             if(temp_answer == -2){
                 // alert("opps not enough, your answer needs to be larger.");
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -914,7 +914,7 @@ function nextsetp(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -930,7 +930,7 @@ function nextsetp(){
             }
             if(temp_answer == -2){
                 // alert("opps not enough, your answer needs to be larger.");
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -957,7 +957,7 @@ function nextsetp(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -978,7 +978,7 @@ function nextsetp(){
                     step4_numerator_error = $(this).prop("value");
                 }
                 // alert("opps not enough, your answer needs to be larger.");
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -997,7 +997,7 @@ function nextsetp(){
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false && carry_over1 == false){
                         // alert("Answer can't be alphabet !");
-                        alertModal("Answer can't be alphabet !");
+                        alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -1019,7 +1019,7 @@ function nextsetp(){
                             step4_denominator_error = $(this).prop("value");
                         }
                         // alert("opps not enough, your answer needs to be larger.");
-                        alertModal("opps not enough, your answer needs to be larger.");
+                        alertModal("Oops not enough, your answer needs to be larger.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -1051,7 +1051,7 @@ function wholeOfValidationFunc() {
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -1078,7 +1078,7 @@ function wholeOfValidationFunc() {
                 if (!step4_whole) {
                     step4_whole = $(this).prop("value");
                 }
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -1100,7 +1100,7 @@ function wholeOfValidationFunc() {
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false && carry_over1 == false){
                         // alert("Answer can't be alphabet !");
-                        alertModal("Answer can't be alphabet !");
+                        alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -1128,7 +1128,7 @@ function wholeOfValidationFunc() {
                             step4_whole_numerator_error = $(this).prop("value");
                         }
                         // alert("opps not enough, your answer needs to be larger.");
-                        alertModal("opps not enough, your answer needs to be larger.");
+                        alertModal("Oops not enough, your answer needs to be larger.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -1150,7 +1150,7 @@ function wholeOfValidationFunc() {
                         if(event.keyCode == 13){
                             if(checkAnswer($(this)) == false && carry_over1 == false){
                                 // alert("Answer can't be alphabet !");
-                                alertModal("Answer can't be alphabet !");
+                                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
@@ -1178,7 +1178,7 @@ function wholeOfValidationFunc() {
                                     step4_whole_denominator_error = $(this).prop("value");
                                 }
                                 // alert("opps not enough, your answer needs to be larger.");
-                                alertModal("opps not enough, your answer needs to be larger.");
+                                alertModal("Oops not enough, your answer needs to be larger.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
@@ -1237,7 +1237,7 @@ function checkAnswerValidation(elem) {
                 step1_error = answer_val;
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1266,7 +1266,7 @@ function checkAnswerValidation(elem) {
                 step2_error = answer_val;
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1299,7 +1299,7 @@ function checkAnswerValidation(elem) {
                 step3_error = answer_val;
             }
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1360,7 +1360,7 @@ function checkAnswerValidation(elem) {
             if(retry_attempt > 1){
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                 retry_attempt = 0;
                 return -3;
             }
@@ -1414,7 +1414,7 @@ function checkAnswerValidation(elem) {
             if(retry_attempt > 1){
                 fraction_count--;
                 // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                 retry_attempt = 0;
                 return -3;
             }
@@ -1461,7 +1461,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                    alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                    alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                     retry_attempt = 0;
                     return -3;
                 }
@@ -1488,7 +1488,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
                     simplify_count--;
                     // alert("Correct Answer is " + correct_answer + ". Retry! ");
-                    alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                    alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                     retry_attempt = 0;
                     return -3;
                 }
@@ -1540,7 +1540,7 @@ function wholeandfractionofcombineFunc() {
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -1556,7 +1556,7 @@ function wholeandfractionofcombineFunc() {
             }
             if(temp_answer == -2){
                 // alert("opps not enough, your answer needs to be larger.");
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -1575,7 +1575,7 @@ function wholeandfractionofcombineFunc() {
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -1591,7 +1591,7 @@ function wholeandfractionofcombineFunc() {
             }
             if(temp_answer == -2){
                 // alert("opps not enough, your answer needs to be larger.");
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -1607,7 +1607,7 @@ function wholeandfractionofcombineFunc() {
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false && carry_over1 == false){
                         // alert("Answer can't be alphabet !");
-                        alertModal("Answer can't be alphabet !");
+                        alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -1623,7 +1623,7 @@ function wholeandfractionofcombineFunc() {
                     }
                     if(temp_answer == -2){
                         // alert("opps not enough, your answer needs to be larger.");
-                        alertModal("opps not enough, your answer needs to be larger.");
+                        alertModal("Oops not enough, your answer needs to be larger.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -1639,7 +1639,7 @@ function wholeandfractionofcombineFunc() {
                         if(event.keyCode == 13){
                             if(checkAnswer($(this)) == false && carry_over1 == false){
                                 // alert("Answer can't be alphabet !");
-                                alertModal("Answer can't be alphabet !");
+                                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
@@ -1655,7 +1655,7 @@ function wholeandfractionofcombineFunc() {
                             }
                             if(temp_answer == -2){
                                 // alert("opps not enough, your answer needs to be larger.");
-                                alertModal("opps not enough, your answer needs to be larger.");
+                                alertModal("Oops not enough, your answer needs to be larger.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
@@ -1720,7 +1720,7 @@ function checkAnswerValidation9() {
         if(retry_attempt > 1){
             total_count--;
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1773,7 +1773,7 @@ function checkAnswerValidation9() {
         if(retry_attempt > 1){
             total_count--;
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1828,7 +1828,7 @@ function checkAnswerValidation9() {
 
         if(retry_attempt > 1){
             total_count--;
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1858,7 +1858,7 @@ function checkAnswerValidation9() {
 
         if(retry_attempt > 1){
             total_count--;
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
         }
@@ -1886,7 +1886,7 @@ function wholebtnYEsOnclick() {
     closeModal();
 }
 function wholebtnNOOnclick() {
-    alertModal("Can not! Retry!",1);
+    alertModal("That is incorrect. Fraction can be simplified. Please retry.",1);
 }
 
 function btnYEsOnclick(){
@@ -1902,7 +1902,7 @@ function btnYEsOnclick(){
 }
 
 function btnNOOnclick(){
-    alertModal("Can not! Retry!",0);
+    alertModal("That is incorrect. Fraction can be simplified. Please retry.",0);
 }
 
 function combinebtnYEsOnclick() {
@@ -1914,10 +1914,10 @@ function combinebtnYEsOnclick() {
     closeModal();
 }
 function combinebtnNOOnclick() {
-    alertModal("Can not! Retry",3);
+    alertModal("That is incorrect. Fraction can be simplified. Please retry.",3);
 }
 function combinebtnNOOnclose() {
-    alertModal("Can not! Retry");
+    alertModal("That is incorrect. Fraction can be simplified. Please retry.");
 
 }
 
@@ -1925,14 +1925,15 @@ function checkAnswer(elem) {
     answer_val = parseInt(elem.prop("value"));
     if(isNaN(answer_val)) return false;
     elem.prop("value", answer_val);
+    setAnswered(answer_val);
     return true;
 }
 
 function displayTotalFlow(){
 
     var strhtml = "";
-    strhtml += "<b style='color:blue'>Answered Flow</b>";
-    strhtml += "<br><br>";
+    // strhtml += "<b style='color:blue'>Answered Flow</b>";
+    // strhtml += "<br><br>";
     strhtml += '<div id="examPane1" style="">';
     strhtml += '<table>';
 
@@ -2058,7 +2059,7 @@ function displayTotalFlow(){
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>"+ m1+"</p>";
-    strhtml += "<p>Step 4: Simplify fraction if possible</p>";
+    strhtml += "<p>Step 4: Simplify the fraction if possible</p>";
 
     if (step4_whole) {
         strhtml += "<p style='color:red;'> Step5 Whole Error : " + step4_whole + "</p>";
@@ -2604,8 +2605,8 @@ function displayTotalFlow(){
 function displayTotalFlow1(){
 
     strhtml = "";
-    strhtml += "<b style='color:blue'>Answered Flow</b>";
-    strhtml += "<br><br>";
+    // strhtml += "<b style='color:blue'>Answered Flow</b>";
+    // strhtml += "<br><br>";
     strhtml += '<div id="examPane1" style="">';
     strhtml += '<table>';
 
@@ -2722,7 +2723,7 @@ function displayTotalFlow1(){
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>"+ m1+"</p>";
-    strhtml += "<p>Step 4: Simplify fraction if possible</p>";
+    strhtml += "<p>Step 4: Simplify the fraction if possible</p>";
 
     if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
         strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";

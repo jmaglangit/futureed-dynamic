@@ -42,7 +42,6 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-    digit = 1;
     randomDigits = digit;
 }
 
@@ -1430,8 +1429,8 @@ function checkAnswer(elem) {
 function displayTotalFlow(){
     
     strhtml = "";
-    strhtml += "<b style='color:blue'>Answered Flow</b>";
-    strhtml += "<br><br>";
+    // strhtml += "<b style='color:blue'>Answered Flow</b>";
+    // strhtml += "<br><br>";
     strhtml += '<div id="examPane1" style="">';
         strhtml += '<table>';
         
@@ -1884,8 +1883,8 @@ function displayTotalFlow(){
 function displayTotalFlow1(){
     
     strhtml = "";
-    strhtml += "<b style='color:blue'>Answered Flow</b>";
-    strhtml += "<br><br>";
+    // strhtml += "<b style='color:blue'>Answered Flow</b>";
+    // strhtml += "<br><br>";
     strhtml += '<div id="examPane1" style="">';
         strhtml += '<table>';
         
