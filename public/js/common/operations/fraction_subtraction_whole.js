@@ -273,7 +273,7 @@ function btncalculateOnclick(){
 	var result_str = "";
 	if (step_count == 1) {
 		result_str = "<div>";
-		result_str += "<p>Step " + step_count +":  Subtraction whole numbers first.</p>";
+		result_str += "<p>Step " + step_count +":  Subtract whole numbers first.</p>";
 		result_str += '<div>';
 			result_str += '<table>';
 				result_str += '<tr>';
@@ -1980,7 +1980,7 @@ function displayTotalFlow(){
 
 	strhtml += '</div>';
 
-	strhtml += "<p>Step 1: Add whole numbers first.</p>";
+	strhtml += "<p>Step 1: Subtract whole numbers first.</p>";
 	if (step1_error) {
 		strhtml += "<p style='color:red;'> Step 1 Error : " +  step1_error + "</p>";
 	}
@@ -2653,7 +2653,7 @@ function displayTotalFlow1(){
 
 	strhtml += '</div>';
 
-	strhtml += "<p>Step 1: Subtraction whole numbers first.</p>";
+	strhtml += "<p>Step 1: Subtract whole numbers first.</p>";
 	strhtml += '<div>';
 		strhtml += '<table>';
 			strhtml += '<tr>';

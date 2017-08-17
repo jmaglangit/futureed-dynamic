@@ -187,7 +187,7 @@ function modal3(){
 }
 
 function closeModal(){
-    dynamicUnBlock();
+    // dynamicUnBlock();
     $("#message_modal_dynamic").hide();
 }
 
