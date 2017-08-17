@@ -122,6 +122,7 @@
 
     function dynamicUnBlock(){
 
+    	console.log('unblocking');
         document.onkeydown = function (e) {
             return true;
         }
