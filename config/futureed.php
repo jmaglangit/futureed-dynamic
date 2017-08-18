@@ -294,7 +294,7 @@ return [
 
 	//path for question uploaded images final
 	'answer_explanation_image_final' => base_path() . '/public/images/que-ans-tip',
-	'answer_explanation_image_public' => '/images/que-ans-tip		',
+	'answer_explanation_image_public' => '/images/que-ans-tip',
 
 	//games images folder
 	'game_images_folder' => '/uploads/games',
