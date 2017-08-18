@@ -14,7 +14,7 @@
             {{--<button onclick="startAnswer();">Start Answer</button>--}}
         </div>
         <!-- answer area -->
-        <div id="answerPane" class="col-xs-6 pull-right h4">
+        <div id="answerPane" class="col-xs-6 pull-right h4 answer_area">
             <div id="lastDiv" class="margin-10-top margin-10-bot h4"></div>
         </div>
         <div id="tipsFlow" style="display: none;">
