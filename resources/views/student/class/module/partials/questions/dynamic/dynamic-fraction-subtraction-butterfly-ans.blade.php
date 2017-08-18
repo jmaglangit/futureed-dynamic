@@ -1,4 +1,3 @@
-<H1> FRACTION SUBSTRACITON BUTTERFLY ans not on the list on single view </H1>
 <div ng-show="mod.record.is_dynamic == futureed.TRUE && mod.current_question.question_template.operation == futureed.FRACTION_SUBTRACTION_BUTTERFLY">
     <div id="examPane" style="display: none;">
         <!-- answer area -->
