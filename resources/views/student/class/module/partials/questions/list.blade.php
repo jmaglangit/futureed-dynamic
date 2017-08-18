@@ -139,8 +139,7 @@
 				{{--Answers--}}
 				{{--TODO add module if dynamic--}}
 				<div class="col-xs-6"
-					 ng-if="mod.current_question.question_type != futureed.CODING && mod.record.is_dynamic == futureed.false"
-				>
+					 ng-if="mod.current_question.question_type != futureed.CODING">
 					<div class="questions-answers">
 
 						{{-- TODO insert dynamic questions --}}
