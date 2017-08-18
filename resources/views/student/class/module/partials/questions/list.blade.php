@@ -343,7 +343,7 @@
 							<span class="tips-text">{{ trans('messages.tips') }}</span>
 						</div>
 						<div class="col-xs-12">
-							<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset] | json !}">
+							<img ng-src="{! mod.answer_explanation[mod.answer_exp_offset].image !}">
 							<i class="fa fa-caret-left fa-2x"
 							   aria-hidden="true"
 							   ng-show="mod.answer_exp_offset >= 1 && mod.answer_explanation_fully_loaded == futureed.TRUE"
