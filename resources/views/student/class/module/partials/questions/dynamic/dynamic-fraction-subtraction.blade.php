@@ -155,4 +155,5 @@
       </div>
     {!! Html::style('/css/futureed-student.css') !!}
     {!! Html::script('/js/common/operations/fraction_subtraction.js')!!}
+    {!! Html::script('/js/common/operations/fraction_global.js?20170822') !!}
 </div>
