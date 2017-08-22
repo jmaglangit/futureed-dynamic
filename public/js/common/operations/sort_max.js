@@ -62,14 +62,6 @@ function disabledNextQuestion(){
 }
 
 function answerDone(){
-    // $("#questionPane").hide();
-    // $("#step_div").hide();
-    // $("#examPane1").hide();
-    // $("#tipsFlow").show();
-    // $("#ansFlow").show();
-    // $("#ansCorrectFlow").show();
-    // $("#answerTipPane").show();
-    // $("#correctAnswerTipPane").show();
 	$("#lastDiv2").show();
 	$("#lastDiv3").show();
     enabledNextQuestion();
@@ -78,14 +70,7 @@ function answerDone(){
 function alertModal(message){
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
-    $("#yes_simplify_modal").hide();
-    $("#no_simplify_modal").hide();
     $("#close_modal").show();
-    $("#yes_whole_modal").hide();
-    $("#no_whole_modal").hide();
-    $("#yes_modal").hide();
-    $("#ok_simplify_modal").hide();
-    $("#ok_whole_num_modal").hide();
     $("input").attr("readonly", true); 
 }
 
