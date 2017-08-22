@@ -134,11 +134,13 @@ class StudentModuleAnswerController extends ApiController{
 		//check type of question
 		$question_type = $this->question->getQuestionType($data['question_id']);
 
+		//check module
+		$module = $this->module->getModule($data['module_id']);
+
 		//check if module has complete setup.
 		if(!$this->module_content_services->checkModuleComplete($data['module_id'])
-			&& is_null($data['is_dynamic'])
 			&& $question_type != config('futureed.question_type_coding')
-			&& !$data['is_dynamic']){
+			&& $module->is_dynamic != 0 ){
 
 			return $this->respondErrorMessage(2058);
 		}
@@ -163,8 +165,7 @@ class StudentModuleAnswerController extends ApiController{
 
 		//ADD ANSWER
 
-		//check module
-		$module = $this->module->getModule($data['module_id']);
+
 
 		//check answer and points
 		//check if module is dynamic or not
