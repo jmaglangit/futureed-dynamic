@@ -1725,7 +1725,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.dynamicQuestionSetup = function(question){
-		console.log("sort teststs small");
+
 		var question_text = question.question_template.question_template_format;
 		var module_map = module_mapper[self.current_question.module_id];
 
@@ -1892,7 +1892,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 
 			case Constants.INTEGER_SORT_SMALL:
-				console.log("sort small page");
+
 				self.date_start = new Date();
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
