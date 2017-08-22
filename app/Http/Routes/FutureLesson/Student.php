@@ -354,8 +354,8 @@
 					]);
 
 					Routes::get('/questions/dynamic/sort-large',[
-						'as' => 'student.class.module.partials.questions.dynamic.sort-large'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@sort_large'
+						'as' => 'student.class.module.partials.questions.dynamic.integer-sort-large'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_sort_large'
 					]);
 
 					Routes::get('/trial/questions', [

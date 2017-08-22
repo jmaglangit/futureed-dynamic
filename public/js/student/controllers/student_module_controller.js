@@ -1891,7 +1891,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
-			case Constants.SORT_LARGE:
+			case Constants.INTEGER_SORT_LARGE:
 
 				self.date_start = new Date();
 
