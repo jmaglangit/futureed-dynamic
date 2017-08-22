@@ -18,6 +18,13 @@
         return _digitsCount;
     }
 
+    function checkAnswerLenght(elem) {
+        answer_val = elem.prop("value");
+        if(answer_val.length >= 8) return false;
+        elem.prop("value", answer_val);
+        return true;
+    }
+
 	// function for validate number
 	function _validateNum(_num, _default_num) {
 		_num = parseInt(_num);
