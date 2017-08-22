@@ -107,6 +107,7 @@ function answerReset(){
 }
 
 function alertModal(message,modal){
+    //dynamicBlock();
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#yes_simplify_modal").hide();
@@ -186,10 +187,12 @@ function modal3(){
 }
 
 function closeModal(){
+    // dynamicUnBlock();
     $("#message_modal_dynamic").hide();
 }
 
 function showModal(){
+    //dynamicBlock();
     $("#message_modal_dynamic").show();
 }
 

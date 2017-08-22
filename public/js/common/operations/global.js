@@ -105,3 +105,31 @@
 
     	return 0;
     }
+
+    //START
+    function dynamicBlock(){
+
+        document.onkeydown = function (e) {
+            return false;
+        }
+
+        $("#message_modal_dynamic").modal({
+            backdrop: 'static',
+            keyboard: Constants.FALSE,
+            show    : Constants.TRUE
+        });
+    }
+
+    function dynamicUnBlock(){
+
+    	console.log('unblocking');
+        document.onkeydown = function (e) {
+            return true;
+        }
+
+        $("#message_modal_dynamic").modal({
+            keyboard: Constants.TRUE,
+            show    : Constants.FALSE,
+        });
+    }
+	//END

@@ -1729,12 +1729,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		var question_text = question.question_template.question_template_format;
 		var module_map = module_mapper[self.current_question.module_id];
 
-        //TODO: 1. replace variable to operation logic requirements.
-		//TODO 	2. output string.
-
-		//get grade condition
-		console.log(self.current_question);
-		console.log(module_map);
+		// hide button
 
 
 		//check type of operation
