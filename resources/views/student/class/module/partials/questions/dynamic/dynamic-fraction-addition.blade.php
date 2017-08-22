@@ -143,5 +143,5 @@
 	</div>
 
 	{!! Html::script('/js/common/operations/fraction_addition.js')!!}
-    {!! Html::script('/js/common/operations/fraction_global.js?20170822')!!}
+	{!! Html::script('/js/common/operations/fraction_global.js?20170822')!!}
 </div>
