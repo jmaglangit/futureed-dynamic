@@ -140,7 +140,7 @@ class StudentModuleAnswerController extends ApiController{
 		//check if module has complete setup.
 		if(!$this->module_content_services->checkModuleComplete($data['module_id'])
 			&& $question_type != config('futureed.question_type_coding')
-			&& $module->is_dynamic != 0 ){
+			&& $module->is_dynamic == 0 ){
 
 			return $this->respondErrorMessage(2058);
 		}
