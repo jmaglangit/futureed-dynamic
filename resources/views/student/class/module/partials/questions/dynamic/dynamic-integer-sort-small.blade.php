@@ -51,7 +51,6 @@
             </div>
         </div>
     </div>
-    {!! Html::style('/css/futureed-student.css') !!}
     {!! Html::script('/js/common/operations/global.js?20170806')!!}
     {!! Html::script('/js/common/operations/sort_min.js?20170806.js')!!}
 </div>
