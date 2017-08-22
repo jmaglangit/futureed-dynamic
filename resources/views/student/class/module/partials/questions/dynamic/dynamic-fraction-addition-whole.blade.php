@@ -117,8 +117,8 @@
                     {!! trans('messages.yes') !!}</button>
                 <button id="no_combine_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick();">
                     {!! trans('messages.no') !!}</button>
-                <button id="yes_can_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="combinebtnNOOnclick();">
-                    {!! trans('messages.yes') !!}</button>
+                <button id="yes_can_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="combinebtnNOOnclick();">
+                    {!! trans('messages.ok') !!}</button>
             </div>
         </div>
     </div>
