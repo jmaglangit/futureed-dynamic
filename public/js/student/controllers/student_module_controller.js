@@ -1752,6 +1752,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
                 self.date_start = new Date();
 
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
                 randomDigitsOnclick();
                 // Deduct {subtrahend} from {minuend}.
                 question_text = question_text.replace("{minuend}", getRandomNumber1());
