@@ -2859,3 +2859,8 @@ div#correct_flow p, div#Answer_correct_flow p,
 .sort_large span{ line-height:30px;}
 .sort_large #lastDiv2 .answerSpan{ margin-bottom: 5px; }
 
+/* sort small style */
+.sort_small span{ line-height:30px;}
+.sort_small #lastDiv2 .answerSpan{ margin-bottom: 5px; }
+.sort_small #answerTipPane p{margin-top: 0px;}
+
