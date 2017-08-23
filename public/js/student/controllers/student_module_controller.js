@@ -1752,6 +1752,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
                 self.date_start = new Date();
 
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
                 randomDigitsOnclick();
                 // Deduct {subtrahend} from {minuend}.
                 question_text = question_text.replace("{minuend}", getRandomNumber1());
@@ -1888,6 +1889,36 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				self.current_question.questions_text = question_text;
 				btncalculateOnclick();
+
+				break;
+
+			case Constants.INTEGER_SORT_SMALL:
+
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+
+				question_text = question_text.replace("{sort_small}",getRandomNumber1());
+
+				self.current_question.questions_text = question_text;
+
+				startAnswer();
+
+				break;
+
+			case Constants.INTEGER_SORT_LARGE:
+
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+
+				question_text = question_text.replace("{sort_large}",getRandomNumber1());
+
+				self.current_question.questions_text = question_text;
+
+				startAnswer();
 
 				break;
 

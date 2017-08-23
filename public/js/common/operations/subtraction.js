@@ -78,7 +78,7 @@ function answerReset(){
 }
 
 function alertModal(message){
-    //dynamicBlock();
+    dynamicBlock();
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#close_modal").show();
@@ -87,7 +87,7 @@ function alertModal(message){
 }
 
 function borrowOneModal(message){
-    //dynamicBlock();
+    dynamicBlock();
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#close_modal").hide();
@@ -97,6 +97,7 @@ function borrowOneModal(message){
 
 function btnNOOnclose() {
     $("#message_modal_dynamic").hide();
+    dynamicUnBlock();
 }
 
 //END ADDED FUNCTION
@@ -106,8 +107,8 @@ function randomDigitsOnclick(){
     // if(randomDigits > 9) randomDigits = 8;
     // $("#randomDigits").prop("value", randomDigits);
 
-    // randomNumber1 = Math.floor(Math.random() * digits(randomDigits));
-    // randomNumber2 = Math.floor(Math.random() * randomNumber1);
+    randomNumber1 = Math.floor(Math.random() * digits(randomDigits));
+    randomNumber2 = Math.floor(Math.random() * randomNumber1);
 
 //        randomNumber1 = 1002;
 //        randomNumber2 = 3;
@@ -334,7 +335,6 @@ function displayTotalFlow2(){
 
 
 function btnYEsOnclick(){
-    $("#message_modal_dynamic").hide();
     // if(borrow_var[step_count - 2]) alert("Remember you borrowed 1 in the previous step.");
     if(borrow_var[step_count - 2]) alertModal("Remember you borrowed 1 in the previous step.");
     $(".inputCheck").focus();
