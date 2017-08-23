@@ -358,6 +358,11 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_sort_small'
 					]);
 
+					Routes::get('/questions/dynamic/integer-sort-large',[
+						'as' => 'student.class.module.partials.questions.dynamic.integer-sort-large'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_sort_large'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'
