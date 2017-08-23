@@ -106,7 +106,9 @@
 					<div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_SUBTRACTION_WHOLE">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-subtraction-whole') !!}"></div>
 					</div>
-
+					<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_SORT_LARGE">
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-sort-large') !!}"></div>
+					</div>
 				</div>
 
 				{{--Main Question Contents--}}
