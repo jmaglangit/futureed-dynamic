@@ -148,4 +148,9 @@ class ClassModuleController extends Controller {
 	public function fraction_subtraction_whole_answer() {
 		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-whole-ans');
 	}
+
+	public function integer_addition(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-integer-addition');
+	}
+
 }

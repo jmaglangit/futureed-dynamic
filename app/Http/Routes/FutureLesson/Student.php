@@ -353,6 +353,11 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_whole_answer'
 					]);
 
+					Routes::get('/questions/dynamic/integer-addition',[
+						'as' => 'student.class.module.partials.questions.dynamic.integer-addition'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_addition'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'
