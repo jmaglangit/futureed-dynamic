@@ -2848,3 +2848,14 @@ div#correct_flow p, div#Answer_correct_flow p,
 #step_div div#multiply_denominator{
     margin-top: 20px;
 }
+
+/* sort large style */
+.boldStr{color: #005588; font-weight: bold;}
+.answerTxt{border: 0; border-bottom: solid 1px black;}
+.answerSpan{display: inline-block; width: 150px; border-bottom: solid 1px black;}
+.mistakeAnswer{color: red; font-weight: bold;}
+.toolTopSpan{color: green;}
+.checkIndexs{border: 0; border-bottom: solid 1px black;}
+.sort_large span{ line-height:30px;}
+.sort_large #lastDiv2 .answerSpan{ margin-bottom: 5px; }
+
