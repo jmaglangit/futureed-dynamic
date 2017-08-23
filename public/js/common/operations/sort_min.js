@@ -33,7 +33,6 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-    // console.log("testing teting", digit);
     randomDigits = digit;
 }
 
