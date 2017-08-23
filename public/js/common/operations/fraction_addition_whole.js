@@ -208,6 +208,44 @@ function digits(digits){
 }
 
 function randomDigitsOnclick(){
+    m1 = "";
+    z2 = "";
+    z1 = "";
+    w1 = "";
+    w2 = "";
+    randomDigits = "";
+    max_t = 0;
+    min_t = 0;
+    flag = 0;
+
+    factorX = 1;
+
+    arry_correctval = [];
+    arry_total = [];
+
+    An = 0;
+    Ad = 0;
+    fraction_count = 0;
+    simplify_count = 0;
+    total_count = 0;
+
+    step1_error = "";
+    step2_error = "";
+    step3_error = "";
+    step4_whole_numerator_error = "";
+    step4_whole_denominator_error = "";
+    step4_whole = "";
+    step4_numerator_error = "";
+    step4_denominator_error = "";
+    step5_whole_numerator_error = "";
+    step5_whole_denominator_error = "";
+    step5_whole = "";
+
+    possibleFlag = false;
+    simplifyFlag=false;
+    wholeBtnFlag = false;
+    specialFlag = false;
+
     carry_over1 = false;
     carry_over = false;
     // randomDigits = $("#randomDigits").prop("value");
@@ -254,6 +292,16 @@ function randomDigitsOnclick(){
     $("#subject_w1_b1").html(w1);
     $("#subject_w2_b1").html(w2);
 
+    $("#whole").html("");
+    $("#questionsz").html("");
+    $("#questionsm").html("");
+
+    $("#simplify").html("");
+    $("#combine").html("");
+
+    $("#correct_flow").html("");
+    $("#Answer_correct_flow").html("");
+
     $("#examPane").show();
     step_count = 0;
 }
@@ -267,27 +315,27 @@ function btncalculateOnclick(){
         result_str = "<div>";
         result_str += "<p>Step " + step_count +":  Add whole numbers first.</p>";
         result_str += '<div>';
-        result_str += '<table>';
-        result_str += '<tr>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><label style = "color:blue">'+ w1 +'</label></td>';
-        result_str += '<td align="center"><label>'+ z1 +'</label></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><label style = "color:blue">'+ w2 +'</label></td>';
-        result_str += '<td align="center"><label>'+ z2 +'</label></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
-        result_str += '</tr>';
-        result_str += '<tr>';
-        result_str += '<td bgcolor="#000000" height="2"></td>';
-        result_str += '<td bgcolor="#000000" height="2"></td>';
-        result_str += '</tr>';
-        result_str += '<tr>';
-        result_str += '<td align="center"><label>'+ m1 +'</label></td>';
-        result_str += '<td align="center"><label>'+ m1 +'</td>';
+            result_str += '<table>';
+                result_str += '<tr>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><label style = "color:blue">'+ w1 +'</label></td>';
+                    result_str += '<td align="center"><label>'+ z1 +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><label style = "color:blue">'+ w2 +'</label></td>';
+                    result_str += '<td align="center"><label>'+ z2 +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td align="center"><label>'+ m1 +'</label></td>';
+                    result_str += '<td align="center"><label>'+ m1 +'</td>';
 
-        result_str += '</tr>';
-        result_str += '</table>';
+                result_str += '</tr>';              
+            result_str += '</table>';
 
         result_str += '</div>';
         result_str += "</div>";
@@ -299,6 +347,13 @@ function btncalculateOnclick(){
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswerLenght($(this)) == false){
+                // alert(" The answer is not this large. Retry !");
+                alertModal("The answer is not this large. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -324,6 +379,7 @@ function btncalculateOnclick(){
                 return false;
             }
             if(temp_answer == correct_answer) {
+                $(this).attr("readonly", true);
                 nextsetp();
             }
 
@@ -341,33 +397,33 @@ function nextsetp(){
         step_count--;
         // console.log("nextsetp- = " + step_count);
     }
-    var result_str = "";
+    result_str = "";
 
     if (step_count == 2) {
         result_str = "<div>";
         result_str += "<p>Step " + step_count +": What is the numerator?</p>";
         result_str += '<div>';
-        result_str += '<table>';
-        result_str += '<tr>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><label>'+ w1 +'</label></td>';
-        result_str += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><label>'+ w2 +'</label></td>';
-        result_str += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
-        result_str += '</tr>';
-        result_str += '<tr>';
-        result_str += '<td bgcolor="#000000" height="2"></td>';
-        result_str += '<td bgcolor="#000000" height="2"></td>';
-        result_str += '</tr>';
-        result_str += '<tr>';
-        result_str += '<td align="center"><label>'+ m1 +'</label></td>';
-        result_str += '<td align="center"><label>'+ m1 +'</td>';
+            result_str += '<table>';
+                result_str += '<tr>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><label>'+ w1 +'</label></td>';
+                    result_str += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><label>'+ w2 +'</label></td>';
+                    result_str += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td align="center"><label>'+ m1 +'</label></td>';
+                    result_str += '<td align="center"><label>'+ m1 +'</td>';
 
-        result_str += '</tr>';
-        result_str += '</table>';
+                result_str += '</tr>';
+            result_str += '</table>';
 
         result_str += '</div>';
         result_str += "</div>";
@@ -378,27 +434,27 @@ function nextsetp(){
         result_str = "<div>";
         result_str += "<p>Step " + step_count +": What is the denominator?</p>";
         result_str += '<div>';
-        result_str += '<table>';
-        result_str += '<tr>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><label>'+ w1 +'</label></td>';
-        result_str += '<td align="center"><label>'+ z1 +'</label></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle"><label>'+ w2 +'</label></td>';
-        result_str += '<td align="center"><label>'+ z2 +'</label></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
-        result_str += '</tr>';
-        result_str += '<tr>';
-        result_str += '<td bgcolor="#000000" height="2"></td>';
-        result_str += '<td bgcolor="#000000" height="2"></td>';
-        result_str += '</tr>';
-        result_str += '<tr>';
-        result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
-        result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
+            result_str += '<table>';
+                result_str += '<tr>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><label>'+ w1 +'</label></td>';
+                    result_str += '<td align="center"><label>'+ z1 +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><label>'+ w2 +'</label></td>';
+                    result_str += '<td align="center"><label>'+ z2 +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><input class="inputCheck"></td>';
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
+                    result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
 
-        result_str += '</tr>';
-        result_str += '</table>';
+                result_str += '</tr>';
+            result_str += '</table>';
 
         result_str += '</div>';
         result_str += "</div>";
@@ -432,57 +488,57 @@ function nextsetp(){
 
             result_str += '<table id="step_count3">';
 
-            result_str += '<tr>';
+                result_str += '<tr>';
+                    
+                    result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                    result_str += '<td align="center"><input class="inputCheck4" style="display:none;width:50px"></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><input class="inputCheck1" style="display:none;width:50px"></td>';
+                    result_str += '<td align="center"><input class="inputCheck2" style="display:none;width:50px"></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 
-            result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-            result_str += '<td align="center"><input class="inputCheck4" style="display:none;width:50px"></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><input class="inputCheck1" style="display:none;width:50px"></td>';
-            result_str += '<td align="center"><input class="inputCheck2" style="display:none;width:50px"></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                    result_str += '<td align="center"><input class="inputCheck5" style="display:none;width:50px"></td>';
+                    result_str += '<td align="center"><input class="inputCheck3" style="display:none;width:50px"></td>';
 
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-            result_str += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-            result_str += '<td align="center"><input class="inputCheck5" style="display:none;width:50px"></td>';
-            result_str += '<td align="center"><input class="inputCheck3" style="display:none;width:50px"></td>';
-
-            result_str += '</tr>';
+                result_str += '</tr>';
             result_str += '</table>';
             result_str += "</div>";
 
             $("#simplify").html(result_str);
         }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 ) {
-            var specialFlag = true;
+            specialFlag = true;
             result_str = "<div>";
             result_str += "<p>Step " + step_count +": Simplify the fraction if possible</p>";
-
+            
             result_str += '<table id="step_count3">';
 
-            result_str += '<tr>';
+                result_str += '<tr>';
 
-            result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-            result_str += '<td align="center"><label>' + arry_correctval[1] + '</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-            result_str += '<td align="center"><label>' + arry_correctval[2] + '</label></td>';
-
-            result_str += '</tr>';
+                    result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                    result_str += '<td align="center"><label>' + arry_correctval[1] + '</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                    
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                    result_str += '<td align="center"><label>' + arry_correctval[2] + '</label></td>';
+                    
+                result_str += '</tr>';
             result_str += '</table>';
             result_str += "</div>";
             specialFlag = true;
@@ -496,25 +552,25 @@ function nextsetp(){
 
             result_str += '<table id="step_count3">';
 
-            result_str += '<tr>';
+                result_str += '<tr>';
 
-            result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><input class="inputCheck1" style="width:50px"></td>';
-            result_str += '<td align="center"><input class="inputCheck2" style="width:50px"></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-            result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
-
-            result_str += '</tr>';
+                    result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><input class="inputCheck1" style="width:50px"></td>';
+                    result_str += '<td align="center"><input class="inputCheck2" style="width:50px"></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                    
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                    result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
+                    
+                result_str += '</tr>';
             result_str += '</table>';
             result_str += "</div>";
 
@@ -536,13 +592,13 @@ function nextsetp(){
 
                 result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-                result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-                result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-                result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';
-                result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                        result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        result_str += '<td rowspan="3" align="center"><b> = </b></td>';
+                        result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';                    
+                    result_str += '</tr>';
                 result_str += '</table>';
                 result_str += "</div>";
             }else{
@@ -551,23 +607,23 @@ function nextsetp(){
 
                 result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-                result_str += '<td rowspan="3" align="center"><b> + </b></td>'							;
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-                result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-                result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-                result_str += '<td rowspan="3" align="center"><input class="inputCheck1" style="width:50px;"></td>';
-                result_str += '<td align="center"><input class="inputCheck2" style="width:50px;"></td>';
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-                result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';
-                result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        result_str += '<td rowspan="3" align="center"><b> + </b></td>'                          ;
+                        result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                        result_str += '<td rowspan="3" align="center"><b> = </b></td>';
+                        result_str += '<td rowspan="3" align="center"><input class="inputCheck1" style="width:50px;"></td>';
+                        result_str += '<td align="center"><input class="inputCheck2" style="width:50px;"></td>';
+                    result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td bgcolor="#000000" height="2"></td>';
+                        result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                        result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';                
+                    result_str += '</tr>';
                 result_str += '</table>';
                 result_str += "</div>";
             }
@@ -578,13 +634,13 @@ function nextsetp(){
 
                 result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-                result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-                result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-                result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';
-                result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                        result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        result_str += '<td rowspan="3" align="center"><b> = </b></td>';
+                        result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';                    
+                    result_str += '</tr>';
                 result_str += '</table>';
                 result_str += "</div>";
             }else{
@@ -593,23 +649,23 @@ function nextsetp(){
 
                 result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-                result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-                result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-                result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-                result_str += '<td rowspan="3" align="center"><input class="inputCheck1" style="width:50px;"></td>';
-                result_str += '<td align="center"><input class="inputCheck2" style="width:50px;"></td>';
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-                result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';
-                result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                        result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                        result_str += '<td rowspan="3" align="center"><b> = </b></td>';
+                        result_str += '<td rowspan="3" align="center"><input class="inputCheck1" style="width:50px;"></td>';
+                        result_str += '<td align="center"><input class="inputCheck2" style="width:50px;"></td>';
+                    result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td bgcolor="#000000" height="2"></td>';
+                        result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                        result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';                
+                    result_str += '</tr>';
                 result_str += '</table>';
                 result_str += "</div>";
             }
@@ -617,113 +673,113 @@ function nextsetp(){
             if (arry_correctval[4] == 0) {
                 result_str = "<div>";
                 result_str += "<p>Step " + step_count +": What is the combined whole number and fraction?</p>";
-
+                
                 result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-                result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-                result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-                result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';
-                result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                        result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        result_str += '<td rowspan="3" align="center"><b> = </b></td>';
+                        result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';                    
+                    result_str += '</tr>';
                 result_str += '</table>';
                 result_str += "</div>";
             }else{
                 result_str = "<div>";
                 result_str += "<p>Step " + step_count +": What is the combined whole number and fraction?</p>";
-
+                
                 result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-                result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-                result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-                result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-                result_str += '<td rowspan="3" align="center"><input class="inputCheck1" style="width:50px;"></td>';
-                result_str += '<td align="center"><input class="inputCheck2" style="width:50px;"></td>';
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-                result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';
-                result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                        result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                        result_str += '<td rowspan="3" align="center"><b> = </b></td>';
+                        result_str += '<td rowspan="3" align="center"><input class="inputCheck1" style="width:50px;"></td>';
+                        result_str += '<td align="center"><input class="inputCheck2" style="width:50px;"></td>';
+                    result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td bgcolor="#000000" height="2"></td>';
+                        result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '</tr>';
+                    result_str += '<tr>';
+                        result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                        result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';                    
+                    result_str += '</tr>';
                 result_str += '</table>';
                 result_str += "</div>";
             }
         }else if (arry_correctval[6] == arry_correctval[7] && factorX != 1) {
             result_str = "<div>";
             result_str += "<p>Step " + step_count +": What is the combined whole number and fraction?</p>";
-
+            
             result_str += '<table>';
 
-            result_str += '<tr>';
-            result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
-            result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-            result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';
-            result_str += '</tr>';
+                result_str += '<tr>';
+                        result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
+                    result_str += '<td rowspan="3" align="center"><b> = </b></td>';
+                        result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';                        
+                result_str += '</tr>';              
             result_str += '</table>';
             result_str += "</div>";
-        }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) {
+        }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
             result_str = "<div>";
             result_str += "<p>Step " + step_count +": What is the combined whole number and fraction?</p>";
-
+            
             result_str += '<table id="step_count3">';
 
-            result_str += '<tr>';
-            result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><input class="inputCheck1" style="width:50px"></td>';
-            result_str += '<td align="center"><input class="inputCheck2" style="width:50px"></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-            result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
-
-            result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><input class="inputCheck1" style="width:50px"></td>';
+                    result_str += '<td align="center"><input class="inputCheck2" style="width:50px"></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                    
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                    result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
+                    
+                result_str += '</tr>';
             result_str += '</table>';
             result_str += "</div>";
-        }else if (arry_correctval[1] < arry_correctval[2] && flag != 0) {
+        }else if (arry_correctval[1] < arry_correctval[2] && flag != 0) { 
             result_str = "<div>";
             result_str += "<p>Step " + step_count +": What is the combined whole number and fraction?</p>";
-
+            
             result_str += '<table id="step_count3">';
 
-            result_str += '<tr>';
-            result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><input class="inputCheck1" style="width:50px"></td>';
-            result_str += '<td align="center"><input class="inputCheck2" style="width:50px"></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
-            result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
-
-            result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle"><input class="inputCheck1" style="width:50px"></td>';
+                    result_str += '<td align="center"><input class="inputCheck2" style="width:50px"></td>';
+                    result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                    
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    result_str += '<td bgcolor="#000000" height="2"></td>';
+                    
+                result_str += '</tr>';
+                result_str += '<tr>';
+                    result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
+                    result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
+                    
+                result_str += '</tr>';
             result_str += '</table>';
             result_str += "</div>";
         }
@@ -733,180 +789,177 @@ function nextsetp(){
     }
 
     if (step_count == 6) {
-        if (arry_correctval[1] < arry_correctval[2] && factorX != 1 || specialFlag == true) {
-            if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
+//       if (arry_correctval[1] < arry_correctval[2] && factorX != 1 || specialFlag == true) {
+//           if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
 
-                result_str = "<div>";
-                result_str += "<p>Step " + step_count +": Answer</p>";
+//               result_str = "<div>";
+     //         result_str += "<p>Step " + step_count +": Answer</p>";
+                
+     //         result_str += '<table>';
 
-                result_str += '<table>';
+        //          result_str += '<tr>';
+        //              result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
+        //              result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
+                        
+        //          result_str += '</tr>';
+        //          result_str += '<tr>';
+        //              result_str += '<td bgcolor="#000000" height="2"></td>';
+                        
+        //          result_str += '</tr>';
+        //          result_str += '<tr>';
+        //              result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';                        
+        //          result_str += '</tr>';              
+        //      result_str += '</table>';
+     //         result_str += "</div>";
+     //         $("#answer").html(result_str);
+  //        }
+//       }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
+//           if (arry_correctval[4] == 0) {
+//               result_str = "<div>";
+     //         result_str += "<p>Step " + step_count +": Answer</p>";
+                
+     //         result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-                result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
+        //          result_str += '<tr>';
+        //              result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';                        
+        //          result_str += '</tr>';              
+        //      result_str += '</table>';
+     //         result_str += "</div>";
+//           }else{
+//               result_str = "<div>";
+     //         result_str += "<p>Step " + step_count +": Answer</p>";
+                
+     //         result_str += '<table>';
 
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
+        //          result_str += '<tr>';
+        //              result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
+        //              result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
+                        
+        //          result_str += '</tr>';
+        //          result_str += '<tr>';
+        //              result_str += '<td bgcolor="#000000" height="2"></td>';
+                        
+        //          result_str += '</tr>';
+        //          result_str += '<tr>';
+        //              result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';                        
+        //          result_str += '</tr>';              
+        //      result_str += '</table>';
+     //         result_str += "</div>";
+//           }
+            
+  //        $("#answer").html(result_str);
+//       }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1) {
+//           if (arry_correctval[4] == 0) {
+//               result_str = "<div>";
+     //         result_str += "<p>Step " + step_count +": Answer</p>";
+                
+     //         result_str += '<table>';
 
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';
-                result_str += '</tr>';
-                result_str += '</table>';
-                result_str += "</div>";
-                $("#answer").html(result_str);
-                answerDone(); //added
-            }
-        }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-            if (arry_correctval[4] == 0) {
-                result_str = "<div>";
-                result_str += "<p>Step " + step_count +": Answer</p>";
+        //          result_str += '<tr>';
+        //              result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';                        
+        //          result_str += '</tr>';              
+        //      result_str += '</table>';
+     //         result_str += "</div>";
+//           }else{
+//               result_str = "<div>";
+     //         result_str += "<p>Step " + step_count +": Answer</p>";
+                
+     //         result_str += '<table>';
 
-                result_str += '<table>';
+        //          result_str += '<tr>';
+        //              result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
+        //              result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
+                        
+        //          result_str += '</tr>';
+        //          result_str += '<tr>';
+        //              result_str += '<td bgcolor="#000000" height="2"></td>';
+                        
+        //          result_str += '</tr>';
+        //          result_str += '<tr>';
+        //              result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';                        
+        //          result_str += '</tr>';              
+        //      result_str += '</table>';
+     //         result_str += "</div>";
+//           }
+            
+  //        $("#answer").html(result_str);
+//       }/*else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
+//           if (arry_correctval[4] == 0) {
+//               result_str = "<div>";
+     //         result_str += "<p>Step " + step_count +": Answer</p>";
+                
+     //         result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-                result_str += '</tr>';
-                result_str += '</table>';
-                result_str += "</div>";
-            }else{
-                result_str = "<div>";
-                result_str += "<p>Step " + step_count +": Answer</p>";
+        //          result_str += '<tr>';
+        //              result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';                       
+        //          result_str += '</tr>';              
+        //      result_str += '</table>';
+     //         result_str += "</div>";
+//           }else{
+//               result_str = "<div>";
+     //         result_str += "<p>Step " + step_count +": Answer</p>";
+                
+     //         result_str += '<table>';
 
-                result_str += '<table>';
+        //          result_str += '<tr>';
+        //              result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+        //              result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                        
+        //          result_str += '</tr>';
+        //          result_str += '<tr>';
+        //              result_str += '<td bgcolor="#000000" height="2"></td>';
+                        
+        //          result_str += '</tr>';
+        //          result_str += '<tr>';
+        //              result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';                       
+        //          result_str += '</tr>';              
+        //      result_str += '</table>';
+     //         result_str += "</div>";
+//           }
+            
+  //        $("#answer").html(result_str);
+//       }*/else if (arry_correctval[1] == arry_correctval[2]) {
+//           result_str = "<div>";
+  //        result_str += "<p>Step " + step_count +": Answer</p>";
+            
+  //        result_str += '<table>';
 
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-                result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
+        //      result_str += '<tr>';
+        //          result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';                        
+        //      result_str += '</tr>';              
+        //  result_str += '</table>';
+  //        result_str += "</div>";
+  //        $("#answer").html(result_str);
+//       }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
+  //        result_str = "<div>";
+            
+  //        result_str += '<table id="step_count3">';
 
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
-
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';
-                result_str += '</tr>';
-                result_str += '</table>';
-                result_str += "</div>";
-            }
-
-            $("#answer").html(result_str);
-            answerDone(); //added
-        }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1) {
-            if (arry_correctval[4] == 0) {
-                result_str = "<div>";
-                result_str += "<p>Step " + step_count +": Answer</p>";
-
-                result_str += '<table>';
-
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-                result_str += '</tr>';
-                result_str += '</table>';
-                result_str += "</div>";
-            }else{
-                result_str = "<div>";
-                result_str += "<p>Step " + step_count +": Answer</p>";
-
-                result_str += '<table>';
-
-                result_str += '<tr>';
-                result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-                result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
-
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td bgcolor="#000000" height="2"></td>';
-
-                result_str += '</tr>';
-                result_str += '<tr>';
-                result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';
-                result_str += '</tr>';
-                result_str += '</table>';
-                result_str += "</div>";
-            }
-
-            $("#answer").html(result_str);
-            answerDone(); //added
-        }/*else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-         if (arry_correctval[4] == 0) {
-         result_str = "<div>";
-         result_str += "<p>Step " + step_count +": Answer</p>";
-
-         result_str += '<table>';
-
-         result_str += '<tr>';
-         result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-         result_str += '</tr>';
-         result_str += '</table>';
-         result_str += "</div>";
-         }else{
-         result_str = "<div>";
-         result_str += "<p>Step " + step_count +": Answer</p>";
-
-         result_str += '<table>';
-
-         result_str += '<tr>';
-         result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-         result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-
-         result_str += '</tr>';
-         result_str += '<tr>';
-         result_str += '<td bgcolor="#000000" height="2"></td>';
-
-         result_str += '</tr>';
-         result_str += '<tr>';
-         result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-         result_str += '</tr>';
-         result_str += '</table>';
-         result_str += "</div>";
-         }
-
-         $("#answer").html(result_str);
-         }*/else if (arry_correctval[1] == arry_correctval[2]) {
-            result_str = "<div>";
-            result_str += "<p>Step " + step_count +": Answer</p>";
-
-            result_str += '<table>';
-
-            result_str += '<tr>';
-            result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-            result_str += '</tr>';
-            result_str += '</table>';
-            result_str += "</div>";
-            $("#answer").html(result_str);
-            answerDone(); //added
-        }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) {
-            result_str = "<div>";
-
-            result_str += '<table id="step_count3">';
-
-            result_str += '<tr>';
-
-            result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-            result_str += '<td align="center"><label>' + arry_correctval[1] + '</label></td>';
-            result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-            result_str += '<td bgcolor="#000000" height="2"></td>';
-
-            result_str += '</tr>';
-            result_str += '<tr>';
-            result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-            result_str += '<td align="center"><label>' + arry_correctval[2] + '</label></td>';
-
-            result_str += '</tr>';
-            result_str += '</table>';
-            result_str += "</div>";
-
-            $("#simplify").html(result_str);
-            nextsetp();
-        }
+        //      result_str += '<tr>';
+                    
+        //          result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+        //          result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+        //          result_str += '<td align="center"><label>' + arry_correctval[1] + '</label></td>';
+        //          result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                    
+        //      result_str += '</tr>';
+        //      result_str += '<tr>';
+        //          result_str += '<td bgcolor="#000000" height="2"></td>';
+        //          result_str += '<td bgcolor="#000000" height="2"></td>';
+                    
+        //      result_str += '</tr>';
+        //      result_str += '<tr>';
+        //          result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+        //          result_str += '<td align="center"><label>' + arry_correctval[2] + '</label></td>';
+                    
+        //      result_str += '</tr>';              
+        //  result_str += '</table>';
+  //        result_str += "</div>";
+            
+  //        $("#simplify").html(result_str);
+  //        nextsetp();
+        // }
+        answerDone(); //added
         displayTotalFlow();
         displayTotalFlow1();
     }
@@ -916,6 +969,13 @@ function nextsetp(){
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswerLenght($(this)) == false){
+                // alert(" The answer is not this large. Retry !");
+                alertModal("The answer is not this large. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -941,8 +1001,8 @@ function nextsetp(){
                 return false;
             }
             if(temp_answer == correct_answer && carry_over1 == false){
-
-                nextsetp();
+                 $(this).attr("readonly", true);
+                 nextsetp();
             }
             else {
                 carry_elem = $(this);
@@ -963,6 +1023,14 @@ function nextsetp(){
                 retry_attempt++;
                 return false;
             }
+            if(checkAnswerLenght($(this)) == false){
+                // alert(" The answer is not this large. Retry !");
+                alertModal("The answer is not this large. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
                 if (!step4_numerator_error) {
@@ -999,6 +1067,14 @@ function nextsetp(){
                     if(checkAnswer($(this)) == false && carry_over1 == false){
                         // alert("Answer can't be alphabet !");
                         alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                        $(this).prop("value", "").focus();
+                        retry_attempt++;
+                        return false;
+                    }
+                    
+                    if(checkAnswerLenght($(this)) == false){
+                        // alert(" The answer is not this large. Retry !");
+                        alertModal("The answer is not this large. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -1057,6 +1133,13 @@ function wholeOfValidationFunc() {
                 retry_attempt++;
                 return false;
             }
+            if(checkAnswerLenght($(this)) == false){
+                // alert(" The answer is not this large. Retry !");
+                alertModal("The answer is not this large. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
 
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
@@ -1079,6 +1162,7 @@ function wholeOfValidationFunc() {
                 if (!step4_whole) {
                     step4_whole = $(this).prop("value");
                 }
+                // alert("opps not enough, your answer needs to be larger.");
                 alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
@@ -1102,6 +1186,13 @@ function wholeOfValidationFunc() {
                     if(checkAnswer($(this)) == false && carry_over1 == false){
                         // alert("Answer can't be alphabet !");
                         alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                        $(this).prop("value", "").focus();
+                        retry_attempt++;
+                        return false;
+                    }                    
+                    if(checkAnswerLenght($(this)) == false){
+                        // alert(" The answer is not this large. Retry !");
+                        alertModal("The answer is not this large. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -1156,7 +1247,14 @@ function wholeOfValidationFunc() {
                                 retry_attempt++;
                                 return false;
                             }
-
+                            
+                            if(checkAnswerLenght($(this)) == false){
+		                        // alert(" The answer is not this large. Retry !");
+		                        alertModal("The answer is not this large. Please retry.");
+		                        $(this).prop("value", "").focus();
+		                        retry_attempt++;
+		                        return false;
+		                    }
                             temp_answer = checkAnswerValidation($(this));
                             if(temp_answer == -1){
                                 if (!step5_whole_denominator_error) {
@@ -1505,6 +1603,7 @@ function checkAnswerValidation(elem) {
     }
 
     if (step_count == 5) {
+    	answerDone();	//added
         displayTotalFlow();
         displayTotalFlow1();
     }
@@ -1545,6 +1644,13 @@ function wholeandfractionofcombineFunc() {
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
+            }          
+            if(checkAnswerLenght($(this)) == false){
+                // alert(" The answer is not this large. Retry !");
+                alertModal("The answer is not this large. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
             }
 
             temp_answer = checkAnswerValidation9($(this));
@@ -1566,6 +1672,7 @@ function wholeandfractionofcombineFunc() {
                 $(this).prop("value", "").focus();
                 return false;
             }
+            $(this).attr("readonly", true);
             nextsetp();
         }
 
@@ -1577,6 +1684,14 @@ function wholeandfractionofcombineFunc() {
             if(checkAnswer($(this)) == false && carry_over1 == false){
                 // alert("Answer can't be alphabet !");
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            
+            if(checkAnswerLenght($(this)) == false){
+                // alert(" The answer is not this large. Retry !");
+                alertModal("The answer is not this large. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -1612,6 +1727,13 @@ function wholeandfractionofcombineFunc() {
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
+                    }                  
+                    if(checkAnswerLenght($(this)) == false){
+                        // alert(" The answer is not this large. Retry !");
+                        alertModal("The answer is not this large. Please retry.");
+                        $(this).prop("value", "").focus();
+                        retry_attempt++;
+                        return false;
                     }
 
                     temp_answer = checkAnswerValidation9($(this));
@@ -1641,6 +1763,13 @@ function wholeandfractionofcombineFunc() {
                             if(checkAnswer($(this)) == false && carry_over1 == false){
                                 // alert("Answer can't be alphabet !");
                                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                                $(this).prop("value", "").focus();
+                                retry_attempt++;
+                                return false;
+                            }                            
+                            if(checkAnswerLenght($(this)) == false){
+                                // alert(" The answer is not this large. Retry !");
+                                alertModal("The answer is not this large. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
@@ -1829,6 +1958,7 @@ function checkAnswerValidation9() {
 
         if(retry_attempt > 1){
             total_count--;
+            // alert("Correct Answer is " + correct_answer + ". Retry! ");
             alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
@@ -1841,6 +1971,7 @@ function checkAnswerValidation9() {
             return -2;
         }
     }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1) {
+        // alert("arry_correctval[1] < arry_correctval[2] && factorX != 1");
         alertModal("arry_correctval[1] < arry_correctval[2] && factorX != 1");
     }if (arry_correctval[1] == arry_correctval[2]) {
         total_count++;
@@ -1859,6 +1990,7 @@ function checkAnswerValidation9() {
 
         if(retry_attempt > 1){
             total_count--;
+            // alert("Correct Answer is " + correct_answer + ". Retry! ");
             alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             retry_attempt = 0;
             return -3;
@@ -1874,7 +2006,7 @@ function checkAnswerValidation9() {
 }
 
 function wholebtnYEsOnclick() {
-
+    
     wholeBtnFlag = true;
     $(".inputCheck1").show();
     $(".inputCheck2").show();
@@ -1887,6 +2019,7 @@ function wholebtnYEsOnclick() {
     closeModal();
 }
 function wholebtnNOOnclick() {
+    // alert("Can not! Retry!");
     alertModal("That is incorrect. Fraction can be simplified. Please retry.",1);
 }
 
@@ -1903,6 +2036,7 @@ function btnYEsOnclick(){
 }
 
 function btnNOOnclick(){
+    // alert("Can not!Retry!");
     alertModal("That is incorrect. Fraction can be simplified. Please retry.",0);
 }
 
@@ -1915,55 +2049,56 @@ function combinebtnYEsOnclick() {
     closeModal();
 }
 function combinebtnNOOnclick() {
+    // alert("Can not!   Retry");
     alertModal("That is incorrect. Fraction can be simplified. Please retry.",3);
 }
 function combinebtnNOOnclose() {
-    alertModal("That is incorrect. Fraction can be simplified. Please retry.");
-
+    // alert("Can not!   Retry");
+    alertModal("That is incorrect. Fraction can be simplified. Please retry.",3);
 }
 
 function checkAnswer(elem) {
     answer_val = parseInt(elem.prop("value"));
     if(isNaN(answer_val)) return false;
     elem.prop("value", answer_val);
-    setAnswered(answer_val);
+    setAnswered(answer_val);	//added
     return true;
 }
 
 function displayTotalFlow(){
 
-    var strhtml = "";
+    strhtml = "";
     // strhtml += "<b style='color:blue'>Answered Flow</b>";
     // strhtml += "<br><br>";
     strhtml += '<div id="examPane1" style="">';
-    strhtml += '<table>';
+        strhtml += '<table>';
+        
+            strhtml += '<tr>';
+            strhtml += '<td colspan="5"><b>Add:</b></td>';
+                
+            strhtml += '</tr>';
 
-    strhtml += '<tr>';
-    strhtml += '<td colspan="5"><b>Add:</b></td>';
+            strhtml += '<tr>';
 
-    strhtml += '</tr>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 
-    strhtml += '<tr>';
-
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-    strhtml += '<td align="center"><label>'+ m1 +'</td>';
-
-    strhtml += '</tr>';
-    strhtml += '</table>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
+                strhtml += '<td align="center"><label>'+ m1 +'</td>';
+                
+            strhtml += '</tr>';             
+        strhtml += '</table>';
 
     strhtml += '</div>';
 
@@ -1972,28 +2107,28 @@ function displayTotalFlow(){
         strhtml += "<p style='color:red;'> Step 1 Error : " +  step1_error + "</p>";
     }
     strhtml += '<div>';
-    strhtml += '<table>';
-    strhtml += '<tr>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+        strhtml += '<table>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+                
+                strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
+                strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
-    strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-    strhtml += '<td align="center"><label>'+ m1 +'</td>';
-
-    strhtml += '</tr>';
-    strhtml += '</table>';
+            strhtml += '</tr>';             
+        strhtml += '</table>';
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
@@ -2005,28 +2140,28 @@ function displayTotalFlow(){
         strhtml += "<p style='color:red;'> Step 2 Error : " +  step2_error + "</p>";
     }
     strhtml += '<div>';
-    strhtml += '<table>';
-    strhtml += '<tr>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+        strhtml += '<table>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+                
+                strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
+                strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
-    strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-    strhtml += '<td align="center"><label>'+ m1 +'</td>';
-
-    strhtml += '</tr>';
-    strhtml += '</table>';
+            strhtml += '</tr>';             
+        strhtml += '</table>';
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
@@ -2035,28 +2170,28 @@ function displayTotalFlow(){
         strhtml += "<p style='color:red;'> Step 3 Error : " +  step3_error + "</p>";
     }
     strhtml += '<div>';
-    strhtml += '<table>';
-    strhtml += '<tr>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+        strhtml += '<table>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+                
+                strhtml += '<td align="center"><label>'+ z1 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
+                strhtml += '<td align="center"><label>'+ z2 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
 
-    strhtml += '<td align="center"><label>'+ z1 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
-    strhtml += '<td align="center"><label>'+ z2 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
-
-    strhtml += '</tr>';
-    strhtml += '</table>';
+            strhtml += '</tr>';             
+        strhtml += '</table>';
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>"+ m1+"</p>";
@@ -2084,29 +2219,29 @@ function displayTotalFlow(){
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        // strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                // strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        // strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
-        // strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                // strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+                // strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
 
-        strhtml += '</tr>';
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
@@ -2115,29 +2250,29 @@ function displayTotalFlow(){
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 
-        strhtml += '</tr>';
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
@@ -2145,28 +2280,28 @@ function displayTotalFlow(){
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
@@ -2174,57 +2309,57 @@ function displayTotalFlow(){
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
+                
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
-
+        
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
+                
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[1] + '</label></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[1] + '</label></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[6] == arry_correctval[7]) {
@@ -2232,19 +2367,19 @@ function displayTotalFlow(){
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
+                
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '</tr>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
     }
@@ -2263,61 +2398,61 @@ function displayTotalFlow(){
     }
 
     if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-        arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
-        arry_correctval[4] = arry_correctval[1] % arry_correctval[2];
-        arry_correctval[5] = arry_correctval[2];
-        if (arry_correctval[4] == 0) {
-            strhtml += "<div>";
+            arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
+            arry_correctval[4] = arry_correctval[1] % arry_correctval[2];
+            arry_correctval[5] = arry_correctval[2];
+            if (arry_correctval[4] == 0) {
+                strhtml += "<div>";
 
-            strhtml += '<table>';
+                strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }else{
-            strhtml += "<div>";
+                    strhtml += '<tr>';
+                        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                        strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                        strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
+                    strhtml += '</tr>';
+                strhtml += '</table>';
+                strhtml += "</div>";
+            }else{
+                strhtml += "<div>";
+                
+                strhtml += '<table>';
 
-            strhtml += '<table>';
-
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> + </b></td>'							;
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }
+                    strhtml += '<tr>';
+                        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        strhtml += '<td rowspan="3" align="center"><b> + </b></td>'                         ;
+                        strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                        strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                        strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
+                        strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
+                    strhtml += '</tr>';
+                    strhtml += '<tr>';
+                        strhtml += '<td bgcolor="#000000" height="2"></td>';
+                        strhtml += '<td bgcolor="#000000" height="2"></td>';
+                    strhtml += '</tr>';
+                    strhtml += '<tr>';
+                        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                        strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
+                    strhtml += '</tr>';
+                strhtml += '</table>';
+                strhtml += "</div>";
+            }
     }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
         if (arry_correctval[6] == 0) {
             strhtml += "<div>";
 
             strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                    strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
+                strhtml += '</tr>';
             strhtml += '</table>';
             strhtml += "</div>";
         }else{
@@ -2325,23 +2460,23 @@ function displayTotalFlow(){
 
             strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
-            strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                    strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                    strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
+                    strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
+                strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td bgcolor="#000000" height="2"></td>';
+                    strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                    strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
+                strhtml += '</tr>';
             strhtml += '</table>';
             strhtml += "</div>";
         }
@@ -2351,13 +2486,13 @@ function displayTotalFlow(){
 
             strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                    strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
+                strhtml += '</tr>';
             strhtml += '</table>';
             strhtml += "</div>";
         }else{
@@ -2365,23 +2500,23 @@ function displayTotalFlow(){
 
             strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
-            strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                    strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                    strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
+                    strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
+                strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td bgcolor="#000000" height="2"></td>';
+                    strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                    strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
+                strhtml += '</tr>';
             strhtml += '</table>';
             strhtml += "</div>";
         }
@@ -2390,13 +2525,13 @@ function displayTotalFlow(){
 
         strhtml += '<table>';
 
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-        strhtml += '</tr>';
+            strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                       
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) {
@@ -2404,201 +2539,201 @@ function displayTotalFlow(){
 
         strhtml += '<table>';
 
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue">' + arry_total[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue">' + arry_total[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
 
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
 
-        strhtml += '</tr>';
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
-    }else if (arry_correctval[1] < arry_correctval[2] && flag != 0) {
+    }else if (arry_correctval[1] < arry_correctval[2] && flag != 0) { 
         strhtml += "<div>";
-
+        
         strhtml += '<table>';
 
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue">' + arry_correctval[10] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue">' + arry_correctval[10] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[7] + '</label></td>';
+                
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
     }
+    
+    // strhtml += "<p>Step 6: Answer: </p>";
+    // if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
+    //  if (arry_correctval[4] == 0) {
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-    strhtml += "<p>Step 6: Answer: </p>";
-    if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-        if (arry_correctval[4] == 0) {
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }else{
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '<tr>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                    
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }
+    // }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
+    //  if (arry_correctval[6] == 0) {
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";                    
+    //  }else{
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }else{
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                    
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }               
+    // }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
+    //  if (arry_correctval[4] == 0) {
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '<tr>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }else{
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                    
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }
+    // }else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
+                        
+    //  strhtml += "<div>";
+//        strhtml += '<table id="step_count3">';
 
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //          strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                
+    //      strhtml += '</tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //      strhtml += '</tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
+                
+    //      strhtml += '</tr>';             
+    //  strhtml += '</table>';
+//        strhtml += "</div>";
+    // }else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
+        
+    //  strhtml += "<div>";
+//        strhtml += '<table id="step_count3">';
 
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }
-    }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
-        if (arry_correctval[6] == 0) {
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //          strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                
+    //      strhtml += '</tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //      strhtml += '</tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';                       
+    //      strhtml += '</tr>';             
+    //  strhtml += '</table>';
+//        strhtml += "</div>";
+    // }else if (arry_correctval[1] == arry_correctval[2]) {
+//        strhtml += "<div>";
+//        strhtml += '<table id="step_count3">';
 
-            strhtml += '<tr>';
-
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }else{
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
-
-            strhtml += '<tr>';
-
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }
-    }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-        if (arry_correctval[4] == 0) {
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
-
-            strhtml += '<tr>';
-
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }else{
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
-
-            strhtml += '<tr>';
-
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }
-    }else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
-
-        strhtml += "<div>";
-        strhtml += '<table id="step_count3">';
-
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
-
-        strhtml += '</tr>';
-        strhtml += '</table>';
-        strhtml += "</div>";
-    }else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
-
-        strhtml += "<div>";
-        strhtml += '<table id="step_count3">';
-
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
-        strhtml += '</tr>';
-        strhtml += '</table>';
-        strhtml += "</div>";
-    }else if (arry_correctval[1] == arry_correctval[2]) {
-        strhtml += "<div>";
-        strhtml += '<table id="step_count3">';
-
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-        strhtml += '</tr>';
-        strhtml += '</table>';
-        strhtml += "</div>";
-    }
+    //      strhtml += '<tr>';
+    //          strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';                  
+    //      strhtml += '</tr>';             
+    //  strhtml += '</table>';
+//        strhtml += "</div>";
+//    }
 
     $("#correct_flow").html(strhtml);
 }
@@ -2606,64 +2741,64 @@ function displayTotalFlow(){
 function displayTotalFlow1(){
 
     strhtml = "";
-    // strhtml += "<b style='color:blue'>Answered Flow</b>";
+    // strhtml += "<b style='color:blue'>Correct Answered Flow</b>";
     // strhtml += "<br><br>";
     strhtml += '<div id="examPane1" style="">';
-    strhtml += '<table>';
+        strhtml += '<table>';
 
-    strhtml += '<tr>';
-    strhtml += '<td colspan="5"><b>Add:</b></td>';
+            strhtml += '<tr>';
+            strhtml += '<td colspan="5"><b>Add:</b></td>';
 
-    strhtml += '</tr>';
+            strhtml += '</tr>';
 
-    strhtml += '<tr>';
+            strhtml += '<tr>';
 
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-    strhtml += '<td align="center"><label>'+ m1 +'</td>';
-
-    strhtml += '</tr>';
-    strhtml += '</table>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
+                strhtml += '<td align="center"><label>'+ m1 +'</td>';
+                
+            strhtml += '</tr>';
+        strhtml += '</table>';
 
     strhtml += '</div>';
 
     strhtml += "<p>Step 1: Add whole numbers first.</p>";
     strhtml += '<div>';
-    strhtml += '<table>';
-    strhtml += '<tr>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+        strhtml += '<table>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
 
-    strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-    strhtml += '<td align="center"><label>'+ m1 +'</td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
+                strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
-    strhtml += '</tr>';
-    strhtml += '</table>';
+            strhtml += '</tr>';
+        strhtml += '</table>';
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
@@ -2672,149 +2807,149 @@ function displayTotalFlow1(){
 
     strhtml += "<p>Step 2: What is the numerator?</p>";
     strhtml += '<div>';
-    strhtml += '<table>';
-    strhtml += '<tr>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+        strhtml += '<table>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
 
-    strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
-    strhtml += '<td align="center"><label>'+ m1 +'</td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z1 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ z2 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
+                strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
-    strhtml += '</tr>';
-    strhtml += '</table>';
+            strhtml += '</tr>';
+        strhtml += '</table>';
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
     strhtml += "<p>Step 3: What is the denominator?</p>";
     strhtml += '<div>';
-    strhtml += '<table>';
-    strhtml += '<tr>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
+        strhtml += '<table>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w1 + '</label></td>';
 
-    strhtml += '<td align="center"><label>'+ z1 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
-    strhtml += '<td align="center"><label>'+ z2 +'</label></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
-    strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '<td bgcolor="#000000" height="2"></td>';
-    strhtml += '</tr>';
-    strhtml += '<tr>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
-    strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
+                strhtml += '<td align="center"><label>'+ z1 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + w2 + '</label></td>';
+                strhtml += '<td align="center"><label>'+ z2 +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>=</b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"><b>?</b></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
+                strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
 
-    strhtml += '</tr>';
-    strhtml += '</table>';
+            strhtml += '</tr>';
+        strhtml += '</table>';
 
     strhtml += '</div>';
     strhtml += "<p style='color:blue'>"+ m1+"</p>";
-    strhtml += "<p>Step 4: Simplify the fraction if possible</p>";
+    strhtml += "<p>Step 4: Simplify fraction if possible</p>";
 
     if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
         strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";
-
+        
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        // strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                // strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        // strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
-        // strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                // strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+                // strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
+                
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
         strhtml += "<p style='color:red'> Simplify Number : " + factorX + "</p>";
-
+        
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
-
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '<tr>';
+                
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+                
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-
+        
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
-
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '<tr>';
+                
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[4] + '</label></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
+                
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
@@ -2822,28 +2957,28 @@ function displayTotalFlow1(){
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
-
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '<tr>';
+                
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
+                
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
@@ -2851,28 +2986,28 @@ function displayTotalFlow1(){
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
+                
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[1] + '</label></td>';
+                // strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+                // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';
+                // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><label>' + arry_correctval[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[1] + '</label></td>';
-        // strhtml += '<td rowspan="3" align="center" valign="middle"><b class="hidden_tag" style="display:none"> = </b></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        // strhtml += '<td bgcolor="#000000" height="2" class="hidden_tag" style="display:none"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';
-        // strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
     }else if (arry_correctval[6] == arry_correctval[7]) {
@@ -2880,19 +3015,19 @@ function displayTotalFlow1(){
         strhtml += "<div>";
         strhtml += '<table id="step_count3">';
 
-        strhtml += '<tr>';
+            strhtml += '<tr>';
 
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_correctval[6] + '</label></td>';
 
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '</tr>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';                      
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
     }
@@ -2900,61 +3035,61 @@ function displayTotalFlow1(){
     strhtml += "<p>Step 5: What is the combined whole number and fraction?</p>";
 
     if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-        arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
-        arry_correctval[4] = arry_correctval[1] % arry_correctval[2];
-        arry_correctval[5] = arry_correctval[2];
-        if (arry_correctval[4] == 0) {
-            strhtml += "<div>";
+            arry_correctval[3] = Math.floor(arry_correctval[1] / arry_correctval[2]);
+            arry_correctval[4] = arry_correctval[1] % arry_correctval[2];
+            arry_correctval[5] = arry_correctval[2];
+            if (arry_correctval[4] == 0) {
+                strhtml += "<div>";
 
-            strhtml += '<table>';
+                strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }else{
-            strhtml += "<div>";
+                    strhtml += '<tr>';
+                        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                        strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                        strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
+                    strhtml += '</tr>';             
+                strhtml += '</table>';
+                strhtml += "</div>";
+            }else{
+                strhtml += "<div>";
+                
+                strhtml += '<table>';
 
-            strhtml += '<table>';
-
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> + </b></td>'							;
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }
+                    strhtml += '<tr>';
+                        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                        strhtml += '<td rowspan="3" align="center"><b> + </b></td>'                         ;
+                        strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                        strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                        strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
+                        strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
+                    strhtml += '</tr>';
+                    strhtml += '<tr>';
+                        strhtml += '<td bgcolor="#000000" height="2"></td>';
+                        strhtml += '<td bgcolor="#000000" height="2"></td>';
+                    strhtml += '</tr>';
+                    strhtml += '<tr>';
+                        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                        strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';               
+                    strhtml += '</tr>';             
+                strhtml += '</table>';
+                strhtml += "</div>";
+            }
     }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
         if (arry_correctval[6] == 0) {
             strhtml += "<div>";
 
             strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                    strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
+                strhtml += '</tr>';             
             strhtml += '</table>';
             strhtml += "</div>";
         }else{
@@ -2962,280 +3097,280 @@ function displayTotalFlow1(){
 
             strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
-            strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                    strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                    strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
+                    strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
+                strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td bgcolor="#000000" height="2"></td>';
+                    strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                    strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';               
+                strhtml += '</tr>';             
             strhtml += '</table>';
             strhtml += "</div>";
         }
     }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
         if (arry_correctval[4] == 0) {
             strhtml += "<div>";
-
+            
             strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                    strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
+                strhtml += '</tr>';             
             strhtml += '</table>';
             strhtml += "</div>";
         }else{
             strhtml += "<div>";
-
+            
             strhtml += '<table>';
 
-            strhtml += '<tr>';
-            strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-            strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-            strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
-            strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-            strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '<td bgcolor="#000000" height="2"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-            strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
-            strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+                    strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+                    strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
+                    strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
+                strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td bgcolor="#000000" height="2"></td>';
+                    strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '</tr>';
+                strhtml += '<tr>';
+                    strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
+                    strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';                   
+                strhtml += '</tr>';             
             strhtml += '</table>';
             strhtml += "</div>";
         }
     }else if (arry_correctval[6] == arry_correctval[7] && factorX != 1) {
         strhtml += "<div>";
-
+        
         strhtml += '<table>';
 
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';
-        strhtml += '</tr>';
+            strhtml += '<tr>';
+                    strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                    strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
+                    strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                       
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
-    }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) {
+    }else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
         strhtml += "<div>";
-
+        
         strhtml += '<table>';
 
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue">' + arry_total[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue">' + arry_total[3] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue">' + arry_total[4] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
+                
+            strhtml += '</tr>';             
         strhtml += '</table>';
         strhtml += "</div>";
-    }else if (arry_correctval[1] < arry_correctval[2] && flag != 0) {
+    }else if (arry_correctval[1] < arry_correctval[2] && flag != 0) { 
         strhtml += "<div>";
-
+        
         strhtml += '<table>';
 
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
-        strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue">' + arry_correctval[10] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[6] + '</label></td>';
-        strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-        strhtml += '<td bgcolor="#000000" height="2"></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
-        strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[7] + '</label></td>';
-
-        strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
+                strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue">' + arry_correctval[10] + '</label></td>';
+                strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[6] + '</label></td>';
+                strhtml += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                strhtml += '<td bgcolor="#000000" height="2"></td>';
+                
+            strhtml += '</tr>';
+            strhtml += '<tr>';
+                strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
+                strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[7] + '</label></td>';
+                
+            strhtml += '</tr>';
         strhtml += '</table>';
         strhtml += "</div>";
     }
 
-    strhtml += "<p>Step 6: Answer: </p>";
-    if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-        if (arry_correctval[4] == 0) {
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
+    // strhtml += "<p>Step 6: Answer: </p>";
+    // if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
+    //  if (arry_correctval[4] == 0) {
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '<tr>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }else{
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                    
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }
+    // }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
+    //  if (arry_correctval[6] == 0) {
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }else{
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";                    
+    //  }else{
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '<tr>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                    
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }               
+    // }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
+    //  if (arry_correctval[4] == 0) {
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }else{
+    //      strhtml += "<div>";
+ //         strhtml += '<table id="step_count3">';
 
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+    //          strhtml += '<tr>';
+                    
+    //              strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                    
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //          strhtml += '</tr>';
+    //          strhtml += '<tr>';
+    //              strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+                    
+    //          strhtml += '</tr>';             
+    //      strhtml += '</table>';
+ //         strhtml += "</div>";
+    //  }
+    // }else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
+                        
+    //  strhtml += "<div>";
+//        strhtml += '<table id="step_count3">';
 
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }
-    }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
-        if (arry_correctval[6] == 0) {
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //          strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                
+    //      strhtml += '</tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //      strhtml += '</tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
+                
+    //      strhtml += '</tr>';             
+    //  strhtml += '</table>';
+//        strhtml += "</div>";
+    // }else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
+        
+    //  strhtml += "<div>";
+//        strhtml += '<table id="step_count3">';
 
-            strhtml += '<tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+    //          strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+                
+    //      strhtml += '</tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+    //      strhtml += '</tr>';
+    //      strhtml += '<tr>';
+    //          strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';                       
+    //      strhtml += '</tr>';             
+    //  strhtml += '</table>';
+//        strhtml += "</div>";
+    // }else if (arry_correctval[1] == arry_correctval[2]) {
+//        strhtml += "<div>";
+//        strhtml += '<table id="step_count3">';
 
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }else{
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
-
-            strhtml += '<tr>';
-
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }
-    }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-        if (arry_correctval[4] == 0) {
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
-
-            strhtml += '<tr>';
-
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }else{
-            strhtml += "<div>";
-            strhtml += '<table id="step_count3">';
-
-            strhtml += '<tr>';
-
-            strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-            strhtml += '</tr>';
-            strhtml += '<tr>';
-            strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
-
-            strhtml += '</tr>';
-            strhtml += '</table>';
-            strhtml += "</div>";
-        }
-    }else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
-
-        strhtml += "<div>";
-        strhtml += '<table id="step_count3">';
-
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
-
-        strhtml += '</tr>';
-        strhtml += '</table>';
-        strhtml += "</div>";
-    }else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
-
-        strhtml += "<div>";
-        strhtml += '<table id="step_count3">';
-
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-        strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
-
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-        strhtml += '</tr>';
-        strhtml += '<tr>';
-        strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
-        strhtml += '</tr>';
-        strhtml += '</table>';
-        strhtml += "</div>";
-    }else if (arry_correctval[1] == arry_correctval[2]) {
-        strhtml += "<div>";
-        strhtml += '<table id="step_count3">';
-
-        strhtml += '<tr>';
-        strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-        strhtml += '</tr>';
-        strhtml += '</table>';
-        strhtml += "</div>";
-    }
+    //      strhtml += '<tr>';
+    //          strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';                  
+    //      strhtml += '</tr>';             
+    //  strhtml += '</table>';
+//        strhtml += "</div>";
+//    }
 
     $("#Answer_correct_flow").html(strhtml);
 }

@@ -145,4 +145,5 @@
     </div>
 
     {!! Html::script('/js/common/operations/fraction_subtraction_butterfly.js')!!}
+    {!! Html::script('/js/common/operations/fraction_global.js?20170822') !!}
 </div>
