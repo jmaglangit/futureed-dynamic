@@ -336,7 +336,8 @@ var Constants = {
 	, FRACTION_SUBTRACTION_BUTTERFLY	: 'fraction_subtraction_butterfly'
 	, FRACTION_ADDITION_WHOLE			: 'fraction_addition_whole'
 	, FRACTION_SUBTRACTION_WHOLE		: 'fraction_subtraction_whole'
-	, INTEGER_ADDITION			: 'integer_addition'
+	, INTEGER_ADDITION					: 'integer_addition'
+	, INTEGER_SORT_LARGE				: 'integer_sort_large'
 
 	/* question dynamic template variables */
 	, ADDENDS1					: 'ADDENDS1'
