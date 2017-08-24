@@ -364,7 +364,7 @@ function btncalculateOnclick(){
             }
             if(checkAnswerLenght($(this)) == false){
                 // alert(" The answer is not this large. Retry !");
-                alertModal(" The answer is not this large. Retry !");
+                alertModal("The answer is not this large. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -926,7 +926,7 @@ function wholeOfValidationFunc() {
                             }
                             if(checkAnswerLenght($(this)) == false){
                                 // alert(" The answer is not this large. Retry !");
-                                alert("The answer is not this large. Please retry.");
+                                alertModal("The answer is not this large. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
