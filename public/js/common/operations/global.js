@@ -59,7 +59,7 @@
     	_correct_answer = _validateNum(_correct_answer, 0);
 
     	if( retry_attempt > retry_attempt_limit ) {
-    		retry_attempt = 0;										return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry.");
+    		retry_attempt = 0;										return _errorHandler(_elem, -5, "The correct answer is " + _correct_answer + ". Please retry.");
     	}    	
 
     	_answer = parseInt(_elem.prop("value"));
@@ -82,7 +82,7 @@
     	_correct_answer = _validateNum(_correct_answer, 0);
 
     	if( retry_attempt > retry_attempt_limit ) {
-    		retry_attempt = 0;										return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry.");
+    		retry_attempt = 0;										return _errorHandler(_elem, -5, "The correct answer is " + _correct_answer + ". Please retry.");
     	}    	
 
     	_answer = parseInt(_elem.prop("value"));
