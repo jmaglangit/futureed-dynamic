@@ -183,7 +183,7 @@ function checkAnswerValidation(elem) {
 	} 
 	if(retry_attempt > 1){
 		// alert("Correct Answer is " + correct_answer + ". Retry! ");
-		alertModal("Correct Answer is " + correct_answer + ". Retry. "); //added
+		alertModal("The correct answer is " + correct_answer + ". Please retry. ");
 		retry_attempt = 0;
 		return -3;
 	}
