@@ -71,28 +71,10 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-5">
-						{!! Form::select('operation'
-							, array(
-								'' =>trans('messages.admin_select_operation')
-								, '{! futureed.ADDITION !}' => trans('messages.admin_operation_add')
-								, '{! futureed.SUBTRACTION !} ' => trans('messages.admin_operation_subtract')
-								, '{! futureed.DIVISION !} ' => trans('messages.admin_operation_divide')
-								, '{! futureed.MULTIPLICATION !} ' => trans('messages.admin_operation_multiply')
-								, '{! futureed.FRACTION_ADDITION !} ' => trans('messages.admin_operation_fraction_addition')
-								, '{! futureed.FRACTION_SUBTRACTION !} ' => trans('messages.admin_operation_fraction_subtraction')
-								, '{! futureed.FRACTION_MULTIPLICATION !} ' => trans('messages.admin_operation_fraction_multiplication')
-								, '{! futureed.FRACTION_DIVISION !} ' => trans('messages.admin_operation_fraction_division')
-								, '{! futureed.FRACTION_ADDITION_BUTTERFLY !} ' => trans('messages.admin_operation_fraction_addition_butterfly')
-								, '{! futureed.FRACTION_SUBTRACTION_BUTTERFLY !} ' => trans('messages.admin_operation_fraction_subtraction_butterfly')
-								, '{! futureed.FRACTION_ADDITION_WHOLE !} ' => trans('messages.admin_operation_fraction_addition_whole')
-								, '{! futureed.FRACTION_SUBTRACTION_WHOLE !} ' => trans('messages.admin_operation_fraction_subtraction_whole')
-							)
-							, null
-							, array(
-								'class' => 'form-control'
-								, 'ng-model' => 'template.search.operation'
-								, 'placeholder' => trans('messages.email'))
-						) !!}
+						<select ng-model="template.search.operation" class="form-control">
+							<option value="">{!! trans('messages.admin_select_operation') !!}</option>
+							<option ng-repeat="operation in template.question_template_operation" ng-value="operation.operation_data"> {! stringReplace(operation.operation_data) | uppercase !} </option>
+						</select>
 					</div>
 					<div class="col-xs-5">
 						{!! Form::text('question_template_format', ''
