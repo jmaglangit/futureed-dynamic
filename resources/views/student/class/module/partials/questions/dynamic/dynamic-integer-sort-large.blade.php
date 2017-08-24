@@ -4,31 +4,38 @@
         <input type="text" name="randomNumber" id="randomNumber" readonly><br><br>
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
-
     <div>
-        <!-- questions area -->
-        <div id="questionPane" class="col-xs-12 answer_area sort_large">
-            <div style="float: left; width: 30%;">
-                <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
-            </div>
-            <!-- answer area -->
-            <div style="float: left; width: 70%;">
-                <div id="examPane" style="display: none;" class="h4">
-                    <div style="float: left; width: 33%;" id="answerPane">
-                        <div id="lastDiv1"></div>
-                    </div>
-                    <div style="float: left; width: 33%;" id="answerTipPane">
-                        <span class="boldStr">Answered Flow</span>
-                        <div id="lastDiv2"></div><br>
-                    </div>
-                    <div style="float: left; width: 34%;" id="correctAnswerTipPane">
-                        <span class="boldStr">Correct Answer Flow</span>
-                        <div id="lastDiv3"></div><br>
-                    </div>
-                    <div style="clear: both;"></div>
-                </div>
-            </div>
+        <!--  questions area right side -->
+        <div id="questionPane" class="col-xs-6  answer_area sort_large">
+            <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
         </div>
+         <!-- #end questions area right side -->
+
+        <!--  questions area left side -->
+        <div id="answerPane" class="col-xs-6 pull-right h4 sort_large_ans">
+            <div id="lastDiv1"></div>
+            <div style="clear: both;"></div>
+        </div>
+        <!-- #end questions area left side -->
+
+        <!-- done answering -->
+        <div id="tipsFlow" class="tips_flow_adjst" style="display: none;">
+           <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
+           <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
+               <div class="pull-right answer_area">
+                   <div class="prof-info"><b>Answered Flow</b></div><br/>
+                    <div id="lastDiv2"></div><br>
+               </div>
+           </div>
+           <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
+               <div class="pull-left answer_area">
+                   <div class="prof-info"><b>Correct Answer Flow</b></div><br/>
+                    <div id="lastDiv3"></div><br>
+               </div>
+           </div>
+        </div>
+         <div style="clear: both;"></div>
+        <!-- #end done answering -->
     </div>
 
     {{--modal--}}
