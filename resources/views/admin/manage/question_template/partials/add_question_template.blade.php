@@ -250,6 +250,28 @@
 							)!!}
 						</div>
 					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_SORT_SMALL">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_integer')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_sort_small'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_SORT_SMALL)'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_SORT_LARGE">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_integer')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_sort_large'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_SORT_LARGE)'
+								)
+							)!!}
+						</div>
+					</div>
 					<div class="col-xs-2"></div>
 					
 				</div>

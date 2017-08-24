@@ -31,6 +31,6 @@
 
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}
-	{!! Html::script('/js/admin/check_template_format.js') !!}
+	{!! Html::script('/js/common/check_template_format.js') !!}
 @stop
 @stop
