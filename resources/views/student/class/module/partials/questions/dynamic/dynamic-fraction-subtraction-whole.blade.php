@@ -122,4 +122,5 @@
     </div>
 
     {!! Html::script('/js/common/operations/fraction_subtraction_whole.js')!!}
+    {!! Html::script('/js/common/operations/fraction_global.js?20170822') !!}
 </div>
