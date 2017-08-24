@@ -265,6 +265,14 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 				self.record.question_template_format += self.actionVariableNames('fraction_subtraction_whole');
 			    $('button[name=btn_fraction_subtraction_whole]').prop('disabled', true);
 				break;
+			case Constants.INTEGER_SORT_SMALL:
+                self.record.question_template_format += self.actionVariableNames('integer_sort_small');
+                $('button[name=btn_integer_sort_small]').prop('disabled', true);
+                break;
+            case Constants.INTEGER_SORT_LARGE:
+                self.record.question_template_format += self.actionVariableNames('integer_sort_large');
+                $('button[name=btn_integer_sort_large]').prop('disabled', true);
+                break;
 			default:
 				self.record.question_template_format += ' ';
 				break;

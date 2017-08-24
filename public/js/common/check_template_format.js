@@ -74,5 +74,15 @@ function validateTemplateText(){
 		if(val.indexOf("{fraction_subtraction_whole}") == Constants.NEGATIVE_1){
 			$('button[name=btn_fraction_subtraction_whole]').prop('disabled', false);
 		}else{$('button[name=btn_fraction_subtraction_whole]').prop('disabled', true);}
+
+		//integer variables
+        if(val.indexOf("{integer_sort_small}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_sort_small]').prop('disabled', false);
+        }else{$('button[name=btn_integer_sort_small]').prop('disabled', true);}
+
+        if(val.indexOf("{integer_sort_large}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_sort_large]').prop('disabled', false);
+        }else{$('button[name=btn_integer_sort_large]').prop('disabled', true);}
+
 	}
 }
