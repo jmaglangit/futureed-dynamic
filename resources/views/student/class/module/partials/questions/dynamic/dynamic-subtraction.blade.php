@@ -1,8 +1,11 @@
 <div>
     <div style="visibility:hidden">
-        <input type="text" name="randomDigits" id="randomDigits" required autofocus value="4">
-        <input type="text" name="randomNumber1" id="randomNumber1" readonly><br><br>
-        <input type="text" name="randomNumber2" id="randomNumber2" readonly><br><br>
+        <label>randomNumberDigits:</label>
+        <input type="text" class="randomNumberDigits1" readonly>
+        <input type="text" class="randomNumberDigits2" readonly><br><br>
+        <label>randomWordsDigits :</label>
+        <input type="text" class="randomWordsDigits1" style="width: 50px">
+        <input type="text" class="randomWordsDigits2" style="width: 50px">
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
 

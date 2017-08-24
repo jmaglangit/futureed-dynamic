@@ -1,3 +1,8 @@
+/**
+ *  Code from client
+ * 20170823.
+ */
+
 var step_count = 0;
 var firstNumber = 0;
 var secondNumber = 0;
@@ -20,6 +25,100 @@ var step1Flag = false;
 var step2Flag = false;
 var step3Flag = false;
 var accaptflag = false;
+var answered = []; //ADDED
+
+// nerubia code
+// start ADDED functions
+//getter and setter
+function getRandomNumber1(){
+    return randomNumberDigits1;
+}
+
+function getRandomNumber2(){
+    return randomNumberDigits2;
+}
+
+function getRandomWordsDigits1(){
+    return randomWordsDigits1;
+}
+
+function getRandomWordsDigits2(){
+    return randomWordsDigits2;
+}
+
+function setRandomNumber1(data){
+    randomNumberDigits1 = data;
+}
+
+function setRandomNumber2(data){
+    randomNumberDigits2 = data;
+}
+
+function setRandomWordsDigits1(data){
+    randomWordsDigits1 = data;
+}
+
+function getRandomWordsDigits2(data){
+    randomWordsDigits2 = data;
+}
+
+function getAnswered(){
+    return answered;
+}
+
+function setAnswered(answer){
+    answered.push(answer);
+}
+
+function enabledNextQuestion(){
+    $("#dynamic_question_btn").show();
+}
+
+function disabledNextQuestion(){
+    $("#dynamic_question_btn").hide();
+}
+
+function answerDone(){
+    $("#questionPane").hide();
+    $("#step_div").hide();
+    $("#examPane1").hide();
+    $("#tipsFlow").show();
+    $("#ansFlow").show();
+    $("#ansCorrectFlow").show();
+    enabledNextQuestion();
+}
+
+function answerReset(){
+    $("#questionPane").show();
+    $("#step_div").show();
+    $("#tipsFlow").hide();
+    $("#ansFlow").hide();
+    $("#ansCorrectFlow").hide();
+    answered = [];
+    disabledNextQuestion();
+}
+
+function alertModal(message){
+    //dynamicBlock();
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#yes_simplify_modal").hide();
+    $("#no_simplify_modal").hide();
+    $("#close_modal").show();
+    $("#yes_whole_modal").hide();
+    $("#no_whole_modal").hide();
+    $("#yes_modal").hide();
+    $("#ok_simplify_modal").hide();
+    $("#ok_whole_num_modal").hide();
+}
+
+function btnNOOnclose() {
+    $("#message_modal_dynamic").hide();
+    $("input").attr("readonly", false);
+}
+
+// end ADDED functions
+
 
 var arry_total = [];
 var number_words = ["One", "Ten", "Hundred", "Thousand", "Ten Thousand", "Hundred Thousand", "Million", "Ten Million", "Hundred Million"];
@@ -123,7 +222,8 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
+                // alert("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet !");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -131,13 +231,15 @@ function startBtnOnclick(){
             
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
+                // alert("Your answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
+                // alert("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -147,7 +249,7 @@ function startBtnOnclick(){
                 return false;
             }
             $(this).attr("readonly", true);
-            nextsetp();                 
+            nextsetp();
         }
     }).focus();
 }
@@ -192,6 +294,7 @@ function nextsetp(){
         result_str += "<label>" + arry_total[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</label>";
         result_str += "</div>";
         $("#answer_div").html(result_str);
+        answerDone(); //added
         displayTotalFlow();
         displayTotalFlow1();
     }
@@ -199,7 +302,8 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
+                // alert("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet !");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -207,13 +311,15 @@ function nextsetp(){
             
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
+                // alert("Your answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
+                // alert("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -333,7 +439,7 @@ function checkAnswerValidation(elem) {
         }               
     }
     if(retry_attempt > 1){
-        alert("Correct Answer is " + correct_answer + ". Retry! ");
+        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
         if (step1_count == 1) {
             step1_count--;
         }
@@ -397,7 +503,7 @@ function checkAnswer(elem) {
 
 function displayTotalFlow(){
     result_str = "";
-    result_str += "<b style='color:blue'>Answered Flow</b>";
+    // result_str += "<b style='color:blue'>Answered Flow</b>";
     result_str += "<br><br>";
     result_str += '<p>What is the value of <b>'+ firstNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +'</b> <label>' + number_words[firsDigitsTonumber_words] + '</label> and <b>' + secondNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</b> <label>' + number_words[secondDigitsToNumber_words] + '?</label></p>';
     result_str += "<div>";
@@ -457,7 +563,7 @@ function displayTotalFlow(){
 
 function displayTotalFlow1(){
     result_str = "";
-    result_str += "<b style='color:blue'>Answered Flow</b>";
+    // result_str += "<b style='color:blue'>Answered Flow</b>";
     result_str += "<br><br>";
     result_str += '<p>What is the value of <b>'+ firstNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +'</b> <label>' + number_words[firsDigitsTonumber_words] + '</label> and <b>' + secondNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</b> <label>' + number_words[secondDigitsToNumber_words] + '?</label></p>';
     result_str += "<div>";

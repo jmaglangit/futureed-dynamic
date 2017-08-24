@@ -2864,3 +2864,24 @@ div#correct_flow p, div#Answer_correct_flow p,
 .sort_small #lastDiv2 .answerSpan{ margin-bottom: 5px; }
 .sort_small #answerTipPane p{margin-top: 0px;}
 
+/* integer addition style */
+/*.int_add_adjust #second_div .inputCheck{
+    margin: 0 7px;
+}*/
+
+div#step_div p {
+    margin: 20px 0 5px 0;
+}
+
+.int_add_adjust #first_div #step1_l,
+.int_add_adjust #add_div #step3_l,
+.int_add_adjust #step3_l .inputCheck{
+    margin: 0 10px;
+}
+
+.int_add_adjust #second_div #step2_l,
+.int_add_adjust #second_div .inputCheck,
+.int_add_adjust #step1_l .inputCheck{
+    margin: 0 5px;
+}
+
