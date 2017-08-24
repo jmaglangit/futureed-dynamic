@@ -33,4 +33,13 @@ class QuestionTemplateOperation extends Model{
 		'created_by' => 1,
 		'updated_by' => 1
 	];
+
+	//scope
+	public function scopeOperationData($query,$operation_data){
+		return $query->where('operation_datda','=',$operation_data);
+	}
+
+	public function scopeStatus($query,$status){
+		return $query->where('status','=',$status);
+	}
 }

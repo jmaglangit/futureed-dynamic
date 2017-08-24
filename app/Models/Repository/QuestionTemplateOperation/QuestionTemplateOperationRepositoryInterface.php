@@ -11,6 +11,8 @@ namespace FutureEd\Models\Repository\QuestionTemplateOperation;
 
 interface QuestionTemplateOperationRepositoryInterface {
 
+	public function getQuestionTemplateOperations($criteria = [],$limit = 0,$offset = 0);
+
 	public function getQuestionTemplateOperation($id);
 
 	public function addQuestionTemplateOperation($data);

@@ -9,7 +9,7 @@
 
 		<div template-directive template-url="{!! route('admin.partials.base_url') !!}"></div>
 
-		<div class="wrapr" ng-init="template.setActive()">
+		<div class="wrapr" ng-init="template.setActive();template.getQuestionTemplateOperations()">
 			<div class="client-nav side-nav">
 				@include('admin.partials.dshbrd-side-nav')
 			</div>

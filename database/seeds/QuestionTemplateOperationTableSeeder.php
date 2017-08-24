@@ -24,7 +24,10 @@ class QuestionTemplateOperationTableSeeder extends Seeder
             'fraction_addition_butterfly',
             'fraction_subtraction_butterfly',
             'fraction_addition_whole',
-            'fraction_subtraction_whole'
+            'fraction_subtraction_whole',
+			'integer_sort_small',
+			'integer_sort_large',
+			'integer_counting'
         ];
 
         $seeder = [];
