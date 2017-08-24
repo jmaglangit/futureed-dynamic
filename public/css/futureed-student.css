@@ -2860,8 +2860,16 @@ div#correct_flow p, div#Answer_correct_flow p,
 .sort_large span{ line-height:30px;}
 .sort_large #lastDiv2 .answerSpan{ margin-bottom: 5px; }
 
+.sort_large #lastDiv2 .span{ line-height: 30px; }
+.sort_large_ans span{ line-height: 30px; }
+.tips_flow_adjst span{ line-height: 30px; }
+
 /* sort small style */
 .sort_small span{ line-height:30px;}
 .sort_small #lastDiv2 .answerSpan{ margin-bottom: 5px; }
 .sort_small #answerTipPane p{margin-top: 0px;}
+
+.sort_small #lastDiv2 .span{ line-height: 30px; }
+.sort_small_ans span{ line-height: 30px; }
+.tips_small_adjst span{ line-height: 30px; }
 
