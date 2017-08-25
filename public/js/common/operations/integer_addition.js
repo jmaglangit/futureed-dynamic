@@ -10,6 +10,9 @@ var firsDigitsTonumber_words = 0;
 var secondDigitsToNumber_words = 0;
 var arry_temp = [];
 
+var randomWordsDigits2 = "";
+var randomNumberDigits1 = "";
+
 var step1_error1 = "";
 var step1_error2 = "";
 var step2_error1 = "";
@@ -58,9 +61,42 @@ function setRandomWordsDigits1(data){
     randomWordsDigits1 = data;
 }
 
-function getRandomWordsDigits2(data){
+function setRandomWordsDigits2(data){
     randomWordsDigits2 = data;
 }
+
+function getfirstNumber(){
+    return firstNumber;
+}
+
+function getsecondNumber(){
+    return secondNumber;
+}
+
+function getfirsDigitsTonumber_words(){
+    return firsDigitsTonumber_words;
+}
+
+function getsecondDigitsToNumber_words(){
+    return secondDigitsToNumber_words;
+}
+
+function setfirstNumber(data){
+    firstNumber = data;
+}
+
+function setsecondNumber(data){
+    secondNumber = data;
+}
+
+function setfirsDigitsTonumber_words(data){
+    firsDigitsTonumber_words = data;
+}
+
+function setsecondDigitsToNumber_words(data){
+    secondDigitsToNumber_words = data;
+}
+
 
 function getAnswered(){
     return answered;
