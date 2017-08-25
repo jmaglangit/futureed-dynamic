@@ -337,6 +337,7 @@ var Constants = {
 	, FRACTION_ADDITION_WHOLE			: 'fraction_addition_whole'
 	, FRACTION_SUBTRACTION_WHOLE		: 'fraction_subtraction_whole'
 	, INTEGER_ADDITION					: 'integer_addition'
+	, CONVERT_NUMBER					: 'convert_number'
 	, INTEGER_SORT_SMALL				: 'integer_sort_small'
 	, INTEGER_SORT_LARGE				: 'integer_sort_large'
 

@@ -1910,6 +1910,19 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.CONVERT_NUMBER:
+
+				self.date_start = new Date();
+
+				randomDigitsOnclick();
+				question_text = question_text.replace("{convert_number}",getfirstNumber());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
 			case Constants.INTEGER_SORT_SMALL:
 
 				self.date_start = new Date();

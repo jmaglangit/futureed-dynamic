@@ -109,6 +109,9 @@
 					<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_ADDITION">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-addition') !!}"></div>
 					</div>
+					<div ng-if="mod.current_question.question_template.operation == futureed.CONVERT_NUMBER">
+						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.convert-number') !!}"></div>
+					</div>
 					<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_SORT_SMALL">
 						<div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-sort-small') !!}"></div>
 					</div>
