@@ -257,10 +257,10 @@ function playAnswer()
 			    	if( retry_attempt > retry_attempt_limit ) {
 			    		retry_attempt = 0;
 			    		// alert("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
-			    		alertModal("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
+                        alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry ");
 			    	} else {
 			    		// alert("You forgot the word number. Retry!");
-			    		alertModal("You forgot the word number. Retry!");
+                        alertModal("That is incorrect. The answer is either largest number or smallest number. Please retry.");
 			    	}
 			    	retry_attempt++;
 			    	$(".answerTxt:last").prop("value", "").focus();
@@ -270,10 +270,11 @@ function playAnswer()
 				if(arrAnswer[real_step_count] != $(".answerTxt:last").prop("value")){
 			    	if( retry_attempt > retry_attempt_limit ) {
 			    		retry_attempt = 0;
-			    		alertModal("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
+                        // alert("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
+			    		alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry ");
 			    	} else {
 			    		// alert("That is the wrong number. Retry!");
-			    		alertModal("That is the wrong number. Retry!");
+                        alertModal("Your answer is incorrect. Please retry.");
 			    	}
 			    	retry_attempt++;
 			    	$(".answerTxt:last").prop("value", "").focus();
@@ -300,8 +301,10 @@ function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
 	_correct_answer = _validateNum(_correct_answer, 0);
 
 	if( retry_attempt > retry_attempt_limit ) {
-		retry_attempt = 0;										return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry! ");
-	}    	
+		retry_attempt = 0;
+        // return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry! ");
+        return _errorHandler(_elem, -5, "The correct answer is " + _correct_answer + ". Please retry ");
+	}
 
 	_answer = parseInt(_elem.prop("value"));
 	    	
@@ -309,7 +312,8 @@ function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
 
 	_elem.prop("value", _answer);
 	if((_answer * 1 < __start_num) || (_answer * 1 > __end_num))	{
-        return _errorHandler(_elem, -2, "Answer can't less than " + __start_num + " or more than " + __end_num + " !");
+        // return _errorHandler(_elem, -2, "Answer can't less than " + __start_num + " or more than " + __end_num + " !");
+        return _errorHandler(_elem, -2, "That is incorrect. Answer cannot be less than " + __start_num + " or more than " + __end_num + ". Please retry.");
     }
     if(_answer < _correct_answer) {
         return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
