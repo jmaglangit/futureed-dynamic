@@ -1778,9 +1778,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.DIVISION:
 
-                var digit = module_algo[module_map[Constants.DIVISION]]();
-                setRandomNumber1(digit.randomNumber1);
-                setRandomNumber2(digit.randomNumber2);
+                // var digit = module_algo[module_map[Constants.DIVISION]]();
+                // setRandomNumber1(digit.randomNumber1);
+                // setRandomNumber2(digit.randomNumber2);
+                self.date_start = new Date();
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
 
                 randomDigitsOnclick();
 

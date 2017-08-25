@@ -3,17 +3,27 @@
 namespace FutureEd\Services;
 
 
+use FutureEd\Models\Repository\QuestionTemplateOperation\QuestionTemplateOperationRepositoryInterface;
+
 class QuestionTemplateServices {
 
-	// protected $question_template;
+	protected $question_template_operation;
 
+	/**
+	 * QuestionTemplateServices constructor.
+	 * @param QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface
+	 */
+	public function __construct(
+		QuestionTemplateOperationRepositoryInterface $questionTemplateOperationRepositoryInterface
+	) {
+		$this->question_template_operation = $questionTemplateOperationRepositoryInterface;
 
-	// public function __construct(
+	}
 
-	// ){
-
-	// }
-
+	/**
+	 * @param $question_template
+	 * @return array|bool
+	 */
 	public function checkOperationVariables($question_template){
 		$operation_var = $question_template['question_template_format'];
 
@@ -184,6 +194,14 @@ class QuestionTemplateServices {
 				break;
 
 			default:
+				//check db if exists.
+				if(!empty($this->question_template_operation->getOperationByData($question_template['operation'])->toArray())){
+					return true;
+				} else {
+					return [
+						'message' => trans('errors.2606')
+					];
+				}
 				break;
 		}
 

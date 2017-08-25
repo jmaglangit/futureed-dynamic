@@ -71,6 +71,7 @@ Routes::group([
 	include('Routes/Api/QuestionCacheLog.php');
 	include('Routes/Api/QuestionGradeCondition.php');
 	include('Routes/Api/QuestionTemplate.php');
+	include('Routes/Api/QuestionTemplateOperation.php');
 	include('Routes/Api/QuestionTranslation.php');
 	include('Routes/Api/Quote.php');
 	include('Routes/Api/QuoteTranslation.php');

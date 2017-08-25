@@ -57,7 +57,7 @@ function answerReset(){
 }
 
 function alertModal(message){
-    //dynamicBlock()
+    dynamicBlock();
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#close_modal").show();
@@ -66,7 +66,7 @@ function alertModal(message){
 }
 
 function remainderModal(message){
-    //dynamicBlock()
+    dynamicBlock();
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#close_modal").hide();
@@ -192,7 +192,7 @@ function btnNOOnclose() {
 					if(($(this).prop("value") != correct_answer + "x" + randomNumber2 + "") && ($(this).prop("value") != "" + randomNumber2 + "x" + correct_answer)) {
 						retry_first_answer++;
 						//alert("Correct Answer is " + randomNumber2 + "x4 format, please Retry !");
-                        alertModal("The answer is incorrect. Please retry!");
+                        alertModal("The answer is incorrect. Please retry.");
                         if (!arry_step_count_temp[real_step_count]) {
                             //console.log("2 = " + $(this).prop("value"));
                             arry_step_count_temp[real_step_count] = $(this).prop("value");
@@ -227,7 +227,7 @@ function btnNOOnclose() {
                                         
                                     }
 									//alert("Correct Answer is " + temp_val + "-" + randomNumber2 + " format, please Retry !");
-                                    alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please retry!");
+                                    alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please retry.");
 									$(this).prop("value", "").focus();
 									return false;
 								}

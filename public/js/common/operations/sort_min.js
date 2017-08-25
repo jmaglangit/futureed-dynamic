@@ -61,9 +61,24 @@ function disabledNextQuestion(){
 }
 
 function answerDone(){
+    $("#questionPane").hide();
+    $("#answerPane").hide();
     $("#lastDiv2").show();
     $("#lastDiv3").show();
+    $("#tipsFlow").show();
+    $("#ansFlow").show();
+    $("#ansCorrectFlow").show();
     enabledNextQuestion();
+}
+
+function answerReset(){
+    $("#questionPane").show();
+    $("#answerPane").show();
+    $("#tipsFlow").hide();
+    $("#ansFlow").hide();
+    $("#ansCorrectFlow").hide();
+    answered = [];
+    disabledNextQuestion();
 }
 
 function alertModal(message){
@@ -148,7 +163,7 @@ function startAnswer(){
 
     $("#subject_number").html(randomNumber);
 
-    $("#answerPane").html('Use these integers and construct the smallest number possible<br><span class="boldStr">'+randomNumber+'</span><div id="lastDiv1"></div>');
+    // $("#answerPane").html('Use these integers and construct the smallest number possible<br><span class="boldStr">'+randomNumber+'</span><div id="lastDiv1"></div>');
     $("#examPane").show();
     $("#lastDiv2").html("");
     $("#lastDiv3").html("");

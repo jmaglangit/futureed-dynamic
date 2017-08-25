@@ -33,7 +33,6 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-	// console.log("testing teting", digit);
     randomDigits = digit;
 }
 
@@ -62,9 +61,24 @@ function disabledNextQuestion(){
 }
 
 function answerDone(){
-	$("#lastDiv2").show();
-	$("#lastDiv3").show();
+    $("#questionPane").hide();
+    $("#answerPane").hide();
+    $("#lastDiv2").show();
+    $("#lastDiv3").show();
+    $("#tipsFlow").show();
+    $("#ansFlow").show();
+    $("#ansCorrectFlow").show();
     enabledNextQuestion();
+}
+
+function answerReset(){
+    $("#questionPane").show();
+    $("#answerPane").show();
+    $("#tipsFlow").hide();
+    $("#ansFlow").hide();
+    $("#ansCorrectFlow").hide();
+    answered = [];
+    disabledNextQuestion();
 }
 
 function alertModal(message){
@@ -81,7 +95,6 @@ function btnNOOnclose() {
 // end ADDED functions
 
 function randomDigitsOnclick(){
-	// alert("testing ssss");
     // randomDigits = _validateNum($("#randomDigits").prop("value"), 4);
     if(randomDigits < 3) randomDigits = 3;
     if(randomDigits > 9) randomDigits = 9;
@@ -144,12 +157,11 @@ function generateRandomNumber(randomDigits){
 }
 
 function startAnswer(){
-	// alert("testing ttt");
 	if(randomNumber == "") return false;
 
     $("#subject_number").html(randomNumber);
 
-    $("#answerPane").html('Use these integers and construct the largest number possible<br><span class="boldStr">'+randomNumber+'</span><div id="lastDiv1"></div>');
+    // $("#answerPane").html('Use these integers and construct the largest number possible<br><span class="boldStr">'+randomNumber+'</span><div id="lastDiv1"></div>');
     $("#examPane").show();
     $("#lastDiv2").html("");
     $("#lastDiv3").html("");

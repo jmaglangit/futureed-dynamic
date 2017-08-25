@@ -815,5 +815,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 		$window.location.href = url + '?tab=' + tab_name;
 	}
 
+	$scope.stringReplace = function(string_data){
+        return string_data.replace(/_/g," ");
+	};
+
 	
 };

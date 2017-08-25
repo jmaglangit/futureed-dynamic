@@ -183,7 +183,7 @@ function checkAnswerValidation(elem) {
 	} 
 	if(retry_attempt > 1){
 		// alert("Correct Answer is " + correct_answer + ". Retry! ");
-		alertModal("Correct Answer is " + correct_answer + ". Retry. "); //added
+		alertModal("The correct answer is " + correct_answer + ". Please retry. ");
 		retry_attempt = 0;
 		return -3;
 	}
@@ -427,9 +427,9 @@ function generateAnswerStep() {
 		else {
 
 			if (carry_over == true) {
-				$("<p>Step " + (total_step) + ": Multiple Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");	
+				$("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 			}else{
-				$("<p>Step " + (total_step) + ": Multiple Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ ".</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+				$("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ ".</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 			}			
 		}
 	}
@@ -594,9 +594,9 @@ function displayTotalFlow(){
     		result = "<p align=left style='text-indent:10px;'>";
     		// console.log("carry_over_Step_Values_Real["+j+"]["+(i+1)+"] = "+ carry_over_All_Values_Real[j][i-1]);
     		if (carry_over_All_Values_Real[j][i-1]*1 !== 0 && i > 1) {
-				result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Real[j][i-1] + " carried over"+"</p>";		
+				result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Real[j][i-1] + " carried over"+"</p>";
 			}else{
-				result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + ".</p>";	
+				result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + ".</p>";
 			}
 			if (arry_tempanswer[steps]) {
 				result += "<label style='color:red;'> error : " + arry_tempanswer[steps] + "</label>";
@@ -666,9 +666,9 @@ function displayTotalFlow1(){
     		steps++;
     		result = "<p align=left style='text-indent:10px;'>";
     		if (carry_over_All_Values_Real[j][i-1]*1 !== 0 && i > 1) {
-				result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Real[j][i-1] + " carried over"+"</p>";		
+				result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Real[j][i-1] + " carried over"+"</p>";
 			}else{
-				result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + ".</p>";	
+				result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + ".</p>";
 			}
 			$(result).insertBefore("#lastDiv3");
 
