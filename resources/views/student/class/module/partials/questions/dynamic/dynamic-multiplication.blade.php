@@ -14,7 +14,7 @@
             {{--<button onclick="startAnswer();">Start Answer</button>--}}
         </div>
         <!-- answer area -->
-        <div id="answerPane" class="col-xs-6 pull-right h4">
+        <div id="answerPane" class="col-xs-6 pull-right h4 answer_area">
             <div id="lastDiv" class="margin-10-top margin-10-bot h4"></div>
         </div>
         <div id="tipsFlow" style="display: none;">
@@ -51,13 +51,13 @@
                 <div id="num2_1div"></div>
             </div>
             <div class="modal-footer">
-                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();" style="display: none;">Close</button>
-                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick();">
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();dynamicUnBlock();" style="display: none;">Close</button>
+                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" data-dismiss="modal" onclick="btnYEsOnclick();dynamicUnBlock();">
                     {!! trans('messages.yes') !!}
                 </button>
 
 
-                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();">
+                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclick();dynamicUnBlock();">
                     {!! trans('messages.no') !!}
                 </button>
             </div>
@@ -65,6 +65,6 @@
 
     </div>
     {!! Html::script('/js/common/operations/multiplication.js')!!}
-    {!! Html::script('/js/common/operations/multiplication_global.js')!!}
+    {!! Html::script('/js/common/operations/global.js')!!}
 
 </div>

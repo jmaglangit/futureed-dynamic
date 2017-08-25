@@ -18,6 +18,13 @@
         return _digitsCount;
     }
 
+    function checkAnswerLenght(elem) {
+        answer_val = elem.prop("value");
+        if(answer_val.length >= 8) return false;
+        elem.prop("value", answer_val);
+        return true;
+    }
+
 	// function for validate number
 	function _validateNum(_num, _default_num) {
 		_num = parseInt(_num);
@@ -125,3 +132,31 @@
 
     	return 0;
     }
+
+    //START
+    function dynamicBlock(){
+
+        document.onkeydown = function (e) {
+            return false;
+        }
+
+        $("#message_modal_dynamic").modal({
+            backdrop: 'static',
+            keyboard: Constants.FALSE,
+            show    : Constants.TRUE
+        });
+    }
+
+    function dynamicUnBlock(){
+
+        console.log('unblocking');
+        document.onkeydown = function (e) {
+            return true;
+        }
+
+        $("#message_modal_dynamic").modal({
+            keyboard: Constants.TRUE,
+            show    : Constants.FALSE,
+        });
+    }
+    //END

@@ -1752,6 +1752,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
                 self.date_start = new Date();
 
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
                 randomDigitsOnclick();
                 // Deduct {subtrahend} from {minuend}.
                 question_text = question_text.replace("{minuend}", getRandomNumber1());
@@ -1777,9 +1778,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.DIVISION:
 
-                var digit = module_algo[module_map[Constants.DIVISION]]();
-                setRandomNumber1(digit.randomNumber1);
-                setRandomNumber2(digit.randomNumber2);
+                // var digit = module_algo[module_map[Constants.DIVISION]]();
+                // setRandomNumber1(digit.randomNumber1);
+                // setRandomNumber2(digit.randomNumber2);
+                self.date_start = new Date();
+                setRandomDigits(self.question_grade_condition.max_number.toString().length);
 
                 randomDigitsOnclick();
 
@@ -1888,6 +1891,52 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				self.current_question.questions_text = question_text;
 				btncalculateOnclick();
+
+				break;
+
+			case Constants.INTEGER_ADDITION:
+
+				self.date_start = new Date();
+
+				randomDigitsOnclick();
+				question_text = question_text.replace("{first_number}",getfirstNumber());
+				question_text = question_text.replace("{firs_digits_number_words}",getfirsDigitsTonumber_words());
+				question_text = question_text.replace("{second_number}",getsecondNumber());
+				question_text = question_text.replace("{second_digits_number_words}",getsecondDigitsToNumber_words());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
+			case Constants.INTEGER_SORT_SMALL:
+
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+
+				question_text = question_text.replace("{integer_sort_small}",getRandomNumber1());
+
+				self.current_question.questions_text = question_text;
+
+				startAnswer();
+
+				break;
+
+			case Constants.INTEGER_SORT_LARGE:
+
+				self.date_start = new Date();
+
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+				randomDigitsOnclick();
+
+				question_text = question_text.replace("{integer_sort_large}",getRandomNumber1());
+
+				self.current_question.questions_text = question_text;
+
+				startAnswer();
 
 				break;
 

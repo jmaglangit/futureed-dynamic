@@ -202,6 +202,44 @@ function digits(digits){
 }
 
 function randomDigitsOnclick(){
+	m1 = "";
+	z2 = "";
+	z1 = "";
+	w1 = "";
+	w2 = "";
+	randomDigits = "";
+	max_t = 0;
+	min_t = 0;
+	flag = 0;
+
+	factorX = 1;
+
+	arry_correctval = [];
+	arry_total = [];
+
+	An = 0;
+	Ad = 0;
+	fraction_count = 0;
+	simplify_count = 0;
+	total_count = 0;
+
+	step1_error = "";
+	step2_error = "";
+	step3_error = "";
+	step4_whole_numerator_error = "";
+	step4_whole_denominator_error = "";
+	step4_whole = "";
+	step4_numerator_error = "";
+	step4_denominator_error = "";
+	step5_whole_numerator_error = "";
+	step5_whole_denominator_error = "";
+	step5_whole = "";
+
+	possibleFlag = false;
+	simplifyFlag=false;
+	wholeBtnFlag = false;
+	specialFlag = false;
+
 	carry_over1 = false;
 	carry_over = false;
 	// randomDigits = $("#randomDigits").prop("value");
@@ -262,6 +300,16 @@ function randomDigitsOnclick(){
 	$("#subject_w1_b1").html(w1);
 	$("#subject_w2_b1").html(w2);
 
+	$("#whole").html("");
+	$("#questionsz").html("");
+	$("#questionsm").html("");
+
+	$("#simplify").html("");
+	$("#combine").html("");
+
+	$("#correct_flow").html("");
+	$("#Answer_correct_flow").html("");
+
 	$("#examPane").show();
 	step_count = 0;
 }
@@ -294,7 +342,7 @@ function btncalculateOnclick(){
 					result_str += '<td align="center"><label>'+ m1 +'</label></td>';
 					result_str += '<td align="center"><label>'+ m1 +'</td>';
 
-				result_str += '</tr>';              
+				result_str += '</tr>';
 			result_str += '</table>';
 
 		result_str += '</div>';
@@ -312,6 +360,13 @@ function btncalculateOnclick(){
 				return false;
 			}
 			
+			if(checkAnswerLenght($(this)) == false){
+				// alert(" The answer is not this large. Retry !");
+				alertModal("The answer is not this large. Please retry.");
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
+			}
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need.");
@@ -332,6 +387,7 @@ function btncalculateOnclick(){
 				return false;
 			}
 			if(temp_answer == correct_answer) {
+				$(this).attr("readonly", true);
 				nextsetp();
 			}
 			
@@ -374,7 +430,7 @@ function nextsetp(){
 					result_str += '<td align="center"><label>'+ m1 +'</label></td>';
 					result_str += '<td align="center"><label>'+ m1 +'</td>';
 
-				result_str += '</tr>';              
+				result_str += '</tr>';
 			result_str += '</table>';
 
 		result_str += '</div>';
@@ -405,7 +461,7 @@ function nextsetp(){
 					result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
 					result_str += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
 
-				result_str += '</tr>';              
+				result_str += '</tr>';
 			result_str += '</table>';
 
 		result_str += '</div>';
@@ -460,7 +516,7 @@ function nextsetp(){
 					result_str += '<td align="center"><input class="inputCheck5" style="display:none;width:50px"></td>';
 					result_str += '<td align="center"><input class="inputCheck3" style="display:none;width:50px"></td>';
 					
-				result_str += '</tr>';              
+				result_str += '</tr>';
 			result_str += '</table>';
 			result_str += "</div>";
 			
@@ -489,7 +545,7 @@ function nextsetp(){
 					result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 					result_str += '<td align="center"><label>' + arry_correctval[2] + '</label></td>';
 					
-				result_str += '</tr>';              
+				result_str += '</tr>';
 			result_str += '</table>';
 			result_str += "</div>";
 			specialFlag = true;
@@ -521,7 +577,7 @@ function nextsetp(){
 					result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 					result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
 					
-				result_str += '</tr>';              
+				result_str += '</tr>';
 			result_str += '</table>';
 			result_str += "</div>";
 			
@@ -548,8 +604,8 @@ function nextsetp(){
 						result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 						result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-						result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';                    
-					result_str += '</tr>';              
+						result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';					
+					result_str += '</tr>';
 				result_str += '</table>';
 				result_str += "</div>";
 			}else{
@@ -560,7 +616,7 @@ function nextsetp(){
 
 					result_str += '<tr>';
 						result_str += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-						result_str += '<td rowspan="3" align="center"><b> + </b></td>'                          ;
+						result_str += '<td rowspan="3" align="center"><b> + </b></td>'							;
 						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 						result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
 						result_str += '<td rowspan="3" align="center"><b> = </b></td>';
@@ -573,8 +629,8 @@ function nextsetp(){
 					result_str += '</tr>';
 					result_str += '<tr>';
 						result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-						result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';                
-					result_str += '</tr>';              
+						result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';				
+					result_str += '</tr>';
 				result_str += '</table>';
 				result_str += "</div>";
 			}
@@ -590,8 +646,8 @@ function nextsetp(){
 						result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 						result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-						result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';                    
-					result_str += '</tr>';              
+						result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';					
+					result_str += '</tr>';
 				result_str += '</table>';
 				result_str += "</div>";
 			}else{
@@ -615,8 +671,8 @@ function nextsetp(){
 					result_str += '</tr>';
 					result_str += '<tr>';
 						result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-						result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';                
-					result_str += '</tr>';              
+						result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';				
+					result_str += '</tr>';
 				result_str += '</table>';
 				result_str += "</div>";
 			}
@@ -632,8 +688,8 @@ function nextsetp(){
 						result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 						result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-						result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';                    
-					result_str += '</tr>';              
+						result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';					
+					result_str += '</tr>';
 				result_str += '</table>';
 				result_str += "</div>";
 			}else{
@@ -657,8 +713,8 @@ function nextsetp(){
 					result_str += '</tr>';
 					result_str += '<tr>';
 						result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-						result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';                    
-					result_str += '</tr>';              
+						result_str += '<td align="center"><input class="inputCheck3" style="width:50px;"></td>';					
+					result_str += '</tr>';
 				result_str += '</table>';
 				result_str += "</div>";
 			}
@@ -673,14 +729,14 @@ function nextsetp(){
 						result_str += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 					result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
 					result_str += '<td rowspan="3" align="center"><b> = </b></td>';
-						result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';                        
-				result_str += '</tr>';              
+						result_str += '<td rowspan="3" align="center"><input class="inputCheck9" style="width:50px;"></td>';						
+				result_str += '</tr>';
 			result_str += '</table>';
 			result_str += "</div>";
 		}else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
 			result_str = "<div>";
 			result_str += "<p>Step " + step_count +": What is the combined whole number and fraction?</p>";
-			
+
 			result_str += '<table id="step_count3">';
 
 				result_str += '<tr>';
@@ -696,13 +752,13 @@ function nextsetp(){
 				result_str += '<tr>';
 					result_str += '<td bgcolor="#000000" height="2"></td>';
 					result_str += '<td bgcolor="#000000" height="2"></td>';
-					
+
 				result_str += '</tr>';
 				result_str += '<tr>';
 					result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 					result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
-					
-				result_str += '</tr>';              
+
+				result_str += '</tr>';
 			result_str += '</table>';
 			result_str += "</div>";
 		}else if (arry_correctval[1] < arry_correctval[2] && flag != 0) { 
@@ -730,7 +786,7 @@ function nextsetp(){
 					result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
 					result_str += '<td align="center"><input class="inputCheck3" style="width:50px"></td>';
 					
-				result_str += '</tr>';              
+				result_str += '</tr>';
 			result_str += '</table>';
 			result_str += "</div>";
 		}
@@ -740,176 +796,176 @@ function nextsetp(){
 	}
 
 	if (step_count == 6) {
-		if (arry_correctval[1] < arry_correctval[2] && factorX != 1 || specialFlag == true) {
-			if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
+//  		if (arry_correctval[1] < arry_correctval[2] && factorX != 1 || specialFlag == true) {
+//  			if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
 
-				result_str = "<div>";
-				result_str += "<p>Step " + step_count +": Answer</p>";
+//  				result_str = "<div>";
+	 //    		result_str += "<p>Step " + step_count +": Answer</p>";
 				
-				result_str += '<table>';
+	 //    		result_str += '<table>';
 
-					result_str += '<tr>';
-						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-						result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
+		// 				result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
 						
-					result_str += '</tr>';
-					result_str += '<tr>';
-						result_str += '<td bgcolor="#000000" height="2"></td>';
+		// 			result_str += '</tr>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td bgcolor="#000000" height="2"></td>';
 						
-					result_str += '</tr>';
-					result_str += '<tr>';
-						result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';                        
-					result_str += '</tr>';              
-				result_str += '</table>';
-				result_str += "</div>";
-				$("#answer").html(result_str);
-			}
-		}else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-			if (arry_correctval[4] == 0) {
-				result_str = "<div>";
-				result_str += "<p>Step " + step_count +": Answer</p>";
+		// 			result_str += '</tr>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';						
+		// 			result_str += '</tr>';				
+		// 		result_str += '</table>';
+	 //    		result_str += "</div>";
+	 //    		$("#answer").html(result_str);
+  //   		}
+//  		}else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
+//  			if (arry_correctval[4] == 0) {
+//  				result_str = "<div>";
+	 //    		result_str += "<p>Step " + step_count +": Answer</p>";
 				
-				result_str += '<table>';
+	 //    		result_str += '<table>';
 
-					result_str += '<tr>';
-						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';                        
-					result_str += '</tr>';              
-				result_str += '</table>';
-				result_str += "</div>";
-			}else{
-				result_str = "<div>";
-				result_str += "<p>Step " + step_count +": Answer</p>";
+		// 			result_str += '<tr>';
+		// 				result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';						
+		// 			result_str += '</tr>';				
+		// 		result_str += '</table>';
+	 //    		result_str += "</div>";
+//  			}else{
+//  				result_str = "<div>";
+	 //    		result_str += "<p>Step " + step_count +": Answer</p>";
 				
-				result_str += '<table>';
+	 //    		result_str += '<table>';
 
-					result_str += '<tr>';
-						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-						result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
+		// 				result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
 						
-					result_str += '</tr>';
-					result_str += '<tr>';
-						result_str += '<td bgcolor="#000000" height="2"></td>';
+		// 			result_str += '</tr>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td bgcolor="#000000" height="2"></td>';
 						
-					result_str += '</tr>';
-					result_str += '<tr>';
-						result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';                        
-					result_str += '</tr>';              
-				result_str += '</table>';
-				result_str += "</div>";
-			}
+		// 			result_str += '</tr>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';						
+		// 			result_str += '</tr>';				
+		// 		result_str += '</table>';
+	 //    		result_str += "</div>";
+//  			}
 			
-			$("#answer").html(result_str);
-		}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1) {
-			if (arry_correctval[4] == 0) {
-				result_str = "<div>";
-				result_str += "<p>Step " + step_count +": Answer</p>";
+  //   		$("#answer").html(result_str);
+//  		}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1) {
+//  			if (arry_correctval[4] == 0) {
+//  				result_str = "<div>";
+	 //    		result_str += "<p>Step " + step_count +": Answer</p>";
 				
-				result_str += '<table>';
+	 //    		result_str += '<table>';
 
-					result_str += '<tr>';
-						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';                        
-					result_str += '</tr>';              
-				result_str += '</table>';
-				result_str += "</div>";
-			}else{
-				result_str = "<div>";
-				result_str += "<p>Step " + step_count +": Answer</p>";
+		// 			result_str += '<tr>';
+		// 				result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';						
+		// 			result_str += '</tr>';				
+		// 		result_str += '</table>';
+	 //    		result_str += "</div>";
+//  			}else{
+//  				result_str = "<div>";
+	 //    		result_str += "<p>Step " + step_count +": Answer</p>";
 				
-				result_str += '<table>';
+	 //    		result_str += '<table>';
 
-					result_str += '<tr>';
-						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
-						result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';
+		// 				result_str += '<td align="center"><label id="result_z1_b">'+ arry_total[4] +'</label></td>';
 						
-					result_str += '</tr>';
-					result_str += '<tr>';
-						result_str += '<td bgcolor="#000000" height="2"></td>';
+		// 			result_str += '</tr>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td bgcolor="#000000" height="2"></td>';
 						
-					result_str += '</tr>';
-					result_str += '<tr>';
-						result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';                        
-					result_str += '</tr>';              
-				result_str += '</table>';
-				result_str += "</div>";
-			}
+		// 			result_str += '</tr>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td align="center"><label id="result_m1_b">'+ arry_total[5] +'</label></td>';						
+		// 			result_str += '</tr>';				
+		// 		result_str += '</table>';
+	 //    		result_str += "</div>";
+//  			}
 			
-			$("#answer").html(result_str);
-		}/*else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-			if (arry_correctval[4] == 0) {
-				result_str = "<div>";
-				result_str += "<p>Step " + step_count +": Answer</p>";
+  //   		$("#answer").html(result_str);
+//  		}/*else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
+//  			if (arry_correctval[4] == 0) {
+//  				result_str = "<div>";
+	 //    		result_str += "<p>Step " + step_count +": Answer</p>";
 				
-				result_str += '<table>';
+	 //    		result_str += '<table>';
 
-					result_str += '<tr>';
-						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';                       
-					result_str += '</tr>';              
-				result_str += '</table>';
-				result_str += "</div>";
-			}else{
-				result_str = "<div>";
-				result_str += "<p>Step " + step_count +": Answer</p>";
+		// 			result_str += '<tr>';
+		// 				result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';						
+		// 			result_str += '</tr>';				
+		// 		result_str += '</table>';
+	 //    		result_str += "</div>";
+//  			}else{
+//  				result_str = "<div>";
+	 //    		result_str += "<p>Step " + step_count +": Answer</p>";
 				
-				result_str += '<table>';
+	 //    		result_str += '<table>';
 
-					result_str += '<tr>';
-						result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
-						result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
+		// 				result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
 						
-					result_str += '</tr>';
-					result_str += '<tr>';
-						result_str += '<td bgcolor="#000000" height="2"></td>';
+		// 			result_str += '</tr>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td bgcolor="#000000" height="2"></td>';
 						
-					result_str += '</tr>';
-					result_str += '<tr>';
-						result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';                       
-					result_str += '</tr>';              
-				result_str += '</table>';
-				result_str += "</div>";
-			}
+		// 			result_str += '</tr>';
+		// 			result_str += '<tr>';
+		// 				result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';						
+		// 			result_str += '</tr>';				
+		// 		result_str += '</table>';
+	 //    		result_str += "</div>";
+//  			}
 			
-			$("#answer").html(result_str);
-		}*/else if (arry_correctval[1] == arry_correctval[2]) {
-			result_str = "<div>";
-			result_str += "<p>Step " + step_count +": Answer</p>";
+  //   		$("#answer").html(result_str);
+//  		}*/else if (arry_correctval[1] == arry_correctval[2]) {
+//  			result_str = "<div>";
+  //   		result_str += "<p>Step " + step_count +": Answer</p>";
 			
-			result_str += '<table>';
+  //   		result_str += '<table>';
 
-				result_str += '<tr>';
-					result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';                        
-				result_str += '</tr>';              
-			result_str += '</table>';
-			result_str += "</div>";
-			$("#answer").html(result_str);
-		}else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
-			result_str = "<div>";
+		// 		result_str += '<tr>';
+		// 			result_str += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_total[3] +'</label></td>';						
+		// 		result_str += '</tr>';				
+		// 	result_str += '</table>';
+  //   		result_str += "</div>";
+  //   		$("#answer").html(result_str);
+//  		}else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
+  //   		result_str = "<div>";
 			
-			result_str += '<table id="step_count3">';
+  //   		result_str += '<table id="step_count3">';
 
-				result_str += '<tr>';
+		// 		result_str += '<tr>';
 					
-					result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
-					result_str += '<td align="center"><label>' + arry_correctval[1] + '</label></td>';
-					result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
+		// 			result_str += '<td align="center"><label id="result_z1_b">'+ arry_correctval[1] +'</label></td>';
+		// 			result_str += '<td rowspan="3" align="center" valign="middle"><b> = </b></td>';
+		// 			result_str += '<td align="center"><label>' + arry_correctval[1] + '</label></td>';
+		// 			result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"></td>';
 					
-				result_str += '</tr>';
-				result_str += '<tr>';
-					result_str += '<td bgcolor="#000000" height="2"></td>';
-					result_str += '<td bgcolor="#000000" height="2"></td>';
+		// 		result_str += '</tr>';
+		// 		result_str += '<tr>';
+		// 			result_str += '<td bgcolor="#000000" height="2"></td>';
+		// 			result_str += '<td bgcolor="#000000" height="2"></td>';
 					
-				result_str += '</tr>';
-				result_str += '<tr>';
-					result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
-					result_str += '<td align="center"><label>' + arry_correctval[2] + '</label></td>';
+		// 		result_str += '</tr>';
+		// 		result_str += '<tr>';
+		// 			result_str += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
+		// 			result_str += '<td align="center"><label>' + arry_correctval[2] + '</label></td>';
 					
-				result_str += '</tr>';              
-			result_str += '</table>';
-			result_str += "</div>";
+		// 		result_str += '</tr>';				
+		// 	result_str += '</table>';
+  //   		result_str += "</div>";
 			
-			$("#simplify").html(result_str);
-			nextsetp();
-		}
+  //   		$("#simplify").html(result_str);
+  //   		nextsetp();
+		// }
 		answerDone(); //added
 		displayTotalFlow();
 		displayTotalFlow1();
@@ -925,6 +981,14 @@ function nextsetp(){
 				return false;
 			}
 			
+			if(checkAnswerLenght($(this)) == false){
+				// alert(" The answer is not this large. Retry !");
+				alertModal("The answer is not this large. Please retry.");
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
+			}
+
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need.");
@@ -945,7 +1009,7 @@ function nextsetp(){
 				return false;
 			}
 			if(temp_answer == correct_answer && carry_over1 == false){
-				 
+				 $(this).attr("readonly", true);
 				 nextsetp();
 			}
 			else {
@@ -963,6 +1027,13 @@ function nextsetp(){
 			if(checkAnswer($(this)) == false && carry_over1 == false){
 				// alert("Answer can't be alphabet !");
 				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
+			}
+			if(checkAnswerLenght($(this)) == false){
+				// alert(" The answer is not this large. Retry !");
+				alertModal("The answer is not this large. Please retry.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -1006,8 +1077,15 @@ function nextsetp(){
 						$(this).prop("value", "").focus();
 						retry_attempt++;
 						return false;
+					}					
+					if(checkAnswerLenght($(this)) == false){
+						// alert(" The answer is not this large. Retry !");
+						alertModal(" The answer is not this large. Retry !");
+						$(this).prop("value", "").focus();
+						retry_attempt++;
+						return false;
 					}
-					
+
 					temp_answer = checkAnswerValidation($(this));
 					if(temp_answer == -1){
 						if (!step4_denominator_error) {
@@ -1063,6 +1141,13 @@ function wholeOfValidationFunc() {
 				return false;
 			}
 			
+			if(checkAnswerLenght($(this)) == false){
+				// alert(" The answer is not this large. Retry !");
+				alertModal("The answer is not this large. Please retry.");
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
+			}
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
 				if (!step5_whole) {
@@ -1113,6 +1198,13 @@ function wholeOfValidationFunc() {
 						return false;
 					}
 					
+					if(checkAnswerLenght($(this)) == false){
+						// alert(" The answer is not this large. Retry !");
+						alertModal("The answer is not this large. Please retry.");
+						$(this).prop("value", "").focus();
+						retry_attempt++;
+						return false;
+					}
 					temp_answer = checkAnswerValidation($(this));
 					if(temp_answer == -1){
 						if (!step5_whole_numerator_error) {
@@ -1161,8 +1253,15 @@ function wholeOfValidationFunc() {
 								$(this).prop("value", "").focus();
 								retry_attempt++;
 								return false;
+							}							
+							if(checkAnswerLenght($(this)) == false){
+								// alert(" The answer is not this large. Retry !");
+								alertModal("The answer is not this large. Please retry.");
+								$(this).prop("value", "").focus();
+								retry_attempt++;
+								return false;
 							}
-							
+
 							temp_answer = checkAnswerValidation($(this));
 							if(temp_answer == -1){
 								if (!step5_whole_denominator_error) {
@@ -1204,7 +1303,7 @@ function wholeOfValidationFunc() {
 							$(".inputCheck3").attr("value", temp_answer);
 							$(".inputCheck3").attr("readonly", true);
 							simplifyFlag = false;
-							nextsetp();                                 
+							nextsetp();
 						}
 					}).focus();
 				}
@@ -1237,7 +1336,7 @@ function checkAnswerValidation(elem) {
 		if (answer_val == correct_answer){
 			carry_over = false;
 			arry_correctval[10] = correct_answer;
-			return correct_answer;  
+			return correct_answer;
 		} 
 		if(retry_attempt > 1){
 			if (!step1_error) {
@@ -1257,7 +1356,7 @@ function checkAnswerValidation(elem) {
 			if (!step1_error) {
 				step1_error = answer_val;
 			}
-			return -2;  
+			return -2;
 		}
 	}
 
@@ -1266,7 +1365,7 @@ function checkAnswerValidation(elem) {
 		if (answer_val == correct_answer){
 			carry_over = false;
 			arry_correctval[1] = correct_answer;
-			return correct_answer;  
+			return correct_answer;
 		} 
 		if(retry_attempt > 1){
 			if (!step2_error) {
@@ -1286,7 +1385,7 @@ function checkAnswerValidation(elem) {
 			if (!step2_error) {
 				step2_error = answer_val;
 			}
-			return -2;  
+			return -2;
 		}
 	}
 
@@ -1298,7 +1397,7 @@ function checkAnswerValidation(elem) {
 			arry_correctval[2] = correct_answer;
 		
 			carry_over = false;
-			return correct_answer;  
+			return correct_answer;
 		} 
 
 		if(retry_attempt > 1){
@@ -1319,12 +1418,12 @@ function checkAnswerValidation(elem) {
 			if (!step3_error) {
 				step3_error = answer_val;
 			}
-			return -2;  
+			return -2;
 		}
 	}
 	if (step_count == 4) {
 		if (simplifyFlag == true) {
-			simplify_count++;   
+			simplify_count++;
 		}
 		if (flag == 0 && simplifyFlag == false) {
 			fraction_count++;
@@ -1337,8 +1436,8 @@ function checkAnswerValidation(elem) {
 					arry_correctval[3] = correct_answer;
 				
 					carry_over = false;
-					return correct_answer;  
-				}                       
+					return correct_answer;
+				}
 			}
 			if (fraction_count == 2) {
 				
@@ -1348,7 +1447,7 @@ function checkAnswerValidation(elem) {
 					arry_correctval[4] = correct_answer;
 				
 					carry_over = false;
-					return correct_answer;  
+					return correct_answer;
 				} 
 			}
 			if (fraction_count == 3) {
@@ -1359,7 +1458,7 @@ function checkAnswerValidation(elem) {
 					arry_correctval[5] = correct_answer;
 				
 					carry_over = false;
-					return correct_answer;  
+					return correct_answer;
 				} 
 				
 			}
@@ -1391,19 +1490,19 @@ function checkAnswerValidation(elem) {
 					arry_correctval[3] = correct_answer;
 				
 					carry_over = false;
-					return correct_answer;  
-				}                       
+					return correct_answer;
+				}
 			}
 			if (fraction_count == 2) {
 				
 				correct_answer = arry_correctval[6] % arry_correctval[7];
-			 
+
 				if (answer_val == correct_answer){
 					arry_correctval[4] = correct_answer;
 				
 					carry_over = false;
-					return correct_answer;  
-				} 
+					return correct_answer;
+				}
 			}
 			if (fraction_count == 3) {
 
@@ -1413,7 +1512,7 @@ function checkAnswerValidation(elem) {
 					arry_correctval[5] = correct_answer;
 				
 					carry_over = false;
-					return correct_answer;  
+					return correct_answer;
 				} 
 				
 			}
@@ -1462,7 +1561,7 @@ function checkAnswerValidation(elem) {
 					arry_correctval[6] = correct_answer;
 				
 					carry_over = false;
-					return correct_answer;  
+					return correct_answer;
 				} 
 
 				if(retry_attempt > 1){
@@ -1489,8 +1588,8 @@ function checkAnswerValidation(elem) {
 					arry_correctval[7] = correct_answer;
 				
 					carry_over = false;
-					return correct_answer;  
-				} 
+					return correct_answer;
+				}
 
 				if(retry_attempt > 1){
 					simplify_count--;
@@ -1507,11 +1606,11 @@ function checkAnswerValidation(elem) {
 					return -2;
 				}
 			}
-		}               
+		}
 	}
-	
+
 	if (step_count == 5) {
-		answerDone(); //added
+		answerDone();
 		displayTotalFlow();
 		displayTotalFlow1();
 	}
@@ -1552,8 +1651,15 @@ function wholeandfractionofcombineFunc() {
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
+			}		
+			if(checkAnswerLenght($(this)) == false){
+				// alert(" The answer is not this large. Retry !");
+				alertModal("The answer is not this large. Please retry.");
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
 			}
-			
+
 			temp_answer = checkAnswerValidation9($(this));
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need.");
@@ -1573,6 +1679,7 @@ function wholeandfractionofcombineFunc() {
 				$(this).prop("value", "").focus();
 				return false;
 			}
+			$(this).attr("readonly", true);
 			nextsetp();
 		}
 		
@@ -1588,7 +1695,14 @@ function wholeandfractionofcombineFunc() {
 				retry_attempt++;
 				return false;
 			}
-			
+			if(checkAnswerLenght($(this)) == false){
+				// alert(" The answer is not this large. Retry !");
+				alertModal("The answer is not this large. Please retry.");
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
+			}
+
 			temp_answer = checkAnswerValidation9($(this));
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need.");
@@ -1621,6 +1735,13 @@ function wholeandfractionofcombineFunc() {
 						return false;
 					}
 					
+					if(checkAnswerLenght($(this)) == false){
+						// alert(" The answer is not this large. Retry !");
+						alertModal("The answer is not this large. Please retry.");
+						$(this).prop("value", "").focus();
+						retry_attempt++;
+						return false;
+					}
 					temp_answer = checkAnswerValidation9($(this));
 					if(temp_answer == -1){
 						// alert("Your answer is larger than what we need.");
@@ -1652,7 +1773,14 @@ function wholeandfractionofcombineFunc() {
 								retry_attempt++;
 								return false;
 							}
-							
+							if(checkAnswerLenght($(this)) == false){
+								// alert(" The answer is not this large. Retry !");
+								alertModal("The answer is not this large. Please retry.");
+								$(this).prop("value", "").focus();
+								retry_attempt++;
+								return false;
+							}
+
 							temp_answer = checkAnswerValidation9($(this));
 							if(temp_answer == -1){
 								// alert("Your answer is larger than what we need.");
@@ -1675,7 +1803,7 @@ function wholeandfractionofcombineFunc() {
 							$(".inputCheck3").attr("value", temp_answer);
 							$(".inputCheck3").attr("readonly", true);
 							simplifyFlag = false;
-							nextsetp();                                 
+							nextsetp();
 						}
 					}).focus();
 				}
@@ -1698,8 +1826,8 @@ function checkAnswerValidation9() {
 			if (answer_val == correct_answer){
 				arry_total[3] = correct_answer;
 				carry_over = false;
-				return correct_answer;  
-			}                       
+				return correct_answer;
+			}
 		}
 		if (total_count == 2) {
 			
@@ -1709,8 +1837,8 @@ function checkAnswerValidation9() {
 				arry_total[4] = correct_answer;
 			
 				carry_over = false;
-				return correct_answer;  
-			} 
+				return correct_answer;
+			}
 		}
 		if (total_count == 3) {
 
@@ -1720,7 +1848,7 @@ function checkAnswerValidation9() {
 				arry_total[5] = correct_answer;
 				total_count = 0;
 				carry_over = false;
-				return correct_answer;  
+				return correct_answer;
 			} 
 			
 		}
@@ -1751,8 +1879,8 @@ function checkAnswerValidation9() {
 			if (answer_val == correct_answer){
 				arry_total[3] = correct_answer;
 				carry_over = false;
-				return correct_answer;  
-			}                       
+				return correct_answer;
+			}
 		}
 		if (total_count == 2) {
 			
@@ -1762,8 +1890,8 @@ function checkAnswerValidation9() {
 				arry_total[4] = correct_answer;
 			
 				carry_over = false;
-				return correct_answer;  
-			} 
+				return correct_answer;
+			}
 		}
 		if (total_count == 3) {
 
@@ -1773,9 +1901,9 @@ function checkAnswerValidation9() {
 				arry_total[5] = correct_answer;
 				total_count = 0;
 				carry_over = false;
-				return correct_answer;  
-			} 
-			
+				return correct_answer;
+			}
+
 		}
 
 		if(retry_attempt > 1){
@@ -1807,18 +1935,18 @@ function checkAnswerValidation9() {
 			if (answer_val == correct_answer){
 				arry_total[3] = correct_answer;
 				carry_over = false;
-				return correct_answer;  
-			}                       
+				return correct_answer;
+			}
 		}
 		if (total_count == 2) {
 			
 			correct_answer = arry_correctval[1];
-		 
+
 			if (answer_val == correct_answer){
 				arry_total[4] = correct_answer;
 			
 				carry_over = false;
-				return correct_answer;  
+				return correct_answer;
 			} 
 		}
 		if (total_count == 3) {
@@ -1829,7 +1957,7 @@ function checkAnswerValidation9() {
 				arry_total[5] = correct_answer;
 				total_count = 0;
 				carry_over = false;
-				return correct_answer;  
+				return correct_answer;
 			} 
 			
 		}
@@ -1861,7 +1989,7 @@ function checkAnswerValidation9() {
 				arry_total[3] = correct_answer;
 				total_count = 0;
 				carry_over = false;
-				return correct_answer;  
+				return correct_answer;
 			} 
 			
 		}
@@ -1939,7 +2067,7 @@ function checkAnswer(elem) {
 	answer_val = parseInt(elem.prop("value"));
 	if(isNaN(answer_val)) return false;
 	elem.prop("value", answer_val);
-	setAnswered(answer_val);
+	setAnswered(answer_val);	//added
 	return true;
 }
 
@@ -1974,8 +2102,8 @@ function displayTotalFlow(){
 			strhtml += '<tr>';
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
 				strhtml += '<td align="center"><label>'+ m1 +'</td>';
-				
-			strhtml += '</tr>';             
+
+			strhtml += '</tr>';
 		strhtml += '</table>';
 
 	strhtml += '</div>';
@@ -2005,11 +2133,11 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
 				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 
 	strhtml += '</div>';
-	strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
+	strhtml += "<p style='color:blue'>" + z1 + " - "+ z2 +" = "+ arry_correctval[1] +"</p>";
 
 	strhtml += '</div>';
 
@@ -2038,11 +2166,11 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
 				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
-			strhtml += '</tr>';             
+			strhtml += '</tr>';				
 		strhtml += '</table>';
 
 	strhtml += '</div>';
-	strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
+	strhtml += "<p style='color:blue'>" + z1 + " - "+ z2 +" = "+ arry_correctval[1] +"</p>";
 	strhtml += "<p>Step 3: What is the denominator?</p>";
 	if (step3_error) {
 		strhtml += "<p style='color:red;'> Step 3 Error : " +  step3_error + "</p>";
@@ -2068,7 +2196,7 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
 				strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
 
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 
 	strhtml += '</div>';
@@ -2119,7 +2247,7 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				// strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
@@ -2150,7 +2278,7 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
@@ -2179,7 +2307,7 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
@@ -2208,7 +2336,7 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
 				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
@@ -2237,7 +2365,7 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';
 				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[6] == arry_correctval[7]) {
@@ -2256,8 +2384,8 @@ function displayTotalFlow(){
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
-				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';                      
-			strhtml += '</tr>';             
+				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';						
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}
@@ -2289,8 +2417,8 @@ function displayTotalFlow(){
 						strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 						strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 						strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-						strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
-					strhtml += '</tr>';             
+						strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';					
+					strhtml += '</tr>';
 				strhtml += '</table>';
 				strhtml += "</div>";
 			}else{
@@ -2300,7 +2428,7 @@ function displayTotalFlow(){
 
 					strhtml += '<tr>';
 						strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-						strhtml += '<td rowspan="3" align="center"><b> + </b></td>'                         ;
+						strhtml += '<td rowspan="3" align="center"><b> + </b></td>'							;
 						strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 						strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
 						strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
@@ -2313,8 +2441,8 @@ function displayTotalFlow(){
 					strhtml += '</tr>';
 					strhtml += '<tr>';
 						strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-						strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';               
-					strhtml += '</tr>';             
+						strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';				
+					strhtml += '</tr>';
 				strhtml += '</table>';
 				strhtml += "</div>";
 			}
@@ -2329,8 +2457,8 @@ function displayTotalFlow(){
 					strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 					strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 					strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
-				strhtml += '</tr>';             
+					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';					
+				strhtml += '</tr>';
 			strhtml += '</table>';
 			strhtml += "</div>";
 		}else{
@@ -2353,8 +2481,8 @@ function displayTotalFlow(){
 				strhtml += '</tr>';
 				strhtml += '<tr>';
 					strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-					strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';               
-				strhtml += '</tr>';             
+					strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';				
+				strhtml += '</tr>';
 			strhtml += '</table>';
 			strhtml += "</div>";
 		}
@@ -2369,8 +2497,8 @@ function displayTotalFlow(){
 					strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 					strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 					strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
-				strhtml += '</tr>';             
+					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';					
+				strhtml += '</tr>';
 			strhtml += '</table>';
 			strhtml += "</div>";
 		}else{
@@ -2393,8 +2521,8 @@ function displayTotalFlow(){
 				strhtml += '</tr>';
 				strhtml += '<tr>';
 					strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-					strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';                   
-				strhtml += '</tr>';             
+					strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';					
+				strhtml += '</tr>';
 			strhtml += '</table>';
 			strhtml += "</div>";
 		}
@@ -2408,8 +2536,8 @@ function displayTotalFlow(){
 					strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 				strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
 				strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                       
-			strhtml += '</tr>';             
+					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';						
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
@@ -2436,7 +2564,7 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] < arry_correctval[2] && flag != 0) { 
@@ -2463,155 +2591,155 @@ function displayTotalFlow(){
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}
 	
-	strhtml += "<p>Step 6: Answer: </p>";
-	if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-		if (arry_correctval[4] == 0) {
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// strhtml += "<p>Step 6: Answer: </p>";
+	// if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
+	// 	if (arry_correctval[4] == 0) {
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}else{
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}else{
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 					
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}
-	}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
-		if (arry_correctval[6] == 0) {
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}
+	// }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
+	// 	if (arry_correctval[6] == 0) {
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";                    
-		}else{
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";					
+	// 	}else{
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 					
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}               
-	}else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-		if (arry_correctval[4] == 0) {
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}				
+	// }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
+	// 	if (arry_correctval[4] == 0) {
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}else{
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}else{
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 					
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}
-	}else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}
+	// }else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
 						
-		strhtml += "<div>";
-		strhtml += '<table id="step_count3">';
+	// 	strhtml += "<div>";
+//   		strhtml += '<table id="step_count3">';
 
-			strhtml += '<tr>';
-				strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 			strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 				
-			strhtml += '</tr>';
-			strhtml += '<tr>';
-				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-			strhtml += '</tr>';
-			strhtml += '<tr>';
-				strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
+	// 		strhtml += '</tr>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 		strhtml += '</tr>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
 				
-			strhtml += '</tr>';             
-		strhtml += '</table>';
-		strhtml += "</div>";
-	}else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
+	// 		strhtml += '</tr>';				
+	// 	strhtml += '</table>';
+//   		strhtml += "</div>";
+	// }else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
 		
-		strhtml += "<div>";
-		strhtml += '<table id="step_count3">';
+	// 	strhtml += "<div>";
+//   		strhtml += '<table id="step_count3">';
 
-			strhtml += '<tr>';
-				strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 			strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 				
-			strhtml += '</tr>';
-			strhtml += '<tr>';
-				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-			strhtml += '</tr>';
-			strhtml += '<tr>';
-				strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';                       
-			strhtml += '</tr>';             
-		strhtml += '</table>';
-		strhtml += "</div>";
-	}else if (arry_correctval[1] == arry_correctval[2]) {
-		strhtml += "<div>";
-		strhtml += '<table id="step_count3">';
+	// 		strhtml += '</tr>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 		strhtml += '</tr>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';						
+	// 		strhtml += '</tr>';				
+	// 	strhtml += '</table>';
+//   		strhtml += "</div>";
+	// }else if (arry_correctval[1] == arry_correctval[2]) {
+//   		strhtml += "<div>";
+//   		strhtml += '<table id="step_count3">';
 
-			strhtml += '<tr>';
-				strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';                  
-			strhtml += '</tr>';             
-		strhtml += '</table>';
-		strhtml += "</div>";
-	}
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';					
+	// 		strhtml += '</tr>';				
+	// 	strhtml += '</table>';
+//   		strhtml += "</div>";
+//   	}
 
 	$("#correct_flow").html(strhtml);
 }
@@ -2619,7 +2747,7 @@ function displayTotalFlow(){
 function displayTotalFlow1(){
 	
 	strhtml = "";
-	// strhtml += "<b style='color:blue'>Answered Flow</b>";
+	// strhtml += "<b style='color:blue'>Correct Answered Flow</b>";
 	// strhtml += "<br><br>";
 	strhtml += '<div id="examPane1" style="">';
 		strhtml += '<table>';
@@ -2648,7 +2776,7 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
 				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 
 	strhtml += '</div>';
@@ -2675,11 +2803,11 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
 				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 
 	strhtml += '</div>';
-	strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
+	strhtml += "<p style='color:blue'>" + z1 + " - "+ z2 +" = "+ arry_correctval[1] +"</p>";
 
 	strhtml += '</div>';
 
@@ -2705,11 +2833,11 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label>'+ m1 +'</label></td>';
 				strhtml += '<td align="center"><label>'+ m1 +'</td>';
 
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 
 	strhtml += '</div>';
-	strhtml += "<p style='color:blue'>" + z1 + " + "+ z2 +" = "+ arry_correctval[1] +"</p>";
+	strhtml += "<p style='color:blue'>" + z1 + " - "+ z2 +" = "+ arry_correctval[1] +"</p>";
 	strhtml += "<p>Step 3: What is the denominator?</p>";
 	strhtml += '<div>';
 		strhtml += '<table>';
@@ -2732,7 +2860,7 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</label></td>';
 				strhtml += '<td align="center"><label style = "color:blue">'+ m1 +'</td>';
 
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 
 	strhtml += '</div>';
@@ -2767,7 +2895,7 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				// strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
@@ -2797,8 +2925,8 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
-				
-			strhtml += '</tr>';             
+
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
@@ -2827,7 +2955,7 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[5] + '</label></td>';
 				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
@@ -2856,7 +2984,7 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[7] + '</label></td>';
 				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
@@ -2885,7 +3013,7 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label style="color:blue;">' + arry_correctval[2] + '</label></td>';
 				// strhtml += '<td align="center"><label>' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[6] == arry_correctval[7]) {
@@ -2904,8 +3032,8 @@ function displayTotalFlow1(){
 				strhtml += '<td bgcolor="#000000" height="2"></td>';
 			strhtml += '</tr>';
 			strhtml += '<tr>';
-				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';                      
-			strhtml += '</tr>';             
+				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';						
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}
@@ -2926,8 +3054,8 @@ function displayTotalFlow1(){
 						strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 						strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 						strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-						strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
-					strhtml += '</tr>';             
+						strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';					
+					strhtml += '</tr>';
 				strhtml += '</table>';
 				strhtml += "</div>";
 			}else{
@@ -2937,7 +3065,7 @@ function displayTotalFlow1(){
 
 					strhtml += '<tr>';
 						strhtml += '<td rowspan="3" align="center"><label>' +  arry_correctval[10] + '</label></td>';
-						strhtml += '<td rowspan="3" align="center"><b> + </b></td>'                         ;
+						strhtml += '<td rowspan="3" align="center"><b> + </b></td>'							;
 						strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 						strhtml += '<td align="center"><label id="result_z1_b">'+ arry_correctval[4] +'</label></td>';
 						strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
@@ -2950,8 +3078,8 @@ function displayTotalFlow1(){
 					strhtml += '</tr>';
 					strhtml += '<tr>';
 						strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-						strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';               
-					strhtml += '</tr>';             
+						strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';				
+					strhtml += '</tr>';
 				strhtml += '</table>';
 				strhtml += "</div>";
 			}
@@ -2966,8 +3094,8 @@ function displayTotalFlow1(){
 					strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 					strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 					strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
-				strhtml += '</tr>';             
+					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';					
+				strhtml += '</tr>';
 			strhtml += '</table>';
 			strhtml += "</div>";
 		}else{
@@ -2990,8 +3118,8 @@ function displayTotalFlow1(){
 				strhtml += '</tr>';
 				strhtml += '<tr>';
 					strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-					strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';               
-				strhtml += '</tr>';             
+					strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';				
+				strhtml += '</tr>';
 			strhtml += '</table>';
 			strhtml += "</div>";
 		}
@@ -3006,8 +3134,8 @@ function displayTotalFlow1(){
 					strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 					strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[3] +'</label></td>';
 					strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                   
-				strhtml += '</tr>';             
+					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';					
+				strhtml += '</tr>';
 			strhtml += '</table>';
 			strhtml += "</div>";
 		}else{
@@ -3030,8 +3158,8 @@ function displayTotalFlow1(){
 				strhtml += '</tr>';
 				strhtml += '<tr>';
 					strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[5] +'</label></td>';
-					strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';                   
-				strhtml += '</tr>';             
+					strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';					
+				strhtml += '</tr>';
 			strhtml += '</table>';
 			strhtml += "</div>";
 		}
@@ -3045,8 +3173,8 @@ function displayTotalFlow1(){
 					strhtml += '<td rowspan="3" align="center" valign="middle"><b> + </b></td>';
 				strhtml += '<td rowspan="3" align="center"><label id="result_z1_b">'+ arry_correctval[6] +'</label></td>';
 				strhtml += '<td rowspan="3" align="center"><b> = </b></td>';
-					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';                       
-			strhtml += '</tr>';             
+					strhtml += '<td rowspan="3" align="center"><label style="color:blue">' + arry_total[3] + '</label></td>';						
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] < arry_correctval[2] && flag == 0 && specialFlag == true) { 
@@ -3073,7 +3201,7 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[2] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue">' + arry_total[5] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}else if (arry_correctval[1] < arry_correctval[2] && flag != 0) { 
@@ -3100,155 +3228,155 @@ function displayTotalFlow1(){
 				strhtml += '<td align="center"><label id="result_m1_b">'+ arry_correctval[7] +'</label></td>';
 				strhtml += '<td align="center"><label style="color:blue">' + arry_correctval[7] + '</label></td>';
 				
-			strhtml += '</tr>';             
+			strhtml += '</tr>';
 		strhtml += '</table>';
 		strhtml += "</div>";
 	}
 	
-	strhtml += "<p>Step 6: Answer: </p>";
-	if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
-		if (arry_correctval[4] == 0) {
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// strhtml += "<p>Step 6: Answer: </p>";
+	// if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] == 0) {
+	// 	if (arry_correctval[4] == 0) {
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}else{
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}else{
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 					
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}
-	}else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
-		if (arry_correctval[6] == 0) {
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}
+	// }else if (arry_correctval[1] > arry_correctval[2] && factorX != 1 && arry_correctval[4] != 0) {
+	// 	if (arry_correctval[6] == 0) {
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";                    
-		}else{
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";					
+	// 	}else{
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 					
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}               
-	}else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
-		if (arry_correctval[4] == 0) {
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}				
+	// }else if (arry_correctval[1] > arry_correctval[2] && factorX == 1) {
+	// 	if (arry_correctval[4] == 0) {
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}else{
-			strhtml += "<div>";
-			strhtml += '<table id="step_count3">';
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}else{
+	// 		strhtml += "<div>";
+ //    		strhtml += '<table id="step_count3">';
 
-				strhtml += '<tr>';
+	// 			strhtml += '<tr>';
 					
-					strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 				strhtml += '<td rowspan="3" align="center" valign="middle"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 					
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-				strhtml += '</tr>';
-				strhtml += '<tr>';
-					strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 			strhtml += '</tr>';
+	// 			strhtml += '<tr>';
+	// 				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[5] + '</label></td>';
 					
-				strhtml += '</tr>';             
-			strhtml += '</table>';
-			strhtml += "</div>";
-		}
-	}else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
+	// 			strhtml += '</tr>';				
+	// 		strhtml += '</table>';
+ //    		strhtml += "</div>";
+	// 	}
+	// }else if (arry_correctval[1] < arry_correctval[2] && factorX != 1) {
 						
-		strhtml += "<div>";
-		strhtml += '<table id="step_count3">';
+	// 	strhtml += "<div>";
+//   		strhtml += '<table id="step_count3">';
 
-			strhtml += '<tr>';
-				strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 			strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 				
-			strhtml += '</tr>';
-			strhtml += '<tr>';
-				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-			strhtml += '</tr>';
-			strhtml += '<tr>';
-				strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
+	// 		strhtml += '</tr>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 		strhtml += '</tr>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';
 				
-			strhtml += '</tr>';             
-		strhtml += '</table>';
-		strhtml += "</div>";
-	}else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
+	// 		strhtml += '</tr>';				
+	// 	strhtml += '</table>';
+//   		strhtml += "</div>";
+	// }else if (arry_correctval[1] < arry_correctval[2] && factorX == 1) {
 		
-		strhtml += "<div>";
-		strhtml += '<table id="step_count3">';
+	// 	strhtml += "<div>";
+//   		strhtml += '<table id="step_count3">';
 
-			strhtml += '<tr>';
-				strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
-				strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';
+	// 			strhtml += '<td align="center"><label style="color:blue;">' + arry_total[4] + '</label></td>';
 				
-			strhtml += '</tr>';
-			strhtml += '<tr>';
-				strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
-			strhtml += '</tr>';
-			strhtml += '<tr>';
-				strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';                       
-			strhtml += '</tr>';             
-		strhtml += '</table>';
-		strhtml += "</div>";
-	}else if (arry_correctval[1] == arry_correctval[2]) {
-		strhtml += "<div>";
-		strhtml += '<table id="step_count3">';
+	// 		strhtml += '</tr>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td bgcolor="#000000" height="2" style="color:blue;"></td>';
+	// 		strhtml += '</tr>';
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td align="center"><label id="result_m1_b" style="color:blue;">'+ arry_total[5] +'</label></td>';						
+	// 		strhtml += '</tr>';				
+	// 	strhtml += '</table>';
+//   		strhtml += "</div>";
+	// }else if (arry_correctval[1] == arry_correctval[2]) {
+//   		strhtml += "<div>";
+//   		strhtml += '<table id="step_count3">';
 
-			strhtml += '<tr>';
-				strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';                  
-			strhtml += '</tr>';             
-		strhtml += '</table>';
-		strhtml += "</div>";
-	}
+	// 		strhtml += '<tr>';
+	// 			strhtml += '<td rowspan="3" align="center"><label style="color:blue;">' + arry_total[3] + '</label></td>';					
+	// 		strhtml += '</tr>';				
+	// 	strhtml += '</table>';
+//   		strhtml += "</div>";
+//   	}
 
 	$("#Answer_correct_flow").html(strhtml);
 }

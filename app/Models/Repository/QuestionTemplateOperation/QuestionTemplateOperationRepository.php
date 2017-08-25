@@ -17,6 +17,35 @@ class QuestionTemplateOperationRepository implements QuestionTemplateOperationRe
 	use LoggerTrait;
 
 	/**
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array
+	 */
+	public function getQuestionTemplateOperations($criteria = [],$limit = 0,$offset = 0){
+
+		$operation = new QuestionTemplateOperation();
+
+		if(isset($criteria['operation_data'])){
+			$operation = $operation->operationData($criteria['operation_data']);
+		}
+
+		if(isset($criteria['status'])){
+			$operation = $operation->status($criteria['status']);
+		}
+
+		$count = $operation->count();
+
+		if ($limit > 0 && $offset >= 0) {
+			$operation = $operation->offset($offset)->limit($limit);
+		}
+
+		$response = ['total' => $count, 'records' => $operation->get()->toArray()];
+
+		return $response;
+	}
+
+	/**
 	 * @param $id
 	 * @return \Illuminate\Support\Collection|null|static
 	 */

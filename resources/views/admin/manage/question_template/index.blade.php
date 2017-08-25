@@ -9,7 +9,7 @@
 
 		<div template-directive template-url="{!! route('admin.partials.base_url') !!}"></div>
 
-		<div class="wrapr" ng-init="template.setActive()">
+		<div class="wrapr" ng-init="template.setActive();template.getQuestionTemplateOperations()">
 			<div class="client-nav side-nav">
 				@include('admin.partials.dshbrd-side-nav')
 			</div>
@@ -31,6 +31,6 @@
 
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}
-	{!! Html::script('/js/admin/check_template_format.js') !!}
+	{!! Html::script('/js/common/check_template_format.js') !!}
 @stop
 @stop
