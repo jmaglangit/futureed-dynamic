@@ -1894,6 +1894,22 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.INTEGER_ADDITION:
+
+				self.date_start = new Date();
+
+				randomDigitsOnclick();
+				question_text = question_text.replace("{first_number}",getfirstNumber());
+				question_text = question_text.replace("{firs_digits_number_words}",getfirsDigitsTonumber_words());
+				question_text = question_text.replace("{second_number}",getsecondNumber());
+				question_text = question_text.replace("{second_digits_number_words}",getsecondDigitsToNumber_words());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
 			case Constants.INTEGER_SORT_SMALL:
 
 				self.date_start = new Date();
