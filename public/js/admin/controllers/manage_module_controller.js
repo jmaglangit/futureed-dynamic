@@ -924,6 +924,25 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 		return flag;
 	}
 
+    self.getQuestionTemplateOperations = function(){
+
+        var data = {};
+
+        ManageQuestionTempService.getQuestionTemplateOperations(data).success(function(response){
+            if(angular.equals(response.status, Constants.STATUS_OK)) {
+                if(response.errors) {
+                    self.errors = $scope.errorHandler(response.errors);
+                } else {
+                    self.question_template_operation = response.data.records;
+                }
+            }
+        }).error(function(response) {
+            self.errors = $scope.internalError();
+            $scope.ui_unblock();
+        });
+
+    }
+
 }
 
 //TODO: cause of restarting module.
