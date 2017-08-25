@@ -21,6 +21,10 @@ var arry_step_count_temp = [];
 var arry_sub_temp = [];
 var arry_left_temp = [];
 var arry_correctAnswer_temp = [];
+var arry_errorTemp1 = [];
+var arry_errorTemp2 = [];
+var arry_errorTemp3 = [];
+var arry_errorTemp4 = [];
 
 _end_num = 9;
 _UPPER_LIMIT = 10000;
