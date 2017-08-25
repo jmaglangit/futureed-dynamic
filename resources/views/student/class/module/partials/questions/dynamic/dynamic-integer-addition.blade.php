@@ -14,7 +14,7 @@
         <!-- dynamic questions area -->
         <div id="questionPane" class="col-xs-6 answer_area">
           <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
-            <div id="start_div" style="display: none;" class="h4">
+            <div style="display: none;" class="h4">
               <p>What is the value of <b id="firstNumber_b">200</b> 
               <label id="firstDigits_label"></label> and <b id="secondNumber_b">2</b> 
               <label id="secondDigits_label"></label>?</p>
@@ -24,7 +24,6 @@
 
         <!-- answer area on right side -->
         <div id="step_div" class="col-xs-6 pull-right h4 int_add_adjust">
-            <br><br><br>
             <div id="first_div"></div>
             <div id="second_div"></div>
             <div id="add_div"></div>

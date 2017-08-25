@@ -13,6 +13,8 @@ var arry_temp = [];
 var randomWordsDigits2 = "";
 var randomNumberDigits1 = "";
 
+var randomWordsDigits1 = "";
+
 var step1_error1 = "";
 var step1_error2 = "";
 var step2_error1 = "";
@@ -33,37 +35,6 @@ var answered = []; //ADDED
 // nerubia code
 // start ADDED functions
 //getter and setter
-function getRandomNumber1(){
-    return randomNumberDigits1;
-}
-
-function getRandomNumber2(){
-    return randomNumberDigits2;
-}
-
-function getRandomWordsDigits1(){
-    return randomWordsDigits1;
-}
-
-function getRandomWordsDigits2(){
-    return randomWordsDigits2;
-}
-
-function setRandomNumber1(data){
-    randomNumberDigits1 = data;
-}
-
-function setRandomNumber2(data){
-    randomNumberDigits2 = data;
-}
-
-function setRandomWordsDigits1(data){
-    randomWordsDigits1 = data;
-}
-
-function setRandomWordsDigits2(data){
-    randomWordsDigits2 = data;
-}
 
 function getfirstNumber(){
     return firstNumber;
@@ -74,11 +45,11 @@ function getsecondNumber(){
 }
 
 function getfirsDigitsTonumber_words(){
-    return firsDigitsTonumber_words;
+    return number_words[firsDigitsTonumber_words];
 }
 
 function getsecondDigitsToNumber_words(){
-    return secondDigitsToNumber_words;
+    return number_words[secondDigitsToNumber_words];
 }
 
 function setfirstNumber(data){
@@ -96,7 +67,6 @@ function setfirsDigitsTonumber_words(data){
 function setsecondDigitsToNumber_words(data){
     secondDigitsToNumber_words = data;
 }
-
 
 function getAnswered(){
     return answered;
@@ -210,6 +180,7 @@ function randomDigitsOnclick(){
     max_t4 = digits(randomWordDigits2);
 
     firsDigitsTonumber_words = Math.floor(Math.random()*randomWordDigits1);
+    console.log("words to number", firsDigitsTonumber_words);
     secondDigitsToNumber_words = Math.floor(Math.random()*randomWordDigits2);
 
     if (firsDigitsTonumber_words == secondDigitsToNumber_words) {
