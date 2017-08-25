@@ -82,13 +82,38 @@ function btnNOOnclose() {
 
     function generateDivisionExpr(_num1, _num2, _num3)
     {
-    	strHTML = '<div class="divide_container"><div class="div_num1">' + _num1 + '</div><div class="div_num2">' + _num2 + '<span class="after_char">' + _num3 + '</span></div><div class="clr"></div></div>';
-    	return strHTML;
+        strHTML = '<div class="divide_container"><div class="div_num1">' + _num1 + '</div><div class="div_num2">' + _num2 + '<span class="after_char">' + _num3 + '</span></div><div class="clr"></div></div>';
+        return strHTML;
     }
 
     function randomDigitsOnclick(){
-    	// randomDigits = _validateNum($("#randomDigits").prop("value"), 2);
-    	// if(randomDigits > 5) randomDigits = 4;
+
+        test_case = true;
+        _TEST_NUM1 = 5127;
+        _TEST_NUM2 = 242;
+
+        randomNumber1 = "";
+        randomNumber2 = "";
+
+        step_count = 0;
+        real_step_count = 0;
+
+        dropdown_var = [];
+        temp_val = 0;
+        remainder_val = 0;
+        _remainder_val = 0;
+
+        arry_step_count_temp = [];
+        arry_sub_temp = [];
+        arry_left_temp = [];
+        arry_correctAnswer_temp = [];
+        arry_errorTemp1 = [];
+        arry_errorTemp2 = [];
+        arry_errorTemp3 = [];
+        arry_errorTemp4 = [];
+
+        // randomDigits = _validateNum($("#randomDigits").prop("value"), 4);
+        // if(randomDigits > 5) randomDigits = 4;
         // $("#randomDigits").prop("value", randomDigits);
         
         randomDigits2 = _validateNum($("#randomDigits2").prop("value"), 1);
@@ -127,6 +152,14 @@ function btnNOOnclose() {
         remainder_val = 0;
     }
 
+    function checkAnswer(elem) {
+        answer_val = parseInt(elem.prop("value"));
+        if(isNaN(answer_val)) return false;
+        elem.prop("value", answer_val);
+        setAnswered(answer_val);    //added
+        return true;
+    }
+
     function startAnswer() {
         if($(".answer_value").length == 0) generateAnswerStep();
     }
@@ -135,11 +168,6 @@ function btnNOOnclose() {
     var retry_second_answer = 0;
     var retry_third_answer = 0;
 
-    var step_count_temp = 0;
-    var sub_temp = 0;
-    var left_temp = 0;
-    var correctAnswer_temp = 0;
-
     function generateAnswerStep() {
         retry_attempt = 0;
         if(step_count >= max_digit) { 
@@ -147,17 +175,16 @@ function btnNOOnclose() {
             checkTotal();
             // ADDED call function view hide
             answerDone();
-            console.log("done");
             return;
         }
 
-		if(step_count == 0) temp_val = (randomNumber1 + "").substring(0, getDigitsCouunt(randomNumber2));
-		else temp_val = (randomNumber1 + "").substring(getDigitsCouunt(randomNumber2) + step_count - 1, getDigitsCouunt(randomNumber2) + step_count);
+        if(step_count == 0) temp_val = (randomNumber1 + "").substring(0, getDigitsCouunt(randomNumber2));
+        else temp_val = (randomNumber1 + "").substring(getDigitsCouunt(randomNumber2) + step_count - 1, getDigitsCouunt(randomNumber2) + step_count);
 
         if(step_count > 0) 
             generateAnswerEquation(real_step_count).insertBefore("#lastDiv");
 
-		temp_val = temp_val * 1 + remainder_val * 10;
+        temp_val = temp_val * 1 + remainder_val * 10;
 
         dropdown_var[step_count] = false;
         $(".answer_value").unbind("keydown").removeClass("inputCheck").attr("readonly", true);
@@ -179,120 +206,160 @@ function btnNOOnclose() {
         $("<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>" + strHTML + "<p>What is the corresponding multiplication?  (Write it out, example "+randomNumber2+"x1)</p><input type=text placeholder='answer' class='first_answer inputCheck'>").insertBefore("#lastDiv");
         $(".inputCheck").keydown(function(event){
             if(event.keyCode == 13){
-            	if($(this).hasClass("first_answer")){
+                if($(this).hasClass("first_answer")){
 
+                    correct_answer = getCorrectAnswer();
 
-					correct_answer = getCorrectAnswer();
-					if(retry_first_answer > 1){
-						retry_first_answer = 0;
-						//alert("Correct Answer is " + randomNumber2 + "x" + correct_answer);
-                        alertModal("Correct Answer is " + randomNumber2 + "x" + correct_answer);
-						$(this).prop("value", "" + randomNumber2 + "x" + correct_answer);
-					}
-					if(($(this).prop("value") != correct_answer + "x" + randomNumber2 + "") && ($(this).prop("value") != "" + randomNumber2 + "x" + correct_answer)) {
-						retry_first_answer++;
-						//alert("Correct Answer is " + randomNumber2 + "x4 format, please Retry !");
-                        alertModal("The answer is incorrect. Please retry.");
-                        if (!arry_step_count_temp[real_step_count]) {
-                            //console.log("2 = " + $(this).prop("value"));
-                            arry_step_count_temp[real_step_count] = $(this).prop("value");
-                            //console.log("arry_step_count_temp[real_step_count] = " + arry_step_count_temp[real_step_count]);
-                            
-                        }
-						$(this).prop("value", "").focus();
-						return false;
-					}
+                    if(($(this).prop("value") != correct_answer + "x" + randomNumber2 + "") && ($(this).prop("value") != "" + randomNumber2 + "x" + correct_answer)) {
 
-            		$(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-            		$("<p style='margin-top:10px;'>What is the equation for subtraction?  (Write it out, example "+temp_val+"-"+randomNumber2+")</p><input type=text placeholder='answer' class='second_answer inputCheck'>").insertBefore("#lastDiv");
-                    
-            		$(".inputCheck").unbind("keydown").keydown(function(event){
-
-						if(event.keyCode == 13){
-
-			            	if($(this).hasClass("second_answer")){
-
-								if(retry_second_answer > 1){
-									retry_second_answer = 0;
-									//alert("Correct Answer is " + temp_val + "-" + (randomNumber2 * correct_answer));
-                                    alertModal("Correct Answer is " + temp_val + "-" + (randomNumber2 * correct_answer));
-                                    $(this).prop("value", "" + temp_val + "-" + (randomNumber2 * correct_answer));
-								}
-								if($(this).prop("value") != "" + temp_val + "-" + (randomNumber2 * correct_answer)) {
-									retry_second_answer++;
-                                    if (!arry_sub_temp[real_step_count]) {
-                                        //console.log("arry_sub_temp[real_step_count] = " + $(this).prop("value"));
-                                        arry_sub_temp[real_step_count] = $(this).prop("value");
-                                        //console.log("arry_sub_temp[real_step_count] = " + arry_sub_temp[real_step_count]);
+                        if(retry_first_answer > 1){
+                            retry_first_answer = 0;
+                            // alert("Correct Answer is " + randomNumber2 + "x" + correct_answer);
+                            alertModal("The correct answer is " + randomNumber2 + "x" + correct_answer + ". Please retry. ");
+                            retry_attempt = 0;
                                         
+                            $(this).prop("value", "");
+                            return;
+                        } else {
+                        
+                            retry_first_answer++;
+                            // alert("That is not the correct answer. Remember to use this format " + randomNumber2 + "x4, please Retry !");
+                            alertModal("That is not the correct answer. Remember to use this format " + randomNumber2 + "x4. Please retry.");
+                            if (!arry_errorTemp1[real_step_count]) {
+                                arry_errorTemp1[real_step_count] = $(this).prop("value");
+                            }
+                            $(this).prop("value", "").focus();
+
+                            return false;
+                        }
+                    }
+
+
+                    $(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
+                    $("<p style='margin-top: 10px;'>What is the equation for subtraction?  (Write it out, example "+temp_val+"-"+randomNumber2+")</p><input type=text placeholder='answer' class='second_answer inputCheck'>").insertBefore("#lastDiv");
+
+                    $(".inputCheck").unbind("keydown").keydown(function(event){
+
+                        if(event.keyCode == 13){
+
+                            if($(this).hasClass("second_answer")){
+
+                                if($(this).prop("value") != "" + temp_val + "-" + (randomNumber2 * correct_answer)) {
+                                    if(retry_second_answer > 1){
+                                        retry_second_answer = 0;
+                                        // alert("Correct Answer is " + temp_val + "-" + (randomNumber2 * correct_answer));
+                                        alertModal("The correct answer is " + temp_val + "-" + (randomNumber2 * correct_answer) + ". Please retry. ");
+                                        retry_attempt = 0;
+                                        
+                                        $(this).prop("value", "");
+                                        return;
+                                    }else{
+                                        retry_second_answer++;
+                                        // alert("That is not the correct answer. Remember to use this format " + temp_val + "-" + randomNumber2 + ", please Retry !");
+                                        alertModal("That is not the correct answer. Remember to use this format " + temp_val + "-" + randomNumber2 + ". Please retry.");
+                                        if (!arry_errorTemp2[real_step_count]) {
+                                            arry_errorTemp2[real_step_count] = $(this).prop("value");
+                                        }
+                                        $(this).prop("value", "").focus();
+                                        return false;
                                     }
-									//alert("Correct Answer is " + temp_val + "-" + randomNumber2 + " format, please Retry !");
-                                    alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please retry.");
-									$(this).prop("value", "").focus();
-									return false;
-								}
+                                }
 
-			            		$(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-			            		$("<p style='margin-top:10px'>How much is left?</p><input type=text placeholder='answer' class='third_answer inputCheck'>").insertBefore("#lastDiv");
-                                
-			            		$(".inputCheck").unbind("keydown").keydown(function(event){
+                                $(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
+                                $("<p style='margin-top:10px;'>How much is left?</p><input type=text placeholder='answer' class='third_answer inputCheck'>").insertBefore("#lastDiv");
 
-			            			if(event.keyCode == 13) {
+                                $(".inputCheck").unbind("keydown").keydown(function(event){
 
-                                        if(retry_third_answer > 1){
-											retry_third_answer = 0;
-											// alert("Correct Answer is " + (temp_val - randomNumber2 * correct_answer));
-                                            alertModal("Correct Answer is " + (temp_val - randomNumber2 * correct_answer));
-											$(this).prop("value", "" + (temp_val - randomNumber2 * correct_answer));
-										}
-										if($(this).prop("value") * 1 > (temp_val - randomNumber2 * correct_answer) * 1) {
-											retry_third_answer++;
-                                            if (!arry_left_temp[real_step_count]) {
-                                                console.log("arry_left_temp[real_step_count] = " + $(this).prop("value"));
-                                                arry_left_temp[real_step_count] = $(this).prop("value");
-                                                console.log("arry_left_temp[real_step_count] = " + arry_left_temp[real_step_count]);
-                                                
+                                    if(event.keyCode == 13) {
+                                        if(checkAnswer($(this)) == false){
+                                            // alert("Answer can't be alphabet !");
+                                            alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                                            $(this).prop("value", "").focus();
+                                            retry_attempt++;
+                                            return false;
+                                        }
+                                        if(checkAnswerLenght($(this)) == false){
+                                            // alert(" The answer is not this large. Retry !");
+                                            alertModal("The answer is not this large. Please retry.");
+                                            $(this).prop("value", "").focus();
+                                            retry_attempt++;
+                                            return false;
+                                        }
+                                        
+                                        if($(this).prop("value") * 1 > (temp_val - randomNumber2 * correct_answer) * 1) {
+                                            if(retry_third_answer > 1){
+                                                retry_third_answer = 0;
+                                                retry_attempt = 0;
+                                                // alert("Correct Answer is " + (temp_val - randomNumber2 * correct_answer));
+                                                alertModal("The correct answer is " + (temp_val - randomNumber2 * correct_answer) + ". Please retry. ");
+
+                                                $(this).prop("value", "");
+                                                return;
+                                            }else{
+                                                retry_third_answer++;
+                                                // alert("Your answer is larger than what we need.");
+                                                alertModal("Your answer is larger than what we need.");
+                                                if (!arry_errorTemp3[real_step_count]) {
+                                                    // console.log("how1");
+                                                    arry_errorTemp3[real_step_count] = $(this).prop("value");
+                                                }
+                                                $(this).prop("value", "").focus();
+                                                return false;
                                             }
-                                            // alert("Your answer is larger than what we need.");
-                                            alertModal("Your answer is larger than what we need.");
-											$(this).prop("value", "").focus();
-											return false;
-										} else if($(this).prop("value") * 1 < (temp_val - randomNumber2 * correct_answer) * 1) {
-											retry_third_answer++;
-											// alert("opps not enough, your answer needs to be larger.");
-                                            alertModal("Oops not enough, your answer needs to be larger.");
-											$(this).prop("value", "").focus();
-											return false;
-										}
+                                        } else if($(this).prop("value") * 1 < (temp_val - randomNumber2 * correct_answer) * 1) {
+                                            if(retry_third_answer > 1){
+                                                retry_third_answer = 0;
+                                                retry_attempt = 0;
+                                                // alert("Correct Answer is " + (temp_val - randomNumber2 * correct_answer));
+                                                alertModal("The correct answer is " + (temp_val - randomNumber2 * correct_answer) + ". Please retry. ");
 
-						            	if($(this).hasClass("third_answer")){
-						            		$(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
-						            		$("<p style='margin-top:10px;'>What is the answer?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+                                                $(this).prop("value", "");
+                                                return;
+                                            }else{
+                                                retry_third_answer++;
+                                                // alert("opps not enough, your answer needs to be larger.");
+                                                alertModal("Oops not enough, your answer needs to be larger.");
+                                                if (!arry_errorTemp3[real_step_count]) {
+                                                    // console.log("how12");
+                                                    arry_errorTemp3[real_step_count] = $(this).prop("value");
+                                                }
+                                                $(this).prop("value", "").focus();
+                                                return false;
+                                            }
+                                        }
 
-						            		$(".inputCheck").unbind("keydown").keydown(function(event){
+                                        if($(this).hasClass("third_answer")){
+                                            $(this).unbind("keydown").removeClass("inputCheck").attr("readonly", true);
+                                            $("<p style='margin-top:10px;'>What is the answer?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 
-						            			if(event.keyCode == 13) {
+                                            $(".inputCheck").unbind("keydown").keydown(function(event){
 
-									            	if($(this).hasClass("answer_value")){
-										                correct_answer = getCorrectAnswer();
-                                                        //console.log("211111111");
-										                temp_answer = validateAnswer($(this), correct_answer);
-										                
-										                if(temp_answer == 0){
-										                	$(this).blur();
-										                	if(remainder_val * 1 > 0) remainderModal("Do you need to bring down remainder to below digits?");
-										                	else generateAnswerStep();
-										                }
-										            }
-										        }
-						            		}).focus();
-						            	}
-						            }
-			            		}).focus();
-			            	}
-			            }
-            		}).focus();
-            	}
+                                                if(event.keyCode == 13) {
+
+                                                    if($(this).hasClass("answer_value")){
+                                                        correct_answer = getCorrectAnswer();
+                                                        temp_answer = validateAnswer($(this), correct_answer);
+                                                        
+                                                        if(temp_answer == 0){
+                                                            $(this).blur();
+                                                            if(remainder_val * 1 > 0) remainderModal("Do you need to bring down remainder to below digits?");
+                                                            else generateAnswerStep();
+                                                        }else{
+                                                            if (!arry_errorTemp4[real_step_count]) {
+                                                                // console.log("what");
+                                                                arry_errorTemp4[real_step_count] = $(this).prop("value");
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }).focus();
+                                        }
+                                    }
+                                }).focus();
+                            }
+                        }
+                    }).focus();
+                }
             }
         }).focus();
         step_count++;
@@ -300,8 +367,8 @@ function btnNOOnclose() {
     }
 
     function getCorrectAnswer() {
-    	correct_answer = parseInt((temp_val - (temp_val % randomNumber2)) / randomNumber2);
-    	remainder_val = temp_val % randomNumber2;
+        correct_answer = parseInt((temp_val - (temp_val % randomNumber2)) / randomNumber2);
+        remainder_val = temp_val % randomNumber2;
         return correct_answer;
     }
 
@@ -341,11 +408,11 @@ function btnNOOnclose() {
     }
 
     function displayTotalFlow(){
-    	remainder_val = 0;
+        remainder_val = 0;
         real_step_count = 0;
-    	result = generateDivisionExpr(randomNumber2, randomNumber1, "");
+        result = generateDivisionExpr(randomNumber2, randomNumber1, "");
 
-    	for(step_count=0; step_count<max_digit; step_count++){
+        for(step_count=0; step_count<max_digit; step_count++){
             
             if(remainder_val > 0){
                 result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + "Bring down the " + step_words[max_digit - step_count - 1] + " digit</p>";
@@ -353,50 +420,49 @@ function btnNOOnclose() {
                 result += generateAnswerEquationColor(real_step_count);
             }
 
-    		result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
+            result += "<p style='margin-top: 10px;'>Step " + (real_step_count + 1) + ": " + ((step_count == 0)?" Begin on left most part. ":"") + "Divide the " + step_words[max_digit - step_count - 1] + " digit</p>";
 
             if(remainder_val > 0){
                 result += "<p class='detail_step notice'>Bring down remainder, add " + step_words[max_digit - step_count - 1] + " digit</p>";
             }
 
-			if(step_count == 0) temp_val = (randomNumber1 + "").substring(0, getDigitsCouunt(randomNumber2));
-			else temp_val = (randomNumber1 + "").substring(getDigitsCouunt(randomNumber2) + step_count - 1, getDigitsCouunt(randomNumber2) + step_count);
+            if(step_count == 0) temp_val = (randomNumber1 + "").substring(0, getDigitsCouunt(randomNumber2));
+            else temp_val = (randomNumber1 + "").substring(getDigitsCouunt(randomNumber2) + step_count - 1, getDigitsCouunt(randomNumber2) + step_count);
 
-			temp_val = temp_val * 1 + remainder_val * 10;
+            temp_val = temp_val * 1 + remainder_val * 10;
 
-			remainder_val = 0;
-        	// strHTML = generateDivisionExpr(randomNumber2, temp_val, (randomNumber1 + "").substring(getDigitsCouunt(randomNumber2) + step_count));
-        	// result += strHTML;
-        	result += "<p class='detail_step'>Divide " + temp_val + " by " + randomNumber2 + "</p>";
+            remainder_val = 0;
+            // strHTML = generateDivisionExpr(randomNumber2, temp_val, (randomNumber1 + "").substring(getDigitsCouunt(randomNumber2) + step_count));
+            // result += strHTML;
+            result += "<p class='detail_step'>Divide " + temp_val + " by " + randomNumber2 + "</p>";
 
             result += generateAnswerEquationColor(real_step_count + 1);
 
-        	correct_answer = getCorrectAnswer();
-        	result += "<p class='detail_step'>Multiple " + correct_answer + " x " + randomNumber2 + " = " + (correct_answer * randomNumber2) + "</p>";
-            console.log("real_step_count = " + real_step_count);
-        	console.log("arry_step_count_temp = "+ arry_step_count_temp[real_step_count + 1]);
-            if (arry_step_count_temp[real_step_count + 1]) {
-                result += "<p style='color:red'> error : " + arry_step_count_temp[real_step_count + 1] + "</p>";
+            correct_answer = getCorrectAnswer();
+            result += "<p class='detail_step'>Multiple " + correct_answer + " x " + randomNumber2 + " = " + (correct_answer * randomNumber2) + "</p>";
+             if (arry_errorTemp1[real_step_count+1]) {
+                result += "<p style='color:red;'> Error : "+ arry_errorTemp1[real_step_count + 1] +"</p>";
             }
             result += "<p class='detail_step'>Subtract " + temp_val + " - " + (correct_answer * randomNumber2) + " = " + (temp_val - correct_answer * randomNumber2) + "</p>";
-            if (arry_sub_temp[real_step_count + 1]) {
-                result += "<p style='color:red'> error : " + arry_sub_temp[real_step_count + 1] + "</p>";
+            if (arry_errorTemp2[real_step_count + 1]) {
+                result += "<p style='color:red;'> Error : "+ arry_errorTemp2[real_step_count + 1] +"</p>";
             }
-
-            if (arry_left_temp[real_step_count + 1]) {
-                result += "<p style='color:red'> How much is left?</p>";
-                result += "<p style='color:red'> error : " + arry_left_temp[real_step_count + 1] + "</p>";
+            if (arry_errorTemp3[real_step_count + 1]) {
+                result += "<p style='color:red;'> Error : "+ arry_errorTemp3[real_step_count + 1] +"</p>";
             }
-        	if(remainder_val > 0) 
-        		result += "<p class='detail_step'>There is a remainder " + remainder_val + "</p>";
+            if (arry_errorTemp4[real_step_count + 1]) {
+                result += "<p style='color:red;'> Error : "+ arry_errorTemp4[real_step_count + 1] +"</p>";
+            }
+            if(remainder_val > 0) 
+                result += "<p class='detail_step'>There is a remainder " + remainder_val + "</p>";
 
             real_step_count++;
-    	}
+        }
 
-		result += "<p align=left style='text-indent:10px;'>Answer:</p>";
-		result += "<p align=left style='text-indent:20px;'>" + $(".inputCheck").prop("value") + "</p>";
+        result += "<p align=left style='text-indent:10px;'>Answer:</p>";
+        result += "<p align=left style='text-indent:20px;'>" + $(".inputCheck").prop("value") + "</p>";
 
-    	$("#lastDiv2").html(result);    	
+        $("#lastDiv2").html(result);        
     }
 
     function displayTotalFlow1(){
@@ -497,6 +563,8 @@ function btnNOOnclose() {
     }
 
     function generateAnswerEquation(_step_number) {
+        // console.log("Step Number" + _step_number);
+
         _strHTML = "";
         _answer_val = "";
         _real_step_count = 0;
@@ -531,6 +599,7 @@ function btnNOOnclose() {
     }
 
     function generateAnswerEquationColor(_step_number) {
+        // console.log("Step Number" + _step_number);
 
         _strHTML = "";
         _answer_val = "";
@@ -549,6 +618,7 @@ function btnNOOnclose() {
                     break;
                 }
 
+                // console.log("Step :" + _step_number + ", " + _real_step_count);
                 if(_step_number <= _real_step_count + 1)
                     _strHTML += _equation_remainder_(_step_count, _remainder_val + "" + _temp_val);
                 else
@@ -578,17 +648,25 @@ function btnNOOnclose() {
     }
 
     function btnYEsOnclick(){
-    	$("#message_modal_dynamic").hide();
-    	// if(dropdown_var[step_count - 2]) alert("Remember you drop down remainder in the previous step.");
-        if(dropdown_var[step_count - 2]) alertModal("Remember you bring down remainder in the previous step.");
+        // $("#myModal").hide();
+        $("#message_modal_dynamic").hide();
+        if(dropdown_var[step_count - 2]) alertModal("Remember you drop down remainder in the previous step.");
         generateAnswerStep();
     }
 
     function btnNOOnclick(){
-    	$("#message_modal_dynamic").hide();
-        //alert("Remainder is not zero, So you must drop down remainder to the lower digits !");
-        alertModal("Remainder is not zero, So you must bring down remainder to the lower digits.");
+        // $("#myModal").hide();
+        $("#message_modal_dynamic").hide();
+        // alert("Division is not yet complete. Please continue and bring down the nextdigit.");
+        alertModal("Division is not yet complete. Please continue and bring down the next digit.");
         generateAnswerStep();
+    }
+
+    function checkAnswerLenght(elem) {
+        answer_val = elem.prop("value");
+        if(answer_val.length >= 8) return false;
+        elem.prop("value", answer_val);
+        return true;
     }
 
 
