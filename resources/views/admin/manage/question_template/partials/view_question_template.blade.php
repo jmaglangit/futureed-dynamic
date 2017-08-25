@@ -49,8 +49,8 @@
 					<select ng-disabled="template.active_view" ng-model="template.record.operation"
 							ng-change="template.operationType()" ng-class="{ 'required-field' : template.fields['operation'] }"
 							class="form-control">
-						<option value="">{!! trans('messages.admin_select_operation') !!}</option>
-						<option ng-repeat="operation in template.question_template_operation" ng-value="operation.operation_data"> {! stringReplace(operation.operation_data) | uppercase !} </option>
+						<option ng-selected="template.record.operation == futureed.false" value="">{!! trans('messages.admin_select_operation') !!}</option>
+						<option ng-selected="template.record.operation == operation.operation_data" ng-repeat="operation in template.question_template_operation" ng-value="operation.operation_data"> {! stringReplace(operation.operation_data) | uppercase !} </option>
 					</select>
 				</div>
 			</div>
@@ -262,6 +262,30 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_fraction_subtracadmin_template_add_fractiontion_whole'
 									, 'ng-click' => 'template.actionButtons(futureed.FRACTION_SUBTRACTION_WHOLE)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_SORT_SMALL">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_integer')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_sort_small'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_SORT_SMALL)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_SORT_LARGE">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_integer')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_sort_large'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_SORT_LARGE)'
 									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
