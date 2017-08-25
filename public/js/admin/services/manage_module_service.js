@@ -113,5 +113,13 @@ function ManageModuleService($http) {
         });
 	}
 
+	api.getQuestionTemplateOperations = function(data){
+        return $http({
+            method	: Constants.METHOD_GET
+            ,url	: apiUrl + 'question-template-operation?operation_data=' + data.operation_data
+            + '&status=' + data.status
+        });
+    }
+
 	return api
 }
