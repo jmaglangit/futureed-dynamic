@@ -1917,7 +1917,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 
-				question_text = question_text.replace("{sort_small}",getRandomNumber1());
+				question_text = question_text.replace("{integer_sort_small}",getRandomNumber1());
 
 				self.current_question.questions_text = question_text;
 
@@ -1932,7 +1932,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 
-				question_text = question_text.replace("{sort_large}",getRandomNumber1());
+				question_text = question_text.replace("{integer_sort_large}",getRandomNumber1());
 
 				self.current_question.questions_text = question_text;
 
