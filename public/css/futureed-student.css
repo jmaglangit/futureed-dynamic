@@ -2889,3 +2889,7 @@ div#correct_flow p, div#Answer_correct_flow p,
     margin: 0 5px;
 }
 
+#start_div p {
+    display: inline-block;
+    vertical-align: top;
+}
