@@ -84,6 +84,7 @@ function alertModal(message){
     $("#close_modal").show();
     $("#yes_modal").hide();
     $("#no_modal").hide();
+    $("#ok_modal").hide();
 }
 
 function borrowOneModal(message){
@@ -93,11 +94,26 @@ function borrowOneModal(message){
     $("#close_modal").hide();
     $("#yes_modal").show();
     $("#no_modal").show();
+    $("#ok_modal").hide();
+}
+
+function btnNOBorrowModal(message){
+    dynamicBlock();
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#close_modal").hide();
+    $("#yes_modal").hide();
+    $("#no_modal").hide();
+    $("#ok_modal").show();
 }
 
 function btnNOOnclose() {
     $("#message_modal_dynamic").hide();
     dynamicUnBlock();
+}
+
+function btnOkBorrowModal() {
+    borrowOneModal("Do you need to BORROW 1 from next column?");
 }
 
 //END ADDED FUNCTION
@@ -343,6 +359,6 @@ function btnYEsOnclick(){
 function btnNOOnclick(){
     $("#message_modal_dynamic").hide();
     // alert(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
-    alertModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1.");
+    btnNOBorrowModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1.");
     $(".inputCheck").focus();
 }

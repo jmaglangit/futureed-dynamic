@@ -224,7 +224,7 @@ function btnNOOnclose() {
                         
                             retry_first_answer++;
                             // alert("That is not the correct answer. Remember to use this format " + randomNumber2 + "x4, please Retry !");
-                            alertModal("That is not the correct answer. Remember to use this format " + randomNumber2 + "x4. Please retry.");
+                            alertModal("That is incorrect. The correct format is " + randomNumber2 + "x4. Please retry.");
                             if (!arry_errorTemp1[real_step_count]) {
                                 arry_errorTemp1[real_step_count] = $(this).prop("value");
                             }
@@ -256,7 +256,7 @@ function btnNOOnclose() {
                                     }else{
                                         retry_second_answer++;
                                         // alert("That is not the correct answer. Remember to use this format " + temp_val + "-" + randomNumber2 + ", please Retry !");
-                                        alertModal("That is not the correct answer. Remember to use this format " + temp_val + "-" + randomNumber2 + ". Please retry.");
+                                        alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please retry.");
                                         if (!arry_errorTemp2[real_step_count]) {
                                             arry_errorTemp2[real_step_count] = $(this).prop("value");
                                         }
