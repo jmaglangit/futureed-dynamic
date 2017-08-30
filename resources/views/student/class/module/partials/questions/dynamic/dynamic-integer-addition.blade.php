@@ -13,12 +13,12 @@
     <div>
         <!-- dynamic questions area -->
         <div id="questionPane" class="col-xs-6 answer_area">
-          <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
-            <div style="display: none;" class="h4">
-              <p>What is the value of <b id="firstNumber_b">200</b> 
-              <label id="firstDigits_label"></label> and <b id="secondNumber_b">2</b> 
-              <label id="secondDigits_label"></label>?</p>
-            </div>
+          <div id="start_div" class="m-top-20 h4" style="display: none;">
+            <p ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+            <p><b id="firstNumber_b">200</b>
+            <label id="firstDigits_label"></label> and <b id="secondNumber_b">2</b>
+            <label id="secondDigits_label"></label>?</p>
+          </div>
         </div>
         <!-- #end questions area -->
 

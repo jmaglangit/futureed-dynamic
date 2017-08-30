@@ -56,8 +56,9 @@
                     {!! trans('messages.yes') !!}
                 </button>
 
+                <button id="ok_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnOkRemainderModal();" style="display: none;">{!! trans('messages.ok') !!}</button>
 
-                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclick();dynamicUnBlock();">
+                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();">
                     {!! trans('messages.no') !!}
                 </button>
             </div>

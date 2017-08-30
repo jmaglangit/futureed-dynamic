@@ -127,14 +127,14 @@
 			<div class="modal-footer">
 				<button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();dynamicUnBlock();" style="display: none;">Close</button>
 				<button id="ok_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnOkSimplifyRetry();dynamicUnBlock();" style="display: none;">OK</button>
-				<button id="ok_whole_num_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnOkWholeNumRetry();dynamicUnBlock();" style="display: none;">OK</button>
+				<button id="ok_whole_num_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnOkWholeNumRetry();dynamicUnBlock();" style="display: none;">OK</button>
 				<button id="yes_simplify_modal" type="button" class="btn btn-green btn-medium pull-left" data-dismiss="modal" onclick="btnYEsOnclick();dynamicUnBlock();">
 					{!! trans('messages.yes') !!}</button>
 				<button id="no_simplify_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();dynamicUnBlock();">
 					{!! trans('messages.no') !!}</button>
 				<button id="yes_whole_modal" type="button" class="btn btn-green btn-medium pull-left" data-dismiss="modal" onclick="wholebtnYEsOnclick();dynamicUnBlock();">
 				{!! trans('messages.yes') !!}</button>
-				<button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="wholebtnNOOnclick();dynamicUnBlock();">
+				<button id="no_whole_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="wholebtnNOOnclick();dynamicUnBlock();">
 					{!! trans('messages.no') !!}</button>
 				<button id="yes_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="canbtnYEsOnclick();dynamicUnBlock();">
 					OK</button>

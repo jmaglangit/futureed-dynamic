@@ -1738,8 +1738,20 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				console.log('addition');
                 self.date_start = new Date();
-				setRandomDigits(self.question_grade_condition.max_number.toString().length);
-				randomDigitsOnclick();
+
+
+                if(module_map != null){
+                    randomDigitsOnclick();
+                    var digit = module_algo[module_map[Constants.ADDITION]]();
+                    console.log(digit,'from mapper');
+				} else {
+                    setRandomDigits(self.question_grade_condition.max_number.toString().length);
+                    randomDigitsOnclick();
+                    console.log('old number');
+                    console.log('module_map = ',module_map);
+
+                }
+
                 question_text = question_text.replace("{addends1}",getRandomNumber1());
                 question_text = question_text.replace("{addends2}",getRandomNumber2());
                 self.current_question.questions_text = question_text;
@@ -1752,8 +1764,15 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
                 self.date_start = new Date();
 
-                setRandomDigits(self.question_grade_condition.max_number.toString().length);
-                randomDigitsOnclick();
+                if(module_map != null){
+                	randomDigitsOnclick();
+                    var digit = module_algo[module_map[Constants.SUBTRACTION]]();
+                    console.log(digit,'from mapper');
+				} else {
+                    setRandomDigits(self.question_grade_condition.max_number.toString().length);
+                    randomDigitsOnclick();
+				}
+
                 // Deduct {subtrahend} from {minuend}.
                 question_text = question_text.replace("{minuend}", getRandomNumber1());
                 question_text = question_text.replace("{subtrahend}", getRandomNumber2());
@@ -1765,8 +1784,15 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			case Constants.MULTIPLICATION:
 
 				self.date_start = new Date();
-				setRandomDigits(self.question_grade_condition.max_number.toString().length);
-				randomDigitsOnclick();
+
+                if(module_map != null){
+                    randomDigitsOnclick();
+                    var digit = module_algo[module_map[Constants.MULTIPLICATION]]();
+                    console.log(digit,'from mapper');
+                } else {
+                    setRandomDigits(self.question_grade_condition.max_number.toString().length);
+                    randomDigitsOnclick();
+                }
 
 				question_text = question_text.replace("{multiplier}",getRandomNumber2());
 				question_text = question_text.replace("{multiplicand}",getRandomNumber1());
@@ -1778,13 +1804,16 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.DIVISION:
 
-                // var digit = module_algo[module_map[Constants.DIVISION]]();
-                // setRandomNumber1(digit.randomNumber1);
-                // setRandomNumber2(digit.randomNumber2);
                 self.date_start = new Date();
-                setRandomDigits(self.question_grade_condition.max_number.toString().length);
 
-                randomDigitsOnclick();
+                if(module_map != null){
+                    randomDigitsOnclick();
+                    var digit = module_algo[module_map[Constants.DIVISION]]();
+                    console.log(digit,'from mapper');
+                } else {
+                    setRandomDigits(self.question_grade_condition.max_number.toString().length);
+                    randomDigitsOnclick();
+                }
 
                 question_text = question_text.replace("{dividend}",getRandomNumber2());
                 question_text = question_text.replace("{divisor}",getRandomNumber1());
@@ -1899,10 +1928,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.date_start = new Date();
 
 				randomDigitsOnclick();
-				question_text = question_text.replace("{first_number}",getfirstNumber());
-				question_text = question_text.replace("{firs_digits_number_words}",getfirsDigitsTonumber_words());
-				question_text = question_text.replace("{second_number}",getsecondNumber());
-				question_text = question_text.replace("{second_digits_number_words}",getsecondDigitsToNumber_words());
+				question_text = question_text.replace("{integer_addition}","");
 
 				self.current_question.questions_text = question_text;
 

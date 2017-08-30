@@ -179,7 +179,7 @@ function appendExamPane(strAppend)
 {
     $("<br><br><span>Step "+(real_step_count + 1)+": "+strAppend+((real_step_count < pos_repeat)||(real_step_count > pos_last)?"":real_step_count+"?")+"</span><br>").insertBefore("#lastDiv1");
     $("<input type=text class='answerTxt' size=20>").insertBefore("#lastDiv1");
-    if(real_step_count == 0) $("<span>(largest or smallest number)</span>").insertBefore("#lastDiv1");
+    if(real_step_count == 0) $("<span>(largest number or smallest number)</span>").insertBefore("#lastDiv1");
 }
 
 function generateAnswerFlow(){
@@ -190,7 +190,7 @@ function generateAnswerFlow(){
         strHTML = "<br><br><span>Step "+(real_step_count + 1)+": "+arrQuestion[step_count]+((real_step_count < pos_repeat)||(real_step_count > pos_last)?"":real_step_count+"?")+"</span><br>"
         if(real_step_count == pos_last + 1)  strHTML += "<span>The number is </span>";
         strHTML += "<span class='answerSpan'>" + arrYourCorrectAnswer[real_step_count] + "</span>";
-        if(real_step_count == 0) strHTML += "<span>(largest or smallest number)</span>";
+        if(real_step_count == 0) strHTML += "<span>(largest number or smallest number)</span>";
         if(arrYourAnswer[real_step_count].toLowerCase() != arrAnswer[real_step_count]){
             if (real_step_count == 0) {
                 strHTML += "<p style='color:red;'> Smallest number Error : " + arrYourAnswer[real_step_count] + "</p>";
@@ -224,7 +224,7 @@ function generateCorrectAnswerFlow(){
         strHTML = "<br><br><span>Step "+(real_step_count + 1)+": "+arrQuestion[step_count]+((real_step_count < pos_repeat)||(real_step_count > pos_last)?"":real_step_count+"?")+"</span><br>"
         if(real_step_count == pos_last + 1)  strHTML += "<span>The number is </span>";
         strHTML += "<span class='answerSpan'>" + arrYourCorrectAnswer[real_step_count] + "</span>";
-        if(real_step_count == 0) strHTML += "<span>(largest or smallest number)</span>";
+        if(real_step_count == 0) strHTML += "<span>(largest number or smallest number)</span>";
         if(real_step_count == 0) strHTML += "<br><span>In this case we need to figure out the smallest number.</span>";
         else if(real_step_count == pos_last + 1) strHTML += "";
         else if(real_step_count == pos_last) strHTML += "<br><span>Final digit is "+arrAnswer[real_step_count]+"</span>";
@@ -308,7 +308,7 @@ function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
 
     _answer = parseInt(_elem.prop("value"));
 
-    if(isNaN(_answer))                                          return _errorHandler(_elem, -1, "Answer can't be alphabet !");
+    if(isNaN(_answer))                                          return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 
     _elem.prop("value", _answer);
     if((_answer * 1 < __start_num) || (_answer * 1 > __end_num))    {

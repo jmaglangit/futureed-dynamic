@@ -72,10 +72,25 @@ function remainderModal(message){
     $("#close_modal").hide();
     $("#yes_modal").show();
     $("#no_modal").show();
+    $("#ok_modal").hide();
 }
 
 function btnNOOnclose() {
     $("#message_modal_dynamic").hide();
+}
+
+function btnNORemainderModal(message){
+    dynamicBlock();
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#close_modal").hide();
+    $("#yes_modal").hide();
+    $("#no_modal").hide();
+    $("#ok_modal").show();
+}
+
+function btnOkRemainderModal() {
+    remainderModal("Do you need to bring down remainder to below digits?");
 }
 
 // end ADDED functions
@@ -224,7 +239,7 @@ function btnNOOnclose() {
                         
                             retry_first_answer++;
                             // alert("That is not the correct answer. Remember to use this format " + randomNumber2 + "x4, please Retry !");
-                            alertModal("That is not the correct answer. Remember to use this format " + randomNumber2 + "x4. Please retry.");
+                            alertModal("That is incorrect. The correct format is " + randomNumber2 + "x4. Please retry.");
                             if (!arry_errorTemp1[real_step_count]) {
                                 arry_errorTemp1[real_step_count] = $(this).prop("value");
                             }
@@ -256,7 +271,7 @@ function btnNOOnclose() {
                                     }else{
                                         retry_second_answer++;
                                         // alert("That is not the correct answer. Remember to use this format " + temp_val + "-" + randomNumber2 + ", please Retry !");
-                                        alertModal("That is not the correct answer. Remember to use this format " + temp_val + "-" + randomNumber2 + ". Please retry.");
+                                        alertModal("That is incorrect. The correct format is " + temp_val + "-" + randomNumber2 + ". Please retry.");
                                         if (!arry_errorTemp2[real_step_count]) {
                                             arry_errorTemp2[real_step_count] = $(this).prop("value");
                                         }
@@ -658,7 +673,7 @@ function btnNOOnclose() {
         // $("#myModal").hide();
         $("#message_modal_dynamic").hide();
         // alert("Division is not yet complete. Please continue and bring down the nextdigit.");
-        alertModal("Division is not yet complete. Please continue and bring down the next digit.");
+        btnNORemainderModal("Division is not yet complete. Please continue and bring down the next digit.");
         generateAnswerStep();
     }
 
