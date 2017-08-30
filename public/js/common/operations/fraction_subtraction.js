@@ -723,6 +723,7 @@ function nextsetp(){
         //     displayTotalFlow1();
         // }
         else{
+            answerDone();   //added
             displayTotalFlow();
             displayTotalFlow1();
         }
