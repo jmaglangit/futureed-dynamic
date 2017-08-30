@@ -230,7 +230,7 @@ function startBtnOnclick(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -310,7 +310,7 @@ function nextsetp(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -544,7 +544,7 @@ function displayTotalFlow(){
 
 
     result_str += "<div>";
-    result_str += "<p>Step 3:    Add the results above. Write out as an equation .</p>";
+    result_str += "<p>Step 3:    Add the results above. Write out as an equation.</p>";
     if (step3_error1 != "") {
         result_str += "<p style='color:red;'> Error : " + step3_error1 + "</p>";
     }
@@ -592,7 +592,7 @@ function displayTotalFlow1(){
 
 
     result_str += "<div>";
-    result_str += "<p>Step 3:    Add the results above. Write out as an equation .</p>";
+    result_str += "<p>Step 3:    Add the results above. Write out as an equation.</p>";
     if (accaptflag == true) {
         result_str += arry_total[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " + " + arry_total[2].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
     }else{
