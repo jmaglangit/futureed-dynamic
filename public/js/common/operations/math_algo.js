@@ -17,7 +17,7 @@ var module_algo = {
     p_4 : function () {
         // Generate two numbers, the sum < 100
         return math.randomSum(100);
-        alert();
+        // alert();
     },
 
     p_5 : function () {
