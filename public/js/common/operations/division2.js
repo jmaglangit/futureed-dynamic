@@ -72,10 +72,25 @@ function remainderModal(message){
     $("#close_modal").hide();
     $("#yes_modal").show();
     $("#no_modal").show();
+    $("#ok_modal").hide();
 }
 
 function btnNOOnclose() {
     $("#message_modal_dynamic").hide();
+}
+
+function btnNORemainderModal(message){
+    dynamicBlock();
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#close_modal").hide();
+    $("#yes_modal").hide();
+    $("#no_modal").hide();
+    $("#ok_modal").show();
+}
+
+function btnOkRemainderModal() {
+    remainderModal("Do you need to bring down remainder to below digits?");
 }
 
 // end ADDED functions
@@ -658,7 +673,7 @@ function btnNOOnclose() {
         // $("#myModal").hide();
         $("#message_modal_dynamic").hide();
         // alert("Division is not yet complete. Please continue and bring down the nextdigit.");
-        alertModal("Division is not yet complete. Please continue and bring down the next digit.");
+        btnNORemainderModal("Division is not yet complete. Please continue and bring down the next digit.");
         generateAnswerStep();
     }
 
