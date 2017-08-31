@@ -167,32 +167,32 @@ var module_mapper = {
 //Multiplication module id
     737: {
         // <10
-        multiply: 'p_14',
+        multiplication: 'p_14',
     },
 //Multiplication module id
     757: {
         // <10
-        multiply: 'p_14',
+        multiplication: 'p_14',
     },
 //Multiplication module id
     763: {
         // <12
-        multiply: 'p_20',
+        multiplication: 'p_20',
     },
 //Multiplication module id
     783: {
         // <20
-        multiply: 'p_2',
+        multiplication: 'p_2',
     },
 //Multiplication module id
 //     806: {
 //         // <100
-//         multiply: 'p_3', 'p_4'
+//         multiplication: 'p_3', 'p_4'
 //     },
 //Multiplication module id
 //     833: {
 //         // <1000
-//         multiply: 'p_5', 'p_4'
+//         multiplication: 'p_5', 'p_4'
 //     },
 
 //Division module id
