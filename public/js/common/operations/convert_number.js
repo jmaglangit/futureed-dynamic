@@ -1,3 +1,8 @@
+/**
+ * Code from client
+ * 20170817
+ */
+
 var randomNumber = 0;
 var randomdigitsNumber = 0;
 var step_count = 0;
@@ -13,6 +18,71 @@ var number_words = ["One", "Ten", "Hundred", "Thousand", "Ten Thousand", "Hundre
 var digits_words = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
 var change_words = ["Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", ""]
 
+// start ADDED functions
+//getter and setter
+function setRandomDigits(digit){
+    randomDigits = digit;
+}
+
+function getRandomNumber1(){
+    return str_randomNumber;
+}
+
+function getAnswered(){
+    return answered;
+}
+
+function setAnswered(answer){
+    answered.push(answer);
+}
+
+function enabledNextQuestion(){
+    $("#dynamic_question_btn").show();
+}
+
+function disabledNextQuestion(){
+    $("#dynamic_question_btn").hide();
+}
+
+function answerDone(){
+    $("#questionPane").hide();
+    $("#answerPane").hide();
+    $("#tipsFlow").show();
+    $("#ansFlow").show();
+    $("#ansCorrectFlow").show();
+    enabledNextQuestion();
+}
+
+function answerReset(){
+    $("#questionPane").show();
+    $("#answerPane").show();
+    $("#tipsFlow").hide();
+    $("#ansFlow").hide();
+    $("#ansCorrectFlow").hide();
+    answered = [];
+    disabledNextQuestion();
+}
+
+function alertModal(message){
+    dynamicBlock();
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#close_modal").show();
+    $("#yes_modal").hide();
+    $("#no_modal").hide();
+}
+
+function carryOneModal(message){
+    dynamicBlock();
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#close_modal").hide();
+    $("#yes_modal").show();
+    $("#no_modal").show();
+}
+
+// end ADDED functions
+
 function randomDigitsOnclick(){
     
     str_randomNumber = "";
@@ -22,7 +92,7 @@ function randomDigitsOnclick(){
 
     
 
-    randomDigits = parseInt($(".randomDigits").prop("value"));
+    // randomDigits = parseInt($(".randomDigits").prop("value"));
     if(isNaN(randomDigits)) {
         randomDigits = 4;
         $(".randomDigits").prop("value", randomDigits);

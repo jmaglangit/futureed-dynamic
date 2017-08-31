@@ -84,5 +84,8 @@ function validateTemplateText(){
             $('button[name=btn_integer_sort_large]').prop('disabled', false);
         }else{$('button[name=btn_integer_sort_large]').prop('disabled', true);}
 
+        if(val.indexOf("{integer_addition}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_addition]').prop('disabled', false);
+        }else{$('button[name=btn_integer_addition]').prop('disabled', true);}
 	}
 }

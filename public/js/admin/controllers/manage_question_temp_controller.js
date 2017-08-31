@@ -273,6 +273,10 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 self.record.question_template_format += self.actionVariableNames('integer_sort_large');
                 $('button[name=btn_integer_sort_large]').prop('disabled', true);
                 break;
+            case Constants.INTEGER_ADDITION:
+                self.record.question_template_format += self.actionVariableNames('integer_addition');
+                $('button[name=btn_integer_addition]').prop('disabled', true);
+                break;
 			default:
 				self.record.question_template_format += ' ';
 				break;

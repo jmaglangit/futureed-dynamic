@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel {
 		'FutureEd\Console\Commands\RebootFutureLessonCommand',
 		'FutureEd\Console\Commands\LocalizationFileSeeder',
 		'FutureEd\Console\Commands\GoogleTranslate',
+		'FutureEd\Console\Commands\ViewClearCommand',
 	];
 
 	/**

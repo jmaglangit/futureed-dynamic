@@ -5,14 +5,16 @@
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
     <div>
-        <!--  questions area right side -->
-        <div id="questionPane" class="col-xs-6  answer_area sort_large">
-            <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+        <!--  dynamic questions area -->
+        <div id="questionPane">
+            <div id="start_div" style="display: none;">
+                <p class="col-xs-6 m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+                {{-- <label>Rewrite the following number into words,<b id="randomNumber_b">1234</b></label>
+                <br><br><br><input type="button" onclick="startBtnOnclick()" value="Start">--}}
+            </div>
         </div>
-         <!-- #end questions area right side -->
-
-        <!--  questions area left side -->
-        <div id="step_div">
+        <!--  answer area -->
+        <div id="step_div" class="col-xs-6 pull-right h4 answer_area">
             <div id="tableNumber_div">
             </div>
             <div id="position_div">
@@ -22,9 +24,8 @@
             <div id="answer">
             </div>
         </div>
-        <!-- #end questions area left side -->
 
-        <!-- done answering -->
+        <!-- tips area -->
         <div id="tipsFlow" class="tips_flow_adjst" style="display: none;">
            <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
            <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
@@ -41,7 +42,6 @@
            </div>
         </div>
          <div style="clear: both;"></div>
-        <!-- #end done answering -->
     </div>
 
     {{--modal--}}
@@ -65,5 +65,5 @@
         </div>
     </div>
     {!! Html::script('/js/common/operations/global.js?20170806')!!}
-    {!! Html::script('/js/common/operations/sort_max.js?20170806.js')!!}
+    {!! Html::script('/js/common/operations/convert_number.js')!!}
 </div>
