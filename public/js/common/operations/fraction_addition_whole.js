@@ -1307,9 +1307,9 @@ function wholeOfValidationFunc() {
 }
 
 function canbtnYEsOnclick(){
+    closeModal();
     nextsetp();
     // $("#myModal2").hide();
-    closeModal();
 }
 
 function checkAnswerValidation(elem) {

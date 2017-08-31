@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ModuleCountry extends Model{
 
-	use SoftDeletes;
+	//use SoftDeletes; //prevent double entries on modules for deleted.
 
 	use TransactionTrait;
 
