@@ -17,6 +17,7 @@ var arry_temp = [];
 var number_words = ["One", "Ten", "Hundred", "Thousand", "Ten Thousand", "Hundred Thousand", "Million", "Ten Million", "Hundred Million"];
 var digits_words = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
 var change_words = ["Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", ""]
+var answered = []; //ADDED
 
 // start ADDED functions
 //getter and setter
@@ -47,6 +48,7 @@ function disabledNextQuestion(){
 function answerDone(){
     $("#questionPane").hide();
     $("#answerPane").hide();
+    $("#step_div").hide();
     $("#tipsFlow").show();
     $("#ansFlow").show();
     $("#ansCorrectFlow").show();
@@ -56,6 +58,7 @@ function answerDone(){
 function answerReset(){
     $("#questionPane").show();
     $("#answerPane").show();
+    $("#step_div").show();
     $("#tipsFlow").hide();
     $("#ansFlow").hide();
     $("#ansCorrectFlow").hide();
@@ -72,13 +75,8 @@ function alertModal(message){
     $("#no_modal").hide();
 }
 
-function carryOneModal(message){
-    dynamicBlock();
-    $("#message_text_modal").html(message);
-    $("#message_modal_dynamic").show();
-    $("#close_modal").hide();
-    $("#yes_modal").show();
-    $("#no_modal").show();
+function closeModal(){
+    $("#message_modal_dynamic").hide();
 }
 
 // end ADDED functions
@@ -191,7 +189,7 @@ function numberToEnglish(n, custom_join_character) {
             /* Add unit word if array item exists */
             if ((word = units[ints[0]])) {
 
-                console.log("11");
+                // console.log("11");
                 words.push(word);
             }
 
@@ -212,7 +210,7 @@ function numberToEnglish(n, custom_join_character) {
 
             /* Add hundreds word if array item exists */
             if ((word = units[ints[2]])) {
-                console.log("1");
+                // console.log("1");
                 words.push(word + ' Hundred');
             }
 
@@ -240,7 +238,8 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
+                // alert("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -248,13 +247,15 @@ function startBtnOnclick(){
             
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
+                // alert("Your answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
+                // alert("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -337,7 +338,8 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
+                // alert("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -345,13 +347,15 @@ function nextsetp(){
             
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
+                // alert("Your answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
+                // alert("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -400,7 +404,7 @@ function checkAnswerValidation(elem) {
         }else{
             sttr = numberToEnglish(real_number);
             sttr = sttr.replace("- ", "-");
-            console.log("sttr = " + sttr);
+            // console.log("sttr = " + sttr);
             correct_answer = sttr;  
         }
 
@@ -409,26 +413,28 @@ function checkAnswerValidation(elem) {
         
         if (answer_val == correct_answer){
             arry_correctval[2] = correct_answer;
+            answerDone();   //added
             displayTotalFlow();
             displayTotalFlow1();
             return correct_answer;  
         }               
     }
     if(retry_attempt > 1){
-        alert("Correct Answer is " + correct_answer + ". Retry! ");
+        // alert("Correct Answer is " + correct_answer + ". Retry! ");
+        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
         retry_attempt = 0;
         return -3;
     }
     if (answer_val > correct_answer) {
         if (!arry_temp[step_count]) {
             arry_temp[step_count] = answer_val;
-            console.log("1temp_answer = " + arry_temp[step_count]);
+            // console.log("1temp_answer = " + arry_temp[step_count]);
         }
         return -1;
     }else {
         if (!arry_temp[step_count]) {
             arry_temp[step_count] = answer_val;
-            console.log("temp_answer = " + arry_temp[step_count]);
+            // console.log("temp_answer = " + arry_temp[step_count]);
         }
 
         return -2;          
@@ -441,6 +447,7 @@ function checkAnswerValidation(elem) {
 function checkAnswer(elem) {
     if (step_count * 1 == 4) {
         answer_val = elem.prop("value");
+        setAnswered(answer_val);    //added
         return true;            
     }else{
         answer_val = elem.prop("value");
@@ -451,8 +458,8 @@ function checkAnswer(elem) {
 
 function displayTotalFlow(){
     result_str = "";
-    result_str += "<b style='color:blue'>Answered Flow</b>";
-    result_str += "<br><br>";
+    // result_str += "<b style='color:blue'>Answered Flow</b>";
+    // result_str += "<br><br>";
     result_str += "<div id='start_div'>";
         result_str += "<label>Rewrite the following number into words, <b>" + str_randomNumber + "</b></label>";
     result_str += "</div>";
@@ -530,8 +537,8 @@ function displayTotalFlow(){
 
 function displayTotalFlow1(){
     result_str = "";
-    result_str += "<b style='color:blue'>Answered Flow</b>";
-    result_str += "<br><br>";
+    // result_str += "<b style='color:blue'>Answered Flow</b>";
+    // result_str += "<br><br>";
     result_str += "<div id='start_div'>";
         result_str += "<label>Rewrite the following number into words, <b>" + str_randomNumber + "</b></label>";
     result_str += "</div>";

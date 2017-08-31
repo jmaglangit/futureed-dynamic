@@ -4,17 +4,18 @@
         <input type="text" name="randomNumber" id="randomNumber" readonly><br><br>
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
+
     <div>
         <!--  dynamic questions area -->
         <div id="questionPane">
-            <div id="start_div" style="display: none;">
+            <!-- <div id="start_div" style="display: none;"> -->
                 <p class="col-xs-6 m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
                 {{-- <label>Rewrite the following number into words,<b id="randomNumber_b">1234</b></label>
                 <br><br><br><input type="button" onclick="startBtnOnclick()" value="Start">--}}
-            </div>
+            <!-- </div> -->
         </div>
         <!--  answer area -->
-        <div id="step_div" class="col-xs-6 pull-right h4 answer_area">
+        <div id="step_div" class="col-xs-6 pull-right h4 integer_area">
             <div id="tableNumber_div">
             </div>
             <div id="position_div">
@@ -26,7 +27,7 @@
         </div>
 
         <!-- tips area -->
-        <div id="tipsFlow" class="tips_flow_adjst" style="display: none;">
+        <div id="tipsFlow" class="integer_area" style="display: none;">
            <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
            <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                <div class="pull-right answer_area">
@@ -60,7 +61,7 @@
             </div>
 
             <div class="modal-footer">
-                <button id="close_modal" ty pe="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose()" style="display: none;">Close</button>
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="closeModal();dynamicUnBlock();" style="display: none;">Close</button>
             </div>
         </div>
     </div>
