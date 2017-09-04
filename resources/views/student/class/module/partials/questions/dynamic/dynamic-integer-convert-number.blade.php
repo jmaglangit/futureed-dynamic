@@ -66,5 +66,5 @@
         </div>
     </div>
     {!! Html::script('/js/common/operations/global.js?20170806')!!}
-    {!! Html::script('/js/common/operations/convert_number.js')!!}
+    {!! Html::script('/js/common/operations/integer_convert_number.js')!!}
 </div>

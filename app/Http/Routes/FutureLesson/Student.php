@@ -358,9 +358,9 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_addition'
 					]);
 
-					Routes::get('/questions/dynamic/convert-number',[
-						'as' => 'student.class.module.partials.questions.dynamic.convert-number'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@convert_number'
+					Routes::get('/questions/dynamic/integer-convert-number',[
+						'as' => 'student.class.module.partials.questions.dynamic.integer-convert-number'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_convert_number'
 					]);
 
 					Routes::get('/questions/dynamic/integer-sort-small',[
