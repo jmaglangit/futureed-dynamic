@@ -2839,7 +2839,7 @@ b.fsb_adjust{
     margin: 3px;
 }
 
-.answer_area p,
+.answer_area p, .integer_area p,
 div#correct_flow p, div#Answer_correct_flow p,
 #step_div div#questionsz, #step_div div#questionsm, 
 #step_div div#simplify, #step_div div#answer,
@@ -2892,4 +2892,12 @@ div#correct_flow p, div#Answer_correct_flow p,
 #start_div p {
     display: inline-block;
     vertical-align: top;
+}
+
+.integer_area table,
+.integer_area th,
+.integer_area td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
 }
