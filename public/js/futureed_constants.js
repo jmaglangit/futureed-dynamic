@@ -339,6 +339,7 @@ var Constants = {
 	, INTEGER_ADDITION					: 'integer_addition'
 	, INTEGER_SORT_SMALL				: 'integer_sort_small'
 	, INTEGER_SORT_LARGE				: 'integer_sort_large'
+	, INTEGER_DECIMAL				: 'integer_decimal'
 
 	/* question dynamic template variables */
 	, ADDENDS1					: 'ADDENDS1'

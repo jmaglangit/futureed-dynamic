@@ -161,4 +161,7 @@ class ClassModuleController extends Controller {
 		return view('student.class.module.partials.questions.dynamic.dynamic-integer-sort-large');
 	}
 
+	public function integer_decimal(){
+		return view('student.class.module.partials.questions.dynamic.dynamic-integer-decimal');
+	}
 }

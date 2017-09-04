@@ -368,6 +368,11 @@
 						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_sort_large'
 					]);
 
+					Routes::get('/questions/dynamic/integer-decimal',[
+						'as' => 'student.class.module.partials.questions.dynamic.integer-decimal'
+						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_decimal'
+					]);
+
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
 						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'

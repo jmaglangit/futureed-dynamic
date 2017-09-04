@@ -28,7 +28,8 @@ class QuestionTemplateOperationTableSeeder extends Seeder
 			'integer_sort_small',
 			'integer_sort_large',
 			'integer_counting',
-            'integer_addition'
+            'integer_addition',
+            'integer_decimal'
         ];
 
         $seeder = [];
