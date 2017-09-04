@@ -87,5 +87,22 @@ function validateTemplateText(){
         if(val.indexOf("{integer_addition}") == Constants.NEGATIVE_1){
             $('button[name=btn_integer_addition]').prop('disabled', false);
         }else{$('button[name=btn_integer_addition]').prop('disabled', true);}
+
+        //btn_integer_convert_number
+        if(val.indexOf("{integer_convert_number}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_convert_number]').prop('disabled', false);
+        }else{$('button[name=btn_integer_convert_number]').prop('disabled', true);}
+
+        if(val.indexOf("{integer_decimal}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_decimal]').prop('disabled', false);
+        }else{$('button[name=btn_integer_decimal]').prop('disabled', true);}
+
+        if(val.indexOf("{integer_expanded_decimal") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_expanded_decimal]').prop('disabled', false);
+        }else{$('button[name=btn_integer_expanded_decimal]').prop('disabled', true);}
+
+        if(val.indexOf("{integer_extended}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_extended]').prop('disabled', false);
+        }else{$('button[name=btn_integer_extended]').prop('disabled', true);}
 	}
 }
