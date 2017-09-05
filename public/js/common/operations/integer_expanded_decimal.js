@@ -186,7 +186,7 @@ function startBtnOnclick(){
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -224,7 +224,7 @@ function middleFunc() {
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -347,7 +347,7 @@ function nextsetp(){
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;

@@ -1946,15 +1946,15 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.INTEGER_EXPANDED_DECIMAL:
 
-                randomDigitsOnclick();
+				randomDigitsOnclick();
 
-                question_text = question_text.replace('{' + Constants.INTEGER_EXPANDED_DECIMAL + '}',getRealNumber());
+				question_text = question_text.replace('{' + Constants.INTEGER_EXPANDED_DECIMAL + '}',getRealNumber());
 
-                self.current_question.questions_text = question_text;
+				self.current_question.questions_text = question_text;
 
-                startBtnOnclick();
+				startBtnOnclick();
 
-                break;
+				break;
 
 			case Constants.INTEGER_DECIMAL:
 
