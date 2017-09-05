@@ -46,6 +46,9 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_SORT_LARGE">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-sort-large') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_EXPANDED_DECIMAL">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-expanded-decimal') !!}"></div>
+</div>
 <div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_DECIMAL">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-decimal') !!}"></div>
 </div>

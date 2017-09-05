@@ -36,6 +36,10 @@ function getsecondNumber(){
     return secondNumber;
 }
 
+function getRealNumber(){
+    return real_number;
+}
+
 function getfirsDigitsTonumber_words(){
     return number_words[firsDigitsTonumber_words];
 }
@@ -76,10 +80,18 @@ function disabledNextQuestion(){
     $("#dynamic_question_btn").hide();
 }
 
+function enabledNextQuestion(){
+    $("#dynamic_question_btn").show();
+}
+
+function disabledNextQuestion(){
+    $("#dynamic_question_btn").hide();
+}
+
 function answerDone(){
     $("#questionPane").hide();
+    $("#answerPane").hide();
     $("#step_div").hide();
-    $("#examPane1").hide();
     $("#tipsFlow").show();
     $("#ansFlow").show();
     $("#ansCorrectFlow").show();
@@ -88,6 +100,7 @@ function answerDone(){
 
 function answerReset(){
     $("#questionPane").show();
+    $("#answerPane").show();
     $("#step_div").show();
     $("#tipsFlow").hide();
     $("#ansFlow").hide();
@@ -97,17 +110,10 @@ function answerReset(){
 }
 
 function alertModal(message){
-    //dynamicBlock();
+    dynamicBlock();
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
-    $("#yes_simplify_modal").hide();
-    $("#no_simplify_modal").hide();
     $("#close_modal").show();
-    $("#yes_whole_modal").hide();
-    $("#no_whole_modal").hide();
-    $("#yes_modal").hide();
-    $("#ok_simplify_modal").hide();
-    $("#ok_whole_num_modal").hide();
 }
 
 function btnNOOnclose() {
@@ -166,7 +172,7 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet!");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -174,13 +180,13 @@ function startBtnOnclick(){
 
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -202,7 +208,7 @@ function middleFunc() {
     $(".checkIndexs").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet!");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -210,7 +216,7 @@ function middleFunc() {
 
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
 
                 $(this).prop("value", "").focus();
 
@@ -218,7 +224,7 @@ function middleFunc() {
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -229,6 +235,7 @@ function middleFunc() {
                 return false;
             }
             if (checkIndex == real_number.length) {
+                answerDone();
                 displayTotalFlow();
                 displayTotalFlow1();
             }
@@ -326,7 +333,7 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet!");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -334,13 +341,13 @@ function nextsetp(){
 
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -375,7 +382,7 @@ function checkAnswerValidation(elem) {
         }
     }
     if(retry_attempt > 1){
-        alert("Correct Answer is " + correct_answer + ". Retry! ");
+        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
         retry_attempt = 0;
         return -3;
     }
@@ -425,6 +432,7 @@ function checkAnswerValidation(elem) {
 function checkAnswer(elem) {
     if (step_count * 1 == 4) {
         answer_val = elem.prop("value");
+        setAnswered(answer_val);    //added
         return true;
     }else{
         answer_val = elem.prop("value");

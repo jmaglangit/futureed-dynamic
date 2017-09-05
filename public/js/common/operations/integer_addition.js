@@ -505,6 +505,7 @@ function checkAnswerValidation(elem) {
 function checkAnswer(elem) {
     answer_val = elem.prop("value");
     if(answer_val == "") return false;
+    setAnswered(answer_val);    //added
     elem.prop("value", answer_val);   
 }
 

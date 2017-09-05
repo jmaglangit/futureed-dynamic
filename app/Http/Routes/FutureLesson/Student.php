@@ -385,6 +385,11 @@
 							,'uses' => $route_controller . '@integer_sort_large'
 						]);
 
+						Routes::get('/integer-expanded-decimal',[
+							'as' => $route_name . 'integer-expanded-decimal'
+							,'uses' => $route_controller . '@integer_expanded_decimal'
+						]);
+
 						Routes::get('/integer-decimal',[
 							'as' => $route_name . 'integer-decimal'
 							,'uses' => $route_controller . '@integer_decimal'

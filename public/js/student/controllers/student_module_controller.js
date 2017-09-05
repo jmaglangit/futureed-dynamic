@@ -1729,16 +1729,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		var question_text = question.question_template.question_template_format;
 		var module_map = module_mapper[self.current_question.module_id];
 
-		// hide button
+        self.date_start = new Date();
 
-
-		//check type of operation
+        //check type of operation
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
-
-				console.log('addition');
-                self.date_start = new Date();
-
 
                 if(module_map != null){
                     randomDigitsOnclick();
@@ -1762,8 +1757,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 			case Constants.SUBTRACTION:
 
-                self.date_start = new Date();
-
                 if(module_map != null){
                 	randomDigitsOnclick();
                     var digit = module_algo[module_map[Constants.SUBTRACTION]]();
@@ -1782,8 +1775,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 			case Constants.MULTIPLICATION:
-
-				self.date_start = new Date();
 
                 if(module_map != null){
                     randomDigitsOnclick();
@@ -1804,8 +1795,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.DIVISION:
 
-                self.date_start = new Date();
-
                 if(module_map != null){
                     randomDigitsOnclick();
                     var digit = module_algo[module_map[Constants.DIVISION]]();
@@ -1825,8 +1814,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.FRACTION_DIVISION:
 
-				self.date_start = new Date();
-
                 setRandomDigits(self.question_grade_condition.max_number.toString().length);
                 randomDigitsOnclick();
 				question_text = question_text.replace("{fraction_division}", "");
@@ -1837,8 +1824,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
   				break;
 
 			case Constants.FRACTION_ADDITION:
-				//for fraction_addition
-				self.date_start = new Date();
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
@@ -1850,8 +1835,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 			case Constants.FRACTION_SUBTRACTION:
 
-			   	self.date_start = new Date();
-
                	setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 				question_text = question_text.replace("{fraction_subtraction}", "");
@@ -1862,8 +1845,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 			case Constants.FRACTION_SUBTRACTION_BUTTERFLY:
 
-			   	self.date_start = new Date();
-
                	setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 				question_text = question_text.replace("{fraction_subtraction_butterfly}","");
@@ -1873,8 +1854,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 			case Constants.FRACTION_MULTIPLICATION:
-				//for fraction_multiplication
-				self.date_start = new Date();
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
@@ -1886,8 +1865,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 			case Constants.FRACTION_ADDITION_WHOLE:
 
-				self.date_start = new Date();
-
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 
@@ -1898,8 +1875,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
                 break;
 			case Constants.FRACTION_ADDITION_BUTTERFLY:
-				//for fraction addition butterfly
-				self.date_start = new Date();
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
@@ -1912,8 +1887,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.FRACTION_SUBTRACTION_WHOLE:
 
-				self.date_start = new Date();
-
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 				question_text = question_text.replace("{fraction_subtraction_whole}","");
@@ -1924,8 +1897,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 
 			case Constants.INTEGER_ADDITION:
-
-				self.date_start = new Date();
 
 				randomDigitsOnclick();
 				question_text = question_text.replace("{integer_addition}","");
@@ -1938,8 +1909,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.INTEGER_CONVERT_NUMBER:
 
-				self.date_start = new Date();
-
 				randomDigitsOnclick();
 				question_text = question_text.replace("{integer_convert_number}",getRandomNumber1());
 
@@ -1950,8 +1919,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 
 			case Constants.INTEGER_SORT_SMALL:
-
-				self.date_start = new Date();
 
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
@@ -1966,8 +1933,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			case Constants.INTEGER_SORT_LARGE:
 
-				self.date_start = new Date();
-
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 
@@ -1976,6 +1941,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.current_question.questions_text = question_text;
 
 				startAnswer();
+
+				break;
+
+			case Constants.INTEGER_EXPANDED_DECIMAL:
+
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.INTEGER_EXPANDED_DECIMAL + '}',getRealNumber());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
 
 				break;
 
