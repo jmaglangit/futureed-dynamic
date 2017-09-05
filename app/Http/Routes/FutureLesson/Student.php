@@ -227,156 +227,161 @@
 						'prefix' => '/questions/dynamic'
 					],function(){
 
-						$route_name = 'student.class.module.partials.questions.';
+						$route_name = 'student.class.module.partials.questions.dynamic.';
 						$route_controller = 'FutureLesson\Student\ClassModuleController';
 
+						Routes::get('/dynamic',[
+							'as' => $route_name . 'dynamic'
+							,'uses' => $route_controller . '@dynamic'
+						]);
+
 						Routes::get('/fib',[
-							'as' => $route_name . 'dynamic.fib'
+							'as' => $route_name . 'fib'
 							,'uses' => $route_controller . '@fib'
 						]);
 
 						Routes::get('/steps',[
-							'as' => $route_name . 'dynamic.steps'
+							'as' => $route_name . 'steps'
 							,'uses' => $route_controller . '@steps'
 						]);
 
 						Routes::get('/addition',[
-							'as' => $route_name . 'dynamic.addition'
+							'as' => $route_name . 'addition'
 							,'uses' => $route_controller . '@addition'
 						]);
 
 						Routes::get('/addition/answer',[
-							'as' => $route_name . 'dynamic.addition.answer'
+							'as' => $route_name . 'addition.answer'
 							,'uses' => $route_controller . '@additionAns'
 						]);
 
 						Routes::get('/subtraction',[
-							'as' => $route_name . 'dynamic.subtraction'
+							'as' => $route_name . 'subtraction'
 							,'uses' => $route_controller . '@subtraction'
 						]);
 
 						Routes::get('/subtraction/answer',[
-							'as' => $route_name . 'dynamic.subtraction.answer'
+							'as' => $route_name . 'subtraction.answer'
 							,'uses' => $route_controller . '@subtractionAns'
 						]);
 
 						Routes::get('/multiplication',[
-							'as' => $route_name . 'dynamic.multiplication'
+							'as' => $route_name . 'multiplication'
 							,'uses' => $route_controller . '@multiplication'
 						]);
 
 						Routes::get('/multiplication/answer',[
-							'as' => $route_name . 'dynamic.multiplication.answer'
+							'as' => $route_name . 'multiplication.answer'
 							,'uses' => $route_controller . '@multiplicationAns'
 						]);
 
 						Routes::get('/division',[
-							'as' => $route_name . 'dynamic.division'
+							'as' => $route_name . 'division'
 							,'uses' => $route_controller . '@division'
 						]);
 
 						Routes::get('/division/answer',[
-							'as' => $route_name . 'dynamic.division.answer'
+							'as' => $route_name . 'division.answer'
 							,'uses' => $route_controller . '@divisionAns'
 
 						]);
 						Routes::get('/fraction-addition',[
-							'as' => $route_name . 'dynamic.fraction-addition'
+							'as' => $route_name . 'fraction-addition'
 							,'uses' => $route_controller . '@fraction_addition'
 						]);
 
 						Routes::get('/fraction-addition/answer',[
-							'as' => $route_name . 'dynamic.fraction-addition.answer'
+							'as' => $route_name . 'fraction-addition.answer'
 							,'uses' => $route_controller . '@fraction_addition_answer'
 						]);
 
 						Routes::get('/fraction-addition-whole',[
-							'as' => $route_name . 'dynamic.fraction-addition-whole'
+							'as' => $route_name . 'fraction-addition-whole'
 							,'uses' => $route_controller . '@fraction_addition_whole'
 						]);
 
 						Routes::get('/fraction-addition-whole/answer',[
-							'as' => $route_name . 'dynamic.fraction-addition-whole.answer'
+							'as' => $route_name . 'fraction-addition-whole.answer'
 							,'uses' => $route_controller . '@fraction_addition_whole_answer'
 						]);
 
 						Routes::get('/fraction-subtraction',[
-							'as' => $route_name . 'dynamic.fraction-subtraction'
+							'as' => $route_name . 'fraction-subtraction'
 							,'uses' => $route_controller . '@fraction_subtraction'
 						]);
 
 						Routes::get('/fraction-subtraction/answer',[
-							'as' => $route_name . 'dynamic.fraction-subtraction.answer'
+							'as' => $route_name . 'fraction-subtraction.answer'
 							,'uses' => $route_controller . '@fraction_subtraction_answer'
 						]);
 
 						Routes::get('/fraction-subtraction-butterfly',[
-							'as' => $route_name . 'dynamic.fraction-subtraction-butterfly'
+							'as' => $route_name . 'fraction-subtraction-butterfly'
 							,'uses' => $route_controller . '@fraction_subtraction_butterfly'
 						]);
 
 						Routes::get('/fraction-subtraction-butterfly/answer',[
-							'as' => $route_name . 'dynamic.fraction-subtraction-butterfly.answer'
+							'as' => $route_name . 'fraction-subtraction-butterfly.answer'
 							,'uses' => $route_controller . '@fraction_subtraction_butterfly_answer'
 						]);
 
 						Routes::get('/fraction-division',[
-							'as' => $route_name . 'dynamic.fraction-division'
+							'as' => $route_name . 'fraction-division'
 							,'uses' => $route_controller . '@fraction_division'
 						]);
 
 						Routes::get('/fraction-division/answer',[
-							'as' => $route_name . 'dynamic.fraction-division.answer'
+							'as' => $route_name . 'fraction-division.answer'
 							,'uses' => $route_controller . '@fraction_division_answer'
 						]);
 
 						Routes::get('/fraction-multiplication',[
-							'as' => $route_name . 'dynamic.fraction-multiplication'
+							'as' => $route_name . 'fraction-multiplication'
 							,'uses' => $route_controller . '@fraction_multiplication'
 						]);
 
 						Routes::get('/fraction-multiplication/answer',[
-							'as' => $route_name . 'dynamic.fraction-multiplication.answer'
+							'as' => $route_name . 'fraction-multiplication.answer'
 							,'uses' => $route_controller . '@fraction_multiplication_answer'
 						]);
 
 						Routes::get('/fraction-addition-butterfly',[
-							'as' => $route_name . 'dynamic.fraction-addition-butterfly'
+							'as' => $route_name . 'fraction-addition-butterfly'
 							,'uses' => $route_controller . '@fraction_addition_butterfly'
 						]);
 
 						Routes::get('/fraction-addition-butterfly/answer',[
-							'as' => $route_name . 'dynamic.fraction-addition-butterfly.answer'
+							'as' => $route_name . 'fraction-addition-butterfly.answer'
 							,'uses' => $route_controller . '@fraction_addition_butterfly_ans'
 						]);
 
 						Routes::get('/fraction-subtraction-whole',[
-							'as' => $route_name . 'dynamic.fraction-subtraction-whole'
+							'as' => $route_name . 'fraction-subtraction-whole'
 							,'uses' => $route_controller . '@fraction_subtraction_whole'
 						]);
 
 						Routes::get('/fraction-subtraction-whole/answer',[
-							'as' => $route_name . 'dynamic.fraction-subtraction-whole.answer'
+							'as' => $route_name . 'fraction-subtraction-whole.answer'
 							,'uses' => $route_controller . '@fraction_subtraction_whole_answer'
 						]);
 
 						Routes::get('/integer-addition',[
-							'as' => $route_name . 'dynamic.integer-addition'
+							'as' => $route_name . 'integer-addition'
 							,'uses' => $route_controller . '@integer_addition'
 						]);
 
 						Routes::get('/integer-convert-number',[
-							'as' => $route_name . 'dynamic.integer-convert-number'
+							'as' => $route_name . 'integer-convert-number'
 							,'uses' => $route_controller . '@integer_convert_number'
 						]);
 
 						Routes::get('/integer-sort-small',[
-							'as' => $route_name . 'dynamic.integer-sort-small'
+							'as' => $route_name . 'integer-sort-small'
 							,'uses' => $route_controller . '@integer_sort_small'
 						]);
 
 						Routes::get('/integer-sort-large',[
-							'as' => $route_name . 'dynamic.integer-sort-large'
+							'as' => $route_name . 'integer-sort-large'
 							,'uses' => $route_controller . '@integer_sort_large'
 						]);
 

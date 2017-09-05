@@ -57,6 +57,10 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question . 'answer-steps')->with('steps',$steps);
 	}
 
+	public function dynamic(){
+		return view($this->dynamic_question . 'dynamic');
+	}
+
 	public function addition(){
 		return view($this->dynamic_question . 'dynamic-addition');
 	}

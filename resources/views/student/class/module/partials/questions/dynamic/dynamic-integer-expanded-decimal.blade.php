@@ -45,4 +45,6 @@
         <div style="clear: both;"></div>
     </div>
 
+    {!! Html::script('/js/common/operations/integer_expanded_decimal.js')!!}
+    {!! Html::script('/js/common/operations/global.js') !!}
 </div>
