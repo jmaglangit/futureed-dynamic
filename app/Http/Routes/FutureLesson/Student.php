@@ -223,155 +223,171 @@
 						, 'uses' => 'FutureLesson\Student\ClassModuleController@questions'
 						]);
 
-					Routes::get('/questions/dynamic/fib',[
-						'as' => 'student.class.module.partials.questions.dynamic.fib'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fib'
-					]);
+					Routes::group([
+						'prefix' => '/questions/dynamic'
+					],function(){
 
-					Routes::get('/questions/dynamic/steps',[
-						'as' => 'student.class.module.partials.questions.dynamic.steps'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@steps'
-					]);
+						$route_name = 'student.class.module.partials.questions.dynamic.';
+						$route_controller = 'FutureLesson\Student\ClassModuleController';
 
-					Routes::get('/questions/dynamic/addition',[
-						'as' => 'student.class.module.partials.questions.dynamic.addition'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@addition'
-					]);
+						Routes::get('/dynamic',[
+							'as' => $route_name . 'dynamic'
+							,'uses' => $route_controller . '@dynamic'
+						]);
 
-					Routes::get('/questions/dynamic/addition/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.addition.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@additionAns'
-					]);
+						Routes::get('/fib',[
+							'as' => $route_name . 'fib'
+							,'uses' => $route_controller . '@fib'
+						]);
 
-					Routes::get('/questions/dynamic/subtraction',[
-						'as' => 'student.class.module.partials.questions.dynamic.subtraction'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@subtraction'
-					]);
+						Routes::get('/steps',[
+							'as' => $route_name . 'steps'
+							,'uses' => $route_controller . '@steps'
+						]);
 
-					Routes::get('/questions/dynamic/subtraction/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.subtraction.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@subtractionAns'
-					]);
+						Routes::get('/addition',[
+							'as' => $route_name . 'addition'
+							,'uses' => $route_controller . '@addition'
+						]);
 
-					Routes::get('/questions/dynamic/multiplication',[
-						'as' => 'student.class.module.partials.questions.dynamic.multiplication'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@multiplication'
-					]);
+						Routes::get('/addition/answer',[
+							'as' => $route_name . 'addition.answer'
+							,'uses' => $route_controller . '@additionAns'
+						]);
 
-					Routes::get('/questions/dynamic/multiplication/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.multiplication.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@multiplicationAns'
-					]);
+						Routes::get('/subtraction',[
+							'as' => $route_name . 'subtraction'
+							,'uses' => $route_controller . '@subtraction'
+						]);
 
-					Routes::get('/questions/dynamic/division',[
-						'as' => 'student.class.module.partials.questions.dynamic.division'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@division'
-					]);
+						Routes::get('/subtraction/answer',[
+							'as' => $route_name . 'subtraction.answer'
+							,'uses' => $route_controller . '@subtractionAns'
+						]);
 
-					Routes::get('/questions/dynamic/division/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.division.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@divisionAns'
+						Routes::get('/multiplication',[
+							'as' => $route_name . 'multiplication'
+							,'uses' => $route_controller . '@multiplication'
+						]);
 
-					]);
-					Routes::get('/questions/dynamic/fraction-addition',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition'
-					]);
+						Routes::get('/multiplication/answer',[
+							'as' => $route_name . 'multiplication.answer'
+							,'uses' => $route_controller . '@multiplicationAns'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-addition/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_answer'
-					]);
+						Routes::get('/division',[
+							'as' => $route_name . 'division'
+							,'uses' => $route_controller . '@division'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-addition-whole',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-whole'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_whole'
-					]);
+						Routes::get('/division/answer',[
+							'as' => $route_name . 'division.answer'
+							,'uses' => $route_controller . '@divisionAns'
 
-					Routes::get('/questions/dynamic/fraction-addition-whole/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-whole.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_whole_answer'
-					]);
+						]);
+						Routes::get('/fraction-addition',[
+							'as' => $route_name . 'fraction-addition'
+							,'uses' => $route_controller . '@fraction_addition'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-subtraction',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction'
-					]);
+						Routes::get('/fraction-addition/answer',[
+							'as' => $route_name . 'fraction-addition.answer'
+							,'uses' => $route_controller . '@fraction_addition_answer'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-subtraction/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_answer'
-					]);
+						Routes::get('/fraction-addition-whole',[
+							'as' => $route_name . 'fraction-addition-whole'
+							,'uses' => $route_controller . '@fraction_addition_whole'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-subtraction-butterfly',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-butterfly'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_butterfly'
-					]);
+						Routes::get('/fraction-addition-whole/answer',[
+							'as' => $route_name . 'fraction-addition-whole.answer'
+							,'uses' => $route_controller . '@fraction_addition_whole_answer'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-subtraction-butterfly/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-butterfly.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_butterfly_answer'
-					]);
+						Routes::get('/fraction-subtraction',[
+							'as' => $route_name . 'fraction-subtraction'
+							,'uses' => $route_controller . '@fraction_subtraction'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-division',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-division'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_division'
-					]);
+						Routes::get('/fraction-subtraction/answer',[
+							'as' => $route_name . 'fraction-subtraction.answer'
+							,'uses' => $route_controller . '@fraction_subtraction_answer'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-division/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-division.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_division_answer'
-					]);
+						Routes::get('/fraction-subtraction-butterfly',[
+							'as' => $route_name . 'fraction-subtraction-butterfly'
+							,'uses' => $route_controller . '@fraction_subtraction_butterfly'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-multiplication',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-multiplication'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_multiplication'
-					]);
+						Routes::get('/fraction-subtraction-butterfly/answer',[
+							'as' => $route_name . 'fraction-subtraction-butterfly.answer'
+							,'uses' => $route_controller . '@fraction_subtraction_butterfly_answer'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-multiplication/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-multiplication.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_multiplication_answer'
-					]);
+						Routes::get('/fraction-division',[
+							'as' => $route_name . 'fraction-division'
+							,'uses' => $route_controller . '@fraction_division'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-addition-butterfly',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-butterfly'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_butterfly'
-					]);
+						Routes::get('/fraction-division/answer',[
+							'as' => $route_name . 'fraction-division.answer'
+							,'uses' => $route_controller . '@fraction_division_answer'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-addition-butterfly/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-addition-butterfly.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_addition_butterfly_ans'
-					]);
+						Routes::get('/fraction-multiplication',[
+							'as' => $route_name . 'fraction-multiplication'
+							,'uses' => $route_controller . '@fraction_multiplication'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-subtraction-whole',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-whole'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_whole'
-					]);
+						Routes::get('/fraction-multiplication/answer',[
+							'as' => $route_name . 'fraction-multiplication.answer'
+							,'uses' => $route_controller . '@fraction_multiplication_answer'
+						]);
 
-					Routes::get('/questions/dynamic/fraction-subtraction-whole/answer',[
-						'as' => 'student.class.module.partials.questions.dynamic.fraction-subtraction-whole.answer'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@fraction_subtraction_whole_answer'
-					]);
+						Routes::get('/fraction-addition-butterfly',[
+							'as' => $route_name . 'fraction-addition-butterfly'
+							,'uses' => $route_controller . '@fraction_addition_butterfly'
+						]);
 
-					Routes::get('/questions/dynamic/integer-addition',[
-						'as' => 'student.class.module.partials.questions.dynamic.integer-addition'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_addition'
-					]);
+						Routes::get('/fraction-addition-butterfly/answer',[
+							'as' => $route_name . 'fraction-addition-butterfly.answer'
+							,'uses' => $route_controller . '@fraction_addition_butterfly_ans'
+						]);
 
-					Routes::get('/questions/dynamic/integer-convert-number',[
-						'as' => 'student.class.module.partials.questions.dynamic.integer-convert-number'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_convert_number'
-					]);
+						Routes::get('/fraction-subtraction-whole',[
+							'as' => $route_name . 'fraction-subtraction-whole'
+							,'uses' => $route_controller . '@fraction_subtraction_whole'
+						]);
 
-					Routes::get('/questions/dynamic/integer-sort-small',[
-						'as' => 'student.class.module.partials.questions.dynamic.integer-sort-small'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_sort_small'
-					]);
+						Routes::get('/fraction-subtraction-whole/answer',[
+							'as' => $route_name . 'fraction-subtraction-whole.answer'
+							,'uses' => $route_controller . '@fraction_subtraction_whole_answer'
+						]);
 
-					Routes::get('/questions/dynamic/integer-sort-large',[
-						'as' => 'student.class.module.partials.questions.dynamic.integer-sort-large'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_sort_large'
-					]);
+						Routes::get('/integer-addition',[
+							'as' => $route_name . 'integer-addition'
+							,'uses' => $route_controller . '@integer_addition'
+						]);
+
+						Routes::get('/integer-convert-number',[
+							'as' => $route_name . 'integer-convert-number'
+							,'uses' => $route_controller . '@integer_convert_number'
+						]);
+
+						Routes::get('/integer-sort-small',[
+							'as' => $route_name . 'integer-sort-small'
+							,'uses' => $route_controller . '@integer_sort_small'
+						]);
+
+						Routes::get('/integer-sort-large',[
+							'as' => $route_name . 'integer-sort-large'
+							,'uses' => $route_controller . '@integer_sort_large'
+						]);
+
+					});
+
+
 
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
