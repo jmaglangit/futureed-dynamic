@@ -32,66 +32,66 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 function setRandomDigits(digit){
-    randomDigits1 = digit;
-    randomDigits2 = digit;
+	randomDigits1 = digit;
+	randomDigits2 = digit;
 }
 
 function getRandomNumber1(){
-    return str_interger;
+	return str_interger;
 }
 
 function getRandomNumber2(digit){
-    return underl;
+	return underl;
 }
 
 function getAnswered(){
-    return answered;
+	return answered;
 }
 
 function setAnswered(answer){
-    answered.push(answer);
+	answered.push(answer);
 }
 
 function enabledNextQuestion(){
-    $("#dynamic_question_btn").show();
+	$("#dynamic_question_btn").show();
 }
 
 function disabledNextQuestion(){
-    $("#dynamic_question_btn").hide();
+	$("#dynamic_question_btn").hide();
 }
 
 function answerDone(){
-    $("#questionPane").hide();
-    $("#answerPane").hide();
-    $("#step_div").hide();
-    $("#tipsFlow").show();
-    $("#ansFlow").show();
-    $("#ansCorrectFlow").show();
-    enabledNextQuestion();
+	$("#questionPane").hide();
+	$("#answerPane").hide();
+	$("#step_div").hide();
+	$("#tipsFlow").show();
+	$("#ansFlow").show();
+	$("#ansCorrectFlow").show();
+	enabledNextQuestion();
 }
 
 function answerReset(){
-    $("#questionPane").show();
-    $("#answerPane").show();
-    $("#step_div").show();
-    $("#tipsFlow").hide();
-    $("#ansFlow").hide();
-    $("#ansCorrectFlow").hide();
-    answered = [];
-    disabledNextQuestion();
+	$("#questionPane").show();
+	$("#answerPane").show();
+	$("#step_div").show();
+	$("#tipsFlow").hide();
+	$("#ansFlow").hide();
+	$("#ansCorrectFlow").hide();
+	answered = [];
+	disabledNextQuestion();
 }
 
 function alertModal(message){
-    dynamicBlock();
-    $("#message_text_modal").html(message);
-    $("#message_modal_dynamic").show();
-    $("#close_modal").show();
-    $("#yes_modal").hide();
-    $("#no_modal").hide();
+	dynamicBlock();
+	$("#message_text_modal").html(message);
+	$("#message_modal_dynamic").show();
+	$("#close_modal").show();
+	$("#yes_modal").hide();
+	$("#no_modal").hide();
 }
 
 function closeModal(){
-    $("#message_modal_dynamic").hide();
+	$("#message_modal_dynamic").hide();
 }
 
 // end ADDED functions
@@ -162,7 +162,8 @@ function startBtnOnclick(){
 	$(".inputCheck").keydown(function(event){
 		if(event.keyCode == 13){
 			if(checkAnswer($(this)) == false){
-				alert("Answer can't be alphabet !");
+				// alert("Answer can't be alphabet !");
+				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -170,13 +171,15 @@ function startBtnOnclick(){
 			
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
-				alert("Your answer is larger than what we need.");
+				// alert("Your answer is larger than what we need.");
+				alertModal("Your answer is larger than what we need.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
 			if(temp_answer == -2){
-				alert("opps not enough, your answer needs to be larger.");
+				// alert("opps not enough, your answer needs to be larger.");
+				alertModal("Oops not enough, your answer needs to be larger.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -186,7 +189,7 @@ function startBtnOnclick(){
 				return false;
 			}
 			$(this).attr("readonly", true);
-			nextsetp();	    			
+			nextsetp();
 		}
 	}).focus();
 }
@@ -198,29 +201,29 @@ function nextsetp(){
 	step_count++;
 	result_str += "<table>";
 		result_str += "<tr>";
-		
-    		for (var i = 0; i < real_number.length; i++) {
-    			if (i == po1) {
-    				result_str += "<th id='color_th'>Decimal</th>";
-    			}else if (i > po1) {
-    				result_str += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";	
-    			}else if (i < po1) {
-    				result_str += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";	
-    			}
-    			
-    		}
-			
+
+			for (var i = 0; i < real_number.length; i++) {
+				if (i == po1) {
+					result_str += "<th id='color_th'>Decimal</th>";
+				}else if (i > po1) {
+					result_str += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";
+				}else if (i < po1) {
+					result_str += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";
+				}
+				
+			}
+
 		result_str += "</tr>";
 		result_str += "<tr>";
 			for (var i = 0; i < real_number.length; i++) {
 				if (i == po1) {
-					result_str += "<td>.</td>";	
+					result_str += "<td>.</td>";
 				}else{
 					result_str += "<td><input type=text style='width:91px;' placeholder='answer' class='checkIndexs'></td>";
 				}
-				
-    			
-    		}
+
+
+			}
 		result_str += "</tr>";
 	result_str += "</table>";
 	if (step_count == 2) {
@@ -231,7 +234,7 @@ function nextsetp(){
 		$("<p>Step " + step_count + " : Use the place value table and rewrite the number in the table.</p>" + result_str).insertBefore("#lastDiv");
 		return middleFunc();
 	}
-	
+
 	if (step_count == 4) {
 		$("<p>Step " + step_count + " : Where does " + str_decimal[randomIndex] + " fall in the number?  (Example Tenths place) </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 	}
@@ -242,25 +245,28 @@ function nextsetp(){
 	if (step_count == 6) {
 		$("<p>Step " + step_count + " : Answer.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
 	}
-	
+
 	$(".inputCheck").unbind("keydown").keydown(function(event){
 		if(event.keyCode == 13){
 			if(checkAnswer($(this)) == false){
-				alert("Answer can't be alphabet !");
+				// alert("Answer can't be alphabet !");
+				alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
-			
+
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
-				alert("Your answer is larger than what we need.");
+				// alert("Your answer is larger than what we need.");
+				alertModal("Your answer is larger than what we need.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
 			if(temp_answer == -2){
-				alert("opps not enough, your answer needs to be larger.");
+				// alert("opps not enough, your answer needs to be larger.");
+				alertModal("Your answer is larger than what we need.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -276,8 +282,8 @@ function nextsetp(){
 				displayTotalFlow();
 				displayTotalFlow1();
 			}
-			
-		}	
+
+		}
 	}).focus();
 }
 
@@ -288,21 +294,24 @@ function middleFunc() {
 	$(".checkIndexs").unbind("keydown").keydown(function(event){
 		if(event.keyCode == 13){
 			if(checkAnswer($(this)) == false){
-				alert("Answer can't be alphabet !");
+				// alert("Answer can't be alphabet !");
+				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
-			
+
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
-				alert("Your answer is larger than what we need.");
+				// alert("Your answer is larger than what we need.");
+				alertModal("Your answer is larger than what we need.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
 			if(temp_answer == -2){
-				alert("opps not enough, your answer needs to be larger.");
+				// alert("opps not enough, your answer needs to be larger.");
+				alertModal("Oops not enough, your answer needs to be larger.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -319,8 +328,8 @@ function middleFunc() {
 				$(".checkIndexs").eq(checkIndex-1).focus();
 			}else{
 				$(".checkIndexs").eq(checkIndex).focus();
-			}    				
-		}	
+			}
+		}
 	});
 }
 
@@ -328,70 +337,71 @@ function checkAnswerValidation(elem) {
 	
 	answer_val = elem.prop("value");
 
-    if (step_count == 1) {
-    	correct_answer = randomDigits2;
-	
-    	if (answer_val == correct_answer){
-    		return correct_answer;	
-    	}
-    }
-    if (step_count == 2) {
-    	correct_answer = str_interger.length;
-	
-    	if (answer_val == correct_answer){
-    		return correct_answer;	
-    	}
-    }
+	if (step_count == 1) {
+		correct_answer = randomDigits2;
 
-    if (step_count == 3) {
-    	if (real_number[checkIndex] == ".") {
-    		checkIndex++;
-    		$(".checkIndexs").eq(checkIndex).focus();
-    	}
-    	correct_answer = real_number[checkIndex] * 1;
-        if (answer_val == correct_answer) {
-        	checkIndex++;
-        	return correct_answer;
-        }
-        if (answer_val > correct_answer) {
-		
-    		if (!arry_checkIdx[checkIndex]) {
+		if (answer_val == correct_answer){
+			return correct_answer;
+		}
+	}
+	if (step_count == 2) {
+		correct_answer = str_interger.length;
+
+		if (answer_val == correct_answer){
+			return correct_answer;
+		}
+	}
+
+	if (step_count == 3) {
+		if (real_number[checkIndex] == ".") {
+			checkIndex++;
+			$(".checkIndexs").eq(checkIndex).focus();
+		}
+		correct_answer = real_number[checkIndex] * 1;
+		if (answer_val == correct_answer) {
+			checkIndex++;
+			return correct_answer;
+		}
+		if (answer_val > correct_answer) {
+
+			if (!arry_checkIdx[checkIndex]) {
 				arry_checkIdx[checkIndex] = answer_val;
 			}
-    		return -1;
-    	}else {
+			return -1;
+		}else {
 
-    		if (!arry_checkIdx[checkIndex]) {
+			if (!arry_checkIdx[checkIndex]) {
 				arry_checkIdx[checkIndex] = answer_val;
 			}
-    		return -2;    		
-    	}
+			return -2;
+		}
 
-    }
+	}
 
-    if (step_count == 4) {
-    	correct_answer = decimal_words[randomIndex];
-	
-    	if (answer_val == correct_answer){
-    		return correct_answer;	
-    	}
-    }
-    if (step_count == 5) {
-    	correct_answer =  1 / digits(randomIndex + 1) + " x " + str_decimal[randomIndex];
-	
-    	if (answer_val == correct_answer){
-    		return correct_answer;	
-    	}
-    }
-    if (step_count == 6) {
-    	correct_answer =  Number(1 / digits(randomIndex + 1).toFixed(randomIndex))*str_decimal[randomIndex];
-	
-    	if (answer_val == correct_answer){
-    		return correct_answer;	
-    	}
-    }
-    if(retry_attempt > 1){
-		alert("Correct Answer is " + correct_answer + ". Retry! ");
+	if (step_count == 4) {
+		correct_answer = decimal_words[randomIndex];
+
+		if (answer_val == correct_answer){
+			return correct_answer;
+		}
+	}
+	if (step_count == 5) {
+		correct_answer =  1 / digits(randomIndex + 1) + " x " + str_decimal[randomIndex];
+
+		if (answer_val == correct_answer){
+			return correct_answer;
+		}
+	}
+	if (step_count == 6) {
+		correct_answer =  Number(1 / digits(randomIndex + 1).toFixed(randomIndex))*str_decimal[randomIndex];
+
+		if (answer_val == correct_answer){
+			return correct_answer;
+		}
+	}
+	if(retry_attempt > 1){
+		// alert("Correct Answer is " + correct_answer + ". Retry! ");
+		alertModal("The correct answer is " + correct_answer + ". Please retry. ");
 		retry_attempt = 0;
 		return -3;
 	}
@@ -401,12 +411,12 @@ function checkAnswerValidation(elem) {
 		correct_answer = str_decimal[(step_count - 3) - 1 - str_interger.length];
 	}
 
-    if (answer_val == correct_answer) {
-    	return correct_answer;
-    }
-    
+	if (answer_val == correct_answer) {
+		return correct_answer;
+	}
+
 	if (answer_val > correct_answer) {
-		
+
 		if (!arry_temp[step_count]) {
 			arry_temp[step_count] = answer_val;
 		}
@@ -416,19 +426,20 @@ function checkAnswerValidation(elem) {
 		if (!arry_temp[step_count]) {
 			arry_temp[step_count] = answer_val;
 		}
-		return -2;    		
-	}	
+		return -2;
+	}
 }
 
 function checkAnswer(elem) {
 	if (step_count * 1 == 4) {
 		answer_val = elem.prop("value");
-		return true;    		
+		setAnswered(answer_val);	//added
+		return true;
 	}else{
 		answer_val = elem.prop("value");
 		if(answer_val == "") return false;
-    	elem.prop("value", answer_val);
-	}	    	
+		elem.prop("value", answer_val);
+	}
 }
 
 function displayTotalFlow(){
@@ -448,7 +459,7 @@ function displayTotalFlow(){
 		if (arry_temp[1]) {
 			result_str += "<p style='color:red;'> Error : " + arry_temp[1] + "</p>";
 		}
-	
+
 		result_str += "<p style='color:blue'> - Count the number of integers to the right of the decimal point.  In this case there are " + randomDigits2 + "</p>";
 		
 	result_str += "</div>";
@@ -461,24 +472,24 @@ function displayTotalFlow(){
 			result_str += "<p style='color:red;'> Error : " + arry_temp[2] + "</p>";
 		}
 		result_str += "<p style='color:blue'> - Count all digits to the left of the decimal point.  In this case there are " + str_interger.length + "</p>";
-		
-	
+
+
 	result_str += "</div>";
 
 	stc = "";
 	stc += "<table>";
 		stc += "<tr>";
-		
-    		for (var i = 0; i < real_number.length; i++) {
-    			if (i == po1) {
-    				stc += "<th id='color_th'>Decimal</th>";
-    			}else if (i > po1) {
-    				stc += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";	
-    			}else if (i < po1) {
-    				stc += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";	
-    			}
-    			
-    		}
+
+			for (var i = 0; i < real_number.length; i++) {
+				if (i == po1) {
+					stc += "<th id='color_th'>Decimal</th>";
+				}else if (i > po1) {
+					stc += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";
+				}else if (i < po1) {
+					stc += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";
+				}
+
+			}
 			
 		stc += "</tr>";
 		stc += "<tr>";
@@ -487,25 +498,25 @@ function displayTotalFlow(){
 					stc += "<td>" + str_decimal[i - po1 - 1] + "</td>";
 				}else{
 					stc += "<td></td>";
-				}		    			
-    		}
+				}
+			}
 		stc += "</tr>";
 	stc += "</table>";
 	stc1 = "";
 	stc1 += "<table>";
 		stc1 += "<tr>";
-		
-    		for (var i = 0; i < real_number.length; i++) {
-    			if (i == po1) {
-    				stc1 += "<th id='color_th'>Decimal</th>";
-    			}else if (i > po1) {
-    				stc1 += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";
-    			}else if (i < po1) {
-    				stc1 += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";	
-    			}
-    			
-    		}
-			
+
+			for (var i = 0; i < real_number.length; i++) {
+				if (i == po1) {
+					stc1 += "<th id='color_th'>Decimal</th>";
+				}else if (i > po1) {
+					stc1 += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";
+				}else if (i < po1) {
+					stc1 += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";
+				}
+
+			}
+
 		stc1 += "</tr>";
 		stc1 += "<tr>";
 			for (var i = 0; i < real_number.length; i++) {
@@ -516,8 +527,8 @@ function displayTotalFlow(){
 					stc1 += "<td></td>";
 				}else if (i < po1){
 					stc1 += "<td>" + str_interger[i] + "</td>";
-				}		    			
-    		}
+				}
+			}
 		stc1 += "</tr>";
 	stc1 += "</table>";
 	result_interger = "";
@@ -531,7 +542,7 @@ function displayTotalFlow(){
 			}
 		}else{
 			result_interger += number_words[str_interger.length - i - 1] + ",";
-		}			
+		}
 	}
 	for (var i = 0; i < str_decimal.length; i++) {
 		if (i == str_decimal.length - 1) {
@@ -541,21 +552,21 @@ function displayTotalFlow(){
 				result_decimal += "and " + decimal_words[i] + ".";
 			}
 		}else{
-			result_decimal += decimal_words[i] + ",";	
-		}	
+			result_decimal += decimal_words[i] + ",";
+		}
 	}
 	str_error = "";
 	for (var k in arry_checkIdx){
-	    if (arry_checkIdx.hasOwnProperty(k)) {
-	    	str_error += "<p style='color:red;'> Error : " + arry_checkIdx[k] + "</p>";
-	    }
+		if (arry_checkIdx.hasOwnProperty(k)) {
+			str_error += "<p style='color:red;'> Error : " + arry_checkIdx[k] + "</p>";
+		}
 	}
 
 	result_str += "<div>";
 
 		result_str += "<p>Step 3:  Use the place value table and rewrite the number in the table.<br> "+ str_error +"<br>- Fill in this table.<br><font color=blue> - We know that if there are " + str_interger.length + " digits in the number to the left of the decimal.<br> - This means the number is in the " + number_words[str_interger.length] + ".  <br> - Hence we have a " + result_interger + "</font></p>" + stc1;
 		result_str += "<p><font color=blue> - Next we know that there are " + str_decimal.length + " integers after the decimal point.  <br> - This means we have a " + result_decimal + "</font></p>" + stc;
-		
+
 	result_str += "</div>";
 
 	result_str += "<div>";
@@ -617,23 +628,23 @@ function displayTotalFlow1(){
 	stc += "<table>";
 		stc += "<tr>";
 		
-    		for (var i = 0; i < real_number.length; i++) {
-    			if (i == po1) {
-    				stc += "<th id='color_th'>Decimal</th>";
-    			}else if (i > po1) {
-    				stc += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";	
-    			}else if (i < po1) {
-    				stc += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";	
-    			}
-    			
-    		}
-			
+			for (var i = 0; i < real_number.length; i++) {
+				if (i == po1) {
+					stc += "<th id='color_th'>Decimal</th>";
+				}else if (i > po1) {
+					stc += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";
+				}else if (i < po1) {
+					stc += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";
+				}
+				
+			}
+
 		stc += "</tr>";
 		stc += "<tr>";
 			for (var i = 0; i < real_number.length; i++) {
 				stc += "<td>" + real_number[i] + "</td>";
-    			
-    		}
+
+			}
 		stc += "</tr>";
 	stc += "</table>";
 	result_interger = "";
@@ -648,7 +659,7 @@ function displayTotalFlow1(){
 		}else{
 			result_interger += number_words[str_interger.length - i - 1] + ",";
 		}
-		
+
 	}
 	for (var i = 0; i < str_decimal.length; i++) {
 		if (i == str_decimal.length - 1) {
@@ -658,25 +669,25 @@ function displayTotalFlow1(){
 				result_decimal += "and " + decimal_words[i] + ".";
 			}
 		}else{
-			result_decimal += decimal_words[i] + ",";	
+			result_decimal += decimal_words[i] + ",";
 		}
-		
+
 	}
 
 	result_str += "<div>";
 
 		result_str += "<p>Step 3:  Use the place value table and rewrite the number in the table.<br> - Fill in this table.<br><font color=blue> - We know that if there are " + str_interger.length + " digits in the number to the left of the decimal.<br> - This means the number is in the " + number_words[str_interger.length] + ".  <br> - Hence we have a " + result_interger + "</font></p>" + stc;
 		result_str += "<p><font color=blue> - Next we know that there are " + str_decimal.length + " integers after the decimal point.  <br> - This means we have a " + result_decimal + "</font></p>" + stc;
-		
+
 	result_str += "</div>";
 
 	result_str += "<div>";
 
 		result_str += "<p>Step 4: Where does " + str_decimal[randomIndex] + " fall in the number?  (Example Tenths place)</p>";
 		result_str += decimal_words[randomIndex];
-		
+
 		result_str += "<p><font color=blue> - In this case the number " + str_decimal[randomIndex] + " falls in "+ decimal_words[randomIndex] +" place.</font></p>";
-	
+
 	result_str += "</div>";
 
 	result_str += "<p> Step 5: What is the value of the number?  (Example if it is a ones, type in 1x5)  <br><font color=blue>" + 1 / digits(randomIndex + 1) + " x " + str_decimal[randomIndex] + "</font></p>";
@@ -690,13 +701,13 @@ function displayFraction(IsAfter, elemAfter){
 	
 			current_str = "";
 			for (var i = 0; i < exponentsNumber; i++) {
-        		if (i == 0) result_str = "<br><label id='valuetoinput_l" + i + "' style='color:blue;'> What is " + baseNumber + " = <input class='inputCheck' style='width:80px;'> --- " + (i+1) + "<sup>" + arr_orderNumber[i] + "</sup></label>"
-    			if(i > 0) current_str += "x";
-    			current_str += baseNumber;
-    			result_str += "<br><label id='valuetoinput_l" + (i+1) + "' style='color:blue;display:none'>What is " + current_str + " x "+ baseNumber +" = <input class='inputCheck' style='width:80px;'> --- " + (i+2) + "<sup>" + arr_orderNumber[i + 1] + "</sup></label>";
-    		}
+				if (i == 0) result_str = "<br><label id='valuetoinput_l" + i + "' style='color:blue;'> What is " + baseNumber + " = <input class='inputCheck' style='width:80px;'> --- " + (i+1) + "<sup>" + arr_orderNumber[i] + "</sup></label>"
+				if(i > 0) current_str += "x";
+				current_str += baseNumber;
+				result_str += "<br><label id='valuetoinput_l" + (i+1) + "' style='color:blue;display:none'>What is " + current_str + " x "+ baseNumber +" = <input class='inputCheck' style='width:80px;'> --- " + (i+2) + "<sup>" + arr_orderNumber[i + 1] + "</sup></label>";
+			}
 			if(IsAfter)
 				$(result_str).insertAfter(elemAfter);
 			else
 				$(result_str).insertBefore(elemAfter);
-		}
+}
