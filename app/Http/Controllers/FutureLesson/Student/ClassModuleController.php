@@ -177,6 +177,6 @@ class ClassModuleController extends Controller {
 	}
 
 	public function integer_decimal(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-integer-decimal');
+		return view($this->dynamic_question.'dynamic-integer-decimal');
 	}
 }

@@ -385,14 +385,12 @@
 							,'uses' => $route_controller . '@integer_sort_large'
 						]);
 
+						Routes::get('/integer-decimal',[
+							'as' => $route_name . 'integer-decimal'
+							,'uses' => $route_controller . '@integer_decimal'
+						]);
+
 					});
-
-
-
-					Routes::get('/questions/dynamic/integer-decimal',[
-						'as' => 'student.class.module.partials.questions.dynamic.integer-decimal'
-						,'uses' => 'FutureLesson\Student\ClassModuleController@integer_decimal'
-					]);
 
 					Routes::get('/trial/questions', [
 						'as' => 'student.class.module.partials.trial.questions',
