@@ -157,7 +157,7 @@ class ClassModuleController extends Controller {
 	}
 
 	public function integer_convert_number(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-integer-convert-number');
+		return view($this->dynamic_question . 'dynamic-integer-convert-number');
 	}
 
 	public function integer_sort_small(){
