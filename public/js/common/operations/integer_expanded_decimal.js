@@ -172,7 +172,7 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet!");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -208,7 +208,7 @@ function middleFunc() {
     $(".checkIndexs").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet!");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -333,7 +333,7 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet !");
+                alertModal("Answer can't be alphabet!");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
