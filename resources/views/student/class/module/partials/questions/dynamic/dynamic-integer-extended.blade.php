@@ -27,13 +27,13 @@
         <div id="tipsFlow" style="display: none;">
             <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
             <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
-                <div class="pull-right answer_area">
+                <div class="pull-right answer_area integer_area">
                     <div class="prof-info"><b>Answered Flow</b></div><br/>
                     <div id="correct_flow"></div><br>
                 </div>
             </div>
             <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
-                <div class="pull-left answer_area">
+                <div class="pull-left answer_area integer_area">
                     <div class="prof-info"><b>Correct Answer Flow</b></div><br/>
                     <div id="correct_flow_answer"></div>
                 </div>
