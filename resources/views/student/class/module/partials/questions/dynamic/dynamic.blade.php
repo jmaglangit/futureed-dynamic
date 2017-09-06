@@ -52,3 +52,6 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_DECIMAL">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-decimal') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_EXTENDED">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-extended') !!}"></div>
+</div>

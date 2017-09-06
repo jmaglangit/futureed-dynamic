@@ -395,6 +395,11 @@
 							,'uses' => $route_controller . '@integer_decimal'
 						]);
 
+						Routes::get('/integer-extended',[
+							'as' => $route_name . 'integer-extended'
+							,'uses' => $route_controller . '@integer_extended'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [
