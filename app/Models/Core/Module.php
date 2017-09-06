@@ -64,18 +64,28 @@ class Module extends Model
 		return $this->getModuleTranslation($this->attributes['id'],$value,'name');
 	}
 
-	public function setNameAttribute($value){
-		return $this->setModuleTranslation($this->attributes['id'],$value,'name');
-	}
+//	public function setNameAttribute($value){
+//
+//		if(isset($this->attributes['id'])){
+//			return $this->setModuleTranslation($this->attributes['id'],$value,'name');
+//		} else {
+//			return $this->setModuleTranslation([],$value,'name');
+//		}
+//	}
 
 	public function getDescriptionAttribute($value){
 
 		return $this->getModuleTranslation($this->attributes['id'],$value,'description');
 	}
 
-	public function setDescriptionAttribute($value){
-		return $this->setModuleTranslation($this->attributes['id'],$value,'description');
-	}
+//	public function setDescriptionAttribute($value){
+//
+//		if(isset($this->attributes['id'])){
+//			return $this->setModuleTranslation($this->attributes['id'],$value,'description');
+//		} else {
+//			return $value;
+//		}
+//	}
 
 	//Mutators
 
