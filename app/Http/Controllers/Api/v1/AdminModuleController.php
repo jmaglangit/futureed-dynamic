@@ -150,7 +150,8 @@ class AdminModuleController extends ApiController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 * @param AdminModuleRequest $request
 	 * @return Response
 	 */
 	public function update($id, AdminModuleRequest $request)

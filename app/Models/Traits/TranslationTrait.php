@@ -142,10 +142,10 @@ trait TranslationTrait {
 	 * @param $column
 	 * @return mixed
 	 */
-	public function setModuleTranslation($primary_key,$value){
+	public function setModuleTranslation($primary_key,$value,$column){
 
 		$translation = ModuleTranslation::where('module_id',$primary_key)
-			->where('locale',App::getLocale())->update($value);
+			->where('locale',App::getLocale())->update([$column => $value]);
 
 		return (!empty($translation)) ? $translation : $value;
 	}
