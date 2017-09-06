@@ -1973,11 +1973,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				randomDigitsOnclick();
 
-                question_text = question_text.replace('{' + Constants.INTEGER_EXTENDED + '}',getRealNumber());
+				question_text = question_text.replace('{' + Constants.INTEGER_EXTENDED + '}',getRealNumber());
 
-                self.current_question.questions_text = question_text;
+				self.current_question.questions_text = question_text;
 
-                startBtnOnclick();
+				startBtnOnclick();
 
 				break;
 
