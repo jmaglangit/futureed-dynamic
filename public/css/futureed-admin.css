@@ -927,3 +927,7 @@ li.questions-answers > a, li.questions-answers div {
 	padding: 0px 20px 15px 20px;
 	color: #887c70;
 }
+
+.padding-right-10 {
+	padding-right: 10px;
+}
