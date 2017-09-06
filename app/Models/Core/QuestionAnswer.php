@@ -65,7 +65,7 @@ class QuestionAnswer extends Model {
 	//Translatable
 	public function setAnswerAttribute($value){
 
-			return $this->setQuestionTranslation($this->attributes['id'],$value,'answer');
+		return $this->setQuestionTranslation($this->attributes['id'],$value,'answer');
 	}
 
 	public function getAnswerImageAttribute($value){
