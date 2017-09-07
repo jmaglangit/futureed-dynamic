@@ -274,7 +274,7 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == "y"){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -326,7 +326,7 @@ function checkTotal() {
     $(".checkIndexs").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == "y"){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -380,7 +380,7 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == "y"){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -426,7 +426,7 @@ function checkAnswerValidation(elem) {
             return correct_answer;
         }
         if(retry_attempt > 1){
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry.");
             retry_attempt = 0;
             return -3;
         }
@@ -448,7 +448,7 @@ function checkAnswerValidation(elem) {
         return correct_answer;
     }
     if(retry_attempt > 1){
-        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+        alertModal("The correct answer is " + correct_answer + ". Please retry.");
         retry_attempt = 0;
         return -3;
     }
@@ -476,7 +476,7 @@ function checkAnswerValidation1(elem) {
         return correct_answer;
     }
     if(retry_attempt > 1){
-        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+        alertModal("The correct answer is " + correct_answer + ". Please retry.");
         retry_attempt = 0;
         return -3;
     }
