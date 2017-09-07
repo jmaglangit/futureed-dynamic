@@ -118,6 +118,21 @@ function btnNOOnclose() {
 
 function randomDigitsOnclick(){
 
+    randomNumber = 0;
+    randomdigitsNumber = 0;
+    step_count = 0;
+    countofrandomdigitsNumber = 0;
+    real_number = "";
+    str_randomNumber = "";
+    max_digit = 0;
+    checkIndex =0;
+
+    arry_correctval = [];
+    arry_total = [];
+    arry_randomNumber = [];
+    arry_temp = [];
+    arry_checkIdx = [];
+
     arr = [];
     str_randomNumber = "";
 
@@ -145,6 +160,11 @@ function randomDigitsOnclick(){
 
     str_randomNumber = str_randomNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     max_digit = randomDigits + 2;
+
+    $("#step_div").html('<div id="tableNumber_div"></div><div id="lastDiv"></div>');
+    $("#correct_flow").html("");
+    $("#correct_flow_answer").html("");
+
     $("#randomNumber_b").html(real_number);
     $("#toEnglish_b").html(numberToEnglish(real_number));
     $("#start_div").show();
@@ -213,7 +233,7 @@ function numberToEnglish(n, custom_join_character) {
 
             /* Add tens word if array item exists */
             if ((word = tens[ints[1]])) {
-                words.push(word)    ;
+                words.push(word);
             }
 
             /* Add 'and' string after units or tens integer if: */
@@ -253,8 +273,14 @@ function startBtnOnclick(){
 
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 alertModal("Answer can't be alphabet!");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                alertModal('Input the valid expression');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -299,8 +325,14 @@ function checkTotal() {
     checkIndex = 0;
     $(".checkIndexs").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 alertModal("Answer can't be alphabet!");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                alertModal('Input the valid expression');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -347,8 +379,14 @@ function nextsetp(){
     $("<p>Step " + step_count + " : What is the value of the " + number_words[step_count -2] + " ? </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 alertModal("Answer can't be alphabet!");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                alertModal('Input the valid expression');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -434,6 +472,7 @@ function checkAnswerValidation1(elem) {
     correct_answer = real_number[checkIndex] * 1;
     if (answer_val == correct_answer) {
         checkIndex++;
+        retry_attempt = 0;
         return correct_answer;
     }
     if(retry_attempt > 1){
@@ -455,15 +494,25 @@ function checkAnswerValidation1(elem) {
 }
 
 function checkAnswer(elem) {
-    if (step_count * 1 == 4 || step_count == 1) {
-        answer_val = elem.prop("value")
+    answer_val = elem.prop("value");
+    console.log("step_count = " + step_count);
+    if (step_count == 5 || step_count == 4) {
+        console.log("step_count45 = " + step_count);
         setAnswered(answer_val);    //added
-        return true;
+        if (answer_val == "") {
+            return "z";
+        }
     }else{
-        answer_val = elem.prop("value");
-        if(isNaN(answer_val)) return false;
-        elem.prop("value", answer_val);
+
+        if(isNaN(answer_val)) {
+            return "y";
+        }
+        if (answer_val == "") {
+            return "z";
+        }
     }
+
+    elem.prop("value", answer_val);
 }
 
 function displayTotalFlow(){
