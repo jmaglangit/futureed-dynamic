@@ -250,7 +250,7 @@ function nextsetp(){
 		if(event.keyCode == 13){
 			if(checkAnswer($(this)) == false){
 				// alert("Answer can't be alphabet !");
-				alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry.");
+				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
