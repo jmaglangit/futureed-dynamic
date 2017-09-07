@@ -54,7 +54,7 @@
             </div>
 
             <div class="modal-footer">
-                <button id="close_modal" ty pe="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose()" style="display: none;">Close</button>
+                <button id="close_modal" ty pe="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();dynamicUnBlock();" style="display: none;">Close</button>
             </div>
         </div>
     </div>

@@ -105,7 +105,7 @@ function answerReset(){
 }
 
 function alertModal(message){
-    //dynamicBlock();
+    dynamicBlock();
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#yes_simplify_modal").hide();
