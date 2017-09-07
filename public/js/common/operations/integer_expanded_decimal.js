@@ -1,4 +1,3 @@
-
 var randomNumber = 0;
 var randomdigitsNumber = 0;
 var step_count = 0;
@@ -125,6 +124,26 @@ function btnNOOnclose() {
 
 function randomDigitsOnclick(){
 
+
+    randomNumber = 0;
+    randomdigitsNumber = 0;
+    step_count = 0;
+    countofrandomdigitsNumber = 0;
+    real_number = "";
+    str_randomNumber = "";
+    max_digit = 0;
+    checkIndex =0;
+    str_interger = "";
+    str_decimal = "";
+    po1 = 0;
+    str_compare = "";
+
+    arry_correctval = [];
+    arry_total = [];
+    arry_randomNumber = [];
+    arry_temp = [];
+    arry_checkIdx = [];
+
     randomDigits1 = parseInt($(".randomDigits1").prop("value"));
     min = 0.05;
     randomDigits2 = parseInt($(".randomDigits2").prop("value"));
@@ -148,8 +167,12 @@ function randomDigitsOnclick(){
     po1 = randomNumber.indexOf(".");
     str_interger = randomNumber.substring(0, po1);
     str_decimal = randomNumber.substring(po1+1);
-    console.log(str_interger + "---" + str_decimal);
 
+    $("#step_div").html('<div id="tableNumber_div"></div><div id="lastDiv"></div>');
+    $("#tableNumber_div").html("");
+    $("#lastDiv").html("");
+    $("#correct_flow").html("");
+    $("#correct_flow_answer").html("");
 
     max_digit = real_number.length + 3;
     $("#randomNumber_b").html(real_number);
@@ -171,8 +194,14 @@ function startBtnOnclick(){
 
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet!");
+            if(checkAnswer($(this)) == "y"){
+                alertModal("Answer can't be alphabet !");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                alertModal('Input the valid expression');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -207,8 +236,14 @@ function middleFunc() {
     checkIndex = 0;
     $(".checkIndexs").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet!");
+            if(checkAnswer($(this)) == "y"){
+                alertModal("Answer can't be alphabet !");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                alertModal('Input the valid expression');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -332,8 +367,14 @@ function nextsetp(){
 
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 alertModal("Answer can't be alphabet!");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                alertModal('Input the valid expression');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -367,78 +408,217 @@ function checkAnswerValidation(elem) {
 
     answer_val = elem.prop("value");
 
-    if (step_count == 1) {
-        correct_answer = real_number.length - 1;
-
-        if (answer_val == correct_answer){
-            return correct_answer;
-        }
-    }
-    if (step_count == 2) {
-        correct_answer = randomDigits2;
-
-        if (answer_val == correct_answer){
-            return correct_answer;
-        }
-    }
-    if(retry_attempt > 1){
-        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
-        retry_attempt = 0;
-        return -3;
-    }
-    if ((step_count - 3) <= po1) {
-        correct_answer = str_interger[po1 - (step_count - 3)] * 1;
-    }else if ((step_count-3) > po1) {
-        correct_answer = str_decimal[(step_count - 3) - 1 - str_interger.length];
-    }
-
     if (step_count >= max_digit) {
-
 
         if (real_number[checkIndex] == ".") {
             checkIndex++;
             $(".checkIndexs").eq(checkIndex).focus();
         }
         correct_answer = real_number[checkIndex] * 1;
+        console.log("c=" + correct_answer);
+        console.log("real_number["+checkIndex+"]=" + real_number[checkIndex]);
         if (answer_val == correct_answer) {
             checkIndex++;
             return correct_answer;
         }
+
+        if (answer_val > correct_answer) {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -1;
+            }
+        }else {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -2;
+            }
+        }
     }
 
-    if (answer_val == correct_answer) {
-        return correct_answer;
+    if (step_count == 1) {
+        correct_answer = real_number.length - 1;
+        if (answer_val == correct_answer) {
+            return correct_answer;
+        }
+
+        if (answer_val > correct_answer) {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -1;
+            }
+
+        }else {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -2;
+            }
+        }
     }
 
-    if (answer_val > correct_answer) {
-        if (!arry_temp[step_count]) {
-            arry_temp[step_count] = answer_val;
+    if (step_count == 2) {
+        correct_answer = randomDigits2;
+        if (answer_val == correct_answer) {
+            return correct_answer;
         }
-        if (!arry_checkIdx[checkIndex]) {
-            arry_checkIdx[checkIndex] = answer_val;
+
+        if (answer_val > correct_answer) {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -1;
+            }
+
+        }else {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -2;
+            }
         }
-        return -1;
-    }else {
-        if (!arry_temp[step_count]) {
-            arry_temp[step_count] = answer_val;
+    }
+    if ((step_count - 3) <= po1) {
+
+        correct_answer = str_interger[po1 - (step_count - 3)] * 1;
+        console.log("c1 = " + correct_answer);
+        if (answer_val == correct_answer) {
+            return correct_answer;
         }
-        if (!arry_checkIdx[checkIndex]) {
-            arry_checkIdx[checkIndex] = answer_val;
+
+        if (answer_val > correct_answer) {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -1;
+            }
+
+        }else {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -2;
+            }
         }
-        return -2;
+    }else if ((step_count-3) > po1 && (step_count-3) < max_digit) {
+
+        correct_answer = str_decimal[(step_count - 3) - 1 - str_interger.length];
+        console.log("step_count-3= " + (step_count-3) + "------" + "po = "+po1);
+        console.log("step_count-3= " + max_digit);
+
+        if (answer_val == correct_answer) {
+            return correct_answer;
+        }
+
+        if (answer_val > correct_answer) {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -1;
+            }
+
+        }else {
+            if(retry_attempt > 1){
+                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (!arry_temp[step_count]) {
+                    arry_temp[step_count] = answer_val;
+                }
+                if (!arry_checkIdx[checkIndex]) {
+                    arry_checkIdx[checkIndex] = answer_val;
+                }
+                return -2;
+            }
+        }
     }
 }
 
 function checkAnswer(elem) {
-    if (step_count * 1 == 4) {
-        answer_val = elem.prop("value");
-        setAnswered(answer_val);    //added
-        return true;
-    }else{
-        answer_val = elem.prop("value");
-        if(isNaN(answer_val)) return false;
-        elem.prop("value", answer_val);
+    answer_val = elem.prop("value");
+    if(isNaN(answer_val)) {
+        return "y";
     }
+    if (answer_val == "") {
+        return "z";
+    }
+    setAnswered(answer_val);    //added
+    elem.prop("value", answer_val);
 }
 
 function displayTotalFlow(){
@@ -604,11 +784,6 @@ function displayTotalFlow(){
             str_error += "<p style='color:#17418d'> Error : " + arry_checkIdx[k] + "</p>";
         }
     }
-    // 		for (var i = 0; i < checkIndex; i++) {
-    //  		if (checkIndex == i && typeof checkIndex != isNaN) {
-    // 	str_error += "<p style='color:#17418d'> Error "+ i +": " + arry_checkIdx[i] + "</p>";
-    // }
-    //  	}
     result_str += "<p> Step " + (real_number.length+3) + " Now write out the answer. <br>" +str_error + "<br>"+ str_compare + "</p>";
     $("#correct_flow").html(result_str);
 
