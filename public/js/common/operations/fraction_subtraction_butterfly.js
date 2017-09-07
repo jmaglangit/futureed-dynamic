@@ -466,7 +466,7 @@ function nextsetp(){
 
     if (step_count == 3) {
         result_str = "<div>";
-        result_str += "<p>Step " + step_count +": Subtraction #1 and #2 </p>";
+        result_str += "<p>Step " + step_count +": Subtract #1 from #2 </p>";
         result_str += '<div>';
             result_str += '<table>';
                 result_str += '<tr>';
@@ -1622,7 +1622,7 @@ function displayTotalFlow(){
     strhtml += "<p style='color:blue'>" + z2 + " x "+ m1 +" = "+ arry_correctval[10] +"</p>";
 
     strhtml += "<div>";
-    strhtml += "<p>Step 3: Subtraction #1 and #2 </p>";
+    strhtml += "<p>Step 3: Subtract #1 from #2 </p>";
     if (step3_error) {
         strhtml += "<p style='color:red;'> Step 3 Error : " +  step3_error + "</p>";
     }
@@ -2070,7 +2070,7 @@ function displayTotalFlow1(){
     strhtml += "<p style='color:blue'>" + z2 + " x "+ m1 +" = "+ arry_correctval[10] +"</p>";
 
     strhtml += "<div>";
-    strhtml += "<p>Step 3: Subtraction #1 and #2 </p>";
+    strhtml += "<p>Step 3: Subtract #1 from #2 </p>";
     strhtml += '<div>';
         strhtml += '<table>';
             strhtml += '<tr>';

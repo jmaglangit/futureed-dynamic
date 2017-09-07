@@ -257,7 +257,7 @@ function playAnswer()
 			    	if( retry_attempt > retry_attempt_limit ) {
 			    		retry_attempt = 0;
 			    		// alert("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
-                        alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry ");
+                        alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry. ");
 			    	} else {
 			    		// alert("You forgot the word number. Retry!");
                         alertModal("That is incorrect. The answer is either largest number or smallest number. Please retry.");
@@ -271,7 +271,7 @@ function playAnswer()
 			    	if( retry_attempt > retry_attempt_limit ) {
 			    		retry_attempt = 0;
                         // alert("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
-			    		alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry ");
+			    		alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry. ");
 			    	} else {
 			    		// alert("That is the wrong number. Retry!");
                         alertModal("Your answer is incorrect. Please retry.");
@@ -303,7 +303,7 @@ function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
 	if( retry_attempt > retry_attempt_limit ) {
 		retry_attempt = 0;
         // return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry! ");
-        return _errorHandler(_elem, -5, "The correct answer is " + _correct_answer + ". Please retry ");
+        return _errorHandler(_elem, -5, "The correct answer is " + _correct_answer + ". Please retry. ");
 	}
 
 	_answer = parseInt(_elem.prop("value"));
