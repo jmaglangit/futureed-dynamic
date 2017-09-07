@@ -2900,6 +2900,9 @@ div#correct_flow p, div#Answer_correct_flow p,
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
+    padding: 0 3px 0 3px;
+}
+
+.integer_area table {
     width: 100%;
-    table-layout: fixed;
 }

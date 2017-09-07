@@ -272,7 +272,7 @@ function playAnswer()
 			    	if( retry_attempt > retry_attempt_limit ) {
 			    		retry_attempt = 0;
                         // alert("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
-                        alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry. ");
+			    		alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry. ");
 			    	} else {
 			    		// alert("That is the wrong number. Retry!");
                         alertModal("Your answer is incorrect. Please retry.");

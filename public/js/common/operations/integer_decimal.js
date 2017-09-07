@@ -15,6 +15,8 @@ var str_interger = "";
 var str_decimal = "";
 var po1 = 0;
 var randomIndex = 0;
+var step5Answer = 0;
+var step4Answer = 0;
 
 var step3Flag = false;
 
@@ -98,11 +100,29 @@ function closeModal(){
 
 
 function randomDigitsOnclick(){
-// 	var obj = { banana: 1425, orange: 1683};
 
-// var fruits = _.map(obj, function(value, key){
-//   return { name : key, value : value };
-// });
+	randomNumber = 0;
+	randomdigitsNumber = 0;
+	step_count = 0;
+	countofrandomdigitsNumber = 0;
+	real_number = "";
+	str_randomNumber = "";
+	max_digit = 0;
+	checkIndex =0;
+	str_interger = "";
+	str_decimal = "";
+	po1 = 0;
+	randomIndex = 0;
+	step5Answer = 0;
+	step4Answer = 0;
+
+	step3Flag = false;
+
+	arry_correctval = [];
+	arry_total = [];
+	arry_randomNumber = [];
+	arry_temp = [];
+	arry_checkIdx = [];
 	
 	// randomDigits1 = parseInt($(".randomDigits1").prop("value"));
 	min = 0.05;
@@ -139,7 +159,10 @@ function randomDigitsOnclick(){
 			underl += str_decimal[i];
 		}
 	}
-	
+	$("#step_div").html('<div id="tableNumber_div"></div><div id="lastDiv"></div>');
+	$("#correct_flow").html("");
+	$("#correct_flow_answer").html("");
+
 	max_digit = real_number.length + 3;
 	$("#str_interger_b").html(str_interger);
 	$("#str_decimal_b").html(underl);
@@ -161,15 +184,23 @@ function startBtnOnclick(){
 
 	$(".inputCheck").keydown(function(event){
 		if(event.keyCode == 13){
-			if(checkAnswer($(this)) == false){
+			if(checkAnswer($(this)) == "y"){
 				// alert("Answer can't be alphabet !");
 				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
+			if(checkAnswer($(this)) == "z"){
+				// alert('Input the valid expression');
+				alertModal('Please input the valid expression.');
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
+			}
 			
 			temp_answer = checkAnswerValidation($(this));
+			// console.log("temp_answer = " + temp_answer);
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need.");
 				alertModal("Your answer is larger than what we need.");
@@ -219,7 +250,7 @@ function nextsetp(){
 				if (i == po1) {
 					result_str += "<td>.</td>";
 				}else{
-					result_str += "<td><input type=text style='width:91px;' placeholder='answer' class='checkIndexs'></td>";
+					result_str += "<td><input type=text style='width:91px;text-align:center;' placeholder='answer' class='checkIndexs'></td>";
 				}
 
 
@@ -248,59 +279,111 @@ function nextsetp(){
 
 	$(".inputCheck").unbind("keydown").keydown(function(event){
 		if(event.keyCode == 13){
-			if(checkAnswer($(this)) == false){
+			if(checkAnswer($(this)) == "y"){
 				// alert("Answer can't be alphabet !");
 				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
-
+			if(checkAnswer($(this)) == "z"){
+				// alert('Input the valid expression');
+				alertModal('Please input the valid expression.');
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
+			}
+			
 			temp_answer = checkAnswerValidation($(this));
-			if(temp_answer == -1){
-				// alert("Your answer is larger than what we need.");
-				alertModal("Your answer is larger than what we need.");
-				$(this).prop("value", "").focus();
-				retry_attempt++;
-				return false;
-			}
-			if(temp_answer == -2){
-				// alert("opps not enough, your answer needs to be larger.");
-				alertModal("Your answer is larger than what we need.");
-				$(this).prop("value", "").focus();
-				retry_attempt++;
-				return false;
-			}
-			if(temp_answer == -3){
-				$(this).prop("value", "").focus();
-				return false;
-			}
-			$(this).attr("readonly", true);
-			nextsetp();
-			if (step_count > 6) {
-				answerDone();	//added
-				displayTotalFlow();
-				displayTotalFlow1();
-			}
 
+			if (step_count == 4 || step_count == 5) {
+				if(temp_answer == true){
+					// console.log("temp_answer = " + temp_answer);
+					// alert('Write it out as an equation, example: 456+10');
+					alertModal('Write it out as an equation, example: 456+10.');
+					$(this).prop("value", "").focus();
+					retry_attempt++;
+					return false;
+				}
+				if (temp_answer == false) {
+					// alert("Answer can't be alphabet !");
+					alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+					$(this).prop("value", "").focus();
+					retry_attempt++;
+					return false;
+				}
+				if(temp_answer == "e"){
+					// alert("Your answer is not accurate. Retry!");
+					alertModal("Your answer is not accurate. Please retry.");
+					$(this).prop("value", "").focus();
+					retry_attempt++;
+					return false;
+				}
+				if(temp_answer == -3){
+					$(this).prop("value", "").focus();
+					return false;
+				}
+				// console.log("temp_answer = " + temp_answer);
+				$(this).attr("readonly", true);
+				nextsetp();
+				if (step_count > 6) {
+					answerDone();	//added
+					displayTotalFlow();
+					displayTotalFlow1();
+				}
+			}else{
+				if(temp_answer == -1){
+					// alert("Your answer is larger than what we need.");
+					alertModal("Your answer is larger than what we need.");
+					$(this).prop("value", "").focus();
+					retry_attempt++;
+					return false;
+				}
+				if(temp_answer == -2){
+					// alert("opps not enough, your answer needs to be larger.");
+					alertModal("Oops not enough, your answer needs to be larger.");
+					$(this).prop("value", "").focus();
+					retry_attempt++;
+					return false;
+				}
+				if(temp_answer == -3){
+					$(this).prop("value", "").focus();
+					return false;
+				}
+				// console.log("temp_answer = " + temp_answer);
+				$(this).attr("readonly", true);
+				nextsetp();
+				if (step_count > 6) {
+					answerDone();	//added
+					displayTotalFlow();
+					displayTotalFlow1();
+				}
+			}
+			
 		}
 	}).focus();
 }
 
 function middleFunc() {
-	// console.log("1");
 	$(".checkIndexs").eq(0).focus();
 	checkIndex = 0;
 	$(".checkIndexs").unbind("keydown").keydown(function(event){
 		if(event.keyCode == 13){
-			if(checkAnswer($(this)) == false){
+			if(checkAnswer($(this)) == "y"){
 				// alert("Answer can't be alphabet !");
 				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
 			}
-
+			if(checkAnswer($(this)) == "z"){
+				// alert('Input the valid expression');
+				alertModal('Please input the valid expression.');
+				$(this).prop("value", "").focus();
+				retry_attempt++;
+				return false;
+			}
+			
 			temp_answer = checkAnswerValidation($(this));
 			if(temp_answer == -1){
 				// alert("Your answer is larger than what we need.");
@@ -329,7 +412,7 @@ function middleFunc() {
 			}else{
 				$(".checkIndexs").eq(checkIndex).focus();
 			}
-		}
+		}	
 	});
 }
 
@@ -345,10 +428,10 @@ function checkAnswerValidation(elem) {
 		}
 	}
 	if (step_count == 2) {
-		correct_answer = str_interger.length;
-
+		correct_answer = str_interger.length + randomDigits2;
+	
 		if (answer_val == correct_answer){
-			return correct_answer;
+			return correct_answer;	
 		}
 	}
 
@@ -360,86 +443,162 @@ function checkAnswerValidation(elem) {
 		correct_answer = real_number[checkIndex] * 1;
 		if (answer_val == correct_answer) {
 			checkIndex++;
+			retry_attempt = 0;
 			return correct_answer;
 		}
 		if (answer_val > correct_answer) {
-
-			if (!arry_checkIdx[checkIndex]) {
-				arry_checkIdx[checkIndex] = answer_val;
+			if(retry_attempt > 1){
+				// alert("Correct Answer is " + correct_answer + ". Retry! ");
+				alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+				retry_attempt = 0;
+				return -3;
+			}else{
+		
+				if (!arry_checkIdx[checkIndex]) {
+					// console.log("checkIndex = " + checkIndex);
+					arry_checkIdx[checkIndex] = answer_val;
+				}
+				return -1;
 			}
-			return -1;
 		}else {
+			if(retry_attempt > 1){
+				// alert("Correct Answer is " + correct_answer + ". Retry! ");
+				alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+				retry_attempt = 0;
+				return -3;
+			}else{
 
-			if (!arry_checkIdx[checkIndex]) {
-				arry_checkIdx[checkIndex] = answer_val;
+				if (!arry_checkIdx[checkIndex]) {
+
+					arry_checkIdx[checkIndex] = answer_val;
+				}
+				return -2;
 			}
-			return -2;
 		}
-
 	}
 
 	if (step_count == 4) {
-		correct_answer = decimal_words[randomIndex];
-
+		var strqq = "";
+		strqq = decimal_words[randomIndex];
+		// console.log("strqq = " + strqq);
+		correct_answer = strqq.toLowerCase()
 		if (answer_val == correct_answer){
-			return correct_answer;
+			step4Answer = correct_answer;
+			return correct_answer;	
+		}else if (answer_val == strqq) {
+			step4Answer = strqq;
+			return strqq;
+		} else{
+			if(retry_attempt > 1){
+				// alert("Correct Answer is " + correct_answer + " or " + strqq + ". Retry! ");
+				alertModal("The correct answer is " + correct_answer + " or " + strqq + ". Please retry. ");
+				retry_attempt = 0;
+				return -3;
+			}else{
+				if (!arry_temp[step_count]) {
+					arry_temp[step_count] = answer_val;
+				}
+				return "e";
+			}
 		}
 	}
 	if (step_count == 5) {
-		correct_answer =  1 / digits(randomIndex + 1) + " x " + str_decimal[randomIndex];
-
-		if (answer_val == correct_answer){
-			return correct_answer;
+		correct_answer1 =  1 / digits(randomIndex + 1) + "x" + str_decimal[randomIndex];
+		correct_answer2 =  str_decimal[randomIndex] + "x" + 1 / digits(randomIndex + 1);
+	
+		if (answer_val == correct_answer1){
+			step5Answer = correct_answer1;
+			return correct_answer1;	
+		}else if (answer_val == correct_answer2) {
+			step5Answer = correct_answer2;
+			return correct_answer2;
+		} else{
+			arry_temp[5] = answer_val;
+			if (isValidExpression(answer_val)) {
+				if(retry_attempt > 1){
+					// alert("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+					alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
+					retry_attempt = 0;
+					return -3;
+				}else{
+					return true;
+				}
+			}else {
+				if(retry_attempt > 1){
+					// alert("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+					alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
+					retry_attempt = 0;
+					return -3;
+				}else{
+					return false;
+				}
+			}
 		}
 	}
 	if (step_count == 6) {
-		correct_answer =  Number(1 / digits(randomIndex + 1).toFixed(randomIndex))*str_decimal[randomIndex];
-
+		correct_answer =  (1 / digits(randomIndex + 1).toFixed(randomIndex))*str_decimal[randomIndex];
+		// console.log("correct_answer = " + correct_answer);
+		
 		if (answer_val == correct_answer){
+			// console.log("correct_answer1 = " + correct_answer);
+			
 			return correct_answer;
 		}
 	}
-	if(retry_attempt > 1){
-		// alert("Correct Answer is " + correct_answer + ". Retry! ");
-		alertModal("The correct answer is " + correct_answer + ". Please retry. ");
-		retry_attempt = 0;
-		return -3;
-	}
-	if ((step_count - 3) <= po1) {
-		correct_answer = str_interger[po1 - (step_count - 3)] * 1;	
-	}else if ((step_count-3) > po1) {
-		correct_answer = str_decimal[(step_count - 3) - 1 - str_interger.length];
-	}
-
-	if (answer_val == correct_answer) {
-		return correct_answer;
-	}
 
 	if (answer_val > correct_answer) {
-
-		if (!arry_temp[step_count]) {
-			arry_temp[step_count] = answer_val;
+		if(retry_attempt > 1){
+			// alert("Correct Answer is " + correct_answer + ". Retry! ");
+			alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+			retry_attempt = 0;
+			return -3;
+		}else{
+			if (!arry_temp[step_count]) {
+				arry_temp[step_count] = answer_val;
+			}
+			return -1;
 		}
-		return -1;
 	}else {
-
-		if (!arry_temp[step_count]) {
-			arry_temp[step_count] = answer_val;
+		if(retry_attempt > 1){
+			// alert("Correct Answer is " + correct_answer + ". Retry! ");
+			alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+			retry_attempt = 0;
+			return -3;
+		}else{
+			if (!arry_temp[step_count]) {
+				arry_temp[step_count] = answer_val;
+			}
+			return -2;
 		}
-		return -2;
 	}
 }
 
+function isValidExpression(__str_expr){
+	var __temp_expr = __str_expr.match( /[1-9.+-/*=]*/ );
+	return (__temp_expr == __str_expr);
+}
+
 function checkAnswer(elem) {
-	if (step_count * 1 == 4) {
-		answer_val = elem.prop("value");
-		setAnswered(answer_val);	//added
-		return true;
+	answer_val = elem.prop("value");
+	// console.log("step_count = " + step_count);
+	setAnswered(answer_val);	//added
+	if (step_count == 5 || step_count == 4) {
+		// console.log("step_count45 = " + step_count);
+		
+		if (answer_val == "") {
+			return "z";
+		}
 	}else{
-		answer_val = elem.prop("value");
-		if(answer_val == "") return false;
-		elem.prop("value", answer_val);
+		
+		if(isNaN(answer_val)) {
+			return "y";
+		}
+		if (answer_val == "") {
+			return "z";
+		}
 	}
+
+	elem.prop("value", answer_val);
 }
 
 function displayTotalFlow(){
@@ -572,7 +731,7 @@ function displayTotalFlow(){
 	result_str += "<div>";
 
 		result_str += "<p>Step 4: Where does " + str_decimal[randomIndex] + " fall in the number?  (Example Tenths place)</p>";
-		result_str += decimal_words[randomIndex];
+		result_str += "<p><font color=blue>" + step4Answer + "</font></p>";
 		if (arry_temp[4]) {
 			result_str += "<p style='color:red;'> Error : " + arry_temp[4] + "</p>";
 		}
@@ -584,7 +743,7 @@ function displayTotalFlow(){
 	if (arry_temp[5]) {
 		result_str += "<p style='color:red;'> Error : " + arry_temp[5] + "</p>";
 	}
-	result_str += "<p><font color=blue>" + 1 / digits(randomIndex + 1) + " x " + str_decimal[randomIndex] + "</font></p>";
+	result_str += "<p><font color=blue>" + step5Answer + "</font></p>";
 	
 	result_str += "<p> Step 6: Answer.</p>";
 	if (arry_temp[6]) {
@@ -632,7 +791,7 @@ function displayTotalFlow1(){
 				if (i == po1) {
 					stc += "<th id='color_th'>Decimal</th>";
 				}else if (i > po1) {
-					stc += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";
+					stc += "<th id='color_th'>" + decimal_words[i-po1-1] + "</th>";	
 				}else if (i < po1) {
 					stc += "<th id='color_th'>" + number_words[po1 - i - 1] + "</th>";
 				}
@@ -684,13 +843,13 @@ function displayTotalFlow1(){
 	result_str += "<div>";
 
 		result_str += "<p>Step 4: Where does " + str_decimal[randomIndex] + " fall in the number?  (Example Tenths place)</p>";
-		result_str += decimal_words[randomIndex];
+		result_str += "<p><font color=blue>" + step4Answer + "</font></p>";
 
 		result_str += "<p><font color=blue> - In this case the number " + str_decimal[randomIndex] + " falls in "+ decimal_words[randomIndex] +" place.</font></p>";
 
 	result_str += "</div>";
 
-	result_str += "<p> Step 5: What is the value of the number?  (Example if it is a ones, type in 1x5)  <br><font color=blue>" + 1 / digits(randomIndex + 1) + " x " + str_decimal[randomIndex] + "</font></p>";
+	result_str += "<p> Step 5: What is the value of the number?  (Example if it is a ones, type in 1x5)  <br><font color=blue>" + step5Answer + "</font></p>";
 	result_str += "<p> Step 6: Answer.</p>";
 	result_str += "<font color=blue>"+1 / digits(randomIndex + 1)*str_decimal[randomIndex] + "</font>";
 	$("#correct_flow_answer").html(result_str);
@@ -699,15 +858,15 @@ function displayTotalFlow1(){
 
 function displayFraction(IsAfter, elemAfter){
 	
-			current_str = "";
-			for (var i = 0; i < exponentsNumber; i++) {
-				if (i == 0) result_str = "<br><label id='valuetoinput_l" + i + "' style='color:blue;'> What is " + baseNumber + " = <input class='inputCheck' style='width:80px;'> --- " + (i+1) + "<sup>" + arr_orderNumber[i] + "</sup></label>"
-				if(i > 0) current_str += "x";
-				current_str += baseNumber;
-				result_str += "<br><label id='valuetoinput_l" + (i+1) + "' style='color:blue;display:none'>What is " + current_str + " x "+ baseNumber +" = <input class='inputCheck' style='width:80px;'> --- " + (i+2) + "<sup>" + arr_orderNumber[i + 1] + "</sup></label>";
-			}
-			if(IsAfter)
-				$(result_str).insertAfter(elemAfter);
-			else
-				$(result_str).insertBefore(elemAfter);
+	current_str = "";
+	for (var i = 0; i < exponentsNumber; i++) {
+		if (i == 0) result_str = "<br><label id='valuetoinput_l" + i + "' style='color:blue;'> What is " + baseNumber + " = <input class='inputCheck' style='width:80px;'> --- " + (i+1) + "<sup>" + arr_orderNumber[i] + "</sup></label>"
+		if(i > 0) current_str += "x";
+		current_str += baseNumber;
+		result_str += "<br><label id='valuetoinput_l" + (i+1) + "' style='color:blue;display:none'>What is " + current_str + " x "+ baseNumber +" = <input class='inputCheck' style='width:80px;'> --- " + (i+2) + "<sup>" + arr_orderNumber[i + 1] + "</sup></label>";
+	}
+	if(IsAfter)
+		$(result_str).insertAfter(elemAfter);
+	else
+		$(result_str).insertBefore(elemAfter);
 }

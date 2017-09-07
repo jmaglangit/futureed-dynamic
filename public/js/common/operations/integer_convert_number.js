@@ -83,10 +83,19 @@ function closeModal(){
 
 function randomDigitsOnclick(){
     
+    text = "";
+    possible = "123456789";
+    randomNumber = 0;
+    randomdigitsNumber = 0;
+    step_count = 0;
+    countofrandomdigitsNumber = 0;
+    real_number = "";
     str_randomNumber = "";
 
-    var text = "";
-    var possible = "123456789";
+    arry_correctval = [];
+    arry_total = [];
+    arry_randomNumber = [];
+    arry_temp = [];
 
     
 
@@ -110,8 +119,14 @@ function randomDigitsOnclick(){
     
     countofrandomdigitsNumber = Math.floor(Math.random() * randomDigits);
 
+    $("#tableNumber_div").html("");
+    $("#position_div").html("");
+    $("#map_table_div").html("");
+    $("#answer").html("");
+    $("#correct_flow").html("");
+    $("#correct_flow_answer").html("");
+
     $("#randomNumber_b").html(str_randomNumber);
-    // $("#digits_b").html(randomdigitsNumber);
     $("#start_div").show();
 }
 
@@ -127,6 +142,21 @@ function inWords (num) {
     str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'Thousand ' : '';
     str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'Hundred ' : '';
     str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + '' + a[n[5][1]]): '';
+    return str;
+}
+
+var a_caps = ['','ONE','TWO','THRE','FOUR', 'FIVE','SIX','SEVEN','EIGHt','NINE','TEN','ElEVEN','TWElVE','THIRTEN','FOURTEN','FIFTEN','SIXTEN','SEVENTEN','EIGHTEN','NINETEN'];
+var b_caps = ['', '', 'TWENTY-','THIRTY-','FORTY-','FIFTY-', 'SIXTY-','SEVENTY-','EIGH TY-','NINETY-'];
+
+function inWords (num) {
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a_caps[Number(n[1])] || b_caps[n[1][0]] + ' ' + a_caps[n[1][1]]) + 'CRORE ' : '';
+    str += (n[2] != 0) ? (a_caps[Number(n[2])] || b_caps[n[2][0]] + ' ' + a_caps[n[2][1]]) + 'MIllION ' : '';
+    str += (n[3] != 0) ? (a_caps[Number(n[3])] || b_caps[n[3][0]] + ' ' + a_caps[n[3][1]]) + 'THOUSAND ' : '';
+    str += (n[4] != 0) ? (a_caps[Number(n[4])] || b_caps[n[4][0]] + ' ' + a_caps[n[4][1]]) + 'HUNDRED ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'AND ' : '') + (a_caps[Number(n[5])] || b_caps[n[5][0]] + '' + a_caps[n[5][1]]): '';
     return str;
 }
 
@@ -188,8 +218,6 @@ function numberToEnglish(n, custom_join_character) {
 
             /* Add unit word if array item exists */
             if ((word = units[ints[0]])) {
-
-                // console.log("11");
                 words.push(word);
             }
 
@@ -210,7 +238,6 @@ function numberToEnglish(n, custom_join_character) {
 
             /* Add hundreds word if array item exists */
             if ((word = units[ints[2]])) {
-                // console.log("1");
                 words.push(word + ' Hundred');
             }
 
@@ -237,9 +264,16 @@ function startBtnOnclick(){
 
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 // alert("Answer can't be alphabet !");
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                // alert('Input the valid expression');
+                alertModal('Please input the valid expression.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -337,39 +371,71 @@ function nextsetp(){
 
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 // alert("Answer can't be alphabet !");
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
+            if(checkAnswer($(this)) == "z"){
+                // alert('Input the valid expression');
+                alertModal('Please input the valid expression.');
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
             
             temp_answer = checkAnswerValidation($(this));
-            if(temp_answer == -1){
-                // alert("Your answer is larger than what we need.");
-                alertModal("Your answer is larger than what we need.");
-                $(this).prop("value", "").focus();
-                retry_attempt++;
-                return false;
-            }
-            if(temp_answer == -2){
-                // alert("opps not enough, your answer needs to be larger.");
-                alertModal("Oops not enough, your answer needs to be larger.");
-                $(this).prop("value", "").focus();
-                retry_attempt++;
-                return false;
-            }
-            if(temp_answer == -3){
-                $(this).prop("value", "").focus();
-                return false;
-            }
+            if (step_count == 4) {
+                if(temp_answer == -1){
+                    // alert("Your answer is not accurate. Retry!");
+                    alertModal("Your answer is not accurate. Please retry.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -2){
+                    // alert("Your answer is not accurate. Retry!");
+                    alertModal("Your answer is not accurate. Please retry.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -3){
+                    $(this).prop("value", "").focus();
+                    return false;
+                }
 
-            if (step_count != 4) {
-                $(this).attr("readonly", true);
-                nextsetp();
-            }
-            
+                if (step_count != 4) {
+                    $(this).attr("readonly", true);
+                    nextsetp();
+                }
+            }else{
+                if(temp_answer == -1){
+                    // alert("Your answer is larger than what we need.");
+                    alertModal("Your answer is larger than what we need.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -2){
+                    // alert("opps not enough, your answer needs to be larger.");
+                    alertModal("Oops not enough, your answer needs to be larger.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -3){
+                    $(this).prop("value", "").focus();
+                    return false;
+                }
+
+                if (step_count != 4) {
+                    $(this).attr("readonly", true);
+                    nextsetp();
+                }
+            }                   
         }   
     }).focus();
 }
@@ -400,12 +466,12 @@ function checkAnswerValidation(elem) {
 
     if (step_count == 4) {
         if (randomDigits <= 2) {
-            correct_answer = inWords(real_number);
+            strqq = inWords(real_number);
+            correct_answer = strqq.toUpperCase();
         }else{
             sttr = numberToEnglish(real_number);
             sttr = sttr.replace("- ", "-");
-            // console.log("sttr = " + sttr);
-            correct_answer = sttr;  
+            correct_answer = sttr.toUpperCase();    
         }
 
         
@@ -419,25 +485,31 @@ function checkAnswerValidation(elem) {
             return correct_answer;  
         }               
     }
-    if(retry_attempt > 1){
-        // alert("Correct Answer is " + correct_answer + ". Retry! ");
-        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
-        retry_attempt = 0;
-        return -3;
-    }
+    
     if (answer_val > correct_answer) {
-        if (!arry_temp[step_count]) {
-            arry_temp[step_count] = answer_val;
-            // console.log("1temp_answer = " + arry_temp[step_count]);
+        if(retry_attempt > 1){
+            // alert("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+            retry_attempt = 0;
+            return -3;
+        }else{
+            if (!arry_temp[step_count]) {
+                arry_temp[step_count] = answer_val;
+            }
         }
         return -1;
     }else {
-        if (!arry_temp[step_count]) {
-            arry_temp[step_count] = answer_val;
-            // console.log("temp_answer = " + arry_temp[step_count]);
+        if(retry_attempt > 1){
+            // alert("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+            retry_attempt = 0;
+            return -3;
+        }else{
+            if (!arry_temp[step_count]) {
+                arry_temp[step_count] = answer_val;
+            }
+            return -2;
         }
-
-        return -2;          
     }
     
 }
@@ -445,15 +517,23 @@ function checkAnswerValidation(elem) {
 
 
 function checkAnswer(elem) {
-    if (step_count * 1 == 4) {
-        answer_val = elem.prop("value");
-        setAnswered(answer_val);    //added
-        return true;            
+    answer_val = elem.prop("value");
+    setAnswered(answer_val);    //added
+    if (step_count != 4) {
+        if(isNaN(answer_val)) {
+            return "y";
+        }
+        if (answer_val == "") {
+            return "z";
+        }
     }else{
-        answer_val = elem.prop("value");
-        if(isNaN(answer_val)) return false;
-        elem.prop("value", answer_val);
-    }           
+
+        if (answer_val == "") {
+            return "z";
+        }
+    }
+    
+    elem.prop("value", answer_val);         
 }
 
 function displayTotalFlow(){
@@ -524,11 +604,11 @@ function displayTotalFlow(){
         result_str += "<p style='color:red;'> Error : " + arry_temp[4] + "</p>";    
     }
     if (randomDigits <= 2) {
-        result_str += "<label style='color:blue;'> " + inWords(real_number) + " </label>";
+        result_str += "<label style='color:blue;'> " + arry_correctval[2] + " </label>";
     }else{
         sttr = numberToEnglish(real_number);
             sttr = sttr.replace("- ", "-");
-        result_str += "<label style='color:blue;'> " + sttr + " </label>"
+        result_str += "<label style='color:blue;'> " + arry_correctval[2] + " </label>"
     }
     
     $("#correct_flow").html(result_str);
@@ -537,7 +617,7 @@ function displayTotalFlow(){
 
 function displayTotalFlow1(){
     result_str = "";
-    // result_str += "<b style='color:blue'>Answered Flow</b>";
+    // result_str += "<b style='color:blue'>Correct Answered Flow</b>";
     // result_str += "<br><br>";
     result_str += "<div id='start_div'>";
         result_str += "<label>Rewrite the following number into words, <b>" + str_randomNumber + "</b></label>";
@@ -594,11 +674,11 @@ function displayTotalFlow1(){
     result_str += "<div>";
     result_str += "<p>Step 4: Answer</p>";
     if (randomDigits <= 2) {
-        result_str += "<label style='color:blue;'> " + inWords(real_number) + " </label>";
+        result_str += "<label style='color:blue;'> " + arry_correctval[2] + " </label>";
     }else{
         sttr = numberToEnglish(real_number);
             sttr = sttr.replace("- ", "-");
-        result_str += "<label style='color:blue;'> " + sttr + " </label>"
+        result_str += "<label style='color:blue;'> " + arry_correctval[2] + " </label>"
     }
     $("#correct_flow_answer").html(result_str);
 
