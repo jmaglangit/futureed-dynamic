@@ -391,7 +391,7 @@
 									<span style="margin-left:40px;" class="control-label alert alert-error">{! module.curr_country_fields !}</span>
 								</div>
 								<div id="curr_country_fields" class="form-group" ng-init="module.packageCountries();getGrades()">
-									<div class="col-xs-3"  ng-if="module.active_edit">
+									<div class="col-xs-3 padding-right-10"  ng-if="module.active_edit">
 										{{--drop down and seq no text--}}
 										<select  name="curr_country" class="form-control" name="curr_country"
 												 ng-model="module.curr_country"
@@ -401,7 +401,7 @@
 													ng-show="module.checkCountryList(curr.country.id) == futureed.TRUE">{! curr.country.name !}</option>
 										</select>
 									</div>
-									<div class="col-xs-3"  ng-if="module.active_edit">
+									<div class="col-xs-3 padding-right-10"  ng-if="module.active_edit">
 										{!! Form::text('curr_seq_no',''
                                             , array(
                                                 'placeHolder' => 'Sequence'
@@ -410,7 +410,7 @@
                                             )
                                         ) !!}
 									</div>
-									<div class="col-xs-3"  ng-if="module.active_edit">
+									<div class="col-xs-3 padding-right-10"  ng-if="module.active_edit">
 										{{--drop down and seq no text--}}
 										<select  name="curr_grade" class="form-control" name="curr_grade"
 												 ng-model="module.curr_grade">

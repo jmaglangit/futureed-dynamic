@@ -210,10 +210,10 @@ function gotoNextLevel() {
 function displayQuestions( isAnswer, nRow1, nRow2, elemBefore){
 	result = "";
 	if( nRow1 <= 0 || nRow1 > getDigitsCouunt(randomNumber1)){
-		result = "<p class='functionVal mul_num1' align=right style='width:150px;'>";
+		result = "<p class='functionVal mul_num1' align=right style='width:100px;'>";
 	}
 	else
-		result = "<p class='functionVal' align=right style='width:150px;'>";
+		result = "<p class='functionVal' align=right style='width:100px;'>";
 	nRow1 = nRow1 * 1; nRow2 = nRow2 * 1;
 	for(k=getDigitsCouunt(randomNumber1); k >= 1; k--){
 		if( k == nRow1){
@@ -229,9 +229,9 @@ function displayQuestions( isAnswer, nRow1, nRow2, elemBefore){
 	result += "</p>";
 	$(result).insertBefore(elemBefore);
 	if( nRow2 == 0 || nRow2 > getDigitsCouunt(randomNumber2))
-		result = "<p class='under_line functionVal mul_num2' align=right style='width:150px;'> x  ";
+		result = "<p class='under_line functionVal mul_num2' align=right style='width:100px;'> x  ";
 	else
-		result = "<p class='under_line functionVal' align=right style='width:150px;'> x  ";
+		result = "<p class='under_line functionVal' align=right style='width:100px;'> x  ";
 
 	for(k=getDigitsCouunt(randomNumber2); k >= 1; k--){
 		if( k == nRow2){
@@ -252,9 +252,9 @@ function displayPrevValue( isAnswer, nRow1, nRow2, elemBefore){
 		if(isAnswer)
 			subPrevResult = randomNumber1 * getDigitNum(randomNumber2, k) * digits(k-1);
 		if( subPrevResult != sub_result_Value[k])
-			result = "<p class='functionVal' align=right style='width:150px; color:red;'>";
+			result = "<p class='functionVal' align=right style='width:100px; color:red;'>";
 		else
-			result = "<p class='functionVal' align=right style='width:150px;'>";
+			result = "<p class='functionVal' align=right style='width:100px;'>";
 		if( subPrevResult == 0)
 			result += "0 ";
 		for(l=getDigitsCouunt(subPrevResult); l >= 1; l--){
@@ -265,7 +265,7 @@ function displayPrevValue( isAnswer, nRow1, nRow2, elemBefore){
 	}
 
 	if( nRow1 < 0){
-		result = "<p class='functionVal' align=right style='width:150px;'>"
+		result = "<p class='functionVal' align=right style='width:100px;'>"
 		for( k = -1; k >= nRow1; k--)
 			result += " 0";
 		result += "</p>";
@@ -285,10 +285,10 @@ function displayCurrValue( isAnswer, nRow1, nRow2, elemBefore){
 		var bFinal = false;
 		if (nRow2 == getDigitsCouunt(randomNumber2)+1 && nRow2 > 1) {
 			bFinal = true;
-			result = "<p class='functionVal under_line' align=right style='width:150px;'>+  ";
+			result = "<p class='functionVal under_line' align=right style='width:100px;'>+  ";
 		}
 		else
-			result = "<p class='functionVal' align=right style='width:150px;'>";
+			result = "<p class='functionVal' align=right style='width:100px;'>";
 		for(k=getDigitsCouunt(cur_Disp_val); k >= 1; k--){
 			if( bFinal == false)
 				if( k > nRow1 - 1)continue;
@@ -298,10 +298,10 @@ function displayCurrValue( isAnswer, nRow1, nRow2, elemBefore){
 	}
 	else{
 		if (nRow2 == getDigitsCouunt(randomNumber2)+1 && nRow2 > 1) {
-			result = "<p class='functionVal under_line' align=right style='width:150px;'>+  ";
+			result = "<p class='functionVal under_line' align=right style='width:100px;'>+  ";
 		}
 		else
-			result = "<p class='functionVal' align=right style='width:150px;'>";
+			result = "<p class='functionVal' align=right style='width:100px;'>";
 		for(k=getDigitsCouunt(cur_Disp_val); k >= 1; k--){
 			result += getDigitNum(cur_Disp_val, k) + " ";
 		}
@@ -336,10 +336,10 @@ function displayCurrValue1( isAnswer, nRow1, nRow2, elemBefore){
 		var bFinal = false;
 		if (nRow2 == getDigitsCouunt(randomNumber2)+1 && nRow2 > 1) {
 			bFinal = true;
-			result = "<p class='functionVal under_line' align=right style='width:150px;'>+  ";
+			result = "<p class='functionVal under_line' align=right style='width:100px;'>+  ";
 		}
 		else
-			result = "<p class='functionVal' align=right style='width:150px;'>";
+			result = "<p class='functionVal' align=right style='width:100px;'>";
 		for(k = nRow1 + nRow2 - 1; k >= 1; k--){
 			if( getDigitsCouunt(cur_Disp_val) < k)continue;
 			result += getDigitNum(cur_Disp_val, k) + " ";	
@@ -348,10 +348,10 @@ function displayCurrValue1( isAnswer, nRow1, nRow2, elemBefore){
 	}
 	else{
 		if (nRow2 == getDigitsCouunt(randomNumber2)+1 && nRow2 > 1) {
-			result = "<p class='functionVal under_line' align=right style='width:150px;'>+  ";
+			result = "<p class='functionVal under_line' align=right style='width:100px;'>+  ";
 		}
 		else
-			result = "<p class='functionVal' align=right style='width:150px;'>";
+			result = "<p class='functionVal' align=right style='width:100px;'>";
 		for(k = nRow1 + nRow2 - 1; k >= 1; k--){
 			if( getDigitsCouunt(cur_Disp_val) < k)continue;
 			result += getDigitNum(cur_Disp_val, k) + " ";
@@ -560,7 +560,7 @@ function btnNOOnclose() {
 
 function displayTotalFlow(){
  	diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
-	result = "<p class='mul_num1' align=right style='width:150px;'>";
+	result = "<p class='mul_num1' align=right style='width:100px;'>";
 
 	for(k=getDigitsCouunt(randomNumber1); k >= 1; k--){
 		result += getDigitNum(randomNumber1, k) + " ";
@@ -568,7 +568,7 @@ function displayTotalFlow(){
 	result += "</p>";
 	$(result).insertBefore("#lastDiv2");
 
-	result = "<p class='under_line mul_num1' align=right style='width:150px;'> x ";
+	result = "<p class='under_line mul_num1' align=right style='width:100px;'> x ";
 	if(diff_space > 0) result += "  ";
 
 	for(k=getDigitsCouunt(randomNumber2); k >= 1; k--){
@@ -633,7 +633,7 @@ function displayTotalFlow(){
 
 function displayTotalFlow1(){
  	diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
-	result = "<p class='mul_num1' align=right style='width:150px;'>";
+	result = "<p class='mul_num1' align=right style='width:100px;'>";
 
 	for(k=getDigitsCouunt(randomNumber1); k >= 1; k--){
 		result += getDigitNum(randomNumber1, k) + " ";
@@ -641,7 +641,7 @@ function displayTotalFlow1(){
 	result += "</p>";
 	$(result).insertBefore("#lastDiv3");
 
-	result = "<p class='under_line mul_num1' align=right style='width:150px;'> x ";
+	result = "<p class='under_line mul_num1' align=right style='width:100px;'> x ";
 	if(diff_space > 0) result += "  ";
 
 	for(k=getDigitsCouunt(randomNumber2); k >= 1; k--){

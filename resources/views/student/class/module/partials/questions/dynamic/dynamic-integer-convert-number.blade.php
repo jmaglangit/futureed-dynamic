@@ -4,38 +4,45 @@
         <input type="text" name="randomNumber" id="randomNumber" readonly><br><br>
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
+
     <div>
-        <!--  questions area right side -->
-        <div id="questionPane" class="col-xs-6  answer_area sort_large">
-            <p class="m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+        <!--  dynamic questions area -->
+        <div id="questionPane">
+            <!-- <div id="start_div" style="display: none;"> -->
+                <p class="col-xs-6 m-top-20 h4" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+                {{-- <label>Rewrite the following number into words,<b id="randomNumber_b">1234</b></label>
+                <br><br><br><input type="button" onclick="startBtnOnclick()" value="Start">--}}
+            <!-- </div> -->
         </div>
-         <!-- #end questions area right side -->
-
-        <!--  questions area left side -->
-        <div id="answerPane" class="col-xs-6 pull-right h4 sort_large_ans">
-            <div id="lastDiv1"></div>
-            <div style="clear: both;"></div>
+        <!--  answer area -->
+        <div id="step_div" class="col-xs-6 pull-right h4 integer_area">
+            <div id="tableNumber_div">
+            </div>
+            <div id="position_div">
+            </div>
+            <div id="map_table_div">
+            </div>
+            <div id="answer">
+            </div>
         </div>
-        <!-- #end questions area left side -->
 
-        <!-- done answering -->
-        <div id="tipsFlow" class="tips_flow_adjst" style="display: none;">
+        <!-- tips area -->
+        <div id="tipsFlow" class="integer_area" style="display: none;">
            <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
            <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                <div class="pull-right answer_area">
                    <div class="prof-info"><b>Answered Flow</b></div><br/>
-                    <div id="lastDiv2"></div><br>
+                    <div id="correct_flow"></div><br>
                </div>
            </div>
            <div id="ansCorrectFlow" style="display: none;" class="col-xs-6 h4">
                <div class="pull-left answer_area">
                    <div class="prof-info"><b>Correct Answer Flow</b></div><br/>
-                    <div id="lastDiv3"></div><br>
+                    <div id="correct_flow_answer"></div><br>
                </div>
            </div>
         </div>
          <div style="clear: both;"></div>
-        <!-- #end done answering -->
     </div>
 
     {{--modal--}}
@@ -54,10 +61,10 @@
             </div>
 
             <div class="modal-footer">
-                <button id="close_modal" ty pe="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();dynamicUnBlock();" style="display: none;">Close</button>
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="closeModal();dynamicUnBlock();" style="display: none;">Close</button>
             </div>
         </div>
     </div>
     {!! Html::script('/js/common/operations/global.js?20170806')!!}
-    {!! Html::script('/js/common/operations/sort_max.js?20170806.js')!!}
+    {!! Html::script('/js/common/operations/integer_convert_number.js')!!}
 </div>

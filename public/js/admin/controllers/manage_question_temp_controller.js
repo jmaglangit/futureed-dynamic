@@ -199,88 +199,23 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		// php scan strings with text combination.
 		// disable button once clicked.
 
-		//add case switch
-		switch(variable){
-			case Constants.ADDENDS1 :
-				self.record.question_template_format += self.actionVariableNames('addends1');
-			    $('button[name=btn_addends_one]').prop('disabled', true);
-				break;
-			case Constants.ADDENDS2 :
-				self.record.question_template_format += self.actionVariableNames('addends2');
-			    $('button[name=btn_addends_two]').prop('disabled', true);
-				break;
-			case Constants.MINUEND :
-				self.record.question_template_format += self.actionVariableNames('minuend');
-			    $('button[name=btn_minuend]').prop('disabled', true);
-				break;
-			case Constants.SUBTRAHEND :
-				self.record.question_template_format += self.actionVariableNames('subtrahend');
-			    $('button[name=btn_subtrahend]').prop('disabled', true);
-				break;
-			case Constants.MULTIPLICAND :
-				self.record.question_template_format += self.actionVariableNames('multiplicand');
-			    $('button[name=btn_multiplicand]').prop('disabled', true);
-				break;
-			case Constants.MULTIPLIER :
-				self.record.question_template_format += self.actionVariableNames('multiplier');
-			    $('button[name=btn_multiplier]').prop('disabled', true);
-				break;
-			case Constants.DIVIDEND :
-				self.record.question_template_format += self.actionVariableNames('dividend');
-			    $('button[name=btn_dividend]').prop('disabled', true);
-				break;
-			case Constants.DIVISOR :
-				self.record.question_template_format += self.actionVariableNames('divisor');
-			    $('button[name=btn_divisor]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_ADDITION :
-				self.record.question_template_format += self.actionVariableNames('fraction_addition');
-			    $('button[name=btn_fraction_addition]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_SUBTRACTION :
-				self.record.question_template_format += self.actionVariableNames('fraction_subtraction');
-			    $('button[name=btn_fraction_subtraction]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_MULTIPLICATION :
-				self.record.question_template_format += self.actionVariableNames('fraction_multiplication');
-			    $('button[name=btn_fraction_multiplication]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_DIVISION :
-				self.record.question_template_format += self.actionVariableNames('fraction_division');
-			    $('button[name=btn_fraction_division]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_ADDITION_BUTTERFLY :
-				self.record.question_template_format += self.actionVariableNames('fraction_addition_butterfly');
-			    $('button[name=btn_fraction_addition_butterfly]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_SUBTRACTION_BUTTERFLY :
-				self.record.question_template_format += self.actionVariableNames('fraction_subtraction_butterfly');
-			    $('button[name=btn_fraction_subtraction_butterfly]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_ADDITION_WHOLE :
-				self.record.question_template_format += self.actionVariableNames('fraction_addition_whole');
-			    $('button[name=btn_fraction_addition_whole]').prop('disabled', true);
-				break;
-			case Constants.FRACTION_SUBTRACTION_WHOLE :
-				self.record.question_template_format += self.actionVariableNames('fraction_subtraction_whole');
-			    $('button[name=btn_fraction_subtraction_whole]').prop('disabled', true);
-				break;
-			case Constants.INTEGER_SORT_SMALL:
-                self.record.question_template_format += self.actionVariableNames('integer_sort_small');
-                $('button[name=btn_integer_sort_small]').prop('disabled', true);
-                break;
-            case Constants.INTEGER_SORT_LARGE:
-                self.record.question_template_format += self.actionVariableNames('integer_sort_large');
-                $('button[name=btn_integer_sort_large]').prop('disabled', true);
-                break;
-            case Constants.INTEGER_ADDITION:
-                self.record.question_template_format += self.actionVariableNames('integer_addition');
-                $('button[name=btn_integer_addition]').prop('disabled', true);
-                break;
-			default:
-				self.record.question_template_format += ' ';
-				break;
-		}
+        self.record.question_template_format += self.actionVariableNames(variable);
+        $('button[name=btn_' + variable + ']').prop('disabled', true);
+	}
+
+	self.validateTemplateText = function(){
+
+        var tempTextArea = document.getElementById('template_text');
+        tempTextArea.onkeyup = function() {
+            var val = tempTextArea.value;
+
+            //addition variables
+            if ((val.indexOf("{addends1}")) == Constants.NEGATIVE_1) {
+                $('button[name=btn_addends_one]').prop('disabled', false);
+            } else {
+                $('button[name=btn_addends_one]').prop('disabled', true);
+            }
+        }
 	}
 
 	self.actionVariableNames = function(variableName){

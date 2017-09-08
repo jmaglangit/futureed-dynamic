@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class ClassModuleController extends Controller {
+
+	protected $dynamic_question = 'student.class.module.partials.questions.dynamic.';
+
 	/**
 	*Display Module Index Page
 	*/
@@ -46,119 +49,138 @@ class ClassModuleController extends Controller {
 	}
 
 	public function fib(){
-		return view('student.class.module.partials.questions.dynamic.fill-in-blanks');
+		return view($this->dynamic_question . 'fill-in-blanks');
 	}
 
 	public function steps($steps = 0){
 		$steps = 3;
-		return view('student.class.module.partials.questions.dynamic.answer-steps')->with('steps',$steps);
+		return view($this->dynamic_question . 'answer-steps')->with('steps',$steps);
+	}
+
+	public function dynamic(){
+		return view($this->dynamic_question . 'dynamic');
 	}
 
 	public function addition(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-addition');
+		return view($this->dynamic_question . 'dynamic-addition');
 	}
 
 	public function additionAns(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-addition-ans');
+		return view($this->dynamic_question . 'dynamic-addition-ans');
 	}
 
 	public function subtraction(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-subtraction');
+		return view($this->dynamic_question . 'dynamic-subtraction');
 	}
 
 	public function subtractionAns(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-subtraction-ans');
+		return view($this->dynamic_question . 'dynamic-subtraction-ans');
 	}
 
 	public function multiplication(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-multiplication');
+		return view($this->dynamic_question . 'dynamic-multiplication');
 	}
 
 	public function multiplicationAns(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-multiplication-ans');
+		return view($this->dynamic_question . 'dynamic-multiplication-ans');
 	}
 
 	public function division(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-division');
+		return view($this->dynamic_question . 'dynamic-division');
 	}
 
 	public function divisionAns(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-division-ans');
+		return view($this->dynamic_question . 'dynamic-division-ans');
 	}
 
 	public function fraction_division(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-division');
+		return view($this->dynamic_question . 'dynamic-fraction-division');
 	}
 
 	public function fraction_division_answer(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-division-ans');
+		return view($this->dynamic_question . 'dynamic-fraction-division-ans');
 	}
 
 	public function fraction_addition(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition');
+		return view($this->dynamic_question . 'dynamic-fraction-addition');
 	}
 
 	public function fraction_addition_answer(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-ans');
+		return view($this->dynamic_question . 'dynamic-fraction-addition-ans');
 	}
 
 	public function fraction_subtraction(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction');
+		return view($this->dynamic_question . 'dynamic-fraction-subtraction');
 	}
 
 	public function fraction_subtraction_answer(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-ans');
+		return view($this->dynamic_question . 'dynamic-fraction-subtraction-ans');
 	}
 
 	public function fraction_addition_whole(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-whole');
+		return view($this->dynamic_question . 'dynamic-fraction-addition-whole');
 	}
 
 	public function fraction_addition_whole_answer() {
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-whole-ans');
+		return view($this->dynamic_question . 'dynamic-fraction-addition-whole-ans');
 	}
 
 	public function fraction_multiplication(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication');
+		return view($this->dynamic_question . 'dynamic-fraction-multiplication');
 	}
 
 	public function fraction_multiplication_answer(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-multiplication-ans');
+		return view($this->dynamic_question . 'dynamic-fraction-multiplication-ans');
 	}
 
 	public function fraction_subtraction_butterfly(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-butterfly');
+		return view($this->dynamic_question . 'dynamic-fraction-subtraction-butterfly');
 	}
 
 	public function fraction_subtraction_butterfly_answer(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-butterfly-ans');
+		return view($this->dynamic_question . 'dynamic-fraction-subtraction-butterfly-ans');
 	}
 
 	public function fraction_addition_butterfly(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-butterfly');
+		return view($this->dynamic_question . 'dynamic-fraction-addition-butterfly');
 	}
 
 	public function fraction_addition_butterfly_ans(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-addition-butterfly-ans');
+		return view($this->dynamic_question . 'dynamic-fraction-addition-butterfly-ans');
 	}
 	public function fraction_subtraction_whole(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-whole');
+		return view($this->dynamic_question . 'dynamic-fraction-subtraction-whole');
 	}
 
 	public function fraction_subtraction_whole_answer() {
-		return view('student.class.module.partials.questions.dynamic.dynamic-fraction-subtraction-whole-ans');
+		return view($this->dynamic_question . 'dynamic-fraction-subtraction-whole-ans');
 	}
 
 	public function integer_addition(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-integer-addition');
+		return view($this->dynamic_question . 'dynamic-integer-addition');
+	}
+
+	public function integer_convert_number(){
+		return view($this->dynamic_question . 'dynamic-integer-convert-number');
 	}
 
 	public function integer_sort_small(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-integer-sort-small');
+		return view($this->dynamic_question . 'dynamic-integer-sort-small');
 	}
 
 	public function integer_sort_large(){
-		return view('student.class.module.partials.questions.dynamic.dynamic-integer-sort-large');
+		return view($this->dynamic_question . 'dynamic-integer-sort-large');
 	}
 
+	public function integer_expanded_decimal(){
+		return view($this->dynamic_question . 'dynamic-integer-expanded-decimal');
+	}
+
+	public function integer_decimal(){
+		return view($this->dynamic_question.'dynamic-integer-decimal');
+	}
+
+	public function integer_extended(){
+		return view($this->dynamic_question.'dynamic-integer-extended');
+	}
 }

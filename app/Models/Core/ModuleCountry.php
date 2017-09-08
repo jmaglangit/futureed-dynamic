@@ -67,7 +67,7 @@ class ModuleCountry extends Model{
 
 	public function scopeSubjectAreaName($query,$subject_area_name){
 		return $query->whereHas('module',function($query) use ($subject_area_name){
-			$query->whereHas('subject_area',function($query) use ($subject_area_name){
+			$query->whereHas('subjectArea',function($query) use ($subject_area_name){
 				$query->where('name','like','%'.$subject_area_name.'%');
 			});
 		});
