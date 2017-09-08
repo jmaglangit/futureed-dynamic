@@ -193,7 +193,7 @@ function startBtnOnclick(){
 			}
 			if(checkAnswer($(this)) == "z"){
 				// alert('Input the valid expression');
-				alertModal('Please input the valid expression.');
+				alertModal('That is incorrect. Answer can’t be blank. Please retry.');
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -288,7 +288,7 @@ function nextsetp(){
 			}
 			if(checkAnswer($(this)) == "z"){
 				// alert('Input the valid expression');
-				alertModal('Please input the valid expression.');
+				alertModal('That is incorrect. Answer can’t be blank. Please retry.');
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
@@ -314,7 +314,7 @@ function nextsetp(){
 				}
 				if(temp_answer == "e"){
 					// alert("Your answer is not accurate. Retry!");
-					alertModal("Your answer is not accurate. Please retry.");
+					alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
 					$(this).prop("value", "").focus();
 					retry_attempt++;
 					return false;
@@ -378,7 +378,7 @@ function middleFunc() {
 			}
 			if(checkAnswer($(this)) == "z"){
 				// alert('Input the valid expression');
-				alertModal('Please input the valid expression.');
+				alertModal('That is incorrect. Answer can’t be blank. Please retry.');
 				$(this).prop("value", "").focus();
 				retry_attempt++;
 				return false;
