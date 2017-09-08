@@ -201,7 +201,7 @@ function startBtnOnclick(){
                 return false;
             }
             if(checkAnswer($(this)) == "z"){
-                alertModal('Input the valid expression');
+                alertModal('That is incorrect. Answer can’t be blank. Please retry.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -243,7 +243,7 @@ function middleFunc() {
                 return false;
             }
             if(checkAnswer($(this)) == "z"){
-                alertModal('Input the valid expression');
+                alertModal('That is incorrect. Answer can’t be blank. Please retry.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -374,7 +374,7 @@ function nextsetp(){
                 return false;
             }
             if(checkAnswer($(this)) == "z"){
-                alertModal('Input the valid expression');
+                alertModal('That is incorrect. Answer can’t be blank. Please retry.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
