@@ -343,6 +343,7 @@ var Constants = {
 	, INTEGER_DECIMAL			: 'integer_decimal'
 	, INTEGER_EXPANDED_DECIMAL	: 'integer_expanded_decimal'
 	, INTEGER_EXTENDED			: 'integer_extended'
+	, INTEGER_IDENTIFY			: 'integer_identify'
 
 	/* question dynamic template variables */
 	, ADDENDS1					: 'addends1'
@@ -359,6 +360,8 @@ var Constants = {
     , DENOMINATOR_WHOLE			: 'denominator_whole'
 	, DENOMINATOR1				: 'denominator1'
     , DENOMINATOR2				: 'denominator2'
+	, INTEGER_RANDOM_DIGIT		: 'integer_random_digit'
+	, INTEGER_RANDOM_NUMBER		: 'integer_random_number'
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']

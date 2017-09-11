@@ -1981,6 +1981,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.INTEGER_IDENTIFY:
+
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_DIGIT + '}',getRandomNumber1());
+				question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_NUMBER + '}',getRandomNumber2());
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
 			default:
 				break;
 		}

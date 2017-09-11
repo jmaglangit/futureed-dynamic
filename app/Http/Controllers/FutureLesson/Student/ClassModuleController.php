@@ -183,4 +183,8 @@ class ClassModuleController extends Controller {
 	public function integer_extended(){
 		return view($this->dynamic_question.'dynamic-integer-extended');
 	}
+
+	public function integer_identify(){
+		return view($this->dynamic_question.'dynamic-integer-identify');
+	}
 }

@@ -986,6 +986,8 @@ return [
 	'admin_operation_fraction_subtraction_whole' => 'FRACTION_SUBTRACTION_WHOLE',
 	'admin_template_add_fraction' => 'ADD FRACTION',
 	'admin_template_add_integer' => 'ADD INTEGER',
+	'admin_template_integer_random_digit' => 'INTEGER RANDOM DIGIT',
+	'admin_template_integer_random_number' => 'INTEGER RANDOM NUMBER',
 
 	//Client
 	//resources/views/client/dashboard/index.blade.php

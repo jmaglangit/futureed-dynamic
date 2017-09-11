@@ -400,6 +400,11 @@
 							,'uses' => $route_controller . '@integer_extended'
 						]);
 
+						Routes::get('/integer-identify',[
+							'as' => $route_name . 'integer-identify'
+							,'uses' => $route_controller . '@integer_identify'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [
