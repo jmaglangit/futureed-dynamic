@@ -21,11 +21,11 @@ function setRandomDigits(digit){
     randomDigits = digit;
 }
 
-function getRandomNumber1(){
+function getDigitsNumber(){
     return randomdigitsNumber;
 }
 
-function getRandomNumber2(){
+function getRandomNumber(){
     return str_randomNumber;
 }
 

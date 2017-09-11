@@ -35,8 +35,8 @@ class QuestionTemplateOperationTableSeeder extends Seeder
 			'integer_extended',
 			'integer_identify',
 			'integer_counting', //MO
-			'integer_regroup',
-			'integer_rounding',
+			// 'integer_regroup',
+			// 'integer_rounding',
         ];
 
         $seeder = [];

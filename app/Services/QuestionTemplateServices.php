@@ -31,52 +31,50 @@ class QuestionTemplateServices {
 		switch($question_template['operation']){
 			case config('futureed.addition'):
 
-				if((strpos($operation_var, '{addends1}') != false) && (strpos($operation_var, '{addends2}') != false)){
-					return true;
-				}else{
+				if((strpos($operation_var, '{addends1}') == false) && (strpos($operation_var, '{addends2}') == false)){
 					return [
 	 					'message' => trans('errors.2605')
  					];
+				}else{
+					return true;
 				}
 
 				break;
 
 			case config('futureed.subtraction'):
 
-				if((strpos($operation_var, '{minuend}') != false) && (strpos($operation_var, '{subtrahend}') != false)){
-					return true;
-				}else{
+				if((strpos($operation_var, '{minuend}') == false) && (strpos($operation_var, '{subtrahend}') == false)){
 					return [
 	 					'message' => trans('errors.2605')
  					];				
+				}else{
+					return true;
  				}
 
 				break;
 
 			case config('futureed.multiplication'):
 
-				if((strpos($operation_var, '{multiplicand}') != false) && (strpos($operation_var, '{multiplier}') != false)){
-
-					return true;
-
-				}else{
+				if((strpos($operation_var, '{multiplicand}') == false) && (strpos($operation_var, '{multiplier}') == false)){
 					return [
 	 					'message' => trans('errors.2605')
  					];				
+				}else{
+					return true;
  				}
 
 				break;
 
 			case config('futureed.division'):
 
-				if((strpos($operation_var, '{dividend}') != false) && (strpos($operation_var, '{divisor}') != false)){
+				if((strpos($operation_var, '{dividend}') == false) && (strpos($operation_var, '{divisor}') == false)){
 
-					return true;
-
-				}else{
 					return [
 	 					'message' => trans('errors.2605')
  					];				
+
+				}else{
+					return true;
  				}
 
 				break;
