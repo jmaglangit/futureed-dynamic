@@ -316,7 +316,7 @@
 							{!! Form::button(trans('messages.admin_template_add_word')
 								,array(
 									'class' => 'btn btn-blue'
-									, 'name' => 'btn_integer_rounding_number_word'
+									, 'name' => 'btn_integer_random_word'
 									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_RANDOM_WORD)'
 								)
 							)!!}
@@ -327,7 +327,7 @@
 							{!! Form::button(trans('messages.admin_template_add_number')
 								,array(
 									'class' => 'btn btn-blue'
-									, 'name' => 'btn_integer_rounding_number_number'
+									, 'name' => 'btn_integer_random_number'
 									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_RANDOM_NUMBER)'
 								)
 							)!!}
