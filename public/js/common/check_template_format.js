@@ -104,5 +104,21 @@ function validateTemplateText(){
         if(val.indexOf("{integer_extended}") == Constants.NEGATIVE_1){
             $('button[name=btn_integer_extended]').prop('disabled', false);
         }else{$('button[name=btn_integer_extended]').prop('disabled', true);}
+
+        if(val.indexOf("{integer_random_number}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_random_number]').prop('disabled', false);
+        }else{$('button[name=btn_integer_random_number]').prop('disabled', true);}
+
+        if(val.indexOf("{integer_random_word}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_random_word]').prop('disabled', false);
+        }else{$('button[name=btn_integer_random_word]').prop('disabled', true);}
+
+        if(val.indexOf("{number1}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_number1]').prop('disabled', false);
+        }else{$('button[name=btn_integer_number1]').prop('disabled', true);}
+
+        if(val.indexOf("{number2}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_number2]').prop('disabled', false);
+        }else{$('button[name=btn_integer_number2]').prop('disabled', true);}
 	}
 }

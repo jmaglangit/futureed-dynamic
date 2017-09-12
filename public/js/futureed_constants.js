@@ -108,7 +108,6 @@ var Constants = {
 	*/
 	, CURRENT 		: "current"
 	, OWN 			: "own"
-	, ALL 			: "all"
 	, CLASSMATE 	: "classmate"
 
 	/**
@@ -343,8 +342,14 @@ var Constants = {
 	, INTEGER_DECIMAL			: 'integer_decimal'
 	, INTEGER_EXPANDED_DECIMAL	: 'integer_expanded_decimal'
 	, INTEGER_EXTENDED			: 'integer_extended'
+	, INTEGER_ROUNDING_NUMBER	: 'integer_rounding_number'
+	, INTEGER_REGROUP			: 'integer_regroup'
+	, INTEGER_RANDOM_WORD		: 'integer_random_word'
+	, INTEGER_RANDOM_NUMBER		: 'integer_random_number'
 
 	/* question dynamic template variables */
+	, NUMBER1					: 'number1'
+	, NUMBER2					: 'number2'
 	, ADDENDS1					: 'addends1'
 	, ADDENDS2					: 'addends2'
 	, MINUEND					: 'minuend'
