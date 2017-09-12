@@ -30,6 +30,9 @@ var step1Flag = false;
 var step2Flag = false;
 var step3Flag = false;
 var accaptflag = false;
+var arry_total = [];
+var number_words = ["One", "Ten", "Hundred", "Thousand", "Ten Thousand", "Hundred Thousand", "Million", "Ten Million", "Hundred Million"];
+
 var answered = []; //ADDED
 
 // nerubia code
@@ -125,12 +128,34 @@ function btnNOOnclose() {
 
 // end ADDED functions
 
-
-var arry_total = [];
-var number_words = ["One", "Ten", "Hundred", "Thousand", "Ten Thousand", "Hundred Thousand", "Million", "Ten Million", "Hundred Million"];
-
 function randomDigitsOnclick(){
-    
+
+    step_count = 0;
+    firstNumber = 0;
+    secondNumber = 0;
+    firsDigitsTonumber_words = 0;
+    secondDigitsToNumber_words = 0;
+    arry_temp = [];
+
+    step1_error1 = "";
+    step1_error2 = "";
+    step2_error1 = "";
+    step2_error2 = "";
+    step3_error1 = "";
+    step3_error2 = "";
+
+    step1_count = 0;
+    step2_count = 0;
+    step3_count = 0;
+    step3_correctAnswer = 0;
+
+    step1Flag = false;
+    step2Flag = false;
+    step3Flag = false;
+    accaptflag = false;
+
+    arry_total = [];
+
     randomDigits1 = parseInt($(".randomNumberDigits1").prop("value"));
     randomDigits2 = parseInt($(".randomNumberDigits2").prop("value"));
     randomWordDigits1 = parseInt($(".randomWordsDigits1").prop("value"));
@@ -180,7 +205,6 @@ function randomDigitsOnclick(){
     max_t4 = digits(randomWordDigits2);
 
     firsDigitsTonumber_words = Math.floor(Math.random()*randomWordDigits1);
-    console.log("words to number", firsDigitsTonumber_words);
     secondDigitsToNumber_words = Math.floor(Math.random()*randomWordDigits2);
 
     if (firsDigitsTonumber_words == secondDigitsToNumber_words) {
@@ -200,7 +224,15 @@ function randomDigitsOnclick(){
     if (firstNumber == 0 || secondNumber == 0) {
         randomDigitsOnclick();
     }
-    
+
+    $("#first_div").html("");
+    $("#second_div").html("");
+    $("#add_div").html("");
+    $("#answer_div").html("");
+    $("#correct_flow").html("");
+    $("#correct_flow_answer").html("");
+
+
     // str_randomNumber = str_randomNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     $("#firstNumber_b").html(firstNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -228,14 +260,21 @@ function startBtnOnclick(){
 
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 // alert("Answer can't be alphabet !");
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
-            
+            if(checkAnswer($(this)) == "z"){
+                // alert('Input the valid expression');
+                alertModal('That is incorrect. Answer can’t be blank. Please retry.');
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
                 // alert("Your answer is larger than what we need.");
@@ -267,7 +306,7 @@ function nextsetp(){
     }
     
     retry_attempt = 0;
-    step_count++;                       
+    step_count++;
     result_str = "";
     if (step_count == 2) {
         if (step2Flag == false) {
@@ -280,7 +319,7 @@ function nextsetp(){
             result_str += "</div>";
             $("#second_div").html(result_str);
         }
-        
+
     }
 
     if (step_count == 3) {
@@ -292,7 +331,7 @@ function nextsetp(){
             result_str += "</div>";
             $("#add_div").html(result_str);
         }
-        
+
     }
 
     if (step_count == 4) {
@@ -308,57 +347,90 @@ function nextsetp(){
 
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 // alert("Answer can't be alphabet !");
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
-            
-            temp_answer = checkAnswerValidation($(this));
-            if(temp_answer == -1){
-                // alert("Your answer is larger than what we need.");
-                alertModal("Your answer is larger than what we need.");
+            if(checkAnswer($(this)) == "z"){
+                // alert('Input the valid expression');
+                alertModal('That is incorrect. Answer can’t be blank. Please retry.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
-                return false;
-            }
-            if(temp_answer == -2){
-                // alert("opps not enough, your answer needs to be larger.");
-                alertModal("Oops not enough, your answer needs to be larger.");
-                $(this).prop("value", "").focus();
-                retry_attempt++;
-                return false;
-            }
-            if(temp_answer == -3){
-                $(this).prop("value", "").focus();
                 return false;
             }
 
-            if (step_count != 4) {
-                $(this).attr("readonly", true);
-                nextsetp();
+            temp_answer = checkAnswerValidation($(this));
+            if (step_count == 3) {
+                if(temp_answer == true){
+                    // console.log("temp_answer = " + temp_answer);
+                    // alert('Write it out as an equation, example: 456+10');
+                    alertModal('Write it out as an equation, example: 456+10');
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if (temp_answer == false) {
+                    // alert("Answer can't be alphabet !");
+                    alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -3){
+                    $(this).prop("value", "").focus();
+                    return false;
+                }
+
+                if (step_count != 4) {
+                    $(this).attr("readonly", true);
+                    nextsetp();
+                }
+            }else{
+                if(temp_answer == -1){
+                    // alert("Your answer is larger than what we need.");
+                    alertModal("Your answer is larger than what we need.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -2){
+                    // alert("opps not enough, your answer needs to be larger.");
+                    alertModal("Oops not enough, your answer needs to be larger.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -3){
+                    $(this).prop("value", "").focus();
+                    return false;
+                }
+
+                if (step_count != 4) {
+                    $(this).attr("readonly", true);
+                    nextsetp();
+                }
             }
-            
         }   
     }).focus();
 }
 
 
 function checkAnswerValidation(elem) {
-    
+
     answer_val = elem.prop("value");
-     
+
     if (step_count == 1) {
         step1_count++;
-        console.log("step1_count+ = "+ step1_count);
+        // console.log("step1_count+ = "+ step1_count);
         if (step1_count == 1) {
             correct_answer = secondNumber;
             if (answer_val == correct_answer){
                 step1Flag = true;
                 $("#step1_l").show();
-                return correct_answer;  
+                return correct_answer;
             }else{
                 step1_count--;
                 step1_error1 = answer_val;
@@ -369,10 +441,9 @@ function checkAnswerValidation(elem) {
             if (answer_val == correct_answer){
                 step1Flag = false;
                 arry_total[1] = correct_answer;
-                return correct_answer;  
+                return correct_answer;
             }
         }
-        
     }
 
     if (step_count == 2) {
@@ -380,13 +451,13 @@ function checkAnswerValidation(elem) {
         step2_count++;
         if (step2_count == 1) {
             correct_answer = firstNumber;
-            console.log("2 = " + correct_answer);
+            // console.log("2 = " + correct_answer);
             if (answer_val == correct_answer){
-                console.log("22 = " + correct_answer);
+                // console.log("22 = " + correct_answer);
             
                 step2Flag = true;
                 $("#step2_l").show();
-                return correct_answer;  
+                return correct_answer;
             }else{
                 step2_count--;
                 step2_error1 = answer_val;
@@ -397,9 +468,9 @@ function checkAnswerValidation(elem) {
             if (answer_val == correct_answer){
                 step2Flag = false;
                 arry_total[2] = correct_answer;
-                return correct_answer;  
+                return correct_answer;
             }
-        }               
+        }
     }
 
     if (step_count == 3) {
@@ -413,15 +484,40 @@ function checkAnswerValidation(elem) {
                 accaptflag = true;
                 step3Flag = true;
                 $("#step3_l").show();
+                step3_correctAnswer = correct_answer1;
                 return correct_answer1; 
             }else if (answer_val == correct_answer2) {
                 step3Flag = true;
                 accaptflag = false;
                 $("#step3_l").show();
+                step3_correctAnswer = correct_answer2;
                 return correct_answer2; 
             } else{
-                step3_count--;
                 step3_error1 = answer_val;
+                if (isValidExpression(answer_val)) {
+                    if(retry_attempt > 1){
+                        // alert("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
+                        step3_count--;
+                        retry_attempt = 0;
+                        return -3;
+                    }else{
+                        step3_count--;
+                        return true;
+                    }
+                }else {
+                    if(retry_attempt > 1){
+                        // alert("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
+                        step3_count--;
+                        retry_attempt = 0;
+                        return -3;
+                    }else{
+                        step3_count--;
+                        return false;
+                    }
+                }
+                step3_count--;
             }
         }
         if (step3_count == 2) {
@@ -430,6 +526,46 @@ function checkAnswerValidation(elem) {
                 step3Flag = false;
                 arry_total[3] = correct_answer;
                 return correct_answer;  
+            }
+            if (answer_val > correct_answer) {
+                if(retry_attempt > 1){
+                    // alert("Correct Answer is " + correct_answer1 + " or "+ correct_answer2 +". Retry! ");
+                    alertModal("The correct answer is " + correct_answer1 + " or "+ correct_answer2 +". Please retry. ");
+                    if (step3_count == 1) {
+                        step3_count--;
+                    }
+                    if (step3_count == 2) {
+                        step3_count--;
+                    }
+                    retry_attempt = 0;
+                    return -3;
+                }else{
+                    if (step3_count == 2) {
+                        step3_count--;
+                        step3_error2 = answer_val;
+                    }
+                    return -1;
+                }
+        }
+
+        }else {
+            if(retry_attempt > 1){
+                // alert("Correct Answer is " + correct_answer1 + " or "+ correct_answer2 +". Retry! ");
+                alertModal("The correct answer is " + correct_answer1 + " or "+ correct_answer2 +". Please retry. ");
+                if (step3_count == 1) {
+                    step3_count--;
+                }
+                if (step3_count == 2) {
+                    step3_count--;
+                }
+                retry_attempt = 0;
+                return -3;
+            }else{
+                if (step3_count == 2) {
+                    step3_count--;
+                    step3_error2 = answer_val;
+                }
+                return -2;
             }
         }
     }
@@ -440,79 +576,124 @@ function checkAnswerValidation(elem) {
         
         if (answer_val == correct_answer){
             arry_correctval[2] = correct_answer;
+            answerDone();   //added
             displayTotalFlow();
             displayTotalFlow1();
-            return correct_answer;  
-        }               
+            return correct_answer;
+        }
     }
-    if(retry_attempt > 1){
-        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
-        if (step1_count == 1) {
-            step1_count--;
-        }
-        if (step2_count == 1) {
-            step2_count--;
-        }
-        if (step3_count == 1) {
-            step3_count--;
-        }
-        if (step1_count == 2) {
-            step1_count--;
-        }
-        if (step2_count == 2) {
-            step2_count--;
-        }
-        if (step3_count == 2) {
-            step3_count--;
-        }
-        retry_attempt = 0;
-        return -3;
-    }
-    if (answer_val > correct_answer) {
-        if (step1_count == 2) {
-            step1_count--;
-            step1_error2 = answer_val;
-        }
-        if (step2_count == 2) {
-            step2_count--;
-            step2_error2 = answer_val;
-        }
-        if (step3_count == 2) {
-            step3_count--;
-            step3_error2 = answer_val;
-        }
-        return -1;
-    }else {
-        if (step1_count == 2) {
-            step1_count--;
-            step1_error2 = answer_val;
-        }
-        if (step2_count == 2) {
-            step2_count--;
-            step2_error2 = answer_val;
-        }
-        if (step3_count == 2) {
-            step3_count--;
-            step3_error2 = answer_val;
-        }
 
-        return -2;          
-    }   
+    if (answer_val > correct_answer) {
+        if(retry_attempt > 1){
+            // alert("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+            if (step1_count == 1) {
+                step1_count--;
+            }
+            if (step2_count == 1) {
+                step2_count--;
+            }
+            if (step3_count == 1) {
+                step3_count--;
+            }
+            if (step1_count == 2) {
+                step1_count--;
+            }
+            if (step2_count == 2) {
+                step2_count--;
+            }
+            if (step3_count == 2) {
+                step3_count--;
+            }
+            retry_attempt = 0;
+            return -3;
+        }else{
+            if (step1_count == 2) {
+                step1_count--;
+                step1_error2 = answer_val;
+            }
+            if (step2_count == 2) {
+                step2_count--;
+                step2_error2 = answer_val;
+            }
+            if (step3_count == 2) {
+                step3_count--;
+                step3_error2 = answer_val;
+            }
+            return -1;
+        }
+    }else {
+        if(retry_attempt > 1){
+            // alert("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
+            if (step1_count == 1) {
+                step1_count--;
+            }
+            if (step2_count == 1) {
+                step2_count--;
+            }
+            if (step3_count == 1) {
+                step3_count--;
+            }
+            if (step1_count == 2) {
+                step1_count--;
+            }
+            if (step2_count == 2) {
+                step2_count--;
+            }
+            if (step3_count == 2) {
+                step3_count--;
+            }
+            retry_attempt = 0;
+            return -3;
+        }else{
+            if (step1_count == 2) {
+                step1_count--;
+                step1_error2 = answer_val;
+            }
+            if (step2_count == 2) {
+                step2_count--;
+                step2_error2 = answer_val;
+            }
+            if (step3_count == 2) {
+                step3_count--;
+                step3_error2 = answer_val;
+            }
+            return -2;
+        }
+    }
 }
 
+function isValidExpression(__str_expr){
+    var __temp_expr = __str_expr.match( /[1-9.+-/*=]*/ );
+    return (__temp_expr == __str_expr);
+}
 
 
 function checkAnswer(elem) {
     answer_val = elem.prop("value");
-    if(answer_val == "") return false;
     setAnswered(answer_val);    //added
-    elem.prop("value", answer_val);   
+    if (step_count != 3 || step3_count == 1) {
+        if(isNaN(answer_val)) {
+            return "y";
+        }
+        if (answer_val == "") {
+            return "z";
+        }
+    }else{
+
+        if (answer_val == "") {
+            return "z";
+        }
+    }
+
+    elem.prop("value", answer_val);
 }
 
 function displayTotalFlow(){
     result_str = "";
     // result_str += "<b style='color:blue'>Answered Flow</b>";
-    result_str += "<br><br>";
+    // result_str += "<br><br>";
     result_str += '<p>What is the value of <b>'+ firstNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +'</b> <label>' + number_words[firsDigitsTonumber_words] + '</label> and <b>' + secondNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</b> <label>' + number_words[secondDigitsToNumber_words] + '?</label></p>';
     result_str += "<div>";
     
@@ -566,13 +747,12 @@ function displayTotalFlow(){
     // result_str += "<p style='color:red;'> Error : " + arry_temp[4] + "</p>";
     result_str += "<label style='color:blue;'>" + arry_total[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</label>";
     $("#correct_flow").html(result_str);
-
 }
 
 function displayTotalFlow1(){
     result_str = "";
-    // result_str += "<b style='color:blue'>Answered Flow</b>";
-    result_str += "<br><br>";
+    // result_str += "<b style='color:blue'>Correct Answered Flow</b>";
+    // result_str += "<br><br>";
     result_str += '<p>What is the value of <b>'+ firstNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +'</b> <label>' + number_words[firsDigitsTonumber_words] + '</label> and <b>' + secondNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</b> <label>' + number_words[secondDigitsToNumber_words] + '?</label></p>';
     result_str += "<div>";
     
@@ -607,11 +787,10 @@ function displayTotalFlow1(){
     // result_str += "<p style='color:red;'> Error : " + arry_temp[4] + "</p>";
     result_str += "<label style='color:blue;'>" + arry_total[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</label>";
     $("#correct_flow_answer").html(result_str);
-
 }
 
 function displayFraction(IsAfter, elemAfter){
-    
+
     current_str = "";
     for (var i = 0; i < exponentsNumber; i++) {
         if (i == 0) result_str = "<br><label id='valuetoinput_l" + i + "' style='color:blue;'> What is " + baseNumber + " = <input class='inputCheck' style='width:80px;'> --- " + (i+1) + "<sup>" + arr_orderNumber[i] + "</sup></label>"
