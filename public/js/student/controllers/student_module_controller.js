@@ -1987,6 +1987,33 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_DIGIT + '}',getDigitsNumber());
 				question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_NUMBER + '}',getRandomNumber());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
+			case Constants.INTEGER_ROUNDING_NUMBER:
+
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_NUMBER + '}',getRandomNumber());
+                question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_WORD + '}',getRandomWords());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
+			case Constants.INTEGER_REGROUP:
+
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.NUMBER1 + '}', getFirstNumber() + ' ' + getFirstNumberWords());
+                question_text = question_text.replace('{' + Constants.NUMBER2 + '}', getSecondNumber() + ' ' + getSecondNumberWords());
+
 				self.current_question.questions_text = question_text;
 
 				startBtnOnclick();

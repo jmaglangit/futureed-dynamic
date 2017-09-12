@@ -612,8 +612,7 @@ return [
 	
 	//resources/views/admin/manage/client/partials/delete_client_form.blade.php
 	'admin_delete_client' => 'Delete Client',
-	'admin_delete_confirm_msg' => 'Are you sure you want to delete this account?',
-	
+
 	//resources/views/admin/manage/client/partials/import_client_form.blade.php	
 	'admin_records_not_inserted' => 'Records Not Inserted',
 	'admin_registered_users' => 'Registered Users',
@@ -938,7 +937,6 @@ return [
 	'admin_tip_list' => 'Tip List',
 	
 	//resources/views/admin/partials/dshbrd-side-nav.blade.php
-	'admin_dashboard' => 'Admin Dashboard',
 	'admin_invoice' => 'Invoice',
 	'admin_manage_admin' => 'Manage Admin',
 	'admin_manage_client' => 'Manage Client',
@@ -951,7 +949,6 @@ return [
 	
 	//resources/views/admin/manage/question_template/partials/list_question_template.blade.php
 	'admin_template_list' => 'Template List',
-	'admin_question_type' => 'Question Type',
 	'admin_operation' => 'Operation',
 	'admin_question_form' => 'Question Form',
 	'admin_template_text' => 'Template Text',
@@ -986,8 +983,10 @@ return [
 	'admin_operation_fraction_subtraction_whole' => 'FRACTION_SUBTRACTION_WHOLE',
 	'admin_template_add_fraction' => 'ADD FRACTION',
 	'admin_template_add_integer' => 'ADD INTEGER',
-	'admin_template_integer_random_digit' => 'INTEGER RANDOM DIGIT',
-	'admin_template_integer_random_number' => 'INTEGER RANDOM NUMBER',
+	'admin_template_integer_random_digit' => 'ADD RANDOM DIGIT',
+	'admin_template_integer_random_number' => 'ADD RANDOM NUMBER',
+	'admin_template_add_number' => 'ADD NUMBER',
+	'admin_template_add_word' => 'ADD WORD',
 
 	//Client
 	//resources/views/client/dashboard/index.blade.php
@@ -1178,7 +1177,6 @@ return [
 	'client_parent_read_all_about_module' => 'Read all about the module by clicking here',
 	
 	//resources/views/client/parent/dashboard/partials/reports_progress_bar.blade.php
-	'client_progress_curriculum' => 'Progress in Future Lesson Curriculum',
 	'client_progress_curriculum' => 'Progress in Future Lesson Curriculum',
 	'client_badges_earned' => 'Badges Earned',
 	'client_no_medals_earned' => 'Number of Medals Earned',
@@ -1550,6 +1548,8 @@ return [
 	'multiply_symbol' => '*',
 	'addends_one' => 'ADDENDS 1',
 	'addends_two' => 'ADDENDS 2',
+	'number_one' => 'Number 1',
+	'number_two' => 'Number 2',
 	'minuend' => 'MINUEND',
 	'subtrahend' => 'SUBTRAHEND',
 	'multiplicand' => 'MULTIPLICAND',

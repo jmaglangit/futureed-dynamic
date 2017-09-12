@@ -58,3 +58,9 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_IDENTIFY">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-identify') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_ROUNDING_NUMBER">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-rounding-number') !!}"></div>
+</div>
+<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_REGROUP">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-regroup') !!}"></div>
+</div>

@@ -187,4 +187,12 @@ class ClassModuleController extends Controller {
 	public function integer_identify(){
 		return view($this->dynamic_question.'dynamic-integer-identify');
 	}
+
+	public function integer_rounding_number(){
+		return view($this->dynamic_question.'dynamic-integer-rounding-number');
+	}
+
+	public function integer_regroup(){
+		return view($this->dynamic_question.'dynamic-integer-regroup');
+	}
 }

@@ -405,6 +405,16 @@
 							,'uses' => $route_controller . '@integer_identify'
 						]);
 
+						Routes::get('/integer-rounding-number',[
+							'as' => $route_name . 'integer-rounding-number'
+							,'uses' => $route_controller . '@integer_rounding_number'
+						]);
+
+						Routes::get('/integer-regroup',[
+							'as' => $route_name . 'integer-regroup'
+							,'uses' => $route_controller . '@integer_regroup'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [
