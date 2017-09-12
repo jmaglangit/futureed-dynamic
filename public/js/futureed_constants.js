@@ -343,6 +343,7 @@ var Constants = {
 	, INTEGER_DECIMAL			: 'integer_decimal'
 	, INTEGER_EXPANDED_DECIMAL	: 'integer_expanded_decimal'
 	, INTEGER_EXTENDED			: 'integer_extended'
+	, INTEGER_COUNTING			: 'integer_counting'
 
 	/* question dynamic template variables */
 	, ADDENDS1					: 'addends1'

@@ -400,6 +400,10 @@
 							,'uses' => $route_controller . '@integer_extended'
 						]);
 
+						Routes::get('/integer-counting',[
+							'as' => $route_name . 'integer-counting'
+							,'uses' => $route_controller . '@integer_counting'
+						]);
 					});
 
 					Routes::get('/trial/questions', [
