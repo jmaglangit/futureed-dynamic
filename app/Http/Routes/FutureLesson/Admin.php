@@ -70,35 +70,36 @@
 				
 				Routes::group(['prefix' => '/partials'], function(){
 					$manage_admin_controller = 'FutureLesson\Admin\ManageAdminController';
+					$admin_partials = 'admin.manage.admin.partials.';
 
 					Routes::get('/list_admin_form', [
-						  'as' => 'admin.manage.admin.partials.list_admin_form'
+						  'as' => $admin_partials . 'list_admin_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@list_admin_form'
 					]);
 
 					Routes::get('/add_admin', [
-						  'as' => 'admin.manage.admin.partials.add_admin'
+						  'as' => $admin_partials . 'add_admin'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@add_admin'
 					]);
 					Routes::get('/view_admin', [
-						  'as' => 'admin.manage.admin.partials.view_admin'
+						  'as' => $admin_partials . 'view_admin'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@view_admin'
 					]);
 					Routes::get('/reset_pass', [
-						  'as' => 'admin.manage.admin.partials.reset_pass'
+						  'as' => $admin_partials . 'reset_pass'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@reset_pass'
 					]);
 					Routes::get('/edit_email_form', [
-						  'as' => 'admin.manage.admin.partials.edit_email_form'
+						  'as' => $admin_partials . 'edit_email_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@edit_email_form'
 					]);
 					Routes::get('/delete_admin_form', [
-						  'as' => 'admin.manage.admin.partials.delete_admin_form'
+						  'as' => $admin_partials . 'delete_admin_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@delete_admin_form'
 					]);
@@ -117,45 +118,46 @@
 
 				Routes::group(['prefix' => 'partials'], function() {
 					$manage_client_controller = 'FutureLesson\Admin\ManageClientController';
+					$client_partials = 'admin.manage.client.partials.';
 
 					Routes::get('/list_client_form', [
-						  'as' => 'admin.manage.client.partials.list_client_form'
+						  'as' => $client_partials . 'list_client_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@list_client_form'
 					]);
 
 					Routes::get('/add_client_form', [
-						  'as' => 'admin.manage.client.partials.add_client_form'
+						  'as' => $client_partials . 'add_client_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@add_client_form'
 					]);
 
 					Routes::get('/client_details_form', [
-						  'as' => 'admin.manage.client.partials.client_details_form'
+						  'as' => $client_partials . 'client_details_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@client_details_form'
 					]);
 
 					Routes::get('/edit_email_form', [
-						  'as' => 'admin.manage.client.partials.edit_email_form'
+						  'as' => $client_partials . 'edit_email_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@edit_email_form'
 					]);
 
 					Routes::get('/confirm_email_form', [
-						  'as' => 'admin.manage.client.partials.confirm_email_form'
+						  'as' => $client_partials . 'confirm_email_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@confirm_email_form'
 					]);
 
 					Routes::get('/delete_client_form', [
-						  'as' => 'admin.manage.client.partials.delete_client_form'
+						  'as' => $client_partials . 'delete_client_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@delete_client_form'
 					]);
 
 					Routes::get('/import_client_form', [
-						'as' => 'admin.manage.client.partials.import_client_form'
+						'as' => $client_partials . 'import_client_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@import'
 					]);
@@ -176,48 +178,49 @@
 					]);
 				Routes::group(['prefix' => '/partials'], function(){
 					$manage_student_controller = 'FutureLesson\Admin\ManageStudentController';
+					$student_partials = 'admin.manage.student.partials.';
 
 					Routes::get('/list_student_form',
 						[
-							'as' => 'admin.manage.student.partials.list_student_form'
+							'as' => $student_partials . 'list_student_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@list_student_form'
 						]);
 					Routes::get('/add_student_form',
 						[
-							'as' => 'admin.manage.student.partials.add_student_form'
+							'as' => $student_partials . 'add_student_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@add_student_form'
 						]);
 					Routes::get('/view_student_form',
 						[
-							'as' => 'admin.manage.student.partials.view_student_form'
+							'as' => $student_partials . 'view_student_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@view_student_form'
 						]);
 					Routes::get('/delete_student_form',
 						[
-							'as' => 'admin.manage.student.partials.delete_student_form'
+							'as' => $student_partials . 'delete_student_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@delete_student_form'
 						]);
 
 					Routes::get('/reward',
 						[
-							'as' => 'admin.manage.student.partials.reward'
+							'as' => $student_partials . 'reward'
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@reward'
 						]);
 
 					Routes::get('/edit_reward',
 						[
-							'as' => 'admin.manage.student.partials.edit_reward'
+							'as' => $student_partials . 'edit_reward'
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@edit_reward'
 						]);
 
 					Routes::get('/import',[
-						'as'=> 'admin.manage.student.partials.import_student_form'
+						'as'=> $student_partials . 'import_student_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_student_controller . '@import'
 					]);
@@ -240,31 +243,32 @@
 
 				Routes::group(['prefix' => '/partial'], function() {
 					$subject_controller = 'FutureLesson\Admin\ManageSubjectController';
+					$subject_partials = 'admin.manage.subject.partials.';
 
 					Routes::get('/subject_list_form',
 						[
-							'as' => 'admin.manage.subject.partials.subject_list_form'
+							'as' => $subject_partials . 'subject_list_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@subject_list_form'
 						]);
 
 					Routes::get('/add_subject_form',
 						[
-							'as' => 'admin.manage.subject.partials.add_subject_form'
+							'as' => $subject_partials . 'add_subject_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@add_subject_form'
 						]);
 
 					Routes::get('/subject_details_form',
 						[
-							'as' => 'admin.manage.subject.partials.subject_details_form'
+							'as' => $subject_partials . 'subject_details_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@subject_details_form'
 						]);
 
 					Routes::get('/delete_subject_form',
 						[
-							'as' => 'admin.manage.subject.partials.delete_subject_form'
+							'as' => $subject_partials . 'delete_subject_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@delete_subject_form'
 						]);
@@ -274,28 +278,28 @@
 					*/
 					Routes::get('/subject_area_list_form',
 						[
-							'as' => 'admin.manage.subject.partials.subject_area_list_form'
+							'as' => $subject_partials . 'subject_area_list_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@subject_area_list_form'
 						]);
 
 					Routes::get('/subject_area_delete_form',
 						[
-							'as' => 'admin.manage.subject.partials.subject_area_delete_form'
+							'as' => $subject_partials . 'subject_area_delete_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@subject_area_delete_form'
 						]);
 
 					Routes::get('/subject_area_details_form',
 						[
-							'as' => 'admin.manage.subject.partials.subject_area_details_form'
+							'as' => $subject_partials . 'subject_area_details_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@subject_area_details_form'
 						]);
 
 					Routes::get('/subject_area_add_form',
 						[
-							'as' => 'admin.manage.subject.partials.subject_area_add_form'
+							'as' => $subject_partials . 'subject_area_add_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@subject_area_add_form'
 						]);
@@ -606,22 +610,29 @@
 					]);
 
 				Routes::group(['prefix' => '/partials'], function() {
+					$template_controller = 'FutureLesson\Admin\ManageQuestionTempController';
+					$template_partials = 'admin.manage.question_template.partials.';
 
 					Routes::get('/list_question_template', 
-						['as' => 'admin.manage.question_template.partials.list_question_template'
-						, 'uses' => 'FutureLesson\Admin\ManageQuestionTempController@list_question_template'
+						['as' => $template_partials . 'list_question_template'
+						, 'uses' => $template_controller . '@list_question_template'
 						, 'middleware' => 'admin_partial'
 					]);
 
 					Routes::get('/add_question_template', 
-						['as' => 'admin.manage.question_template.partials.add_question_template'
-						, 'uses' => 'FutureLesson\Admin\ManageQuestionTempController@add_question_template'
+						['as' => $template_partials . 'add_question_template'
+						, 'uses' => $template_controller . '@add_question_template'
 					]);
 
 					Routes::get('/view_question_template', 
-						['as' => 'admin.manage.question_template.partials.view_question_template'
-						, 'uses' => 'FutureLesson\Admin\ManageQuestionTempController@view_question_template'
+						['as' => $template_partials . 'view_question_template'
+						, 'uses' => $template_controller . '@view_question_template'
 					]);
+
+					Routes::get('/question_template_variable',
+						['as' => $template_partials . 'question_template_variable'
+							, 'uses' => $template_controller . '@question_template_variable'
+						]);
 				});
 
 			});

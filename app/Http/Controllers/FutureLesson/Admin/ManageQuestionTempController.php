@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class ManageQuestionTempController extends Controller {
 
+	protected $admin_question_template = 'admin.manage.question_template.partials.';
+
 	/**
 	 * @return list of question template
 	 */
@@ -22,7 +24,7 @@ class ManageQuestionTempController extends Controller {
 	 */
 	public function add_question_template()
 	{
-		return view('admin.manage.question_template.partials.add_question_template');
+		return view($this->admin_question_template . 'add_question_template');
 	}
 
 	/**
@@ -30,7 +32,7 @@ class ManageQuestionTempController extends Controller {
 	 */
 	public function view_question_template()
 	{
-		return view('admin.manage.question_template.partials.view_question_template');
+		return view($this->admin_question_template . 'view_question_template');
 	}
 
 	/**
@@ -38,7 +40,14 @@ class ManageQuestionTempController extends Controller {
 	 */
 	public function list_question_template()
 	{
-		return view('admin.manage.question_template.partials.list_question_template');
+		return view($this->admin_question_template . 'list_question_template');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function question_template_variable(){
+		return view($this->admin_question_template . 'question_template_variable');
 	}
 
 }
