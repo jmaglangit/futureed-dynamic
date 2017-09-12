@@ -104,5 +104,9 @@ function validateTemplateText(){
         if(val.indexOf("{integer_extended}") == Constants.NEGATIVE_1){
             $('button[name=btn_integer_extended]').prop('disabled', false);
         }else{$('button[name=btn_integer_extended]').prop('disabled', true);}
+
+        if(val.indexOf("{integer_counting}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_counting]').prop('disabled', false);
+        }else{$('button[name=btn_integer_counting]').prop('disabled', true);}
 	}
 }
