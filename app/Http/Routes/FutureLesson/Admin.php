@@ -633,6 +633,11 @@
 						['as' => $template_partials . 'question_template_variable'
 							, 'uses' => $template_controller . '@question_template_variable'
 						]);
+
+					Routes::get('/question_template_preview',
+						['as' => $template_partials . 'question_template_preview'
+							, 'uses' => $template_controller . '@question_template_preview'
+						]);
 				});
 
 			});

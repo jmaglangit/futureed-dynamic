@@ -162,7 +162,7 @@
 				<tbody>
 					<tr ng-repeat="record in template.records">
 						<td>{! record.question_type !}</td>
-						<td>{! record.operation !}</td>
+						<td>{! stringReplace(record.operation) | uppercase !}</td>
 						<td>{! record.question_form !}</td>
 						<td>{! record.question_template_format !}</td>
 						<td ng-if="template.records.length">

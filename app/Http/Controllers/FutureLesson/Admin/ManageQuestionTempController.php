@@ -50,4 +50,11 @@ class ManageQuestionTempController extends Controller {
 		return view($this->admin_question_template . 'question_template_variable');
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function question_template_preview(){
+		return view($this->admin_question_template . 'question_template_preview');
+	}
+
 }

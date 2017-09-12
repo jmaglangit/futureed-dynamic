@@ -149,7 +149,8 @@
 				<h4 class="modal-title">{!! trans('messages.admin_module_preview_questions') !!}</h4>
 			</div>
 			<div class="modal-body">
-				<p>{! template.question_preview !}</p>
+				{{--<p>{! template.question_preview !}</p>--}}
+				<div template-directive template-url="{!! route('admin.manage.question_template.partials.question_template_preview') !!}"></div>
 			</div>
 		</div>
 
