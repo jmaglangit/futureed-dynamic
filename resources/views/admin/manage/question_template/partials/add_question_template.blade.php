@@ -311,6 +311,7 @@
 							)!!}
 						</div>
 					</div>
+
 					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_COUNTING">
 						<div class="col-xs-5 admin-search-module">
 							{!! Form::button(trans('messages.admin_template_add_integer')
@@ -318,6 +319,51 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_integer_counting'
 									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_COUNTING)'
+								)
+							)!!}
+						</div>
+					</div>
+
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_ROUNDING_NUMBER">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_word')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_random_word'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_RANDOM_WORD)'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_ROUNDING_NUMBER">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_number')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_random_number'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_RANDOM_NUMBER)'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_REGROUP">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.number_one')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_number1'
+									, 'ng-click' => 'template.actionButtons(futureed.NUMBER1)'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_REGROUP">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.number_two')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_number2'
+									, 'ng-click' => 'template.actionButtons(futureed.NUMBER2)'
 								)
 							)!!}
 						</div>
