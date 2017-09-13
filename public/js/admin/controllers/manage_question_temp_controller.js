@@ -474,26 +474,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                             keyboard: Constants.FALSE,
                             show    : Constants.TRUE
 		});
-
-        // ManageQuestionTempService.questionPreview(data).success(function(response){
-        //     if(angular.equals(response.status, Constants.STATUS_OK)) {
-        //         if(response.errors) {
-        //             self.errors = $scope.errorHandler(response.errors);
-        //         } else {
-        //             self.question_preview = response.data;
-        //             //pop-up modal and display questions
-        //
-        //             $("#preview_question").modal({
-        //                 backdrop: 'static',
-        //                 keyboard: Constants.FALSE,
-        //                 show    : Constants.TRUE
-        //             });
-        //         }
-        //     }
-        // }).error(function(response) {
-        //     self.errors = $scope.internalError();
-        //     $scope.ui_unblock();
-        // });
 	}
 
 	self.getQuestionTemplateOperations = function(){
