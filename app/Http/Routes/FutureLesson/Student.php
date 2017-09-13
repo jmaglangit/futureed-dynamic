@@ -410,6 +410,11 @@
 							,'uses' => $route_controller . '@integer_regroup'
 						]);
 
+						Routes::get('/decimal-addition',[
+							'as' => $route_name . 'decimal-addition'
+							,'uses' => $route_controller . '@decimal_addition'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [

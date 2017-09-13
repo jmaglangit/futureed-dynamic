@@ -33,10 +33,11 @@ class QuestionTemplateOperationTableSeeder extends Seeder
 			'integer_decimal',
 			'integer_expanded_decimal',
 			'integer_extended',
-//			'integer_identify',
+			'integer_identify',
 //			'integer_counting', //MO
 			'integer_regroup',
 			'integer_rounding_number',
+            'decimal_addition',
         ];
 
         $seeder = [];
