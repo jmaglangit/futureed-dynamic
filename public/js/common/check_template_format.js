@@ -126,12 +126,12 @@ function validateTemplateText(){
             $('button[name=btn_integer_random_word]').prop('disabled', false);
         }else{$('button[name=btn_integer_random_word]').prop('disabled', true);}
 
-        if(val.indexOf("{number1}") == Constants.NEGATIVE_1){
-            $('button[name=btn_integer_number1]').prop('disabled', false);
-        }else{$('button[name=btn_integer_number1]').prop('disabled', true);}
+        if((val.indexOf("{number1}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_number1]').prop('disabled', false);
+        }else{$('button[name=btn_number1]').prop('disabled', true);}
 
-        if(val.indexOf("{number2}") == Constants.NEGATIVE_1){
-            $('button[name=btn_integer_number2]').prop('disabled', false);
-        }else{$('button[name=btn_integer_number2]').prop('disabled', true);}
+        if((val.indexOf("{number2}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_number1]').prop('disabled', false);
+        }else{$('button[name=btn_number1]').prop('disabled', true);}
 	}
 }
