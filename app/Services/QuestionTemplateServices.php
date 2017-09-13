@@ -191,6 +191,18 @@ class QuestionTemplateServices {
 
 				break;
 
+			case config('futureed.integer_identify'):
+
+				if((strpos($operation_var, ' {integer_random_digit}') == false) && (strpos($operation_var, ' {integer_random_number}') == false)){
+					return [
+						'message' => trans('errors.2605')
+					];
+				}else{
+					return true;
+				}
+
+				break;
+
 			default:
 				//check db if exists.
 				if(!empty($this->question_template_operation->getOperationByData($question_template['operation'])->toArray())){
