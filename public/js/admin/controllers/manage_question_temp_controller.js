@@ -31,6 +31,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		self.question_preview_id = "#questions_preview";
 		self.curriculum_country = Constants.FALSE;
 		self.checkbox_all = Constants.FALSE;
+		self.question_text = '';
 
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
@@ -201,6 +202,8 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 
         self.record.question_template_format += self.actionVariableNames(variable);
         $('button[name=btn_' + variable + ']').prop('disabled', true);
+		$('#template_text').focus();
+
 	}
 
 	self.validateTemplateText = function(){
@@ -459,30 +462,38 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 
     	//get preview constants
 		var data = {
-			'question_template_format' : encodeURIComponent(self.record.question_template_format),
+			'question_template_format' : self.record.question_template_format,
 			'operation' : self.record.operation,
 			'question_form' : self.record.question_form
 		};
 
-    	ManageQuestionTempService.questionPreview(data).success(function(response){
-            if(angular.equals(response.status, Constants.STATUS_OK)) {
-                if(response.errors) {
-                    self.errors = $scope.errorHandler(response.errors);
-                } else {
-                    self.question_preview = response.data;
-                    //pop-up modal and display questions
+		self.dynamicQuestionSetup(data);
 
-                    $("#preview_question").modal({
-                        backdrop: 'static',
-                        keyboard: Constants.FALSE,
-                        show    : Constants.TRUE
-                    });
-                }
-            }
-        }).error(function(response) {
-            self.errors = $scope.internalError();
-            $scope.ui_unblock();
-        });
+        $("#preview_question").modal({
+                            backdrop: 'static',
+                            keyboard: Constants.FALSE,
+                            show    : Constants.TRUE
+		});
+
+        // ManageQuestionTempService.questionPreview(data).success(function(response){
+        //     if(angular.equals(response.status, Constants.STATUS_OK)) {
+        //         if(response.errors) {
+        //             self.errors = $scope.errorHandler(response.errors);
+        //         } else {
+        //             self.question_preview = response.data;
+        //             //pop-up modal and display questions
+        //
+        //             $("#preview_question").modal({
+        //                 backdrop: 'static',
+        //                 keyboard: Constants.FALSE,
+        //                 show    : Constants.TRUE
+        //             });
+        //         }
+        //     }
+        // }).error(function(response) {
+        //     self.errors = $scope.internalError();
+        //     $scope.ui_unblock();
+        // });
 	}
 
 	self.getQuestionTemplateOperations = function(){
@@ -503,6 +514,153 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
         });
 
 	}
+
+    self.dynamicQuestionSetup = function(question){
+
+        var question_text = question.question_template_format;
+
+        console.log('question here --' + question_text);
+
+        //check type of operation
+        switch(question.operation){
+            case Constants.ADDITION:
+
+				randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.ADDENDS1 + '}',getRandomNumber1());
+                question_text = question_text.replace('{' + Constants.ADDENDS2 + '}',getRandomNumber2());
+                break;
+
+            case Constants.SUBTRACTION:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.MINUEND + '}', getRandomNumber1());
+                question_text = question_text.replace('{' + Constants.SUBTRAHEND +'}', getRandomNumber2());
+                break;
+
+            case Constants.MULTIPLICATION:
+
+            	randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.MULTIPLIER + '}',getRandomNumber2());
+                question_text = question_text.replace('{' + Constants.MULTIPLICAND + '}',getRandomNumber1());
+                break;
+
+            case Constants.DIVISION:
+
+				randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.DIVIDEND + '}',getRandomNumber2());
+                question_text = question_text.replace('{' + Constants.DIVISOR + '}',getRandomNumber1());
+                break;
+
+            case Constants.FRACTION_DIVISION:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_DIVISION + '}', "");
+                break;
+
+            case Constants.FRACTION_ADDITION:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_ADDITION + '}', "");
+                break;
+
+            case Constants.FRACTION_SUBTRACTION:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_SUBTRACTION + '}', "");
+                break;
+
+            case Constants.FRACTION_SUBTRACTION_BUTTERFLY:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_SUBTRACTION_BUTTERFLY + '}',"");
+                break;
+
+            case Constants.FRACTION_MULTIPLICATION:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_MULTIPLICATION + '}', "");
+                break;
+
+            case Constants.FRACTION_ADDITION_WHOLE:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_ADDITION_WHOLE + '}',"");
+                break;
+
+            case Constants.FRACTION_ADDITION_BUTTERFLY:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_ADDITION_BUTTERFLY + '}', "");
+				break;
+
+            case Constants.FRACTION_SUBTRACTION_WHOLE:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_SUBTRACTION_WHOLE + '}',"");
+                break;
+
+            case Constants.INTEGER_ADDITION:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_ADDITION + '}',"");
+				break;
+
+            case Constants.INTEGER_CONVERT_NUMBER:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_CONVERT_NUMBER + '}',getRandomNumber1());
+                break;
+
+            case Constants.INTEGER_SORT_SMALL:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_SORT_SMALL + '}',getRandomNumber1());
+                break;
+
+            case Constants.INTEGER_SORT_LARGE:
+
+                randomDigitsOnclick();
+				question_text = question_text.replace('{' + Constants.INTEGER_SORT_LARGE +'}',getRandomNumber1());
+                break;
+
+            case Constants.INTEGER_EXPANDED_DECIMAL:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_EXPANDED_DECIMAL + '}',getRealNumber());
+                break;
+
+            case Constants.INTEGER_DECIMAL:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_DECIMAL + '}',"");
+                break;
+
+            case Constants.INTEGER_EXTENDED:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_EXTENDED + '}',getRealNumber());
+				break;
+
+            case Constants.INTEGER_ROUNDING_NUMBER:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_NUMBER + '}',getRandomNumber());
+                question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_WORD + '}',getRandomWords());
+                break;
+
+            case Constants.INTEGER_REGROUP:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.NUMBER1 + '}', getFirstNumber() + ' ' + getFirstNumberWords());
+                question_text = question_text.replace('{' + Constants.NUMBER2 + '}', getSecondNumber() + ' ' + getSecondNumberWords());
+                break;
+
+            default:
+                break;
+        }
+
+        self.question_text = question_text;
+    }
 
 
 
