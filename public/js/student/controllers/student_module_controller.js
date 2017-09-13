@@ -1981,6 +1981,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.INTEGER_COUNTING:
+
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.INTEGER_COUNTING + '}',getRandomNumber());
+
+				self.current_question.questions_text = question_text;
+
+				startAnswer();
+
+				break;
+
 			case Constants.INTEGER_IDENTIFY:
 
 				randomDigitsOnclick();

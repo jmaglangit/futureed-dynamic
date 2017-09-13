@@ -63,7 +63,6 @@
 				<label class="control-label col-xs-2">{!! trans('messages.admin_template_text') !!} <span class="required">*</span></label>
 			</div>
 
-
 			<div class="form-group">
 				<div template-directive template-url="{!! route('admin.manage.question_template.partials.question_template_variable') !!}"></div>
 				{{--<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}

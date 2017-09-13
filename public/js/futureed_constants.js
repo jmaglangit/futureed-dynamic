@@ -342,6 +342,7 @@ var Constants = {
 	, INTEGER_DECIMAL			: 'integer_decimal'
 	, INTEGER_EXPANDED_DECIMAL	: 'integer_expanded_decimal'
 	, INTEGER_EXTENDED			: 'integer_extended'
+	, INTEGER_COUNTING			: 'integer_counting'
 	, INTEGER_IDENTIFY			: 'integer_identify'
 	, INTEGER_ROUNDING_NUMBER	: 'integer_rounding_number'
 	, INTEGER_REGROUP			: 'integer_regroup'
