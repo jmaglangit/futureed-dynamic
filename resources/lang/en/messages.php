@@ -983,6 +983,8 @@ return [
 	'admin_operation_fraction_subtraction_whole' => 'FRACTION_SUBTRACTION_WHOLE',
 	'admin_template_add_fraction' => 'ADD FRACTION',
 	'admin_template_add_integer' => 'ADD INTEGER',
+	'admin_template_integer_random_digit' => 'ADD RANDOM DIGIT',
+	'admin_template_integer_random_number' => 'ADD RANDOM NUMBER',
 	'admin_template_add_number' => 'ADD NUMBER',
 	'admin_template_add_word' => 'ADD WORD',
 

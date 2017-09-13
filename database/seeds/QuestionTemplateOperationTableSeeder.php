@@ -27,14 +27,13 @@ class QuestionTemplateOperationTableSeeder extends Seeder
             'fraction_subtraction_whole',
 			'integer_sort_small',
 			'integer_sort_large',
-			'integer_counting',
+			'integer_counting',  //MO
             'integer_addition',
 			'integer_convert_number',
 			'integer_decimal',
 			'integer_expanded_decimal',
 			'integer_extended',
-//			'integer_identify',
-//			'integer_counting', //MO
+			'integer_identify',
 			'integer_regroup',
 			'integer_rounding_number',
         ];

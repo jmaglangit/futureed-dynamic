@@ -109,6 +109,15 @@ function validateTemplateText(){
             $('button[name=btn_integer_counting]').prop('disabled', false);
         }else{$('button[name=btn_integer_counting]').prop('disabled', true);}
 
+        //integer identify variables
+        if(val.indexOf("{integer_random_digit}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_random_digit]').prop('disabled', false);
+        }else{$('button[name=btn_integer_random_digit]').prop('disabled', true);}
+
+        if(val.indexOf("{integer_random_number}") == Constants.NEGATIVE_1){
+            $('button[name=btn_integer_random_number]').prop('disabled', false);
+        }else{$('button[name=btn_integer_random_number]').prop('disabled', true);}
+
         if(val.indexOf("{integer_random_number}") == Constants.NEGATIVE_1){
             $('button[name=btn_integer_random_number]').prop('disabled', false);
         }else{$('button[name=btn_integer_random_number]').prop('disabled', true);}

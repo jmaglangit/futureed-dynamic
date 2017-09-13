@@ -405,6 +405,11 @@
 							,'uses' => $route_controller . '@integer_counting'
 						]);
 
+						Routes::get('/integer-identify',[
+							'as' => $route_name . 'integer-identify'
+							,'uses' => $route_controller . '@integer_identify'
+						]);
+
 						Routes::get('/integer-rounding-number',[
 							'as' => $route_name . 'integer-rounding-number'
 							,'uses' => $route_controller . '@integer_rounding_number'

@@ -322,6 +322,25 @@
 								)
 							)!!}
 						</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_IDENTIFY">
+						<div class="col-xs-6 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_integer_random_digit')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_random_digit'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_RANDOM_DIGIT)'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-6 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_integer_random_number')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_random_number'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_RANDOM_NUMBER)'
+								)
+							)!!}
+						</div>
 					</div>
 
 					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_ROUNDING_NUMBER">
