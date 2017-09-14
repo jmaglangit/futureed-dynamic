@@ -367,8 +367,8 @@ var Constants = {
     , DENOMINATOR_WHOLE			: 'denominator_whole'
 	, DENOMINATOR1				: 'denominator1'
     , DENOMINATOR2				: 'denominator2'
-    , DECIMAL_ADDENDS1			: 'decimal_addends1'
-    , DECIMAL_ADDENDS2			: 'decimal_addends2'
+	, DECIMAL_ADDENDS1			: 'decimal_addends1'
+	, DECIMAL_ADDENDS2			: 'decimal_addends2'
 	, INTEGER_RANDOM_DIGIT		: 'integer_random_digit'
 	, INTEGER_RANDOM_NUMBER		: 'integer_random_number'
 

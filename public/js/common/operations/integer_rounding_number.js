@@ -137,7 +137,7 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -181,7 +181,7 @@ function nextsetp(){
         $("<p>Step " + step_count + " :  Do you round up or down?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 5) {
-        $("<p>Step " + step_count + " : Answer </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " : What is the answer? </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 6) {
         answerDone(); //ADDED
@@ -192,7 +192,7 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -320,11 +320,11 @@ function checkAnswerValidation(elem) {
 
     if(retry_attempt > 1){
         if (step_count == 1) {
-            alertModal("Correct Answer is " + arry_correct_answer[1] + ". Retry! ");
+            alertModal("The correct answer is " + arry_correct_answer[1] + ". Please retry. ");
         }else if (step_count == 4) {
-            alertModal("Correct Answer is " + arry_correct_answer[3] + ". Retry! ");
+            alertModal("The correct answer is " + arry_correct_answer[3] + ". Please retry. ");
         } else{
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
         }
         retry_attempt = 0;
         return -3;
@@ -422,7 +422,7 @@ function displayTotalFlow(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 5: Answer</p>";
+    result_str += "<p>Step 5: What is the answer?</p>";
     if (arry_temp[5]) {
         result_str += "<p style='color:red;'> Error : " + arry_temp[5] + "</p>";
     }
@@ -508,7 +508,7 @@ function CorrectdisplayTotalFlows(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 5: Answer</p>";
+    result_str += "<p>Step 5: What is the answer?</p>";
     result_str += "<p style='color:red;'>Now round "+ s1 +".  <br>This means that the numbers to the right of the number in question turn to 0.<br>The number in question does not change.</p>";
     str_number = "";
     if (real_number[real_number.length - randonWordsIndex] < 5) {

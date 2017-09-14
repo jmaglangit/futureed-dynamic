@@ -14,7 +14,7 @@
             <div id="lastDiv1" class="margin-10-top margin-10-bot h4"></div>
         </div>
         <!-- answer area -->
-        <div id="tipsFlow" style="display: none;">
+        <div id="tipsFlow" style="display: none;" class="tips_area">
             <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
             <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-right">

@@ -244,13 +244,13 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == "y"){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(checkAnswer($(this)) == "z"){
-                alertModal('Input the valid expression');
+                alertModal('That is incorrect. Answer can’t be blank. Please retry.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -267,7 +267,7 @@ function startBtnOnclick(){
                     return false;
                 }
                 if (temp_answer == false) {
-                    alertModal("Answer can't be alphabet!");
+                    alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
@@ -351,13 +351,13 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == "y"){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(checkAnswer($(this)) == "z"){
-                alertModal('Input the valid expression');
+                alertModal('That is incorrect. Answer can’t be blank. Please retry.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -373,7 +373,7 @@ function nextsetp(){
                     return false;
                 }
                 if (temp_answer == false) {
-                    alertModal("Answer can't be alphabet!");
+                    alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
@@ -442,7 +442,7 @@ function checkAnswerValidation(elem) {
                 step1_error1 = answer_val;
                 if (isValidExpression(answer_val)) {
                     if(retry_attempt > 1){
-                        alertModal("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
                         step1_count--;
                         retry_attempt = 0;
                         return -3;
@@ -452,7 +452,7 @@ function checkAnswerValidation(elem) {
                     }
                 }else {
                     if(retry_attempt > 1){
-                        alertModal("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
                         step1_count--;
                         retry_attempt = 0;
                         return -3;
@@ -478,7 +478,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
 
                     if (step1_count == 2) {
-                        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                         step1_count--;
                     }
                     retry_attempt = 0;
@@ -494,7 +494,7 @@ function checkAnswerValidation(elem) {
             }else {
                 if(retry_attempt > 1){
                     if (step1_count == 2) {
-                        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                         step1_count--;
                     }
                     retry_attempt = 0;
@@ -531,7 +531,7 @@ function checkAnswerValidation(elem) {
                 step2_error1 = answer_val;
                 if (isValidExpression(answer_val)) {
                     if(retry_attempt > 1){
-                        alertModal("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
                         step2_count--;
                         retry_attempt = 0;
                         return -3;
@@ -541,7 +541,7 @@ function checkAnswerValidation(elem) {
                     }
                 }else {
                     if(retry_attempt > 1){
-                        alertModal("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
                         step2_count--;
                         retry_attempt = 0;
                         return -3;
@@ -566,7 +566,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
 
                     if (step2_count == 2) {
-                        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                         step2_count--;
                     }
                     retry_attempt = 0;
@@ -582,7 +582,7 @@ function checkAnswerValidation(elem) {
             }else {
                 if(retry_attempt > 1){
                     if (step2_count == 2) {
-                        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                         step2_count--;
                     }
                     retry_attempt = 0;
@@ -618,7 +618,7 @@ function checkAnswerValidation(elem) {
                 step3_error1 = answer_val;
                 if (isValidExpression(answer_val)) {
                     if(retry_attempt > 1){
-                        alertModal("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
                         step3_count--;
                         retry_attempt = 0;
                         return -3;
@@ -628,7 +628,7 @@ function checkAnswerValidation(elem) {
                     }
                 }else {
                     if(retry_attempt > 1){
-                        alertModal("Correct Answer is " + correct_answer1 + " or " + correct_answer2 + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer1 + " or " + correct_answer2 + ". Please retry. ");
                         step3_count--;
                         retry_attempt = 0;
                         return -3;
@@ -652,7 +652,7 @@ function checkAnswerValidation(elem) {
                 if(retry_attempt > 1){
 
                     if (step3_count == 2) {
-                        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                         step3_count--;
                     }
                     retry_attempt = 0;
@@ -668,7 +668,7 @@ function checkAnswerValidation(elem) {
             }else {
                 if(retry_attempt > 1){
                     if (step3_count == 2) {
-                        alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                         step3_count--;
                     }
                     retry_attempt = 0;
@@ -699,7 +699,7 @@ function checkAnswerValidation(elem) {
         if (answer_val > correct_answer) {
 
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                 retry_attempt = 0;
                 return -3;
             }else{
@@ -711,7 +711,7 @@ function checkAnswerValidation(elem) {
 
         }else {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry. ");
                 retry_attempt = 0;
                 return -3;
             }else{
@@ -801,7 +801,7 @@ function displayTotalFlow(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 4: Answer</p>";
+    result_str += "<p>Step 4: What is the answer?</p>";
     // result_str += "<p style='color:red;'> Error : " + arry_temp[4] + "</p>";
     result_str += "<label style='color:blue;'>" + arry_total[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</label>";
     $("#correct_flow").html(result_str);
@@ -838,7 +838,7 @@ function displayTotalFlow1(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 4: Answer</p>";
+    result_str += "<p>Step 4: What is the answer?</p>";
     result_str += "<label style='color:blue;'>" + arry_total[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</label>";
     $("#correct_flow_answer").html(result_str);
 

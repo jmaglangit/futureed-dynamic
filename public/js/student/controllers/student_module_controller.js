@@ -2038,7 +2038,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				randomDigitsOnclick();
 
 				question_text = question_text.replace('{' + Constants.DECIMAL_ADDENDS1 + '}',getRandomNumber1());
-                question_text = question_text.replace('{' + Constants.DECIMAL_ADDENDS2 + '}',getRandomNumber2());
+				question_text = question_text.replace('{' + Constants.DECIMAL_ADDENDS2 + '}',getRandomNumber2());
 
 				self.current_question.questions_text = question_text;
 
