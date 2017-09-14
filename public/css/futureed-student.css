@@ -2906,3 +2906,7 @@ div#correct_flow p, div#Answer_correct_flow p,
 .integer_area table {
     width: 100%;
 }
+
+.tips_area span {
+    line-height: 25px;
+}
