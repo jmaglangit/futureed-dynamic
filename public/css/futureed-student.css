@@ -2907,6 +2907,10 @@ div#correct_flow p, div#Answer_correct_flow p,
     width: 100%;
 }
 
+.tips_area span {
+    line-height: 25px;
+}
+
 .integer_area > #first_div > div > label {
     margin-top: 10px;
 }
