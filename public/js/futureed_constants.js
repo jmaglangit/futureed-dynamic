@@ -342,6 +342,8 @@ var Constants = {
 	, INTEGER_DECIMAL			: 'integer_decimal'
 	, INTEGER_EXPANDED_DECIMAL	: 'integer_expanded_decimal'
 	, INTEGER_EXTENDED			: 'integer_extended'
+	, INTEGER_COUNTING			: 'integer_counting'
+	, INTEGER_IDENTIFY			: 'integer_identify'
 	, INTEGER_ROUNDING_NUMBER	: 'integer_rounding_number'
 	, INTEGER_REGROUP			: 'integer_regroup'
 	, INTEGER_RANDOM_WORD		: 'integer_random_word'
@@ -367,6 +369,8 @@ var Constants = {
     , DENOMINATOR2				: 'denominator2'
     , DECIMAL_ADDENDS1			: 'decimal_addends1'
     , DECIMAL_ADDENDS2			: 'decimal_addends2'
+	, INTEGER_RANDOM_DIGIT		: 'integer_random_digit'
+	, INTEGER_RANDOM_NUMBER		: 'integer_random_number'
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']

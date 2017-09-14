@@ -55,6 +55,12 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_EXTENDED">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-extended') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_COUNTING">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-counting') !!}"></div>
+</div>
+<div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_IDENTIFY">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-identify') !!}"></div>
+</div>
 <div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_ROUNDING_NUMBER">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-rounding-number') !!}"></div>
 </div>

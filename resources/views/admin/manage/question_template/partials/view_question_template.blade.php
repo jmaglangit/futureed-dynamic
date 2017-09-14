@@ -24,22 +24,13 @@
 			<div class="form-group">
 				<label class="control-label col-xs-3">{!! trans('messages.admin_question_type') !!} <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::select('search_question_type'
-						, array(
-							 ''=>trans('messages.admin_select_question_type')
-							, 'FIB' => trans('messages.admin_fib')
-							//, 'MC' => trans('messages.admin_mc')
-					 	)
-					 	, null
-					 	, array(
-					 		'ng-disabled' => 'template.active_view',
-					 		'ng-selected' => 'template.record.question_type'
-					 		, 'class' => 'form-control'
-					 		, 'ng-model' => 'template.record.question_type'
-					 		, 'ng-class' => "{ 'required-field' : template.fields['question_type'] }"
-					 		, 'placeholder' => trans('messages.email')
-					 	)
-					) !!}
+					<select ng-disabled="template.active_view" ng-model="template.record.question_type"
+							ng-class="{ 'required-field' : template.fields['question_type'] }"
+							class="form-control">
+						<option ng-show="template.record.question_type == futureed.FALSE" value="">{!! trans('messages.admin_select_question_type') !!}</option>
+						<option value="FIB"> {!!  trans('messages.admin_fib') !!} </option>
+						{{--<option value="MC"> {!!  trans('messages.admin_mc') !!} </option>--}}
+					</select>
 				</div>
 			</div>
 
@@ -49,7 +40,7 @@
 					<select ng-disabled="template.active_view" ng-model="template.record.operation"
 							ng-change="template.operationType()" ng-class="{ 'required-field' : template.fields['operation'] }"
 							class="form-control">
-						<option ng-selected="template.record.operation == futureed.false" value="">{!! trans('messages.admin_select_operation') !!}</option>
+						{{--<option ng-selected="template.record.operation == futureed.false" value="">{!! trans('messages.admin_select_operation') !!}</option>--}}
 						<option ng-selected="template.record.operation == operation.operation_data" ng-repeat="operation in template.question_template_operation" ng-value="operation.operation_data"> {! stringReplace(operation.operation_data) | uppercase !} </option>
 					</select>
 				</div>
@@ -58,22 +49,14 @@
 			<div class="form-group">
 				<label class="control-label col-xs-3">{!! trans('messages.admin_question_form') !!} <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::select('search_question_form'
-						, array(
-							  ''=>trans('messages.admin_select_question_form')
-							//, 'Word' => trans('messages.admin_question_form_word')
-							//, 'Blank' => trans('messages.admin_question_form_blank')
-							, 'Series' => trans('messages.admin_question_form_series')
-					 	)
-					 	, null
-					 	, array(
-					 		'ng-disabled' => 'template.active_view'
-					 		, 'class' => 'form-control'
-					 		, 'ng-model' => 'template.record.question_form'
-					 		, 'ng-class' => "{ 'required-field' : template.fields['question_form'] }"
-					 		, 'placeholder' => trans('messages.email')
-					 	)
-					) !!}
+					<select ng-disabled="template.active_view" ng-model="template.record.question_form"
+							ng-class="{ 'required-field' : template.fields['question_form'] }"
+							class="form-control">
+						<option ng-show="template.record.question_form == futureed.FALSE" value="">{!! trans('messages.admin_select_question_form') !!}</option>
+						{{--<option value="Word"> {!!  trans('messages.admin_question_form_word') !!} </option>--}}
+						{{--<option value="Blank"> {!!  trans('messages.admin_question_form_blank') !!} </option>--}}
+						<option value="Series"> {!!  trans('messages.admin_question_form_series') !!} </option>
+					</select>
 				</div>
 			</div>
 
@@ -298,6 +281,41 @@
 									'class' => 'btn btn-blue'
 									, 'name' => 'btn_integer_addition'
 									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_ADDITION)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_IDENTIFY">
+						<div class="col-xs-6 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_integer_random_digit')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_random_digit'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_RANDOM_DIGIT)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-6 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_integer_random_number')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_random_number'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_RANDOM_NUMBER)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.INTEGER_COUNTING">
+						<div class="col-xs-5 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_integer')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_integer_counting'
+									, 'ng-click' => 'template.actionButtons(futureed.INTEGER_COUNTING)'
+									, 'ng-disabled' => '!template.isClicked'
 								)
 							)!!}
 						</div>
