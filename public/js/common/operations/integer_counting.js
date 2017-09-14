@@ -225,7 +225,7 @@ function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
 
     _elem.prop("value", _answer);
     if((_answer * 1 < __start_num) || (_answer * 1 > __end_num))    {
-        return _errorHandler(_elem, -2, "Answer can't less than " + __start_num + " or more than " + __end_num + " !");
+        return _errorHandler(_elem, -2, "That is incorrect. Answer cannot be less than " + __start_num + " or more than " + __end_num + ". Please retry.");
     }
     if(_answer < _correct_answer) {
         return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
