@@ -137,7 +137,7 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -192,7 +192,7 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet!");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -320,11 +320,11 @@ function checkAnswerValidation(elem) {
 
     if(retry_attempt > 1){
         if (step_count == 1) {
-            alertModal("Correct Answer is " + arry_correct_answer[1] + ". Retry! ");
+            alertModal("The correct answer is " + arry_correct_answer[1] + ". Please retry. ");
         }else if (step_count == 4) {
-            alertModal("Correct Answer is " + arry_correct_answer[3] + ". Retry! ");
+            alertModal("The correct answer is " + arry_correct_answer[3] + ". Please retry. ");
         } else{
-            alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
         }
         retry_attempt = 0;
         return -3;
