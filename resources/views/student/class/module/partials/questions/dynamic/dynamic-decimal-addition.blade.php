@@ -1,7 +1,8 @@
 <div>
     <div style="visibility:hidden">
+        <input type="text" class="input_num_max" style="width: 50px" readonly>
         <input type="text" name="randomDigits" id="randomDigits" required autofocus value="4">
-        <input type="text" name="randomNumber1" id="randomNumber1" readonly><br><br>
+        <input type="text" name="randomNumber1" id="randomNumber1" readonly>
         <input type="text" name="randomNumber2" id="randomNumber2" readonly><br><br>
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
@@ -15,7 +16,7 @@
         </div>
 
         <!-- answer area -->
-        <div id="answerPane" class="col-xs-6 pull-right h4">
+        <div id="answerPane" class="col-xs-6 pull-right h4 answer_area">
             <div id="lastDiv" class="margin-10-top margin-10-bot h4"></div>
         </div>
 

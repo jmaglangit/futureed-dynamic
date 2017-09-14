@@ -235,7 +235,8 @@ function checkAnswerValidation(elem) {
         return correct_answer;  
     } 
     if(retry_attempt > 1){
-        alert("Correct Answer is " + correct_answer + ". Retry! ");
+        // alert("Correct Answer is " + correct_answer + ". Retry! ");
+        alertModal("The correct answer is " + correct_answer + ". Please retry. ");
         retry_attempt = 0;
         return -3;
     }
@@ -467,7 +468,7 @@ function generateAnswerStep() {
 
     diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
     result = "<p>Add</p>";
-    result += "<p align=right style='width:58%;'>";
+    result += "<p align=right style='width:100px;'>";
 
     pos_i = step_count + 2;
     if(pos_i == getDigitsCouunt(randomNumber1) - 1) pos_i++;
@@ -481,7 +482,7 @@ function generateAnswerStep() {
         }
     }
     result += "</p>";
-    result += "<p align=right style='width:58%;'> + ";
+    result += "<p align=right style='width:100px;'> + ";
     if(diff_space > 0) result += "  ";
 
     for(i=getDigitsCouunt(randomNumber2); i > 1; i--){
@@ -515,26 +516,30 @@ function generateAnswerStep() {
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alert("Answer can't be alphabet !");
+                // alert("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(checkAnswer2($(this)) == false){
-                alert("Answer can't be negative or more than 18 !");
+                // alert("Answer can't be negative or more than 18 !");
+                alertModal("That is incorrect. Answer cannot be less than 0 or more than 18. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alert("Your answer is larger than what we need.");
+                // alert("Your answer is larger than what we need.");
+                alertModal("Your answer is larger than what we need.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alert("opps not enough, your answer needs to be larger.");
+                // alert("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
