@@ -422,7 +422,7 @@ function displayTotalFlow(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 5: Answer</p>";
+    result_str += "<p>Step 5: What is the answer?</p>";
     if (arry_temp[5]) {
         result_str += "<p style='color:red;'> Error : " + arry_temp[5] + "</p>";
     }
@@ -508,7 +508,7 @@ function CorrectdisplayTotalFlows(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 5: Answer</p>";
+    result_str += "<p>Step 5: What is the answer?</p>";
     result_str += "<p style='color:red;'>Now round "+ s1 +".  <br>This means that the numbers to the right of the number in question turn to 0.<br>The number in question does not change.</p>";
     str_number = "";
     if (real_number[real_number.length - randonWordsIndex] < 5) {

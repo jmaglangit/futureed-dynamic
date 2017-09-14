@@ -801,7 +801,7 @@ function displayTotalFlow(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 4: Answer</p>";
+    result_str += "<p>Step 4: What is the answer?</p>";
     // result_str += "<p style='color:red;'> Error : " + arry_temp[4] + "</p>";
     result_str += "<label style='color:blue;'>" + arry_total[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</label>";
     $("#correct_flow").html(result_str);
@@ -838,7 +838,7 @@ function displayTotalFlow1(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 4: Answer</p>";
+    result_str += "<p>Step 4: What is the answer?</p>";
     result_str += "<label style='color:blue;'>" + arry_total[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</label>";
     $("#correct_flow_answer").html(result_str);
 
