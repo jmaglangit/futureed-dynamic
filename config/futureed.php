@@ -394,4 +394,5 @@ return [
 	'fraction_subtraction_butterfly' => 'fraction_subtraction_butterfly',
 	'fraction_addition_whole' => 'fraction_addition_whole',
 	'fraction_subtraction_whole' => 'fraction_subtraction_whole',
+	'integer_identify' => 'integer_identify',
 ];
