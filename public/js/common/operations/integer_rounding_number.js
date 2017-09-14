@@ -181,7 +181,7 @@ function nextsetp(){
         $("<p>Step " + step_count + " :  Do you round up or down?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 5) {
-        $("<p>Step " + step_count + " : Answer </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " : What is the answer? </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 6) {
         answerDone(); //ADDED
