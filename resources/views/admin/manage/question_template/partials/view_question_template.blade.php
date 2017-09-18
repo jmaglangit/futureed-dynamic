@@ -320,6 +320,28 @@
 							)!!}
 						</div>
 					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_ADDITION">
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.addends_one')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_decimal_addends1'
+									, 'ng-click' => 'template.actionButtons(futureed.DECIMAL_ADDENDS1)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-4 admin-search-module">
+							{!! Form::button(trans('messages.addends_two')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_decimal_addends2'
+									, 'ng-click' => 'template.actionButtons(futureed.DECIMAL_ADDENDS2)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+					</div>
 					<div class="col-xs-2"></div>
 
 				</div>

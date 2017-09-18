@@ -133,5 +133,14 @@ function validateTemplateText(){
         if((val.indexOf("{number2}")) == Constants.NEGATIVE_1){
             $('button[name=btn_number1]').prop('disabled', false);
         }else{$('button[name=btn_number1]').prop('disabled', true);}
+
+        //integer decimal variables
+        if((val.indexOf("{decimal_addends1}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_addends1]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_addends1]').prop('disabled', true);}
+
+        if((val.indexOf("{decimal_addends2}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_addends2]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_addends2]').prop('disabled', true);}
 	}
 }
