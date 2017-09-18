@@ -67,3 +67,6 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.INTEGER_REGROUP">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.integer-regroup') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_COMPARE">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-compare') !!}"></div>
+</div>

@@ -420,6 +420,11 @@
 							,'uses' => $route_controller . '@integer_regroup'
 						]);
 
+						Routes::get('/decimal-compare',[
+							'as' => $route_name . 'decimal-compare'
+							,'uses' => $route_controller . '@decimal_compare'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [

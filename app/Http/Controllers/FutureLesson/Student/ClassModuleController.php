@@ -199,4 +199,9 @@ class ClassModuleController extends Controller {
 	public function integer_counting(){
 		return view($this->dynamic_question.'dynamic-integer-counting');
 	}
+
+	public function decimal_compare(){
+		return view($this->dynamic_question.'dynamic-decimal-compare');
+	}
+
 }
