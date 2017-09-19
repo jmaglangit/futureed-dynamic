@@ -215,6 +215,18 @@ class QuestionTemplateServices {
 
 				break;
 
+			case config('futureed.decimal_compare'):
+
+				if((strpos($operation_var, '{decimal_random_number1}') != false) && (strpos($operation_var, '{decimal_random_number2}') != false)){
+					return true;
+				}else{
+					return [
+						'message' => trans('errors.2605')
+					];
+				}
+
+				break;
+
 			default:
 				//check db if exists.
 				if(!empty($this->question_template_operation->getOperationByData($question_template['operation'])->toArray())){
