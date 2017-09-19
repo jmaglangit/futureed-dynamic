@@ -397,4 +397,5 @@ return [
 	'integer_identify' => 'integer_identify',
 	'decimal_addition' => 'decimal_addition',
 	'decimal_compare' => 'decimal_compare',
+	'decimal_understand' => 'decimal_understand',
 ];
