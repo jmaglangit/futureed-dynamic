@@ -36,6 +36,7 @@ class QuestionTemplateOperationTableSeeder extends Seeder
 			'integer_identify',
 			'integer_regroup',
 			'integer_rounding_number',
+            'decimal_compare',
             'decimal_addition',
         ];
 

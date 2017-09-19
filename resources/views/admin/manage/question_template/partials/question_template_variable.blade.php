@@ -335,5 +335,27 @@
             )!!}
         </div>
     </div>
+
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_COMPARE">
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal1')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_random_number1'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_NUMBER1)'
+                )
+            )!!}
+        </div>
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal2')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_random_number2'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_NUMBER2)'
+                )
+            )!!}
+        </div>
+    </div>
+
     <div class="col-xs-2"></div>
 </div>

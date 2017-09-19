@@ -2032,6 +2032,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.DECIMAL_COMPARE:
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER1 + '}', getFirstNumber() + '.' + getFirstDecimalDigit());
+				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER2 + '}', getSecondNumber() + '.' + getSecondDecimalDigit());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
 			case Constants.DECIMAL_ADDITION:
 				setRandomDigits(self.question_grade_condition.max_number.toString().length);
 

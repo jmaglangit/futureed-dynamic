@@ -348,6 +348,7 @@ var Constants = {
 	, INTEGER_REGROUP			: 'integer_regroup'
 	, INTEGER_RANDOM_WORD		: 'integer_random_word'
 	, INTEGER_RANDOM_NUMBER		: 'integer_random_number'
+	, DECIMAL_COMPARE			: 'decimal_compare'
 	, DECIMAL_ADDITION			: 'decimal_addition'
 
 	/* question dynamic template variables */
@@ -371,6 +372,8 @@ var Constants = {
 	, DECIMAL_ADDENDS2			: 'decimal_addends2'
 	, INTEGER_RANDOM_DIGIT		: 'integer_random_digit'
 	, INTEGER_RANDOM_NUMBER		: 'integer_random_number'
+	, DECIMAL_RANDOM_NUMBER1	: 'decimal_random_number1'
+	, DECIMAL_RANDOM_NUMBER2	: 'decimal_random_number2'
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']

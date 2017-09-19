@@ -142,5 +142,15 @@ function validateTemplateText(){
         if((val.indexOf("{decimal_addends2}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_addends2]').prop('disabled', false);
         }else{$('button[name=btn_decimal_addends2]').prop('disabled', true);}
+
+        //decimal variables
+        if((val.indexOf("{decimal_random_number1}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_random_number1]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_random_number1]').prop('disabled', true);}
+
+        if((val.indexOf("{decimal_random_number2}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_random_number2]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_random_number2]').prop('disabled', true);}
+
 	}
 }

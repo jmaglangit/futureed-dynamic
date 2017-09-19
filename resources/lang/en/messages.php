@@ -987,7 +987,8 @@ return [
 	'admin_template_integer_random_number' => 'ADD RANDOM NUMBER',
 	'admin_template_add_number' => 'ADD NUMBER',
 	'admin_template_add_word' => 'ADD WORD',
-
+	'admin_template_decimal1' => 'ADD DECIMAL1',
+	'admin_template_decimal2' => 'ADD DECIMAL2',
 	//Client
 	//resources/views/client/dashboard/index.blade.php
 	'client_dashboard' => 'Client Dashboard',
