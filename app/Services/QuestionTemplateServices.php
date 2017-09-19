@@ -203,6 +203,18 @@ class QuestionTemplateServices {
 
 				break;
 
+			case config('futureed.decimal_addition'):
+
+				if((strpos($operation_var, '{decimal_addends1}') == false) && (strpos($operation_var, '{decimal_addends2}') == false)){
+					return [
+						'message' => trans('errors.2605')
+					];
+				}else{
+					return true;
+				}
+
+				break;
+
 			default:
 				//check db if exists.
 				if(!empty($this->question_template_operation->getOperationByData($question_template['operation'])->toArray())){

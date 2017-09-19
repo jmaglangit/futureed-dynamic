@@ -349,6 +349,7 @@ var Constants = {
 	, INTEGER_RANDOM_WORD		: 'integer_random_word'
 	, INTEGER_RANDOM_NUMBER		: 'integer_random_number'
 	, DECIMAL_COMPARE			: 'decimal_compare'
+	, DECIMAL_ADDITION			: 'decimal_addition'
 
 	/* question dynamic template variables */
 	, NUMBER1					: 'number1'
@@ -367,6 +368,8 @@ var Constants = {
     , DENOMINATOR_WHOLE			: 'denominator_whole'
 	, DENOMINATOR1				: 'denominator1'
     , DENOMINATOR2				: 'denominator2'
+	, DECIMAL_ADDENDS1			: 'decimal_addends1'
+	, DECIMAL_ADDENDS2			: 'decimal_addends2'
 	, INTEGER_RANDOM_DIGIT		: 'integer_random_digit'
 	, INTEGER_RANDOM_NUMBER		: 'integer_random_number'
 	, DECIMAL_RANDOM_NUMBER1	: 'decimal_random_number1'
