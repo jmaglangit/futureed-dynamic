@@ -2914,3 +2914,8 @@ div#correct_flow p, div#Answer_correct_flow p,
 .integer_area > #first_div > div > label {
     margin-top: 10px;
 }
+
+.answer_underline {
+    margin-top: 10px;
+    border-bottom: 1px solid;
+}

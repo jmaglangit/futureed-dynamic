@@ -295,7 +295,7 @@ function finalFunc(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -326,7 +326,7 @@ function finalFunc(){
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false){
                         // alert("Answer can't be alphabet !");
-                        alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                        alertModal("That is incorrect. Answer can't be blank. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -335,14 +335,14 @@ function finalFunc(){
                     temp_answer = checkAnswerValidation1($(this));
                     if(temp_answer == -1){
                         // alert("Your answer incorrect. Retey!");
-                        alertModal("Your answer incorrect. Please retry.");
+                        alertModal("Your answer is incorrect. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
                     }
                     if(temp_answer == -2){
                         // alert("Your answer incorrect. Retey!");
-                        alertModal("Your answer incorrect. Please retry.");
+                        alertModal("Your answer is incorrect. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -461,7 +461,7 @@ function nextsetp(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -505,7 +505,7 @@ function middleFunc() {
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -568,7 +568,7 @@ function step2Func() {
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -576,13 +576,13 @@ function step2Func() {
             
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alertModal("Sign is not correct. Please retry.");
+                alertModal("Your answer is incorrect. Please retry..");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("Sign is not correct. Please retry.");
+                alertModal("Your answer is incorrect. Please retry..");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -596,7 +596,7 @@ function step2Func() {
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false){
                         // alert("Answer can't be alphabet !");
-                        alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                        alertModal("That is incorrect. Answer can't be blank. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -604,13 +604,13 @@ function step2Func() {
                     
                     temp_answer = checkAnswerValidation($(this));
                     if(temp_answer == -1){
-                        alertModal("Sign is not correct. Please retry.");
+                        alertModal("Your answer is incorrect. Please retry..");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
                     }
                     if(temp_answer == -2){
-                        alertModal("Sign is not correct. Please retry.");
+                        alertModal("Your answer is incorrect. Please retry..");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -624,7 +624,7 @@ function step2Func() {
                         if(event.keyCode == 13){
                             if(checkAnswer($(this)) == false){
                                 // alert("Answer can't be alphabet !");
-                                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
@@ -632,13 +632,13 @@ function step2Func() {
                             
                             temp_answer = checkAnswerValidation($(this));
                             if(temp_answer == -1){
-                                alertModal("Sign is not correct. Please retry.");
+                                alertModal("Your answer is incorrect. Please retry..");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
                             }
                             if(temp_answer == -2){
-                                alertModal("Sign is not correct. Please retry.");
+                                alertModal("Your answer is incorrect. Please retry..");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;

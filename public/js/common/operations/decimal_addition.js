@@ -270,7 +270,7 @@ function displayTotalFlow2(){
         result += getDigitNum(randomNumber1, i) + " ";
     }
     result += "</p>";
-    result += "<p align=right style='width:58%;'> + ";
+    result += "<p align=right style='width:58%;margin-top:10px'> + ";
     if(diff_space > 0) result += "  ";
 
     for(i=getDigitsCouunt(randomNumber2); i > 1; i--){
@@ -278,9 +278,9 @@ function displayTotalFlow2(){
     }
 
     result += "</p>";
-    result += "<p align=right style='width:58%;'> --";
+    result += "<p align=right style='width:58%;margin-top:-20px'> __";
     for(i=getDigitsCouunt(randomNumber2); i > 1; i--)
-        result += "--";
+        result += "__";
     result += "</p>";
     for(i=2; i<max_digit; i++){
         result += "<p align=left style='text-indent:10px;'>";
@@ -364,7 +364,7 @@ function displayTotalFlow(){
         result += getDigitNum(randomNumber1, i) + " ";
     }
     result += "</p>";
-    result += "<p align=right style='width:58%;'> + ";
+    result += "<p align=right style='width:58%;margin-top:10px'> + ";
     if(diff_space > 0) result += "  ";
 
     for(i=getDigitsCouunt(randomNumber2); i > 1; i--){
@@ -372,9 +372,9 @@ function displayTotalFlow(){
     }
 
     result += "</p>";
-    result += "<p align=right style='width:58%;'> --";
+    result += "<p align=right style='width:58%;margin-top:-20px'> __";
     for(i=getDigitsCouunt(randomNumber2); i > 1; i--)
-        result += "--";
+        result += "__";
     result += "</p>";
     for(i=2; i< max_digit; i++){
         result += "<p align=left style='text-indent:10px;'>";
@@ -468,7 +468,7 @@ function generateAnswerStep() {
 
     diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
     result = "<p>Add</p>";
-    result += "<p align=right style='width:100px;'>";
+    result += "<p align=right style='width:110px;'>";
 
     pos_i = step_count + 2;
     if(pos_i == getDigitsCouunt(randomNumber1) - 1) pos_i++;
@@ -476,18 +476,18 @@ function generateAnswerStep() {
     for(i=getDigitsCouunt(randomNumber1); i > 1; i--){
 
         if (pos_i == i) {
-            result += "<label style='color:red'>" + getDigitNum(randomNumber1, i) + " " + "</label>";
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber1, i) + "&nbsp;" + "</label>";
         }else{
             result += getDigitNum(randomNumber1, i) + " ";
         }
     }
     result += "</p>";
-    result += "<p align=right style='width:100px;'> + ";
+    result += "<p align=right style='width:110px;margin-top:10px;' class='answer_underline'> + ";
     if(diff_space > 0) result += "  ";
 
     for(i=getDigitsCouunt(randomNumber2); i > 1; i--){
         if (pos_i == i) {
-            result += "<label style='color:red'>" + getDigitNum(randomNumber2, i) + " " + "</label>";    
+            result += "<label style='color:blue'>" + getDigitNum(randomNumber2, i) + "&nbsp;" + "</label>";    
         }else{
             result += getDigitNum(randomNumber2, i) + " ";
         }
