@@ -60,6 +60,7 @@ function disabledNextQuestion(){
 function answerDone(){
     $("#questionPane").hide();
     $("#answerPane").hide();
+    $("#examPane").hide();
     $("#lastDiv2").show();
     $("#lastDiv3").show();
     $("#tipsFlow").show();
