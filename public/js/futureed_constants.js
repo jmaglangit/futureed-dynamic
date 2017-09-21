@@ -352,6 +352,7 @@ var Constants = {
 	, DECIMAL_ADDITION			: 'decimal_addition'
 	, DECIMAL_NUMERIC			: 'decimal_numeric'
 	, DECIMAL_UNDERSTAND		: 'decimal_understand'
+	, DECIMAL_IN_WORDS			: 'decimal_in_words'
 
 	/* question dynamic template variables */
 	, NUMBER1					: 'number1'
