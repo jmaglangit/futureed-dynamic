@@ -219,7 +219,7 @@ function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
     _correct_answer = _validateNum(_correct_answer, 0);
 
     _answer = _elem.prop("value");
-    if (_answer == "" )                                         return _errorHandler(_elem, -5, "Please input the answer. ");
+    if (_answer == "" )                                         return _errorHandler(_elem, -5, "That is incorrect. Answer can’t be blank. Please retry. ");
     _answer = parseInt(_elem.prop("value"));
     setAnswered(_answer);    //added
 
