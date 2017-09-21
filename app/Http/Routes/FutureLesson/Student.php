@@ -430,6 +430,11 @@
 							,'uses' => $route_controller . '@decimal_addition'
 						]);
 
+						Routes::get('/decimal-numeric',[
+							'as' => $route_name . 'decimal-numeric'
+							,'uses' => $route_controller . '@decimal_numeric'
+						]);
+
 						Routes::get('/decimal-understand',[
 							'as' => $route_name . 'decimal-understand'
 							,'uses' => $route_controller . '@decimal_understand'

@@ -38,6 +38,7 @@ class QuestionTemplateOperationTableSeeder extends Seeder
 			'integer_rounding_number',
             'decimal_compare',
             'decimal_addition',
+			'decimal_numeric',
             'decimal_understand',
         ];
 

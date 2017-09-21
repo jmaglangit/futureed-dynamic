@@ -152,6 +152,10 @@ function validateTemplateText(){
             $('button[name=btn_decimal_random_number2]').prop('disabled', false);
         }else{$('button[name=btn_decimal_random_number2]').prop('disabled', true);}
 
+        if((val.indexOf("{decimal_random_word}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_random_word]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_random_word]').prop('disabled', true);}
+
         if((val.indexOf("{decimal_random_digit}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_random_digit]').prop('disabled', false);
         }else{$('button[name=btn_decimal_random_digit]').prop('disabled', true);}

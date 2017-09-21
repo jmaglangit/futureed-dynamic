@@ -246,7 +246,7 @@ function playAnswer()
 		if(e.keyCode == 13){
 
 			if ($(".answerTxt").prop("value") == "") {
-				alertModal("Input the answer .");
+				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 				return;
 			}
 			arrYourCorrectAnswer[real_step_count] = $(".answerTxt:last").prop("value");
@@ -298,12 +298,12 @@ function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
 
 	    	
 	_answer = _elem.prop("value");
-	if (_answer == "" ) 										return _errorHandler(_elem, -5, "Input the answer !");
+	if (_answer == "" ) 										return _errorHandler(_elem, -5, "That is incorrect. Answer cannot be blank. Please retry.");
 	_answer = parseInt(_elem.prop("value"));
 
 	
 	    	
-	if(isNaN(_answer))											return _errorHandler(_elem, -1, "Answer can't be alphabet !");
+	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 
 	_elem.prop("value", _answer);
 	if((_answer * 1 < __start_num) || (_answer * 1 > __end_num))	{

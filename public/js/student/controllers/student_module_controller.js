@@ -1731,6 +1731,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
         self.date_start = new Date();
 
+        console.log(question.question_template.operation);
         //check type of operation
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
@@ -2058,16 +2059,27 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+            case Constants.DECIMAL_NUMERIC:
+
+                randomDigitsOnclick();
+
+                question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_WORD + '}',getCorrectAnswer());
+
+                self.current_question.questions_text = question_text;
+
+                startBtnOnclick();
+
+                break;
+
 			case Constants.DECIMAL_UNDERSTAND:
+                resources/views/admin/manage/question_template/partials/question_template_variable.blade.php
 				randomDigitsOnclick();
 				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_DIGIT + '}',getDigitsNumber());
 				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER + '}', getFirstDecimalDigit() + '' + getSecondDecimalDigit());
-
 				self.current_question.questions_text = question_text;
-
 				startBtnOnclick();
-
 				break;
+
 			default:
 				break;
 		}

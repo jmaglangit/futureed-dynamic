@@ -356,6 +356,16 @@
             )!!}
         </div>
     </div>
+
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_NUMERIC">
+        <div class="col-xs-5 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_add_word')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_random_word'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_WORD)'
+                     )
+            )!!}
     <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_UNDERSTAND">
         <div class="col-xs-6 admin-search-module">
             {!! Form::button(trans('messages.admin_template_integer_random_digit')

@@ -73,6 +73,9 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_ADDITION">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-addition') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_NUMERIC">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-numeric') !!}"></div>
+</div>
 <div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_UNDERSTAND">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-understand') !!}"></div>
 </div>
