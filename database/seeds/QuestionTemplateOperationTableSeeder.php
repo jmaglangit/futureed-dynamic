@@ -39,6 +39,7 @@ class QuestionTemplateOperationTableSeeder extends Seeder
             'decimal_compare',
             'decimal_addition',
 			'decimal_numeric',
+            'decimal_understand',
         ];
 
         $seeder = [];

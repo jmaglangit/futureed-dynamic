@@ -295,7 +295,7 @@ function finalFunc(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -321,12 +321,12 @@ function finalFunc(){
                 return false;
             }
             $(this).attr("readonly", true);
-            $("<p>Step " + (step_count+1) + " : Answer.<br>"+ randomNumber1 + "<input type=text placeholder='answer' style='width:20px;' class='inputCheck9'>"+ randomNumber2 + "</p>").insertBefore("#lastDiv");
+            $("<p>Step " + (step_count+1) + " : Answer.<br>"+ randomNumber1 + "<input type=text placeholder='answer' style='width:32px;margin: 5px;' class='inputCheck9'>"+ randomNumber2 + "</p>").insertBefore("#lastDiv");
             $(".inputCheck9").keydown(function(event){
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false){
                         // alert("Answer can't be alphabet !");
-                        alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                        alertModal("That is incorrect. Answer can't be blank. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -335,14 +335,14 @@ function finalFunc(){
                     temp_answer = checkAnswerValidation1($(this));
                     if(temp_answer == -1){
                         // alert("Your answer incorrect. Retey!");
-                        alertModal("Your answer incorrect. Please retry.");
+                        alertModal("Your answer is incorrect. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
                     }
                     if(temp_answer == -2){
                         // alert("Your answer incorrect. Retey!");
-                        alertModal("Your answer incorrect. Please retry.");
+                        alertModal("Your answer is incorrect. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -461,7 +461,7 @@ function nextsetp(){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -505,7 +505,7 @@ function middleFunc() {
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -561,14 +561,14 @@ function eventMouseOnclick1(){
 
 function step2Func() {
     step2Flag = true;
-    $("<p> Which sign shows less than?  <input style='width:20px; margin-left: 22px;' class='inputCheck'></p>").insertBefore("#lastDiv");
-    $("<p id='less_p' style='display:none;'> Which sign shows greater than?  <input style='width:20px;' class='inputCheck1'></p>").insertBefore("#lastDiv");
-    $("<p id='equals_p' style='display:none;'> Which sign shows equals to?   <input style='width:20px; margin-left: 18px;' class='inputCheck2'></p>").insertBefore("#lastDiv");
+    $("<p> Which sign shows less than?  <input style='width:20px; margin-left: 22px;text-align:center;' class='inputCheck'></p>").insertBefore("#lastDiv");
+    $("<p id='less_p' style='display:none;'> Which sign shows greater than?  <input style='width:20px;text-align:center;' class='inputCheck1'></p>").insertBefore("#lastDiv");
+    $("<p id='equals_p' style='display:none;'> Which sign shows equals to?   <input style='width:20px; margin-left: 18px;text-align:center;' class='inputCheck2'></p>").insertBefore("#lastDiv");
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
                 // alert("Answer can't be alphabet !");
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -576,13 +576,13 @@ function step2Func() {
             
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alertModal("Sign is not correct. Please retry.");
+                alertModal("Your answer is incorrect. Please retry..");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("Sign is not correct. Please retry.");
+                alertModal("Your answer is incorrect. Please retry..");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -596,7 +596,7 @@ function step2Func() {
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false){
                         // alert("Answer can't be alphabet !");
-                        alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                        alertModal("That is incorrect. Answer can't be blank. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -604,13 +604,13 @@ function step2Func() {
                     
                     temp_answer = checkAnswerValidation($(this));
                     if(temp_answer == -1){
-                        alertModal("Sign is not correct. Please retry.");
+                        alertModal("Your answer is incorrect. Please retry..");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
                     }
                     if(temp_answer == -2){
-                        alertModal("Sign is not correct. Please retry.");
+                        alertModal("Your answer is incorrect. Please retry..");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -624,7 +624,7 @@ function step2Func() {
                         if(event.keyCode == 13){
                             if(checkAnswer($(this)) == false){
                                 // alert("Answer can't be alphabet !");
-                                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
@@ -632,13 +632,13 @@ function step2Func() {
                             
                             temp_answer = checkAnswerValidation($(this));
                             if(temp_answer == -1){
-                                alertModal("Sign is not correct. Please retry.");
+                                alertModal("Your answer is incorrect. Please retry..");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
                             }
                             if(temp_answer == -2){
-                                alertModal("Sign is not correct. Please retry.");
+                                alertModal("Your answer is incorrect. Please retry..");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
@@ -949,8 +949,8 @@ function checkAnswer(elem) {
 
 function displayTotalFlow(){
     result_str = "";
-    result_str += "<b style='color:blue'>Answered Flow</b>";
-    result_str += "<br><br>";
+    // result_str += "<b style='color:blue'>Answered Flow</b>";
+    // result_str += "<br><br>";
     result_str += "<div id='start_div'>";
         result_str += '<label>Compare the decimals below by using >, < , or = <br><b>'+ randomNumber1 + '</b> And <b>'+ randomNumber2 + '</b></label>';
     result_str += "</div>";
@@ -1165,8 +1165,8 @@ function displayTotalFlow(){
 
 function displayTotalFlow1(){
     result_str = "";
-    result_str += "<b style='color:blue'>Correct Answered Flow</b>";
-    result_str += "<br><br>";
+    // result_str += "<b style='color:blue'>Correct Answered Flow</b>";
+    // result_str += "<br><br>";
     result_str += "<div id='start_div'>";
         result_str += '<label>Compare the decimals below by using >, < , or = <br><b>'+ randomNumber1 + '</b> And <b>'+ randomNumber2 + '</b></label>';
     result_str += "</div>";

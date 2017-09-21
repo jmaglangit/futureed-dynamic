@@ -351,6 +351,7 @@ var Constants = {
 	, DECIMAL_COMPARE			: 'decimal_compare'
 	, DECIMAL_ADDITION			: 'decimal_addition'
 	, DECIMAL_NUMERIC			: 'decimal_numeric'
+	, DECIMAL_UNDERSTAND		: 'decimal_understand'
 
 	/* question dynamic template variables */
 	, NUMBER1					: 'number1'
@@ -374,7 +375,12 @@ var Constants = {
 	, INTEGER_RANDOM_DIGIT		: 'integer_random_digit'
 	, DECIMAL_RANDOM_NUMBER1	: 'decimal_random_number1'
 	, DECIMAL_RANDOM_NUMBER2	: 'decimal_random_number2'
+<<<<<<< HEAD
 	, DECIMAL_RANDOM_WORD		: 'decimal_random_word'
+=======
+	, DECIMAL_RANDOM_DIGIT		: 'decimal_random_digit'
+	, DECIMAL_RANDOM_NUMBER		: 'decimal_random_number'
+>>>>>>> 9bab48d4d03325cc2f2a58c7cdd10c3513d01c13
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']

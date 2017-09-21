@@ -21,7 +21,7 @@
         </div>
 
         <!-- tips area -->
-        <div id="tipsFlow" style="display: none;">
+        <div id="tipsFlow" class="integer_area" style="display: none;">
             <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
             <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-right">

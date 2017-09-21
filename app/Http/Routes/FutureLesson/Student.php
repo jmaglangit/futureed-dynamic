@@ -435,6 +435,10 @@
 							,'uses' => $route_controller . '@decimal_numeric'
 						]);
 
+						Routes::get('/decimal-understand',[
+							'as' => $route_name . 'decimal-understand'
+							,'uses' => $route_controller . '@decimal_understand'
+						]);
 					});
 
 					Routes::get('/trial/questions', [
