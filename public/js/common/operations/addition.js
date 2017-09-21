@@ -16,6 +16,7 @@ var carry_over = false;
 var carry_elem;
 var carr_over_var = [];
 var carr_over_var2 = [];
+var arry_errorTemp = [];
 
 var retry_attempt = 0;
 var answered = []; //ADDED
@@ -98,19 +99,37 @@ function carryOneModal(message){
 // end ADDED functions
 
 function randomDigitsOnclick(){
+
+    randomNumber1 = "";
+    randomNumber2 = "";
+    randomDigits = "";
+    max_t = 0;
+    min_t = 0;
+
+    step_count = 0;
+    max_digit = 0;
     carry_over = false;
-    // randomDigits = $("#randomDigits").prop("value"); //REMOVED
+    carry_elem;
+    carr_over_var = [];
+    carr_over_var2 = [];
+    arry_errorTemp = [];
+
+    retry_attempt = 0;
+    carry_over = false;
+
+    // randomDigits = $("#randomDigits").prop("value");
     randomDigits = parseInt(randomDigits);
     if(isNaN(randomDigits)) randomDigits = 1;
     if(randomDigits > 7) randomDigits = 7;
     $("#randomDigits").prop("value", randomDigits);
     max_t = digits(randomDigits);
-    // console.log(max_t); //REMOVED
+    // console.log(max_t);
 
-    randomNumber1 = Math.floor(Math.random() * max_t);
-    randomNumber2 = Math.floor(Math.random() * max_t);
-    //randomNumber1 = 35818;
-    //randomNumber2 = 81842;
+    // randomNumber1 = Math.floor(Math.random() * max_t);
+    // randomNumber2 = Math.floor(Math.random() * max_t);
+    // if (randomNumber2 == 0 ) randomNumber2++;
+    // if (randomNumber1 == 0 ) randomNumber1++;
+
     $("#randomNumber1").prop("value", randomNumber1);
     $("#randomNumber2").prop("value", randomNumber2);
     $("#subject_number1_p").html(randomNumber1);
@@ -118,6 +137,7 @@ function randomDigitsOnclick(){
     $("#answerPane").html('<div id="lastDiv"></div>');
     $("#examPane").show();
     $("#lastDiv2").html("");
+    $("#lastDiv3").html("");
 
     var large_num = randomNumber1 > randomNumber2 ? randomNumber1 : randomNumber2;
     max_digit = getDigitsCouunt(large_num);
@@ -132,35 +152,54 @@ function getDigitNum(checkNumber, digitPosition) {
 }
 
 function checkAnswer(elem) {
-    answer_val = parseInt(elem.prop("value"));
-    if(isNaN(answer_val)) return false;
-    elem.prop("value", answer_val);
-    setAnswered(answer_val);
-    return true;
+    answer_val = elem.prop("value");
+    if(isNaN(answer_val)) {
+        return "y";
+    }
+    if (answer_val == "") {
+        return "z";
+    }
+    
+    elem.prop("value", answer_val);     
+    setAnswered(answer_val);    //ADDED
 }
 
 function checkAnswer2(elem) {
-    answer_val = parseInt(elem.prop("value"));
-    if((answer_val * 1 < 0) || (answer_val * 1 > 19)) return false;
+    answer_val = elem.prop("value");
+    if (answer_val.length > 8) {
+        return false;
+    }
+    // if((answer_val * 1 < 0) || (answer_val * 1 > 19)) return false;
     return true;
 }
 
 function checkAnswerValidation(elem) {
     answer_val = parseInt(elem.prop("value"));
+    // console.log("answer_val = " + answer_val);
     correct_answer = getDigitNum(randomNumber1, step_count) * 1 + getDigitNum(randomNumber2, step_count) * 1;
     if(carry_over) correct_answer++;
-    if (answer_val == correct_answer){
+    if ((answer_val*1) == correct_answer){
         carry_over = false;
-        return correct_answer;
-    }
+        return correct_answer;  
+    } 
     if(retry_attempt > 1){
         // alert("Correct Answer is " + correct_answer + ". Retry! ");
         alertModal("The correct answer is " + correct_answer + ". Please retry. ");
         retry_attempt = 0;
-        return -3;
+        return -3*1;
     }
-    if (answer_val > correct_answer) return -1;
-    return -2;
+    if ((answer_val*1) > correct_answer) {
+        if (!arry_errorTemp[step_count]) {
+            arry_errorTemp[step_count] = answer_val;
+        }
+        // console.log("arry_errorTemp["+ step_count + "] = " + arry_errorTemp[step_count]);
+        return -1*1;
+    }else{
+        if (!arry_errorTemp[step_count]) {
+            arry_errorTemp[step_count] = answer_val;
+        }
+        return -2*1;    
+    }       
 }
 
 function gotoNextLevel() {
@@ -174,13 +213,15 @@ function displayTotalFlow2(){
     diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
     result = "<p>Add</p>";
     result += "<p align=right style='width:100px;'>";
+    if (getDigitsCouunt(randomNumber1) == 0) result += "0";
 
     for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
         result += getDigitNum(randomNumber1, i) + " ";
     }
     result += "</p>";
     result += "<p align=right style='width:100px;'> + ";
-    if(diff_space > 0) result += "  ";
+    if(diff_space > 0) result += "&nbsp&nbsp&nbsp&nbsp";
+    if (getDigitsCouunt(randomNumber2) == 0) result += "0";
 
     for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
         result += getDigitNum(randomNumber2, i) + " ";
@@ -243,13 +284,15 @@ function displayTotalFlow(){
     diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
     result = "<p>Add</p>";
     result += "<p align=right style='width:100px;'>";
+    if (getDigitsCouunt(randomNumber1) == 0) result += "0";
 
     for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
         result += getDigitNum(randomNumber1, i) + " ";
     }
     result += "</p>";
     result += "<p align=right style='width:100px;'> + ";
-    if(diff_space > 0) result += "  ";
+    if(diff_space > 0) result += "&nbsp&nbsp&nbsp&nbsp";
+    if (getDigitsCouunt(randomNumber2) == 0) result += "0";
 
     for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
         result += getDigitNum(randomNumber2, i) + " ";
@@ -261,8 +304,11 @@ function displayTotalFlow(){
         result += "--";
     result += "</p>";
     for(i=1; i<=max_digit; i++){
-        result += "<p align=left style='text-indent:10px;' class='h4'>"; // ADDED
+        result += "<p align=left style='text-indent:10px;' class='h4'>";
         result += "Step " + i + " : Add the " + step_words[i - 1];
+        if (arry_errorTemp[i]) {
+            result += "<p style='color:red;'> Error : "+ arry_errorTemp[i] +"</p>";
+        }
         result += "</p>";
         result += "<p align=left style='text-indent:20px;'>";
         if((getDigitsCouunt(randomNumber1) >= i)&&(getDigitsCouunt(randomNumber2) >= i)){
@@ -322,9 +368,10 @@ function generateAnswerStep() {
     diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
     result = "<p>Add</p>";
     result += "<p align=right style='width:100px;'>";
+    if (getDigitsCouunt(randomNumber1) == 0) result += "<label style='color:blue'>" + "0" + " " + "</label>";
 
     for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
-
+        
         if ((step_count+1) == i) {
             result += "<label style='color:blue'>" + getDigitNum(randomNumber1, i) + "&nbsp;" + "</label>";
         }else{
@@ -333,7 +380,8 @@ function generateAnswerStep() {
     }
     result += "</p>";
     result += "<p align=right style='width:100px;'> + ";
-    if(diff_space > 0) result += "  ";
+    if(diff_space > 0) result += "&nbsp&nbsp&nbsp&nbsp";
+    if (getDigitsCouunt(randomNumber2) == 0) result += "<label style='color:blue'>" + "0" + " " + "</label>";
 
     for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
         if ((step_count+1) == i) {
@@ -351,9 +399,16 @@ function generateAnswerStep() {
     $("<p style='margin-top: 20px;'>Step " + (step_count + 1) + ": Add the " + step_words[step_count] + "</p>" + result + "<input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
-                // alert("That is incorrect. Answer cannot be blank and can only be numbers. Please retry. !");
+            if(checkAnswer($(this)) == "y"){
+                // alert("Answer can't be alphabet !");
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                // alert('Please enter a valid input!');
+                alertModal('Please enter a valid input.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -388,10 +443,8 @@ function generateAnswerStep() {
             else {
                 carry_elem = $(this);
                 carry_elem.blur();
-
-                // $("#message_modal").show();
+                // $("#myModal").show();
                 carryOneModal("Do you carry one?");
-
             }
         }
     }).focus();
