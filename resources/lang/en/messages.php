@@ -989,6 +989,7 @@ return [
 	'admin_template_add_word' => 'ADD WORD',
 	'admin_template_decimal1' => 'ADD DECIMAL1',
 	'admin_template_decimal2' => 'ADD DECIMAL2',
+	'admin_template_decimal' => 'ADD DECIMAL',
 	//Client
 	//resources/views/client/dashboard/index.blade.php
 	'client_dashboard' => 'Client Dashboard',

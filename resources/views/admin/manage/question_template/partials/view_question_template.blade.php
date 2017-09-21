@@ -365,6 +365,28 @@
 							)!!}
 						</div>
 					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_UNDERSTAND">
+						<div class="col-xs-6 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_integer_random_digit')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_decimal_random_digit'
+									, 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_DIGIT)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-6 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_decimal')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_decimal_random_number'
+									, 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_NUMBER)'
+									, 'ng-disabled' => '!template.isClicked'
+									)
+							)!!}
+						</div>
+					</div>
 					<div class="col-xs-2"></div>
 
 				</div>
