@@ -208,4 +208,8 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-decimal-compare');
 	}
 
+	public function decimal_numeric(){
+		return view($this->dynamic_question.'dynamic-decimal-numeric');
+	}
+
 }

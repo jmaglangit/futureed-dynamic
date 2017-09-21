@@ -201,6 +201,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 		// disable button once clicked.
 
         self.record.question_template_format += self.actionVariableNames(variable);
+        self.record.question_template_format += ' ';
         $('button[name=btn_' + variable + ']').prop('disabled', true);
 		$('#template_text').focus();
 
@@ -648,6 +649,12 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 question_text = question_text.replace('{' + Constants.NUMBER1 + '}', getFirstNumber() + ' ' + getFirstNumberWords());
                 question_text = question_text.replace('{' + Constants.NUMBER2 + '}', getSecondNumber() + ' ' + getSecondNumberWords());
                 break;
+
+			case Constants.DECIMAL_NUMERIC:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_WORD + '}', getCorrectAnswer());
+				break;
 
             default:
                 break;
