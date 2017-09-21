@@ -2919,3 +2919,19 @@ div#correct_flow p, div#Answer_correct_flow p,
     margin-top: 10px;
     border-bottom: 1px solid;
 }
+
+#step_div input.checkIndexs {
+    text-align: center;
+}
+
+#tipsFlow p font {
+    margin: 5px;
+}
+
+.integer_area p{
+    line-height: 25px;
+}
+
+.integer_area input {
+    line-height: 0px;
+}
