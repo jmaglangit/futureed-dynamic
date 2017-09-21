@@ -303,7 +303,7 @@ function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
 
 	
 	    	
-	if(isNaN(_answer))											return _errorHandler(_elem, -1, "Answer can't be alphabet !");
+	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 
 	_elem.prop("value", _answer);
 	if((_answer * 1 < __start_num) || (_answer * 1 > __end_num))	{
