@@ -576,13 +576,13 @@ function step2Func() {
             
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alertModal("Your answer is incorrect. Please retry..");
+                alertModal("Your answer is incorrect. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("Your answer is incorrect. Please retry..");
+                alertModal("Your answer is incorrect. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -604,13 +604,13 @@ function step2Func() {
                     
                     temp_answer = checkAnswerValidation($(this));
                     if(temp_answer == -1){
-                        alertModal("Your answer is incorrect. Please retry..");
+                        alertModal("Your answer is incorrect. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
                     }
                     if(temp_answer == -2){
-                        alertModal("Your answer is incorrect. Please retry..");
+                        alertModal("Your answer is incorrect. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -632,13 +632,13 @@ function step2Func() {
                             
                             temp_answer = checkAnswerValidation($(this));
                             if(temp_answer == -1){
-                                alertModal("Your answer is incorrect. Please retry..");
+                                alertModal("Your answer is incorrect. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
                             }
                             if(temp_answer == -2){
-                                alertModal("Your answer is incorrect. Please retry..");
+                                alertModal("Your answer is incorrect. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
