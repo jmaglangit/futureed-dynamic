@@ -1731,6 +1731,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
         self.date_start = new Date();
 
+        console.log(question.question_template.operation);
         //check type of operation
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
