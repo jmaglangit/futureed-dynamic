@@ -153,7 +153,7 @@ function startBtnOnclick(){
         if(event.keyCode == 13){
 
             if(checkAnswer($(this)) == "z"){
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -168,7 +168,7 @@ function startBtnOnclick(){
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("Oops not enough, your answer needs to be larger.");
+                alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
