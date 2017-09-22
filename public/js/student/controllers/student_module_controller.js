@@ -2072,7 +2072,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
                 break;
 
 			case Constants.DECIMAL_UNDERSTAND:
-                resources/views/admin/manage/question_template/partials/question_template_variable.blade.php
 				randomDigitsOnclick();
 				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_DIGIT + '}',getDigitsNumber());
 				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER + '}', getFirstDecimalDigit() + '' + getSecondDecimalDigit());
@@ -2080,11 +2079,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				startBtnOnclick();
 				break;
 
-			case Constants.DECIMAL_IN_WORDS:
+			case Constants.DECIMAL_WORDS:
 
 				randomDigitsOnclick();
 
-				question_text = question_text.replace('{' + Constants.DECIMAL_IN_WORDS + '}',getFirstNumber() + getSecondNumber());
+				question_text = question_text.replace('{' + Constants.DECIMAL_WORDS + '}',getFirstNumber() + getSecondNumber());
 
 				self.current_question.questions_text = question_text;
 

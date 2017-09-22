@@ -440,9 +440,9 @@
 							,'uses' => $route_controller . '@decimal_understand'
 						]);
 
-						Routes::get('/decimal-in-words',[
-							'as' => $route_name . 'decimal-in-words'
-							,'uses' => $route_controller . '@decimal_in_words'
+						Routes::get('/decimal-words',[
+							'as' => $route_name . 'decimal-words'
+							,'uses' => $route_controller . '@decimal_words'
 						]);
 
 					});

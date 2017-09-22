@@ -388,13 +388,13 @@
             )!!}
         </div>
     </div>
-    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_IN_WORDS">
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_WORDS">
         <div class="col-xs-5 admin-search-module">
             {!! Form::button(trans('messages.admin_template_decimal')
                 ,array(
                     'class' => 'btn btn-blue'
-                    , 'name' => 'btn_decimal_in_words'
-                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_IN_WORDS)'
+                    , 'name' => 'btn_decimal_words'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_WORDS)'
                 )
             )!!}
         </div>

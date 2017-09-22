@@ -314,7 +314,7 @@ function startBtnOnclick(){
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -322,13 +322,13 @@ function startBtnOnclick(){
 
             temp_answer = checkAnswerValidation($(this));
             if(temp_answer == -1){
-                alertModal('You forgot the word "number". Retry!');
+                alertModal('Your answer is either incorrect or must be in all capital letters. Please retry.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alertModal('You forgot the word "number". Retry!');
+                alertModal('Your answer is either incorrect or must be in all capital letters. Please retry.');
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -399,7 +399,7 @@ function nextsetp(){
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -408,13 +408,13 @@ function nextsetp(){
             temp_answer = checkAnswerValidation($(this));
             if (step_count <= 2) {
                 if(temp_answer == -1){
-                    alertModal('You forgot the word "number". Retry!');
+                    alertModal('Your answer is either incorrect or must be in all capital letters. Please retry.');
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
                 }
                 if(temp_answer == -2){
-                    alertModal('You forgot the word "number". Retry!');
+                    alertModal('Your answer is either incorrect or must be in all capital letters. Please retry.');
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
@@ -433,7 +433,7 @@ function nextsetp(){
                     return false;
                 }
                 if(temp_answer == -2){
-                    alertModal("opps not enough, your answer needs to be larger.");
+                    alertModal("Oops not enough, your answer needs to be larger.");
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
@@ -457,7 +457,7 @@ function middleFunc() {
     $(".checkIndexs").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -471,7 +471,7 @@ function middleFunc() {
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("opps not enough, your answer needs to be larger.");
+                alertModal("Oops not enough, your answer needs to be larger.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;

@@ -71,6 +71,6 @@
 
     </div>
     {!! Html::script('/js/common/operations/global.js')!!}
-    {!! Html::script('/js/common/operations/decimal_in_words.js')!!}
+    {!! Html::script('/js/common/operations/decimal_words.js')!!}
 
 </div>

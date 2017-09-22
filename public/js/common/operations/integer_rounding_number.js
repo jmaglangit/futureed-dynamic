@@ -153,7 +153,7 @@ function startBtnOnclick(){
         if(event.keyCode == 13){
 
             if(checkAnswer($(this)) == "z"){
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -162,13 +162,13 @@ function startBtnOnclick(){
             temp_answer = checkAnswerValidation($(this));
 
             if(temp_answer == -1){
-                alertModal("Your answer is larger than what we need.");
+                alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("Oops not enough, your answer needs to be larger.");
+                alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -215,7 +215,7 @@ function nextsetp(){
                 return false;
             }
             if(checkAnswer($(this)) == "z"){
-                alertModal('Input the answer.');
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -224,13 +224,13 @@ function nextsetp(){
             temp_answer = checkAnswerValidation($(this));
             if (step_count == 4) {
                 if(temp_answer == -1){
-                    alertModal("Your answer is larger than what we need.");
+                    alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
                 }
                 if(temp_answer == -2){
-                    alertModal("That is incorrect, try again");
+                    alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
