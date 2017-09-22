@@ -12,7 +12,7 @@
          <!-- #end questions area right side -->
 
         <!--  questions area left side -->
-        <div id="examPane" class="col-xs-6 pull-right h4 sort_large_ans">
+        <div id="answerPane" class="col-xs-6 pull-right h4 sort_large_ans">
             <div id="lastDiv1"></div>
             <div style="clear: both;"></div>
         </div>

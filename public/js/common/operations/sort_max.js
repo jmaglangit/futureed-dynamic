@@ -164,7 +164,9 @@ function startAnswer(){
 
     $("#subject_number").html(randomNumber);
 
-    // $("#answerPane").html('Use these integers and construct the largest number possible<br><span class="boldStr">'+randomNumber+'</span><div id="lastDiv1"></div>');
+    $("#answerPane").html(
+    	// 'Use these integers and construct the largest number possible<br><span class="boldStr">'+randomNumber+'</span>' +
+		'<div id="lastDiv1"></div>');
     $("#examPane").show();
     $("#lastDiv2").html("");
     $("#lastDiv3").html("");
