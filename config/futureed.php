@@ -395,4 +395,7 @@ return [
 	'fraction_addition_whole' => 'fraction_addition_whole',
 	'fraction_subtraction_whole' => 'fraction_subtraction_whole',
 	'integer_identify' => 'integer_identify',
+	'decimal_addition' => 'decimal_addition',
+	'decimal_compare' => 'decimal_compare',
+	'decimal_understand' => 'decimal_understand',
 ];

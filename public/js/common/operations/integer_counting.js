@@ -80,6 +80,10 @@ function generateMo(_num, _snum){
 }
 
 function randomDigitsOnclick(){
+    $("#answerPane").html('<div id="lastDiv"></div>');
+    $("#examPane").show();
+    $("#lastDiv2").html("");
+    $("#lastDiv3").html("");
     randomNumber = Math.round(Math.random() * 39) + 3;
     arrAnswer[0] = (randomNumber - randomNumber % 10) / 10;
     arrAnswer[1] = randomNumber % 10;
@@ -214,26 +218,46 @@ function playAnswer()
 function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
     _correct_answer = _validateNum(_correct_answer, 0);
 
-    if( retry_attempt > retry_attempt_limit ) {
-        retry_attempt = 0;                                      return _errorHandler(_elem, -5, "The correct answer is " + _correct_answer + ". Please retry. ");
-    }       
-
+    _answer = _elem.prop("value");
+    if (_answer == "" )                                         return _errorHandler(_elem, -5, "That is incorrect. Answer can’t be blank. Please retry. ");
     _answer = parseInt(_elem.prop("value"));
     setAnswered(_answer);    //added
-            
+
+
     if(isNaN(_answer))                                          return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 
     _elem.prop("value", _answer);
     if((_answer * 1 < __start_num) || (_answer * 1 > __end_num))    {
-        return _errorHandler(_elem, -2, "That is incorrect. Answer cannot be less than " + __start_num + " or more than " + __end_num + ". Please retry.");
+        if( retry_attempt > retry_attempt_limit ) {
+            retry_attempt = 0;                                      return _errorHandler(_elem, -6, "The correct answer is " + _correct_answer + ". Please retry. ");
+        }else{
+            return _errorHandler(_elem, -2, "That is incorrect. Answer cannot be less than " + __start_num + " or more than " + __end_num + ". Please retry.");
+        }
     }
     if(_answer < _correct_answer) {
-        return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
-    }                               
+        if( retry_attempt > retry_attempt_limit ) {
+            retry_attempt = 0;                                  return _errorHandler(_elem, -6, "The correct answer is " + _correct_answer + ". Please retry. ");
+        }else{
+            return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
+        }
+
+    }
 
     if(_answer > _correct_answer) {
-        return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
+        if( retry_attempt > retry_attempt_limit ) {
+            retry_attempt = 0;                                  return _errorHandler(_elem, -6, "The correct answer is " + _correct_answer + ". Please retry. ");
+        }else{
+            return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
+        }
     }
 
     return 0;
+}
+
+function _errorHandler(_elem, _err_num, _err_description) {
+    // alert( _err_description );
+    alertModal( _err_description ); //added
+    if(_err_num != -6) retry_attempt++;
+    _elem.prop("value", "").focus();
+    return _err_num;
 }

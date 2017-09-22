@@ -315,5 +315,78 @@
             )!!}
         </div>
     </div>
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_ADDITION">
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.addends_one')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_addends1'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_ADDENDS1)'
+                )
+            )!!}
+        </div>
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.addends_two')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_addends2'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_ADDENDS2)'
+                )
+            )!!}
+        </div>
+    </div>
+
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_COMPARE">
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal1')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_random_number1'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_NUMBER1)'
+                )
+            )!!}
+        </div>
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal2')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_random_number2'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_NUMBER2)'
+                )
+            )!!}
+        </div>
+    </div>
+
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_NUMERIC">
+        <div class="col-xs-5 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_add_word')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_random_word'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_WORD)'
+                     )
+            )!!}
+        </div>
+    </div>
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_UNDERSTAND">
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_integer_random_digit')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_random_digit'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_DIGIT)'
+                )
+            )!!}
+        </div>
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_random_number'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RANDOM_NUMBER)'
+                )
+            )!!}
+        </div>
+    </div>
     <div class="col-xs-2"></div>
 </div>

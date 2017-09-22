@@ -11,13 +11,10 @@ var real_step_count = 0;
 var randomDigits = ""; // added
 
 var arrQuestion = [
-	'What do we need to construct?',
-	'How many place values are there?',
-	'Which digit would you place in the far left?',
-	'Which digit would you place in the far right?',
-	'Which digit would you place to the right of digit in Step 3?',
-	'Which digit would you place to the right of digit in Step ',
-	'What is the number?'
+	' How many columns should the place value table have?',
+	' Place the number in the place value table.',
+	' What is the value for the ',
+	' Now combine prior steps and write it out.  For example 100 + 90 + 3 + 0.2 + 0.03+ 0.005'
 ];
 
 var arrAnswer = ['largest number'];
@@ -63,6 +60,7 @@ function disabledNextQuestion(){
 function answerDone(){
     $("#questionPane").hide();
     $("#answerPane").hide();
+    $("#examPane").hide();
     $("#lastDiv2").show();
     $("#lastDiv3").show();
     $("#tipsFlow").show();
@@ -86,7 +84,7 @@ function alertModal(message){
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#close_modal").show();
-    $("input").attr("readonly", true); 
+    $("input").attr("readonly", true);
 }
 
 function btnNOOnclose() {
@@ -96,6 +94,10 @@ function btnNOOnclose() {
 // end ADDED functions
 
 function randomDigitsOnclick(){
+	$("#answerPane").html('<div id="lastDiv"></div>');
+	$("#examPane").show();
+	$("#lastDiv2").html("");
+	$("#lastDiv3").html("");
     // randomDigits = _validateNum($("#randomDigits").prop("value"), 4);
     if(randomDigits < 3) randomDigits = 3;
     if(randomDigits > 9) randomDigits = 9;
@@ -250,31 +252,32 @@ function playAnswer()
 	appendExamPane(arrQuestion[step_count]);
 	$(".answerTxt").keydown(function(e){
 		if(e.keyCode == 13){
+			if ($(".answerTxt").prop("value") == "") {
+				alertModal("That is incorrect. Answer cannot be blank. Please retry.");
+				return;
+			}
 			arrYourCorrectAnswer[real_step_count] = $(".answerTxt:last").prop("value");
 			if(arrYourAnswer.length == real_step_count) arrYourAnswer[real_step_count] = $(".answerTxt:last").prop("value");
 			else if(arrYourAnswer[real_step_count] == "") arrYourAnswer[real_step_count] = $(".answerTxt:last").prop("value");
 			if(real_step_count == 0){
 				if(arrAnswer[real_step_count] != $(".answerTxt:last").prop("value").toLowerCase()){
 			    	if( retry_attempt > retry_attempt_limit ) {
-			    		retry_attempt = 0;
-			    		// alert("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
+			    		retry_attempt = -1;
                         alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry. ");
 			    	} else {
-			    		// alert("You forgot the word number. Retry!");
                         alertModal("That is incorrect. The answer is either largest number or smallest number. Please retry.");
 			    	}
 			    	retry_attempt++;
+			    	// alertModal(1);
 			    	$(".answerTxt:last").prop("value", "").focus();
 			    	return false;
 				}
 			} else if(real_step_count == pos_last + 1){
 				if(arrAnswer[real_step_count] != $(".answerTxt:last").prop("value")){
 			    	if( retry_attempt > retry_attempt_limit ) {
-			    		retry_attempt = 0;
-                        // alert("Correct Answer is " + arrAnswer[real_step_count] + ". Retry! ");
-			    		alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry. ");
+			    		retry_attempt = -1;
+                        alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry. ");
 			    	} else {
-			    		// alert("That is the wrong number. Retry!");
                         alertModal("Your answer is incorrect. Please retry.");
 			    	}
 			    	retry_attempt++;
@@ -283,7 +286,7 @@ function playAnswer()
 				}
 				$(".answerTxt").attr("readonly", true);
 				generateAnswerFlow();
-				answerDone(); // added
+                answerDone(); // added
 				return false;
 			} else {
 				chk_answer = validateAnswer4Sort($(".answerTxt:last"), arrAnswer[real_step_count], 0, 9);
@@ -301,28 +304,51 @@ function playAnswer()
 function validateAnswer4Sort(_elem, _correct_answer, __start_num, __end_num) {
 	_correct_answer = _validateNum(_correct_answer, 0);
 
-	if( retry_attempt > retry_attempt_limit ) {
-		retry_attempt = 0;
-        // return _errorHandler(_elem, -5, "Correct Answer is " + _correct_answer + ". Retry! ");
-        return _errorHandler(_elem, -5, "The correct answer is " + _correct_answer + ". Please retry. ");
-	}
-
+	    	
+	_answer = _elem.prop("value");
+	if (_answer == "" ) 										return _errorHandler(_elem, -5, "That is incorrect. Answer cannot be blank. Please retry.");
 	_answer = parseInt(_elem.prop("value"));
+
+	
 	    	
 	if(isNaN(_answer))											return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
 
 	_elem.prop("value", _answer);
 	if((_answer * 1 < __start_num) || (_answer * 1 > __end_num))	{
-        // return _errorHandler(_elem, -2, "Answer can't less than " + __start_num + " or more than " + __end_num + " !");
-        return _errorHandler(_elem, -2, "That is incorrect. Answer cannot be less than " + __start_num + " or more than " + __end_num + ". Please retry.");
+		if( retry_attempt > retry_attempt_limit ) {
+			retry_attempt = 0;										return _errorHandler(_elem, -6, "The correct answer is " + _correct_answer + ". Please retry. ");
+		}else{
+	        return _errorHandler(_elem, -2, "That is incorrect. Answer cannot be less than " + __start_num + " or more than " + __end_num + ". Please retry.");
+	    }
     }
     if(_answer < _correct_answer) {
-        return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
+    	if( retry_attempt > retry_attempt_limit ) {
+			retry_attempt = 0;									return _errorHandler(_elem, -6, "The correct answer is " + _correct_answer + ". Please retry. ");
+		}else{
+			return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
+		}
+        
     }                               
 
     if(_answer > _correct_answer) {
-        return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
+    	if( retry_attempt > retry_attempt_limit ) {
+			retry_attempt = 0;									return _errorHandler(_elem, -6, "The correct answer is " + _correct_answer + ". Please retry. ");
+		}else{
+	        return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
+	    }
     }
 
 	return 0;
+}
+
+function _errorHandler(_elem, _err_num, _err_description) {
+
+	alertModal( _err_description );
+
+	if(_err_num != -6) retry_attempt++;
+
+	_elem.prop("value", "").focus();
+
+	return _err_num;
+
 }

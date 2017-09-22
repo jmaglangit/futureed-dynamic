@@ -420,6 +420,25 @@
 							,'uses' => $route_controller . '@integer_regroup'
 						]);
 
+						Routes::get('/decimal-compare',[
+							'as' => $route_name . 'decimal-compare'
+							,'uses' => $route_controller . '@decimal_compare'
+						]);
+
+						Routes::get('/decimal-addition',[
+							'as' => $route_name . 'decimal-addition'
+							,'uses' => $route_controller . '@decimal_addition'
+						]);
+
+						Routes::get('/decimal-numeric',[
+							'as' => $route_name . 'decimal-numeric'
+							,'uses' => $route_controller . '@decimal_numeric'
+						]);
+
+						Routes::get('/decimal-understand',[
+							'as' => $route_name . 'decimal-understand'
+							,'uses' => $route_controller . '@decimal_understand'
+						]);
 					});
 
 					Routes::get('/trial/questions', [

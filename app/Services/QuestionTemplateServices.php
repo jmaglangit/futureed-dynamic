@@ -203,6 +203,41 @@ class QuestionTemplateServices {
 
 				break;
 
+			case config('futureed.decimal_addition'):
+
+				if((strpos($operation_var, '{decimal_addends1}') == false) && (strpos($operation_var, '{decimal_addends2}') == false)){
+					return [
+						'message' => trans('errors.2605')
+					];
+				}else{
+					return true;
+				}
+
+				break;
+
+			case config('futureed.decimal_compare'):
+
+				if((strpos($operation_var, '{decimal_random_number1}') != false) && (strpos($operation_var, '{decimal_random_number2}') != false)){
+					return true;
+				}else{
+					return [
+						'message' => trans('errors.2605')
+					];
+				}
+
+				break;
+
+			case config('futureed.decimal_understand'):
+				if((strpos($operation_var, '{decimal_random_digit}') != false) && (strpos($operation_var, '{decimal_random_number}') != false)){
+					return true;
+				}else{
+					return [
+						'message' => trans('errors.2605')
+					];
+				}
+
+				break;
+
 			default:
 				//check db if exists.
 				if(!empty($this->question_template_operation->getOperationByData($question_template['operation'])->toArray())){

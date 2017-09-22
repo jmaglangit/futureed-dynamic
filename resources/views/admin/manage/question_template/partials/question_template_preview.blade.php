@@ -102,6 +102,11 @@
     <div ng-if="template.record.operation == futureed.FRACTION_DIVISION">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
     </div>
+    <div ng-if="template.record.operation == futureed.DECIMAL_NUMERIC">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        {!! Html::script('/js/common/operations/global.js')!!}
+        {!! Html::script('/js/common/operations/decimal_numeric.js')!!}
+    </div>
 
 
 

@@ -1731,6 +1731,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
         self.date_start = new Date();
 
+        console.log(question.question_template.operation);
         //check type of operation
 		switch(question.question_template.operation){
 			case Constants.ADDITION:
@@ -2030,6 +2031,52 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				startBtnOnclick();
 
+				break;
+
+			case Constants.DECIMAL_COMPARE:
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER1 + '}', getFirstNumber() + '.' + getFirstDecimalDigit());
+				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER2 + '}', getSecondNumber() + '.' + getSecondDecimalDigit());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
+			case Constants.DECIMAL_ADDITION:
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.DECIMAL_ADDENDS1 + '}',getRandomNumber1());
+				question_text = question_text.replace('{' + Constants.DECIMAL_ADDENDS2 + '}',getRandomNumber2());
+
+				self.current_question.questions_text = question_text;
+
+				startAnswer();
+
+				break;
+
+            case Constants.DECIMAL_NUMERIC:
+
+                randomDigitsOnclick();
+
+                question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_WORD + '}',getCorrectAnswer());
+
+                self.current_question.questions_text = question_text;
+
+                startBtnOnclick();
+
+                break;
+
+			case Constants.DECIMAL_UNDERSTAND:
+				randomDigitsOnclick();
+				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_DIGIT + '}',getDigitsNumber());
+				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER + '}', getFirstDecimalDigit() + '' + getSecondDecimalDigit());
+				self.current_question.questions_text = question_text;
+				startBtnOnclick();
 				break;
 
 			default:

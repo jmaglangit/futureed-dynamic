@@ -196,7 +196,24 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-integer-regroup');
 	}
 
+	public function decimal_addition(){
+		return view($this->dynamic_question.'dynamic-decimal-addition');
+	}
+
 	public function integer_counting(){
 		return view($this->dynamic_question.'dynamic-integer-counting');
 	}
+
+	public function decimal_compare(){
+		return view($this->dynamic_question.'dynamic-decimal-compare');
+	}
+
+	public function decimal_numeric() {
+		return view($this->dynamic_question . 'dynamic-decimal-numeric');
+	}
+
+	public function decimal_understand(){
+		return view($this->dynamic_question.'dynamic-decimal-understand');
+	}
+
 }

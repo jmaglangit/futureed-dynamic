@@ -15,9 +15,9 @@ var x_var2 = [];
 var y_var = [];
 var arr_randomNumber1 = [];
 var arr_randomNumber2 = [];
+var arry_error_temp = [];
 
 _end_num = 9;
-
 var answered = []; //ADDED
 
 //START ADDED FUNCTIONS
@@ -119,12 +119,26 @@ function btnOkBorrowModal() {
 //END ADDED FUNCTION
 
 function randomDigitsOnclick(){
+    randomNumber1 = "";
+    randomNumber2 = "";
+
+    step_count = 0;
+    max_digit = 0;
+
+    borrow_var = [];
+    x_var = [];
+    x_var2 = [];
+    y_var = [];
+    arr_randomNumber1 = [];
+    arr_randomNumber2 = [];
     // randomDigits = _validateNum($("#randomDigits").prop("value"), 4);
     // if(randomDigits > 9) randomDigits = 8;
     // $("#randomDigits").prop("value", randomDigits);
 
     randomNumber1 = Math.floor(Math.random() * digits(randomDigits));
     randomNumber2 = Math.floor(Math.random() * randomNumber1);
+    // if (randomNumber2 == 0 ) randomNumber2++;
+    // if (randomNumber1 == 0 ) randomNumber1++;
 
 //        randomNumber1 = 1002;
 //        randomNumber2 = 3;
@@ -170,8 +184,9 @@ function generateAnswerStep() {
     var str1 = randomNumber1.toString();
 
     diff_space = getDigitsCouunt(randomNumber1) - getDigitsCouunt(randomNumber2);
-    result = "<p>Substract</p>";
+    result = "<p>Subtract</p>";
     result += "<p align=right style='width:100px;'>";
+    if (getDigitsCouunt(randomNumber1) == 0) result += "<label style='color:blue'>" + "0" + "&nbsp;" + "</label>";
 
     for(i=getDigitsCouunt(randomNumber1); i >= 1; i--){
 
@@ -183,7 +198,8 @@ function generateAnswerStep() {
     }
     result += "</p>";
     result += "<p align=right style='width:100px;'> - ";
-    if(diff_space > 0) result += "  ";
+    if(diff_space > 0) result += "&nbsp&nbsp&nbsp&nbsp";
+    if (getDigitsCouunt(randomNumber2) == 0) result += "<label style='color:blue'>" + "0" + "&nbsp;" + "</label>";
 
     for(i=getDigitsCouunt(randomNumber2); i >= 1; i--){
         if ((step_count+1) == i) {
@@ -196,7 +212,7 @@ function generateAnswerStep() {
     result += "</p>";
 
     borrow_var[step_count] = false;
-    console.log("step_count = " + step_count);
+    // console.log("step_count = " + step_count);
     $(".answer_value").unbind("keydown").removeClass("inputCheck").attr("readonly", true);
     $("<p class='margin-10-top'>Step " + (step_count + 1) + ": Subtract the " + step_words[step_count] + "</p>" + result + "<input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     $(".inputCheck").keydown(function(event){
@@ -211,21 +227,66 @@ function generateAnswerStep() {
     if((step_count < y_var.length) && (x_var[step_count] < y_var[step_count])){
         borrowNumber(step_count + 1);
         borrow_var[step_count] = true;
-        // $("#message_modal").show(); //REMOVED
+        // $("#myModal").show();
         borrowOneModal("Do you need to BORROW 1 from next column?");
     } else $(".inputCheck").focus();
     step_count++;
-}
-
-function borrowNumber(_digits) {
-    x_var[_digits] = (x_var[_digits] + 9) % 10;
-    if(x_var[_digits] == 9) borrowNumber(_digits + 1);
 }
 
 function getCorrectAnswer() {
     correct_answer = 10 + x_var[step_count - 1];
     if(y_var.length > step_count - 1) correct_answer -= y_var[step_count - 1];
     return correct_answer % 10;
+}
+
+function validateAnswer4Substraction(_elem, _correct_answer) {
+    _correct_answer = _validateNum(_correct_answer, 0);
+
+    if( retry_attempt > retry_attempt_limit ) {
+        retry_attempt = 0;                                      return _errorHandler(_elem, -5, "The correct answer is " + _correct_answer + ". Please retry. ");
+    }       
+
+    _answer = _elem.prop("value");
+
+    // console.log("Correct Answer: " + _correct_answer + ", Answered Answer: " + _elem.prop("value"));
+
+    
+    if(isNaN(_answer))                                          return _errorHandler(_elem, -1, "That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+    if (_answer == "")                                          return _errorHandler(_elem, -5, "Please enter a valid input.");
+
+    _elem.prop("value", _answer);
+    if((_answer * 1 < _start_num) || (_answer * 1 > _end_num)) {
+        if (!arry_error_temp[step_count]) arry_error_temp[step_count] = _answer;
+        return _errorHandler(_elem, -2, "That is incorrect. Answer can't less than " + _start_num + " or more than " + _end_num + ". Please retry.");
+    }
+    if(step_count > 1)
+        if(borrow_var[step_count - 2]){
+            if((_answer == _correct_answer + 1)||(_answer == _correct_answer - 9))
+                                                                return _errorHandler(_elem, -6, "Remember you borrowed 1 in the previous step.");
+        }
+
+    if(_answer < _correct_answer) {      
+        if (!arry_error_temp[step_count]) arry_error_temp[step_count] = _answer;
+        return _errorHandler(_elem, -3, "Oops not enough, your answer needs to be larger.");
+    }
+    if(_answer > _correct_answer)  {
+        if (!arry_error_temp[step_count]) arry_error_temp[step_count] = _answer;
+         return _errorHandler(_elem, -4, "Your answer is larger than what we need.");
+     }
+
+    return 0;
+}
+
+function _errorHandler(_elem, _err_num, _err_description) {
+    alertModal( _err_description );
+    if(_err_num != -6) retry_attempt++;
+    _elem.prop("value", "").focus();
+    return _err_num;
+}
+
+function borrowNumber(_digits) {
+    x_var[_digits] = (x_var[_digits] + 9) % 10;
+    if(x_var[_digits] == 9) borrowNumber(_digits + 1);
 }
 
 function dismissZero(_number) {
@@ -262,7 +323,10 @@ function displayTotalFlow(){
 
     for(i=1; i<=max_digit; i++){
         result += "<p align=left style='text-indent:10px;' class='margin-10-top'>";
-        result += "Step " + i + " : Substract the " + step_words[i - 1];
+        result += "Step " + i + " : Subtract the " + step_words[i - 1];
+        if (arry_error_temp[i]) {
+            result += "<br>"+ "&nbsp; &nbsp; " + "<font style = 'color: red;'>" + "step"+ i + ":&nbsp;" + "error : "+ arry_error_temp[i] + "</font>";
+        }
         result += "</p>";
 
         result += "<p align=left style='text-indent:20px;'>";
@@ -285,6 +349,7 @@ function displayTotalFlow(){
             if(x_var[i - 1] < y_var[i - 1]) result += (x_var[i - 1] + 10) + " - " + y_var[i - 1] + " = " + (x_var[i - 1] + 10 - y_var[i - 1]);
             else result += x_var[i - 1] + " - " + y_var[i - 1] + " = " + (x_var[i - 1] - y_var[i - 1]);
         } else {
+            // console.log("i = " + i + "---" + y_var[i - 1]);
             result += x_var[i - 1];
         }
 
@@ -313,7 +378,7 @@ function displayTotalFlow2(){
 
     for(i=1; i<=max_digit; i++){
         result += "<p align=left style='text-indent:10px;' class='margin-10-top'>";
-        result += "Step " + i + " : Substract the " + step_words[i - 1];
+        result += "Step " + i + " : Subtract the " + step_words[i - 1];
         result += "</p>";
 
         result += "<p align=left style='text-indent:20px;'>";
@@ -336,7 +401,7 @@ function displayTotalFlow2(){
             if(x_var[i - 1] < y_var[i - 1]) result += (x_var[i - 1] + 10) + " - " + y_var[i - 1] + " = " + (x_var[i - 1] + 10 - y_var[i - 1]);
             else result += x_var[i - 1] + " - " + y_var[i - 1] + " = " + (x_var[i - 1] - y_var[i - 1]);
         } else {
-            result += x_var[i - 1];
+            result += y_var[i - 1];
         }
 
         result += "</p>";
@@ -346,19 +411,21 @@ function displayTotalFlow2(){
     result += "<p align=left style='text-indent:10px;'>Answer:</p>";
     result += "<p align=left style='text-indent:20px;'>" + $(".inputCheck").prop("value") + "</p>";
 
-    $("#lastDiv3").html(result);
+    $("#lastDiv3").html(result);        
 }
 
 
 function btnYEsOnclick(){
-    // if(borrow_var[step_count - 2]) alert("Remember you borrowed 1 in the previous step.");
+    // $("#myModal").hide();
+    $("#message_modal_dynamic").hide();
     if(borrow_var[step_count - 2]) alertModal("Remember you borrowed 1 in the previous step.");
+    // console.log("yes = " + step_count);
     $(".inputCheck").focus();
 }
 
 function btnNOOnclick(){
+    // $("#myModal").hide();
     $("#message_modal_dynamic").hide();
-    // alert(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1 !");
     btnNOBorrowModal(x_var[step_count - 1] + " is less than " + y_var[step_count - 1] + ", So you must borrow 1.");
     $(".inputCheck").focus();
 }

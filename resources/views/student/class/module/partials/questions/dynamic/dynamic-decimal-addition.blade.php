@@ -1,23 +1,27 @@
 <div>
     <div style="visibility:hidden">
+        <input type="text" class="input_num_max" style="width: 50px" readonly>
         <input type="text" name="randomDigits" id="randomDigits" required autofocus value="4">
-        <input type="text" name="randomNumber1" id="randomNumber1" readonly><br><br>
+        <input type="text" name="randomNumber1" id="randomNumber1" readonly>
         <input type="text" name="randomNumber2" id="randomNumber2" readonly><br><br>
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
 
-    <div id="examPane" style="display: none;">
+    <div id="examPane" style="display:none;">
         <!-- questions area -->
         <div id="questionPane">
             {{--<p class="col-xs-6 h3">Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>--}}
             <p class="col-xs-6 h3" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
             {{--<button onclick="startAnswer();">Start Answer</button>--}}
         </div>
+
         <!-- answer area -->
-        <div id="answerPane" class="col-xs-6 pull-right h4">
+        <div id="answerPane" class="col-xs-6 pull-right h4 answer_area">
             <div id="lastDiv" class="margin-10-top margin-10-bot h4"></div>
         </div>
-        <div id="tipsFlow" style="display: none;">
+
+        <!-- tips area -->
+        <div id="tipsFlow" class="integer_area" style="display: none;">
             <div class="prof-info h3"><img src="/images/icon-tipbulb.png"><b> Tips</b></div>
             <div id="ansFlow" style="display: none;" class="col-xs-6 h4">
                 <div class="pull-right">
@@ -51,21 +55,20 @@
                 <div id="num2_1div"></div>
             </div>
             <div class="modal-footer">
-                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose()" style="display: none;">Close</button>
-                <button id="ok_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnOkBorrowModal()" style="display: none;">{!! trans('messages.ok') !!}</button>
-                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" data-dismiss="modal" onclick="btnYEsOnclick(); dynamicUnBlock();">
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();dynamicUnBlock()" style="display: none;">Close</button>
+                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" data-dismiss="modal" onclick="btnYEsOnclick();dynamicUnBlock()">
                     {!! trans('messages.yes') !!}
                 </button>
 
 
-                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick()">
+                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclick();dynamicUnBlock()">
                     {!! trans('messages.no') !!}
                 </button>
             </div>
         </div>
 
     </div>
-    {!! Html::script('/js/common/operations/integer_global.js')!!}
-    {!! Html::script('/js/common/operations/subtraction.js')!!}
+    {!! Html::script('/js/common/operations/global.js')!!}
+    {!! Html::script('/js/common/operations/decimal_addition.js')!!}
 
 </div>

@@ -89,6 +89,18 @@ function btnNOOnclose() {
 
 function randomDigitsOnclick(){
 
+    randomNumber = 0;
+    randonWordsIndex = 0;
+    step_count = 0;
+    real_number = "";
+    str_randomNumber = "";
+
+    arry_correctval = [];
+    arry_total = [];
+    arry_randomNumber = [];
+    arry_temp = [];
+    arry_correct_answer = [];
+
     str_randomNumber = "";
 
     var text = "";
@@ -116,6 +128,9 @@ function randomDigitsOnclick(){
     randonWordsIndex = Math.floor(Math.random() * real_number.length);
     // randonWordsIndex = 3;
     if (randonWordsIndex == 0) randonWordsIndex = 1;
+    $("#step_div").html('<div id="step_div" style="width: 700px; float: left;"><br><div id="tableNumber_div"></div><div id="lastDiv"></div></div>');
+    $("#correct_flow").html("");
+    $("#correct_flow_answer").html("");
 
     $("#randomNumber_b").html(str_randomNumber);
     $("#randomWords_b").html(number_words[randonWordsIndex]);
@@ -136,22 +151,24 @@ function startBtnOnclick(){
 
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
-                alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+
+            if(checkAnswer($(this)) == "z"){
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
 
             temp_answer = checkAnswerValidation($(this));
+
             if(temp_answer == -1){
-                alertModal("Your answer is larger than what we need.");
+                alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
             if(temp_answer == -2){
-                alertModal("Oops not enough, your answer needs to be larger.");
+                alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -181,36 +198,58 @@ function nextsetp(){
         $("<p>Step " + step_count + " :  Do you round up or down?</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 5) {
-        $("<p>Step " + step_count + " : What is the answer? </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " : Answer </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 6) {
-        answerDone(); //ADDED
+        answerDone() //ADDED
         displayTotalFlow();
         CorrectdisplayTotalFlows();
     }
 
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
-            if(checkAnswer($(this)) == false){
+            if(checkAnswer($(this)) == "y"){
                 alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+                $(this).prop("value", "").focus();
+                retry_attempt++;
+                return false;
+            }
+            if(checkAnswer($(this)) == "z"){
+                alertModal("That is incorrect. Answer can't be blank. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
             }
 
             temp_answer = checkAnswerValidation($(this));
-            if(temp_answer == -1){
-                alertModal("Your answer is larger than what we need.");
-                $(this).prop("value", "").focus();
-                retry_attempt++;
-                return false;
+            if (step_count == 4) {
+                if(temp_answer == -1){
+                    alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -2){
+                    alertModal("Your answer is either incorrect or must be in all capital letters. Please retry.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+            }else{
+                if(temp_answer == -1){
+                    alertModal("Your answer is larger than what we need.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
+                if(temp_answer == -2){
+                    alertModal("Oops not enough, your answer needs to be larger.");
+                    $(this).prop("value", "").focus();
+                    retry_attempt++;
+                    return false;
+                }
             }
-            if(temp_answer == -2){
-                alertModal("Oops not enough, your answer needs to be larger.");
-                $(this).prop("value", "").focus();
-                retry_attempt++;
-                return false;
-            }
+
             if(temp_answer == -3){
                 $(this).prop("value", "").focus();
                 return false;
@@ -343,19 +382,23 @@ function checkAnswerValidation(elem) {
 
         return -2;
     }
-
 }
 
 
-
 function checkAnswer(elem) {
-    if (step_count * 1 == 1 || step_count == 4) {
-        answer_val = elem.prop("value");
-        return true;
+    answer_val = elem.prop("value");
+    if (step_count == 1 || step_count == 4) {
+        if (answer_val == "") {
+            return "z";
+        }
     }else{
-        answer_val = elem.prop("value");
-        if(isNaN(answer_val)) return false;
-        elem.prop("value", answer_val);
+
+        if(isNaN(answer_val)) {
+            return "y";
+        }
+        if (answer_val == "") {
+            return "z";
+        }
     }
 }
 
@@ -508,7 +551,7 @@ function CorrectdisplayTotalFlows(){
     result_str += "</div>";
 
     result_str += "<div>";
-    result_str += "<p>Step 5: What is the answer?</p>";
+    result_str += "<p>Step 5: Answer</p>";
     result_str += "<p style='color:red;'>Now round "+ s1 +".  <br>This means that the numbers to the right of the number in question turn to 0.<br>The number in question does not change.</p>";
     str_number = "";
     if (real_number[real_number.length - randonWordsIndex] < 5) {
