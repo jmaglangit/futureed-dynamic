@@ -253,7 +253,7 @@ function playAnswer()
 	$(".answerTxt").keydown(function(e){
 		if(e.keyCode == 13){
 			if ($(".answerTxt").prop("value") == "") {
-				alertModal("That is incorrect. Answer cannot be blank and can only be numbers. Please retry.");
+				alertModal("That is incorrect. Answer cannot be blank. Please retry.");
 				return;
 			}
 			arrYourCorrectAnswer[real_step_count] = $(".answerTxt:last").prop("value");
