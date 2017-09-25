@@ -2095,6 +2095,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				startBtnOnclick();
 				break;
 
+			case Constants.DECIMAL_WORDS:
+
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.DECIMAL_WORDS + '}',getFirstNumber() + getSecondNumber());
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
 			default:
 				break;
 		}

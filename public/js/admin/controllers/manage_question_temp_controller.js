@@ -668,7 +668,12 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 randomDigitsOnclick();
 				question_text = question_text.replace('{' + Constants.DECIMAL_FRACTION_NUMERATOR + '}',getDigitNumerator());
 				question_text = question_text.replace('{' + Constants.DECIMAL_FRACTION_DENOMINATOR + '}', getDigitDenominator());
+                break;
 
+            case Constants.DECIMAL_WORDS:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.DECIMAL_WORDS + '}',getFirstNumber() + getSecondNumber());
                 break;
 
             default:

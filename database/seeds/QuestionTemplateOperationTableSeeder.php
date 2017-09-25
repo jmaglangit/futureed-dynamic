@@ -41,6 +41,7 @@ class QuestionTemplateOperationTableSeeder extends Seeder
 			'decimal_numeric',
             'decimal_understand',
             'decimal_convert_fraction',
+            'decimal_words',
         ];
 
         $seeder = [];

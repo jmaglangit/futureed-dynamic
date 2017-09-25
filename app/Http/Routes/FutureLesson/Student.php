@@ -444,6 +444,12 @@
 							'as' => $route_name . 'decimal-convert-fraction'
 							,'uses' => $route_controller . '@decimal_convert_fraction'
 						]);
+
+						Routes::get('/decimal-words',[
+							'as' => $route_name . 'decimal-words'
+							,'uses' => $route_controller . '@decimal_words'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [

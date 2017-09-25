@@ -220,4 +220,8 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-decimal-convert-fraction');
 	}
 
+	public function decimal_words(){
+		return view($this->dynamic_question.'dynamic-decimal-words');
+	}
+
 }
