@@ -40,6 +40,7 @@ class QuestionTemplateOperationTableSeeder extends Seeder
             'decimal_addition',
 			'decimal_numeric',
             'decimal_understand',
+            'decimal_convert_fraction',
         ];
 
         $seeder = [];

@@ -387,6 +387,28 @@
 							)!!}
 						</div>
 					</div>
+					<div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_CONVERT_FRACTION">
+						<div class="col-xs-6 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_add_number')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_decimal_fraction_numerator'
+									, 'ng-click' => 'template.actionButtons(futureed.DECIMAL_FRACTION_NUMERATOR)'
+									, 'ng-disabled' => '!template.isClicked'
+								)
+							)!!}
+						</div>
+						<div class="col-xs-6 admin-search-module">
+							{!! Form::button(trans('messages.admin_template_decimal')
+								,array(
+									'class' => 'btn btn-blue'
+									, 'name' => 'btn_decimal_fraction_denominator'
+									, 'ng-disabled' => '!template.isClicked'
+									, 'ng-click' => 'template.actionButtons(futureed.DECIMAL_FRACTION_DENOMINATOR)'
+								)
+							)!!}
+						</div>
+					</div>
 					<div class="col-xs-2"></div>
 
 				</div>

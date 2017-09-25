@@ -439,6 +439,11 @@
 							'as' => $route_name . 'decimal-understand'
 							,'uses' => $route_controller . '@decimal_understand'
 						]);
+
+						Routes::get('/decimal-convert-fraction',[
+							'as' => $route_name . 'decimal-convert-fraction'
+							,'uses' => $route_controller . '@decimal_convert_fraction'
+						]);
 					});
 
 					Routes::get('/trial/questions', [

@@ -79,3 +79,6 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_UNDERSTAND">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-understand') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_CONVERT_FRACTION">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-convert-fraction') !!}"></div>
+</div>

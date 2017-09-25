@@ -2072,10 +2072,26 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
                 break;
 
 			case Constants.DECIMAL_UNDERSTAND:
+				
 				randomDigitsOnclick();
+				
 				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_DIGIT + '}',getDigitsNumber());
 				question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER + '}', getFirstDecimalDigit() + '' + getSecondDecimalDigit());
+				
 				self.current_question.questions_text = question_text;
+				
+				startBtnOnclick();
+				break;
+
+			case Constants.DECIMAL_CONVERT_FRACTION:
+				
+				randomDigitsOnclick();
+				
+				question_text = question_text.replace('{' + Constants.DECIMAL_FRACTION_NUMERATOR + '}',getDigitNumerator());
+				question_text = question_text.replace('{' + Constants.DECIMAL_FRACTION_DENOMINATOR + '}', getDigitDenominator());
+				
+				self.current_question.questions_text = question_text;
+				
 				startBtnOnclick();
 				break;
 
