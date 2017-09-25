@@ -125,10 +125,10 @@ function randomDigitsOnclick(){
     max_t = digits(randomDigits);
     // console.log(max_t);
 
-    // randomNumber1 = Math.floor(Math.random() * max_t);
-    // randomNumber2 = Math.floor(Math.random() * max_t);
-    // if (randomNumber2 == 0 ) randomNumber2++;
-    // if (randomNumber1 == 0 ) randomNumber1++;
+    randomNumber1 = Math.floor(Math.random() * max_t);
+    randomNumber2 = Math.floor(Math.random() * max_t);
+    if (randomNumber2 == 0 ) randomNumber2++;
+    if (randomNumber1 == 0 ) randomNumber1++;
 
     $("#randomNumber1").prop("value", randomNumber1);
     $("#randomNumber2").prop("value", randomNumber2);
