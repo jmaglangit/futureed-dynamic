@@ -590,18 +590,19 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 
                 randomDigitsOnclick();
                 question_text = question_text.replace('{' + Constants.INTEGER_CONVERT_NUMBER + '}',getRandomNumber1());
+                console.log('question text --' + question_text);
                 break;
 
-            case Constants.INTEGER_SORT_SMALL:
+			case Constants.INTEGER_COUNTING:
+
+				randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_COUNTING + '}',getRandomNumber1());
+				break;
+
+            case Constants.INTEGER_DECIMAL:
 
                 randomDigitsOnclick();
-                question_text = question_text.replace('{' + Constants.INTEGER_SORT_SMALL + '}',getRandomNumber1());
-                break;
-
-            case Constants.INTEGER_SORT_LARGE:
-
-                randomDigitsOnclick();
-				question_text = question_text.replace('{' + Constants.INTEGER_SORT_LARGE +'}',getRandomNumber1());
+                question_text = question_text.replace('{' + Constants.INTEGER_DECIMAL + '}',"");
                 break;
 
             case Constants.INTEGER_EXPANDED_DECIMAL:
@@ -610,17 +611,25 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 question_text = question_text.replace('{' + Constants.INTEGER_EXPANDED_DECIMAL + '}',getRealNumber());
                 break;
 
-            case Constants.INTEGER_DECIMAL:
-
-                randomDigitsOnclick();
-                question_text = question_text.replace('{' + Constants.INTEGER_DECIMAL + '}',"");
-                break;
-
             case Constants.INTEGER_EXTENDED:
 
                 randomDigitsOnclick();
                 question_text = question_text.replace('{' + Constants.INTEGER_EXTENDED + '}',getRealNumber());
 				break;
+
+			case Constants.INTEGER_IDENTIFY:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_DIGIT + '}',getDigitsNumber());
+                question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_NUMBER + '}',getRandomNumber());
+				break;
+
+            case Constants.INTEGER_REGROUP:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.NUMBER1 + '}', getFirstNumber() + ' ' + getFirstNumberWords());
+                question_text = question_text.replace('{' + Constants.NUMBER2 + '}', getSecondNumber() + ' ' + getSecondNumberWords());
+                break;
 
             case Constants.INTEGER_ROUNDING_NUMBER:
 
@@ -629,11 +638,16 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 question_text = question_text.replace('{' + Constants.INTEGER_RANDOM_WORD + '}',getRandomWords());
                 break;
 
-            case Constants.INTEGER_REGROUP:
+            case Constants.INTEGER_SORT_LARGE:
 
                 randomDigitsOnclick();
-                question_text = question_text.replace('{' + Constants.NUMBER1 + '}', getFirstNumber() + ' ' + getFirstNumberWords());
-                question_text = question_text.replace('{' + Constants.NUMBER2 + '}', getSecondNumber() + ' ' + getSecondNumberWords());
+                question_text = question_text.replace('{' + Constants.INTEGER_SORT_LARGE +'}',getRandomNumber1());
+                break;
+
+            case Constants.INTEGER_SORT_SMALL:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.INTEGER_SORT_SMALL + '}',getRandomNumber1());
                 break;
 
             case Constants.DECIMAL_ADDITION:

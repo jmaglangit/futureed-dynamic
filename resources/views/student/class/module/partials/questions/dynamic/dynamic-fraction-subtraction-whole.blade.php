@@ -53,8 +53,6 @@
                             <td align="center" class="verybigtext">?</td>
                         </tr>
                     </table>
-
-                </div>
             </div>
         </div>
 

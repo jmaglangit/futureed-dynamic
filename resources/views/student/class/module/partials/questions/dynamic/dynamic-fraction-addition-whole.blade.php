@@ -57,7 +57,6 @@
                     </table>
 
                 </div>
-            </div>
         </div>
 
         <!-- answer area -->
