@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Observers;
 
+use FutureEd\Models\Core\Module;
 use FutureEd\Models\Traits\TranslationTrait;
 
 class ModuleObserver {
@@ -15,15 +16,6 @@ class ModuleObserver {
 			'description' => $model->description
 		]);
 
-	}
-
-	public function updated($model){
-
-		//name translation
-		$this->setModuleTranslation($model->id,[
-			'name' => $model->name,
-			'description' => $model->description
-		]);
 	}
 
 }
