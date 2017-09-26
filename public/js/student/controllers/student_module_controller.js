@@ -2083,12 +2083,12 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				startBtnOnclick();
 				break;
 
-			case Constants.DECIMAL_CONVERT_FRACTION:
+			case Constants.FRACTION_DECIMAL:
 				
 				randomDigitsOnclick();
 				
-				question_text = question_text.replace('{' + Constants.DECIMAL_FRACTION_NUMERATOR + '}',getDigitNumerator());
-				question_text = question_text.replace('{' + Constants.DECIMAL_FRACTION_DENOMINATOR + '}', getDigitDenominator());
+				question_text = question_text.replace('{' + Constants.FRACTION_DECIMAL_NUMERATOR + '}',getDigitNumerator());
+				question_text = question_text.replace('{' + Constants.FRACTION_DECIMAL_DENOMINATOR + '}', getDigitDenominator());
 				
 				self.current_question.questions_text = question_text;
 				

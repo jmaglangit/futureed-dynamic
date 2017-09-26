@@ -440,9 +440,9 @@
 							,'uses' => $route_controller . '@decimal_understand'
 						]);
 
-						Routes::get('/decimal-convert-fraction',[
-							'as' => $route_name . 'decimal-convert-fraction'
-							,'uses' => $route_controller . '@decimal_convert_fraction'
+						Routes::get('/fraction-decimal',[
+							'as' => $route_name . 'fraction-decimal'
+							,'uses' => $route_controller . '@fraction_decimal'
 						]);
 
 						Routes::get('/decimal-words',[

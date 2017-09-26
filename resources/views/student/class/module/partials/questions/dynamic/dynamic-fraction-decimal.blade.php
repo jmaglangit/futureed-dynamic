@@ -59,6 +59,6 @@
         </div>
     </div>
 
-    {!! Html::script('/js/common/operations/decimal_convert_fraction.js')!!}
+    {!! Html::script('/js/common/operations/fraction_decimal.js')!!}
     {!! Html::script('/js/common/operations/global.js') !!}
 </div>

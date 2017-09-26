@@ -164,13 +164,13 @@ function validateTemplateText(){
             $('button[name=btn_decimal_random_number]').prop('disabled', false);
         }else{$('button[name=btn_decimal_random_number]').prop('disabled', true);}
 
-        if((val.indexOf("{decimal_fraction_numerator}")) == Constants.NEGATIVE_1){
-            $('button[name=btn_decimal_fraction_numerator]').prop('disabled', false);
-        }else{$('button[name=btn_decimal_fraction_numerator]').prop('disabled', true);}
+        if((val.indexOf("{fraction_decimal_numerator}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_fraction_decimal_numerator]').prop('disabled', false);
+        }else{$('button[name=btn_fraction_decimal_numerator]').prop('disabled', true);}
 
-        if((val.indexOf("{decimal_fraction_denominator}")) == Constants.NEGATIVE_1){
-            $('button[name=btn_decimal_fraction_denominator]').prop('disabled', false);
-        }else{$('button[name=btn_decimal_fraction_denominator]').prop('disabled', true);}
+        if((val.indexOf("{fraction_decimal_denominator}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_fraction_decimal_denominator]').prop('disabled', false);
+        }else{$('button[name=btn_fraction_decimal_denominator]').prop('disabled', true);}
 
         if((val.indexOf("{decimal_words}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_words]').prop('disabled', false);
