@@ -216,4 +216,12 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-decimal-understand');
 	}
 
+	public function fraction_decimal(){
+		return view($this->dynamic_question.'dynamic-fraction-decimal');
+	}
+
+	public function decimal_words(){
+		return view($this->dynamic_question.'dynamic-decimal-words');
+	}
+
 }

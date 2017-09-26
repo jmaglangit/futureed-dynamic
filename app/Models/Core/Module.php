@@ -64,32 +64,32 @@ class Module extends Model
 		return $this->getModuleTranslation($this->attributes['id'],$value,'name');
 	}
 
-//	public function setNameAttribute($value){
-//
-//		if(isset($this->attributes['id'])){
-//			return $this->setModuleTranslation($this->attributes['id'],$value,'name');
-//		} else {
-//			return $this->setModuleTranslation([],$value,'name');
-//		}
-//	}
+	public function setNameAttribute($value){
+
+
+		if(isset($this->attributes['id'])){
+			return $this->setModuleTranslation($this->attributes['id'],$value,'name');
+		} else {
+			return $this->attributes['name'] = $value;
+		}
+	}
 
 	public function getDescriptionAttribute($value){
 
 		return $this->getModuleTranslation($this->attributes['id'],$value,'description');
 	}
 
-//	public function setDescriptionAttribute($value){
-//
-//		if(isset($this->attributes['id'])){
-//			return $this->setModuleTranslation($this->attributes['id'],$value,'description');
-//		} else {
-//			return $value;
-//		}
-//	}
+	public function setDescriptionAttribute($value){
+
+		if(isset($this->attributes['id'])){
+			return $this->setModuleTranslation($this->attributes['id'],$value,'description');
+		} else {
+			return $this->attributes['description'] = $value;
+		}
+	}
 
 	//Mutators
 
-	//Translations -- transfered to observers
 	public function setCommonCoreAreaAttribute($value){
 
 		if($value == NULL){

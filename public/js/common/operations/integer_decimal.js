@@ -124,9 +124,9 @@ function randomDigitsOnclick(){
 	arry_temp = [];
 	arry_checkIdx = [];
 	
-	// randomDigits1 = parseInt($(".randomDigits1").prop("value"));
+	randomDigits1 = parseInt($(".randomDigits1").prop("value"));
 	min = 0.05;
-	// randomDigits2 = parseInt($(".randomDigits2").prop("value"));
+	randomDigits2 = parseInt($(".randomDigits2").prop("value"));
 
 	if(isNaN(randomDigits1)) {
 		randomDigits1 = 50;
