@@ -677,6 +677,13 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER + '}', getFirstDecimalDigit() + '' + getSecondDecimalDigit());
                 break;
 
+            case Constants.FRACTION_DECIMAL:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.FRACTION_DECIMAL_NUMERATOR + '}',getDigitNumerator());
+                question_text = question_text.replace('{' + Constants.FRACTION_DECIMAL_DENOMINATOR + '}', getDigitDenominator());
+                break;
+
             case Constants.DECIMAL_WORDS:
 
                 randomDigitsOnclick();
