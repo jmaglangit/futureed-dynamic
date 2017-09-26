@@ -2935,3 +2935,9 @@ div#correct_flow p, div#Answer_correct_flow p,
 .integer_area input {
     line-height: 0px;
 }
+
+.border_table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
