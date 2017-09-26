@@ -388,6 +388,26 @@
             )!!}
         </div>
     </div>
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.FRACTION_DECIMAL">
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_add_number')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_fraction_decimal_numerator'
+                    , 'ng-click' => 'template.actionButtons(futureed.FRACTION_DECIMAL_NUMERATOR)'
+                )
+            )!!}
+        </div>
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_fraction_decimal_denominator'
+                    , 'ng-click' => 'template.actionButtons(futureed.FRACTION_DECIMAL_DENOMINATOR)'
+                )
+            )!!}
+        </div>
+    </div>
     <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_WORDS">
         <div class="col-xs-5 admin-search-module">
             {!! Form::button(trans('messages.admin_template_decimal')

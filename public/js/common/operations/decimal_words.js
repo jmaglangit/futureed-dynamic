@@ -367,7 +367,7 @@ function nextsetp(){
         result_str += "</tr>";
     result_str += "</table>";
     if (step_count == 2) {
-        $("<p>Step " + step_count + " : How many columns should the place table have?</p><br><input class='inputCheck'>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " : How many columns should the place table have?</p><input class='inputCheck'>").insertBefore("#lastDiv");
     }
 
     if (step_count == 3) {
@@ -375,16 +375,16 @@ function nextsetp(){
         return middleFunc();
     }
     if (step_count == 4) {
-        $("<p>Step " + step_count + " : What is number to the left of the decimal? Write it out as a number</p><br><input class='inputCheck'>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " : What is number to the left of the decimal? Write it out as a number</p><input class='inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 5) {
-        $("<p>Step " + step_count + " :  What is the number to the right of the decimal? Write it out as a number</p><br><input class='inputCheck'>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " :  What is the number to the right of the decimal? Write it out as a number</p><input class='inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 6) {
-        $("<p>Step " + step_count + " : What is the place value of the last digit on the right? (EX: Tenths. )</p><br><input class='inputCheck'>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " : What is the place value of the last digit on the right? (EX: Tenths. )</p><input class='inputCheck'>").insertBefore("#lastDiv");
     }
     if (step_count == 7) {
-        $("<p>Step " + step_count + " : Answer.(Only use lower case).</p><br><input class='inputCheck' style='width:400px'>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " : Answer.(Only use lower case).</p><input class='inputCheck' style='width:400px'>").insertBefore("#lastDiv");
     }
     
     if (step_count > 7) {
@@ -406,14 +406,14 @@ function nextsetp(){
             if (step_count == 6) {
                 if(temp_answer == -1){
                     // alert('You forgot the word "number". Retry!');
-                    alertModal('You forgot the word "number". Please retry.');
+                    alertModal('Your answer is incorrect. Please retry.');
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
                 }
                 if(temp_answer == -2){
                     // alert('You forgot the word "number". Retry!');
-                    alertModal('You forgot the word "number". Please retry.');
+                    alertModal('Your answer is incorrect. Please retry.');
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
@@ -427,14 +427,14 @@ function nextsetp(){
             }else if (step_count == 7) {
                 if(temp_answer == -1){
                     // alert("Incorrect. Retry! ");
-                    alertModal("Incorrect. Retry! ");
+                    alertModal("Your answer is incorrect. Please retry.");
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
                 }
                 if(temp_answer == -2){
                     // alert("Incorrect. Retry! ");
-                    alertModal("Incorrect. Retry! ");
+                    alertModal("Your answer is incorrect. Please retry.");
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
