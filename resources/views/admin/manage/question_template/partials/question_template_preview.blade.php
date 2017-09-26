@@ -347,10 +347,25 @@
         {!! Html::script('/js/common/operations/global.js?20170806')!!}
         {!! Html::script('/js/common/operations/sort_min.js?20170806.js')!!}
     </div>
+    <div ng-if="template.record.operation == futureed.DECIMAL_ADDITION">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        {!! Html::script('/js/common/operations/global.js')!!}
+        {!! Html::script('/js/common/operations/decimal_addition.js')!!}
+    </div>
+    <div ng-if="template.record.operation == futureed.DECIMAL_COMPARE">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        {!! Html::script('/js/common/operations/global.js')!!}
+        {!! Html::script('/js/common/operations/decimal_compare.js')!!}
+    </div>
     <div ng-if="template.record.operation == futureed.DECIMAL_NUMERIC">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
         {!! Html::script('/js/common/operations/global.js')!!}
         {!! Html::script('/js/common/operations/decimal_numeric.js')!!}
+    </div>
+    <div ng-if="template.record.operation == futureed.DECIMAL_UNDERSTAND">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        {!! Html::script('/js/common/operations/global.js')!!}
+        {!! Html::script('/js/common/operations/decimal_understand.js')!!}
     </div>
 
 

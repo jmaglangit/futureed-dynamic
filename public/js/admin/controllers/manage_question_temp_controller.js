@@ -660,8 +660,8 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
             case Constants.DECIMAL_COMPARE:
 
                 randomDigitsOnclick();
-                question_text = question_text.replace('{' + Constants.NUMBER1 + '}', getFirstNumber() + ' ' + getFirstNumberWords());
-                question_text = question_text.replace('{' + Constants.NUMBER2 + '}', getSecondNumber() + ' ' + getSecondNumberWords());
+                question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER1 + '}', getFirstNumber() + '.' + getFirstDecimalDigit());
+                question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER2 + '}', getSecondNumber() + '.' + getSecondDecimalDigit());
                 break;
 
 			case Constants.DECIMAL_NUMERIC:
@@ -676,7 +676,6 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_DIGIT + '}',getDigitsNumber());
                 question_text = question_text.replace('{' + Constants.DECIMAL_RANDOM_NUMBER + '}', getFirstDecimalDigit() + '' + getSecondDecimalDigit());
                 break;
-
             default:
                 break;
         }
