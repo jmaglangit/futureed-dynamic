@@ -62,4 +62,4 @@
     </div>
     {!! Html::script('/js/common/operations/global.js?20170806')!!}
     {!! Html::script('/js/common/operations/integer_decimal.js')!!}
-</div
+</div>
