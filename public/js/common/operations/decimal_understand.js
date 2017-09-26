@@ -318,13 +318,13 @@ function nextsetp(){
             temp_answer = checkAnswerValidation($(this));
             if (step_count == 3) {
                 if(temp_answer == -1){
-                    alertModal('You forgot the word "number".');
+                    alertModal('Your answer is incorrect. Please retry.');
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
                 }
                 if(temp_answer == -2){
-                    alertModal('You forgot the word "number".');
+                    alertModal('Your answer is incorrect. Please retry.');
                     $(this).prop("value", "").focus();
                     retry_attempt++;
                     return false;
@@ -608,8 +608,8 @@ function checkAnswer(elem) {
 
 function displayTotalFlow(){
     result_str = "";
-    result_str += "<b style='color:blue'>Answered Flow</b>";
-    result_str += "<br><br>";
+    // result_str += "<b style='color:blue'>Answered Flow</b>";
+    // result_str += "<br><br>";
     result_str += "<div id='start_div'>";
         result_str += '<label>What is the decimal place of ' + decimalNumber + ' in the number ' + str_interger + underl + ' and how would you represent it in a fraction form?</label>';
     result_str += "</div>";
@@ -721,7 +721,7 @@ function displayTotalFlow(){
                 result_str += '<table style="color:red; border: 0px solid black;">';
                     result_str += '<tr>';
                         
-                        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext">Hence '+decimalNumber+' ' + decimal_words[i] + ' equals '+ decimalNumber +' x </td>';
+                        result_str += '<td rowspan="3" style="text-align:left; max-width:75%" valign="middle" class="verybigtext">Hence '+decimalNumber+' ' + decimal_words[i] + ' equals '+ decimalNumber +' x </td>';
                         result_str += '<td align="center" valign="middle" class="verybigtext"> 1 </td>';
                         result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"> = </td>';
                         result_str += '<td align="center" valign="middle" class="verybigtext"> '+decimalNumber+' </td>';
@@ -756,8 +756,8 @@ function displayTotalFlow(){
 
 function displayTotalFlow1(){
     result_str = "";
-    result_str += "<b style='color:blue'>Correct Answered Flow</b>";
-    result_str += "<br><br>";
+    // result_str += "<b style='color:blue'>Correct Answered Flow</b>";
+    // result_str += "<br><br>";
     result_str += "<div id='start_div'>";
         result_str += '<label>What is the decimal place of ' + decimalNumber + ' in the number ' + str_interger + underl + ' and how would you represent it in a fraction form?</label>';
     result_str += "</div>";
@@ -852,7 +852,7 @@ function displayTotalFlow1(){
                 result_str += '<table style="color:red; border: 0px solid black;">';
                     result_str += '<tr>';
                         
-                        result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext">Hence '+decimalNumber+' ' + decimal_words[i] + ' equals '+ decimalNumber +' x </td>';
+                        result_str += '<td rowspan="3" style="text-align:left; max-width:75%" valign="middle" class="verybigtext">Hence '+decimalNumber+' ' + decimal_words[i] + ' equals '+ decimalNumber +' x </td>';
                         result_str += '<td align="center" valign="middle" class="verybigtext"> 1 </td>';
                         result_str += '<td rowspan="3" align="center" valign="middle" class="verybigtext"> = </td>';
                         result_str += '<td align="center" valign="middle" class="verybigtext"> '+decimalNumber+' </td>';
