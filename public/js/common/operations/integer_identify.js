@@ -99,7 +99,7 @@ function randomDigitsOnclick(){
     arr = [];
     str_randomNumber = "";
 
-    // randomDigits = parseInt($(".randomDigits").prop("value"));
+    randomDigits = parseInt($(".randomDigits").prop("value"));
     if(isNaN(randomDigits)) {
         randomDigits = 4;
         $(".randomDigits").prop("value", randomDigits);
