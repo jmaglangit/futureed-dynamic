@@ -163,5 +163,10 @@ function validateTemplateText(){
         if((val.indexOf("{decimal_random_number}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_random_number]').prop('disabled', false);
         }else{$('button[name=btn_decimal_random_number]').prop('disabled', true);}
+
+        if((val.indexOf("{decimal_words}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_words]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_words]').prop('disabled', true);}
+
 	}
 }
