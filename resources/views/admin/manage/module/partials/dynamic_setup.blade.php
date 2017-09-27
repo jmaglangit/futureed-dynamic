@@ -202,7 +202,7 @@
                                                              ng-checked="template.checkbox_all || template.checkedTemplates(record.id,template.module_templates.records)"
                                                              ng-model="template.checkbox_value[record.id]" ></label>
                         </td>
-                        <td class="wide-column"><div class="pull-left">{! record.question_template_format !}</div></td>
+                        <td class="wide-column"><div class="pull-left text-align-left">{! record.question_template_format !}</div></td>
                     </tr>
                     <tr class="odd" ng-if="!template.records.length && !template.table.loading">
                         <td valign="top" colspan="7">
