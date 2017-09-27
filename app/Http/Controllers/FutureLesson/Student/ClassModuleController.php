@@ -224,4 +224,8 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-decimal-words');
 	}
 
+	public function decimal_subtraction(){
+		return view($this->dynamic_question.'dynamic-decimal-subtraction');
+	}
+
 }

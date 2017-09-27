@@ -450,6 +450,11 @@
 							,'uses' => $route_controller . '@decimal_words'
 						]);
 
+						Routes::get('/decimal-subtraction',[
+							'as' => $route_name . 'decimal-subtraction'
+							,'uses' => $route_controller . '@decimal_subtraction'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [
