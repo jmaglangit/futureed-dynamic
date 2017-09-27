@@ -425,7 +425,7 @@ function checkAnswerValidation(elem) {
         }
         if(retry_attempt > 1){
             // alert("Correct Answer is " + correct_answer + ". Retry! ");
-            alertModal("The correct answer is " + correct_answer + "Please retry. ");
+            alertModal("The correct answer is " + correct_answer + ". Please retry. ");
             step2_count--;
             retry_attempt = 0;
             return -3;
@@ -583,7 +583,7 @@ function displayTotalFlow(){
         result_str += '</table>';
         result_str += "<br>You go to the end of the number in this case " + An * factorY + ", and move back the number of times by the number of zeros in the denominator.";
         result_str += "<br>Since "+ Ad * factorY +" has " + Math.log10(Ad * factorY) + " zeros, you must move back " + Math.log10(Ad * factorY) + " times.";
-        result_str += "<font color=red><br>Note the movement of the decimal point to the left (always to the left), depends on what you are dividing by. <br> If you are dividing by 100, move back 2 spaces, 1,000 3 spaces, 10,000 4 spaces and so on.</font><br><br>";
+        result_str += "<font color=red><br><br>Note: The movement of the decimal point to the left (always to the left), depends on what you are dividing by. <br> If you are dividing by 100, move back 2 spaces, 1,000 3 spaces, 10,000 4 spaces and so on.</font><br><br>";
 
         var str = ((An * factorY) / (Ad * factorY)).toString();
         
@@ -678,7 +678,7 @@ function displayTotalFlow1(){
         result_str += '</table>';
         result_str += "<br>You go to the end of the number in this case " + An * factorY + ", and move back the number of times by the number of zeros in the denominator.";
         result_str += "<br>Since "+ Ad * factorY +" has " + Math.log10(Ad * factorY) + " zeros, you must move back " + Math.log10(Ad * factorY) + " times.";
-        result_str += "<font color=red><br>Note the movement of the decimal point to the left (always to the left), depends on what you are dividing by. <br> If you are dividing by 100, move back 2 spaces, 1,000 3 spaces, 10,000 4 spaces and so on.</font><br><br>";
+        result_str += "<font color=red><br><br>Note: The movement of the decimal point to the left (always to the left), depends on what you are dividing by. <br> If you are dividing by 100, move back 2 spaces, 1,000 3 spaces, 10,000 4 spaces and so on.</font><br><br>";
 
         var str = ((An * factorY) / (Ad * factorY)).toString();
         

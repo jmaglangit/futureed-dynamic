@@ -355,6 +355,7 @@ var Constants = {
 	, FRACTION_DECIMAL			: 'fraction_decimal'
 	, DECIMAL_FRACTION			: 'decimal_fraction'
 	, DECIMAL_WORDS				: 'decimal_words'
+	, DECIMAL_SUBTRACTION		: 'decimal_subtraction'
 
 	/* question dynamic template variables */
 	, NUMBER1					: 'number1'
@@ -383,6 +384,8 @@ var Constants = {
 	, DECIMAL_RANDOM_NUMBER		: 'decimal_random_number'
 	, FRACTION_DECIMAL_NUMERATOR		: 'fraction_decimal_numerator'
 	, FRACTION_DECIMAL_DENOMINATOR		: 'fraction_decimal_denominator'
+	, DECIMAL_MINUEND					: 'decimal_minuend'
+	, DECIMAL_SUBTRAHEND				: 'decimal_subtrahend'
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']

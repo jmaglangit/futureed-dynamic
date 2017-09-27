@@ -180,5 +180,13 @@ function validateTemplateText(){
             $('button[name=btn_decimal_words]').prop('disabled', false);
         }else{$('button[name=btn_decimal_words]').prop('disabled', true);}
 
+        //decimal subtraction variable button
+        if((val.indexOf("{decimal_minuend}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_minuend]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_minuend]').prop('disabled', true);}
+
+        if((val.indexOf("{decimal_subtrahend}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_subtrahend]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_subtrahend]').prop('disabled', true);}
 	}
 }
