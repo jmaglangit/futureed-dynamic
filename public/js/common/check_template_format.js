@@ -172,6 +172,10 @@ function validateTemplateText(){
             $('button[name=btn_fraction_decimal_denominator]').prop('disabled', false);
         }else{$('button[name=btn_fraction_decimal_denominator]').prop('disabled', true);}
 
+        if((val.indexOf("{decimal_fraction}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_fraction]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_fraction]').prop('disabled', true);}
+
         if((val.indexOf("{decimal_words}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_words]').prop('disabled', false);
         }else{$('button[name=btn_decimal_words]').prop('disabled', true);}

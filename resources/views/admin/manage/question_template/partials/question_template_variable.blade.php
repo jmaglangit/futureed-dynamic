@@ -408,6 +408,18 @@
             )!!}
         </div>
     </div>
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_FRACTION">
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_add_number')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_fraction'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_FRACTION)'
+                )
+            )!!}
+        </div>
+    </div>
+
     <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_WORDS">
         <div class="col-xs-5 admin-search-module">
             {!! Form::button(trans('messages.admin_template_decimal')

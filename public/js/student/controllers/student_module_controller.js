@@ -2095,6 +2095,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				startBtnOnclick();
 				break;
 
+            case Constants.DECIMAL_FRACTION:
+
+                randomDigitsOnclick();
+
+                question_text = question_text.replace('{' + Constants.DECIMAL_FRACTION + '}',getInteger() + '.' + getDecimal());
+
+                self.current_question.questions_text = question_text;
+
+                console.log(self.current_question.questions_text);
+                startBtnOnclick();
+                break;
+
 			case Constants.DECIMAL_WORDS:
 
 				randomDigitsOnclick();
