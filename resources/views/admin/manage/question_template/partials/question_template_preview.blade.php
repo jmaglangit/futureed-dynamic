@@ -373,6 +373,11 @@
         {!! Html::script('/js/common/operations/global.js')!!}
         {!! Html::script('/js/common/operations/decimal_understand.js')!!}
     </div>
+    <div ng-if="template.record.operation == futureed.DECIMAL_SUBTRACTION">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        {!! Html::script('/js/common/operations/global.js?20170825')!!}
+        {!! Html::script('/js/common/operations/decimal_subtraction.js')!!}
+    </div>
 
     {!! Html::script('/js/common/operations/math_algo.js')!!}
     {!! Html::script('/js/common/operations/module_mapper.js')!!}

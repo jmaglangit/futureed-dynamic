@@ -990,6 +990,8 @@ return [
 	'admin_template_decimal1' => 'ADD DECIMAL1',
 	'admin_template_decimal2' => 'ADD DECIMAL2',
 	'admin_template_decimal' => 'ADD DECIMAL',
+	'admin_template_decimal_minuend' => 'DECIMAL MINUEND',
+	'admin_template_decimal_subtrahend' => 'DECIMAL SUBTRAHEND',
 	//Client
 	//resources/views/client/dashboard/index.blade.php
 	'client_dashboard' => 'Client Dashboard',
