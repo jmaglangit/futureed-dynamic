@@ -69,7 +69,7 @@
         </div>
 
     </div>
-    {!! Html::script('/js/common/operations/global.js?20170713')!!}
+    {!! Html::script('/js/common/operations/global.js?20170825')!!}
     {!! Html::script('/js/common/operations/decimal_subtraction.js')!!}
 
 </div>
