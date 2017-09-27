@@ -7,16 +7,15 @@
         <p ng-init="mod.dynamicQuestionSetup(mod.current_question)"></p>
     </div>
 
-    <div id="examPane" style="display:none;">
+    <div id="start_div" style="display:none;">
         <!-- questions area -->
         <div id="questionPane">
-            {{--<p class="col-xs-6 h3">Find the sum of <label id="subject_number1_p"></label> + <label id="subject_number2_p"></label></p><br>--}}
             <p class="col-xs-6 h3" ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
-            {{--<button onclick="startAnswer();">Start Answer</button>--}}
         </div>
 
         <!-- answer area -->
-        <div id="answerPane" class="col-xs-6 pull-right h4 answer_area">
+        <div id="step_div" class="col-xs-6 pull-right h4 answer_area">
+            <div id="tableNumber_div" class="margin-10-top margin-10-bot h4"></div>
             <div id="lastDiv" class="margin-10-top margin-10-bot h4"></div>
         </div>
 
@@ -55,20 +54,23 @@
                 <div id="num2_1div"></div>
             </div>
             <div class="modal-footer">
-                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclose();dynamicUnBlock()" style="display: none;">Close</button>
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal"
+                        onclick="closeModal();dynamicUnBlock()" style="display: none;">Close</button>
+                <button id="close_back_modal" type="button" class="btn btn-gold btn-medium pull-right"
+                        onclick="simplifyPossible();" style="display: none;">{!! trans('messages.ok') !!}</button>
+                <button id="can_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal"
+                        onclick="canbtnYEsOnclick();dynamicUnBlock()" style="display: none;">{!! trans('messages.yes') !!}</button>
                 <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" data-dismiss="modal" onclick="btnYEsOnclick();dynamicUnBlock()">
                     {!! trans('messages.yes') !!}
                 </button>
-
-
-                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="btnNOOnclick();dynamicUnBlock()">
+                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();">
                     {!! trans('messages.no') !!}
                 </button>
             </div>
         </div>
 
     </div>
+    {!! Html::script('/js/common/operations/decimal_fraction.js')!!}
     {!! Html::script('/js/common/operations/global.js')!!}
-    {!! Html::script('/js/common/operations/decimal_addition.js')!!}
 
 </div>

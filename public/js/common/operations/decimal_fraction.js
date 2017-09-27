@@ -41,20 +41,12 @@ var answered = []; //ADDED
 // start ADDED functions
 //getter and setter
 
-function getFirstNumber(){
-    return str_interger1;
+function getInteger(){
+    return str_interger;
 }
 
-function getFirstDecimalDigit(){
-    return str_decimal1;
-}
-
-function getSecondNumber(){
-    return str_interger2;
-}
-
-function getSecondDecimalDigit(){
-    return str_decimal2;
+function getDecimal(){
+    return str_decimal;
 }
 
 function getAnswered(){
@@ -107,8 +99,10 @@ function alertModal(message, modal){
     $("#message_text_modal").html(message);
     $("#message_modal_dynamic").show();
     $("#close_modal").show();
+    $("#close_back_modal").hide();
     $("#yes_modal").hide();
     $("#no_modal").hide();
+    $("#can_modal").hide();
 
     $("#close_modal").bind("click",{modal}, function(){
         switch(modal){
@@ -119,11 +113,23 @@ function alertModal(message, modal){
     });
 }
 
+function alertBackModal(message){
+    dynamicBlock();
+    $("#message_text_modal").html(message);
+    $("#message_modal_dynamic").show();
+    $("#close_back_modal").hide();
+    $("#no_modal").hide();
+    $("#close_modal").hide();
+    $("#yes_modal").hide();
+    $("#can_modal").show();
+}
+
 function digitsTheSameModal(){
     dynamicBlock();
     $("#message_text_modal").html("Are the digits the same?  If Yes move on, if No,");
     $("#message_modal_dynamic").show();
     $("#close_modal").hide();
+    $("#close_back_modal").hide();
     $("#yes_modal").show();
     $("#no_modal").show();
 }
@@ -131,6 +137,28 @@ function digitsTheSameModal(){
 function closeModal() {
     dynamicUnBlock();
     $("#message_modal_dynamic").modal('hide');
+}
+
+function simplifyPossible(){
+    dynamicBlock();
+    $("#message_text_modal").html('Simplify fraction if possible ?');
+    $("#message_modal_dynamic").show();
+    $("#close_modal").hide();
+    $("#close_back_modal").hide();
+    $("#yes_modal").show();
+    $("#no_modal").show();
+    $("#can_modal").hide();
+}
+
+function cantSimplify(){
+    dynamicBlock();
+    $("#message_text_modal").html('Can not Simplify.');
+    $("#message_modal_dynamic").show();
+    $("#close_modal").hide();
+    $("#close_back_modal").hide();
+    $("#yes_modal").hide();
+    $("#no_modal").hide();
+    $("#can_modal").show();
 }
 
 // end ADDED functions
@@ -283,11 +311,12 @@ function randomDigitsOnclick(){
 }
 
 function btnNOOnclick() {
-    alertModal("Can not! Retry!");
+    alertBackModal("Can not! Retry!");
 }
 
 function canbtnYEsOnclick(){
-    $("#myModal2").hide();
+    // $("#myModal2").hide();
+    closeModal();
     nextsetp();
 }
 
@@ -394,7 +423,9 @@ function btnYEsOnclick(){
 
 function nextsetp(){
     step2Str = "";
+    step2Str += "<br>"; //ADDED
     step2Str += "<input type=text placeholder='answer' style='width:50px;' class='inputCheckstep2Str1'> x <input type=text style='width:50px;' placeholder='answer' class='inputCheckstep2Str2'> = <input type=text style='width:50px;' placeholder='answer' class='inputCheckstep2Str3'>"
+    step2Str += "<br>";
 
     retry_attempt = 0;
     step_count++;
@@ -413,16 +444,18 @@ function nextsetp(){
     }
 
     if (step_count == 5) {
-        $("<p>Step " + step_count + " :Simplify the fraction.<br> " + result_str_answer + "<label id='hide_label' style='display:none;'>" + result_str_all_re + "</label></p>").insertBefore("#lastDiv");
+        $("<p>Step " + step_count + " : Simplify the fraction.<br><div>" + result_str_answer + "<label id='hide_label' style='display:none;'>" + result_str_all_re + "</label></div></p>").insertBefore("#lastDiv");
         if (factorX == 1) {
-            $("#myModal2").show();
+            // $("#myModal2").show();
+            cantSimplify();
         }else{
-            $("#myModal").show();
+            // $("#myModal").show();
+            simplifyPossible();
         }
     }
 
     if (step_count == 6) {
-        $("<p>Step " + step_count + " : Answer. <br>" + result_str_all).insertBefore("#lastDiv");
+        $("<br><p>Step " + step_count + " : Answer. <br>" + result_str_all).insertBefore("#lastDiv");
     }
     if (step_count > 6) {
         answerDone(); //ADDED
@@ -675,7 +708,7 @@ function checkAnswerValidation(elem) {
         }
         if (answer_val > correct_answer) {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Retry! ");
                 step1_count--;
                 retry_attempt = 0;
                 return -3;
@@ -689,7 +722,7 @@ function checkAnswerValidation(elem) {
             }
         }else {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step1_count--;
                 retry_attempt = 0;
                 return -3;
@@ -734,7 +767,7 @@ function checkAnswerValidation(elem) {
 
         if (answer_val > correct_answer) {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step2_count--;
                 retry_attempt = 0;
                 return -3;
@@ -748,7 +781,7 @@ function checkAnswerValidation(elem) {
             }
         }else {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step2_count--;
                 retry_attempt = 0;
                 return -3;
@@ -792,7 +825,7 @@ function checkAnswerValidation(elem) {
 
         if (answer_val > correct_answer) {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step3_count--;
                 retry_attempt = 0;
                 return -3;
@@ -806,7 +839,7 @@ function checkAnswerValidation(elem) {
             }
         }else {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step3_count--;
                 retry_attempt = 0;
                 return -3;
@@ -843,7 +876,7 @@ function checkAnswerValidation(elem) {
 
         if (answer_val > correct_answer) {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step4_count--;
                 retry_attempt = 0;
                 return -3;
@@ -857,7 +890,7 @@ function checkAnswerValidation(elem) {
             }
         }else {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step4_count--;
                 retry_attempt = 0;
                 return -3;
@@ -910,7 +943,7 @@ function checkAnswerValidation(elem) {
 
         if (answer_val > correct_answer) {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step5_count--;
                 retry_attempt = 0;
                 return -3;
@@ -924,7 +957,7 @@ function checkAnswerValidation(elem) {
             }
         }else {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step5_count--;
                 retry_attempt = 0;
                 return -3;
@@ -978,7 +1011,7 @@ function checkAnswerValidation(elem) {
 
         if (answer_val > correct_answer) {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step6_count--;
                 retry_attempt = 0;
                 return -3;
@@ -992,7 +1025,7 @@ function checkAnswerValidation(elem) {
             }
         }else {
             if(retry_attempt > 1){
-                alertModal("Correct Answer is " + correct_answer + ". Retry! ");
+                alertModal("The correct answer is " + correct_answer + ". Please retry.");
                 step6_count--;
                 retry_attempt = 0;
                 return -3;
