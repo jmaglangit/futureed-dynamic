@@ -445,6 +445,11 @@
 							,'uses' => $route_controller . '@fraction_decimal'
 						]);
 
+						Routes::get('/decimal-fraction',[
+							'as' => $route_name . 'decimal-fraction'
+							,'uses' => $route_controller . '@decimal_fraction'
+						]);
+
 						Routes::get('/decimal-words',[
 							'as' => $route_name . 'decimal-words'
 							,'uses' => $route_controller . '@decimal_words'

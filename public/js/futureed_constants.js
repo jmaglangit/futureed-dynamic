@@ -353,6 +353,7 @@ var Constants = {
 	, DECIMAL_NUMERIC			: 'decimal_numeric'
 	, DECIMAL_UNDERSTAND		: 'decimal_understand'
 	, FRACTION_DECIMAL			: 'fraction_decimal'
+	, DECIMAL_FRACTION			: 'decimal_fraction'
 	, DECIMAL_WORDS				: 'decimal_words'
 	, DECIMAL_SUBTRACTION		: 'decimal_subtraction'
 	, DECIMAL_RATIONAL_NUMBER	: 'decimal_rational_number'

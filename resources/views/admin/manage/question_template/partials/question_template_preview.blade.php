@@ -368,6 +368,12 @@
         {!! Html::script('/js/common/operations/global.js') !!}
     </div>
 
+    <div ng-if="template.record.operation == futureed.DECIMAL_FRACTION">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        {!! Html::script('/js/common/operations/decimal_fraction.js')!!}
+        {!! Html::script('/js/common/operations/global.js') !!}
+    </div>
+
     <div ng-if="template.record.operation == futureed.DECIMAL_UNDERSTAND">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
         {!! Html::script('/js/common/operations/global.js')!!}
