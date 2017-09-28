@@ -82,6 +82,12 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.FRACTION_DECIMAL">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.fraction-decimal') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_FRACTION">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-fraction') !!}"></div>
+</div>
 <div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_WORDS">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-words') !!}"></div>
+</div>
+<div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_SUBTRACTION">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-subtraction') !!}"></div>
 </div>
