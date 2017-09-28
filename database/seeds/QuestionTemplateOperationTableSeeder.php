@@ -44,6 +44,7 @@ class QuestionTemplateOperationTableSeeder extends Seeder
 			'decimal_fraction',
             'decimal_words',
             'decimal_subtraction',
+            'decimal_rational_number',
         ];
 
         $seeder = [];
