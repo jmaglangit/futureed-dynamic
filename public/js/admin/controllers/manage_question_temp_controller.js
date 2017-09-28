@@ -697,6 +697,12 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 question_text = question_text.replace('{' + Constants.DECIMAL_SUBTRAHEND + '}',getRandomNumber2());
                 break;
 
+            case Constants.DECIMAL_RATIONAL_NUMBER:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.DECIMAL_RATIONAL_NUMBER + '}', "");
+                break;
+
             default:
                 break;
         }

@@ -379,6 +379,28 @@
         {!! Html::script('/js/common/operations/decimal_subtraction.js')!!}
     </div>
 
+    <div ng-if="template.record.operation == futureed.DECIMAL_RATIONAL_NUMBER">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        <div id="start_div" class="h4" style="display: none;">
+            <table  style="display:inline-block;border: 0">
+                <tr>
+                    <td rowspan="3" align="center" valign="middle" id="real_number_b"><b>,</b></td>
+                    <td rowspan="3" align="center" valign="middle"><b>,</b></td>
+                    <td rowspan="3" align="center" valign="middle" id="str_interger_td"><b></b></td>
+                    <td align="center" id="An_td"></td>
+                    <td rowspan="3" align="center" valign="middle"><b>,</b></td>
+                    <td rowspan="3" align="center" valign="middle" id="str_interger_b"><b>,</b>,</td>
+                </tr>
+                <tr><td bgcolor="#000000" height="2"></td></tr>
+                <tr>
+                    <td align="center" id="Ad_td"></td>
+                </tr>
+            </table>
+        </div>
+        {!! Html::script('/js/common/operations/decimal_rational_number.js')!!}
+        {!! Html::script('/js/common/operations/global.js') !!}
+    </div>
+
     {!! Html::script('/js/common/operations/math_algo.js')!!}
     {!! Html::script('/js/common/operations/module_mapper.js')!!}
 </div>

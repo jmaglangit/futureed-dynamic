@@ -2846,7 +2846,7 @@ div#correct_flow p, div#Answer_correct_flow p,
 #step_div div#flip, #step_div div#combine, 
 #step_div div#addoneandtwo, #step_div div#Subtractiononeandtwo, 
 #step_div div#whole, #step_div div#crossone, #step_div div#crosstwo, 
-#step_div div#multiply_denominator{
+#step_div div#multiply_denominator, .decimal_area p{
     margin-top: 20px;
 }
 
@@ -2937,6 +2937,12 @@ div#correct_flow p, div#Answer_correct_flow p,
 }
 
 .border_table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table.rank_no, table.rank_no th,table.rank_no td{
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;

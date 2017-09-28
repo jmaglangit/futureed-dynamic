@@ -184,5 +184,9 @@ function validateTemplateText(){
         if((val.indexOf("{decimal_subtrahend}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_subtrahend]').prop('disabled', false);
         }else{$('button[name=btn_decimal_subtrahend]').prop('disabled', true);}
+
+        if((val.indexOf("{decimal_rational_number}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_rational_number]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_rational_number]').prop('disabled', true);}
 	}
 }
