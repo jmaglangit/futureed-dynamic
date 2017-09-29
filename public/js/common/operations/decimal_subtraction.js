@@ -228,8 +228,8 @@ function generateAnswerStep() {
         }
     }
     result += "</p>";
-    result += "<p align=right style='width:100px;'> - ";
-    if(diff_space > 0) result += "&nbsp&nbsp&nbsp&nbsp";
+    result += "<p align=right style='width:100px;margin-top:10px;' class='answer_underline'> - ";
+    if(diff_space > 0) result += "&nbsp&nbsp";
 
     for(i=getDigitsCouunt(randomNumber2); i > 1; i--){
         if (pos_i == i) {
