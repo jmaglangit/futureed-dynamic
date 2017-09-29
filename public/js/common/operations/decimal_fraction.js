@@ -311,7 +311,7 @@ function randomDigitsOnclick(){
 }
 
 function btnNOOnclick() {
-    alertBackModal("Can That is incorrect. Fraction can be simplified. Please retry");
+    alertBackModal("That is incorrect. Fraction can be simplified. Please retry");
 }
 
 function canbtnYEsOnclick(){
