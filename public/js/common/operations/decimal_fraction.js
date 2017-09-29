@@ -356,7 +356,7 @@ function startBtnOnclick(){
     $(".inputCheck1").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("Answer can't be alphabet !");
+                alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -383,7 +383,7 @@ function startBtnOnclick(){
             $(".inputCheck2").keydown(function(event){
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false){
-                        alertModal("Answer can't be alphabet !");
+                        alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -466,7 +466,7 @@ function nextsetp(){
     $(".inputCheck1").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("That is incorrect. Answer can’t be blank and can only be a numbers. Please retry.");
+                alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -493,7 +493,7 @@ function nextsetp(){
             $(".inputCheck2").keydown(function(event){
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false){
-                        alertModal("That is incorrect. Answer can’t be blank and can only be a numbers. Please retry.");
+                        alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -529,7 +529,7 @@ function step3Func() {
     $(".inputCheck").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("That is incorrect. Answer can’t be blank and can only be a numbers. Please retry.");
+                alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -562,7 +562,7 @@ function middleFunc() {
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("That is incorrect. Answer can’t be blank and can only be a numbers. Please retry.");
+                alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -595,7 +595,7 @@ function step1Func() {
     $(".inputCheckstep2Str1").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == false){
-                alertModal("That is incorrect. Answer can’t be blank and can only be a numbers. Please retry.");
+                alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                 $(this).prop("value", "").focus();
                 retry_attempt++;
                 return false;
@@ -622,7 +622,7 @@ function step1Func() {
             $(".inputCheckstep2Str2").keydown(function(event){
                 if(event.keyCode == 13){
                     if(checkAnswer($(this)) == false){
-                        alertModal("That is incorrect. Answer can’t be blank and can only be a numbers. Please retry.");
+                        alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                         $(this).prop("value", "").focus();
                         retry_attempt++;
                         return false;
@@ -649,7 +649,7 @@ function step1Func() {
                     $(".inputCheckstep2Str3").keydown(function(event){
                         if(event.keyCode == 13){
                             if(checkAnswer($(this)) == false){
-                                alertModal("That is incorrect. Answer can’t be blank and can only be a numbers. Please retry.");
+                                alertModal("That is incorrect. Answer can’t be blank and can only be numbers. Please retry.");
                                 $(this).prop("value", "").focus();
                                 retry_attempt++;
                                 return false;
