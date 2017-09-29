@@ -2903,7 +2903,7 @@ div#correct_flow p, div#Answer_correct_flow p,
     padding: 0 3px 0 3px;
 }
 
-.integer_area table, .decimal_area table {
+.integer_area table {
     width: 100%;
 }
 
@@ -2940,6 +2940,7 @@ div#correct_flow p, div#Answer_correct_flow p,
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
+    padding: 0 5px 0 5px;
 }
 
 table.rank_no, table.rank_no th,table.rank_no td{

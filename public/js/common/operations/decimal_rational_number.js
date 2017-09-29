@@ -964,7 +964,7 @@ function twoCompareFunc(){
             if(($(this).prop("value") != (str_interger2 + "x" + Ad + "")) && ($(this).prop("value") != (Ad + "x" + str_interger2 + ""))) {
                 
                 if(retry_attempt >= 3){
-                    alertModal("The correct answer is " + (str_interger2 + "x" + Ad + "") + "or "+ (Ad + "x" + str_interger2 + "") +". Please retry. ");
+                    alertModal("The correct answer is " + (str_interger2 + "x" + Ad + "") + " or "+ (Ad + "x" + str_interger2 + "") +". Please retry. ");
                     $(this).prop("value", "").focus();
                     retry_attempt = 0;
                     return;
@@ -1050,7 +1050,7 @@ function threeCompareFunc(){
             if(($(this).prop("value") != (str_interger2 * Ad + "+" + An + "")) && ($(this).prop("value") != (An + "+" + str_interger2 * Ad + ""))) {
                 
                 if(retry_attempt >= 3){
-                    alertModal("The correct answer is " + (str_interger2 * Ad + "+" + An + "") + "or "+ (An + "+" + str_interger2 * Ad + "") + ". Please retry. ");
+                    alertModal("The correct answer is " + (str_interger2 * Ad + "+" + An + "") + " or "+ (An + "+" + str_interger2 * Ad + "") + ". Please retry. ");
                     $(this).prop("value", "").focus();
                     retry_attempt = 0;
                     return;
@@ -1136,7 +1136,7 @@ function sixCompareFunc(){
             if(($(this).prop("value") != (Ad + "x" + factorX + "")) && ($(this).prop("value") != (factorX + "x" + Ad + ""))) {
                 
                 if(retry_attempt >= 3){
-                    alertModal("The correct answer is " + (Ad + "x" + factorX + "") + "or "+ (factorX + "x" + Ad + "") +". Please retry. ");
+                    alertModal("The correct answer is " + (Ad + "x" + factorX + "") + " or "+ (factorX + "x" + Ad + "") +". Please retry. ");
                     $(this).prop("value", "").focus();
                     retry_attempt = 0;
                     return;
