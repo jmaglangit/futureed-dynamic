@@ -141,7 +141,7 @@ function closeModal() {
 
 function simplifyPossible(){
     dynamicBlock();
-    $("#message_text_modal").html('Can you simplify the fraction');
+    $("#message_text_modal").html('Can you simplify the fraction?');
     $("#message_modal_dynamic").show();
     $("#close_modal").hide();
     $("#close_back_modal").hide();
@@ -152,7 +152,7 @@ function simplifyPossible(){
 
 function cantSimplify(){
     dynamicBlock();
-    $("#message_text_modal").html('Fraction is already in its simplest form');
+    $("#message_text_modal").html('Fraction is already in its simplest form.');
     $("#message_modal_dynamic").show();
     $("#close_modal").hide();
     $("#close_back_modal").hide();
@@ -311,7 +311,7 @@ function randomDigitsOnclick(){
 }
 
 function btnNOOnclick() {
-    alertBackModal("That is incorrect. Fraction can be simplified. Please retry");
+    alertBackModal("That is incorrect. Fraction can be simplified. Please retry.");
 }
 
 function canbtnYEsOnclick(){
