@@ -451,5 +451,16 @@
             )!!}
         </div>
     </div>
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_RATIONAL_NUMBER">
+        <div class="col-xs-5 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_rational_number'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_RATIONAL_NUMBER)'
+                )
+            )!!}
+        </div>
+    </div>
     <div class="col-xs-2"></div>
 </div>

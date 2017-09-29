@@ -232,4 +232,8 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-decimal-subtraction');
 	}
 
+	public function decimal_rational_number(){
+		return view($this->dynamic_question.'dynamic-decimal-rational-number');
+	}
+
 }

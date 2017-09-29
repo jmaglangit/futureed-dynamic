@@ -460,6 +460,11 @@
 							,'uses' => $route_controller . '@decimal_subtraction'
 						]);
 
+						Routes::get('/decimal-rational-numbers',[
+							'as' => $route_name . 'decimal-rational-number'
+							,'uses' => $route_controller . '@decimal_rational_number'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [

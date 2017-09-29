@@ -2131,6 +2131,17 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.DECIMAL_RATIONAL_NUMBER:
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.DECIMAL_RATIONAL_NUMBER + '}', "");
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
 			default:
 				break;
 		}
