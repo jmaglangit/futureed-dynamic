@@ -712,8 +712,8 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
             case Constants.DECIMAL_MULTIPLICATION:
 
                 randomDigitsOnclick();
-				question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLICAND + '}',getRandomNumber1());
-				question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLIER + '}',getRandomNumber2());
+                question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLICAND + '}',getRandomNumber1());
+                question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLIER + '}',getRandomNumber2());
                 break;
 
 
