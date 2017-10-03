@@ -94,3 +94,6 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_RATIONAL_NUMBER">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-rational-number') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_DIVISION">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-division') !!}"></div>
+</div>

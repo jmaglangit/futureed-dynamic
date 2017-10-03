@@ -465,6 +465,11 @@
 							,'uses' => $route_controller . '@decimal_rational_number'
 						]);
 
+						Routes::get('/decimal-division',[
+							'as' => $route_name . 'decimal-division'
+							,'uses' => $route_controller . '@decimal_division'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [

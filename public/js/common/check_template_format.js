@@ -192,5 +192,14 @@ function validateTemplateText(){
         if((val.indexOf("{decimal_rational_number}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_rational_number]').prop('disabled', false);
         }else{$('button[name=btn_decimal_rational_number]').prop('disabled', true);}
+
+        //decimal division variable button
+        if((val.indexOf("{decimal_divisor}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_divisor]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_divisor]').prop('disabled', true);}
+
+        if((val.indexOf("{decimal_dividend}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_dividend]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_dividend]').prop('disabled', true);}
 	}
 }

@@ -2953,3 +2953,7 @@ table.rank_no, table.rank_no th,table.rank_no td{
 .decimal_tips_area p {
     display: block !important;
 }
+
+.div_notice{
+    color: red; text-decoration: underline;
+}

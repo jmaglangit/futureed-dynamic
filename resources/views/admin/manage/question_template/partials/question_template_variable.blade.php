@@ -462,5 +462,25 @@
             )!!}
         </div>
     </div>
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_DIVISION">
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal_dividend')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_dividend'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_DIVIDEND)'
+                )
+            )!!}
+        </div>
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal_divisor')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_divisor'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_DIVISOR)'
+                )
+            )!!}
+        </div>
+    </div>
     <div class="col-xs-2"></div>
 </div>

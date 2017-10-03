@@ -2142,6 +2142,17 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.DECIMAL_DIVISION:
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.DECIMAL_DIVIDEND + '}',getRandomNumber1());
+				question_text = question_text.replace('{' + Constants.DECIMAL_DIVISOR + '}',getRandomNumber2());
+				self.current_question.questions_text = question_text;
+
+				startAnswer();
+
+				break;
+
 			default:
 				break;
 		}
