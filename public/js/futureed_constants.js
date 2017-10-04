@@ -389,13 +389,10 @@ var Constants = {
 	, FRACTION_DECIMAL_DENOMINATOR		: 'fraction_decimal_denominator'
 	, DECIMAL_MINUEND					: 'decimal_minuend'
 	, DECIMAL_SUBTRAHEND				: 'decimal_subtrahend'
-<<<<<<< HEAD
 	, DECIMAL_DIVIDEND				: 'decimal_dividend'
 	, DECIMAL_DIVISOR				: 'decimal_divisor'
-=======
 	, DECIMAL_MULTIPLICAND				: 'decimal_multiplicand'
 	, DECIMAL_MULTIPLIER				: 'decimal_multiplier'
->>>>>>> e0795f68bd467d7c626e25c1b94e2827394b4592
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']
