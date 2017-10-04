@@ -240,4 +240,8 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-decimal-division');
 	}
 
+	public function decimal_multiplication(){
+		return view($this->dynamic_question.'dynamic-decimal-multiplication');
+	}
+
 }

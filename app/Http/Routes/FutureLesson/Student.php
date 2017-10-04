@@ -470,6 +470,11 @@
 							,'uses' => $route_controller . '@decimal_division'
 						]);
 
+						Routes::get('/decimal-multiplication',[
+							'as' => $route_name . 'decimal-multiplication'
+							,'uses' => $route_controller . '@decimal_multiplication'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [

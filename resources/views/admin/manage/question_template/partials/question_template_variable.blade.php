@@ -482,5 +482,25 @@
             )!!}
         </div>
     </div>
+    <div class="admin-search-module" ng-if="template.record.operation == futureed.DECIMAL_MULTIPLICATION">
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal_multiplicand')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_multiplicand'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_MULTIPLICAND)'
+                )
+            )!!}
+        </div>
+        <div class="col-xs-6 admin-search-module">
+            {!! Form::button(trans('messages.admin_template_decimal_multiplier')
+                ,array(
+                    'class' => 'btn btn-blue'
+                    , 'name' => 'btn_decimal_multiplier'
+                    , 'ng-click' => 'template.actionButtons(futureed.DECIMAL_MULTIPLIER)'
+                )
+            )!!}
+        </div>
+    </div>
     <div class="col-xs-2"></div>
 </div>

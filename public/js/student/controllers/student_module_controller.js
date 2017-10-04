@@ -2153,6 +2153,20 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.DECIMAL_MULTIPLICATION:
+				setRandomDigits(self.question_grade_condition.max_number.toString().length);
+
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLICAND + '}',getRandomNumber1());
+				question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLIER + '}',getRandomNumber2());
+
+				self.current_question.questions_text = question_text;
+
+				startAnswer();
+
+				break;
+
 			default:
 				break;
 		}
