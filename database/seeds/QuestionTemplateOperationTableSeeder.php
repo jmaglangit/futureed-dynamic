@@ -45,6 +45,7 @@ class QuestionTemplateOperationTableSeeder extends Seeder
             'decimal_words',
             'decimal_subtraction',
             'decimal_rational_number',
+            'decimal_division',
             'decimal_multiplication',
         ];
 
