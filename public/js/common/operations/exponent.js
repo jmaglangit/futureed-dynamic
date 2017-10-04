@@ -78,16 +78,8 @@ function alertModal(message){
     $("#no_modal").hide();
 }
 
-function carryOneModal(message){
-    dynamicBlock();
-    $("#message_text_modal").html(message);
-    $("#message_modal_dynamic").show();
-    $("#close_modal").hide();
-    $("#yes_modal").show();
-    $("#no_modal").show();
-}
-
 function closeModal(){
+    dynamicUnBlock();
     $("#message_modal_dynamic").hide();
 }
 

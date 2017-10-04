@@ -996,6 +996,7 @@ return [
 	'admin_template_decimal_divisor' => 'DECIMAL DIVISOR',
 	'admin_template_decimal_multiplicand' => 'DECIMAL MULTIPLICAND',
 	'admin_template_decimal_multiplier' => 'DECIMAL MULTIPLIER',
+	'admin_template_exponent' => 'ADD EXPONENT',
 
 	//Client
 	//resources/views/client/dashboard/index.blade.php

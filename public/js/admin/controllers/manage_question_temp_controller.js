@@ -723,6 +723,11 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLIER + '}',getRandomNumber2());
                 break;
 
+            case Constants.EXPONENT:
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.EXPONENT + '}', "");
+                break;
+
             default:
                 break;
         }

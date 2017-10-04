@@ -210,5 +210,9 @@ function validateTemplateText(){
         if((val.indexOf("{decimal_multiplier}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_multiplier]').prop('disabled', false);
         }else{$('button[name=btn_decimal_multiplier]').prop('disabled', true);}
+
+        if((val.indexOf("{exponent}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_exponent]').prop('disabled', false);
+        }else{$('button[name=btn_exponent]').prop('disabled', true);}
 	}
 }

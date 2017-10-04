@@ -62,13 +62,7 @@
                 <div id="num2_1div"></div>
             </div>
             <div class="modal-footer">
-                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="closeModal();" style="display: none;">Close</button>
-                <button id="yes_modal" type="button" class="btn btn-green btn-medium pull-left" onclick="btnYEsOnclick();dynamicUnBlock();">
-                    {!! trans('messages.yes') !!}
-                </button>
-                <button id="no_modal" type="button" class="btn btn-gold btn-medium pull-right" onclick="btnNOOnclick();dynamicUnBlock();">
-                    {!! trans('messages.no') !!}
-                </button>
+                <button id="close_modal" type="button" class="btn btn-gold btn-medium pull-right" data-dismiss="modal" onclick="closeModal();" style="display: none;">Close</button>
             </div>
         </div>
     </div>
