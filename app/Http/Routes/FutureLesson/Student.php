@@ -465,6 +465,11 @@
 							,'uses' => $route_controller . '@decimal_rational_number'
 						]);
 
+						Routes::get('/exponent',[
+							'as' => $route_name . 'exponent'
+							,'uses' => $route_controller . '@exponent'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [

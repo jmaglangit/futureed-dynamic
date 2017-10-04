@@ -2142,6 +2142,17 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				break;
 
+			case Constants.EXPONENT:
+				randomDigitsOnclick();
+
+				question_text = question_text.replace('{' + Constants.EXPONENT + '}', "");
+
+				self.current_question.questions_text = question_text;
+
+				startBtnOnclick();
+
+				break;
+
 			default:
 				break;
 		}

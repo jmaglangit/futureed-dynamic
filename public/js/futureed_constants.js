@@ -357,6 +357,7 @@ var Constants = {
 	, DECIMAL_WORDS				: 'decimal_words'
 	, DECIMAL_SUBTRACTION		: 'decimal_subtraction'
 	, DECIMAL_RATIONAL_NUMBER	: 'decimal_rational_number'
+	, EXPONENT					: 'exponent'
 
 	/* question dynamic template variables */
 	, NUMBER1					: 'number1'
