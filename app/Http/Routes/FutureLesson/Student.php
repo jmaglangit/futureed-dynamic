@@ -465,6 +465,11 @@
 							,'uses' => $route_controller . '@decimal_rational_number'
 						]);
 
+						Routes::get('/decimal-multiplication',[
+							'as' => $route_name . 'decimal-multiplication'
+							,'uses' => $route_controller . '@decimal_multiplication'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [

@@ -192,5 +192,14 @@ function validateTemplateText(){
         if((val.indexOf("{decimal_rational_number}")) == Constants.NEGATIVE_1){
             $('button[name=btn_decimal_rational_number]').prop('disabled', false);
         }else{$('button[name=btn_decimal_rational_number]').prop('disabled', true);}
+
+        //decimal multiplication variable button
+        if((val.indexOf("{decimal_multiplicand}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_multiplicand]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_multiplicand]').prop('disabled', true);}
+
+        if((val.indexOf("{decimal_multiplier}")) == Constants.NEGATIVE_1){
+            $('button[name=btn_decimal_multiplier]').prop('disabled', false);
+        }else{$('button[name=btn_decimal_multiplier]').prop('disabled', true);}
 	}
 }

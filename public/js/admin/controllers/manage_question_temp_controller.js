@@ -709,6 +709,14 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
                 question_text = question_text.replace('{' + Constants.DECIMAL_RATIONAL_NUMBER + '}', "");
                 break;
 
+            case Constants.DECIMAL_MULTIPLICATION:
+
+                randomDigitsOnclick();
+                question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLICAND + '}',getRandomNumber1());
+                question_text = question_text.replace('{' + Constants.DECIMAL_MULTIPLIER + '}',getRandomNumber2());
+                break;
+
+
             default:
                 break;
         }
