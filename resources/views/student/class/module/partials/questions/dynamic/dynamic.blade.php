@@ -100,3 +100,6 @@
 <div ng-if="mod.current_question.question_template.operation == futureed.DECIMAL_MULTIPLICATION">
     <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.decimal-multiplication') !!}"></div>
 </div>
+<div ng-if="mod.current_question.question_template.operation == futureed.EXPONENT">
+    <div template-directive template-url="{!! route('student.class.module.partials.questions.dynamic.exponent') !!}"></div>
+</div>

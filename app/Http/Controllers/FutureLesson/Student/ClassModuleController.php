@@ -244,4 +244,8 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-decimal-multiplication');
 	}
 
+	public function exponent(){
+		return view($this->dynamic_question.'dynamic-exponent');
+	}
+
 }

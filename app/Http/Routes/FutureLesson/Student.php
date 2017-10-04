@@ -475,6 +475,11 @@
 							,'uses' => $route_controller . '@decimal_multiplication'
 						]);
 
+						Routes::get('/exponent',[
+							'as' => $route_name . 'exponent'
+							,'uses' => $route_controller . '@exponent'
+						]);
+
 					});
 
 					Routes::get('/trial/questions', [
