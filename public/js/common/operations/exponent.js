@@ -53,6 +53,7 @@ function disabledNextQuestion(){
 function answerDone(){
     $("#questionPane").hide();
     $("#answerPane").hide();
+    $("#step_div").hide();
     $("#tipsFlow").show();
     $("#ansFlow").show();
     $("#ansCorrectFlow").show();
@@ -62,6 +63,7 @@ function answerDone(){
 function answerReset(){
     $("#questionPane").show();
     $("#answerPane").show();
+    $("#step_div").show();
     $("#tipsFlow").hide();
     $("#ansFlow").hide();
     $("#ansCorrectFlow").hide();
