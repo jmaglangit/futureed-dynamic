@@ -2957,3 +2957,7 @@ table.rank_no, table.rank_no th,table.rank_no td{
 .div_notice{
     color: red; text-decoration: underline;
 }
+
+.last_before {
+    width: 50px;
+}
