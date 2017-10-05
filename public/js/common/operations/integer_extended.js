@@ -320,7 +320,7 @@ function checkTotal() {
         }
 
     }
-    $("<p>Step " + step_count + " : Now write out the answer.</p>" + strs).insertBefore("#lastDiv");
+    $("<p>Step " + step_count + ": Now write out the answer.</p>" + strs).insertBefore("#lastDiv");
     $(".checkIndexs").eq(0).focus();
     checkIndex = 0;
     $(".checkIndexs").unbind("keydown").keydown(function(event){
@@ -376,7 +376,7 @@ function nextsetp(){
         return;
     }
 
-    $("<p>Step " + step_count + " : What is the value of the " + number_words[step_count -2] + " ? </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+    $("<p>Step " + step_count + ": What is the value of the " + number_words[step_count -2] + " ? </p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
     $(".inputCheck").unbind("keydown").keydown(function(event){
         if(event.keyCode == 13){
             if(checkAnswer($(this)) == "y"){
@@ -551,7 +551,7 @@ function displayTotalFlow(){
 
     for (var j = 0; j < real_number.length; j++) {
 
-        result_str += "<p> Step " + (j+2) + "What is the value of the "+ number_words[j] +" ?</p>";
+        result_str += "<p> Step " + (j+2) + ": What is the value of the "+ number_words[j] +" ?</p>";
         if (arry_temp[j+2]) {
             result_str += "<p style='color:red;'> Error : " + arry_temp[j+2] + "</p>";
             console.log("arry_temp["+ (j+2) + "] = " + arry_temp[j+2]);
@@ -597,7 +597,7 @@ function displayTotalFlow(){
 
 
 
-    result_str += "<p> Step " + (real_number.length+2) + " Now write out the answer. <br>" + strs + "</p>";
+    result_str += "<p> Step " + (real_number.length+2) + ": Now write out the answer. <br>" + strs + "</p>";
     for (var i = 0; i < real_number.length; i++) {
         if (arry_checkIdx[i]) {
             result_str += "<p style='color:red;'> Error : " + arry_checkIdx[i] + "</p>";
@@ -643,7 +643,7 @@ function displayTotalFlow1(){
 
     for (var j = 0; j < real_number.length; j++) {
 
-        result_str += "<p> Step " + (j+2) + "What is the value of the "+ number_words[j] +" ?</p>";
+        result_str += "<p> Step " + (j+2) + ": What is the value of the "+ number_words[j] +" ?</p>";
         result_str += "<table>";
         result_str += "<tr>";
 
@@ -682,7 +682,7 @@ function displayTotalFlow1(){
 
     }
 
-    result_str += "<p> Step " + (real_number.length+2) + " Now write out the answer. <br>" + strs + "</p>";
+    result_str += "<p> Step " + (real_number.length+2) + ": Now write out the answer. <br>" + strs + "</p>";
     $("#correct_flow_answer").html(result_str);
 
 }
