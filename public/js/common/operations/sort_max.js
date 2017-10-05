@@ -280,7 +280,7 @@ function playAnswer()
 			    		retry_attempt = -1;
                         alertModal("The correct answer is " + arrAnswer[real_step_count] + ". Please retry. ");
 			    	} else {
-                        alertModal("Your answer is incorrect. Please retry.");
+                        alertModal("That is incorrect. Answer can’t be blank. Please retry.");
 			    	}
 			    	retry_attempt++;
 			    	$(".answerTxt:last").prop("value", "").focus();

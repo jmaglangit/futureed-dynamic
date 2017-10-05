@@ -357,6 +357,9 @@ var Constants = {
 	, DECIMAL_WORDS				: 'decimal_words'
 	, DECIMAL_SUBTRACTION		: 'decimal_subtraction'
 	, DECIMAL_RATIONAL_NUMBER	: 'decimal_rational_number'
+	, DECIMAL_DIVISION			: 'decimal_division'
+	, DECIMAL_MULTIPLICATION	: 'decimal_multiplication'
+	, EXPONENT					: 'exponent'
 
 	/* question dynamic template variables */
 	, NUMBER1					: 'number1'
@@ -387,6 +390,10 @@ var Constants = {
 	, FRACTION_DECIMAL_DENOMINATOR		: 'fraction_decimal_denominator'
 	, DECIMAL_MINUEND					: 'decimal_minuend'
 	, DECIMAL_SUBTRAHEND				: 'decimal_subtrahend'
+	, DECIMAL_DIVIDEND				: 'decimal_dividend'
+	, DECIMAL_DIVISOR				: 'decimal_divisor'
+	, DECIMAL_MULTIPLICAND				: 'decimal_multiplicand'
+	, DECIMAL_MULTIPLIER				: 'decimal_multiplier'
 
 	/* steps label dynamic template*/
 	, STEPS_LABEL				: ['ones', 'tens', 'hundreds', 'thousands', 'one thousands', 'ten thousands', 'hundred thousands']

@@ -992,6 +992,12 @@ return [
 	'admin_template_decimal' => 'ADD DECIMAL',
 	'admin_template_decimal_minuend' => 'DECIMAL MINUEND',
 	'admin_template_decimal_subtrahend' => 'DECIMAL SUBTRAHEND',
+	'admin_template_decimal_dividend' => 'DECIMAL DIVIDEND',
+	'admin_template_decimal_divisor' => 'DECIMAL DIVISOR',
+	'admin_template_decimal_multiplicand' => 'DECIMAL MULTIPLICAND',
+	'admin_template_decimal_multiplier' => 'DECIMAL MULTIPLIER',
+	'admin_template_exponent' => 'ADD EXPONENT',
+
 	//Client
 	//resources/views/client/dashboard/index.blade.php
 	'client_dashboard' => 'Client Dashboard',

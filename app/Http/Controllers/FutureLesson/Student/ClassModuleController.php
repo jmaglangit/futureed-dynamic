@@ -236,4 +236,16 @@ class ClassModuleController extends Controller {
 		return view($this->dynamic_question.'dynamic-decimal-rational-number');
 	}
 
+	public function decimal_division(){
+		return view($this->dynamic_question.'dynamic-decimal-division');
+	}
+
+	public function decimal_multiplication(){
+		return view($this->dynamic_question.'dynamic-decimal-multiplication');
+	}
+
+	public function exponent(){
+		return view($this->dynamic_question.'dynamic-exponent');
+	}
+
 }
