@@ -610,9 +610,9 @@ function generateAnswerStep() {
         else {
 
             if (carry_over == true) {
-                $("<p>Step " + (total_step) + ": Multiple Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");    
+                $("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ " + " + carry_over_value + " carried over.</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");    
             }else{
-                $("<p>Step " + (total_step) + ": Multiple Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ ".</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
+                $("<p>Step " + (total_step) + ": Multiply Row2 " + step_words[step_count_row2 - 1] + " x The Row 1 " + step_words[step_count_row1]+ ".</p><input type=text placeholder='answer' class='answer_value inputCheck'>").insertBefore("#lastDiv");
             }           
         }
     }
@@ -698,7 +698,7 @@ function generateAnswerStep() {
 function IsfinishBefore(){
     str_before = "";
     str_before += "<p>Start with:"+ randomNumber_decimals1 +" x "+ randomNumber_decimals2 +"</p>";
-    str_before += "<p>multiply without decimal points:"+ randomNumber1 +" x "+ randomNumber2 +"</p>";
+    str_before += "<p>Multiply without decimal points:"+ randomNumber1 +" x "+ randomNumber2 +"</p>";
     str_before += "<p>"+ randomNumber_decimals1 + " has <input type=text placeholder='answer' class='last_before answer_value inputCheck1'> decimal places,</p>";
     str_before += "<p>and "+ randomNumber_decimals2 + " has <input type=text placeholder='answer' class='last_before answer_value inputCheck2'> decimal place,</p>";
     str_before += "<p>so the answer has <input type=text placeholder='answer' class='last_before answer_value inputCheck3'> decimal places:<input type=text placeholder='answer' class='last_before answer_value inputCheck4'></p>";
@@ -709,7 +709,7 @@ function IsfinishBefore(){
 function IsfinishBeforeShow1(){
     str_before = "";
     str_before += "<p>Start with:"+ randomNumber_decimals1 +" x "+ randomNumber_decimals2 +"</p>";
-    str_before += "<p>multiply without decimal points:"+ randomNumber1 +" x "+ randomNumber2 +"</p>";
+    str_before += "<p>Multiply without decimal points:"+ randomNumber1 +" x "+ randomNumber2 +"</p>";
     str_before += "<p>"+ randomNumber_decimals1 + " has "+ randomDigits1 +" decimal places,</p>";
     str_before += "<p>and "+ randomNumber_decimals2 + " has "+ randomDigits2 +" decimal place,</p>";
     str_before += "<p>so the answer has "+ (randomDigits1+randomDigits2) +" decimal places: "+ (total_result/digits(randomDigits2 + randomDigits1)) +" </p>";
@@ -719,7 +719,7 @@ function IsfinishBeforeShow1(){
 function IsfinishBeforeShow2(){
     str_before = "";
     str_before += "<p>Start with:"+ randomNumber_decimals1 +" x "+ randomNumber_decimals2 +"</p>";
-    str_before += "<p>multiply without decimal points:"+ randomNumber1 +" x "+ randomNumber2 +"</p>";
+    str_before += "<p>Multiply without decimal points:"+ randomNumber1 +" x "+ randomNumber2 +"</p>";
     str_before += "<p>"+ randomNumber_decimals1 + " has "+ randomDigits1 +" decimal places,</p>";
     str_before += "<p>and "+ randomNumber_decimals2 + " has "+ randomDigits2 +" decimal place,</p>";
     str_before += "<p>so the answer has "+ (randomDigits1+randomDigits2) +" decimal places: "+ ((randomNumber1*randomNumber2)/digits(randomDigits2 + randomDigits1)) +" </p>";
@@ -959,9 +959,9 @@ function displayTotalFlow(){
             result = "<p align=left style='text-indent:10px;'>";
             // console.log("carry_over_Step_Values_Real["+j+"]["+(i+1)+"] = "+ carry_over_All_Values_Real[j][i-1]);
             if (carry_over_All_Values_Real[j][i-1]*1 !== 0 && i > 1) {
-                result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Real[j][i-1] + " carried over"+"</p>";        
+                result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Real[j][i-1] + " carried over"+"</p>";        
             }else{
-                result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + ".</p>";    
+                result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + ".</p>";    
             }
             if (arry_tempanswer[steps]) {
                 result += "<label style='color:red;'> error : " + arry_tempanswer[steps] + "</label>";
@@ -1060,9 +1060,9 @@ function displayTotalFlow1(){
             steps++;
             result = "<p align=left style='text-indent:10px;'>";
             if (carry_over_All_Values_Real[j][i-1]*1 !== 0 && i > 1) {
-                result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Real[j][i-1] + " carried over"+"</p>";        
+                result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + " + " + carry_over_All_Values_Real[j][i-1] + " carried over"+"</p>";        
             }else{
-                result += "Step " + steps + " : Multiple Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + ".</p>";    
+                result += "Step " + steps + " : Multiply Row2 " + step_words[j - 1] + " x The Row 1 " + step_words[i - 1] + ".</p>";    
             }
             $(result).insertBefore("#lastDiv3");
 

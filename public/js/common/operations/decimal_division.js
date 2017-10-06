@@ -402,7 +402,7 @@ function generateAnswerStep() {
 
                     if(retry_first_answer > 1){
                         retry_first_answer = 0;
-                        alertModal("The correct answer is " + randomNumber2 + "x" + correct_answer);
+                        alertModal("The correct answer is " + randomNumber2 + "x" + correct_answer + ". Please retry. ");
                         retry_attempt = 0;
                                     
                         $(this).prop("value", "");
@@ -433,7 +433,7 @@ function generateAnswerStep() {
                             if($(this).prop("value") != "" + temp_val + "-" + (randomNumber2 * correct_answer)) {
                                 if(retry_second_answer > 1){
                                     retry_second_answer = 0;
-                                    alertModal("The correct answer is " + temp_val + "-" + (randomNumber2 * correct_answer));
+                                    alertModal("The correct answer is " + temp_val + "-" + (randomNumber2 * correct_answer) + ". Please retry. ");
                                     retry_attempt = 0;
                                     
                                     $(this).prop("value", "");
@@ -472,7 +472,7 @@ function generateAnswerStep() {
                                         if(retry_third_answer > 1){
                                             retry_third_answer = 0;
                                             retry_attempt = 0;
-                                            alertModal("The correct answer is " + (temp_val - randomNumber2 * correct_answer));
+                                            alertModal("The correct answer is " + (temp_val - randomNumber2 * correct_answer) + ". Please retry. ");
 
                                             $(this).prop("value", "");
                                             return;
@@ -490,7 +490,7 @@ function generateAnswerStep() {
                                         if(retry_third_answer > 1){
                                             retry_third_answer = 0;
                                             retry_attempt = 0;
-                                            alertModal("The correct answer is " + (temp_val - randomNumber2 * correct_answer));
+                                            alertModal("The correct answer is " + (temp_val - randomNumber2 * correct_answer) + ". Please retry. ");
 
                                             $(this).prop("value", "");
                                             return;
