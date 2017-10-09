@@ -27,228 +27,45 @@ class QuestionTemplateServices {
 	public function checkOperationVariables($question_template){
 		$operation_var = $question_template['question_template_format'];
 
-		//check question template operation variables used
-		switch($question_template['operation']){
-			case config('futureed.addition'):
+		// search variable in the template text area
+		$template_first_var = $this->checkTempVariable($operation_var, config('futureed.template_variables1'));
+		$template_second_var = $this->checkTempVariable($operation_var, config('futureed.template_variables2'));
+		$template_var = $this->checkTempVariable($operation_var, $question_template['operation']);
+
+		//check variables
+		if(($template_first_var !== false && $template_second_var !== false) || $template_var !== false){
+			return true;
+		}elseif($template_first_var === false && $template_second_var === false && $template_var === false){
+			return [
+				'message' => trans('errors.2606')
+			];
+
+		}else{
+			return [
+				'message' => trans('errors.2605')
+			];
 
-				if((strpos($operation_var, '{addends1}') == false) && (strpos($operation_var, '{addends2}') == false)){
-					return [
-	 					'message' => trans('errors.2605')
- 					];
-				}else{
-					return true;
-				}
-
-				break;
-
-			case config('futureed.subtraction'):
-
-				if((strpos($operation_var, '{minuend}') == false) && (strpos($operation_var, '{subtrahend}') == false)){
-					return [
-	 					'message' => trans('errors.2605')
- 					];				
-				}else{
-					return true;
- 				}
-
-				break;
-
-			case config('futureed.multiplication'):
-
-				if((strpos($operation_var, '{multiplicand}') == false) && (strpos($operation_var, '{multiplier}') == false)){
-					return [
-	 					'message' => trans('errors.2605')
- 					];				
-				}else{
-					return true;
- 				}
-
-				break;
-
-			case config('futureed.division'):
-
-				if((strpos($operation_var, '{dividend}') == false) && (strpos($operation_var, '{divisor}') == false)){
-
-					return [
-	 					'message' => trans('errors.2605')
- 					];				
-
-				}else{
-					return true;
- 				}
-
-				break;
-
-			case config('futureed.fraction_addition'):
-
-				if((strpos($operation_var, '{fraction_addition}') != false)){
-
-					return true;
-
-				}else{
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-
-				break;
-
-			case config('futureed.fraction_subtraction'):
-
-				if((strpos($operation_var, '{fraction_subtraction}') != false)){
-
-					return true;
-
-				}else{
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-
-				break;
-
-			case config('futureed.fraction_multiplication'):
-
-				if((strpos($operation_var, '{fraction_multiplication}') != false)){
-
-					return true;
-
-				}else{
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-
-				break;
-
-			case config('futureed.fraction_division'):
-
-				if((strpos($operation_var, '{fraction_division}') != false)){
-
-					return true;
-
-				}else{
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-
-				break;
-
-			case config('futureed.fraction_addition_butterfly'):
-
-				if((strpos($operation_var, '{fraction_addition_butterfly}') != false)){
-
-					return true;
-
-				}else{
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-
-				break;
-
-			case config('futureed.fraction_subtraction_butterfly'):
-
-				if((strpos($operation_var, '{fraction_subtraction_butterfly}') != false)){
-
-					return true;
-
-				}else{
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-
-				break;
-
-			case config('futureed.fraction_addition_whole'):
-
-				if((strpos($operation_var, '{fraction_addition_whole}') != false)){
-
-					return true;
-
-				}else{
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-
-				break;
-
-			case config('futureed.fraction_subtraction_whole'):
-
-				if((strpos($operation_var, '{fraction_subtraction_whole}') != false)){
-
-					return true;
-
-				}else{
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-
-				break;
-
-			case config('futureed.integer_identify'):
-
-				if((strpos($operation_var, ' {integer_random_digit}') == false) && (strpos($operation_var, ' {integer_random_number}') == false)){
-					return [
-						'message' => trans('errors.2605')
-					];
-				}else{
-					return true;
-				}
-
-				break;
-
-			case config('futureed.decimal_addition'):
-
-				if((strpos($operation_var, '{decimal_addends1}') == false) && (strpos($operation_var, '{decimal_addends2}') == false)){
-					return [
-						'message' => trans('errors.2605')
-					];
-				}else{
-					return true;
-				}
-
-				break;
-
-			case config('futureed.decimal_compare'):
-
-				if((strpos($operation_var, '{decimal_random_number1}') != false) && (strpos($operation_var, '{decimal_random_number2}') != false)){
-					return true;
-				}else{
-					return [
-						'message' => trans('errors.2605')
-					];
-				}
-
-				break;
-
-			case config('futureed.decimal_understand'):
-				if((strpos($operation_var, '{decimal_random_digit}') != false) && (strpos($operation_var, '{decimal_random_number}') != false)){
-					return true;
-				}else{
-					return [
-						'message' => trans('errors.2605')
-					];
-				}
-
-				break;
-
-			default:
-				//check db if exists.
-				if(!empty($this->question_template_operation->getOperationByData($question_template['operation'])->toArray())){
-					return true;
-				} else {
-					return [
-						'message' => trans('errors.2606')
-					];
-				}
-				break;
 		}
 
 	}
+
+	/**
+	 * Check question template text if variable/s is found.
+	 * @param $question_template_text
+	 * @param $find_string
+	 * @return bool
+	 */
+	public function checkTempVariable($question_template_text, $find_string) {
+		if(!is_array($find_string)) $find_string = array($find_string);
+
+		foreach($find_string as $string) {
+			$mod_string = '{'. $string .'}';
+
+			if(strpos($question_template_text, $mod_string) !== false)
+				return true; //will return true if variable is found
+		}
+
+		return false;
+	}
+
 }
