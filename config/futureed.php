@@ -398,4 +398,41 @@ return [
 	'decimal_addition' => 'decimal_addition',
 	'decimal_compare' => 'decimal_compare',
 	'decimal_understand' => 'decimal_understand',
+
+	//question template first variables
+	'template_variables1' => [
+		'addends1',
+		'minuend',
+		'multiplicand',
+		'dividend',
+		'integer_random_digit',
+		'number1',
+		'integer_random_word',
+		'decimal_random_number1',
+		'decimal_addends1',
+		'decimal_random_digit',
+		'fraction_decimal_numerator',
+		'decimal_minuend',
+		'decimal_dividend',
+		'decimal_multiplicand',
+	],
+
+	//question template second variables
+	'template_variables2' => [
+		'addends2',
+		'subtrahend',
+		'multiplier',
+		'divisor',
+		'integer_random_number',
+		'number2',
+		'decimal_random_number2',
+		'decimal_addends2',
+		'decimal_random_number',
+		'fraction_decimal_denominator',
+		'decimal_subtrahend',
+		'decimal_divisor',
+		'decimal_multiplier',
+	],
+
 ];
+
