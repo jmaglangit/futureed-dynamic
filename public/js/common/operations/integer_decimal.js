@@ -42,7 +42,7 @@ function getRandomNumber1(){
 	return str_interger;
 }
 
-function getRandomNumber2(digit){
+function getRandomNumber2(){
 	return underl;
 }
 
