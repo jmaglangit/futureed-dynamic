@@ -602,7 +602,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
             case Constants.INTEGER_DECIMAL:
 
                 randomDigitsOnclick();
-                question_text = question_text.replace('{' + Constants.INTEGER_DECIMAL + '}',"");
+                question_text = question_text.replace('{' + Constants.INTEGER_DECIMAL + '}',getRandomNumber1() + '.' + getRandomNumber2());
                 break;
 
             case Constants.INTEGER_EXPANDED_DECIMAL:

@@ -308,7 +308,6 @@
     </div>
     <div ng-if="template.record.operation == futureed.INTEGER_DECIMAL">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <p><label><b id="str_interger_b"></b>.<b id="str_decimal_b"></b></label></p>
         {!! Html::script('/js/common/operations/global.js?20170806')!!}
         {!! Html::script('/js/common/operations/integer_decimal.js')!!}
     </div>
@@ -374,6 +373,12 @@
         {!! Html::script('/js/common/operations/global.js') !!}
     </div>
 
+    <div ng-if="template.record.operation == futureed.DECIMAL_WORDS">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        {!! Html::script('/js/common/operations/global.js')!!}
+        {!! Html::script('/js/common/operations/decimal_words.js')!!}
+    </div>
+
     <div ng-if="template.record.operation == futureed.DECIMAL_UNDERSTAND">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
         {!! Html::script('/js/common/operations/global.js')!!}
@@ -411,6 +416,26 @@
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
         {!! Html::script('/js/common/operations/decimal_division.js')!!}
         {!! Html::script('/js/common/operations/integer_global.js?20170825')!!}
+    </div>
+
+    <div ng-if="template.record.operation == futureed.DECIMAL_MULTIPLICATION">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        {!! Html::script('/js/common/operations/global.js')!!}
+        {!! Html::script('/js/common/operations/decimal_multiplication.js')!!}
+    </div>
+
+    <div ng-if="template.record.operation == futureed.EXPONENT">
+        <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
+        <div id="start_div" class="m-top-20 h3" style="display: none;">
+            <span>
+                <label id="baseNumber_l">d</label>
+                <sup id="exponents_sup">9</sup>
+            </span>
+            <br><br><br>
+            {{--<input type="button" onclick="startBtnOnclick()" value="Start">--}}
+        </div>
+        {!! Html::script('/js/common/operations/exponent.js')!!}
+        {!! Html::script('/js/common/operations/global.js') !!}
     </div>
 
     {!! Html::script('/js/common/operations/math_algo.js')!!}
