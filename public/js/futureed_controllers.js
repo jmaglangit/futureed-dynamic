@@ -233,7 +233,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
 				} else if(response.data) {
-					$window.location.href = callback;
+					$window.location.replace(callback);
 					localStorage.authorization = 0;
 				}
 			}
