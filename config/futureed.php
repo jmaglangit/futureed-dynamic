@@ -127,7 +127,7 @@ return [
 	'uploads' => base_path() . '/public/uploads',
 
 	//path for question uploaded images temp
-	'question_image_path' => base_path() . '/public/images/que-ans-tip',
+	'question_image_path' => base_path() . '/public/uploads/temp/question',
 
 	//path for question uploaded images final
 	'question_image_path_final' => base_path() . '/public/images/que-ans-tip',
@@ -137,7 +137,7 @@ return [
 	'question' => 'question',
 
 	//path for answer uploaded images temp
-	'answer_image_path' => base_path() . '/public/images/temp',
+	'answer_image_path' => base_path() . '/public/uploads/temp/answer',
 
 	//path for question uploaded images final
 	'answer_image_path_final' => base_path() . '/public/images/que-ans-tip',
