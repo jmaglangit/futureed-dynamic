@@ -68,7 +68,7 @@
 				{{--<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
 			<div class="form-group">
-				<div class="col-xs-12" onclick="validateTemplateText()">
+				<div class="col-xs-12">
 					{!! Form::textarea('search_question_template_format',''
 						, array(
 							'ng-model' => 'template.record.question_template_format'
@@ -76,6 +76,7 @@
 							, 'ng-class' => "{ 'required-field' : template.fields['question_template_format'] }"
 							, 'rows' => '5'
 							, 'id' => 'template_text'
+							, 'ng-keyup' => 'template.validateTemplateText()'
 						)
 					) !!}
 				</div>
