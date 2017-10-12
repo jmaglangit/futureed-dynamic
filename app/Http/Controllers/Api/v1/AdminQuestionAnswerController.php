@@ -86,21 +86,15 @@ class AdminQuestionAnswerController extends ApiController {
 			$update['original_image_name'] = $image[1];
 			$update['answer_image'] = config('futureed.answer').'_'.$return['id'].'.'.$image_type[1];
 
-
 			//move image to question directory
-			$this->file->move($from.'/'.$image[0],$to);
-			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['answer_image']);
-
+			$this->file->copy($from.'/'.$image[0].'/'.$image[1],$to.'/'.$update['answer_image']);
 
 			//add questions_image and original_image_name
 			$this->question_answer->updateQuestionAnswer($return['id'],$update);
 
 		}
 
-
-
 		return $this->respondWithData(['id'=>$return['id']]);
-
 	}
 
 	/**

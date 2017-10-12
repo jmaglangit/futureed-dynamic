@@ -229,6 +229,8 @@ var Constants = {
 	, ATTR_PASSWORD 		: "password"
 
 	, LSP_URL 				: "/student/dashboard/follow-up-registration"
+	, QUESTION_IMAGES		: "/images/que-ans-tip/"
+	, QUESTION_IMAGES_UPLOADED	: "/uploads/temp/question/"
 
 	, DELETE_STU_SUCCESS 	: "Student successfully deleted"
 

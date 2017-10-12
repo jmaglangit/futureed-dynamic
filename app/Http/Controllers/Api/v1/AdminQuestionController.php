@@ -151,8 +151,9 @@ class AdminQuestionController extends ApiController {
 			$update['questions_image'] = config('futureed.question').'_'.$return['id'].'.'.$image_type[1];
 
 			//move image to question directory
-			$this->file->move($from.'/'.$image[0],$to);
-			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['questions_image']);
+//			dd($from.'/'.$image[0],$to,$image);
+			$this->file->move($from.'/'.$image[0].'/'.$image[1],$to.'/'.$image[1]);
+//			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['questions_image']);
 
 
 			//add questions_image and original_image_name
@@ -230,7 +231,7 @@ class AdminQuestionController extends ApiController {
 		if($data['image']){
 			if($data['uploaded']){
 				$from = config('futureed.question_image_path');
-				$to = config('futureed.question_image_path_final').'/'.$id;
+				$to = config('futureed.question_image_path_final');
 
 				$image = explode('/',$data['image']);
 				$image_type = explode('.',$image[1]);
@@ -238,9 +239,8 @@ class AdminQuestionController extends ApiController {
 				$data['original_image_name'] = $image[1];
 				$data['questions_image'] = config('futureed.question').'_'.$id.'.'.$image_type[1];
 
-				$this->file->deleteDirectory($to);
-				$this->file->move($from.'/'.$image[0],$to);
-				$this->file->copy($to.'/'.$image[1],$to.'/'.$data['questions_image']);
+				//transfer file to the public folder.
+				$this->file->copy($from.'/'.$image[0].'/'.$image[1],$to.'/'.$data['questions_image']);
 			}else{
 				if($data['image'] == config('futureed.none')){
 					$data['original_image_name'] = config('futureed.false');

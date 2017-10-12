@@ -175,7 +175,7 @@ class AdminModuleController extends ApiController {
 			$update = NULL;
 
 			$from = config('futureed.icon_image_path');
-			$to = config('futureed.icon_image_path_final').'/';
+			$to = config('futureed.icon_image_path_final');
 
 			//check if directory don't exist, it will create new directory
 			if (!$this->file->exists(config('futureed.icon_image_path_final'))){
@@ -190,7 +190,7 @@ class AdminModuleController extends ApiController {
 			$update['icon_image'] = config('futureed.icon').'_'.$id.'.'.$image_type[1];
 
 			//move image to question directory
-			$this->file->deleteDirectory($to.'/'.$return['id']);
+			$this->file->deleteDirectory($to.'/'.$id);
 			$this->file->move($from.'/'.$image[0],$to.'/'.$image[0]);
 			$this->file->move($to.'/'.$image[0].'/'.$image[1],$to.'/'.$update['icon_image']);
 
