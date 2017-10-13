@@ -321,11 +321,11 @@
 								<div class="form-group">
 									<div ng-if="module.active_edit">
 										<label class="control-label col-xs-2">{!! trans('messages.image') !!}</label>
-										<div class="col-xs-3" ng-if="!module.record.uploaded">
+										<div class="col-xs-3" ng-if="module.record.icon_image == 'None' && !module.record.uploaded">
 											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.choose_image') !!}</div>
 										</div>
 									</div>
-									<div class="form-group" ng-if="module.active_edit && module.record.uploaded">
+									<div class="form-group" ng-if="module.active_edit && module.record.uploaded || module.active_edit && module.record.icon_image != 'None'">
 						                <div class="col-xs-6">
 											<!-- <div class="col-xs-2"></div> -->
 											<!-- <span class="col-xs-5 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span> -->
