@@ -113,6 +113,12 @@ class QuestionController extends ApiController {
 
 		//check if has images uploaded
 		if ($input['file']) {
+
+			if ($_FILES['file']['size'] > 2 * config('futureed.question_mb') || $_FILES['file']['error'] == 1 ) {
+
+				return $this->respondErrorMessage(2143);
+			}
+
 			if ($_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/png') {
 
 				return $this->respondErrorMessage(2142);
@@ -128,11 +134,7 @@ class QuestionController extends ApiController {
 			}
 
 
-			if ($_FILES['file']['size'] > 2 * config('futureed.question_mb')) {
 
-				return $this->respondErrorMessage(2143);
-
-			}
 
 			//get image_name
 			$image = $_FILES['file']['name'];
