@@ -134,7 +134,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3">{!! trans('messages.admin_question_image') !!} </label>
-					<div class="col-xs-5" ng-if="qa.active_edit">
+					<div class="col-xs-5" ng-if="qa.active_edit && qa.record.questions_image == 'None'">
 						<div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.record)">{!! trans('messages.choose_image') !!}</div>
 					</div>
 
@@ -152,14 +152,13 @@
 					<div class="col-xs-3" ng-if="qa.active_view && qa.record.questions_image == 'None'">
 						<span class="upload-label label label-info">{! qa.record.questions_image !}</span>
 					</div>
-				</div>
-
-				<div class="form-group" ng-if="qa.active_edit && qa.record.image != futureed.NONE && !qa.record.uploaded">
-					<div class="col-xs-3"></div>
-					<div ng-if="qa.active_edit && qa.record.questions_image != futureed.NONE">
-						<div class="col-xs-5 margin-top-8">
-							<a href="" ng-click="qa.viewImage(qa.record)">{!! trans('messages.admin_view_image') !!}</a>
-							<a class="pull-right" href="" ng-click="qa.removeImage(qa.record)"><i class="fa fa-trash"></i></a>
+					<div class="form-group" ng-if="qa.active_edit && qa.record.image != futureed.NONE && !qa.record.uploaded">
+						<div class="col-xs-6" ng-if="qa.active_edit && qa.record.questions_image != futureed.NONE">
+							<a href="" style="right:15px;" class="control-label col-xs-1" ng-click="qa.viewImage(qa.record)">{!! trans('messages.view') !!}</a>
+							<a class="control-label col-xs-1" href="" ng-click="qa.removeImage(qa.record)"><i class="fa fa-trash"></i></a>
+							<div class="col-xs-7">
+								<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.change_image') !!}</div>
+							</div>
 						</div>
 					</div>
 				</div>
