@@ -10,7 +10,6 @@
         <div id="questionPane" class="col-xs-6 answer_area">
             <div id="start_div" class="m-top-20 h4" style="display: none;">
                 <p ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
-                <p><label><b id="str_interger_b"></b>.<b id="str_decimal_b"></b></label></p>
                 {{-- <label>What is the place value of the underlined integer? <b id="str_interger_b"></b>.<b id="str_decimal_b"></b></label>
                 <br><br><br><input type="button" onclick="startBtnOnclick()" value="Start">--}}
             </div>

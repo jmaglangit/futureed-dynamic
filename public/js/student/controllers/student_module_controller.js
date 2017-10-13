@@ -1962,7 +1962,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				// setRandomDigits(self.question_grade_condition.max_number.toString().length);
 				randomDigitsOnclick();
 
-				question_text = question_text.replace("{integer_decimal}","");
+				question_text = question_text.replace("{integer_decimal}",getRandomNumber1() + '.' + getRandomNumber2());
 
 				self.current_question.questions_text = question_text;
 

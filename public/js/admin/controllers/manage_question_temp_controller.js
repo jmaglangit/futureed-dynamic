@@ -208,18 +208,22 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
 	}
 
 	self.validateTemplateText = function(){
+		var map_buttons = $.map($("button[name]"), function(button) {
+			return $(button).attr("name");
+		});
 
-        var tempTextArea = document.getElementById('template_text');
-        tempTextArea.onkeyup = function() {
-            var val = tempTextArea.value;
+		$.each(map_buttons, function(key, value ) {
+			var split_value = value.split("btn_");
+			var val = self.record.question_template_format.indexOf('{' + split_value[1] + '}');
 
-            //addition variables
-            if ((val.indexOf("{addends1}")) == Constants.NEGATIVE_1) {
-                $('button[name=btn_addends_one]').prop('disabled', false);
-            } else {
-                $('button[name=btn_addends_one]').prop('disabled', true);
-            }
-        }
+			//enable/disable button if exist
+			if (val == Constants.NEGATIVE_1) {
+				$('button[name=' + value + ']').prop('disabled', false);
+			} else {
+				$('button[name=' + value + ']').prop('disabled', true);
+			}
+
+		});
 	}
 
 	self.actionVariableNames = function(variableName){
@@ -602,7 +606,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
             case Constants.INTEGER_DECIMAL:
 
                 randomDigitsOnclick();
-                question_text = question_text.replace('{' + Constants.INTEGER_DECIMAL + '}',"");
+                question_text = question_text.replace('{' + Constants.INTEGER_DECIMAL + '}',getRandomNumber1() + '.' + getRandomNumber2());
                 break;
 
             case Constants.INTEGER_EXPANDED_DECIMAL:

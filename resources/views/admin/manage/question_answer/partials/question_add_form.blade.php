@@ -90,19 +90,16 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-4">{!! trans('messages.admin_question_image') !!}</label>
-					<div class="col-xs-5">
+					<div class="col-xs-5" ng-if="!qa.record.uploaded">
 						<div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.record)"> {!! trans('messages.choose_image') !!} </div>
 					</div>
-
-					<div class="margin-top-8" ng-if="qa.record.uploaded">
-						<a href="" ng-click="qa.removeImage(qa.record)"><i class="fa fa-trash"></i></a>
-					</div>
-				</div>
-				<div class="form-group" ng-if="qa.record.uploaded">
-					<div class="col-xs-4"></div>
-					<div class="col-xs-5">
-						<span class="col-xs-6 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span>
-						<a href="" class="control-label col-xs-6" ng-click="qa.viewImage(qa.record)">{!! trans('messages.view_image') !!}</a>
+					<div class="col-xs-6" class="form-group" ng-if="qa.record.uploaded">
+						<!-- <span class="col-xs-6 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span> -->
+						<a href="" style="right:15px;" class="control-label col-xs-1" ng-click="qa.viewImage(qa.record)">{!! trans('messages.view') !!}</a>
+						<a href="" class="control-label col-xs-1" ng-click="qa.removeImage(qa.record)"><i class="fa fa-trash"></i></a>
+						<div class="col-xs-8">
+							<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.change_image') !!}</div>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">

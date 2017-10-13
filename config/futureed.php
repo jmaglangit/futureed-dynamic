@@ -127,7 +127,7 @@ return [
 	'uploads' => base_path() . '/public/uploads',
 
 	//path for question uploaded images temp
-	'question_image_path' => base_path() . '/public/images/que-ans-tip',
+	'question_image_path' => base_path() . '/public/uploads/temp/question',
 
 	//path for question uploaded images final
 	'question_image_path_final' => base_path() . '/public/images/que-ans-tip',
@@ -137,7 +137,7 @@ return [
 	'question' => 'question',
 
 	//path for answer uploaded images temp
-	'answer_image_path' => base_path() . '/public/images/temp',
+	'answer_image_path' => base_path() . '/public/uploads/temp/answer',
 
 	//path for question uploaded images final
 	'answer_image_path_final' => base_path() . '/public/images/que-ans-tip',
@@ -398,4 +398,41 @@ return [
 	'decimal_addition' => 'decimal_addition',
 	'decimal_compare' => 'decimal_compare',
 	'decimal_understand' => 'decimal_understand',
+
+	//question template first variables
+	'template_variables1' => [
+		'addends1',
+		'minuend',
+		'multiplicand',
+		'dividend',
+		'integer_random_digit',
+		'number1',
+		'integer_random_word',
+		'decimal_random_number1',
+		'decimal_addends1',
+		'decimal_random_digit',
+		'fraction_decimal_numerator',
+		'decimal_minuend',
+		'decimal_dividend',
+		'decimal_multiplicand',
+	],
+
+	//question template second variables
+	'template_variables2' => [
+		'addends2',
+		'subtrahend',
+		'multiplier',
+		'divisor',
+		'integer_random_number',
+		'number2',
+		'decimal_random_number2',
+		'decimal_addends2',
+		'decimal_random_number',
+		'fraction_decimal_denominator',
+		'decimal_subtrahend',
+		'decimal_divisor',
+		'decimal_multiplier',
+	],
+
 ];
+

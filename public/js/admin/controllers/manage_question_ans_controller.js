@@ -266,7 +266,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		self.view_image = {};
 
 		if(object.uploaded) {
-			self.view_image.image_path = "/uploads/temp/question/" + object.image;
+			self.view_image.image_path = Constants.QUESTION_IMAGES_UPLOADED + object.image;
 		} else {
 			self.view_image.image_path = object.questions_image;
 		}
