@@ -128,12 +128,22 @@ class Question extends Model {
 	//Translations
 	public function setQuestionsTextAttribute($value){
 
-		return $this->setQuestionTranslation($this->attributes['id'],$value,'questions_text');
+		if(isset($this->attributes['id'])){
+			return $this->setQuestionTranslation($this->attributes['id'],$value,'questions_text');
+
+		} else {
+			return $this->attributes['questions_text'] = $value;
+		}
 	}
 
 	public function setAnswerAttribute($value){
 
-		return $this->setQuestionTranslation($this->attributes['id'],$value,'answer');
+		if(isset($this->attributes['id'])){
+			return $this->setQuestionTranslation($this->attributes['id'],$value,'answer');
+
+		} else {
+			return $this->attributes['answer'] = $value;
+		}
 	}
 
 	//-------------relationships
