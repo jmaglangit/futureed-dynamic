@@ -71,7 +71,7 @@
 							{!! Form::button(trans('messages.addends_one')
 								,array(
 									 'class' => 'btn btn-blue'
-									, 'name' => 'btn_addends_one'
+									, 'name' => 'btn_addends1'
 									, 'ng-click' => 'template.actionButtons(futureed.ADDENDS1)'
 									, 'ng-disabled' => '!template.isClicked'
 								)
@@ -81,7 +81,7 @@
 							{!! Form::button(trans('messages.addends_two')
 								,array(
 									 'class' => 'btn btn-blue'
-									, 'name' => 'btn_addends_two'
+									, 'name' => 'btn_addends2'
 									, 'ng-click' => 'template.actionButtons(futureed.ADDENDS2)'
 									, 'ng-disabled' => '!template.isClicked'
 								)
@@ -243,7 +243,7 @@
 							{!! Form::button(trans('messages.admin_template_add_fraction')
 								,array(
 									'class' => 'btn btn-blue'
-									, 'name' => 'btn_fraction_subtracadmin_template_add_fractiontion_whole'
+									, 'name' => 'btn_fraction_subtraction_whole'
 									, 'ng-click' => 'template.actionButtons(futureed.FRACTION_SUBTRACTION_WHOLE)'
 									, 'ng-disabled' => '!template.isClicked'
 								)
@@ -633,7 +633,7 @@
 {{--				<label class="control-label col-xs-3">{!! trans('messages.admin_how_to_use_variables') !!} <span class="required">*</span></label>--}}
 			</div>
 			<div class="form-group">
-				<div class="col-xs-12" onclick="validateTemplateText()">
+				<div class="col-xs-12">
 					{!! Form::textarea('admin_template_text',''
 						, array(
 							'ng-model' => 'template.record.question_template_format'
@@ -642,6 +642,7 @@
 							, 'ng-class' => "{ 'required-field' : template.fields['question_template_format'] }"
 							, 'rows' => '5'
 							, 'id' => 'template_text'
+							, 'ng-keyup' => 'template.validateTemplateText()'
 						)
 					) !!}
 				</div>
