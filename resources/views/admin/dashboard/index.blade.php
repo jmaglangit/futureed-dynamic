@@ -24,7 +24,7 @@
 	
 @section('scripts')
 	
-	{!! Html::script('/js/admin/controllers/dashboard_controller.js')!!}
+	{!! Html::script('/js/admin/controllers/dashboard_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/dashboard_controller.js')))!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js')!!}
 
 @stop

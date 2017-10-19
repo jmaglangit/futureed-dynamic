@@ -53,14 +53,14 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/sales_controller.js')!!}
-	{!! Html::script('/js/admin/services/sales_service.js')!!}
+	{!! Html::script('/js/admin/controllers/sales_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/sales_controller.js')))!!}
+	{!! Html::script('/js/admin/services/sales_service.js'. '?size=' . File::size(public_path('/js/admin/services/sales_service.js')))!!}
 
-	{!! Html::script('/js/admin/controllers/manage_price_controller.js')!!}
-	{!! Html::script('/js/admin/controllers/manage_subscription_days_controller.js')!!}
-	{!! Html::script('/js/admin/controllers/manage_subscription_packages_controller.js')!!}
-	{!! Html::script('/js/admin/controllers/manage_discount_controller.js')!!}
-	{!! Html::script('/js/admin/controllers/manage_bulk_controller.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_price_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_price_controller.js')))!!}
+	{!! Html::script('/js/admin/controllers/manage_subscription_days_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_subscription_days_controller.js')))!!}
+	{!! Html::script('/js/admin/controllers/manage_subscription_packages_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_subscription_packages_controller.js')))!!}
+	{!! Html::script('/js/admin/controllers/manage_discount_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_discount_controller.js')))!!}
+	{!! Html::script('/js/admin/controllers/manage_bulk_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_bulk_controller.js')))!!}
 	
-	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/table_service.js'. '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
 @stop

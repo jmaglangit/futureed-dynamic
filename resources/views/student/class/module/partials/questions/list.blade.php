@@ -444,6 +444,6 @@
 </div>
 
 @section('scripts')
-	{!! Html::script('/js/common/operations/addition.js')!!}
+	{!! Html::script('/js/common/operations/addition.js' . '?size=' . File::size(public_path('/js/common/operations/addition.js')))!!}
 	{!! Html::script('/js/common/operations/jquery.js')!!}
 @stop

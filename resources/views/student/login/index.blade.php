@@ -26,13 +26,13 @@
     {!! Html::script('https://apis.google.com/js/platform.js') !!}
     {!! Html::script('https://apis.google.com/js/client.js') !!}
 
-    {!! Html::script('/js/common/validation_service.js') !!}
+    {!! Html::script('/js/common/validation_service.js' . '?size=' . File::size(public_path('/js/common/validation_service.js'))) !!}
 
-    {!! Html::script('/js/student/controllers/media_login_controller.js') !!}
-    {!! Html::script('/js/student/services/media_login_service.js') !!}
+    {!! Html::script('/js/student/controllers/media_login_controller.js' . '?size=' . File::size(public_path('/js/student/controllers/media_login_controller.js'))) !!}
+    {!! Html::script('/js/student/services/media_login_service.js' . '?size=' . File::size(public_path('/js/student/services/media_login_service.js'))) !!}
 
-	{!! Html::script('/js/student/controllers/login_controller.js') !!}
-    {!! Html::script('/js/student/services/login_service.js') !!}
+	{!! Html::script('/js/student/controllers/login_controller.js' . '?size=' . File::size(public_path('/js/student/controllers/login_controller.js'))) !!}
+    {!! Html::script('/js/student/services/login_service.js' . '?size=' . File::size(public_path('/js/student/services/login_service.js'))) !!}
 
-    {!! Html::script('/js/student/login.js') !!} 
+    {!! Html::script('/js/student/login.js' . '?size=' . File::size(public_path('/js/student/login.js'))) !!}
 @stop

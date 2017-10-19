@@ -31,8 +31,8 @@
     <!-- CSS -->
     {!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css') !!}
     {!! Html::style('/css/datetimepicker.css') !!}
-    {!! Html::style('/css/futureed.css') !!}
-    {!! Html::style('/css/futureed-admin.css') !!}
+    {!! Html::style('/css/futureed.css' . '?size=' . File::size(public_path('/css/futureed.css'))) !!}
+    {!! Html::style('/css/futureed-admin.css' . '?size=' . File::size(public_path('/css/futureed-admin.css'))) !!}
     {!! Html::style('/css/angucomplete.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -72,15 +72,15 @@
 
     {!! Html::script('/js/jquery.date-dropdowns.js') !!}
     
-    {!! Html::script('/js/futureed_constants.js') !!}
-    {!! Html::script('/js/futureed_utils.js') !!}
+    {!! Html::script('/js/futureed_constants.js' . '?size=' . File::size(public_path('/js/futureed_constants.js'))) !!}
+    {!! Html::script('/js/futureed_utils.js'. '?size=' . File::size(public_path('/js/futureed_utils.js'))) !!}
 	{!! Html::script('/js/common/angular/marked.js')!!}
 	{!! Html::script('/js/common/angular/markdown-preview.js')!!}
-    {!! Html::script('/js/futureed.js') !!}
-    {!! Html::script('/js/futureed_controllers.js') !!}
-    {!! Html::script('/js/futureed_services.js') !!}
-    {!! Html::script('/js/common/table_service.js') !!}
-    {!! Html::script('/js/common/search_service.js') !!}
+    {!! Html::script('/js/futureed.js'. '?size=' . File::size(public_path('/js/futureed.js'))) !!}
+    {!! Html::script('/js/futureed_controllers.js'. '?size=' . File::size(public_path('/js/futureed_controllers.js'))) !!}
+    {!! Html::script('/js/futureed_services.js'. '?size=' . File::size(public_path('/js/futureed_services.js'))) !!}
+    {!! Html::script('/js/common/table_service.js'. '?size=' . File::size(public_path('/js/common/table_service.js'))) !!}
+    {!! Html::script('/js/common/search_service.js'. '?size=' . File::size(public_path('/js/common/search_service.js'))) !!}
     {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
 

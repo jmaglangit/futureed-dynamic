@@ -50,7 +50,7 @@
 @stop
 
 @section('scripts')
-	{!! Html::script('/js/client/controllers/profile_controller.js') !!}
-	{!! Html::script('/js/client/services/profile_service.js') !!}
-	{!! Html::script('/js/client/profile.js') !!}
+	{!! Html::script('/js/client/controllers/profile_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/profile_controller.js'))) !!}
+	{!! Html::script('/js/client/services/profile_service.js' . '?size=' . File::size(public_path('/js/client/services/profile_service.js'))) !!}
+	{!! Html::script('/js/client/profile.js' . '?size=' . File::size(public_path('/js/client/profile.js'))) !!}
 @stop

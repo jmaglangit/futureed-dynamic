@@ -69,6 +69,6 @@
 @endsection
 
 @section('scripts')
-	{!! Html::script('/js/client/controllers/client_password_controller.js') !!}
-	{!! Html::script('/js/client/services/client_password_service.js') !!}
+	{!! Html::script('/js/client/controllers/client_password_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/client_password_controller.js'))) !!}
+	{!! Html::script('/js/client/services/client_password_service.js' . '?size=' . File::size(public_path('/js/client/services/client_password_service.js'))) !!}
 @stop
