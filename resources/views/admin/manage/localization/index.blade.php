@@ -23,10 +23,10 @@
 @stop
 
 @section('scripts')
-    {!! Html::script('/js/admin/controllers/manage_localization_controller.js') !!}
-    {!! Html::script('/js/admin/services/manage_localization_service.js')!!}
+    {!! Html::script('/js/admin/controllers/manage_localization_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_localization_controller.js'))) !!}
+    {!! Html::script('/js/admin/services/manage_localization_service.js'. '?size=' . File::size(public_path('/js/admin/services/manage_localization_service.js')))!!}
 
-    {!! Html::script('/js/common/search_service.js') !!}
-    {!! Html::script('/js/common/table_service.js')!!}
+    {!! Html::script('/js/common/search_service.js'. '?size=' . File::size(public_path('/js/common/search_service.js'))) !!}
+    {!! Html::script('/js/common/table_service.js'. '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
     {!! Html::script('/js/common/FileSaver.min.js') !!}
 @stop

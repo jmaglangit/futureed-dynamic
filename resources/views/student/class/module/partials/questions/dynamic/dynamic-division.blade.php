@@ -65,9 +65,9 @@
         </div>
 
     </div>
-    {!! Html::style('/css/operations/division.css') !!}
-    {!! Html::script('/js/common/operations/division_main.js')!!}
-    {!! Html::script('/js/common/operations/division2.js?20170715')!!}
-    {!! Html::script('/js/common/operations/global.js?20170715')!!}
+    {!! Html::style('/css/operations/division.css' . '?size=' . File::size(public_path('/css/operations/division.css'))) !!}
+    {!! Html::script('/js/common/operations/division_main.js' . '?size=' . File::size(public_path('/js/common/operations/division_main.js')))!!}
+    {!! Html::script('/js/common/operations/division2.js?20170715' . '?size=' . File::size(public_path('/js/common/operations/division2.js')))!!}
+    {!! Html::script('/js/common/operations/global.js?20170715' . '?size=' . File::size(public_path('/js/common/operations/global.js')))!!}
 
 </div>

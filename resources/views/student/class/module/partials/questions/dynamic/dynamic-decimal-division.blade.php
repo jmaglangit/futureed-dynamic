@@ -66,8 +66,8 @@
         </div>
 
     </div>
-    {!! Html::style('/css/operations/division.css') !!}
-    {!! Html::script('/js/common/operations/decimal_division.js')!!}
-    {!! Html::script('/js/common/operations/integer_global.js?20170825')!!}
+    {!! Html::style('/css/operations/division.css' . '?size=' . File::size(public_path('/css/operations/division.css'))) !!}
+    {!! Html::script('/js/common/operations/decimal_division.js' . '?size=' . File::size(public_path('/js/common/operations/decimal_division.js')))!!}
+    {!! Html::script('/js/common/operations/integer_global.js?20170825' . '?size=' . File::size(public_path('/js/common/operations/integer_global.js')))!!}
 
 </div>

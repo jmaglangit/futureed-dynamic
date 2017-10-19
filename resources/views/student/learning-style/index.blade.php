@@ -298,7 +298,7 @@
 @stop
 
 @section('scripts')
-    {!! Html::script('/js/student/helpers/test.js')!!}
-    {!! Html::script('/js/student/controllers/learning_style_controller.js')!!}
-    {!! Html::script('/js/student/services/learning_style_service.js')!!}
+    {!! Html::script('/js/student/helpers/test.js' . '?size=' . File::size(public_path('/js/student/helpers/test.js')))!!}
+    {!! Html::script('/js/student/controllers/learning_style_controller.js' . '?size=' . File::size(public_path('/js/student/controllers/learning_style_controller.js')))!!}
+    {!! Html::script('/js/student/services/learning_style_service.js' . '?size=' . File::size(public_path('/js/student/services/learning_style_service.js')))!!}
 @stop

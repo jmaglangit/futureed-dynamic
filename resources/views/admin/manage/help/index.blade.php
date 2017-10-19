@@ -48,6 +48,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/manage_help_request_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_help_request_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_help_request_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_help_request_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_help_request_service.js' . '?size=' . File::size(public_path('/js/admin/services/manage_help_request_service.js')))!!}
 @stop

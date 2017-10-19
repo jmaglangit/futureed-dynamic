@@ -30,20 +30,20 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/manage_module_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_module_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_module_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_module_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_module_service.js' . '?size=' . File::size(public_path('/js/admin/services/manage_module_service.js')))!!}
 
-	{!! Html::script('/js/admin/controllers/manage_age_group_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_age_group_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_age_group_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_age_group_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_age_group_service.js' . '?size=' . File::size(public_path('/js/admin/services/manage_age_group_service.js')))!!}
 
-	{!! Html::script('/js/admin/controllers/manage_module_content_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_module_content_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_module_content_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_module_content_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_module_content_service.js' . '?size=' . File::size(public_path('/js/admin/services/manage_module_content_service.js')))!!}
 	
-	{!! Html::script('/js/admin/controllers/manage_question_ans_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_question_ans_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_question_ans_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_question_ans_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_question_ans_service.js' . '?size=' . File::size(public_path('/js/admin/services/manage_question_ans_service.js')))!!}
 
-	{!! Html::script('/js/admin/controllers/manage_question_temp_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_question_temp_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_question_temp_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_question_temp_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_question_temp_service.js' . '?size=' . File::size(public_path('/js/admin/services/manage_question_temp_service.js')))!!}
 
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}

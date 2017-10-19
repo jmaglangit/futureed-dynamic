@@ -31,8 +31,8 @@
     <!-- CSS -->
     {!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css') !!}
     {!! Html::style('/css/datetimepicker.css') !!}
-    {!! Html::style('/css/futureed.css') !!}
-    {!! Html::style('/css/futureed-admin.css') !!}
+    {!! Html::style('/css/futureed.css' . '?size=' . File::size(public_path('/css/futureed.css'))) !!}
+    {!! Html::style('/css/futureed-admin.css' . '?size=' . File::size(public_path('/css/futureed-admin.css'))) !!}
     {!! Html::style('/css/angucomplete.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

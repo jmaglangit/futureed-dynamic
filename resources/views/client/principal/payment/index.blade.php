@@ -25,11 +25,11 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_principal_payment_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_principal_payment_service.js')!!}
-	{!! Html::script('/js/client/services/profile_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_principal_payment_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_principal_payment_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_principal_payment_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_principal_payment_service.js')))!!}
+	{!! Html::script('/js/client/services/profile_service.js' . '?size=' . File::size(public_path('/js/client/services/profile_service.js')))!!}
 
-	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/moment.min.js')!!}
+	{!! Html::script('/js/common/search_service.js' . '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
+	{!! Html::script('/js/common/table_service.js' . '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/common/moment.min.js' . '?size=' . File::size(public_path('/js/common/moment.min.js')))!!}
 @stop

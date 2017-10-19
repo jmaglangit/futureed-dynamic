@@ -134,6 +134,6 @@
 @endsection
 
 @section('scripts')
-	{!! Html::script('/js/student/controllers/student_password_controller.js') !!}
-    {!! Html::script('/js/student/services/student_password_service.js') !!}
+	{!! Html::script('/js/student/controllers/student_password_controller.js'  . '?size=' . File::size(public_path('/js/student/controllers/student_password_controller.js'))) !!}
+    {!! Html::script('/js/student/services/student_password_service.js' . '?size=' . File::size(public_path('/js/student/services/student_password_service.js'))) !!}
 @stop

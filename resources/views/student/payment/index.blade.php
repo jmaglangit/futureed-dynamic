@@ -22,10 +22,10 @@
 @stop
 
 @section('scripts')
-	{!! Html::script('/js/student/controllers/student_payment_controller.js')!!}
-	{!! Html::script('/js/student/services/student_payment_service.js')!!}
+	{!! Html::script('/js/student/controllers/student_payment_controller.js' . '?size=' . File::size(public_path('/js/student/controllers/student_payment_controller.js')))!!}
+	{!! Html::script('/js/student/services/student_payment_service.js' . '?size=' . File::size(public_path('/js/student/services/student_payment_service.js')))!!}
 
-	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/moment.min.js')!!}
+	{!! Html::script('/js/common/search_service.js' . '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
+	{!! Html::script('/js/common/table_service.js' . '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/common/moment.min.js' . '?size=' . File::size(public_path('/js/common/moment.min.js')))!!}
 @stop

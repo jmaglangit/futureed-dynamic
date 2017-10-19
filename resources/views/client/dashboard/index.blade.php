@@ -32,25 +32,25 @@
 @stop
 
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_principal_content_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_principal_content_service.js')!!}
-	{!! Html::script('/js/client/controllers/manage_teacher_content_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_teacher_content_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_principal_content_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_principal_content_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_principal_content_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_principal_content_service.js')))!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_content_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_teacher_content_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_teacher_content_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_teacher_content_service.js')))!!}
 
-	{!! Html::script('/js/common/validation_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/search_service.js')!!}
+	{!! Html::script('/js/common/validation_service.js' . '?size=' . File::size(public_path('/js/common/validation_service.js')))!!}
+	{!! Html::script('/js/common/table_service.js' . '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/common/search_service.js' . '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
 
-	{!! Html::script('/js/client/controllers/manage_principal_content_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_principal_content_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_principal_content_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_principal_content_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_principal_content_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_principal_content_service.js')))!!}
 
-	{!! Html::script('/js/client/controllers/manage_parent_content_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_parent_content_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_parent_content_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_parent_content_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_parent_content_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_parent_content_service.js')))!!}
 
-	{!! Html::script('/js/client/controllers/manage_parent_reports_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_parent_reports_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_parent_reports_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_parent_reports_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_parent_reports_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_parent_reports_service.js')))!!}
 
-	{!! Html::script('/js/client/services/profile_service.js')!!}
+	{!! Html::script('/js/client/services/profile_service.js' . '?size=' . File::size(public_path('/js/client/services/profile_service.js')))!!}
 
-	{!! Html::script('/js/common/platform-charts.js') !!}
+	{!! Html::script('/js/common/platform-charts.js' . '?size=' . File::size(public_path('/js/common/platform-charts.js'))) !!}
 @stop

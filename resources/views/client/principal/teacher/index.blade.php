@@ -28,13 +28,13 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_principal_teacher_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_principal_teacher_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_principal_teacher_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_principal_teacher_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_principal_teacher_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_principal_teacher_service.js')))!!}
 	
-	{!! Html::script('/js/client/services/profile_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/validation_service.js')!!}
+	{!! Html::script('/js/client/services/profile_service.js' . '?size=' . File::size(public_path('/js/client/services/profile_service.js')))!!}
+	{!! Html::script('/js/common/table_service.js' . '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/common/search_service.js' . '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
+	{!! Html::script('/js/common/validation_service.js' . '?size=' . File::size(public_path('/js/common/validation_service.js')))!!}
 
-	{!! Html::script('/js/client/constants/teacher_constants.js')!!}
+	{!! Html::script('/js/client/constants/teacher_constants.js' . '?size=' . File::size(public_path('/js/client/constants/teacher_constants.js')))!!}
 @stop

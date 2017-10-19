@@ -118,23 +118,23 @@
 @stop
 
 @section('scripts')
-	{!! Html::script('/js/student/controllers/student_tips_controller.js')!!}
-	{!! Html::script('/js/student/services/student_tips_service.js')!!}
+	{!! Html::script('/js/student/controllers/student_tips_controller.js' . '?size=' . File::size(public_path('/js/student/controllers/student_tips_controller.js')))!!}
+	{!! Html::script('/js/student/services/student_tips_service.js' . '?size=' . File::size(public_path('/js/student/services/student_tips_service.js')))!!}
 
-	{!! Html::script('/js/student/controllers/student_help_controller.js')!!}
-	{!! Html::script('/js/student/services/student_help_service.js')!!}
+	{!! Html::script('/js/student/controllers/student_help_controller.js' . '?size=' . File::size(public_path('/js/student/controllers/student_help_controller.js')))!!}
+	{!! Html::script('/js/student/services/student_help_service.js' . '?size=' . File::size(public_path('/js/student/services/student_help_service.js')))!!}
 
-	{!! Html::script('/js/student/controllers/student_module_controller.js')!!}
-	{!! Html::script('/js/student/services/student_module_service.js')!!}
+	{!! Html::script('/js/student/controllers/student_module_controller.js' . '?size=' . File::size(public_path('/js/student/controllers/student_module_controller.js')))!!}
+	{!! Html::script('/js/student/services/student_module_service.js' . '?size=' . File::size(public_path('/js/student/services/student_module_service.js')))!!}
 
-	{!! Html::script('/js/student/constants/student_module_constant.js')!!}
-	{!! Html::script('/js/student/constants/student_help_constant.js')!!}
+	{!! Html::script('/js/student/constants/student_module_constant.js' . '?size=' . File::size(public_path('/js/student/constants/student_module_constant.js')))!!}
+	{!! Html::script('/js/student/constants/student_help_constant.js' . '?size=' . File::size(public_path('/js/student/constants/student_help_constant.js')))!!}
 
-	{!! Html::script('/js/common/operations/math_algo.js')!!}
-	{!! Html::script('/js/common/operations/module_mapper.js')!!}
-	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/sketch.min.js')!!}
+	{!! Html::script('/js/common/operations/math_algo.js' . '?size=' . File::size(public_path('/js/common/operations/math_algo.js')))!!}
+	{!! Html::script('/js/common/operations/module_mapper.js' . '?size=' . File::size(public_path('/js/common/operations/module_mapper.js')))!!}
+	{!! Html::script('/js/common/search_service.js' . '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
+	{!! Html::script('/js/common/table_service.js' . '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/common/sketch.min.js' . '?size=' . File::size(public_path('/js/common/sketch.min.js')))!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js')!!}
 

@@ -16,8 +16,8 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_teacher_content_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_teacher_content_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_content_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_teacher_content_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_teacher_content_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_teacher_content_service.js')))!!}
 	
-	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/table_service.js' . '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
 @stop

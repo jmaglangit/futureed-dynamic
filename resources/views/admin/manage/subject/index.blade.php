@@ -36,9 +36,9 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/manage_subject_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_subject_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_subject_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_subject_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_subject_service.js') . '?size=' . File::size(public_path('/js/admin/services/manage_subject_service.js'))!!}
 
-	{!! Html::script('/js/admin/controllers/manage_subject_area_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_subject_area_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_subject_area_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_subject_area_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_subject_area_service.js' . '?size=' . File::size(public_path('/js/admin/services/manage_subject_area_service.js')))!!}
 @stop
