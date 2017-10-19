@@ -56,6 +56,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/manage_logs_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_logs_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_logs_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_logs_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_logs_service.js'. '?size=' . File::size(public_path('/js/admin/services/manage_logs_service.js')))!!}
 @stop

@@ -79,6 +79,6 @@
         </div>
     </div>
 
-    {!! Html::script('/js/common/operations/decimal_rational_number.js')!!}
-    {!! Html::script('/js/common/operations/global.js') !!}
+    {!! Html::script('/js/common/operations/decimal_rational_number.js'. '?size=' . File::size(public_path('/js/common/operations/decimal_rational_number.js')))!!}
+    {!! Html::script('/js/common/operations/global.js'. '?size=' . File::size(public_path('/js/common/operations/global.js'))) !!}
 </div>

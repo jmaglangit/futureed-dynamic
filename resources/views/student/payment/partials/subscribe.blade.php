@@ -1,7 +1,7 @@
 <div ng-if="payment.active_add || payment.active_view">
     {{--Headers progress breadcrumb arrow Start > SUBJECT > SUBSCRIPTION > DAYS > DETAILS > PAY --}}
-    {!! Html::script('/js/common/subscription_service.js')!!}
-    {!! Html::script('/js/common/form_service.js')!!}
+    {!! Html::script('/js/common/subscription_service.js'. '?size=' . File::size(public_path('/js/common/subscription_service.js')))!!}
+    {!! Html::script('/js/common/form_service.js'. '?size=' . File::size(public_path('/js/common/form_service.js')))!!}
     <div class="wizard-content-title">
         <div class="title-main-content">
             <span>{!! trans('messages.add_payment') !!}</span>
