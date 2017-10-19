@@ -31,7 +31,7 @@
     </div>
     <div ng-if="template.record.operation == futureed.FRACTION_ADDITION">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <div id="examPane" style="display: none;" class="h4">
+        <div ng-if="template.getQuestionVar !== futureed.NEGATIVE_1" id="examPane" style="display: none;" class="h4">
             <table>
                 <tr>
                     <td colspan="5"></td>
@@ -66,7 +66,7 @@
     </div>
     <div ng-if="template.record.operation == futureed.FRACTION_ADDITION_WHOLE">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <table>
+        <table ng-if="template.getQuestionVar !== futureed.NEGATIVE_1">
 
             <tr>
                 <td colspan="5"></td>
@@ -96,7 +96,7 @@
     </div>
     <div ng-if="template.record.operation == futureed.FRACTION_ADDITION_BUTTERFLY">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <table>
+        <table ng-if="template.getQuestionVar !== futureed.NEGATIVE_1">
             <tr>
                 <td colspan="5"></td>
             </tr>
@@ -128,7 +128,7 @@
     </div>
     <div ng-if="template.record.operation == futureed.FRACTION_SUBTRACTION">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <div id="examPane" style="display: none;" class="h3">
+        <div ng-if="template.getQuestionVar !== futureed.NEGATIVE_1" id="examPane" style="display: none;" class="h3">
             <table>
                 <tr>
                     <td colspan="5"></td>
@@ -162,7 +162,7 @@
     </div>
     <div ng-if="template.record.operation == futureed.FRACTION_SUBTRACTION_BUTTERFLY">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <table>
+        <table ng-if="template.getQuestionVar !== futureed.NEGATIVE_1">
             <tr>
                 <td colspan="5"></td>
             </tr>
@@ -194,7 +194,7 @@
     </div>
     <div ng-if="template.record.operation == futureed.FRACTION_SUBTRACTION_WHOLE">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <table>
+        <table ng-if="template.getQuestionVar !== futureed.NEGATIVE_1">
             <tr>
                 <td colspan="5"></td>
             </tr>
@@ -222,7 +222,7 @@
     </div>
     <div ng-if="template.record.operation == futureed.FRACTION_MULTIPLICATION">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <div id="examPane" style="display: none;" class="h3">
+        <div ng-if="template.getQuestionVar !== futureed.NEGATIVE_1" id="examPane" style="display: none;" class="h3">
             <table>
                 <tr>
                     <td colspan="5"></td>
@@ -256,7 +256,7 @@
     </div>
     <div ng-if="template.record.operation == futureed.FRACTION_DIVISION">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <div id="examPane" style="display: none;" class="h4">
+        <div ng-if="template.getQuestionVar !== futureed.NEGATIVE_1" id="examPane" style="display: none;" class="h4">
             <table>
                 <tr>
                     <td colspan="5"></td>
@@ -392,7 +392,7 @@
 
     <div ng-if="template.record.operation == futureed.DECIMAL_RATIONAL_NUMBER">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <div id="start_div" class="h4" style="display: none;">
+        <div ng-if="template.getQuestionVar !== futureed.NEGATIVE_1" id="start_div" class="h4" style="display: none;">
             <table  style="display:inline-block;border: 0">
                 <tr>
                     <td rowspan="3" align="center" valign="middle" id="real_number_b"><b>,</b></td>
@@ -426,7 +426,7 @@
 
     <div ng-if="template.record.operation == futureed.EXPONENT">
         <p class="col-xs-12 h3" ng-bind-html="template.question_text | trustAsHtml"></p>
-        <div id="start_div" class="m-top-20 h3" style="display: none;">
+        <div ng-if="template.getQuestionVar !== futureed.NEGATIVE_1" id="start_div" class="m-top-20 h3"  style="display: none;">
             <span>
                 <label id="baseNumber_l">d</label>
                 <sup id="exponents_sup">9</sup>
