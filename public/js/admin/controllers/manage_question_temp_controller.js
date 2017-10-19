@@ -505,6 +505,7 @@ function ManageQuestionTempController($scope, ManageQuestionTempService, TableSe
         var question_text = question.question_template_format;
 
         console.log('question here --' + question_text);
+        self.getQuestionVar = question_text.indexOf('{' + self.record.operation + '}');
 
         //check type of operation
         switch(question.operation){
