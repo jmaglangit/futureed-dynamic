@@ -62,5 +62,5 @@
 	{!! Html::script('/js/admin/controllers/manage_discount_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_discount_controller.js')))!!}
 	{!! Html::script('/js/admin/controllers/manage_bulk_controller.js'. '?size=' . File::size(public_path('/js/admin/controllers/manage_bulk_controller.js')))!!}
 	
-	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/table_service.js'. '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
 @stop

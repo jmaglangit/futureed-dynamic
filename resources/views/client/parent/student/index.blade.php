@@ -33,9 +33,9 @@
 @section('scripts')
 	{!! Html::script('/js/client/controllers/manage_parent_student_controller.js'. '?size=' . File::size(public_path('/js/client/controllers/manage_parent_student_controller.js')))!!}
 	{!! Html::script('/js/client/services/manage_parent_student_service.js'. '?size=' . File::size(public_path('/js/client/services/manage_parent_student_service.js')))!!}
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/validation_service.js')!!}
+	{!! Html::script('/js/common/table_service.js'. '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/common/search_service.js'. '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
+	{!! Html::script('/js/common/validation_service.js'. '?size=' . File::size(public_path('/js/common/validation_service.js')))!!}
 	{!! Html::script('/js/client/constants/parent_constants.js'. '?size=' . File::size(public_path('/js/client/constants/parent_constants.js')))!!}
 	{!! Html::script('/js/client/student.js'. '?size=' . File::size(public_path('/js/client/student.js')))!!}
 @stop

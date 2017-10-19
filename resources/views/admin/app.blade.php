@@ -79,8 +79,8 @@
     {!! Html::script('/js/futureed.js'. '?size=' . File::size(public_path('/js/futureed.js'))) !!}
     {!! Html::script('/js/futureed_controllers.js'. '?size=' . File::size(public_path('/js/futureed_controllers.js'))) !!}
     {!! Html::script('/js/futureed_services.js'. '?size=' . File::size(public_path('/js/futureed_services.js'))) !!}
-    {!! Html::script('/js/common/table_service.js') !!}
-    {!! Html::script('/js/common/search_service.js') !!}
+    {!! Html::script('/js/common/table_service.js'. '?size=' . File::size(public_path('/js/common/table_service.js'))) !!}
+    {!! Html::script('/js/common/search_service.js'. '?size=' . File::size(public_path('/js/common/search_service.js'))) !!}
     {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
 
