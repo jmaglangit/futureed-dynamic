@@ -24,21 +24,21 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_teacher_class_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_teacher_class_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_class_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_teacher_class_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_teacher_class_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_teacher_class_service.js')))!!}
 
-	{!! Html::script('/js/client/constants/teacher_constants.js')!!}
+	{!! Html::script('/js/client/constants/teacher_constants.js' . '?size=' . File::size(public_path('/js/client/constants/teacher_constants.js')))!!}
 
-	{!! Html::script('/js/client/controllers/manage_teacher_tips_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_teacher_tips_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_tips_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_teacher_tips_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_teacher_tips_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_teacher_tips_service.js')))!!}
 	
-	{!! Html::script('/js/client/controllers/manage_teacher_help_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_teacher_help_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_help_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_teacher_help_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_teacher_help_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_teacher_help_service.js')))!!}
 
-	{!! Html::script('/js/client/controllers/manage_teacher_help_answer_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_teacher_help_answer_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_help_answer_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_teacher_help_answer_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_teacher_help_answer_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_teacher_help_answer_service.js')))!!}
 	
-	{!! Html::script('/js/common/validation_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/search_service.js')!!}
+	{!! Html::script('/js/common/validation_service.js' . '?size=' . File::size(public_path('/js/common/validation_service.js')))!!}
+	{!! Html::script('/js/common/table_service.js' . '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/common/search_service.js' . '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
 @stop

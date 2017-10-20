@@ -82,6 +82,6 @@
 	@endsection
 
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/login_controller.js') !!}
-	{!! Html::script('/js/admin/services/login_service.js') !!}
+	{!! Html::script('/js/admin/controllers/login_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/login_controller.js'))) !!}
+	{!! Html::script('/js/admin/services/login_service.js' . '?size=' . File::size(public_path('/js/admin/services/login_service.js'))) !!}
 @stop

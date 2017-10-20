@@ -24,14 +24,14 @@
 @stop
 
 @section('scripts')
-	{!! Html::script('/js/student/controllers/student_class_controller.js')!!}
-	{!! Html::script('/js/student/controllers/student_help_controller.js')!!}
+	{!! Html::script('/js/student/controllers/student_class_controller.js'. '?size=' . File::size(public_path('/js/student/controllers/student_class_controller.js')))!!}
+	{!! Html::script('/js/student/controllers/student_help_controller.js'. '?size=' . File::size(public_path('/js/student/controllers/student_help_controller.js')))!!}
 	
-	{!! Html::script('/js/student/services/student_class_service.js')!!}
-	{!! Html::script('/js/student/services/student_help_service.js')!!}
-	{!! Html::script('/js/student/constants/student_help_constant.js')!!}
+	{!! Html::script('/js/student/services/student_class_service.js'. '?size=' . File::size(public_path('/js/student/services/student_class_service.js')))!!}
+	{!! Html::script('/js/student/services/student_help_service.js'. '?size=' . File::size(public_path('/js/student/services/student_help_service.js')))!!}
+	{!! Html::script('/js/student/constants/student_help_constant.js'. '?size=' . File::size(public_path('/js/student/constants/student_help_constant.js')))!!}
 
-	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/student/class.js')!!}
+	{!! Html::script('/js/common/search_service.js'. '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
+	{!! Html::script('/js/common/table_service.js'. '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/student/class.js'. '?size=' . File::size(public_path('/js/student/class.js')))!!}
 @stop

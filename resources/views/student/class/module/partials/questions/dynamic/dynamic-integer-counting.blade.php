@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    {!! Html::script('/js/common/operations/integer_global.js')!!}
-    {!! Html::script('/js/common/operations/integer_counting.js')!!}
-    {!! Html::style('/css/operations/mo.css') !!}
+    {!! Html::script('/js/common/operations/integer_global.js'. '?size=' . File::size(public_path('/js/common/operations/integer_global.js')))!!}
+    {!! Html::script('/js/common/operations/integer_counting.js'. '?size=' . File::size(public_path('/js/common/operations/integer_counting.js')))!!}
+    {!! Html::style('/css/operations/mo.css'. '?size=' . File::size(public_path('/css/operations/mo.css'))) !!}
 </div>

@@ -65,7 +65,7 @@
         </div>
 
     </div>
-    {!! Html::script('/js/common/operations/integer_global.js')!!}
-    {!! Html::script('/js/common/operations/subtraction.js')!!}
+    {!! Html::script('/js/common/operations/integer_global.js' . '?size=' . File::size(public_path('/js/common/operations/integer_global.js')))!!}
+    {!! Html::script('/js/common/operations/subtraction.js' . '?size=' . File::size(public_path('/js/common/operations/subtraction.js')))!!}
 
 </div>

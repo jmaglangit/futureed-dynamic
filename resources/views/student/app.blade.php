@@ -31,9 +31,9 @@
     <!-- CSS -->
     {!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css') !!}
     {!! Html::style('/css/datetimepicker.css') !!}
-    {!! Html::style('/css/futureed.css') !!}
-    {!! Html::style('/css/futureed-student.css') !!}
-    {!! Html::style('/css/chart/student-progress.css') !!}
+    {!! Html::style('/css/futureed.css' . '?size=' . File::size(public_path('/css/futureed.css'))) !!}
+    {!! Html::style('/css/futureed-student.css' . '?size=' . File::size(public_path('/css/futureed-student.css'))) !!}
+    {!! Html::style('/css/chart/student-progress.css' . '?size=' . File::size(public_path('/css/chart/student-progress.css'))) !!}
 {{--    {!! Html::style('/css/operations/w3.css') !!}--}}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -77,16 +77,16 @@
     {!! Html::script('/js/ng-sortable.min.js')!!}
     {!! Html::script('/js/jquery.date-dropdowns.js') !!}
     
-    {!! Html::script('/js/futureed_constants.js') !!}
-    {!! Html::script('/js/futureed_utils.js') !!}
+    {!! Html::script('/js/futureed_constants.js' . '?size=' . File::size(public_path('/js/futureed_constants.js'))) !!}
+    {!! Html::script('/js/futureed_utils.js' . '?size=' . File::size(public_path('/js/futureed_utils.js'))) !!}
 	{!! Html::script('/js/common/angular/marked.js')!!}
 	{!! Html::script('/js/common/angular/markdown-preview.js')!!}
-	{!! Html::script('/js/futureed.js') !!}
-    {!! Html::script('/js/futureed_controllers.js') !!}
-    {!! Html::script('/js/futureed_services.js') !!}
+	{!! Html::script('/js/futureed.js' . '?size=' . File::size(public_path('/js/futureed.js'))) !!}
+    {!! Html::script('/js/futureed_controllers.js' . '?size=' . File::size(public_path('/js/futureed_controllers.js'))) !!}
+    {!! Html::script('/js/futureed_services.js' . '?size=' . File::size(public_path('/js/futureed_services.js'))) !!}
     {!! Html::script('/js/datetimepicker.js') !!}
     {!! Html::script('/js/common/filters.js') !!}
-    {!! Html::script('/js/common/tooltip_service.js') !!}
+    {!! Html::script('/js/common/tooltip_service.js' . '?size=' . File::size(public_path('/js/common/tooltip_service.js'))) !!}
     {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
 
     {!! Html::script('/js/ng-file-upload-shim.min.js')!!}

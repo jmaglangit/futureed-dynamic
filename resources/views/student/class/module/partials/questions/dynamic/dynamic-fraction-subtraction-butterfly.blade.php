@@ -144,6 +144,6 @@
         </div>
     </div>
 
-    {!! Html::script('/js/common/operations/fraction_subtraction_butterfly.js')!!}
-    {!! Html::script('/js/common/operations/fraction_global.js?20170822') !!}
+    {!! Html::script('/js/common/operations/fraction_subtraction_butterfly.js' . '?size=' . File::size(public_path('/js/common/operations/fraction_subtraction_butterfly.js')))!!}
+    {!! Html::script('/js/common/operations/fraction_global.js?20170822' . '?size=' . File::size(public_path('/js/common/operations/fraction_global.js'))) !!}
 </div>

@@ -36,4 +36,4 @@
         <div class="col-md-2 help-sketch"><a href="#notepad_sketch" data-tool="help" class="btn btn-blue">{!! trans('messages.help') !!}</a></div>
     </div>
 </div>
-{!! Html::script('/js/common/notepad.js')!!}
+{!! Html::script('/js/common/notepad.js'. '?size=' . File::size(public_path('/js/common/notepad.js')))!!}

@@ -32,10 +32,10 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/manage_student_controller.js')!!}
-	{!! Html::script('/js/admin/services/manage_student_service.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_student_controller.js' . '?size=' . File::size(public_path('/js/admin/controllers/manage_student_controller.js')))!!}
+	{!! Html::script('/js/admin/services/manage_student_service.js' . '?size=' . File::size(public_path('/js/admin/services/manage_student_service.js')))!!}
 
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/validation_service.js')!!}
+	{!! Html::script('/js/common/table_service.js' . '?size=' . File::size(public_path('/js/common/table_service.js')))!!}
+	{!! Html::script('/js/common/search_service.js' . '?size=' . File::size(public_path('/js/common/search_service.js')))!!}
+	{!! Html::script('/js/common/validation_service.js' . '?size=' . File::size(public_path('/js/common/validation_service.js')))!!}
 @stop

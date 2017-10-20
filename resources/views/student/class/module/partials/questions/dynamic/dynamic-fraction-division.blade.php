@@ -142,7 +142,7 @@
             </div>
         </div>
     </div>
-    {!! Html::style('/css/futureed-student.css') !!}
-    {!! Html::script('/js/common/operations/fraction_division.js')!!}
-    {!! Html::script('/js/common/operations/fraction_global.js?20170822') !!}
+    {!! Html::style('/css/futureed-student.css' . '?size=' . File::size(public_path('/css/futureed-student.css'))) !!}
+    {!! Html::script('/js/common/operations/fraction_division.js' . '?size=' . File::size(public_path('/js/common/operations/fraction_division.js')))!!}
+    {!! Html::script('/js/common/operations/fraction_global.js?20170822' . '?size=' . File::size(public_path('/js/common/operations/fraction_global.js'))) !!}
 </div>

@@ -58,6 +58,6 @@
             </div>
         </div>
     </div>
-    {!! Html::script('/js/common/operations/global.js?20170806')!!}
-    {!! Html::script('/js/common/operations/sort_min.js?20170806.js')!!}
+    {!! Html::script('/js/common/operations/global.js?20170806' . '?size=' . File::size(public_path('/js/common/operations/global.js')))!!}
+    {!! Html::script('/js/common/operations/sort_min.js?20170806'  . '?size=' . File::size(public_path('/js/common/operations/sort_min.js')))!!}
 </div>

@@ -119,6 +119,6 @@
         </div>
     </div>
 
-    {!! Html::script('/js/common/operations/fraction_subtraction_whole.js')!!}
-    {!! Html::script('/js/common/operations/fraction_global.js?20170822') !!}
+    {!! Html::script('/js/common/operations/fraction_subtraction_whole.js' . '?size=' . File::size(public_path('/js/common/operations/fraction_subtraction_whole.js')))!!}
+    {!! Html::script('/js/common/operations/fraction_global.js?20170822' . '?size=' . File::size(public_path('/js/common/operations/fraction_global.js'))) !!}
 </div>

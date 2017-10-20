@@ -62,6 +62,6 @@
         </div>
     </div>
 
-    {!! Html::script('/js/common/operations/integer_expanded_decimal.js')!!}
-    {!! Html::script('/js/common/operations/global.js') !!}
+    {!! Html::script('/js/common/operations/integer_expanded_decimal.js' . '?size=' . File::size(public_path('/js/common/operations/integer_expanded_decimal.js')))!!}
+    {!! Html::script('/js/common/operations/global.js' . '?size=' . File::size(public_path('/js/common/operations/global.js'))) !!}
 </div>

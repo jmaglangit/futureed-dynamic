@@ -21,6 +21,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_parent_content_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_parent_content_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_parent_content_controller.js' . '?size=' . File::size(public_path('/js/client/controllers/manage_parent_content_controller.js')))!!}
+	{!! Html::script('/js/client/services/manage_parent_content_service.js' . '?size=' . File::size(public_path('/js/client/services/manage_parent_content_service.js')))!!}
 @stop
