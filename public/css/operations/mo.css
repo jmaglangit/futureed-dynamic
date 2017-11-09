@@ -1,0 +1,24 @@
+.mo_pre, .mo_inner, .mo_last{
+	display: inline-block;
+	height: 70px;
+	background-repeat: no-repeat;
+	line-height: 132px;
+	font-size:12px;
+}
+.mo_pre{
+	width: 13px;
+	background-image:url(/images/dynamic_operations/pre_mo.png); background-size:100% 51px;
+}
+.mo_inner{
+	width: 16px;
+	background-image:url(/images/dynamic_operations/inner_mo.png); background-size:100% 51px;
+}
+.mo_last{
+	width: 40px;
+	background-image:url(/images/dynamic_operations/last_mo.png); background-size:100% 51px;
+}
+.boldStr{color: #005588; font-weight: bold;}
+.answerTxt{border: 0; border-bottom: solid 1px black; text-align:center; width: 50px;}
+.answerSpan{display: inline-block; width: 50px; border-bottom: solid 1px black; text-align:center;}
+.mistakeAnswer{color: red; font-weight: bold;}
+.toolTopSpan{color: green;}

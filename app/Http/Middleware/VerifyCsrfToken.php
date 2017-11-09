@@ -1,0 +1,46 @@
+<?php namespace FutureEd\Http\Middleware;
+
+use Closure;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
+
+class VerifyCsrfToken extends BaseVerifier {
+
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Closure  $next
+	 * @return mixed
+	 */
+	public function handle($request, Closure $next)
+	{
+//		return parent::handle($request, $next);
+        if($request->method() == 'POST')
+        {
+            return $next($request);
+        }
+
+        if ($request->method() == 'GET' || $this->tokensMatch($request))
+        {
+            return $next($request);
+        }
+
+        if($request->method() == 'PUT')
+        {
+            return $next($request);
+        }
+
+        if($request->method() == 'PATCH')
+        {
+            return $next($request);
+        }
+
+        if($request->method() == 'DELETE')
+        {
+            return $next($request);
+        }
+
+        throw new TokenMismatchException;
+	}
+
+}
