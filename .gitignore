@@ -1,18 +1,4 @@
-<<<<<<< HEAD
 .*
 /*
 !.gitignore
-=======
-.DS_Store
-/bootstrap/compiled.php
-/public/csv
-/public/images
-/public/downloads
-/vendor
-/node_modules
-.env
-.env.*.php
-.env.php
-.idea
-composer.lock
->>>>>>> 7abf8ee45bdc0a66d43b100b1a89a67605184ad7
+!
